@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 3.5)
+project(summit_xl_common)
+find_package(ament_cmake REQUIRED)
+ament_export_dependencies(${THIS_PACKAGE_INCLUDE_DEPENDS})
+ament_package()

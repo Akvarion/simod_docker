@@ -1,0 +1,13 @@
+# joint_state_controller:
+#   type: joint_state_controller/JointStateController
+#   publish_rate: &loop_hz 500
+
+left_ur_joint_group_pos_controller:
+  type: position_controllers/JointGroupPositionController
+  joints:
+     - left_ur_shoulder_pan_joint
+     - left_ur_shoulder_lift_joint
+     - left_ur_elbow_joint
+     - left_ur_wrist_1_joint
+     - left_ur_wrist_2_joint
+     - left_ur_wrist_3_joint

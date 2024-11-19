@@ -1,0 +1,68 @@
+version: "3.9"
+services:
+  ros1_simod:
+    privileged: true
+    build:
+      context: ..
+      dockerfile: ros1_docker/Dockerfile
+    environment:
+     - DISPLAY=${DISPLAY}
+     - NO_AT_BRIDGE=1
+     - QT_X11_NO_MITSHM=1
+    network_mode: host
+
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - /tmp/.docker.xauth:/tmp/.docker.xauth:rw
+
+    
+      - type: bind
+        source: /home/lar/ws1/ros1_ros2_bridge_docker
+        target: /ros1_docker
+    command: 
+      /bin/bash -c "cd /ros1_docker/ros1_ws && terminator"
+# source /opt/ros/noetic/setup.bash
+  bridge_simod:
+    privileged: true
+    build:
+      context: ..
+      dockerfile: bridge_docker/Dockerfile
+    environment:
+     - DISPLAY=${DISPLAY}
+     - QT_X11_NO_MITSHM=1
+    network_mode: host
+
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - /tmp/.docker.xauth:/tmp/.docker.xauth:rw
+      - /dev/shm:/dev/shm
+
+      - type: bind
+        source: /home/lar/ws1/ros1_ros2_bridge_docker
+        target: /bridge_docker
+
+    command: 
+      /bin/bash -c "cd /bridge_docker/bridge_ws && terminator"
+
+  ros2_simod:
+    privileged: true
+    build:
+      context: ..
+      dockerfile: ros2_docker/Dockerfile
+    environment:
+    - DISPLAY=${DISPLAY}
+    - QT_X11_NO_MITSHM=1
+    network_mode: host
+
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - /tmp/.docker.xauth:/tmp/.docker.xauth:rw
+      - /dev/shm:/dev/shm
+
+      - type: bind
+        source: /home/lar/ws1/ros1_ros2_bridge_docker
+        target: /ros2_docker
+
+    command: 
+      /bin/bash -c "cd /ros2_docker/ros2_ws && terminator"
+
