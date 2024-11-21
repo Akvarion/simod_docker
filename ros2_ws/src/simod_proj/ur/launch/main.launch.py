@@ -53,7 +53,7 @@ def generate_launch_description():
 
     gazebo = IncludeLaunchDescription(
                  (os.path.join(get_package_share_directory('gazebo_ros'), 'launch','gazebo.launch.py')),
-                 launch_arguments={'physics': 'False', 'world': '/ros2_docker/ros2_ws/src/simod_proj/ur/xacro/gazebo.world'}.items(),
+                 launch_arguments={'physics': 'False', 'world': '/home/michela/ros2/simod_docker/ros2_ws/src/simod_proj/ur/xacro/gazebo.world'}.items(),
                  condition=IfCondition(gazebo))
     
     
@@ -66,7 +66,7 @@ def generate_launch_description():
                             'ur_type': ur_type_left, 
                             'namespace': namespace_left,
                             'tf_prefix': tf_prefix_left,
-                            'base_prefix': 'left_summit_',
+                            'base_prefix': 'left_summit',
                             'parent_ur': parent_ur_left,
                             'parent_hand': parent_hand_left,
                             'xyz': xyz_left,
@@ -95,7 +95,7 @@ def generate_launch_description():
                             'ur_type': ur_type_right, 
                             'namespace': namespace_right,
                             'tf_prefix': tf_prefix_right,
-                            'base_prefix': 'right_summit_',
+                            'base_prefix': 'right_summit',
                             'parent_ur': parent_ur_right,
                             'parent_hand': parent_hand_right,
                             'xyz': xyz_right,
@@ -126,12 +126,11 @@ def generate_launch_description():
                    ],
         condition=IfCondition(spawn_gazebo_base)
         )
-    
 
  
     ld = LaunchDescription()
     ld.add_action(gazebo)
-    ld.add_action(joint_pub_ros1)
+    #ld.add_action(joint_pub_ros1)
     ld.add_action(robot_spawner_left)
     ld.add_action(robot_spawner_right)
     

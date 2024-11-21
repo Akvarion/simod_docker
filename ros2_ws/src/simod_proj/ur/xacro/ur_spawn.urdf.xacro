@@ -10,13 +10,12 @@
     <xacro:arg name="ur_type" default="ur5e"/>
     <xacro:arg name="tf_prefix" default="ur_left_"/>
     <xacro:arg name="base_prefix" default="summit_"/>
+    <xacro:arg name="ros_planar_move_plugin" default="true"/>
     <xacro:arg name="xyz" default="-0.47 0 0"/>
-    <xacro:arg name="rpy_base_ur" default="0 0 -1.57"/>
-    <xacro:arg name="xyz_base" default="0.66 0 0"/>
     <xacro:arg name="parent_ur" default="world"/>
     <xacro:arg name="parent_hand" default="ur_left_tool0"/>
-    <xacro:arg name="parent_base" default="world"/>
     <xacro:arg name="rpy" default="0 -1.57 0"/>
+    <xacro:arg name="rpy_base_ur" default="0 -1.57 0"/>
     <xacro:arg name="finger_tip_cor" default="0.157 0 0.0018"/>
     <xacro:arg name="robot_ip" default="192.168.0.102"/>
     <xacro:arg name="initial_positions_file" default="initial_positions_left"/>

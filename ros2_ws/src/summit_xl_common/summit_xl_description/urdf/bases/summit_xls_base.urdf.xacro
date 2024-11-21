@@ -2,8 +2,7 @@
 <robot name="summit_xl" xmlns:xacro="http://wiki.ros.org/xacro">
 
 
-  <xacro:include filename="$(find summit_xl_description)/urdf/bases/summit_xl_base.gazebo.xacro" />
-
+ 
   <xacro:macro name="summit_xls_base" params="prefix publish_bf hq">
 
   <!-- Robot mechanical and motor parameters -->

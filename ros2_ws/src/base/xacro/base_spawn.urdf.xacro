@@ -4,9 +4,8 @@
     <xacro:include filename="$(find summit_xl_description)/robots/summit_xls.urdf.xacro"/>
     
     <xacro:arg name="base_prefix" default="right"/>
-    <xacro:arg name="parent_base" default="world"/>
-    <xacro:arg name="xyz_base" default="0.66 0 0"/>
-
+    <xacro:arg name="ros_planar_move_plugin" default="false"/>
+    
     <xacro:summit_xl
 
         prefix="$(arg base_prefix)"

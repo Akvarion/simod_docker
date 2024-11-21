@@ -10,6 +10,7 @@
 
 	<!-- Import summit XL base elements -->
 	<xacro:include filename="$(find summit_xl_description)/urdf/bases/summit_xls_base.urdf.xacro" />
+	<xacro:include filename="$(find summit_xl_description)/urdf/bases/summit_xl_base.gazebo.xacro" />
 
 	<!-- Import summit XL wheels -->
 	<xacro:include filename="$(find summit_xl_description)/urdf/wheels/omni_wheel.urdf.xacro" />
@@ -72,34 +73,33 @@
 		<!-- Here we create the robot elements using the xacro:macros imported at the beggining of this file -->
 
 		<!-- Summit XL base -->
-		<xacro:summit_xls_base prefix="${prefix}" publish_bf="true" hq="${hq}"/>
-
-		<xacro:omni_wheel prefix="${prefix}front_right" parent="${prefix}base_link" reflect="false" hq="${hq}">
+		<xacro:summit_xls_base prefix="${prefix}_" publish_bf="true" hq="${hq}"/>
+		<xacro:omni_wheel prefix="${prefix}_front_right" parent="${prefix}_base_link" reflect="false" hq="${hq}">
 			<origin xyz="${wheel_offset_x} -${wheel_offset_y} ${wheel_offset_z}" rpy="0 0.2 0"/>
 		</xacro:omni_wheel>
 
-		<xacro:omni_wheel prefix="${prefix}front_left" parent="${prefix}base_link" reflect="true" hq="${hq}">
+		<xacro:omni_wheel prefix="${prefix}_front_left" parent="${prefix}_base_link" reflect="true" hq="${hq}">
 			<origin xyz="${wheel_offset_x} ${wheel_offset_y} ${wheel_offset_z}" rpy="0 0 0"/>
 		</xacro:omni_wheel>
 
-		<xacro:omni_wheel prefix="${prefix}back_left" parent="${prefix}base_link" reflect="true" hq="${hq}">
+		<xacro:omni_wheel prefix="${prefix}_back_left" parent="${prefix}_base_link" reflect="true" hq="${hq}">
 			<origin xyz="-${wheel_offset_x} ${wheel_offset_y} ${wheel_offset_z}" rpy="0 0 0"/>
 		</xacro:omni_wheel>
 
-		<xacro:omni_wheel prefix="${prefix}back_right" parent="${prefix}base_link" reflect="false" hq="${hq}">
+		<xacro:omni_wheel prefix="${prefix}_back_right" parent="${prefix}_base_link" reflect="false" hq="${hq}">
 			<origin xyz="-${wheel_offset_x} -${wheel_offset_y} ${wheel_offset_z}" rpy="0 0 0"/>
 		</xacro:omni_wheel>
         <!-- IMU -->
-		<xacro:sensor_imu prefix="${prefix}imu" parent="${prefix}base_link">
+		<xacro:sensor_imu prefix="${prefix}_imu" parent="${prefix}_base_link">
 			<origin xyz="${imu_offset_x} ${imu_offset_y} ${imu_offset_z}" rpy="0 0 0"/>
 		</xacro:sensor_imu> 
 
 
 		<!-- SENSORS -->
-		<xacro:sensor_sick_s300 prefix="${prefix}front_laser" parent="${prefix}base_link" prefix_topic="front_laser" gpu="$(arg gpu)">
+		<xacro:sensor_sick_s300 prefix="${prefix}_front_laser" parent="${prefix}_base_link" prefix_topic="front_laser" gpu="$(arg gpu)">
 			<origin xyz="${front_laser_offset_x} ${front_laser_offset_y} ${front_laser_offset_z}" rpy="0 ${-PI} ${3/4*PI}" />
 		</xacro:sensor_sick_s300>
-		<xacro:sensor_sick_s300 prefix="${prefix}rear_laser" parent="${prefix}base_link" prefix_topic="rear_laser" gpu="$(arg gpu)">
+		<xacro:sensor_sick_s300 prefix="${prefix}_rear_laser" parent="${prefix}_base_link" prefix_topic="rear_laser" gpu="$(arg gpu)">
 			<origin xyz="${rear_laser_offset_x} ${rear_laser_offset_y} ${rear_laser_offset_z}" rpy="0 ${-PI} ${-1/4*PI}" />
 		</xacro:sensor_sick_s300>
 

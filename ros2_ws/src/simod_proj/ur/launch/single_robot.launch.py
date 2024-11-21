@@ -138,12 +138,6 @@ def launch_setup(context, *args, **kwargs):
             "xyz:=",
             xyz,
             " ",
-            "rpy_base_ur:=",
-            rpy_base_ur,
-            " ",
-            "xyz_base:=",
-            xyz_base,
-            " ",
             "parent_ur:=",
             parent_ur,
             " ",
@@ -152,6 +146,9 @@ def launch_setup(context, *args, **kwargs):
             " ",
             "rpy:=",
             rpy,
+            " ",
+            "rpy_base_ur:=",
+            rpy_base_ur,
             " ",
             "finger_tip_cor:=",
             finger_tip_cor,
@@ -176,9 +173,6 @@ def launch_setup(context, *args, **kwargs):
             " ",
             "spawn_gazebo_base:=",
             spawn_gazebo_base,  
-            " ",
-            "parent_base:=",
-            parent_base,  
             " ",
             "script_sender_port:=",
             script_sender_port,
@@ -207,6 +201,16 @@ def launch_setup(context, *args, **kwargs):
         parameters=[{'use_sim_time': True},{'robot_description': robot_description_param}],
     )
 
+    static_tf_real = Node(
+        package="tf2_ros",
+        executable="static_transform_publisher",
+        namespace=namespace,
+        name="static_transform_publisher",
+        output="log",
+        arguments=[(xyz_base.split()[0]+'"').replace('"', ''), ('"'+xyz_base.split()[1]+'"').replace('"', ''), ('"'+xyz_base.split()[2]).replace('"', ''), "0", "0", "0", "1", parent_base, base_prefix+"_odom"],
+    )
+    
+
     # Spawn from topic                                                      
     gazebo_spawn_robot_description = Node(
         package='gazebo_ros',
@@ -216,6 +220,9 @@ def launch_setup(context, *args, **kwargs):
         arguments=[
                     '-entity', namespace + '_robot',
                     '-topic', namespaced_robot_description,
+                    '-x',  (xyz_base.split()[0]+ '"').replace('"', ''),
+                    '-y', ('"'+xyz_base.split()[1]+ '"').replace('"', ''),
+                    '-z', ('"'+xyz_base.split()[2]+ '"').replace('"', ''),
                     '-timeout', '5',
                     '-unpause'
                     ],
@@ -235,7 +242,8 @@ def launch_setup(context, *args, **kwargs):
     joint_state_broadcaster_spawner = Node(
         package='controller_manager',
         executable='spawner',
-        arguments=['joint_state_broadcaster', '-c', namespaced_node_name, '-n', namespace],
+        namespace=namespace,
+        arguments=['joint_state_broadcaster', '-c', namespaced_node_name],
         output='screen',
         
     )
@@ -263,6 +271,7 @@ def launch_setup(context, *args, **kwargs):
         ur_control_node,
         joint_state_broadcaster_spawner,
         velocity_controller,
+        static_tf_real
     ]
 
     
