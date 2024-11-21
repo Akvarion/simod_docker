@@ -118,15 +118,15 @@ def generate_launch_description():
                             'trajectory_port': '50003',
                             }.items())
     
-    joint_pub_ros1 = Node(
-        package="py_pubsub",
-        executable="ros1_bridge",
-        output="screen",
-        arguments=["-model_name_right", "right_robot",
-                   "-model_name_left", "left_robot",
-                   ],
-        condition=IfCondition(spawn_gazebo_base)
-        )
+    # joint_pub_ros1 = Node(
+    #     package="py_pubsub",
+    #     executable="ros1_bridge",
+    #     output="screen",
+    #     arguments=["-model_name_right", "right_robot",
+    #                "-model_name_left", "left_robot",
+    #                ],
+    #     condition=IfCondition(spawn_gazebo_base)
+    #     )
 
  
     ld = LaunchDescription()
