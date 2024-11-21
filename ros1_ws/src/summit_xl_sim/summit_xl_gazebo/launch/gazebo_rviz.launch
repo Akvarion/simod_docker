@@ -3,7 +3,7 @@
 
 	<!-- roslaunch arguments -->
 	<arg name="debug" default="false"/>
-	<arg name="gazebo_gui" default="true"/>
+	<arg name="gazebo_gui" default="false"/>
 	<arg name="launch_rviz" default="false"/>
 	<arg name="world" default="$(find summit_xl_gazebo)/worlds/summit_xl.world"/>
 	<!-- located in summit_xl_gazebo/worlds -->

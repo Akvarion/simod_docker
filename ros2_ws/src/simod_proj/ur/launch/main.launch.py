@@ -50,10 +50,11 @@ def generate_launch_description():
     spawn_gazebo_robot   = 'True'
     spawn_gazebo_base    = 'True'
 
+    gazebo_path = os.path.join(get_package_share_directory('ur'), 'xacro','gazebo.world')
 
     gazebo = IncludeLaunchDescription(
                  (os.path.join(get_package_share_directory('gazebo_ros'), 'launch','gazebo.launch.py')),
-                 launch_arguments={'physics': 'False', 'world': '/home/michela/ros2/simod_docker/ros2_ws/src/simod_proj/ur/xacro/gazebo.world'}.items(),
+                 launch_arguments={'physics': 'False', 'world': gazebo_path}.items(),
                  condition=IfCondition(gazebo))
     
     

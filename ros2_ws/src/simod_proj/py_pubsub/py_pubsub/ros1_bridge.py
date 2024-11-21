@@ -10,6 +10,7 @@ import time
 from geometry_msgs.msg import Pose
 from sensor_msgs.msg import JointState
 from std_msgs.msg import Float64MultiArray
+from threading import Condition
 
 class Ros1Bridge(Node):
     def __init__(self, model_name_right,model_name_left, callback):
@@ -21,6 +22,7 @@ class Ros1Bridge(Node):
         self.msg           = None
         self.pose_right    = Pose()
         self.pose_left     = Pose()
+        self.condition     = Condition()
         self.joint_command_right = Float64MultiArray()
         self.joint_command_left = Float64MultiArray()
 
@@ -39,7 +41,9 @@ class Ros1Bridge(Node):
 
 
     def gazebo_state_callback(self, msg):
-        self.msg = msg
+        with self.condition:
+            self.msg = msg
+            self.condition.notify_all()
         self.set_entity_state_left()
         self.set_entity_state_right()
 
@@ -91,15 +95,6 @@ class Ros1Bridge(Node):
 
                 break
 
-        
-        # Turtle only exists in 2D, thus we get x and y translation
-        # coordinates from the message and set the z coordinate to 0
-        
-
-        # For the same reason, turtle can only rotate around one axis
-        # and this why we set rotation in x and y to 0 and obtain
-        # rotation in z axis from the message
-        
         # Send the transformation
         self.gazebo_pose_pub_right.publish(self.pose_right)
 

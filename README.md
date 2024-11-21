@@ -32,9 +32,9 @@ Terminator GUI will open up with the Docker container running inside it and the 
  
 ## 3. Running
 
-BRIDGE_DOCKER
+BRIDGE_DOCKER CONTAINER
 
-2° Terminale (solo quando si builda la prima volta il workspace)
+2° Terminale (solo quando si compila la prima volta il workspace)
 ```bash
 colcon build --symlink-install --packages-skip ros1_bridge
 source /opt/ros/noetic/setup.bash
@@ -62,9 +62,9 @@ ros2 run ros1_bridge parameter_bridge
 ```
 
 
-ROS1_DOCKER
+ROS1_DOCKER CONTAINER
 
-*solo la prima volat che si builda il workspace
+*solo la prima volta che si compila il workspace
 
 ```bash
 colcon build
@@ -75,11 +75,11 @@ roslaunch summit_xl_gazebo parameter.launch
 roslaunch summit_xl_gazebo environment.launch
 ```
 
-ROS2_DOCKER
+ROS2_DOCKER CONTAINER
 
 1° Terminale
 
-*solo la prima volat che si builda il workspace
+*solo la prima volta che si compila il workspace
 ```bash
 colcon build --symlink-install 
 ```
@@ -94,4 +94,17 @@ colcon build --symlink-install
 source ros2_setup.bash
 ros2 launch ur main.launch.py
 ```
+
+## 4° Useful topics
+
+${NAMESPACE}/odom : da cui si ricava la posizione della base rispetto al mondo.
+${NAMESPACE}/cmd_vel : controllo in velocità 
+
+Per pubblicare da terminale, c'è un problema di autocompletamento del messaggio:
+
+ex. ros2 topic pub /right_summit/cmd_vel geometry_msgs/msg/Twist msg
+
+(ros2 topic pub ${NOME_TOPIC} ${TIPO DEL MESSAGGIO} ${MSG})
+
+per ottenere il messaggio, Tab+si vede la prima lettera del messaggio+"prima lettere+Tab
 
