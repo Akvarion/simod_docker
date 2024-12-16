@@ -1,40 +1,43 @@
-## 1. Building
+# SIMOD Set-up
+
+## 1. Prepare docker-compose
+Assuming all the necessary dependencies are met, the file docker compose must be modified in order to result in a working environment.
+
+Lines 19, 40 and 62 must be edited with the correct path (<user_path_to_directory>); paths must be absolute.
+
+
+## 2. Building
  
 Build the Docker container with
  
-```shell
+```bash
 docker compose -f docker-compose-gui.yml build
 ```
+Should a permission denied error appear, that is because the current user has no sudo permissions granted for docker. Simply adding `sudo` before the command should fix this issue.
+## 2. Starting
  
-## 2. Starting Container
- 
-Allow the container to display contents on your host machine by typing
+Allow the containers to display contents on your host machine by typing
  
 ```bash
 xhost +local:root
 ```
- 
-IMPORTANT: Modify the path of the current directory in the docker-compose-gui.yml
-```shell
-- type: bind
-source: /home/miriam/Scrivania/ros_bridge_docker/
-```
- 
-```shell
- 
-Inside the docker folder, start the container
-```shell
+Then start the setup with:
+```bash
 docker compose -f docker-compose-gui.yml up
 ```
  
 Terminator GUI will open up with the Docker container running inside it and the ros1 and ros2 environments already sourced.
- 
+
+#### Starting a single container
+To start a single container, simply run the following (change the `<options>` into one of the followings: `ros1_simod`, `bridge_simod`, `ros2_simod`):
+```bash
+docker compose -f docker-compose-gui.yml up <options>
+```
  
 ## 3. Running
 
-BRIDGE_DOCKER CONTAINER
-
-2° Terminale (solo quando si compila la prima volta il workspace)
+### Bridge Container
+This container operates the ros1 bridge. It has to be compiled.
 ```bash
 colcon build --symlink-install --packages-skip ros1_bridge
 source /opt/ros/noetic/setup.bash

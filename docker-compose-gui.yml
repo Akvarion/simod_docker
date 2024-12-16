@@ -3,7 +3,7 @@ services:
   ros1_simod:
     privileged: true
     build:
-      context: ..
+      context: .
       dockerfile: ros1_docker/Dockerfile
     environment:
      - DISPLAY=${DISPLAY}
@@ -14,18 +14,17 @@ services:
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix:rw
       - /tmp/.docker.xauth:/tmp/.docker.xauth:rw
-
-    
+      # Load source folder into target location
       - type: bind
-        source: /home/lar/ws1/ros1_ros2_bridge_docker
-        target: /ros1_docker
+        source: /home/<user_path_to_directory>/simod_docker/ros1_ws
+        target: /ros1_ws
     command: 
-      /bin/bash -c "cd /ros1_docker/ros1_ws && terminator"
+      /bin/bash -c "cd /ros1_ws && terminator"
 # source /opt/ros/noetic/setup.bash
   bridge_simod:
     privileged: true
     build:
-      context: ..
+      context: .
       dockerfile: bridge_docker/Dockerfile
     environment:
      - DISPLAY=${DISPLAY}
@@ -38,16 +37,16 @@ services:
       - /dev/shm:/dev/shm
 
       - type: bind
-        source: /home/lar/ws1/ros1_ros2_bridge_docker
-        target: /bridge_docker
+        source: /home/<user_path_to_directory>/simod_docker/bridge_ws
+        target: /bridge_ws
 
     command: 
-      /bin/bash -c "cd /bridge_docker/bridge_ws && terminator"
+      /bin/bash -c "cd /bridge_ws && terminator"
 
   ros2_simod:
     privileged: true
     build:
-      context: ..
+      context: .
       dockerfile: ros2_docker/Dockerfile
     environment:
     - DISPLAY=${DISPLAY}
@@ -60,9 +59,9 @@ services:
       - /dev/shm:/dev/shm
 
       - type: bind
-        source: /home/lar/ws1/ros1_ros2_bridge_docker
-        target: /ros2_docker
+        source: /home/<user_path_to_directory>/simod_docker/ros2_ws
+        target: /ros2_ws
 
     command: 
-      /bin/bash -c "cd /ros2_docker/ros2_ws && terminator"
+      /bin/bash -c "cd /ros2_ws && terminator"
 
