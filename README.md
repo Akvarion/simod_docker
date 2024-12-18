@@ -1,12 +1,13 @@
 # SIMOD Set-up
 
-## 1. Prepare docker-compose
+## Running both ROS1 and ROS2 with Bridge
+### 1. Prepare docker-compose
 Assuming all the necessary dependencies are met, the file docker compose must be modified in order to result in a working environment.
 
 Lines 19, 40 and 62 must be edited with the correct path (<user_path_to_directory>); paths must be absolute.
 
 
-## 2. Building
+### 1. Building
  
 Build the Docker container with
  
@@ -14,7 +15,7 @@ Build the Docker container with
 docker compose -f docker-compose-gui.yml build
 ```
 Should a permission denied error appear, that is because the current user has no sudo permissions granted for docker. Simply adding `sudo` before the command should fix this issue.
-## 2. Starting
+### 2. Starting
  
 Allow the containers to display contents on your host machine by typing
  
@@ -33,10 +34,10 @@ To start a single container, simply run the following (change the `<options>` in
 ```bash
 docker compose -f docker-compose-gui.yml up <options>
 ```
- 
-## 3. Running
 
-### Bridge Container
+### 3. Running
+
+#### Bridge Container
 This container operates the ros1 bridge. It has to be compiled.
 ```bash
 colcon build --symlink-install --packages-skip ros1_bridge
@@ -98,7 +99,7 @@ source ros2_setup.bash
 ros2 launch ur main.launch.py
 ```
 
-## 4° Useful topics
+### 4. Useful topics
 
 ${NAMESPACE}/odom : da cui si ricava la posizione della base rispetto al mondo.
 ${NAMESPACE}/cmd_vel : controllo in velocità 
@@ -111,3 +112,66 @@ ex. ros2 topic pub /right_summit/cmd_vel geometry_msgs/msg/Twist msg
 
 per ottenere il messaggio, Tab+si vede la prima lettera del messaggio+"prima lettere+Tab
 
+## Running only ROS2 environment
+
+If not yet built, run:
+
+```bash
+sudo docker compose -f docker-compose-gui.yml build
+```
+
+Then, allow the containers to display contents on your host machine by typing
+ 
+```bash
+xhost +local:root
+```
+### Starting a single container
+To start only the container for `ros2`, run the following:
+```bash
+sudo docker compose -f docker-compose-gui.yml up ros2_simod
+```
+
+Now a new terminal running the docker container prepared with ROS2 and Gazebo should appear. The current position correspond to the ROS2 workspace `ros2_ws`.
+Now, we can run the software inside this environment.
+
+**Only The first time** you compile the workspace with:
+```bash
+colcon build --symlink-install 
+```
+
+Before starting the scripts, you need to source the bash files:
+
+```bash
+# . install/setup.bash
+# export RMW_IMPLEMENTATION=rmw_fastrtps_cpp
+# . /usr/share/gazebo/setup.bash
+
+source ros2_setup.bash
+source install/setup.bash #allows autocomplete
+```
+
+Finally, we can run the application in the Gazebo environment:
+
+```bash
+ros2 launch ur main.launch.py
+```
+
+You should see the virtual space with two robots (mobile base and arms) facing each other and stopped in position (0,0,0).
+
+### Testing the application
+In order to try the application you can send a ros message to the topic corresponding to a robot and see if it responds correctly in the gazebo environment.
+To do so, open a new tab of the terminal running the container with ros2 (right click > new tab) and use the new one to read/write on the topics corresponding to the robot movements.  
+The command can be something similar to:
+
+```bash
+# moving the base
+ros2 topic pub /right_summit/cmd_vel geometry_msgs/msg/Twist "{linear: {x: 0.0, y: 0.5, z: 0.0}, angular: {x: 0.0, y: 0.0, z: 0.3}}" -1
+```
+
+or
+
+```bash
+# moving the arm
+ros2 topic pub /left/ur_left_joint_group_vel_controller/commands std_msgs/msg/Float64MultiArray "{layout: {dim: [], data_offset: 0}, data: [0.02, 0.01, 0.03, 0,0,0.1]}"
+```
+Remember to use the `""`.

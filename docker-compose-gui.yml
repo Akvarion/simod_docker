@@ -16,7 +16,7 @@ services:
       - /tmp/.docker.xauth:/tmp/.docker.xauth:rw
       # Load source folder into target location
       - type: bind
-        source: /home/<user_path_to_directory>/simod_docker/ros1_ws
+        source: /home/marco/Universita/Progetto SIMOD/attivita/simod_docker/ros1_ws
         target: /ros1_ws
     command: 
       /bin/bash -c "cd /ros1_ws && terminator"
@@ -37,7 +37,7 @@ services:
       - /dev/shm:/dev/shm
 
       - type: bind
-        source: /home/<user_path_to_directory>/simod_docker/bridge_ws
+        source: /home/marco/Universita/Progetto SIMOD/attivita/simod_docker/bridge_ws
         target: /bridge_ws
 
     command: 
@@ -59,7 +59,7 @@ services:
       - /dev/shm:/dev/shm
 
       - type: bind
-        source: /home/<user_path_to_directory>/simod_docker/ros2_ws
+        source: /home/marco/Universita/Progetto SIMOD/attivita/simod_docker/ros2_ws
         target: /ros2_ws
 
     command: 
