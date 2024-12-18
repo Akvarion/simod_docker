@@ -34,6 +34,38 @@ To start a single container, simply run the following (change the `<options>` in
 ```bash
 docker compose -f docker-compose-gui.yml up <options>
 ```
+### 2.1 Nvidia GPU hardware acceleration
+Some machines may use a setup with a dual GPU combo (Integrated + Dedicated Nvidia Cards). To use the Nvidia graphics card as the rendering device, a few requirements must be met:
+#### 1. Nvidia Container Toolkit
+To install this tool, you need to:
+
+##### Configure the production repository
+```bash
+curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg \
+  && curl -s -L https://nvidia.github.io/libnvidia-container/stable/deb/nvidia-container-toolkit.list | \
+    sed 's#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g' | \
+    sudo tee /etc/apt/sources.list.d/nvidia-container-toolkit.list
+```
+##### Update
+```bash
+sudo apt-get update
+```
+##### Install Nvidia Container Toolkit
+```bash
+sudo apt-get install -y nvidia-container-toolkit
+```
+##### Configure Docker
+```bash
+sudo nvidia-ctk runtime configure --runtime=docker
+```
+##### Restart Docker Service
+```bash
+sudo systemctl restart docker
+```
+
+##### Uncomment lines 9,14,15,56,60,61 in docker-compose-gui.ymls
+
+Further information can be found at the official [Nvidia Container Toolkit installation page](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html).
 
 ### 3. Running
 
