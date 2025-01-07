@@ -4,7 +4,12 @@
 ### 1. Prepare docker-compose
 Assuming all the necessary dependencies are met, the file docker compose must be modified in order to result in a working environment.
 
-Lines 19, 40 and 62 must be edited with the correct path (<user_path_to_directory>); paths must be absolute.
+Lines 19, 40 and 62 must be edited with the correct path ( <user_path_to_directory> ); paths must be absolute.
+Once the path is set up correctly, run the following command to avoid temporarily rewriting the the one in the repo once you commit the changes:
+
+```bash
+git update-index --assume-unchanged docker-compose-gui.yaml
+```
 
 
 ### 1. Building
