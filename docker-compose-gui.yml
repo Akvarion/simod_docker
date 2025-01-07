@@ -53,12 +53,12 @@ services:
       context: .
       dockerfile: ros2_docker/Dockerfile
   # Uncomment to use NVIDIA GPU hardware acceleration
-    runtime: nvidia
+  #  runtime: nvidia
     environment:
     - DISPLAY=${DISPLAY}
     - QT_X11_NO_MITSHM=1
-    - NVIDIA_VISIBLE_DEVICES=all
-    - NVIDIA_DRIVER_CAPABILITIES=all
+  #  - NVIDIA_VISIBLE_DEVICES=all
+  #  - NVIDIA_DRIVER_CAPABILITIES=all
     network_mode: host
 
     volumes:
