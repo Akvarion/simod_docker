@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root BTCPP_format="4">
+  <BehaviorTree ID="DropOff">
+    <Sequence>
+      <Fallback>
+        <CheckAlignment name="InAPositionToDrop?"/>
+        <MoveBase goal="AdjstPositioning"/>
+      </Fallback>
+      <Drop/>
+      <Release/>
+      <MoveBase goal="ReturnToDefaultPos"/>
+    </Sequence>
+  </BehaviorTree>
+
+  <BehaviorTree ID="Identify&amp;Align">
+    <Sequence>
+      <FindObj name="IdentifyPacco"/>
+      <CalculateGoal goal="PackagePositionAnalisys"/>
+      <Fallback>
+        <CheckAlignment name="ARM1-ARM2"/>
+        <MoveBase goal=""/>
+      </Fallback>
+    </Sequence>
+  </BehaviorTree>
+
+  <BehaviorTree ID="PickUpPrep">
+    <Sequence>
+      <Fallback>
+        <CheckAlignment name="EE"/>
+        <Set name="EE"/>
+      </Fallback>
+      <CloseGripper/>
+      <ParallelAll max_failures="0">
+        <ForceControl/>
+        <AngleControl/>
+      </ParallelAll>
+    </Sequence>
+  </BehaviorTree>
+
+  <BehaviorTree ID="SRM1-approach">
+    <Sequence>
+      <Fallback>
+        <NearObj name="SRM1@Pallet"/>
+        <ApproachObject/>
+      </Fallback>
+      <SaySomething name="DataToSRM2"
+                    message="PalletIsHere"/>
+      <Fallback>
+        <NearObj name="SRM2@Pallet"/>
+        <Sleep msec="Until SRM2 is there"/>
+      </Fallback>
+      <ApproachObject name="SyncPositioningSRM1-SRM2"/>
+    </Sequence>
+  </BehaviorTree>
+
+  <BehaviorTree ID="Transport">
+    <Sequence>
+      <LiftObj/>
+      <ParallelAll max_failures="0">
+        <KeepRunningUntilFailure>
+          <Controller name="ARM1-ARM2Position"/>
+        </KeepRunningUntilFailure>
+        <KeepRunningUntilFailure>
+          <Check name="PathIsClear"/>
+        </KeepRunningUntilFailure>
+        <Fallback>
+          <KeepRunningUntilFailure>
+            <Check name="PackageNotLost"/>
+          </KeepRunningUntilFailure>
+          <SaySomething message="PackageLost,Call Operator"/>
+        </Fallback>
+        <MoveBase goal="DST"/>
+      </ParallelAll>
+    </Sequence>
+  </BehaviorTree>
+
+  <BehaviorTree ID="recon">
+    <Sequence>
+      <FindObj/>
+      <CalculateGoal goal="DistanceFromPallet"/>
+    </Sequence>
+  </BehaviorTree>
+
+  <BehaviorTree ID="scenario1-SRM1">
+    <Sequence name="TaskStart">
+      <FindObj name="IdentifyPallet"/>
+      <CalculateGoal goal="DistanceFromPallet"/>
+      <Sequence name="SRM1_to_LoadSite">
+        <Fallback>
+          <NearObj name="SRM1@Pallet"/>
+          <ApproachObject/>
+        </Fallback>
+        <SaySomething name="DataToSRM2"
+                      message="PalletIsHere"/>
+        <RetryUntilSuccessful num_attempts="1000">
+          <NearObj name="SRM2@Pallet"/>
+        </RetryUntilSuccessful>
+        <Sync name="SyncPositioningSRM1-SRM2"/>
+      </Sequence>
+    </Sequence>
+  </BehaviorTree>
+
+  <BehaviorTree ID="scenario1-SRM2">
+    <Sequence>
+      <RetryUntilSuccessful num_attempts="">
+        <DataReceived name="DataReceivedFromSRM1"/>
+      </RetryUntilSuccessful>
+      <Fallback>
+        <NearObj name="SRM2@Pallet"/>
+        <ApproachObject name="MoveToPallet"/>
+      </Fallback>
+      <Sync name="SyncPositioningSRM1-SRM2"/>
+    </Sequence>
+  </BehaviorTree>
+
+  <BehaviorTree ID="scenario1-SRMSupervisor">
+    <Sequence name="IdentifySequence">
+      <RetryUntilSuccessful num_attempts="1000">
+        <Sync name="SyncSRM1-SRM2"/>
+      </RetryUntilSuccessful>
+      <Fallback>
+        <FindObj name="IdentifyPacco"/>
+        <SaySomething message="Can&apos;t Identify Pkg,Call Operator"/>
+      </Fallback>
+      <CalculateGoal goal="PackagePositionAnalisys"/>
+      <Fallback>
+        <CheckAlignment name="ARM1-ARM2"/>
+        <MoveBase goal="CorrectBasePos"/>
+      </Fallback>
+      <Sequence name="Pick-upPrepSequence">
+        <Fallback>
+          <CheckAlignment name="EE"/>
+          <Set name="EE"/>
+        </Fallback>
+        <CloseGripper/>
+        <ParallelAll max_failures="0">
+          <Controller name="ForceControllerInit"/>
+          <Controller name="AngleControllerInit"/>
+        </ParallelAll>
+        <Sequence name="TransportSequence">
+          <Fallback>
+            <LiftObj/>
+            <SaySomething message="PackageLost,Call Operator"/>
+          </Fallback>
+          <ParallelAll max_failures="0">
+            <Controller name="BasePosControllerInit"/>
+            <Controller name="ForceControllerInit"/>
+            <MoveBase goal="DST"/>
+          </ParallelAll>
+          <Sequence name="DropSequence">
+            <Fallback>
+              <CheckAlignment name="InAPositionToDrop?"/>
+              <MoveBase goal="AdjstPositioning"/>
+            </Fallback>
+            <Drop/>
+            <Release/>
+            <MoveBase goal="ReturnToPallet"/>
+          </Sequence>
+        </Sequence>
+      </Sequence>
+    </Sequence>
+  </BehaviorTree>
+
+  <!-- Description of Node Models (used by Groot) -->
+  <TreeNodesModel>
+    <Action ID="AngleControl"
+            editable="true"/>
+    <Action ID="ApproachObject"
+            editable="true"/>
+    <Action ID="CalculateGoal"
+            editable="true">
+      <output_port name="goal"/>
+    </Action>
+    <Condition ID="Check"
+               editable="true"/>
+    <Condition ID="CheckAlignment"
+               editable="true"/>
+    <Action ID="CloseGripper"
+            editable="true"/>
+    <Action ID="Controller"
+            editable="true"/>
+    <Condition ID="DataReceived"
+               editable="true"/>
+    <Action ID="Drop"
+            editable="true"/>
+    <Action ID="FindObj"
+            editable="true"/>
+    <Action ID="ForceControl"
+            editable="true"/>
+    <Action ID="LiftObj"
+            editable="true"/>
+    <Action ID="MoveBase"
+            editable="true">
+      <input_port name="goal"/>
+    </Action>
+    <Condition ID="NearObj"
+               editable="true"/>
+    <Action ID="Release"
+            editable="true"/>
+    <Action ID="SaySomething"
+            editable="true">
+      <input_port name="message"/>
+    </Action>
+    <Action ID="Set"
+            editable="true"/>
+    <Action ID="Sync"
+            editable="true"/>
+  </TreeNodesModel>
+
+</root>

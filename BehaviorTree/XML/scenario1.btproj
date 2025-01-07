@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root BTCPP_format="4" project_name="Project">
+    <include path="untitled_1.xml"/>
+    <!-- Description of Node Models (used by Groot) -->
+    <TreeNodesModel>
+        <Action ID="AngleControl" editable="true"/>
+        <Action ID="ApproachObject" editable="true"/>
+        <Action ID="AtObj" editable="true"/>
+        <Action ID="CalculateGoal" editable="true">
+            <output_port name="goal"/>
+        </Action>
+        <Condition ID="Check" editable="true"/>
+        <Condition ID="CheckAlignment" editable="true"/>
+        <Condition ID="CheckBattery" editable="true"/>
+        <Action ID="CloseGripper" editable="true"/>
+        <Action ID="Controller" editable="true"/>
+        <Condition ID="DataReceived" editable="true"/>
+        <Action ID="Drop" editable="true"/>
+        <Action ID="FindObj" editable="true"/>
+        <Action ID="ForceControl" editable="true"/>
+        <Condition ID="IsDoorClosed" editable="true"/>
+        <Action ID="LiftObj" editable="true"/>
+        <Action ID="MoveBase" editable="true">
+            <input_port name="goal"/>
+        </Action>
+        <Condition ID="NearObj" editable="true"/>
+        <Action ID="OpenDoor" editable="true"/>
+        <Action ID="OpenGripper" editable="true"/>
+        <Action ID="PassThroughDoor" editable="true"/>
+        <Action ID="Pick" editable="true"/>
+        <Action ID="PickLock" editable="true"/>
+        <Action ID="PrintTarget" editable="true">
+            <input_port name="target"/>
+        </Action>
+        <Action ID="Release" editable="true"/>
+        <Action ID="SaySomething" editable="true">
+            <input_port name="message"/>
+        </Action>
+        <Action ID="Set" editable="true"/>
+        <Action ID="SmashDoor" editable="true"/>
+        <Action ID="Sync" editable="true"/>
+        <Action ID="ThinkWhatToSay" editable="true">
+            <output_port name="text"/>
+        </Action>
+    </TreeNodesModel>
+</root>

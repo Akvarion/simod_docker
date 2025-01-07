@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root BTCPP_format="4">
+  <BehaviorTree ID="scenario1-SRMSupervisor">
+    <Sequence name="IdentifySequence">
+      <RetryUntilSuccessful num_attempts="">
+        <Check name="SRM1-SRM2PairingSucc"/>
+      </RetryUntilSuccessful>
+      <Fallback>
+        <FindObj name="IdentifyPacco"/>
+        <SaySomething message="Can&apos;t Identify Pkg,Call Operator"/>
+      </Fallback>
+      <CalculateGoal goal="PackagePositionAnalisys"/>
+      <Fallback>
+        <CheckAlignment name="ARM1-ARM2"/>
+        <MoveBase goal="CorrectBasePos"/>
+      </Fallback>
+      <Sequence name="Pick-upPrepSequence">
+        <Fallback>
+          <CheckAlignment name="EE"/>
+          <Set name="EE"/>
+        </Fallback>
+        <CloseGripper/>
+        <ParallelAll max_failures="0">
+          <KeepRunningUntilFailure>
+            <ForceControl/>
+          </KeepRunningUntilFailure>
+          <KeepRunningUntilFailure>
+            <AngleControl/>
+          </KeepRunningUntilFailure>
+        </ParallelAll>
+        <Sequence name="TransportSequence">
+          <Fallback>
+            <LiftObj/>
+            <SaySomething message="PackageLost,Call Operator"/>
+          </Fallback>
+          <ParallelAll max_failures="0">
+            <KeepRunningUntilFailure>
+              <Controller name="ARM1-ARM2Position" ID="scenario1-SRMSupervisor"/>
+            </KeepRunningUntilFailure>
+            <KeepRunningUntilFailure>
+              <Check name="PathIsClear"/>
+            </KeepRunningUntilFailure>
+            <KeepRunningUntilFailure>
+              <Check name="PackageNotLost"/>
+            </KeepRunningUntilFailure>
+            <Fallback>
+              <MoveBase goal="DST"/>
+              <SaySomething message="PackageLost,Call Operator"/>
+            </Fallback>
+          </ParallelAll>
+          <Sequence>
+            <Fallback>
+              <CheckAlignment name="InAPositionToDrop?"/>
+              <MoveBase goal="AdjstPositioning"/>
+            </Fallback>
+            <Drop/>
+            <Release/>
+            <MoveBase goal="ReturnToDefaultPos"/>
+          </Sequence>
+        </Sequence>
+      </Sequence>
+    </Sequence>
+  </BehaviorTree>
+
+    <!-- Description of Node Models (used by Groot) -->
+  <TreeNodesModel>
+    <Action ID="AngleControl"
+            editable="true"/>
+    <Action ID="ApproachObject"
+            editable="true"/>
+    <Action ID="CalculateGoal"
+            editable="true">
+      <output_port name="goal"/>
+    </Action>
+    <Condition ID="Check"
+               editable="true"/>
+    <Condition ID="CheckAlignment"
+               editable="true"/>
+    <Action ID="CloseGripper"
+            editable="true"/>
+    <Action ID="Control"
+            editable="true"/>
+    <Condition ID="DataReceived"
+               editable="true"/>
+    <Action ID="Drop"
+            editable="true"/>
+    <Action ID="FindObj"
+            editable="true"/>
+    <Action ID="ForceControl"
+            editable="true"/>
+    <Action ID="LiftObj"
+            editable="true"/>
+    <Action ID="MoveBase"
+            editable="true">
+      <input_port name="goal"/>
+    </Action>
+    <Condition ID="NearObj"
+               editable="true"/>
+    <Action ID="Release"
+            editable="true"/>
+    <Action ID="SaySomething"
+            editable="true">
+      <input_port name="message"/>
+    </Action>
+    <Action ID="Set"
+            editable="true"/>
+  </TreeNodesModel>
+
+</root>
