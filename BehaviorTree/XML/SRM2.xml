@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root BTCPP_format="4">
+  <BehaviorTree ID="scenario1-SRM2">
+    <Sequence>
+      <RetryUntilSuccessful num_attempts="">
+        <DataReceived name="DataReceivedFromSRM1"/>
+      </RetryUntilSuccessful>
+      <Fallback>
+        <NearObj name="SRM2@Pallet"/>
+        <ApproachObject name="MoveToPallet"/>
+      </Fallback>
+      <Sync name="SyncPositioningSRM1-SRM2"/>
+    </Sequence>
+  </BehaviorTree>
+
+
+<!-- Description of Node Models (used by Groot) -->
+  <TreeNodesModel>
+    <Action ID="AngleControl"
+            editable="true"/>
+    <Action ID="ApproachObject"
+            editable="true"/>
+    <Action ID="CalculateGoal"
+            editable="true">
+      <output_port name="goal"/>
+    </Action>
+    <Condition ID="Check"
+               editable="true"/>
+    <Condition ID="CheckAlignment"
+               editable="true"/>
+    <Action ID="CloseGripper"
+            editable="true"/>
+    <Action ID="Controller"
+            editable="true"/>
+    <Condition ID="DataReceived"
+               editable="true"/>
+    <Action ID="Drop"
+            editable="true"/>
+    <Action ID="FindObj"
+            editable="true"/>
+    <Action ID="ForceControl"
+            editable="true"/>
+    <Action ID="LiftObj"
+            editable="true"/>
+    <Action ID="MoveBase"
+            editable="true">
+      <input_port name="goal"/>
+    </Action>
+    <Condition ID="NearObj"
+               editable="true"/>
+    <Action ID="Release"
+            editable="true"/>
+    <Action ID="SaySomething"
+            editable="true">
+      <input_port name="message"/>
+    </Action>
+    <Action ID="Set"
+            editable="true"/>
+    <Action ID="Sync"
+            editable="true"/>
+  </TreeNodesModel>
+</root>

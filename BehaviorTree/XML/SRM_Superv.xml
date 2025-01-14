@@ -2,8 +2,8 @@
 <root BTCPP_format="4">
   <BehaviorTree ID="scenario1-SRMSupervisor">
     <Sequence name="IdentifySequence">
-      <RetryUntilSuccessful num_attempts="">
-        <Check name="SRM1-SRM2PairingSucc"/>
+      <RetryUntilSuccessful num_attempts="1000">
+        <Sync name="SyncSRM1-SRM2"/>
       </RetryUntilSuccessful>
       <Fallback>
         <FindObj name="IdentifyPacco"/>
@@ -21,12 +21,8 @@
         </Fallback>
         <CloseGripper/>
         <ParallelAll max_failures="0">
-          <KeepRunningUntilFailure>
-            <ForceControl/>
-          </KeepRunningUntilFailure>
-          <KeepRunningUntilFailure>
-            <AngleControl/>
-          </KeepRunningUntilFailure>
+          <Controller name="ForceControllerInit"/>
+          <Controller name="AngleControllerInit"/>
         </ParallelAll>
         <Sequence name="TransportSequence">
           <Fallback>
@@ -34,35 +30,28 @@
             <SaySomething message="PackageLost,Call Operator"/>
           </Fallback>
           <ParallelAll max_failures="0">
-            <KeepRunningUntilFailure>
-              <Controller name="ARM1-ARM2Position" ID="scenario1-SRMSupervisor"/>
-            </KeepRunningUntilFailure>
-            <KeepRunningUntilFailure>
-              <Check name="PathIsClear"/>
-            </KeepRunningUntilFailure>
-            <KeepRunningUntilFailure>
-              <Check name="PackageNotLost"/>
-            </KeepRunningUntilFailure>
-            <Fallback>
-              <MoveBase goal="DST"/>
-              <SaySomething message="PackageLost,Call Operator"/>
-            </Fallback>
+            <Controller name="BasePosControllerInit"/>
+            <Controller name="ForceControllerInit"/>
+            <MoveBase goal="DST"/>
           </ParallelAll>
-          <Sequence>
+          <Sequence name="DropSequence">
             <Fallback>
               <CheckAlignment name="InAPositionToDrop?"/>
               <MoveBase goal="AdjstPositioning"/>
             </Fallback>
             <Drop/>
             <Release/>
-            <MoveBase goal="ReturnToDefaultPos"/>
+            <MoveBase goal="ReturnToPallet"/>
           </Sequence>
         </Sequence>
       </Sequence>
     </Sequence>
   </BehaviorTree>
 
-    <!-- Description of Node Models (used by Groot) -->
+
+
+
+<!-- Description of Node Models (used by Groot) -->
   <TreeNodesModel>
     <Action ID="AngleControl"
             editable="true"/>
@@ -78,7 +67,7 @@
                editable="true"/>
     <Action ID="CloseGripper"
             editable="true"/>
-    <Action ID="Control"
+    <Action ID="Controller"
             editable="true"/>
     <Condition ID="DataReceived"
                editable="true"/>
@@ -103,6 +92,8 @@
       <input_port name="message"/>
     </Action>
     <Action ID="Set"
+            editable="true"/>
+    <Action ID="Sync"
             editable="true"/>
   </TreeNodesModel>
 
