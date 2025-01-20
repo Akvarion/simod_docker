@@ -204,11 +204,16 @@ The command can be something similar to:
 # moving the base
 ros2 topic pub /right_summit/cmd_vel geometry_msgs/msg/Twist "{linear: {x: 0.0, y: 0.5, z: 0.0}, angular: {x: 0.0, y: 0.0, z: 0.3}}" -1
 ```
+ros2 topic pub /right_summit/cmd_vel geometry_msgs/msg/Twist "{linear: {x: 0.0, y: 0.5, z: 0.0}, angular: {x: 0.0, y: 0.0, z: 0.3}}"
 
 or
 
 ```bash
 # moving the arm
 ros2 topic pub /left/ur_left_joint_group_vel_controller/commands std_msgs/msg/Float64MultiArray "{layout: {dim: [], data_offset: 0}, data: [0.02, 0.01, 0.03, 0,0,0.1]}"
+
+ros2 topic pub /right/ur_right_joint_group_vel_controller/commands std_msgs/msg/Float64MultiArray "{layout: {dim: [], data_offset: 0}, data: [0.02, 0.01, 0.03, 0,0,0.1]}"
 ```
+Data: [Rotazione della base, Inclinazione In Avanti (II giunto), Inclinazione in Avanti II (III Giunto), Rotazione X Pinza (IV Giunto), Rotazione Z Pinza (V Giunto), Rotazione Y Pinza (VI Giunto)]
+
 Remember to use the `""`.
