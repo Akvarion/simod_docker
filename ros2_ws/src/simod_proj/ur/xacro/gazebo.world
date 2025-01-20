@@ -1,26 +1,3522 @@
-<sdf version="1.6">
-  <world name="default">
-    <plugin name="gazebo_ros_state" filename="libgazebo_ros_state.so">
-      <ros>
-        <namespace>/state</namespace>
-        <argument>model_states:=model_states</argument>
-        <argument>link_states:=link_states</argument>
-      </ros>
-
-      <update_rate>1.0</update_rate>
-    </plugin>
-    
-    <include>
-      <uri>model://ground_plane</uri>
-    </include>
-
-    <include>
-      <uri>model://sun</uri>
-    </include>
-
-    <gravity>0.0 0.0 -9.8</gravity>
-
-
-   
+<sdf version='1.7'>
+  <world name='default'>
+    <light name='sun' type='directional'>
+      <cast_shadows>1</cast_shadows>
+      <pose>0 0 10 0 -0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <attenuation>
+        <range>1000</range>
+        <constant>0.9</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <direction>-0.5 0.1 -0.9</direction>
+      <spot>
+        <inner_angle>0</inner_angle>
+        <outer_angle>0</outer_angle>
+        <falloff>0</falloff>
+      </spot>
+    </light>
+    <model name='ground_plane'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <surface>
+            <contact>
+              <collide_bitmask>65535</collide_bitmask>
+              <ode/>
+            </contact>
+            <friction>
+              <ode>
+                <mu>100</mu>
+                <mu2>50</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <gravity>0 0 -9.8</gravity>
+    <magnetic_field>6e-06 2.3e-05 -4.2e-05</magnetic_field>
+    <atmosphere type='adiabatic'/>
+    <physics type='ode'>
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1</real_time_factor>
+      <real_time_update_rate>1000</real_time_update_rate>
+    </physics>
+    <scene>
+      <ambient>0.4 0.4 0.4 1</ambient>
+      <background>0.7 0.7 0.7 1</background>
+      <shadows>1</shadows>
+    </scene>
+    <audio>
+      <device>default</device>
+    </audio>
+    <wind/>
+    <spherical_coordinates>
+      <surface_model>EARTH_WGS84</surface_model>
+      <latitude_deg>0</latitude_deg>
+      <longitude_deg>0</longitude_deg>
+      <elevation>0</elevation>
+      <heading_deg>0</heading_deg>
+    </spherical_coordinates>
+    <model name='Untitled_clone_0'>
+      <link name='link_0'>
+        <inertial>
+          <mass>1</mass>
+          <inertia>
+            <ixx>0.166667</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.166667</iyy>
+            <iyz>0</iyz>
+            <izz>0.166667</izz>
+          </inertia>
+          <pose>0 0 0 0 -0 0</pose>
+        </inertial>
+        <pose>0 -0 0 0 -0 0</pose>
+        <gravity>1</gravity>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <enable_wind>0</enable_wind>
+        <visual name='visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>.Models/package_800x300x200/package.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <lighting>1</lighting>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <shader type='vertex'>
+              <normal_map>__default__</normal_map>
+            </shader>
+            <ambient>0.7 0.3 0.3 1</ambient>
+            <diffuse>0.8 0.6 0.7 1</diffuse>
+            <specular>0.01 0.01 0.31 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+          <transparency>0</transparency>
+          <cast_shadows>1</cast_shadows>
+        </visual>
+        <collision name='collision'>
+          <laser_retro>0</laser_retro>
+          <max_contacts>10</max_contacts>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>/ros2_ws/install/ur/share/ur/xacro/./Models/package_800x300x200/package.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1</mu>
+                <mu2>1</mu2>
+                <fdir1>0 0 0</fdir1>
+                <slip1>0</slip1>
+                <slip2>0</slip2>
+              </ode>
+              <torsional>
+                <coefficient>1</coefficient>
+                <patch_radius>0</patch_radius>
+                <surface_radius>0</surface_radius>
+                <use_patch_radius>1</use_patch_radius>
+                <ode>
+                  <slip>0</slip>
+                </ode>
+              </torsional>
+            </friction>
+            <bounce>
+              <restitution_coefficient>0</restitution_coefficient>
+              <threshold>1e+06</threshold>
+            </bounce>
+            <contact>
+              <collide_without_contact>0</collide_without_contact>
+              <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+              <collide_bitmask>1</collide_bitmask>
+              <ode>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.2</soft_erp>
+                <kp>1e+13</kp>
+                <kd>1</kd>
+                <max_vel>0.01</max_vel>
+                <min_depth>0</min_depth>
+              </ode>
+              <bullet>
+                <split_impulse>1</split_impulse>
+                <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.2</soft_erp>
+                <kp>1e+13</kp>
+                <kd>1</kd>
+              </bullet>
+            </contact>
+          </surface>
+        </collision>
+      </link>
+      <static>0</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <pose>-0.197184 5.32112 0.238409 0 -0 0</pose>
+    </model>
+    <state world_name='default'>
+      <sim_time>178 23000000</sim_time>
+      <real_time>37 121193210</real_time>
+      <wall_time>1737382429 889039491</wall_time>
+      <iterations>35559</iterations>
+      <model name='Untitled_clone_0'>
+        <pose>-0.007753 3.68041 0.224317 0 0 -1.03216</pose>
+        <scale>1 1 1</scale>
+        <link name='link_0'>
+          <pose>-0.007753 3.68041 0.224317 0 0 -1.03216</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>-0 -0 0 0 -0 0</acceleration>
+          <wrench>-0 -0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='aws_robomaker_warehouse_GroundB_01_0'>
+        <pose>0.748933 -0.442162 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>0.748933 -0.442162 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='ground_plane'>
+        <pose>0 0 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>0 0 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='left_robot'>
+        <pose>-0.648106 0.001547 0.123316 0 0 -0.002736</pose>
+        <scale>1 1 1</scale>
+        <link name='left_summit_back_left_wheel_link'>
+          <pose>-0.870046 0.206655 0.250316 -1e-06 0.008238 -0.002736</pose>
+          <velocity>-0 0 3e-06 -2e-06 -0 -0</velocity>
+          <acceleration>-3e-06 -1e-06 -1e-06 1.2e-05 -2.7e-05 -0</acceleration>
+          <wrench>-2.2e-05 -1e-05 -8e-06 0 -0 0</wrench>
+        </link>
+        <link name='left_summit_back_right_wheel_link'>
+          <pose>-0.871165 -0.202343 0.250316 -2e-06 0.088479 -0.002736</pose>
+          <velocity>-0 0 3e-06 -2e-06 -0 -0</velocity>
+          <acceleration>-3e-06 -2e-06 -0 1.2e-05 -2.6e-05 0</acceleration>
+          <wrench>-2.2e-05 -1e-05 -3e-06 0 -0 0</wrench>
+        </link>
+        <link name='left_summit_base_footprint'>
+          <pose>-0.648106 0.001547 0.123316 0 0 -0.002736</pose>
+          <velocity>-0 0 3e-06 0 -0 0</velocity>
+          <acceleration>-3e-06 -2e-06 -1e-06 -1e-06 0 0</acceleration>
+          <wrench>-0.000445 -0.000254 -0.000111 0 -0 0</wrench>
+        </link>
+        <link name='left_summit_front_left_wheel_link'>
+          <pose>-0.425047 0.205438 0.250316 -1e-06 0.008265 -0.002736</pose>
+          <velocity>-0 0 3e-06 -2e-06 -0 -0</velocity>
+          <acceleration>-3e-06 -1e-06 -1e-06 1.1e-05 -2.7e-05 0</acceleration>
+          <wrench>-2.2e-05 -9e-06 -8e-06 0 -0 0</wrench>
+        </link>
+        <link name='left_summit_front_right_wheel_link'>
+          <pose>-0.426166 -0.203561 0.250316 -1e-06 0.288418 -0.002736</pose>
+          <velocity>-0 0 3e-06 -2e-06 -0 -0</velocity>
+          <acceleration>-3e-06 -1e-06 -1e-06 1.2e-05 -2.7e-05 -0</acceleration>
+          <wrench>-2.2e-05 -1e-05 -3e-06 0 -0 0</wrench>
+        </link>
+        <link name='ur_left_forearm_link'>
+          <pose>-0.788961 -0.022462 1.22908 -1.5708 0.122951 -2.97277</pose>
+          <velocity>0 -0 3e-06 1e-06 -0 0</velocity>
+          <acceleration>3e-06 -0.000185 1.1e-05 0.000622 -2.8e-05 0.00039</acceleration>
+          <wrench>8e-06 -0.000528 3.1e-05 0 -0 0</wrench>
+        </link>
+        <link name='ur_left_shoulder_link'>
+          <pose>-0.648106 0.001547 0.828816 0 -0 0.16882</pose>
+          <velocity>0 0 3e-06 0 -0 0</velocity>
+          <acceleration>-4e-06 1.1e-05 1e-06 -0.000205 -3.1e-05 0.000455</acceleration>
+          <wrench>-1.4e-05 4.1e-05 5e-06 0 -0 0</wrench>
+        </link>
+        <link name='ur_left_upper_arm_link'>
+          <pose>-0.648106 0.001547 0.828816 1.57081 1.22791 0.16883</pose>
+          <velocity>0 0 3e-06 1e-06 -0 0</velocity>
+          <acceleration>6.2e-05 -8.7e-05 -7.9e-05 -0.001039 -0.000147 0.003541</acceleration>
+          <wrench>0.000499 -0.000703 -0.000639 0 -0 0</wrench>
+        </link>
+        <link name='ur_left_wrist_1_link'>
+          <pose>-0.382858 -0.088467 1.27718 -1.57081 -1.32445 -2.97276</pose>
+          <velocity>0 -0 3e-06 1e-06 -0 0</velocity>
+          <acceleration>3e-05 -0.000136 -1.8e-05 0.00059 -4e-06 0.000283</acceleration>
+          <wrench>4.1e-05 -0.000187 -2.5e-05 0 -0 0</wrench>
+        </link>
+        <link name='ur_left_wrist_2_link'>
+          <pose>-0.287542 -0.072222 1.30149 -1.31104 0.31932 -1.31874</pose>
+          <velocity>0 -0 3e-06 1e-06 -0 0</velocity>
+          <acceleration>2.6e-05 -0.000132 -1.3e-05 0.000834 6.4e-05 0.000219</acceleration>
+          <wrench>3.3e-05 -0.000172 -1.6e-05 0 -0 0</wrench>
+        </link>
+        <link name='ur_left_wrist_3_link'>
+          <pose>-0.270305 -0.036579 1.2101 -2.73717 0.061373 -0.592776</pose>
+          <velocity>0 0 3e-06 1e-06 -0 0</velocity>
+          <acceleration>2.1e-05 -6e-05 3e-06 0.000666 -6.7e-05 0.000257</acceleration>
+          <wrench>1.6e-05 -4.6e-05 2e-06 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='muraUse1'>
+        <pose>-0.192068 5.643666 1.124180 0.000372 2.7e-05 0.003247</pose>
+        <scale>1 1 1</scale>
+        <link name='link_0'>
+          <pose>-0.192 5.62237 1.12418 -2.7e-05 0.000372 -1.5675</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='pacco'>
+        <pose>-0.207264 5.37008 0.984078 0.000372 2.7e-05 0.003286</pose>
+        <scale>1 1 1</scale>
+        <link name='link_0'>
+          <pose>-0.207264 5.37008 0.984078 0.000372 2.7e-05 0.003286</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 -9.8 0 -0 0</acceleration>
+          <wrench>0 0 -9.8 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='pacco_clone'>
+        <pose>-0.207384 4.99868 0.983939 0.000372 2.7e-05 0.003286</pose>
+        <scale>1 1 1</scale>
+        <link name='link_0'>
+          <pose>-0.207384 4.99868 0.983939 0.000372 2.7e-05 0.003286</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 -9.8 0 -0 0</acceleration>
+          <wrench>0 0 -9.8 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='pacco_clone_0'>
+        <pose>-0.190049 4.64564 0.983808 0.000372 2.7e-05 0.003286</pose>
+        <scale>1 1 1</scale>
+        <link name='link_0'>
+          <pose>-0.190049 4.64564 0.983808 0.000372 2.7e-05 0.003286</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 -9.8 0 -0 0</acceleration>
+          <wrench>0 0 -9.8 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='pacco_clone_1'>
+        <pose>-0.186301 4.31139 0.983683 0.000372 2.7e-05 0.003286</pose>
+        <scale>1 1 1</scale>
+        <link name='link_0'>
+          <pose>-0.186301 4.31139 0.983683 0.000372 2.7e-05 0.003286</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 -9.8 0 -0 0</acceleration>
+          <wrench>0 0 -9.8 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='pallet2'>
+        <pose>-2.79329 3.65826 0.119317 1e-06 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='pallet_base'>
+          <pose>-2.79329 3.65826 0.119317 1e-06 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0.000325 0.002627 -8.48079 0.525227 -0.064904 0</acceleration>
+          <wrench>0.000325 0.002627 -8.48079 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='right_robot'>
+        <pose>0.66116 -0.000789 0.123316 0 -0 0.006643</pose>
+        <scale>1 1 1</scale>
+        <link name='right_summit_back_left_wheel_link'>
+          <pose>0.437306 0.202228 0.250316 -1e-06 -0.000417 0.006643</pose>
+          <velocity>-0 0 3e-06 -2e-06 -0 -0</velocity>
+          <acceleration>2e-06 -1e-06 -1e-06 1.1e-05 1.8e-05 0</acceleration>
+          <wrench>1.5e-05 -9e-06 -8e-06 0 -0 0</wrench>
+        </link>
+        <link name='right_summit_back_right_wheel_link'>
+          <pose>0.440023 -0.206763 0.250316 -1e-06 0.004055 0.006643</pose>
+          <velocity>-0 0 3e-06 -2e-06 -0 -0</velocity>
+          <acceleration>2e-06 -1e-06 -1e-06 1.1e-05 1.8e-05 0</acceleration>
+          <wrench>1.5e-05 -9e-06 -4e-06 0 -0 0</wrench>
+        </link>
+        <link name='right_summit_base_footprint'>
+          <pose>0.66116 -0.000789 0.123316 0 -0 0.006643</pose>
+          <velocity>-0 0 3e-06 0 -0 0</velocity>
+          <acceleration>2e-06 -2e-06 -1e-06 -1e-06 -1e-06 0</acceleration>
+          <wrench>0.000296 -0.000239 -0.000104 0 -0 0</wrench>
+        </link>
+        <link name='right_summit_front_left_wheel_link'>
+          <pose>0.882296 0.205184 0.250316 -1e-06 -0.005113 0.006643</pose>
+          <velocity>-0 0 3e-06 -2e-06 -0 -0</velocity>
+          <acceleration>2e-06 -1e-06 -1e-06 1.1e-05 1.8e-05 0</acceleration>
+          <wrench>1.5e-05 -9e-06 -6e-06 0 -0 0</wrench>
+        </link>
+        <link name='right_summit_front_right_wheel_link'>
+          <pose>0.885013 -0.203807 0.250316 -1e-06 0.179329 0.006643</pose>
+          <velocity>-0 0 3e-06 -2e-06 -0 -0</velocity>
+          <acceleration>2e-06 -1e-06 -0 1.1e-05 1.8e-05 0</acceleration>
+          <wrench>1.5e-05 -9e-06 -2e-06 0 -0 0</wrench>
+        </link>
+        <link name='ur_right_forearm_link'>
+          <pose>0.945953 0.080059 1.13375 -1.5708 0.541766 0.276599</pose>
+          <velocity>-0 0 3e-06 -0 -0 -0</velocity>
+          <acceleration>-8.1e-05 0.00018 4.5e-05 0.000191 -6.5e-05 -0.000424</acceleration>
+          <wrench>-0.000231 0.000512 0.000129 0 -0 0</wrench>
+        </link>
+        <link name='ur_right_shoulder_link'>
+          <pose>0.66116 -0.000789 0.828816 -0 -0 -2.86499</pose>
+          <velocity>-0 0 3e-06 0 -0 0</velocity>
+          <acceleration>1e-06 1.1e-05 -2e-06 0.000106 3.7e-05 -0.000149</acceleration>
+          <wrench>5e-06 4.3e-05 -7e-06 0 -0 0</wrench>
+        </link>
+        <link name='ur_right_upper_arm_link'>
+          <pose>0.66116 -0.000789 0.828816 1.5708 0.800177 -2.86499</pose>
+          <velocity>-0 0 3e-06 0 -0 0</velocity>
+          <acceleration>1.2e-05 6.3e-05 -3.6e-05 -0.00102 -0.00061 -0.001221</acceleration>
+          <wrench>0.000101 0.000506 -0.00029 0 -0 0</wrench>
+        </link>
+        <link name='ur_right_wrist_1_link'>
+          <pose>0.586286 0.116525 1.33598 -1.5708 -1.0285 0.276609</pose>
+          <velocity>-0 0 3e-06 -0 -0 -0</velocity>
+          <acceleration>-7.7e-05 0.000291 -1.8e-05 -0.000534 2.7e-05 -0.000258</acceleration>
+          <wrench>-0.000106 0.000398 -2.5e-05 0 -0 0</wrench>
+        </link>
+        <link name='ur_right_wrist_2_link'>
+          <pose>0.504136 0.093205 1.38744 -1.0275 0.05759 1.88215</pose>
+          <velocity>-0 0 3e-06 -2e-06 -0 0</velocity>
+          <acceleration>-8.6e-05 0.000354 -4e-06 -0.002231 -0.000474 0.000568</acceleration>
+          <wrench>-0.000112 0.00046 -5e-06 0 -0 0</wrench>
+        </link>
+        <link name='ur_right_wrist_3_link'>
+          <pose>0.456626 0.07276 1.30232 -2.5983 0.057579 1.88216</pose>
+          <velocity>-0 0 3e-06 -1e-06 -0 1e-06</velocity>
+          <acceleration>-6.4e-05 0.00016 -2.2e-05 -0.001707 -0.000322 0.000356</acceleration>
+          <wrench>-4.9e-05 0.000123 -1.7e-05 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='target_plane'>
+        <pose>6.58171 -8.56484 0.134057 -1e-06 2e-06 -0</pose>
+        <scale>1 1 1</scale>
+        <link name='link_0'>
+          <pose>6.58171 -8.56484 0.134057 -1e-06 2e-06 -0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0.072282 0.106599 1.80671 1.62463 1.13668 1.3e-05</acceleration>
+          <wrench>0.005448 0.008035 0.136182 0 -0 0</wrench>
+        </link>
+      </model>
+      <light name='sun'>
+        <pose>0 0 10 0 -0 0</pose>
+      </light>
+    </state>
+    <model name='pallet2'>
+      <pose>6.82908 -9.08928 0.07 0 -0 0</pose>
+      <self_collide>0</self_collide>
+      <link name='pallet_base'>
+        <pose>0 0 0 0 -0 0</pose>
+        <collision name='pallet_top_collision'>
+          <pose>0 0 0.125 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>1.22 0.8 0.04</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='pallet_center_collision'>
+          <pose>0 0 0.055 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>1.22 0.1 0.1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='pallet_left_collision'>
+          <pose>0 -0.35 0.055 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>1.22 0.1 0.1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='pallet_right_collision'>
+          <pose>0 0.35 0.055 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>1.22 0.1 0.1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='pallet_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/ros2_ws/install/ur/share/ur/xacro/./Models/pallet/meshes/pallet.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+          <mass>1</mass>
+        </inertial>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <static>0</static>
+    </model>
+    <gui fullscreen='0'>
+      <camera name='user_camera'>
+        <pose>1.03576 -3.75154 4.55737 -0 0.653796 1.47218</pose>
+        <view_controller>orbit</view_controller>
+        <projection_type>perspective</projection_type>
+      </camera>
+    </gui>
+    <model name='aws_robomaker_warehouse_GroundB_01_0'>
+      <link name='link'>
+        <inertial>
+          <mass>1000</mass>
+          <inertia>
+            <ixx>1.20008e+06</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>8.33342e+06</iyy>
+            <iyz>0</iyz>
+            <izz>2.03333e+06</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>/ros2_ws/install/ur/share/ur/xacro/./Models/aws_warehouse/aws_robomaker_warehouse_GroundB_01/meshes/aws_robomaker_warehouse_GroundB_01_collision.DAE</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>100</mu>
+                <mu2>50</mu2>
+                <fdir1>0 0 0</fdir1>
+                <slip1>0</slip1>
+                <slip2>0</slip2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>/ros2_ws/install/ur/share/ur/xacro/./Models/aws_warehouse/aws_robomaker_warehouse_GroundB_01/meshes/aws_robomaker_warehouse_GroundB_01_visual.DAE</uri>
+            </mesh>
+          </geometry>
+          <meta>
+            <layer>1</layer>
+          </meta>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <static>1</static>
+      <pose>0 -0.442162 0 0 -0 0</pose>
+    </model>
+    <model name='target_plane'>
+      <link name='link_0'>
+        <inertial>
+          <mass>0.0753756</mass>
+          <inertia>
+            <ixx>0.0242871</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.0244094</iyy>
+            <iyz>0</iyz>
+            <izz>0.0486918</izz>
+          </inertia>
+          <pose>0 0 0 0 -0 0</pose>
+        </inertial>
+        <pose>-0 -0 0 0 -0 0</pose>
+        <gravity>1</gravity>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <enable_wind>0</enable_wind>
+        <visual name='visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>1.97121 1.96626 0.019484</size>
+            </box>
+          </geometry>
+          <material>
+            <lighting>1</lighting>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <shader type='pixel'>
+              <normal_map>__default__</normal_map>
+            </shader>
+            <ambient>0.961 0.761 0.067 1</ambient>
+            <diffuse>0.961 0.761 0.067 1</diffuse>
+            <specular>0.961 0.761 0.067 1</specular>
+            <emissive>0.961 0.761 0.067 1</emissive>
+          </material>
+          <transparency>0</transparency>
+          <cast_shadows>1</cast_shadows>
+        </visual>
+        <collision name='collision'>
+          <laser_retro>0</laser_retro>
+          <max_contacts>10</max_contacts>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>1.97121 1.96626 0.019484</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1</mu>
+                <mu2>1</mu2>
+                <fdir1>0 0 0</fdir1>
+                <slip1>0</slip1>
+                <slip2>0</slip2>
+              </ode>
+              <torsional>
+                <coefficient>1</coefficient>
+                <patch_radius>0</patch_radius>
+                <surface_radius>0</surface_radius>
+                <use_patch_radius>1</use_patch_radius>
+                <ode>
+                  <slip>0</slip>
+                </ode>
+              </torsional>
+            </friction>
+            <bounce>
+              <restitution_coefficient>0</restitution_coefficient>
+              <threshold>1e+06</threshold>
+            </bounce>
+            <contact>
+              <collide_without_contact>0</collide_without_contact>
+              <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+              <collide_bitmask>1</collide_bitmask>
+              <ode>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.2</soft_erp>
+                <kp>1e+13</kp>
+                <kd>1</kd>
+                <max_vel>0.01</max_vel>
+                <min_depth>0</min_depth>
+              </ode>
+              <bullet>
+                <split_impulse>1</split_impulse>
+                <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.2</soft_erp>
+                <kp>1e+13</kp>
+                <kd>1</kd>
+              </bullet>
+            </contact>
+          </surface>
+        </collision>
+      </link>
+      <static>0</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <pose>9.00801 -7.68181 0 0 -0 0</pose>
+    </model>
+    <model name='right_robot'>
+      <link name='right_summit_base_footprint'>
+        <inertial>
+          <pose>5e-06 -5e-06 0.14373 0 -0 0</pose>
+          <mass>131.405</mass>
+          <inertia>
+            <ixx>2.28126</ixx>
+            <ixy>0.147666</ixy>
+            <ixz>-0.000130347</ixz>
+            <iyy>7.83548</iyy>
+            <iyz>0.000132399</iyz>
+            <izz>6.43846</izz>
+          </inertia>
+        </inertial>
+        <collision name='right_summit_base_footprint_fixed_joint_lump__right_summit_base_link_collision'>
+          <pose>0 0 0.127 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///ros2_ws/install/summit_xl_description/share/summit_xl_description/meshes/bases/xls/summit_xls_chassis.dae</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <collision name='right_summit_base_footprint_fixed_joint_lump__right_summit_front_laser_base_link_collision_1'>
+          <pose>0.2865 -0.20894 0.4243 3.14159 -0 -0.785398</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robotnik_sensors/meshes/sick_s300.dae</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='right_summit_base_footprint_fixed_joint_lump__right_summit_rear_laser_base_link_collision_2'>
+          <pose>-0.2865 0.20894 0.4243 3.14159 -0 2.35619</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robotnik_sensors/meshes/sick_s300.dae</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='right_summit_base_footprint_fixed_joint_lump__ur_right_base_link_inertia_collision_3'>
+          <pose>0 0 0.543 0 -0 1.57</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///ros2_ws/install/ur_description/share/ur_description/meshes/ur5e/collision/base.stl</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='right_summit_base_footprint_visual'>
+          <pose>0 0 0.5 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.001 0.001 0.001</size>
+            </box>
+          </geometry>
+        </visual>
+        <visual name='right_summit_base_footprint_fixed_joint_lump__right_summit_base_link_visual_1'>
+          <pose>0 0 0.127 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///ros2_ws/install/summit_xl_description/share/summit_xl_description/meshes/bases/xls/summit_xls_chassis.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <name>Gazebo/Black</name>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+            </script>
+          </material>
+        </visual>
+        <visual name='right_summit_base_footprint_fixed_joint_lump__right_summit_base_logo_front_visual_2'>
+          <pose>0.345 0 0.127 0 0 -1.5708</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///ros2_ws/install/summit_xl_description/share/summit_xl_description/meshes/bases/xls/robotnik_logo_chasis.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name='right_summit_base_footprint_fixed_joint_lump__right_summit_base_logo_left_visual_3'>
+          <pose>0 0.28931 0.41762 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///ros2_ws/install/summit_xl_description/share/summit_xl_description/meshes/bases/xls/robotnik_logo_chasis.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name='right_summit_base_footprint_fixed_joint_lump__right_summit_base_logo_rear_visual_4'>
+          <pose>-0.345 0 0.127 0 -0 1.5708</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///ros2_ws/install/summit_xl_description/share/summit_xl_description/meshes/bases/xls/robotnik_logo_chasis.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name='right_summit_base_footprint_fixed_joint_lump__right_summit_base_logo_right_visual_5'>
+          <pose>0 -0.28931 0.41762 0 -0 3.14159</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///ros2_ws/install/summit_xl_description/share/summit_xl_description/meshes/bases/xls/robotnik_logo_chasis.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name='right_summit_base_footprint_fixed_joint_lump__right_summit_base_chapa_visual_6'>
+          <pose>0 0 0.50762 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///ros2_ws/install/summit_xl_description/share/summit_xl_description/meshes/bases/xls/summit_xls_chapas_inox_tapas.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name='right_summit_base_footprint_fixed_joint_lump__right_summit_front_laser_base_link_visual_7'>
+          <pose>0.2865 -0.20894 0.4243 1.5708 -0 -0.785398</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robotnik_sensors/meshes/sick_s300_color.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name='right_summit_base_footprint_fixed_joint_lump__right_summit_imu_link_visual_8'>
+          <pose>0.127 -0.129 0.339 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.001 0.001 0.001</size>
+            </box>
+          </geometry>
+        </visual>
+        <visual name='right_summit_base_footprint_fixed_joint_lump__right_summit_rear_laser_base_link_visual_9'>
+          <pose>-0.2865 0.20894 0.4243 1.5708 -0 2.35619</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robotnik_sensors/meshes/sick_s300_color.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name='right_summit_base_footprint_fixed_joint_lump__ur_right_base_link_inertia_visual_10'>
+          <pose>0 0 0.543 0 -0 1.57</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///ros2_ws/install/ur_description/share/ur_description/meshes/ur5e/visual/base.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <gravity>0</gravity>
+        <sensor name='right_summit_front_laser_sensor' type='ray'>
+          <visualize>0</visualize>
+          <update_rate>12.5</update_rate>
+          <ray>
+            <scan>
+              <horizontal>
+                <samples>541</samples>
+                <resolution>1</resolution>
+                <min_angle>-2.3562</min_angle>
+                <max_angle>2.3562</max_angle>
+              </horizontal>
+              <vertical>
+                <samples>1</samples>
+                <min_angle>0</min_angle>
+                <max_angle>0</max_angle>
+              </vertical>
+            </scan>
+            <range>
+              <min>0.1</min>
+              <max>30</max>
+              <resolution>0.03</resolution>
+            </range>
+            <noise>
+              <type>gaussian</type>
+              <mean>0</mean>
+              <stddev>0.03</stddev>
+            </noise>
+          </ray>
+          <plugin name='right_summit_front_laser_controller' filename='libgazebo_ros_ray_sensor.so'>
+            <ros>
+              <remapping>~/out:=front_laser/scan</remapping>
+            </ros>
+            <frame_name>right_summit_front_laser_link</frame_name>
+            <output_type>sensor_msgs/LaserScan</output_type>
+          </plugin>
+          <pose>0.2865 -0.20894 0.3083 3.14159 -0 -0.785398</pose>
+        </sensor>
+        <gravity>1</gravity>
+        <sensor name='right_summit_imu_imu_sensor' type='imu'>
+          <always_on>1</always_on>
+          <update_rate>100</update_rate>
+          <visualize>1</visualize>
+          <topic>__default_topic__</topic>
+          <plugin name='right_summit_imu_imu_plugin' filename='libgazebo_ros_imu_sensor.so'>
+            <topicName>imu/data</topicName>
+            <bodyName>right_summit_imu_link</bodyName>
+            <updateRateHZ>100.0</updateRateHZ>
+            <gaussianNoise>0.0</gaussianNoise>
+            <xyzOffset>0 0 0</xyzOffset>
+            <rpyOffset>0 0 0</rpyOffset>
+            <frameName>right_summit_imu_link</frameName>
+          </plugin>
+          <pose>0.127 -0.129 0.339 0 -0 0</pose>
+          <imu/>
+        </sensor>
+        <sensor name='right_summit_rear_laser_sensor' type='ray'>
+          <visualize>0</visualize>
+          <update_rate>12.5</update_rate>
+          <ray>
+            <scan>
+              <horizontal>
+                <samples>541</samples>
+                <resolution>1</resolution>
+                <min_angle>-2.3562</min_angle>
+                <max_angle>2.3562</max_angle>
+              </horizontal>
+              <vertical>
+                <samples>1</samples>
+                <min_angle>0</min_angle>
+                <max_angle>0</max_angle>
+              </vertical>
+            </scan>
+            <range>
+              <min>0.1</min>
+              <max>30</max>
+              <resolution>0.03</resolution>
+            </range>
+            <noise>
+              <type>gaussian</type>
+              <mean>0</mean>
+              <stddev>0.03</stddev>
+            </noise>
+          </ray>
+          <plugin name='right_summit_rear_laser_controller' filename='libgazebo_ros_ray_sensor.so'>
+            <ros>
+              <remapping>~/out:=rear_laser/scan</remapping>
+            </ros>
+            <frame_name>right_summit_rear_laser_link</frame_name>
+            <output_type>sensor_msgs/LaserScan</output_type>
+          </plugin>
+          <pose>-0.2865 0.20894 0.3083 3.14159 -0 2.35619</pose>
+        </sensor>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='right_summit_back_left_wheel_joint' type='revolute'>
+        <pose relative_to='right_summit_base_footprint'>-0.2225 0.2045 0.127 0 -0 0</pose>
+        <parent>right_summit_base_footprint</parent>
+        <child>right_summit_back_left_wheel_link</child>
+        <axis>
+          <xyz>0 1 0</xyz>
+          <limit>
+            <effort>100</effort>
+            <velocity>100</velocity>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='right_summit_back_left_wheel_link'>
+        <pose relative_to='right_summit_back_left_wheel_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>6.5</mass>
+          <inertia>
+            <ixx>0.0303095</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.0524193</iyy>
+            <iyz>0</iyz>
+            <izz>0.0303095</izz>
+          </inertia>
+        </inertial>
+        <collision name='right_summit_back_left_wheel_link_collision'>
+          <pose>0 0 0 1.5708 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <length>0.087</length>
+              <radius>0.127</radius>
+            </cylinder>
+          </geometry>
+          <surface>
+            <contact>
+              <ode>
+                <kp>1e+08</kp>
+                <kd>1</kd>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+            <friction>
+              <ode>
+                <mu>0.9</mu>
+                <mu2>0.9</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='right_summit_back_left_wheel_link_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///ros2_ws/install/summit_xl_description/share/summit_xl_description/meshes/wheels/omni_wheel_1.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='right_summit_back_right_wheel_joint' type='revolute'>
+        <pose relative_to='right_summit_base_footprint'>-0.2225 -0.2045 0.127 0 -0 0</pose>
+        <parent>right_summit_base_footprint</parent>
+        <child>right_summit_back_right_wheel_link</child>
+        <axis>
+          <xyz>0 1 0</xyz>
+          <limit>
+            <effort>100</effort>
+            <velocity>100</velocity>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='right_summit_back_right_wheel_link'>
+        <pose relative_to='right_summit_back_right_wheel_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>6.5</mass>
+          <inertia>
+            <ixx>0.0303095</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.0524193</iyy>
+            <iyz>0</iyz>
+            <izz>0.0303095</izz>
+          </inertia>
+        </inertial>
+        <collision name='right_summit_back_right_wheel_link_collision'>
+          <pose>0 0 0 1.5708 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <length>0.087</length>
+              <radius>0.127</radius>
+            </cylinder>
+          </geometry>
+          <surface>
+            <contact>
+              <ode>
+                <kp>1e+08</kp>
+                <kd>1</kd>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+            <friction>
+              <ode>
+                <mu>0.9</mu>
+                <mu2>0.9</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='right_summit_back_right_wheel_link_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///ros2_ws/install/summit_xl_description/share/summit_xl_description/meshes/wheels/omni_wheel_2.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='right_summit_front_left_wheel_joint' type='revolute'>
+        <pose relative_to='right_summit_base_footprint'>0.2225 0.2045 0.127 0 -0 0</pose>
+        <parent>right_summit_base_footprint</parent>
+        <child>right_summit_front_left_wheel_link</child>
+        <axis>
+          <xyz>0 1 0</xyz>
+          <limit>
+            <effort>100</effort>
+            <velocity>100</velocity>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='right_summit_front_left_wheel_link'>
+        <pose relative_to='right_summit_front_left_wheel_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>6.5</mass>
+          <inertia>
+            <ixx>0.0303095</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.0524193</iyy>
+            <iyz>0</iyz>
+            <izz>0.0303095</izz>
+          </inertia>
+        </inertial>
+        <collision name='right_summit_front_left_wheel_link_collision'>
+          <pose>0 0 0 1.5708 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <length>0.087</length>
+              <radius>0.127</radius>
+            </cylinder>
+          </geometry>
+          <surface>
+            <contact>
+              <ode>
+                <kp>1e+08</kp>
+                <kd>1</kd>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+            <friction>
+              <ode>
+                <mu>0.9</mu>
+                <mu2>0.9</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='right_summit_front_left_wheel_link_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///ros2_ws/install/summit_xl_description/share/summit_xl_description/meshes/wheels/omni_wheel_1.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='right_summit_front_right_wheel_joint' type='revolute'>
+        <pose relative_to='right_summit_base_footprint'>0.2225 -0.2045 0.127 0 0.2 0</pose>
+        <parent>right_summit_base_footprint</parent>
+        <child>right_summit_front_right_wheel_link</child>
+        <axis>
+          <xyz>0 1 0</xyz>
+          <limit>
+            <effort>100</effort>
+            <velocity>100</velocity>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='right_summit_front_right_wheel_link'>
+        <pose relative_to='right_summit_front_right_wheel_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>6.5</mass>
+          <inertia>
+            <ixx>0.0303095</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.0524193</iyy>
+            <iyz>0</iyz>
+            <izz>0.0303095</izz>
+          </inertia>
+        </inertial>
+        <collision name='right_summit_front_right_wheel_link_collision'>
+          <pose>0 0 0 1.5708 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <length>0.087</length>
+              <radius>0.127</radius>
+            </cylinder>
+          </geometry>
+          <surface>
+            <contact>
+              <ode>
+                <kp>1e+08</kp>
+                <kd>1</kd>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+            <friction>
+              <ode>
+                <mu>0.9</mu>
+                <mu2>0.9</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='right_summit_front_right_wheel_link_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///ros2_ws/install/summit_xl_description/share/summit_xl_description/meshes/wheels/omni_wheel_2.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='ur_right_shoulder_pan_joint' type='revolute'>
+        <pose relative_to='right_summit_base_footprint'>0 0 0.7055 0 0 -1.57159</pose>
+        <parent>right_summit_base_footprint</parent>
+        <child>ur_right_shoulder_link</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-6.28319</lower>
+            <upper>6.28319</upper>
+            <effort>150</effort>
+            <velocity>3.14159</velocity>
+          </limit>
+          <dynamics>
+            <damping>0</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='ur_right_shoulder_link'>
+        <pose relative_to='ur_right_shoulder_pan_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>3.761</mass>
+          <inertia>
+            <ixx>0.0104368</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.0104368</iyy>
+            <iyz>0</iyz>
+            <izz>0.0067698</izz>
+          </inertia>
+        </inertial>
+        <collision name='ur_right_shoulder_link_collision'>
+          <pose>0 0 0 0 -0 3.14159</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///ros2_ws/install/ur_description/share/ur_description/meshes/ur5e/collision/shoulder.stl</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='ur_right_shoulder_link_visual'>
+          <pose>0 0 0 0 -0 3.14159</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///ros2_ws/install/ur_description/share/ur_description/meshes/ur5e/visual/shoulder.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <gravity>0</gravity>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='ur_right_shoulder_lift_joint' type='revolute'>
+        <pose relative_to='ur_right_shoulder_link'>0 0 0 1.5708 -0 0</pose>
+        <parent>ur_right_shoulder_link</parent>
+        <child>ur_right_upper_arm_link</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-6.28319</lower>
+            <upper>6.28319</upper>
+            <effort>150</effort>
+            <velocity>3.14159</velocity>
+          </limit>
+          <dynamics>
+            <damping>0</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='ur_right_upper_arm_link'>
+        <pose relative_to='ur_right_shoulder_lift_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>-0.2125 0 0.138 3.14159 1.57079 3.14159</pose>
+          <mass>8.058</mass>
+          <inertia>
+            <ixx>0.128542</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.128542</iyy>
+            <iyz>0</iyz>
+            <izz>0.0145044</izz>
+          </inertia>
+        </inertial>
+        <collision name='ur_right_upper_arm_link_collision'>
+          <pose>0 0 0.138 1.5708 0 -1.5708</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///ros2_ws/install/ur_description/share/ur_description/meshes/ur5e/collision/upperarm.stl</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='ur_right_upper_arm_link_visual'>
+          <pose>0 0 0.138 1.5708 0 -1.5708</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///ros2_ws/install/ur_description/share/ur_description/meshes/ur5e/visual/upperarm.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <gravity>0</gravity>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='ur_right_elbow_joint' type='revolute'>
+        <pose relative_to='ur_right_upper_arm_link'>-0.425 0 0 0 -0 0</pose>
+        <parent>ur_right_upper_arm_link</parent>
+        <child>ur_right_forearm_link</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-3.14159</lower>
+            <upper>3.14159</upper>
+            <effort>150</effort>
+            <velocity>3.14159</velocity>
+          </limit>
+          <dynamics>
+            <damping>0</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='ur_right_forearm_link'>
+        <pose relative_to='ur_right_elbow_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>-0.1961 0 0.007 3.14159 1.57079 3.14159</pose>
+          <mass>2.846</mass>
+          <inertia>
+            <ixx>0.0390426</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.0390426</iyy>
+            <iyz>0</iyz>
+            <izz>0.0051228</izz>
+          </inertia>
+        </inertial>
+        <collision name='ur_right_forearm_link_collision'>
+          <pose>0 0 0.007 1.5708 0 -1.5708</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///ros2_ws/install/ur_description/share/ur_description/meshes/ur5e/collision/forearm.stl</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='ur_right_forearm_link_visual'>
+          <pose>0 0 0.007 1.5708 0 -1.5708</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///ros2_ws/install/ur_description/share/ur_description/meshes/ur5e/visual/forearm.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <gravity>0</gravity>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='ur_right_wrist_1_joint' type='revolute'>
+        <pose relative_to='ur_right_forearm_link'>-0.3922 0 0.1333 0 -0 0</pose>
+        <parent>ur_right_forearm_link</parent>
+        <child>ur_right_wrist_1_link</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-6.28319</lower>
+            <upper>6.28319</upper>
+            <effort>28</effort>
+            <velocity>3.14159</velocity>
+          </limit>
+          <dynamics>
+            <damping>0</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='ur_right_wrist_1_link'>
+        <pose relative_to='ur_right_wrist_1_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>1.37</mass>
+          <inertia>
+            <ixx>0.002877</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.002877</iyy>
+            <iyz>0</iyz>
+            <izz>0.002466</izz>
+          </inertia>
+        </inertial>
+        <collision name='ur_right_wrist_1_link_collision'>
+          <pose>0 0 -0.127 1.5708 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///ros2_ws/install/ur_description/share/ur_description/meshes/ur5e/collision/wrist1.stl</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='ur_right_wrist_1_link_visual'>
+          <pose>0 0 -0.127 1.5708 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///ros2_ws/install/ur_description/share/ur_description/meshes/ur5e/visual/wrist1.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <gravity>0</gravity>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='ur_right_wrist_2_joint' type='revolute'>
+        <pose relative_to='ur_right_wrist_1_link'>0 -0.0997 -0 1.5708 -0 0</pose>
+        <parent>ur_right_wrist_1_link</parent>
+        <child>ur_right_wrist_2_link</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-6.28319</lower>
+            <upper>6.28319</upper>
+            <effort>28</effort>
+            <velocity>3.14159</velocity>
+          </limit>
+          <dynamics>
+            <damping>0</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='ur_right_wrist_2_link'>
+        <pose relative_to='ur_right_wrist_2_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>1.3</mass>
+          <inertia>
+            <ixx>0.00273</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.00273</iyy>
+            <iyz>0</iyz>
+            <izz>0.00234</izz>
+          </inertia>
+        </inertial>
+        <collision name='ur_right_wrist_2_link_collision'>
+          <pose>0 0 -0.0997 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///ros2_ws/install/ur_description/share/ur_description/meshes/ur5e/collision/wrist2.stl</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='ur_right_wrist_2_link_visual'>
+          <pose>0 0 -0.0997 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///ros2_ws/install/ur_description/share/ur_description/meshes/ur5e/visual/wrist2.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <gravity>0</gravity>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='ur_right_wrist_3_joint' type='revolute'>
+        <pose relative_to='ur_right_wrist_2_link'>0 0.0996 -0 -1.5708 0 0</pose>
+        <parent>ur_right_wrist_2_link</parent>
+        <child>ur_right_wrist_3_link</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-6.28319</lower>
+            <upper>6.28319</upper>
+            <effort>28</effort>
+            <velocity>3.14159</velocity>
+          </limit>
+          <dynamics>
+            <damping>0</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='ur_right_wrist_3_link'>
+        <pose relative_to='ur_right_wrist_3_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0.022996 4.7e-05 -0.001147 0 -0 0</pose>
+          <mass>0.768993</mass>
+          <inertia>
+            <ixx>0.003931</ixx>
+            <ixy>5.77379e-05</ixy>
+            <ixz>-2.96646e-05</ixz>
+            <iyy>0.00422799</iyy>
+            <iyz>4.27705e-06</iyz>
+            <izz>0.00243413</izz>
+          </inertia>
+        </inertial>
+        <collision name='ur_right_wrist_3_link_collision'>
+          <pose>0 0 -0.0989 1.5708 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///ros2_ws/install/ur_description/share/ur_description/meshes/ur5e/collision/wrist3.stl</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <collision name='ur_right_wrist_3_link_fixed_joint_lump__ur_right_robotiq_hand_collision_1'>
+          <pose>0 0 0 -3e-06 -1.57079 3.14159</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///ros2_ws/install/robotiq_hand_e/share/robotiq_hand_e/meshes/wiring_gripper.stl</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='ur_right_wrist_3_link_fixed_joint_lump__ur_right_finger_left_collision_2'>
+          <pose>-0.02609 0.014 0.113279 1.57159 0.000798 -1.57239</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///ros2_ws/install/robotiq_hand_e/share/robotiq_hand_e/meshes/hand_e_finger_left_.stl</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='ur_right_wrist_3_link_fixed_joint_lump__ur_right_finger_right_collision_3'>
+          <pose>0.025864 -0.014583 0.113298 1.57159 0.000798 -1.57239</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///ros2_ws/install/robotiq_hand_e/share/robotiq_hand_e/meshes/hand_e_finger_right_.stl</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='ur_right_wrist_3_link_visual'>
+          <pose>0 0 -0.0989 1.5708 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///ros2_ws/install/ur_description/share/ur_description/meshes/ur5e/visual/wrist3.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name='ur_right_wrist_3_link_fixed_joint_lump__ur_right_robotiq_hand_visual_1'>
+          <pose>0 0 0 -3e-06 -1.57079 3.14159</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///ros2_ws/install/robotiq_hand_e/share/robotiq_hand_e/meshes/wiring_gripper.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name='ur_right_wrist_3_link_fixed_joint_lump__ur_right_finger_left_visual_2'>
+          <pose>-0.02609 0.014 0.113279 1.57159 0.000798 -1.57239</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///ros2_ws/install/robotiq_hand_e/share/robotiq_hand_e/meshes/hand_e_finger_left_.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name='ur_right_wrist_3_link_fixed_joint_lump__ur_right_finger_right_visual_3'>
+          <pose>0.025864 -0.014583 0.113298 1.57159 0.000798 -1.57239</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///ros2_ws/install/robotiq_hand_e/share/robotiq_hand_e/meshes/hand_e_finger_right_.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <gravity>0</gravity>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <plugin name='ros_control' filename='libgazebo_ros_control.so'>
+        <robotParam>robot_description</robotParam>
+        <controlPeriod>0.001</controlPeriod>
+        <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
+        <legacyModeNS>1</legacyModeNS>
+      </plugin>
+      <plugin name='omni_steering' filename='libgazebo_ros_planar_move.so'>
+        <namespace>right_summit</namespace>
+        <command_topic>right_summit/cmd_vel</command_topic>
+        <odometry_topic>right_summit/odom</odometry_topic>
+        <odometry_frame>right_summit_odom</odometry_frame>
+        <odometryRate>50.0</odometryRate>
+        <robot_base_frame>right_summit_base_footprint</robot_base_frame>
+        <publish_odom>1</publish_odom>
+        <publish_odom_tf>1</publish_odom_tf>
+        <enableYAxis>1</enableYAxis>
+      </plugin>
+      <static>0</static>
+      <plugin name='right_gazebo_ros2_control' filename='libgazebo_ros2_control.so'>
+        <parameters>/ros2_ws/install/ur/share/ur/config/right_controller.yaml</parameters>
+        <ros>
+          <namespace>right</namespace>
+        </ros>
+      </plugin>
+      <pose>0.66 0 0 0 -0 0</pose>
+    </model>
+    <model name='left_robot'>
+      <link name='left_summit_base_footprint'>
+        <inertial>
+          <pose>5e-06 -5e-06 0.14373 0 -0 0</pose>
+          <mass>131.405</mass>
+          <inertia>
+            <ixx>2.28126</ixx>
+            <ixy>0.147666</ixy>
+            <ixz>-0.000130347</ixz>
+            <iyy>7.83548</iyy>
+            <iyz>0.000132399</iyz>
+            <izz>6.43846</izz>
+          </inertia>
+        </inertial>
+        <collision name='left_summit_base_footprint_fixed_joint_lump__left_summit_base_link_collision'>
+          <pose>0 0 0.127 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///ros2_ws/install/summit_xl_description/share/summit_xl_description/meshes/bases/xls/summit_xls_chassis.dae</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <collision name='left_summit_base_footprint_fixed_joint_lump__left_summit_front_laser_base_link_collision_1'>
+          <pose>0.2865 -0.20894 0.4243 3.14159 -0 -0.785398</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robotnik_sensors/meshes/sick_s300.dae</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='left_summit_base_footprint_fixed_joint_lump__left_summit_rear_laser_base_link_collision_2'>
+          <pose>-0.2865 0.20894 0.4243 3.14159 -0 2.35619</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robotnik_sensors/meshes/sick_s300.dae</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='left_summit_base_footprint_fixed_joint_lump__ur_left_base_link_inertia_collision_3'>
+          <pose>0 0 0.543 0 0 -1.57</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///ros2_ws/install/ur_description/share/ur_description/meshes/ur5e/collision/base.stl</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='left_summit_base_footprint_visual'>
+          <pose>0 0 0.5 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.001 0.001 0.001</size>
+            </box>
+          </geometry>
+        </visual>
+        <visual name='left_summit_base_footprint_fixed_joint_lump__left_summit_base_link_visual_1'>
+          <pose>0 0 0.127 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///ros2_ws/install/summit_xl_description/share/summit_xl_description/meshes/bases/xls/summit_xls_chassis.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <name>Gazebo/Black</name>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+            </script>
+          </material>
+        </visual>
+        <visual name='left_summit_base_footprint_fixed_joint_lump__left_summit_base_logo_front_visual_2'>
+          <pose>0.345 0 0.127 0 0 -1.5708</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///ros2_ws/install/summit_xl_description/share/summit_xl_description/meshes/bases/xls/robotnik_logo_chasis.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name='left_summit_base_footprint_fixed_joint_lump__left_summit_base_logo_left_visual_3'>
+          <pose>0 0.28931 0.41762 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///ros2_ws/install/summit_xl_description/share/summit_xl_description/meshes/bases/xls/robotnik_logo_chasis.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name='left_summit_base_footprint_fixed_joint_lump__left_summit_base_logo_rear_visual_4'>
+          <pose>-0.345 0 0.127 0 -0 1.5708</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///ros2_ws/install/summit_xl_description/share/summit_xl_description/meshes/bases/xls/robotnik_logo_chasis.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name='left_summit_base_footprint_fixed_joint_lump__left_summit_base_logo_right_visual_5'>
+          <pose>0 -0.28931 0.41762 0 -0 3.14159</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///ros2_ws/install/summit_xl_description/share/summit_xl_description/meshes/bases/xls/robotnik_logo_chasis.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name='left_summit_base_footprint_fixed_joint_lump__left_summit_base_chapa_visual_6'>
+          <pose>0 0 0.50762 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///ros2_ws/install/summit_xl_description/share/summit_xl_description/meshes/bases/xls/summit_xls_chapas_inox_tapas.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name='left_summit_base_footprint_fixed_joint_lump__left_summit_front_laser_base_link_visual_7'>
+          <pose>0.2865 -0.20894 0.4243 1.5708 -0 -0.785398</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robotnik_sensors/meshes/sick_s300_color.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name='left_summit_base_footprint_fixed_joint_lump__left_summit_imu_link_visual_8'>
+          <pose>0.127 -0.129 0.339 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.001 0.001 0.001</size>
+            </box>
+          </geometry>
+        </visual>
+        <visual name='left_summit_base_footprint_fixed_joint_lump__left_summit_rear_laser_base_link_visual_9'>
+          <pose>-0.2865 0.20894 0.4243 1.5708 -0 2.35619</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robotnik_sensors/meshes/sick_s300_color.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name='left_summit_base_footprint_fixed_joint_lump__ur_left_base_link_inertia_visual_10'>
+          <pose>0 0 0.543 0 0 -1.57</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///ros2_ws/install/ur_description/share/ur_description/meshes/ur5e/visual/base.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <gravity>0</gravity>
+        <sensor name='left_summit_front_laser_sensor' type='ray'>
+          <visualize>0</visualize>
+          <update_rate>12.5</update_rate>
+          <ray>
+            <scan>
+              <horizontal>
+                <samples>541</samples>
+                <resolution>1</resolution>
+                <min_angle>-2.3562</min_angle>
+                <max_angle>2.3562</max_angle>
+              </horizontal>
+              <vertical>
+                <samples>1</samples>
+                <min_angle>0</min_angle>
+                <max_angle>0</max_angle>
+              </vertical>
+            </scan>
+            <range>
+              <min>0.1</min>
+              <max>30</max>
+              <resolution>0.03</resolution>
+            </range>
+            <noise>
+              <type>gaussian</type>
+              <mean>0</mean>
+              <stddev>0.03</stddev>
+            </noise>
+          </ray>
+          <plugin name='left_summit_front_laser_controller' filename='libgazebo_ros_ray_sensor.so'>
+            <ros>
+              <remapping>~/out:=front_laser/scan</remapping>
+            </ros>
+            <frame_name>left_summit_front_laser_link</frame_name>
+            <output_type>sensor_msgs/LaserScan</output_type>
+          </plugin>
+          <pose>0.2865 -0.20894 0.3083 3.14159 -0 -0.785398</pose>
+        </sensor>
+        <gravity>1</gravity>
+        <sensor name='left_summit_imu_imu_sensor' type='imu'>
+          <always_on>1</always_on>
+          <update_rate>100</update_rate>
+          <visualize>1</visualize>
+          <topic>__default_topic__</topic>
+          <plugin name='left_summit_imu_imu_plugin' filename='libgazebo_ros_imu_sensor.so'>
+            <topicName>imu/data</topicName>
+            <bodyName>left_summit_imu_link</bodyName>
+            <updateRateHZ>100.0</updateRateHZ>
+            <gaussianNoise>0.0</gaussianNoise>
+            <xyzOffset>0 0 0</xyzOffset>
+            <rpyOffset>0 0 0</rpyOffset>
+            <frameName>left_summit_imu_link</frameName>
+          </plugin>
+          <pose>0.127 -0.129 0.339 0 -0 0</pose>
+          <imu/>
+        </sensor>
+        <sensor name='left_summit_rear_laser_sensor' type='ray'>
+          <visualize>0</visualize>
+          <update_rate>12.5</update_rate>
+          <ray>
+            <scan>
+              <horizontal>
+                <samples>541</samples>
+                <resolution>1</resolution>
+                <min_angle>-2.3562</min_angle>
+                <max_angle>2.3562</max_angle>
+              </horizontal>
+              <vertical>
+                <samples>1</samples>
+                <min_angle>0</min_angle>
+                <max_angle>0</max_angle>
+              </vertical>
+            </scan>
+            <range>
+              <min>0.1</min>
+              <max>30</max>
+              <resolution>0.03</resolution>
+            </range>
+            <noise>
+              <type>gaussian</type>
+              <mean>0</mean>
+              <stddev>0.03</stddev>
+            </noise>
+          </ray>
+          <plugin name='left_summit_rear_laser_controller' filename='libgazebo_ros_ray_sensor.so'>
+            <ros>
+              <remapping>~/out:=rear_laser/scan</remapping>
+            </ros>
+            <frame_name>left_summit_rear_laser_link</frame_name>
+            <output_type>sensor_msgs/LaserScan</output_type>
+          </plugin>
+          <pose>-0.2865 0.20894 0.3083 3.14159 -0 2.35619</pose>
+        </sensor>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='left_summit_back_left_wheel_joint' type='revolute'>
+        <pose relative_to='left_summit_base_footprint'>-0.2225 0.2045 0.127 0 -0 0</pose>
+        <parent>left_summit_base_footprint</parent>
+        <child>left_summit_back_left_wheel_link</child>
+        <axis>
+          <xyz>0 1 0</xyz>
+          <limit>
+            <effort>100</effort>
+            <velocity>100</velocity>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='left_summit_back_left_wheel_link'>
+        <pose relative_to='left_summit_back_left_wheel_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>6.5</mass>
+          <inertia>
+            <ixx>0.0303095</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.0524193</iyy>
+            <iyz>0</iyz>
+            <izz>0.0303095</izz>
+          </inertia>
+        </inertial>
+        <collision name='left_summit_back_left_wheel_link_collision'>
+          <pose>0 0 0 1.5708 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <length>0.087</length>
+              <radius>0.127</radius>
+            </cylinder>
+          </geometry>
+          <surface>
+            <contact>
+              <ode>
+                <kp>1e+08</kp>
+                <kd>1</kd>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+            <friction>
+              <ode>
+                <mu>0.9</mu>
+                <mu2>0.9</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='left_summit_back_left_wheel_link_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///ros2_ws/install/summit_xl_description/share/summit_xl_description/meshes/wheels/omni_wheel_1.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='left_summit_back_right_wheel_joint' type='revolute'>
+        <pose relative_to='left_summit_base_footprint'>-0.2225 -0.2045 0.127 0 -0 0</pose>
+        <parent>left_summit_base_footprint</parent>
+        <child>left_summit_back_right_wheel_link</child>
+        <axis>
+          <xyz>0 1 0</xyz>
+          <limit>
+            <effort>100</effort>
+            <velocity>100</velocity>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='left_summit_back_right_wheel_link'>
+        <pose relative_to='left_summit_back_right_wheel_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>6.5</mass>
+          <inertia>
+            <ixx>0.0303095</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.0524193</iyy>
+            <iyz>0</iyz>
+            <izz>0.0303095</izz>
+          </inertia>
+        </inertial>
+        <collision name='left_summit_back_right_wheel_link_collision'>
+          <pose>0 0 0 1.5708 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <length>0.087</length>
+              <radius>0.127</radius>
+            </cylinder>
+          </geometry>
+          <surface>
+            <contact>
+              <ode>
+                <kp>1e+08</kp>
+                <kd>1</kd>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+            <friction>
+              <ode>
+                <mu>0.9</mu>
+                <mu2>0.9</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='left_summit_back_right_wheel_link_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///ros2_ws/install/summit_xl_description/share/summit_xl_description/meshes/wheels/omni_wheel_2.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='left_summit_front_left_wheel_joint' type='revolute'>
+        <pose relative_to='left_summit_base_footprint'>0.2225 0.2045 0.127 0 -0 0</pose>
+        <parent>left_summit_base_footprint</parent>
+        <child>left_summit_front_left_wheel_link</child>
+        <axis>
+          <xyz>0 1 0</xyz>
+          <limit>
+            <effort>100</effort>
+            <velocity>100</velocity>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='left_summit_front_left_wheel_link'>
+        <pose relative_to='left_summit_front_left_wheel_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>6.5</mass>
+          <inertia>
+            <ixx>0.0303095</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.0524193</iyy>
+            <iyz>0</iyz>
+            <izz>0.0303095</izz>
+          </inertia>
+        </inertial>
+        <collision name='left_summit_front_left_wheel_link_collision'>
+          <pose>0 0 0 1.5708 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <length>0.087</length>
+              <radius>0.127</radius>
+            </cylinder>
+          </geometry>
+          <surface>
+            <contact>
+              <ode>
+                <kp>1e+08</kp>
+                <kd>1</kd>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+            <friction>
+              <ode>
+                <mu>0.9</mu>
+                <mu2>0.9</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='left_summit_front_left_wheel_link_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///ros2_ws/install/summit_xl_description/share/summit_xl_description/meshes/wheels/omni_wheel_1.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='left_summit_front_right_wheel_joint' type='revolute'>
+        <pose relative_to='left_summit_base_footprint'>0.2225 -0.2045 0.127 0 0.2 0</pose>
+        <parent>left_summit_base_footprint</parent>
+        <child>left_summit_front_right_wheel_link</child>
+        <axis>
+          <xyz>0 1 0</xyz>
+          <limit>
+            <effort>100</effort>
+            <velocity>100</velocity>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='left_summit_front_right_wheel_link'>
+        <pose relative_to='left_summit_front_right_wheel_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>6.5</mass>
+          <inertia>
+            <ixx>0.0303095</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.0524193</iyy>
+            <iyz>0</iyz>
+            <izz>0.0303095</izz>
+          </inertia>
+        </inertial>
+        <collision name='left_summit_front_right_wheel_link_collision'>
+          <pose>0 0 0 1.5708 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <length>0.087</length>
+              <radius>0.127</radius>
+            </cylinder>
+          </geometry>
+          <surface>
+            <contact>
+              <ode>
+                <kp>1e+08</kp>
+                <kd>1</kd>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+            <friction>
+              <ode>
+                <mu>0.9</mu>
+                <mu2>0.9</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='left_summit_front_right_wheel_link_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///ros2_ws/install/summit_xl_description/share/summit_xl_description/meshes/wheels/omni_wheel_2.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='ur_left_shoulder_pan_joint' type='revolute'>
+        <pose relative_to='left_summit_base_footprint'>0 0 0.7055 0 -0 1.57159</pose>
+        <parent>left_summit_base_footprint</parent>
+        <child>ur_left_shoulder_link</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-6.28319</lower>
+            <upper>6.28319</upper>
+            <effort>150</effort>
+            <velocity>3.14159</velocity>
+          </limit>
+          <dynamics>
+            <damping>0</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='ur_left_shoulder_link'>
+        <pose relative_to='ur_left_shoulder_pan_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>3.761</mass>
+          <inertia>
+            <ixx>0.0104368</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.0104368</iyy>
+            <iyz>0</iyz>
+            <izz>0.0067698</izz>
+          </inertia>
+        </inertial>
+        <collision name='ur_left_shoulder_link_collision'>
+          <pose>0 0 0 0 -0 3.14159</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///ros2_ws/install/ur_description/share/ur_description/meshes/ur5e/collision/shoulder.stl</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='ur_left_shoulder_link_visual'>
+          <pose>0 0 0 0 -0 3.14159</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///ros2_ws/install/ur_description/share/ur_description/meshes/ur5e/visual/shoulder.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <gravity>0</gravity>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='ur_left_shoulder_lift_joint' type='revolute'>
+        <pose relative_to='ur_left_shoulder_link'>0 0 0 1.5708 -0 0</pose>
+        <parent>ur_left_shoulder_link</parent>
+        <child>ur_left_upper_arm_link</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-6.28319</lower>
+            <upper>6.28319</upper>
+            <effort>150</effort>
+            <velocity>3.14159</velocity>
+          </limit>
+          <dynamics>
+            <damping>0</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='ur_left_upper_arm_link'>
+        <pose relative_to='ur_left_shoulder_lift_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>-0.2125 0 0.138 3.14159 1.57079 3.14159</pose>
+          <mass>8.058</mass>
+          <inertia>
+            <ixx>0.128542</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.128542</iyy>
+            <iyz>0</iyz>
+            <izz>0.0145044</izz>
+          </inertia>
+        </inertial>
+        <collision name='ur_left_upper_arm_link_collision'>
+          <pose>0 0 0.138 1.5708 0 -1.5708</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///ros2_ws/install/ur_description/share/ur_description/meshes/ur5e/collision/upperarm.stl</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='ur_left_upper_arm_link_visual'>
+          <pose>0 0 0.138 1.5708 0 -1.5708</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///ros2_ws/install/ur_description/share/ur_description/meshes/ur5e/visual/upperarm.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <gravity>0</gravity>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='ur_left_elbow_joint' type='revolute'>
+        <pose relative_to='ur_left_upper_arm_link'>-0.425 0 0 0 -0 0</pose>
+        <parent>ur_left_upper_arm_link</parent>
+        <child>ur_left_forearm_link</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-3.14159</lower>
+            <upper>3.14159</upper>
+            <effort>150</effort>
+            <velocity>3.14159</velocity>
+          </limit>
+          <dynamics>
+            <damping>0</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='ur_left_forearm_link'>
+        <pose relative_to='ur_left_elbow_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>-0.1961 0 0.007 3.14159 1.57079 3.14159</pose>
+          <mass>2.846</mass>
+          <inertia>
+            <ixx>0.0390426</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.0390426</iyy>
+            <iyz>0</iyz>
+            <izz>0.0051228</izz>
+          </inertia>
+        </inertial>
+        <collision name='ur_left_forearm_link_collision'>
+          <pose>0 0 0.007 1.5708 0 -1.5708</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///ros2_ws/install/ur_description/share/ur_description/meshes/ur5e/collision/forearm.stl</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='ur_left_forearm_link_visual'>
+          <pose>0 0 0.007 1.5708 0 -1.5708</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///ros2_ws/install/ur_description/share/ur_description/meshes/ur5e/visual/forearm.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <gravity>0</gravity>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='ur_left_wrist_1_joint' type='revolute'>
+        <pose relative_to='ur_left_forearm_link'>-0.3922 0 0.1333 0 -0 0</pose>
+        <parent>ur_left_forearm_link</parent>
+        <child>ur_left_wrist_1_link</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-6.28319</lower>
+            <upper>6.28319</upper>
+            <effort>28</effort>
+            <velocity>3.14159</velocity>
+          </limit>
+          <dynamics>
+            <damping>0</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='ur_left_wrist_1_link'>
+        <pose relative_to='ur_left_wrist_1_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>1.37</mass>
+          <inertia>
+            <ixx>0.002877</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.002877</iyy>
+            <iyz>0</iyz>
+            <izz>0.002466</izz>
+          </inertia>
+        </inertial>
+        <collision name='ur_left_wrist_1_link_collision'>
+          <pose>0 0 -0.127 1.5708 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///ros2_ws/install/ur_description/share/ur_description/meshes/ur5e/collision/wrist1.stl</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='ur_left_wrist_1_link_visual'>
+          <pose>0 0 -0.127 1.5708 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///ros2_ws/install/ur_description/share/ur_description/meshes/ur5e/visual/wrist1.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <gravity>0</gravity>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='ur_left_wrist_2_joint' type='revolute'>
+        <pose relative_to='ur_left_wrist_1_link'>0 -0.0997 -0 1.5708 -0 0</pose>
+        <parent>ur_left_wrist_1_link</parent>
+        <child>ur_left_wrist_2_link</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-6.28319</lower>
+            <upper>6.28319</upper>
+            <effort>28</effort>
+            <velocity>3.14159</velocity>
+          </limit>
+          <dynamics>
+            <damping>0</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='ur_left_wrist_2_link'>
+        <pose relative_to='ur_left_wrist_2_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>1.3</mass>
+          <inertia>
+            <ixx>0.00273</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.00273</iyy>
+            <iyz>0</iyz>
+            <izz>0.00234</izz>
+          </inertia>
+        </inertial>
+        <collision name='ur_left_wrist_2_link_collision'>
+          <pose>0 0 -0.0997 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///ros2_ws/install/ur_description/share/ur_description/meshes/ur5e/collision/wrist2.stl</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='ur_left_wrist_2_link_visual'>
+          <pose>0 0 -0.0997 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///ros2_ws/install/ur_description/share/ur_description/meshes/ur5e/visual/wrist2.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <gravity>0</gravity>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='ur_left_wrist_3_joint' type='revolute'>
+        <pose relative_to='ur_left_wrist_2_link'>0 0.0996 -0 -1.5708 0 0</pose>
+        <parent>ur_left_wrist_2_link</parent>
+        <child>ur_left_wrist_3_link</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-6.28319</lower>
+            <upper>6.28319</upper>
+            <effort>28</effort>
+            <velocity>3.14159</velocity>
+          </limit>
+          <dynamics>
+            <damping>0</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='ur_left_wrist_3_link'>
+        <pose relative_to='ur_left_wrist_3_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0.022996 4.7e-05 -0.001147 0 -0 0</pose>
+          <mass>0.768993</mass>
+          <inertia>
+            <ixx>0.003931</ixx>
+            <ixy>5.77379e-05</ixy>
+            <ixz>-2.96646e-05</ixz>
+            <iyy>0.00422799</iyy>
+            <iyz>4.27705e-06</iyz>
+            <izz>0.00243413</izz>
+          </inertia>
+        </inertial>
+        <collision name='ur_left_wrist_3_link_collision'>
+          <pose>0 0 -0.0989 1.5708 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///ros2_ws/install/ur_description/share/ur_description/meshes/ur5e/collision/wrist3.stl</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <collision name='ur_left_wrist_3_link_fixed_joint_lump__ur_left_robotiq_hand_collision_1'>
+          <pose>0 0 0 -3e-06 -1.57079 3.14159</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///ros2_ws/install/robotiq_hand_e/share/robotiq_hand_e/meshes/wiring_gripper.stl</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='ur_left_wrist_3_link_fixed_joint_lump__ur_left_finger_left_collision_2'>
+          <pose>-0.02609 0.014 0.113279 1.57159 0.000798 -1.57239</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///ros2_ws/install/robotiq_hand_e/share/robotiq_hand_e/meshes/hand_e_finger_left_.stl</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='ur_left_wrist_3_link_fixed_joint_lump__ur_left_finger_right_collision_3'>
+          <pose>0.025864 -0.014583 0.113298 1.57159 0.000798 -1.57239</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///ros2_ws/install/robotiq_hand_e/share/robotiq_hand_e/meshes/hand_e_finger_right_.stl</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='ur_left_wrist_3_link_visual'>
+          <pose>0 0 -0.0989 1.5708 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///ros2_ws/install/ur_description/share/ur_description/meshes/ur5e/visual/wrist3.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name='ur_left_wrist_3_link_fixed_joint_lump__ur_left_robotiq_hand_visual_1'>
+          <pose>0 0 0 -3e-06 -1.57079 3.14159</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///ros2_ws/install/robotiq_hand_e/share/robotiq_hand_e/meshes/wiring_gripper.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name='ur_left_wrist_3_link_fixed_joint_lump__ur_left_finger_left_visual_2'>
+          <pose>-0.02609 0.014 0.113279 1.57159 0.000798 -1.57239</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///ros2_ws/install/robotiq_hand_e/share/robotiq_hand_e/meshes/hand_e_finger_left_.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name='ur_left_wrist_3_link_fixed_joint_lump__ur_left_finger_right_visual_3'>
+          <pose>0.025864 -0.014583 0.113298 1.57159 0.000798 -1.57239</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///ros2_ws/install/robotiq_hand_e/share/robotiq_hand_e/meshes/hand_e_finger_right_.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <gravity>0</gravity>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <plugin name='ros_control' filename='libgazebo_ros_control.so'>
+        <robotParam>robot_description</robotParam>
+        <controlPeriod>0.001</controlPeriod>
+        <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
+        <legacyModeNS>1</legacyModeNS>
+      </plugin>
+      <plugin name='omni_steering' filename='libgazebo_ros_planar_move.so'>
+        <namespace>left_summit</namespace>
+        <command_topic>left_summit/cmd_vel</command_topic>
+        <odometry_topic>left_summit/odom</odometry_topic>
+        <odometry_frame>left_summit_odom</odometry_frame>
+        <odometryRate>50.0</odometryRate>
+        <robot_base_frame>left_summit_base_footprint</robot_base_frame>
+        <publish_odom>1</publish_odom>
+        <publish_odom_tf>1</publish_odom_tf>
+        <enableYAxis>1</enableYAxis>
+      </plugin>
+      <static>0</static>
+      <plugin name='left_gazebo_ros2_control' filename='libgazebo_ros2_control.so'>
+        <parameters>/ros2_ws/install/ur/share/ur/config/left_controller.yaml</parameters>
+        <ros>
+          <namespace>left</namespace>
+        </ros>
+      </plugin>
+      <pose>-0.66 0 0 0 -0 0</pose>
+    </model>
+    <model name='pacco'>
+      <link name='link_0'>
+        <inertial>
+          <mass>1</mass>
+          <inertia>
+            <ixx>0.166667</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.166667</iyy>
+            <iyz>0</iyz>
+            <izz>0.166667</izz>
+          </inertia>
+          <pose>0 0 0 0 -0 0</pose>
+        </inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <gravity>1</gravity>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <enable_wind>0</enable_wind>
+        <visual name='visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>/ros2_ws/install/ur/share/ur/xacro/./Models/package_800x300x200/package.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <lighting>1</lighting>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <shader type='vertex'>
+              <normal_map>__default__</normal_map>
+            </shader>
+            <ambient>0.7 0.3 0.3 1</ambient>
+            <diffuse>0.8 0.6 0.7 1</diffuse>
+            <specular>0.01 0.01 0.31 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+          <transparency>0</transparency>
+          <cast_shadows>1</cast_shadows>
+        </visual>
+        <collision name='collision_1'>
+          <laser_retro>0</laser_retro>
+          <max_contacts>10</max_contacts>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.8 0.3 0.2</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1</mu>
+                <mu2>1</mu2>
+                <fdir1>0 0 0</fdir1>
+                <slip1>0</slip1>
+                <slip2>0</slip2>
+              </ode>
+              <torsional>
+                <coefficient>1</coefficient>
+                <patch_radius>0</patch_radius>
+                <surface_radius>0</surface_radius>
+                <use_patch_radius>1</use_patch_radius>
+                <ode>
+                  <slip>0</slip>
+                </ode>
+              </torsional>
+            </friction>
+            <bounce>
+              <restitution_coefficient>0</restitution_coefficient>
+              <threshold>1e+06</threshold>
+            </bounce>
+            <contact>
+              <collide_without_contact>0</collide_without_contact>
+              <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+              <collide_bitmask>1</collide_bitmask>
+              <ode>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.2</soft_erp>
+                <kp>1e+13</kp>
+                <kd>1</kd>
+                <max_vel>0.01</max_vel>
+                <min_depth>0</min_depth>
+              </ode>
+              <bullet>
+                <split_impulse>1</split_impulse>
+                <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.2</soft_erp>
+                <kp>1e+13</kp>
+                <kd>1</kd>
+              </bullet>
+            </contact>
+          </surface>
+        </collision>
+      </link>
+      <static>0</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <pose>2.16642 2.21717 1.23366 0.000129 -0.000157 -9.8e-05</pose>
+    </model>
+    <model name='muraUse1'>
+      <link name='link_0'>
+        <inertial>
+          <mass>500</mass>
+          <inertia>
+            <ixx>0.166667</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.166667</iyy>
+            <iyz>0</iyz>
+            <izz>0.166667</izz>
+          </inertia>
+          <pose>0 0 0 0 -0 0</pose>
+        </inertial>
+        <pose>0 0 0 0 0 -1.57075</pose>
+        <gravity>1</gravity>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <enable_wind>0</enable_wind>
+        <visual name='visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>/ros2_ws/assets/usecase1(mura+pallet).stl</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <lighting>1</lighting>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <shader type='pixel'>
+              <normal_map>__default__</normal_map>
+            </shader>
+          </material>
+          <transparency>0</transparency>
+          <cast_shadows>1</cast_shadows>
+        </visual>
+        <collision name='collision'>
+          <laser_retro>0</laser_retro>
+          <max_contacts>10</max_contacts>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>/ros2_ws/assets/usecase1(mura+pallet).stl</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>5000</mu>
+                <mu2>5000</mu2>
+                <fdir1>0 0 0</fdir1>
+                <slip1>0</slip1>
+                <slip2>0</slip2>
+              </ode>
+              <torsional>
+                <coefficient>1</coefficient>
+                <patch_radius>0</patch_radius>
+                <surface_radius>0</surface_radius>
+                <use_patch_radius>1</use_patch_radius>
+                <ode>
+                  <slip>0</slip>
+                </ode>
+              </torsional>
+            </friction>
+            <bounce>
+              <restitution_coefficient>0</restitution_coefficient>
+              <threshold>1e+06</threshold>
+            </bounce>
+            <contact>
+              <collide_without_contact>0</collide_without_contact>
+              <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+              <collide_bitmask>1</collide_bitmask>
+              <ode>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.2</soft_erp>
+                <kp>1e+13</kp>
+                <kd>1</kd>
+                <max_vel>0.01</max_vel>
+                <min_depth>0</min_depth>
+              </ode>
+              <bullet>
+                <split_impulse>1</split_impulse>
+                <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.2</soft_erp>
+                <kp>1e+13</kp>
+                <kd>1</kd>
+              </bullet>
+            </contact>
+          </surface>
+        </collision>
+      </link>
+      <static>1</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <pose>2.3722 4.26789 1.12418 0.000372 2.7e-05 0.003247</pose>
+    </model>
+    <model name='pacco_clone'>
+      <link name='link_0'>
+        <inertial>
+          <mass>1</mass>
+          <inertia>
+            <ixx>0.166667</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.166667</iyy>
+            <iyz>0</iyz>
+            <izz>0.166667</izz>
+          </inertia>
+          <pose>0 0 0 0 -0 0</pose>
+        </inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <gravity>1</gravity>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <enable_wind>0</enable_wind>
+        <visual name='visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>/ros2_ws/install/ur/share/ur/xacro/./Models/package_800x300x200/package.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <lighting>1</lighting>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <shader type='vertex'>
+              <normal_map>__default__</normal_map>
+            </shader>
+            <ambient>0.7 0.3 0.3 1</ambient>
+            <diffuse>0.8 0.6 0.7 1</diffuse>
+            <specular>0.01 0.01 0.31 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+          <transparency>0</transparency>
+          <cast_shadows>1</cast_shadows>
+        </visual>
+        <collision name='collision_1'>
+          <laser_retro>0</laser_retro>
+          <max_contacts>10</max_contacts>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.8 0.3 0.2</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1</mu>
+                <mu2>1</mu2>
+                <fdir1>0 0 0</fdir1>
+                <slip1>0</slip1>
+                <slip2>0</slip2>
+              </ode>
+              <torsional>
+                <coefficient>1</coefficient>
+                <patch_radius>0</patch_radius>
+                <surface_radius>0</surface_radius>
+                <use_patch_radius>1</use_patch_radius>
+                <ode>
+                  <slip>0</slip>
+                </ode>
+              </torsional>
+            </friction>
+            <bounce>
+              <restitution_coefficient>0</restitution_coefficient>
+              <threshold>1e+06</threshold>
+            </bounce>
+            <contact>
+              <collide_without_contact>0</collide_without_contact>
+              <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+              <collide_bitmask>1</collide_bitmask>
+              <ode>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.2</soft_erp>
+                <kp>1e+13</kp>
+                <kd>1</kd>
+                <max_vel>0.01</max_vel>
+                <min_depth>0</min_depth>
+              </ode>
+              <bullet>
+                <split_impulse>1</split_impulse>
+                <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.2</soft_erp>
+                <kp>1e+13</kp>
+                <kd>1</kd>
+              </bullet>
+            </contact>
+          </surface>
+        </collision>
+      </link>
+      <static>0</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <pose>-0.207385 4.99869 0.983765 0.000376 2.7e-05 0.003286</pose>
+    </model>
+    <model name='pacco_clone_0'>
+      <link name='link_0'>
+        <inertial>
+          <mass>1</mass>
+          <inertia>
+            <ixx>0.166667</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.166667</iyy>
+            <iyz>0</iyz>
+            <izz>0.166667</izz>
+          </inertia>
+          <pose>0 0 0 0 -0 0</pose>
+        </inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <gravity>1</gravity>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <enable_wind>0</enable_wind>
+        <visual name='visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>/ros2_ws/install/ur/share/ur/xacro/./Models/package_800x300x200/package.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <lighting>1</lighting>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <shader type='vertex'>
+              <normal_map>__default__</normal_map>
+            </shader>
+            <ambient>0.7 0.3 0.3 1</ambient>
+            <diffuse>0.8 0.6 0.7 1</diffuse>
+            <specular>0.01 0.01 0.31 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+          <transparency>0</transparency>
+          <cast_shadows>1</cast_shadows>
+        </visual>
+        <collision name='collision_1'>
+          <laser_retro>0</laser_retro>
+          <max_contacts>10</max_contacts>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.8 0.3 0.2</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1</mu>
+                <mu2>1</mu2>
+                <fdir1>0 0 0</fdir1>
+                <slip1>0</slip1>
+                <slip2>0</slip2>
+              </ode>
+              <torsional>
+                <coefficient>1</coefficient>
+                <patch_radius>0</patch_radius>
+                <surface_radius>0</surface_radius>
+                <use_patch_radius>1</use_patch_radius>
+                <ode>
+                  <slip>0</slip>
+                </ode>
+              </torsional>
+            </friction>
+            <bounce>
+              <restitution_coefficient>0</restitution_coefficient>
+              <threshold>1e+06</threshold>
+            </bounce>
+            <contact>
+              <collide_without_contact>0</collide_without_contact>
+              <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+              <collide_bitmask>1</collide_bitmask>
+              <ode>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.2</soft_erp>
+                <kp>1e+13</kp>
+                <kd>1</kd>
+                <max_vel>0.01</max_vel>
+                <min_depth>0</min_depth>
+              </ode>
+              <bullet>
+                <split_impulse>1</split_impulse>
+                <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.2</soft_erp>
+                <kp>1e+13</kp>
+                <kd>1</kd>
+              </bullet>
+            </contact>
+          </surface>
+        </collision>
+      </link>
+      <static>0</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <pose>-0.19005 4.64565 0.983765 0.000376 2.7e-05 0.003286</pose>
+    </model>
+    <model name='pacco_clone_1'>
+      <link name='link_0'>
+        <inertial>
+          <mass>1</mass>
+          <inertia>
+            <ixx>0.166667</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.166667</iyy>
+            <iyz>0</iyz>
+            <izz>0.166667</izz>
+          </inertia>
+          <pose>0 0 0 0 -0 0</pose>
+        </inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <gravity>1</gravity>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <enable_wind>0</enable_wind>
+        <visual name='visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>/ros2_ws/install/ur/share/ur/xacro/./Models/package_800x300x200/package.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <lighting>1</lighting>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <shader type='vertex'>
+              <normal_map>__default__</normal_map>
+            </shader>
+            <ambient>0.7 0.3 0.3 1</ambient>
+            <diffuse>0.8 0.6 0.7 1</diffuse>
+            <specular>0.01 0.01 0.31 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+          <transparency>0</transparency>
+          <cast_shadows>1</cast_shadows>
+        </visual>
+        <collision name='collision_1'>
+          <laser_retro>0</laser_retro>
+          <max_contacts>10</max_contacts>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.8 0.3 0.2</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1</mu>
+                <mu2>1</mu2>
+                <fdir1>0 0 0</fdir1>
+                <slip1>0</slip1>
+                <slip2>0</slip2>
+              </ode>
+              <torsional>
+                <coefficient>1</coefficient>
+                <patch_radius>0</patch_radius>
+                <surface_radius>0</surface_radius>
+                <use_patch_radius>1</use_patch_radius>
+                <ode>
+                  <slip>0</slip>
+                </ode>
+              </torsional>
+            </friction>
+            <bounce>
+              <restitution_coefficient>0</restitution_coefficient>
+              <threshold>1e+06</threshold>
+            </bounce>
+            <contact>
+              <collide_without_contact>0</collide_without_contact>
+              <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+              <collide_bitmask>1</collide_bitmask>
+              <ode>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.2</soft_erp>
+                <kp>1e+13</kp>
+                <kd>1</kd>
+                <max_vel>0.01</max_vel>
+                <min_depth>0</min_depth>
+              </ode>
+              <bullet>
+                <split_impulse>1</split_impulse>
+                <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.2</soft_erp>
+                <kp>1e+13</kp>
+                <kd>1</kd>
+              </bullet>
+            </contact>
+          </surface>
+        </collision>
+      </link>
+      <static>0</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <pose>-0.186302 4.3114 0.983765 0.000376 2.7e-05 0.003286</pose>
+    </model>
   </world>
 </sdf>

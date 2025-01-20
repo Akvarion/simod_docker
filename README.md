@@ -8,7 +8,7 @@ Lines 19, 40 and 62 must be edited with the correct path ( <user_path_to_directo
 Once the path is set up correctly, run the following command to avoid temporarily rewriting the the one in the repo once you commit the changes:
 
 ```bash
-git update-index --assume-unchanged docker-compose-gui.yaml
+git update-index --assume-unchanged docker-compose-gui.yml
 ```
 
 

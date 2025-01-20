@@ -20,7 +20,7 @@ services:
       - /tmp/.docker.xauth:/tmp/.docker.xauth:rw
       # Load source folder into target location
       - type: bind
-        source: /home/<user_path_to_directory>/simod_docker/ros1_ws
+        source: /home/outlander/Documents/git/simod_docker/ros1_ws
         target: /ros1_ws
     command: 
       /bin/bash -c "cd /ros1_ws && terminator"
@@ -41,7 +41,7 @@ services:
       - /dev/shm:/dev/shm
 
       - type: bind
-        source: /home/<user_path_to_directory>/simod_docker/bridge_ws
+        source: /home/outlander/Documents/git/simod_docker/bridge_ws
         target: /bridge_ws
 
     command: 
@@ -53,12 +53,12 @@ services:
       context: .
       dockerfile: ros2_docker/Dockerfile
   # Uncomment to use NVIDIA GPU hardware acceleration
-  #  runtime: nvidia
+    runtime: nvidia
     environment:
     - DISPLAY=${DISPLAY}
     - QT_X11_NO_MITSHM=1
-  #  - NVIDIA_VISIBLE_DEVICES=all
-  #  - NVIDIA_DRIVER_CAPABILITIES=all
+    - NVIDIA_VISIBLE_DEVICES=all
+    - NVIDIA_DRIVER_CAPABILITIES=all
     network_mode: host
 
     volumes:
@@ -67,7 +67,7 @@ services:
       - /dev/shm:/dev/shm
 
       - type: bind
-        source: /home/<user_path_to_directory>/simod_docker/ros2_ws
+        source: /home/outlander/Documents/git/simod_docker/ros2_ws
         target: /ros2_ws
 
     command: 
