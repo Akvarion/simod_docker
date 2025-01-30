@@ -4,7 +4,8 @@
 ### 1. Prepare docker-compose
 Assuming all the necessary dependencies are met, the file docker compose must be modified in order to result in a working environment.
 
-Lines 19, 40 and 62 must be edited with the correct path ( <user_path_to_directory> ); paths must be absolute.
+**Lines 23, 44 and 70 must be edited with the correct path ( <user_path_to_directory> ); paths must be absolute.**
+
 Once the path is set up correctly, run the following command to avoid temporarily rewriting the the one in the repo once you commit the changes:
 
 ```bash
@@ -204,7 +205,17 @@ The command can be something similar to:
 # moving the base
 ros2 topic pub /right_summit/cmd_vel geometry_msgs/msg/Twist "{linear: {x: 0.0, y: 0.5, z: 0.0}, angular: {x: 0.0, y: 0.0, z: 0.3}}" -1
 ```
-ros2 topic pub /right_summit/cmd_vel geometry_msgs/msg/Twist "{linear: {x: 0.0, y: 0.5, z: 0.0}, angular: {x: 0.0, y: 0.0, z: 0.3}}"
+ros2 topic pub /right_summit/cmd_vel geometry_msgs/msg/Twist "{linear: {x: 0.0, y: 0.0, z: 0.0}, angular: {x: 0.0, y: 0.0, z: -0.3}}"
+
+ros2 topic pub /right_summit/cmd_vel geometry_msgs/msg/Twist "{linear: {x: -0.1, y: 0.0, z: 0.0}, angular: {x: 0.0, y: 0.0, z: 0.0}}"
+
+
+
+
+
+ros2 topic pub /left_summit/cmd_vel geometry_msgs/msg/Twist "{linear: {x: 0.0, y: 0.0, z: 0.0}, angular: {x: 0.0, y: 0.0, z: 0.0}}"
+
+ros2 topic pub /left_summit/cmd_vel geometry_msgs/msg/Twist "{linear: {x: 0.0, y: 0.0, z: 0.0}, angular: {x: 0.0, y: 0.0, z: 0.3}}"
 
 or
 
@@ -217,3 +228,25 @@ ros2 topic pub /right/ur_right_joint_group_vel_controller/commands std_msgs/msg/
 Data: [Rotazione della base, Inclinazione In Avanti (II giunto), Inclinazione in Avanti II (III Giunto), Rotazione X Pinza (IV Giunto), Rotazione Z Pinza (V Giunto), Rotazione Y Pinza (VI Giunto)]
 
 Remember to use the `""`.
+
+Some commands to try out:
+```bash
+ros2 topic pub /right/ur_right_joint_group_vel_controller/commands std_msgs/msg/Float64MultiArray "{layout: {dim: [], data_offset: 0}, data: [-0.01, -0.01, 0.0, 0,0,0]}"
+
+
+ros2 topic pub /right/ur_right_joint_group_vel_controller/commands std_msgs/msg/Float64MultiArray "{layout: {dim: [], data_offset: 0}, data: [0.0, -0.05, 0.1, 0,0,0]}"
+
+ros2 topic pub /right/ur_right_joint_group_vel_controller/commands std_msgs/msg/Float64MultiArray "{layout: {dim: [], data_offset: 0}, data: [0,0,0,0,0,0]}"
+
+
+
+ros2 topic pub /left/ur_left_joint_group_vel_controller/commands std_msgs/msg/Float64MultiArray "{layout: {dim: [], data_offset: 0}, data: [0.01, 0.01, 0.05, 0,0.1,0]}"
+
+ros2 topic pub /left_summit/cmd_vel geometry_msgs/msg/Twist "{linear: {x: 0.1, y: 0.0, z: 0.0}, angular: {x: 0.0, y: 0.0, z: 0.2}}"
+
+
+
+ros2 topic pub /left/ur_left_joint_group_vel_controller/commands std_msgs/msg/Float64MultiArray "{layout: {dim: [], data_offset: 0}, data: [0,0,0,0,0,0]}"
+
+ros2 topic pub /left_summit/cmd_vel geometry_msgs/msg/Twist "{linear: {x: 0.0, y: 0.0, z: 0.0}, angular: {x: 0.0, y: 0.0, z: 0.0}}"
+```
