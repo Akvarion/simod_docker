@@ -1,4 +1,8 @@
 #include <iostream>
+#include <chrono>
+#include <memory>
+
+#include <rclcpp/rclcpp.hpp>
 
 #include <behaviortree_cpp/bt_factory.h>
 #include <behaviortree_cpp/behavior_tree.h>
@@ -16,7 +20,8 @@ using namespace BT;
 
 */
 
-//Define GripperInterface for Gripper interactions
+//Define GripperInterface for Gripper interactions,
+//Might be useful for later.
 class GripperInterface {
     private: bool isOpen; 
     
