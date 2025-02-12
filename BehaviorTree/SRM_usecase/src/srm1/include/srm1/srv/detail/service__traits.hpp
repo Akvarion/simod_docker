@@ -1,1 +1,0 @@
-/home/outlander/Workspace/ros2_ws/build/srm1/rosidl_generator_cpp/srm1/srv/detail/service__traits.hpp

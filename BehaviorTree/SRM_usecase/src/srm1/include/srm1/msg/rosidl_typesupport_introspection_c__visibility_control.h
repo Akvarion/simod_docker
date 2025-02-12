@@ -1,1 +1,0 @@
-/home/outlander/Workspace/ros2_ws/build/srm1/rosidl_typesupport_introspection_c/srm1/msg/rosidl_typesupport_introspection_c__visibility_control.h
