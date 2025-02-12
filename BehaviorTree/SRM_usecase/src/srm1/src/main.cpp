@@ -53,7 +53,7 @@ BT::NodeStatus GotObj(){
 }
 
 
- int main(void){
+int main(void){
     BehaviorTreeFactory factory;
 
     // Register custom action nodes with the factory
@@ -75,10 +75,10 @@ BT::NodeStatus GotObj(){
     factory.registerSimpleAction("GraspBall", std::bind(&GripperInterface::close, &gripper));
 
     // Create BehavTree from file SRM1
-    auto tree= factory.createTreeFromFile("../XML/SRM1.xml");
+    auto tree= factory.createTreeFromFile("./SRM1.xml");
 
     //RUN
     tree.tickWhileRunning();
 
     return 0;
- }
+}
