@@ -139,14 +139,14 @@ ros2 launch ur main.launch.py
 
 ### 4. Useful topics
 
-${NAMESPACE}/odom : da cui si ricava la posizione della base rispetto al mondo.
-${NAMESPACE}/cmd_vel : controllo in velocità 
+- `${NAMESPACE}/odom` : da cui si ricava la posizione della base rispetto al mondo.
+- `${NAMESPACE}/cmd_vel` : controllo in velocità 
 
 Per pubblicare da terminale, c'è un problema di autocompletamento del messaggio:
 
-ex. ros2 topic pub /right_summit/cmd_vel geometry_msgs/msg/Twist msg
+ex. `ros2 topic pub /right_summit/cmd_vel geometry_msgs/msg/Twist msg`
 
-(ros2 topic pub ${NOME_TOPIC} ${TIPO DEL MESSAGGIO} ${MSG})
+(`ros2 topic pub ${NOME_TOPIC} ${TIPO DEL MESSAGGIO} ${MSG}`)
 
 per ottenere il messaggio, Tab+si vede la prima lettera del messaggio+"prima lettere+Tab
 
@@ -167,6 +167,16 @@ xhost +local:root
 To start only the container for `ros2`, run the following:
 ```bash
 sudo docker compose -f docker-compose-gui.yml up ros2_simod
+```
+
+To restart the previous session use instead:
+
+```bash
+sudo docker start -ai simod_docker-ros2_simod-1
+```
+using the appropriate name of the container you created. You can check it with:
+```bash
+sudo docker ps -a
 ```
 
 Now a new terminal running the docker container prepared with ROS2 and Gazebo should appear. The current position correspond to the ROS2 workspace `ros2_ws`.
