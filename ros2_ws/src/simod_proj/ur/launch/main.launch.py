@@ -49,7 +49,7 @@ def generate_launch_description():
     gazebo               = 'True'
     spawn_gazebo_robot   = 'True'
     spawn_gazebo_base    = 'True'
-
+    rviz                 = 'True'
     gazebo_path = os.path.join(get_package_share_directory('ur'), 'xacro','gazebo.world')
 
     gazebo = IncludeLaunchDescription(
@@ -57,6 +57,18 @@ def generate_launch_description():
                  launch_arguments={'physics': 'False', 'world': gazebo_path}.items(),
                  condition=IfCondition(gazebo))
     
+    # Launch RViz
+    rviz_config_file = (
+        os.path.join(get_package_share_directory('ur'), 'rviz','rviz_config.rviz')
+    )
+    rviz = Node(
+        package='rviz2',
+        executable='rviz2',
+        name='rviz2',
+        output='screen',
+        arguments=['-d', rviz_config_file],
+        
+    )
     
     #Open gazebo and spawn robots
   
@@ -131,6 +143,7 @@ def generate_launch_description():
  
     ld = LaunchDescription()
     ld.add_action(gazebo)
+    ld.add_action(rviz)
     #ld.add_action(joint_pub_ros1)
     ld.add_action(robot_spawner_left)
     ld.add_action(robot_spawner_right)
