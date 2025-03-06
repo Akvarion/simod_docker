@@ -12,9 +12,8 @@ find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(rclcpp_action REQUIRED)
 find_package(rclcpp_components REQUIRED)
-find_package(cpp_pubsub REQUIRED)
-find_package(cpp_srvcli REQUIRED)
 find_package(behaviortree_cpp REQUIRED)
+find_package(behaviortree_ros2 REQUIRED)
 find_package(rosidl_default_generators REQUIRED)
 find_package(std_msgs REQUIRED)
 find_package(std_srvs REQUIRED)
@@ -37,11 +36,22 @@ endif()
 rosidl_generate_interfaces(${PROJECT_NAME}
   "msg/message.msg"
   "srv/service.srv"
+  "action/Act.action"
   DEPENDENCIES
    # Add packages that above messages depend on, in this case geometry_msgs for Sphere.msg
 )
 
 ament_package()
 
-add_executable(srm1 main.cpp)
-target_link_libraries(srm1 BT::behaviortree_cpp)
+#include_directories(
+#   include $ENV{HOME}/Workspace/ros2_ws/install/behaviortree_cpp/include/
+#   include $ENV{HOME}/Workspace/ros2_ws/install/behaviortree_ros2/include/
+# )
+#add_library(behaviortree_cpp SHARED IMPORTED GLOBAL)
+#add_library(behaviortree_ros2 SHARED IMPORTED GLOBAL)
+
+#set_target_properties(behaviortree_cpp PROPERTIES IMPORTED_LOCATION $ENV{HOME}/Workspace/ros2_ws/install/behaviortree_cpp/lib/libbehaviortree_cpp.so)
+#set_target_properties(behaviortree_ros2 PROPERTIES IMPORTED_LOCATION $ENV{HOME}/Workspace/ros2_ws/install/behaviortree_ros2/lib/libbehaviortree_ros2.a)
+
+#add_executable(srm1_node main.cpp)
+#target_link_libraries(srm1_node BT::behaviortree_cpp)
