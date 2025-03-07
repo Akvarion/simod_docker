@@ -104,7 +104,7 @@ ros2 run ros1_bridge parameter_bridge
 ```
 
 
-ROS1_DOCKER CONTAINER
+#### ROS1_DOCKER CONTAINER
 
 *solo la prima volta che si compila il workspace
 
@@ -117,14 +117,17 @@ roslaunch summit_xl_gazebo parameter.launch
 roslaunch summit_xl_gazebo environment.launch
 ```
 
-ROS2_DOCKER CONTAINER
+#### ROS2_DOCKER CONTAINER
 
 1° Terminale
 
 *solo la prima volta che si compila il workspace
 ```bash
-colcon build --symlink-install 
+cd ./src
+rosdep install -r --from-paths . --ignore-src
+MAKEFLAGS="-j4 -l1" colcon build --symlink-install --executor sequential
 ```
+Questi comandi permettono la risoluzione delle dipendenze e la compilazione del framework MoveIt2 e del workspace. 
 
 2° Terminale
 
