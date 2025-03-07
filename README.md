@@ -125,6 +125,7 @@ roslaunch summit_xl_gazebo environment.launch
 ```bash
 cd ./src
 rosdep install -r --from-paths . --ignore-src
+cd ..
 MAKEFLAGS="-j4 -l1" colcon build --symlink-install --executor sequential
 ```
 Questi comandi permettono la risoluzione delle dipendenze e la compilazione del framework MoveIt2 e del workspace. 
