@@ -188,9 +188,9 @@ Now, we can run the software inside this environment.
 
 **Only The first time** you compile the workspace with:
 ```bash
-colcon build --symlink-install 
+MAKEFLAGS="-j4 -l1" colcon build --symlink-install --executor sequential
 ```
-
+This will also compile and Install Moveit2.
 Before starting the scripts, you need to source the bash files:
 
 ```bash
@@ -208,7 +208,8 @@ Finally, we can run the application in the Gazebo environment:
 ros2 launch ur main.launch.py
 ```
 
-You should see the virtual space with two robots (mobile base and arms) facing each other and stopped in position (0,0,0).
+You should see the virtual space with two robots (mobile base and arms) facing each other and stopped in position (0,0,0). 
+If the robots do not spawn correctly, a solution can be to delete the build folder and rebuild the whole workspace from scratch.
 
 ### Testing the application
 In order to try the application you can send a ros message to the topic corresponding to a robot and see if it responds correctly in the gazebo environment.

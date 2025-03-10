@@ -8,16 +8,12 @@ rosdep update
 sudo apt update
 sudo apt dist-upgrade
 ```
-
-Install moveit! 2 if not yet present:
-```bash
-sudo apt install ros-$ROS_DISTRO-moveit ros-$ROS_DISTRO-moveit-ros-perception
-```
+Moveit 2 should already be present in the workspacefolder and already to be built as per README.
 
 Then create a package, build it (singularly if nothing else changed) and source:
 ```bash
 cd ros2_ws/src
-ros2 pkg create my_bt_moveit --build-type ament_cmake --dependencies rclcpp moveit_ros_planning moveit_ros_planning_interface behaviortree_cpp_v3 geometry_msgs
+ros2 pkg create my_bt_moveit --build-type ament_cmake --dependencies rclcpp moveit_ros_planning moveit_ros_planning_interface behaviortree_cpp geometry_msgs
 
 cd ..
 colcon build --packages-select my_bt_moveit
@@ -34,7 +30,7 @@ apt-cache search behaviortree
 If this is not the case, please install it:
 ```bash
 apt update
-apt install -y ros-${ROS_DISTRO}-behaviortree-cpp-v3
+apt install -y ros-${ROS_DISTRO}-behaviortree-cpp
 ```  
 
 
@@ -98,7 +94,7 @@ You can have also the `hpp` file at the path `ros2_ws/src/my_bt_moveit/include/m
 #ifndef MOVE_BASE_ACTION_HPP
 #define MOVE_BASE_ACTION_HPP
 
-#include <behaviortree_cpp_v3/action_node.h>
+#include <behaviortree_cpp/action_node.h>
 #include <rclcpp/rclcpp.hpp>
 #include <geometry_msgs/msg/twist.hpp>
 
@@ -117,7 +113,7 @@ public:
 
 You need also to define the `xml` file for the behavior_tree at the path `ros2_ws/src/my_bt_moveit/behavior_trees/behavior_tree.xml`, for example, to move the robotnik base you can have:
 ```xml
-<root main_tree_to_execute="MainTree">
+<root BTCPP_format="4">
     <BehaviorTree ID="MainTree">
         <Sequence>
             <MoveBase target_x="1.0" target_y="0.0" target_theta="0.0" />
@@ -140,7 +136,7 @@ In this example the behavior tree:
 Then, you need the Behavior Tree ROS2 node in a path similar to: `ros2_ws/src/my_bt_moveit/src/bt_moveit_node.cpp`:
 ```cpp
 #include <rclcpp/rclcpp.hpp>
-#include <behaviortree_cpp_v3/bt_factory.h>
+#include <behaviortree_cpp/bt_factory.h>
 #include <geometry_msgs/msg/twist.hpp>
 #include <chrono>
 #include <thread>
@@ -205,7 +201,7 @@ Check the correctness of the `package.xml` in `src/my_bt_moveit`. It should look
   <depend>rclcpp</depend>
   <depend>moveit_ros_planning</depend>
   <depend>moveit_ros_planning_interface</depend>
-  <depend>behaviortree_cpp_v3</depend>
+  <depend>behaviortree_cpp</depend>
   <depend>geometry_msgs</depend>
 
   <test_depend>ament_lint_auto</test_depend>
@@ -234,7 +230,7 @@ find_package(rclcpp REQUIRED)
 # find_package(moveit2 REQUIRED)
 find_package(moveit_ros_planning REQUIRED)
 find_package(moveit_ros_planning_interface REQUIRED)
-find_package(behaviortree_cpp_v3 REQUIRED)
+find_package(behaviortree_cpp REQUIRED)
 find_package(geometry_msgs REQUIRED)
 
 add_executable(bt_moveit_node 
@@ -244,7 +240,7 @@ add_executable(bt_moveit_node
 ament_target_dependencies(bt_moveit_node 
                           rclcpp 
                           geometry_msgs 
-                          behaviortree_cpp_v3 
+                          behaviortree_cpp
                           moveit_ros_planning_interface)
 
 install(TARGETS
@@ -267,9 +263,9 @@ ament_package()
 
 ```
 
-Finally, build everything and source:
+Finally, build everything and source [build only my_bt_moveit otherwise the system will run out of RAM (if <32 GB)]:
 ```bash
-colcon build
+colcon build --packages-select my_bt_moveit
 source install/setup.bash
 ```
 

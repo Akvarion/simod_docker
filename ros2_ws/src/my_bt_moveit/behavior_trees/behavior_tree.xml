@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root BTCPP_format="4">
+    <BehaviorTree ID="MainTree">
+        <Sequence>
+            <MoveBase target_x="1.0" target_y="0.0" target_theta="0.0" />
+            <MoveBase target_x="0.0" target_y="0.0" target_theta="1.57" />
+            <MoveBase target_x="0.0" target_y="0.0" target_theta="-1.57" />
+            <MoveBase target_x="0.0" target_y="0.0" target_theta="0.0" />
+        </Sequence>
+    </BehaviorTree>
+</root>
