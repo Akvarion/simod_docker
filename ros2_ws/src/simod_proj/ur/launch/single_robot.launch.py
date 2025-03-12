@@ -288,15 +288,15 @@ def launch_setup(context, *args, **kwargs):
     }
 
     # Start the actual move_group node/action server
-    run_move_group_node = Node(
-        package="base",
-        executable="move_group",
-        output="screen",
-        parameters=[
-            moveit_config.to_dict(),
-            move_group_capabilities,
-        ],
-    )
+    # run_move_group_node = Node(
+    #     package="base",
+    #     #executable="move_group",
+    #     output="screen",
+    #     parameters=[
+    #         moveit_config.to_dict(),
+    #         move_group_capabilities,
+    #     ],
+    # )
  
     return [
         robot_state_publisher_node,
@@ -304,7 +304,7 @@ def launch_setup(context, *args, **kwargs):
         ur_control_node,
         joint_state_broadcaster_spawner,
         velocity_controller,
-        run_move_group_node,
+        #run_move_group_node,
         static_tf_real
     ]
 

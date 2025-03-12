@@ -13,6 +13,12 @@ install(
   DIRECTORY launch xacro 
   DESTINATION share/${PROJECT_NAME}
 )
+install(
+  PROGRAMS
+  launch/robotic_base.launch.py
+  DESTINATION lib/${PROJECT_NAME}
+)
+
 # uncomment the following section in order to fill in
 # further dependencies manually.
 # find_package(<dependency> REQUIRED)

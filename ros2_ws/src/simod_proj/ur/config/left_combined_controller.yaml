@@ -5,42 +5,55 @@
       joint_state_broadcaster:
         type: joint_state_broadcaster/JointStateBroadcaster
 
-      ur_left_joint_group_vel_controller:
-        type: velocity_controllers/JointGroupVelocityController
-        
+  joint_blw_velocity_controller:
+    type: velocity_controllers/JointVelocityController
+    joint: $(arg prefix)back_left_wheel_joint
+  joint_brw_velocity_controller:
+    type: velocity_controllers/JointVelocityController
+    joint: $(arg prefix)back_right_wheel_joint
+  joint_frw_velocity_controller:
+    type: velocity_controllers/JointVelocityController
+    joint: $(arg prefix)front_right_wheel_joint
+  joint_flw_velocity_controller:
+    type: velocity_controllers/JointVelocityController
+    joint: $(arg prefix)front_left_wheel_joint
 
-  controller_list:
-    - name: left_summit_xls_controller
-      action_ns: left_summit/cmd_vel
-      type: JointGroupVelocityController
-      default: true
-    
-    - name: joint_state_broadcaster
-      type: joint_state_broadcaster/JointStateBroadcaster
-      joints:
-        - ur_left_shoulder_pan_joint
-        - ur_left_shoulder_lift_joint
-        - ur_left_elbow_joint
-        - ur_left_wrist_1_joint
-        - ur_left_wrist_2_joint
-        - ur_left_wrist_3_joint
+  robotnik_base_control:
+    type: summit_xl_controller/SummitXLController
+    joint:
+      front_right_wheel_joint:
+        name: $(arg prefix)front_right_wheel_joint
+        max_speed: 27.27 # rad/s
+      front_left_wheel_joint:
+        name: $(arg prefix)front_left_wheel_joint
+        max_speed: 27.27 # rad/s
+      back_right_wheel_joint:
+        name: $(arg prefix)back_right_wheel_joint
+        max_speed: 27.27 # rad/s
+      back_left_wheel_joint:
+        name: $(arg prefix)back_left_wheel_joint
+        max_speed: 27.27 # rad/s
+    linear_speed_limit: 1.5 # m/s
+    linear_acceleration_limit: 0.6 # m/s^2
+    angular_speed_limit: 3 # rad/s
+    angular_acceleration_limit: 1.5 # rad/s^2
+    odom_frame: $(arg odom_frame)
+    robot_base_frame: $(arg base_frame)
+    odom_broadcast_tf: $(arg odom_broadcast_tf)
+    odom_topic: 'left_summit/odom'
+    wheel_base: $(arg wheel_base)
+    track_width: $(arg track_width)
+    wheel_diameter: $(arg wheel_diameter)
+    cmd_watchdog_duration: 0.5
+    imu_watchdog_duration: 0.1
+    imu_topic: /left_summit_imu_imu_plugin/out
+    odom_publish_frequency: 100
+    cmd_vel        : 'left_summit/cmd_vel'
+    kinematic_mode : $(arg kinematics)
+    motion_odometry: true
+    in_motion_timer: 2.0
 
-    - name: ur_left_manipulator_controller
-      action_ns: ur_left_joint_group_vel_controller
-      type: velocity_controllers/JointGroupVelocityController
-      default: true
-      joints:
-        - ur_left_shoulder_pan_joint
-        - ur_left_shoulder_lift_joint
-        - ur_left_elbow_joint
-        - ur_left_wrist_1_joint
-        - ur_left_wrist_2_joint
-        - ur_left_wrist_3_joint
-      pid_gains:
-        ur_left_shoulder_pan_joint: {p: 10.0,  i: 0.05, d: 0.1, i_clamp: 1}
-        ur_left_shoulder_lift_joint: {p: 10.0,  i: .05, d: 0.1, i_clamp: 1}
-        ur_left_elbow_joint: {p: 10.0,  i: 0.05, d: 0.1, i_clamp: 1}
-        ur_left_wrist_1_joint: {p: 10.0,  i: 0.05, d: 0.1, i_clamp: 1}
-        ur_left_wrist_2_joint: {p: 10.0,  i: 0.05, d: 0.1, i_clamp: 1}
-        ur_left_wrist_3_joint: {p: 10.0,  i: 0.05, d: 0.1, i_clamp: 1}
-      interface_name: velocity
+  joint_read_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 100.0
+
