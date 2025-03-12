@@ -272,31 +272,31 @@ def launch_setup(context, *args, **kwargs):
     )
        
     # planning_context
-    # moveit_config = (
-    #     MoveItConfigsBuilder(get_package_share_directory("ur"))
-    #     .robot_description(file_path=get_package_share_directory('ur')+"/xacro/ur_spawn.urdf.xacro")
-    #     .trajectory_execution(file_path=get_package_share_directory('ur')+"/config/"+getRobotType(namespace)+"_combined_controller.yaml")
-    #     .planning_pipelines(
-    #         pipelines=["ompl", "chomp", "pilz_industrial_motion_planner"]
-    #     )
-    #     .to_moveit_configs()
-    # )
+    moveit_config = (
+        MoveItConfigsBuilder('summit_xls')
+        .robot_description(file_path=get_package_share_directory('base')+"/xacro/base_spawn.urdf.xacro")
+        .trajectory_execution(file_path=get_package_share_directory('ur')+"/config/"+getRobotType(namespace)+"_combined_controller.yaml")
+        .planning_pipelines(
+            pipelines=["ompl", "chomp", "pilz_industrial_motion_planner"]
+        )
+        .to_moveit_configs()
+    )
 
-    # # Load  ExecuteTaskSolutionCapability so we can execute found solutions in simulation
-    # move_group_capabilities = {
-    #     "capabilities": "move_group/ExecuteTaskSolutionCapability"
-    # }
+    # Load  ExecuteTaskSolutionCapability so we can execute found solutions in simulation
+    move_group_capabilities = {
+        "capabilities": "move_group/ExecuteTaskSolutionCapability"
+    }
 
-    # # Start the actual move_group node/action server
-    # run_move_group_node = Node(
-    #     package="ur",
-    #     executable="move_group",
-    #     output="screen",
-    #     parameters=[
-    #         moveit_config.to_dict(),
-    #         move_group_capabilities,
-    #     ],
-    # )
+    # Start the actual move_group node/action server
+    run_move_group_node = Node(
+        package="base",
+        executable="move_group",
+        output="screen",
+        parameters=[
+            moveit_config.to_dict(),
+            move_group_capabilities,
+        ],
+    )
  
     return [
         robot_state_publisher_node,
@@ -304,7 +304,7 @@ def launch_setup(context, *args, **kwargs):
         ur_control_node,
         joint_state_broadcaster_spawner,
         velocity_controller,
-        # run_move_group_node,
+        run_move_group_node,
         static_tf_real
     ]
 
