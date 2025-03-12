@@ -9,6 +9,8 @@ from launch import LaunchDescription
 import launch_ros.parameter_descriptions
 from launch.actions import OpaqueFunction
 from launch.conditions import IfCondition, UnlessCondition
+from ament_index_python.packages import get_package_share_directory
+from moveit_configs_utils import MoveItConfigsBuilder
 
 
 def generate_launch_description():
@@ -52,7 +54,12 @@ def generate_launch_description():
          physical_parameters_file, controller_file,vel_controller,spawn_gazebo_base, parent_base, script_sender_port, reverse_port, script_command_port, trajectory_port,
         OpaqueFunction(function=launch_setup) ]
         ) 
-    
+
+def getRobotType(arg):
+    if "right" in arg:
+        return "right"
+    else:
+        return "left"
 
 def launch_setup(context, *args, **kwargs):
 
@@ -263,7 +270,33 @@ def launch_setup(context, *args, **kwargs):
         # output="screen",
         condition=UnlessCondition(LaunchConfiguration('spawn_gazebo_robot')),
     )
+       
+    # planning_context
+    moveit_config = (
+        MoveItConfigsBuilder()
+        .robot_description(file_path=get_package_share_directory('ur')+"/xacro/ur_spawn.urdf.xacro")
+        .trajectory_execution(file_path=get_package_share_directory('ur')+"/config/"+getRobotType(namespace)+"_combined_controller.yaml")
+        .planning_pipelines(
+            pipelines=["ompl", "chomp", "pilz_industrial_motion_planner"]
+        )
+        .to_moveit_configs()
+    )
 
+    # Load  ExecuteTaskSolutionCapability so we can execute found solutions in simulation
+    move_group_capabilities = {
+        "capabilities": "move_group/ExecuteTaskSolutionCapability"
+    }
+
+    # Start the actual move_group node/action server
+    run_move_group_node = Node(
+        package="ur",
+        executable="move_group",
+        output="screen",
+        parameters=[
+            moveit_config.to_dict(),
+            move_group_capabilities,
+        ],
+    )
  
     return [
         robot_state_publisher_node,
@@ -271,6 +304,7 @@ def launch_setup(context, *args, **kwargs):
         ur_control_node,
         joint_state_broadcaster_spawner,
         velocity_controller,
+        run_move_group_node,
         static_tf_real
     ]
 

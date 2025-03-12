@@ -1,0 +1,46 @@
+/**:
+  controller_manager:
+    ros__parameters:
+      update_rate: 500  # Hz
+      joint_state_broadcaster:
+        type: joint_state_broadcaster/JointStateBroadcaster
+
+      ur_right_joint_group_vel_controller:
+        type: velocity_controllers/JointGroupVelocityController
+        
+
+  controller_list:
+    - name: right_summit_xls_controller
+      action_ns: right_summit/cmd_vel
+      type: JointGroupVelocityController
+      default: true
+    
+    - name: joint_state_broadcaster
+      type: joint_state_broadcaster/JointStateBroadcaster
+      joints:
+        - ur_right_shoulder_pan_joint
+        - ur_right_shoulder_lift_joint
+        - ur_right_elbow_joint
+        - ur_right_wrist_1_joint
+        - ur_right_wrist_2_joint
+        - ur_right_wrist_3_joint
+
+    - name: ur_right_manipulator_controller
+      action_ns: ur_right_joint_group_vel_controller
+      type: velocity_controllers/JointGroupVelocityController
+      default: true
+      joints:
+        - ur_right_shoulder_pan_joint
+        - ur_right_shoulder_lift_joint
+        - ur_right_elbow_joint
+        - ur_right_wrist_1_joint
+        - ur_right_wrist_2_joint
+        - ur_right_wrist_3_joint
+      pid_gains:
+        ur_right_shoulder_pan_joint: {p: 10.0,  i: 0.05, d: 0.1, i_clamp: 1}
+        ur_right_shoulder_lift_joint: {p: 10.0,  i: .05, d: 0.1, i_clamp: 1}
+        ur_right_elbow_joint: {p: 10.0,  i: 0.05, d: 0.1, i_clamp: 1}
+        ur_right_wrist_1_joint: {p: 10.0,  i: 0.05, d: 0.1, i_clamp: 1}
+        ur_right_wrist_2_joint: {p: 10.0,  i: 0.05, d: 0.1, i_clamp: 1}
+        ur_right_wrist_3_joint: {p: 10.0,  i: 0.05, d: 0.1, i_clamp: 1}
+      interface_name: velocity

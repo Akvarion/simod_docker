@@ -66,10 +66,8 @@ def generate_launch_description():
         executable='rviz2',
         name='rviz2',
         output='screen',
-        arguments=['-d', rviz_config_file],
-        
+        arguments=['-d', rviz_config_file],        
     )
-    
     #Open gazebo and spawn robots
   
     robot_spawner_left = IncludeLaunchDescription(
@@ -140,7 +138,6 @@ def generate_launch_description():
     #     condition=IfCondition(spawn_gazebo_base)
     #     )
 
- 
     ld = LaunchDescription()
     ld.add_action(gazebo)
     ld.add_action(rviz)
