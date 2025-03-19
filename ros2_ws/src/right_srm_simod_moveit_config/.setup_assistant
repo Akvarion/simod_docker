@@ -1,0 +1,28 @@
+moveit_setup_assistant_config:
+  urdf:
+    package: ur
+    relative_path: xacro/ur_spawn.urdf.xacro
+    xacro_args: "\"spawn_gazebo_base:= True\" \"parent_ur:='right_summit_base_footprint'\" \"base_prefix:= 'right_summit'\" \"namespace:='right'\" \"tf_prefix:='ur_right_'\" \"parent_hand:='ur_right_tool0'\""
+  srdf:
+    relative_path: config/dual.srdf
+  package_settings:
+    author_name: todo
+    author_email: ""
+    generated_timestamp: 1742388798
+  control_xacro:
+    command:
+      - position
+      - velocity
+    state:
+      - position
+      - velocity
+  modified_urdf:
+    xacros:
+      - control_xacro
+  control_xacro:
+    command:
+      - position
+      - velocity
+    state:
+      - position
+      - velocity
