@@ -4,10 +4,10 @@ moveit_controller_manager: moveit_simple_controller_manager/MoveItSimpleControll
 
 moveit_simple_controller_manager:
   controller_names:
-    - mobile_base_l_controller
+    - base_l_controller
     - ur_l_controller
 
-  mobile_base_l_controller:
+  base_l_controller:
     type: FollowJointTrajectory
     joints:
       - left_summit_back_left_wheel_joint

@@ -3,18 +3,18 @@ controller_manager:
   ros__parameters:
     update_rate: 100  # Hz
 
-    move_base_r_controller:
+    base_r_controller:
       type: joint_trajectory_controller/JointTrajectoryController
 
 
-    ur_r_controller:
+    ur_right_joint_group_vel_controller:
       type: joint_trajectory_controller/JointTrajectoryController
 
 
     joint_state_broadcaster:
       type: joint_state_broadcaster/JointStateBroadcaster
 
-move_base_r_controller:
+base_r_controller:
   ros__parameters:
     joints:
       - right_summit_back_left_wheel_joint
@@ -27,7 +27,7 @@ move_base_r_controller:
     state_interfaces:
       - position
       - velocity
-ur_r_controller:
+ur_right_joint_group_vel_controller:
   ros__parameters:
     joints:
       - ur_right_shoulder_pan_joint
