@@ -2,7 +2,7 @@ moveit_setup_assistant_config:
   urdf:
     package: ur
     relative_path: xacro/ur_spawn.urdf.xacro
-    xacro_args: "\"spawn_gazebo_base:= True\" \"tf_prefix:='ur_right_'\" \"parent_ur:='right_summit_base_footprint'\" \"base_prefix:= 'right_summit'\" \"ur_type:= ur5e\" \"spawn_gazebo_robot:= True\" \"namespace:='right'\" \"parent_hand:='ur_right_tool0'\" \"xyz:= 0 0 0.543\" \"rpy_base_ur:= 0 0 -1.57\" \"xyz_base:= 0.66 0 0\" \"rpy:= 0 -1.57 0\" \"finger_tip_cor:= 0.174 0 0.0018\" \"hardware_interface:= 'hardware_interface/PositionJointInterface'\" \"robot_ip:= 192.168.0.103\" \"vel_controller:= 'ur_right_joint_group_vel_controller'\" \"controller_file:= right_controller.yaml\" \"parent_base:= 'world'\" \"script_sender_port:= 50006\" \"reverse_port:= 50001\" \"script_command_port:= 50004\" \"trajectory_port:= 50003\""
+    xacro_args: "\"spawn_gazebo_base:=True\" \"tf_prefix:='ur_right_'\" \"parent_ur:='right_summit_base_footprint'\" \"base_prefix:='right_summit'\" \"ur_type:='ur5e'\" \"spawn_gazebo_robot:=True\" \"namespace:='right'\" \"parent_hand:='ur_right_tool0'\" \"xyz:={0,0,0.543}\" \"rpy_base_ur:={0,0,-1.57}\" \"xyz_base:={0.66,0,0}\" \"rpy:={0,-1.57,0}\" \"finger_tip_cor:={0.174,0,0.0018}\" \"hardware_interface:='hardware_interface/PositionJointInterface'\" \"robot_ip:='192.168.0.103'\" \"vel_controller:='ur_right_joint_group_vel_controller'\" \"controller_file:=right_controller.yaml\" \"parent_base:='world'\" \"script_sender_port:=50006\" \"reverse_port:=50001\" \"script_command_port:=50004\" \"trajectory_port:=50003\""
   srdf:
     relative_path: config/dual.srdf
   package_settings:

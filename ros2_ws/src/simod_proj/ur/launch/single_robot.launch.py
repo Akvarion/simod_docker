@@ -272,10 +272,11 @@ def launch_setup(context, *args, **kwargs):
     )
        
     # planning_context
+
     moveit_config = (
-        MoveItConfigsBuilder('summit_xls')
-        .robot_description(file_path=get_package_share_directory('base')+"/xacro/base_spawn.urdf.xacro")
-        .trajectory_execution(file_path=get_package_share_directory('ur')+"/config/"+getRobotType(namespace)+"_combined_controller.yaml")
+        MoveItConfigsBuilder("dual",package_name=namespace+'_srm_simod_moveit_config')
+        .robot_description(file_path=get_package_share_directory('ur')+"/xacro/ur_spawn.urdf.xacro")
+        .trajectory_execution(file_path=get_package_share_directory('ur')+"/config/"+namespace+"_controller.yaml")
         .planning_pipelines(
             pipelines=["ompl", "chomp", "pilz_industrial_motion_planner"]
         )
