@@ -3,7 +3,7 @@
     <xacro:arg name="initial_positions_file" default="initial_positions.yaml" />
 
     <!-- Import dual urdf file -->
-    <xacro:include filename="$(find ur)/xacro/ur_spawn.urdf.xacro" />
+    <xacro:include filename="/ros2_ws/left_resolved.urdf.xacro" />
 
     <!-- Import control_xacro -->
     <xacro:include filename="dual.ros2_control.xacro" />

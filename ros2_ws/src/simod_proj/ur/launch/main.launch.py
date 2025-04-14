@@ -58,6 +58,14 @@ def generate_launch_description():
                  condition=IfCondition(gazebo))
     
     # Launch RViz
+
+    robot_description_left = PathJoinSubstitution(
+        ["/", namespace_left, "/robot_description"]
+    )
+
+    robot_description_right = PathJoinSubstitution(
+        ["/", namespace_right, "/robot_description"]
+    )
     rviz_config_file = (
         os.path.join(get_package_share_directory('ur'), 'rviz','rviz_config.rviz')
     )
@@ -66,7 +74,11 @@ def generate_launch_description():
         executable='rviz2',
         name='rviz2',
         output='screen',
-        arguments=['-d', rviz_config_file],        
+        arguments=['-d', rviz_config_file],
+        parameters=[
+            {'/left/robot_description': robot_description_left},
+            {'/right/robot_description': robot_description_right},
+        ],        
     )
     #Open gazebo and spawn robots
   

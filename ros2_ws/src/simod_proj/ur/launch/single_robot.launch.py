@@ -11,7 +11,7 @@ from launch.actions import OpaqueFunction
 from launch.conditions import IfCondition, UnlessCondition
 from ament_index_python.packages import get_package_share_directory
 from moveit_configs_utils import MoveItConfigsBuilder
-
+import subprocess
 
 def generate_launch_description():
     namespace = DeclareLaunchArgument('namespace')
@@ -197,6 +197,8 @@ def launch_setup(context, *args, **kwargs):
     )
 
     robot_description_param = launch_ros.descriptions.ParameterValue(robot_description_content, value_type=str)
+    
+  
 
     # Publish robot state
     robot_state_publisher_node = Node(
@@ -272,10 +274,13 @@ def launch_setup(context, *args, **kwargs):
     )
        
     # planning_context
+    file = open(namespace+'_resolved.urdf.xacro','w')
+    file.write(robot_description_content.perform(context))   
+    file.close()
 
     moveit_config = (
         MoveItConfigsBuilder("dual",package_name=namespace+'_srm_simod_moveit_config')
-        .robot_description(file_path=get_package_share_directory('ur')+"/xacro/ur_spawn.urdf.xacro")
+        .robot_description("/ros2_ws/"+namespace+"_resolved.urdf")
         .trajectory_execution(file_path=get_package_share_directory('ur')+"/config/"+namespace+"_controller.yaml")
         .planning_pipelines(
             pipelines=["ompl", "chomp", "pilz_industrial_motion_planner"]
@@ -288,16 +293,18 @@ def launch_setup(context, *args, **kwargs):
         "capabilities": "move_group/ExecuteTaskSolutionCapability"
     }
 
-    # Start the actual move_group node/action server
-    # run_move_group_node = Node(
-    #     package="base",
-    #     #executable="move_group",
-    #     output="screen",
-    #     parameters=[
-    #         moveit_config.to_dict(),
-    #         move_group_capabilities,
-    #     ],
-    # )
+    #Start the actual move_group node/action server
+    run_move_group_node = Node(
+        package="moveit_ros_move_group",
+        executable="move_group",
+        output="screen",
+        parameters=[
+            moveit_config.to_dict(),
+            move_group_capabilities,
+            {'moveit_controller_manager': 'moveit_simple_controller_manager/MoveItSimpleControllerManager'},
+            {'robot_description': robot_description_param},
+        ],
+    )
  
     return [
         robot_state_publisher_node,
@@ -305,7 +312,7 @@ def launch_setup(context, *args, **kwargs):
         ur_control_node,
         joint_state_broadcaster_spawner,
         velocity_controller,
-        #run_move_group_node,
+        run_move_group_node,
         static_tf_real
     ]
 
