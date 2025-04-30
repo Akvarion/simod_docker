@@ -10,48 +10,33 @@
     <!--CHAINS: When a chain is specified, all the links along the chain (including endpoints) are included in the group. Additionally, all the joints that are parents to included links are also included. This means that joints along the chain and the parent joint of the base link are included in the group-->
     <!--SUBGROUPS: Groups can also be formed by referencing to already defined group names-->
     <group name="base_l">
-        <joint name="left_summit_base_footprint_joint"/>
         <joint name="left_summit_back_left_wheel_joint"/>
         <joint name="left_summit_back_right_wheel_joint"/>
-        <joint name="left_summit_base_docking_joint"/>
-        <joint name="left_summit_base_logo_front_joint"/>
-        <joint name="left_summit_base_logo_left_joint"/>
-        <joint name="left_summit_base_logo_rear_joint"/>
-        <joint name="left_summit_base_logo_right_joint"/>
-        <joint name="left_summit_base_tapa_joint"/>
-        <joint name="left_summit_front_laser_base_joint"/>
-        <joint name="left_summit_front_laser_joint"/>
         <joint name="left_summit_front_left_wheel_joint"/>
         <joint name="left_summit_front_right_wheel_joint"/>
-        <joint name="left_summit_imu_joint"/>
-        <joint name="left_summit_rear_laser_base_joint"/>
-        <joint name="left_summit_rear_laser_joint"/>
+        <joint name="left_summit_base_footprint_joint"/>
     </group>
     <group name="ur_l">
-        <joint name="ur_left_base_joint"/>
-        <joint name="ur_left_base_link-base_fixed_joint"/>
-        <joint name="ur_left_base_link-base_link_inertia"/>
         <joint name="ur_left_shoulder_pan_joint"/>
         <joint name="ur_left_shoulder_lift_joint"/>
         <joint name="ur_left_elbow_joint"/>
         <joint name="ur_left_wrist_1_joint"/>
         <joint name="ur_left_wrist_2_joint"/>
         <joint name="ur_left_wrist_3_joint"/>
-        <joint name="ur_left_wrist_3-flange"/>
+        <joint name="ur_left_base_link-base_link_inertia"/>
+        <chain base_link="ur_left_base_link_inertia" tip_link="ur_left_wrist_3_link"/>
     </group>
     <group name="ur_ee_l">
         <link name="ur_left_robotiq_hand"/>
         <link name="ur_left_finger_left"/>
         <link name="ur_left_finger_right"/>
         <link name="ur_left_finger_tip"/>
-        <link name="ur_left_ft_frame"/>
-        <joint name="ur_left_gripper_joint"/>
-        <joint name="ur_left_bl_to_leftFinger"/>
-        <joint name="ur_left_leftFinger_to_rightFinger"/>
-        <joint name="ur_left_flange-tool0"/>
-        <joint name="ur_left_wrist_3-flange"/>
-        <joint name="ur_left_rightFinger_to_tip"/>
-        <joint name="ur_left_wrist_3_link-ft_frame"/>
+        <chain base_link="ur_left_robotiq_hand" tip_link="ur_left_finger_right"/>
+    </group>
+    <group name="base_arm_ee_l">
+        <group name="base_l"/>
+        <group name="ur_l"/>
+        <group name="ur_ee_l"/>
     </group>
     <!--GROUP STATES: Purpose: Define a named state for a particular group, in terms of joint values. This is useful to define states like 'folded arms'-->
     <group_state name="standby" group="ur_l">
@@ -71,9 +56,9 @@
         <joint name="ur_left_wrist_3_joint" value="0.1041"/>
     </group_state>
     <!--END EFFECTOR: Purpose: Represent information about an end effector.-->
-    <end_effector name="ee_l" parent_link="ur_left_wrist_3_link" group="ur_ee_l"/>
+    <end_effector name="EE_L" parent_link="ur_left_wrist_3_link" group="ur_ee_l" parent_group="ur_l"/>
     <!--VIRTUAL JOINT: Purpose: this element defines a virtual joint between a robot link and an external frame of reference (considered fixed with respect to the robot)-->
-    <virtual_joint name="Vjoint" type="fixed" parent_frame="world" child_link="left_summit_base_footprint"/>
+    <virtual_joint name="Vjoint_left" type="planar" parent_frame="left_summit_odom" child_link="left_summit_base_footprint"/>
     <!--DISABLE COLLISIONS: By default it is assumed that any link of the robot could potentially come into collision with any other link in the robot. This tag disables collision checking between a specified pair of links. -->
     <disable_collisions link1="left_summit_back_left_wheel_link" link2="left_summit_back_right_wheel_link" reason="Never"/>
     <disable_collisions link1="left_summit_back_left_wheel_link" link2="left_summit_base_link" reason="Adjacent"/>

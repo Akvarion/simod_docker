@@ -1,0 +1,111 @@
+[INFO] [launch]: All log files can be found below /root/.ros/log/2025-04-16-14-49-42-040130-outlander-Aspire-V3-571G-48824
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [gzserver-1]: process started with pid [48840]
+[INFO] [gzclient-2]: process started with pid [48842]
+[INFO] [rviz2-3]: process started with pid [48844]
+[INFO] [robot_state_publisher-4]: process started with pid [48846]
+[INFO] [spawn_entity.py-5]: process started with pid [48848]
+[INFO] [spawner-6]: process started with pid [48850]
+[INFO] [spawner-7]: process started with pid [48852]
+[INFO] [move_group-8]: process started with pid [48854]
+[INFO] [static_transform_publisher-9]: process started with pid [48856]
+[INFO] [static_transform_publisher-10]: process started with pid [48858]
+[INFO] [robot_state_publisher-11]: process started with pid [48860]
+[INFO] [spawn_entity.py-12]: process started with pid [48862]
+[INFO] [spawner-13]: process started with pid [48864]
+[INFO] [spawner-14]: process started with pid [48880]
+[INFO] [move_group-15]: process started with pid [48892]
+[INFO] [static_transform_publisher-16]: process started with pid [48894]
+[INFO] [static_transform_publisher-17]: process started with pid [48896]
+[static_transform_publisher-9] [WARN] [1744814987.660814255] []: Old-style arguments are deprecated; see --help for new-style arguments
+[static_transform_publisher-10] [WARN] [1744814987.660515155] []: Old-style arguments are deprecated; see --help for new-style arguments
+[static_transform_publisher-10] [INFO] [1744814987.733880141] [left.static_transform_publisher]: Spinning until stopped - publishing transform
+[static_transform_publisher-10] translation: ('-0.660000', '0.000000', '0.000000')
+[static_transform_publisher-10] rotation: ('0.000000', '0.000000', '0.000000', '1.000000')
+[static_transform_publisher-10] from 'world' to 'left_summit_odom'
+[static_transform_publisher-16] [WARN] [1744814987.797368365] []: Old-style arguments are deprecated; see --help for new-style arguments
+[static_transform_publisher-17] [WARN] [1744814987.825503074] []: Old-style arguments are deprecated; see --help for new-style arguments
+[rviz2-3] QStandardPaths: XDG_RUNTIME_DIR not set, defaulting to '/tmp/runtime-root'
+[ERROR] [gzserver-1]: process has died [pid 48840, exit code 255, cmd 'gzserver /ros2_ws/install/ur/share/ur/xacro/gazebo.world --physics False -slibgazebo_ros_init.so -slibgazebo_ros_factory.so -slibgazebo_ros_force_system.so'].
+[WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+[static_transform_publisher-16] [INFO] [1744815008.529670573] [rclcpp]: signal_handler(signum=2)
+[static_transform_publisher-17] [INFO] [1744815008.529670801] [rclcpp]: signal_handler(signum=2)
+[static_transform_publisher-10] [INFO] [1744815008.529785576] [rclcpp]: signal_handler(signum=2)
+[robot_state_publisher-11] [INFO] [1744815008.529718927] [rclcpp]: signal_handler(signum=2)
+[ERROR] [gzclient-2]: process has died [pid 48842, exit code -2, cmd 'gzclient'].
+[static_transform_publisher-9] [INFO] [1744815008.529856164] [rclcpp]: signal_handler(signum=2)
+[robot_state_publisher-4] [INFO] [1744815008.529894707] [rclcpp]: signal_handler(signum=2)
+[move_group-15] [INFO] [1744815008.529890948] [rclcpp]: signal_handler(signum=2)
+[move_group-8] [INFO] [1744815008.529881172] [rclcpp]: signal_handler(signum=2)
+[rviz2-3] [INFO] [1744815008.529917938] [rclcpp]: signal_handler(signum=2)
+[INFO] [static_transform_publisher-10]: process has finished cleanly [pid 48858]
+[ERROR] [static_transform_publisher-17]: process[static_transform_publisher-17] failed to terminate '5' seconds after receiving 'SIGINT', escalating to 'SIGTERM'
+[ERROR] [static_transform_publisher-16]: process[static_transform_publisher-16] failed to terminate '5' seconds after receiving 'SIGINT', escalating to 'SIGTERM'
+[ERROR] [move_group-15]: process[move_group-15] failed to terminate '5' seconds after receiving 'SIGINT', escalating to 'SIGTERM'
+[ERROR] [spawner-14]: process[spawner-14] failed to terminate '5' seconds after receiving 'SIGINT', escalating to 'SIGTERM'
+[ERROR] [spawner-13]: process[spawner-13] failed to terminate '5' seconds after receiving 'SIGINT', escalating to 'SIGTERM'
+[ERROR] [spawn_entity.py-12]: process[spawn_entity.py-12] failed to terminate '5' seconds after receiving 'SIGINT', escalating to 'SIGTERM'
+[ERROR] [robot_state_publisher-11]: process[robot_state_publisher-11] failed to terminate '5' seconds after receiving 'SIGINT', escalating to 'SIGTERM'
+[ERROR] [static_transform_publisher-9]: process[static_transform_publisher-9] failed to terminate '5' seconds after receiving 'SIGINT', escalating to 'SIGTERM'
+[ERROR] [move_group-8]: process[move_group-8] failed to terminate '5' seconds after receiving 'SIGINT', escalating to 'SIGTERM'
+[ERROR] [spawner-7]: process[spawner-7] failed to terminate '5' seconds after receiving 'SIGINT', escalating to 'SIGTERM'
+[INFO] [static_transform_publisher-17]: sending signal 'SIGTERM' to process[static_transform_publisher-17]
+[ERROR] [spawner-6]: process[spawner-6] failed to terminate '5' seconds after receiving 'SIGINT', escalating to 'SIGTERM'
+[ERROR] [spawn_entity.py-5]: process[spawn_entity.py-5] failed to terminate '5' seconds after receiving 'SIGINT', escalating to 'SIGTERM'
+[INFO] [static_transform_publisher-16]: sending signal 'SIGTERM' to process[static_transform_publisher-16]
+[ERROR] [robot_state_publisher-4]: process[robot_state_publisher-4] failed to terminate '5' seconds after receiving 'SIGINT', escalating to 'SIGTERM'
+[ERROR] [rviz2-3]: process[rviz2-3] failed to terminate '5' seconds after receiving 'SIGINT', escalating to 'SIGTERM'
+[INFO] [move_group-15]: sending signal 'SIGTERM' to process[move_group-15]
+[INFO] [spawner-14]: sending signal 'SIGTERM' to process[spawner-14]
+[INFO] [spawner-13]: sending signal 'SIGTERM' to process[spawner-13]
+[INFO] [spawn_entity.py-12]: sending signal 'SIGTERM' to process[spawn_entity.py-12]
+[INFO] [robot_state_publisher-11]: sending signal 'SIGTERM' to process[robot_state_publisher-11]
+[ERROR] [spawner-14]: process has died [pid 48880, exit code -15, cmd '/opt/ros/humble/lib/controller_manager/spawner ur_right_joint_group_vel_controller -c /right/controller_manager --ros-args -r __ns:=/right'].
+[ERROR] [spawner-13]: process has died [pid 48864, exit code -15, cmd '/opt/ros/humble/lib/controller_manager/spawner joint_state_broadcaster -c /right/controller_manager --ros-args -r __ns:=/right'].
+[INFO] [static_transform_publisher-9]: sending signal 'SIGTERM' to process[static_transform_publisher-9]
+[INFO] [move_group-8]: sending signal 'SIGTERM' to process[move_group-8]
+[INFO] [spawner-7]: sending signal 'SIGTERM' to process[spawner-7]
+[static_transform_publisher-17] [INFO] [1744815013.564700985] [rclcpp]: signal_handler(signum=15)
+[INFO] [spawner-6]: sending signal 'SIGTERM' to process[spawner-6]
+[INFO] [spawn_entity.py-5]: sending signal 'SIGTERM' to process[spawn_entity.py-5]
+[ERROR] [spawner-7]: process has died [pid 48852, exit code -15, cmd '/opt/ros/humble/lib/controller_manager/spawner ur_left_joint_group_vel_controller -c /left/controller_manager --ros-args -r __ns:=/left'].
+[static_transform_publisher-16] [INFO] [1744815013.574577854] [rclcpp]: signal_handler(signum=15)
+[ERROR] [spawner-6]: process has died [pid 48850, exit code -15, cmd '/opt/ros/humble/lib/controller_manager/spawner joint_state_broadcaster -c /left/controller_manager --ros-args -r __ns:=/left'].
+[INFO] [robot_state_publisher-4]: sending signal 'SIGTERM' to process[robot_state_publisher-4]
+[INFO] [rviz2-3]: sending signal 'SIGTERM' to process[rviz2-3]
+[move_group-15] [INFO] [1744815013.582453389] [rclcpp]: signal_handler(signum=15)
+[robot_state_publisher-11] [INFO] [1744815013.603258645] [rclcpp]: signal_handler(signum=15)
+[static_transform_publisher-9] [INFO] [1744815013.608531647] [rclcpp]: signal_handler(signum=15)
+[move_group-8] [INFO] [1744815013.613391107] [rclcpp]: signal_handler(signum=15)
+[robot_state_publisher-4] [INFO] [1744815013.632529407] [rclcpp]: signal_handler(signum=15)
+[rviz2-3] [INFO] [1744815013.636601346] [rclcpp]: signal_handler(signum=15)
+[ERROR] [static_transform_publisher-17]: process[static_transform_publisher-17] failed to terminate '10.0' seconds after receiving 'SIGTERM', escalating to 'SIGKILL'
+[ERROR] [static_transform_publisher-16]: process[static_transform_publisher-16] failed to terminate '10.0' seconds after receiving 'SIGTERM', escalating to 'SIGKILL'
+[ERROR] [move_group-15]: process[move_group-15] failed to terminate '10.0' seconds after receiving 'SIGTERM', escalating to 'SIGKILL'
+[ERROR] [spawn_entity.py-12]: process[spawn_entity.py-12] failed to terminate '10.0' seconds after receiving 'SIGTERM', escalating to 'SIGKILL'
+[ERROR] [robot_state_publisher-11]: process[robot_state_publisher-11] failed to terminate '10.0' seconds after receiving 'SIGTERM', escalating to 'SIGKILL'
+[ERROR] [static_transform_publisher-9]: process[static_transform_publisher-9] failed to terminate '10.0' seconds after receiving 'SIGTERM', escalating to 'SIGKILL'
+[ERROR] [move_group-8]: process[move_group-8] failed to terminate '10.0' seconds after receiving 'SIGTERM', escalating to 'SIGKILL'
+[ERROR] [spawn_entity.py-5]: process[spawn_entity.py-5] failed to terminate '10.0' seconds after receiving 'SIGTERM', escalating to 'SIGKILL'
+[INFO] [static_transform_publisher-17]: sending signal 'SIGKILL' to process[static_transform_publisher-17]
+[ERROR] [robot_state_publisher-4]: process[robot_state_publisher-4] failed to terminate '10.0' seconds after receiving 'SIGTERM', escalating to 'SIGKILL'
+[ERROR] [rviz2-3]: process[rviz2-3] failed to terminate '10.0' seconds after receiving 'SIGTERM', escalating to 'SIGKILL'
+[ERROR] [static_transform_publisher-17]: process has died [pid 48896, exit code -9, cmd '/opt/ros/humble/lib/tf2_ros/static_transform_publisher 0.66 0 0 0 0 0 1 world right_summit_odom --ros-args -r __node:=static_transform_publisher -r __ns:=/right'].
+[INFO] [static_transform_publisher-16]: sending signal 'SIGKILL' to process[static_transform_publisher-16]
+[INFO] [move_group-15]: sending signal 'SIGKILL' to process[move_group-15]
+[INFO] [spawn_entity.py-12]: sending signal 'SIGKILL' to process[spawn_entity.py-12]
+[ERROR] [static_transform_publisher-16]: process has died [pid 48894, exit code -9, cmd '/opt/ros/humble/lib/tf2_ros/static_transform_publisher 0 0 0 0 0 0 1 right_summit_odom right_summit_base_footprint --ros-args -r __node:=static_tf_publisher_odom_to_base_right -r __ns:=/right'].
+[INFO] [robot_state_publisher-11]: sending signal 'SIGKILL' to process[robot_state_publisher-11]
+[ERROR] [move_group-15]: process has died [pid 48892, exit code -9, cmd '/ros2_ws/install/moveit_ros_move_group/lib/moveit_ros_move_group/move_group --ros-args --params-file /tmp/launch_params_b2ts3uw7 --params-file /tmp/launch_params_ro4z8yqe --params-file /tmp/launch_params_9ec2m_xi --params-file /tmp/launch_params_wvg2xal9'].
+[INFO] [static_transform_publisher-9]: sending signal 'SIGKILL' to process[static_transform_publisher-9]
+[INFO] [move_group-8]: sending signal 'SIGKILL' to process[move_group-8]
+[ERROR] [spawn_entity.py-12]: process has died [pid 48862, exit code -9, cmd '/opt/ros/humble/lib/gazebo_ros/spawn_entity.py -entity right_robot -topic /right/robot_description -x 0.66 -y 0 -z 0 -timeout 5 -unpause --ros-args -r __node:=right'].
+[ERROR] [robot_state_publisher-11]: process has died [pid 48860, exit code -9, cmd '/opt/ros/humble/lib/robot_state_publisher/robot_state_publisher --ros-args -r __node:=robot_state_publisher -r __ns:=/right --params-file /tmp/launch_params_lypayoc5 --params-file /tmp/launch_params_i42c7a04'].
+[INFO] [spawn_entity.py-5]: sending signal 'SIGKILL' to process[spawn_entity.py-5]
+[ERROR] [static_transform_publisher-9]: process has died [pid 48856, exit code -9, cmd '/opt/ros/humble/lib/tf2_ros/static_transform_publisher 0 0 0 0 0 0 1 left_summit_odom left_summit_base_footprint --ros-args -r __node:=static_tf_publisher_odom_to_base_left -r __ns:=/left'].
+[INFO] [robot_state_publisher-4]: sending signal 'SIGKILL' to process[robot_state_publisher-4]
+[ERROR] [move_group-8]: process has died [pid 48854, exit code -9, cmd '/ros2_ws/install/moveit_ros_move_group/lib/moveit_ros_move_group/move_group --ros-args --params-file /tmp/launch_params__l0i8xq9 --params-file /tmp/launch_params_czjzjgll --params-file /tmp/launch_params_adtc9dg5 --params-file /tmp/launch_params_qwn9xehy'].
+[INFO] [rviz2-3]: sending signal 'SIGKILL' to process[rviz2-3]
+[ERROR] [spawn_entity.py-5]: process has died [pid 48848, exit code -9, cmd '/opt/ros/humble/lib/gazebo_ros/spawn_entity.py -entity left_robot -topic /left/robot_description -x -0.66 -y 0 -z 0 -timeout 5 -unpause --ros-args -r __node:=left'].
+[ERROR] [robot_state_publisher-4]: process has died [pid 48846, exit code -9, cmd '/opt/ros/humble/lib/robot_state_publisher/robot_state_publisher --ros-args -r __node:=robot_state_publisher -r __ns:=/left --params-file /tmp/launch_params_h0cnv3x1 --params-file /tmp/launch_params_7tmxy8om'].
+[ERROR] [rviz2-3]: process has died [pid 48844, exit code -9, cmd '/opt/ros/humble/lib/rviz2/rviz2 -d /ros2_ws/install/ur/share/ur/rviz/rviz_config.rviz --ros-args -r __node:=rviz2 --params-file /tmp/launch_params_pdjoyg35 --params-file /tmp/launch_params_w_utvmmq'].

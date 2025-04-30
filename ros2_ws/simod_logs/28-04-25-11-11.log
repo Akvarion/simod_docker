@@ -1,0 +1,171 @@
+[INFO] [launch]: All log files can be found below /root/.ros/log/2025-04-28-11-56-15-105317-outlander-Aspire-V3-571G-1040
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [gzserver-1]: process started with pid [1054]
+[INFO] [gzclient-2]: process started with pid [1056]
+[INFO] [rviz2-3]: process started with pid [1058]
+[INFO] [robot_state_publisher-4]: process started with pid [1060]
+[INFO] [spawn_entity.py-5]: process started with pid [1062]
+[INFO] [spawner-6]: process started with pid [1064]
+[INFO] [spawner-7]: process started with pid [1066]
+[INFO] [move_group-8]: process started with pid [1068]
+[INFO] [static_transform_publisher-9]: process started with pid [1070]
+[INFO] [static_transform_publisher-10]: process started with pid [1072]
+[INFO] [robot_state_publisher-11]: process started with pid [1074]
+[INFO] [spawn_entity.py-12]: process started with pid [1076]
+[INFO] [spawner-13]: process started with pid [1078]
+[INFO] [spawner-14]: process started with pid [1080]
+[INFO] [move_group-15]: process started with pid [1082]
+[INFO] [static_transform_publisher-16]: process started with pid [1084]
+[INFO] [static_transform_publisher-17]: process started with pid [1087]
+[static_transform_publisher-9] [WARN] [1745841379.234334422] []: Old-style arguments are deprecated; see --help for new-style arguments
+[static_transform_publisher-10] [WARN] [1745841379.262388650] []: Old-style arguments are deprecated; see --help for new-style arguments
+[static_transform_publisher-16] [WARN] [1745841379.293825104] []: Old-style arguments are deprecated; see --help for new-style arguments
+[static_transform_publisher-17] [WARN] [1745841379.318562864] []: Old-style arguments are deprecated; see --help for new-style arguments
+[static_transform_publisher-9] [INFO] [1745841379.336295327] [left.static_tf_publisher_odom_to_base_left]: Spinning until stopped - publishing transform
+[static_transform_publisher-9] translation: ('0.000000', '0.000000', '0.000000')
+[static_transform_publisher-9] rotation: ('0.000000', '0.000000', '0.000000', '1.000000')
+[static_transform_publisher-9] from 'left_summit_odom' to 'left_summit_base_footprint'
+[static_transform_publisher-16] [INFO] [1745841379.379592249] [right.static_tf_publisher_odom_to_base_right]: Spinning until stopped - publishing transform
+[static_transform_publisher-16] translation: ('0.000000', '0.000000', '0.000000')
+[static_transform_publisher-16] rotation: ('0.000000', '0.000000', '0.000000', '1.000000')
+[static_transform_publisher-16] from 'right_summit_odom' to 'right_summit_base_footprint'
+[static_transform_publisher-10] [INFO] [1745841379.385787150] [left.static_transform_publisher]: Spinning until stopped - publishing transform
+[static_transform_publisher-10] translation: ('-0.660000', '0.000000', '0.000000')
+[static_transform_publisher-10] rotation: ('0.000000', '0.000000', '0.000000', '1.000000')
+[static_transform_publisher-10] from 'world' to 'left_summit_odom'
+[robot_state_publisher-4] [INFO] [1745841379.412908524] [left.robot_state_publisher]: got segment left_summit_back_left_wheel_link
+[robot_state_publisher-4] [INFO] [1745841379.413221631] [left.robot_state_publisher]: got segment left_summit_back_right_wheel_link
+[robot_state_publisher-4] [INFO] [1745841379.413250104] [left.robot_state_publisher]: got segment left_summit_base_chapa
+[robot_state_publisher-4] [INFO] [1745841379.413302821] [left.robot_state_publisher]: got segment left_summit_base_docking_contact
+[robot_state_publisher-4] [INFO] [1745841379.413323179] [left.robot_state_publisher]: got segment left_summit_base_footprint
+[robot_state_publisher-4] [INFO] [1745841379.413340415] [left.robot_state_publisher]: got segment left_summit_base_link
+[robot_state_publisher-4] [INFO] [1745841379.413357666] [left.robot_state_publisher]: got segment left_summit_base_logo_front
+[robot_state_publisher-4] [INFO] [1745841379.413376731] [left.robot_state_publisher]: got segment left_summit_base_logo_left
+[robot_state_publisher-4] [INFO] [1745841379.413397056] [left.robot_state_publisher]: got segment left_summit_base_logo_rear
+[robot_state_publisher-4] [INFO] [1745841379.413416722] [left.robot_state_publisher]: got segment left_summit_base_logo_right
+[robot_state_publisher-4] [INFO] [1745841379.413435899] [left.robot_state_publisher]: got segment left_summit_front_laser_base_link
+[robot_state_publisher-4] [INFO] [1745841379.413455240] [left.robot_state_publisher]: got segment left_summit_front_laser_link
+[robot_state_publisher-4] [INFO] [1745841379.413473327] [left.robot_state_publisher]: got segment left_summit_front_left_wheel_link
+[robot_state_publisher-4] [INFO] [1745841379.413491046] [left.robot_state_publisher]: got segment left_summit_front_right_wheel_link
+[robot_state_publisher-4] [INFO] [1745841379.413509369] [left.robot_state_publisher]: got segment left_summit_imu_link
+[robot_state_publisher-4] [INFO] [1745841379.413526807] [left.robot_state_publisher]: got segment left_summit_rear_laser_base_link
+[robot_state_publisher-4] [INFO] [1745841379.413567273] [left.robot_state_publisher]: got segment left_summit_rear_laser_link
+[robot_state_publisher-4] [INFO] [1745841379.413588494] [left.robot_state_publisher]: got segment ur_left_base
+[robot_state_publisher-4] [INFO] [1745841379.413606460] [left.robot_state_publisher]: got segment ur_left_base_link
+[robot_state_publisher-4] [INFO] [1745841379.413624973] [left.robot_state_publisher]: got segment ur_left_base_link_inertia
+[robot_state_publisher-4] [INFO] [1745841379.413642060] [left.robot_state_publisher]: got segment ur_left_finger_left
+[robot_state_publisher-4] [INFO] [1745841379.413659847] [left.robot_state_publisher]: got segment ur_left_finger_right
+[robot_state_publisher-4] [INFO] [1745841379.413675211] [left.robot_state_publisher]: got segment ur_left_finger_tip
+[robot_state_publisher-4] [INFO] [1745841379.413691460] [left.robot_state_publisher]: got segment ur_left_flange
+[robot_state_publisher-4] [INFO] [1745841379.413709297] [left.robot_state_publisher]: got segment ur_left_forearm_link
+[robot_state_publisher-4] [INFO] [1745841379.413725903] [left.robot_state_publisher]: got segment ur_left_ft_frame
+[robot_state_publisher-4] [INFO] [1745841379.413742707] [left.robot_state_publisher]: got segment ur_left_robotiq_hand
+[robot_state_publisher-4] [INFO] [1745841379.413760067] [left.robot_state_publisher]: got segment ur_left_shoulder_link
+[robot_state_publisher-4] [INFO] [1745841379.413776396] [left.robot_state_publisher]: got segment ur_left_tool0
+[robot_state_publisher-4] [INFO] [1745841379.413794646] [left.robot_state_publisher]: got segment ur_left_upper_arm_link
+[robot_state_publisher-4] [INFO] [1745841379.413816093] [left.robot_state_publisher]: got segment ur_left_wrist_1_link
+[robot_state_publisher-4] [INFO] [1745841379.413835311] [left.robot_state_publisher]: got segment ur_left_wrist_2_link
+[robot_state_publisher-4] [INFO] [1745841379.413853378] [left.robot_state_publisher]: got segment ur_left_wrist_3_link
+[robot_state_publisher-11] [INFO] [1745841379.446001729] [right.robot_state_publisher]: got segment right_summit_back_left_wheel_link
+[robot_state_publisher-11] [INFO] [1745841379.446234640] [right.robot_state_publisher]: got segment right_summit_back_right_wheel_link
+[robot_state_publisher-11] [INFO] [1745841379.446261283] [right.robot_state_publisher]: got segment right_summit_base_chapa
+[robot_state_publisher-11] [INFO] [1745841379.446280855] [right.robot_state_publisher]: got segment right_summit_base_docking_contact
+[robot_state_publisher-11] [INFO] [1745841379.446300090] [right.robot_state_publisher]: got segment right_summit_base_footprint
+[robot_state_publisher-11] [INFO] [1745841379.446321133] [right.robot_state_publisher]: got segment right_summit_base_link
+[robot_state_publisher-11] [INFO] [1745841379.446339807] [right.robot_state_publisher]: got segment right_summit_base_logo_front
+[robot_state_publisher-11] [INFO] [1745841379.446359269] [right.robot_state_publisher]: got segment right_summit_base_logo_left
+[robot_state_publisher-11] [INFO] [1745841379.446378652] [right.robot_state_publisher]: got segment right_summit_base_logo_rear
+[robot_state_publisher-11] [INFO] [1745841379.446398073] [right.robot_state_publisher]: got segment right_summit_base_logo_right
+[robot_state_publisher-11] [INFO] [1745841379.446416926] [right.robot_state_publisher]: got segment right_summit_front_laser_base_link
+[robot_state_publisher-11] [INFO] [1745841379.446436040] [right.robot_state_publisher]: got segment right_summit_front_laser_link
+[robot_state_publisher-11] [INFO] [1745841379.446455240] [right.robot_state_publisher]: got segment right_summit_front_left_wheel_link
+[robot_state_publisher-11] [INFO] [1745841379.446474681] [right.robot_state_publisher]: got segment right_summit_front_right_wheel_link
+[robot_state_publisher-11] [INFO] [1745841379.446493802] [right.robot_state_publisher]: got segment right_summit_imu_link
+[robot_state_publisher-11] [INFO] [1745841379.446512938] [right.robot_state_publisher]: got segment right_summit_rear_laser_base_link
+[robot_state_publisher-11] [INFO] [1745841379.446533145] [right.robot_state_publisher]: got segment right_summit_rear_laser_link
+[robot_state_publisher-11] [INFO] [1745841379.446552881] [right.robot_state_publisher]: got segment ur_right_base
+[robot_state_publisher-11] [INFO] [1745841379.446572339] [right.robot_state_publisher]: got segment ur_right_base_link
+[robot_state_publisher-11] [INFO] [1745841379.446591242] [right.robot_state_publisher]: got segment ur_right_base_link_inertia
+[robot_state_publisher-11] [INFO] [1745841379.446611249] [right.robot_state_publisher]: got segment ur_right_finger_left
+[robot_state_publisher-11] [INFO] [1745841379.446629659] [right.robot_state_publisher]: got segment ur_right_finger_right
+[robot_state_publisher-11] [INFO] [1745841379.446648962] [right.robot_state_publisher]: got segment ur_right_finger_tip
+[robot_state_publisher-11] [INFO] [1745841379.446668625] [right.robot_state_publisher]: got segment ur_right_flange
+[robot_state_publisher-11] [INFO] [1745841379.446689156] [right.robot_state_publisher]: got segment ur_right_forearm_link
+[robot_state_publisher-11] [INFO] [1745841379.446708376] [right.robot_state_publisher]: got segment ur_right_ft_frame
+[robot_state_publisher-11] [INFO] [1745841379.446728111] [right.robot_state_publisher]: got segment ur_right_robotiq_hand
+[robot_state_publisher-11] [INFO] [1745841379.446746924] [right.robot_state_publisher]: got segment ur_right_shoulder_link
+[robot_state_publisher-11] [INFO] [1745841379.446765900] [right.robot_state_publisher]: got segment ur_right_tool0
+[robot_state_publisher-11] [INFO] [1745841379.446784880] [right.robot_state_publisher]: got segment ur_right_upper_arm_link
+[robot_state_publisher-11] [INFO] [1745841379.446803936] [right.robot_state_publisher]: got segment ur_right_wrist_1_link
+[robot_state_publisher-11] [INFO] [1745841379.446823431] [right.robot_state_publisher]: got segment ur_right_wrist_2_link
+[robot_state_publisher-11] [INFO] [1745841379.446842726] [right.robot_state_publisher]: got segment ur_right_wrist_3_link
+[rviz2-3] QStandardPaths: XDG_RUNTIME_DIR not set, defaulting to '/tmp/runtime-root'
+[WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+[static_transform_publisher-17] [INFO] [1745841393.290859041] [rclcpp]: signal_handler(signum=2)
+[static_transform_publisher-16] [INFO] [1745841393.290862569] [rclcpp]: signal_handler(signum=2)
+[robot_state_publisher-4] [INFO] [1745841393.291017697] [rclcpp]: signal_handler(signum=2)
+[robot_state_publisher-11] [INFO] [1745841393.291045661] [rclcpp]: signal_handler(signum=2)
+[static_transform_publisher-10] [INFO] [1745841393.291136136] [rclcpp]: signal_handler(signum=2)
+[static_transform_publisher-9] [INFO] [1745841393.291331906] [rclcpp]: signal_handler(signum=2)
+[move_group-15] [INFO] [1745841393.291289867] [rclcpp]: signal_handler(signum=2)
+[rviz2-3] [INFO] [1745841393.291836505] [rclcpp]: signal_handler(signum=2)
+[gzserver-1] [INFO] [1745841393.291719032] [rclcpp]: signal_handler(signum=2)
+[move_group-8] [INFO] [1745841393.292697971] [rclcpp]: signal_handler(signum=2)
+[ERROR] [gzclient-2]: process has died [pid 1056, exit code -2, cmd 'gzclient'].
+[INFO] [static_transform_publisher-9]: process has finished cleanly [pid 1070]
+[INFO] [static_transform_publisher-16]: process has finished cleanly [pid 1084]
+[INFO] [static_transform_publisher-10]: process has finished cleanly [pid 1072]
+[INFO] [robot_state_publisher-11]: process has finished cleanly [pid 1074]
+[INFO] [robot_state_publisher-4]: process has finished cleanly [pid 1060]
+[ERROR] [static_transform_publisher-17]: process[static_transform_publisher-17] failed to terminate '5' seconds after receiving 'SIGINT', escalating to 'SIGTERM'
+[ERROR] [move_group-15]: process[move_group-15] failed to terminate '5' seconds after receiving 'SIGINT', escalating to 'SIGTERM'
+[ERROR] [spawner-14]: process[spawner-14] failed to terminate '5' seconds after receiving 'SIGINT', escalating to 'SIGTERM'
+[ERROR] [spawner-13]: process[spawner-13] failed to terminate '5' seconds after receiving 'SIGINT', escalating to 'SIGTERM'
+[ERROR] [spawn_entity.py-12]: process[spawn_entity.py-12] failed to terminate '5' seconds after receiving 'SIGINT', escalating to 'SIGTERM'
+[ERROR] [move_group-8]: process[move_group-8] failed to terminate '5' seconds after receiving 'SIGINT', escalating to 'SIGTERM'
+[ERROR] [spawner-7]: process[spawner-7] failed to terminate '5' seconds after receiving 'SIGINT', escalating to 'SIGTERM'
+[ERROR] [spawner-6]: process[spawner-6] failed to terminate '5' seconds after receiving 'SIGINT', escalating to 'SIGTERM'
+[ERROR] [spawn_entity.py-5]: process[spawn_entity.py-5] failed to terminate '5' seconds after receiving 'SIGINT', escalating to 'SIGTERM'
+[ERROR] [rviz2-3]: process[rviz2-3] failed to terminate '5' seconds after receiving 'SIGINT', escalating to 'SIGTERM'
+[ERROR] [gzserver-1]: process[gzserver-1] failed to terminate '5' seconds after receiving 'SIGINT', escalating to 'SIGTERM'
+[INFO] [static_transform_publisher-17]: sending signal 'SIGTERM' to process[static_transform_publisher-17]
+[INFO] [move_group-15]: sending signal 'SIGTERM' to process[move_group-15]
+[INFO] [spawner-14]: sending signal 'SIGTERM' to process[spawner-14]
+[INFO] [spawner-13]: sending signal 'SIGTERM' to process[spawner-13]
+[INFO] [spawn_entity.py-12]: sending signal 'SIGTERM' to process[spawn_entity.py-12]
+[INFO] [move_group-8]: sending signal 'SIGTERM' to process[move_group-8]
+[ERROR] [spawner-14]: process has died [pid 1080, exit code -15, cmd '/opt/ros/humble/lib/controller_manager/spawner ur_right_joint_group_vel_controller -c /right/controller_manager --ros-args -r __ns:=/right'].
+[ERROR] [spawner-13]: process has died [pid 1078, exit code -15, cmd '/opt/ros/humble/lib/controller_manager/spawner joint_state_broadcaster -c /right/controller_manager --ros-args -r __ns:=/right'].
+[INFO] [spawner-7]: sending signal 'SIGTERM' to process[spawner-7]
+[INFO] [spawner-6]: sending signal 'SIGTERM' to process[spawner-6]
+[INFO] [spawn_entity.py-5]: sending signal 'SIGTERM' to process[spawn_entity.py-5]
+[ERROR] [spawner-7]: process has died [pid 1066, exit code -15, cmd '/opt/ros/humble/lib/controller_manager/spawner ur_left_joint_group_vel_controller -c /left/controller_manager --ros-args -r __ns:=/left'].
+[INFO] [rviz2-3]: sending signal 'SIGTERM' to process[rviz2-3]
+[ERROR] [spawner-6]: process has died [pid 1064, exit code -15, cmd '/opt/ros/humble/lib/controller_manager/spawner joint_state_broadcaster -c /left/controller_manager --ros-args -r __ns:=/left'].
+[INFO] [gzserver-1]: sending signal 'SIGTERM' to process[gzserver-1]
+[static_transform_publisher-17] [INFO] [1745841398.331892568] [rclcpp]: signal_handler(signum=15)
+[move_group-15] [INFO] [1745841398.339013519] [rclcpp]: signal_handler(signum=15)
+[move_group-8] [INFO] [1745841398.361885302] [rclcpp]: signal_handler(signum=15)
+[rviz2-3] [INFO] [1745841398.384378239] [rclcpp]: signal_handler(signum=15)
+[gzserver-1] [INFO] [1745841398.389506686] [rclcpp]: signal_handler(signum=15)
+[ERROR] [static_transform_publisher-17]: process[static_transform_publisher-17] failed to terminate '10.0' seconds after receiving 'SIGTERM', escalating to 'SIGKILL'
+[ERROR] [move_group-15]: process[move_group-15] failed to terminate '10.0' seconds after receiving 'SIGTERM', escalating to 'SIGKILL'
+[ERROR] [spawn_entity.py-12]: process[spawn_entity.py-12] failed to terminate '10.0' seconds after receiving 'SIGTERM', escalating to 'SIGKILL'
+[ERROR] [move_group-8]: process[move_group-8] failed to terminate '10.0' seconds after receiving 'SIGTERM', escalating to 'SIGKILL'
+[ERROR] [spawn_entity.py-5]: process[spawn_entity.py-5] failed to terminate '10.0' seconds after receiving 'SIGTERM', escalating to 'SIGKILL'
+[ERROR] [rviz2-3]: process[rviz2-3] failed to terminate '10.0' seconds after receiving 'SIGTERM', escalating to 'SIGKILL'
+[ERROR] [gzserver-1]: process[gzserver-1] failed to terminate '10.0' seconds after receiving 'SIGTERM', escalating to 'SIGKILL'
+[INFO] [static_transform_publisher-17]: sending signal 'SIGKILL' to process[static_transform_publisher-17]
+[INFO] [move_group-15]: sending signal 'SIGKILL' to process[move_group-15]
+[INFO] [spawn_entity.py-12]: sending signal 'SIGKILL' to process[spawn_entity.py-12]
+[ERROR] [static_transform_publisher-17]: process has died [pid 1087, exit code -9, cmd '/opt/ros/humble/lib/tf2_ros/static_transform_publisher 0.66 0 0 0 0 0 1 world right_summit_odom --ros-args -r __node:=static_transform_publisher -r __ns:=/right'].
+[INFO] [move_group-8]: sending signal 'SIGKILL' to process[move_group-8]
+[ERROR] [move_group-15]: process has died [pid 1082, exit code -9, cmd '/ros2_ws/install/moveit_ros_move_group/lib/moveit_ros_move_group/move_group --ros-args --params-file /tmp/launch_params_p9xiin7f --params-file /tmp/launch_params_mzb_2y2z --params-file /tmp/launch_params_9frzsaxm --params-file /tmp/launch_params_li2pmbh7'].
+[INFO] [spawn_entity.py-5]: sending signal 'SIGKILL' to process[spawn_entity.py-5]
+[ERROR] [spawn_entity.py-12]: process has died [pid 1076, exit code -9, cmd '/opt/ros/humble/lib/gazebo_ros/spawn_entity.py -entity right_robot -topic /right/robot_description -x 0.66 -y 0 -z 0 -timeout 5 -unpause --ros-args -r __node:=right'].
+[INFO] [rviz2-3]: sending signal 'SIGKILL' to process[rviz2-3]
+[ERROR] [move_group-8]: process has died [pid 1068, exit code -9, cmd '/ros2_ws/install/moveit_ros_move_group/lib/moveit_ros_move_group/move_group --ros-args --params-file /tmp/launch_params_u7na34yb --params-file /tmp/launch_params_scqf0e8o --params-file /tmp/launch_params_4usysa0k --params-file /tmp/launch_params_r81dlcn4'].
+[INFO] [gzserver-1]: sending signal 'SIGKILL' to process[gzserver-1]
+[ERROR] [spawn_entity.py-5]: process has died [pid 1062, exit code -9, cmd '/opt/ros/humble/lib/gazebo_ros/spawn_entity.py -entity left_robot -topic /left/robot_description -x -0.66 -y 0 -z 0 -timeout 5 -unpause --ros-args -r __node:=left'].
+[ERROR] [rviz2-3]: process has died [pid 1058, exit code -9, cmd '/opt/ros/humble/lib/rviz2/rviz2 -d /ros2_ws/install/ur/share/ur/rviz/rviz_config.rviz --ros-args -r __node:=rviz2 --params-file /tmp/launch_params_6oncy3xy --params-file /tmp/launch_params_15riuc4r'].
+[ERROR] [gzserver-1]: process has died [pid 1054, exit code -9, cmd 'gzserver /ros2_ws/install/ur/share/ur/xacro/gazebo.world --physics False -slibgazebo_ros_init.so -slibgazebo_ros_factory.so -slibgazebo_ros_force_system.so'].

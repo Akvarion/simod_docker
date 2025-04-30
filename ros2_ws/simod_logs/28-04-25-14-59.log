@@ -1,0 +1,365 @@
+[INFO] [launch]: All log files can be found below /root/.ros/log/2025-04-28-12-59-06-206427-outlander-Aspire-V3-571G-16403
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [gzserver-1]: process started with pid [16406]
+[INFO] [gzclient-2]: process started with pid [16408]
+[INFO] [rviz2-3]: process started with pid [16410]
+[INFO] [robot_state_publisher-4]: process started with pid [16412]
+[INFO] [spawn_entity.py-5]: process started with pid [16414]
+[INFO] [static_transform_publisher-6]: process started with pid [16416]
+[INFO] [spawner-7]: process started with pid [16418]
+[INFO] [spawner-8]: process started with pid [16431]
+[INFO] [move_group-9]: process started with pid [16441]
+[INFO] [robot_state_publisher-10]: process started with pid [16444]
+[INFO] [spawn_entity.py-11]: process started with pid [16454]
+[INFO] [static_transform_publisher-12]: process started with pid [16457]
+[INFO] [spawner-13]: process started with pid [16461]
+[INFO] [spawner-14]: process started with pid [16472]
+[INFO] [move_group-15]: process started with pid [16481]
+[rviz2-3] QStandardPaths: XDG_RUNTIME_DIR not set, defaulting to '/tmp/runtime-root'
+[robot_state_publisher-4] [INFO] [1745845150.601340065] [left.robot_state_publisher]: got segment left_summit_back_left_wheel_link
+[robot_state_publisher-4] [INFO] [1745845150.601514325] [left.robot_state_publisher]: got segment left_summit_back_right_wheel_link
+[robot_state_publisher-4] [INFO] [1745845150.601540894] [left.robot_state_publisher]: got segment left_summit_base_chapa
+[robot_state_publisher-4] [INFO] [1745845150.601560501] [left.robot_state_publisher]: got segment left_summit_base_docking_contact
+[robot_state_publisher-4] [INFO] [1745845150.601578500] [left.robot_state_publisher]: got segment left_summit_base_footprint
+[robot_state_publisher-4] [INFO] [1745845150.601594532] [left.robot_state_publisher]: got segment left_summit_base_link
+[robot_state_publisher-4] [INFO] [1745845150.601610636] [left.robot_state_publisher]: got segment left_summit_base_logo_front
+[robot_state_publisher-4] [INFO] [1745845150.601625980] [left.robot_state_publisher]: got segment left_summit_base_logo_left
+[robot_state_publisher-4] [INFO] [1745845150.601642042] [left.robot_state_publisher]: got segment left_summit_base_logo_rear
+[robot_state_publisher-4] [INFO] [1745845150.601659324] [left.robot_state_publisher]: got segment left_summit_base_logo_right
+[robot_state_publisher-4] [INFO] [1745845150.601677853] [left.robot_state_publisher]: got segment left_summit_front_laser_base_link
+[robot_state_publisher-4] [INFO] [1745845150.601695626] [left.robot_state_publisher]: got segment left_summit_front_laser_link
+[robot_state_publisher-4] [INFO] [1745845150.601712790] [left.robot_state_publisher]: got segment left_summit_front_left_wheel_link
+[robot_state_publisher-4] [INFO] [1745845150.601729377] [left.robot_state_publisher]: got segment left_summit_front_right_wheel_link
+[robot_state_publisher-4] [INFO] [1745845150.601750063] [left.robot_state_publisher]: got segment left_summit_imu_link
+[robot_state_publisher-4] [INFO] [1745845150.601767555] [left.robot_state_publisher]: got segment left_summit_rear_laser_base_link
+[robot_state_publisher-4] [INFO] [1745845150.601782197] [left.robot_state_publisher]: got segment left_summit_rear_laser_link
+[robot_state_publisher-4] [INFO] [1745845150.601799049] [left.robot_state_publisher]: got segment ur_left_base
+[robot_state_publisher-4] [INFO] [1745845150.601816631] [left.robot_state_publisher]: got segment ur_left_base_link
+[robot_state_publisher-4] [INFO] [1745845150.601835089] [left.robot_state_publisher]: got segment ur_left_base_link_inertia
+[robot_state_publisher-4] [INFO] [1745845150.601852240] [left.robot_state_publisher]: got segment ur_left_finger_left
+[robot_state_publisher-4] [INFO] [1745845150.601869310] [left.robot_state_publisher]: got segment ur_left_finger_right
+[robot_state_publisher-4] [INFO] [1745845150.601887064] [left.robot_state_publisher]: got segment ur_left_finger_tip
+[robot_state_publisher-4] [INFO] [1745845150.601904400] [left.robot_state_publisher]: got segment ur_left_flange
+[robot_state_publisher-4] [INFO] [1745845150.601921301] [left.robot_state_publisher]: got segment ur_left_forearm_link
+[robot_state_publisher-4] [INFO] [1745845150.601939616] [left.robot_state_publisher]: got segment ur_left_ft_frame
+[robot_state_publisher-4] [INFO] [1745845150.601959084] [left.robot_state_publisher]: got segment ur_left_robotiq_hand
+[robot_state_publisher-4] [INFO] [1745845150.601978005] [left.robot_state_publisher]: got segment ur_left_shoulder_link
+[robot_state_publisher-4] [INFO] [1745845150.601996496] [left.robot_state_publisher]: got segment ur_left_tool0
+[robot_state_publisher-4] [INFO] [1745845150.602016581] [left.robot_state_publisher]: got segment ur_left_upper_arm_link
+[robot_state_publisher-4] [INFO] [1745845150.602032363] [left.robot_state_publisher]: got segment ur_left_wrist_1_link
+[robot_state_publisher-4] [INFO] [1745845150.602049071] [left.robot_state_publisher]: got segment ur_left_wrist_2_link
+[robot_state_publisher-4] [INFO] [1745845150.602067232] [left.robot_state_publisher]: got segment ur_left_wrist_3_link
+[static_transform_publisher-6] [WARN] [1745845150.520150100] []: Old-style arguments are deprecated; see --help for new-style arguments
+[static_transform_publisher-6] [INFO] [1745845150.555202477] [left.static_transform_publisher]: Spinning until stopped - publishing transform
+[static_transform_publisher-6] translation: ('-0.660000', '0.000000', '0.000000')
+[static_transform_publisher-6] rotation: ('0.000000', '0.000000', '0.000000', '1.000000')
+[static_transform_publisher-6] from 'world' to 'left_summit_odom'
+[static_transform_publisher-12] [WARN] [1745845150.673189680] []: Old-style arguments are deprecated; see --help for new-style arguments
+[robot_state_publisher-10] [INFO] [1745845150.752055391] [right.robot_state_publisher]: got segment right_summit_back_left_wheel_link
+[robot_state_publisher-10] [INFO] [1745845150.752346658] [right.robot_state_publisher]: got segment right_summit_back_right_wheel_link
+[robot_state_publisher-10] [INFO] [1745845150.752378824] [right.robot_state_publisher]: got segment right_summit_base_chapa
+[robot_state_publisher-10] [INFO] [1745845150.752398433] [right.robot_state_publisher]: got segment right_summit_base_docking_contact
+[robot_state_publisher-10] [INFO] [1745845150.752416613] [right.robot_state_publisher]: got segment right_summit_base_footprint
+[robot_state_publisher-10] [INFO] [1745845150.752433953] [right.robot_state_publisher]: got segment right_summit_base_link
+[robot_state_publisher-10] [INFO] [1745845150.752452610] [right.robot_state_publisher]: got segment right_summit_base_logo_front
+[robot_state_publisher-10] [INFO] [1745845150.752470248] [right.robot_state_publisher]: got segment right_summit_base_logo_left
+[robot_state_publisher-10] [INFO] [1745845150.752487986] [right.robot_state_publisher]: got segment right_summit_base_logo_rear
+[robot_state_publisher-10] [INFO] [1745845150.752504961] [right.robot_state_publisher]: got segment right_summit_base_logo_right
+[robot_state_publisher-10] [INFO] [1745845150.752523323] [right.robot_state_publisher]: got segment right_summit_front_laser_base_link
+[robot_state_publisher-10] [INFO] [1745845150.752542906] [right.robot_state_publisher]: got segment right_summit_front_laser_link
+[robot_state_publisher-10] [INFO] [1745845150.752562002] [right.robot_state_publisher]: got segment right_summit_front_left_wheel_link
+[robot_state_publisher-10] [INFO] [1745845150.752579615] [right.robot_state_publisher]: got segment right_summit_front_right_wheel_link
+[robot_state_publisher-10] [INFO] [1745845150.752596878] [right.robot_state_publisher]: got segment right_summit_imu_link
+[robot_state_publisher-10] [INFO] [1745845150.752614174] [right.robot_state_publisher]: got segment right_summit_rear_laser_base_link
+[robot_state_publisher-10] [INFO] [1745845150.752631897] [right.robot_state_publisher]: got segment right_summit_rear_laser_link
+[robot_state_publisher-10] [INFO] [1745845150.752648730] [right.robot_state_publisher]: got segment ur_right_base
+[robot_state_publisher-10] [INFO] [1745845150.752666384] [right.robot_state_publisher]: got segment ur_right_base_link
+[robot_state_publisher-10] [INFO] [1745845150.752684673] [right.robot_state_publisher]: got segment ur_right_base_link_inertia
+[robot_state_publisher-10] [INFO] [1745845150.752704261] [right.robot_state_publisher]: got segment ur_right_finger_left
+[robot_state_publisher-10] [INFO] [1745845150.752723060] [right.robot_state_publisher]: got segment ur_right_finger_right
+[robot_state_publisher-10] [INFO] [1745845150.752742596] [right.robot_state_publisher]: got segment ur_right_finger_tip
+[robot_state_publisher-10] [INFO] [1745845150.752761363] [right.robot_state_publisher]: got segment ur_right_flange
+[robot_state_publisher-10] [INFO] [1745845150.752780424] [right.robot_state_publisher]: got segment ur_right_forearm_link
+[robot_state_publisher-10] [INFO] [1745845150.752798528] [right.robot_state_publisher]: got segment ur_right_ft_frame
+[robot_state_publisher-10] [INFO] [1745845150.752819541] [right.robot_state_publisher]: got segment ur_right_robotiq_hand
+[robot_state_publisher-10] [INFO] [1745845150.752837944] [right.robot_state_publisher]: got segment ur_right_shoulder_link
+[robot_state_publisher-10] [INFO] [1745845150.752862456] [right.robot_state_publisher]: got segment ur_right_tool0
+[robot_state_publisher-10] [INFO] [1745845150.752891189] [right.robot_state_publisher]: got segment ur_right_upper_arm_link
+[robot_state_publisher-10] [INFO] [1745845150.752920382] [right.robot_state_publisher]: got segment ur_right_wrist_1_link
+[robot_state_publisher-10] [INFO] [1745845150.752949603] [right.robot_state_publisher]: got segment ur_right_wrist_2_link
+[robot_state_publisher-10] [INFO] [1745845150.752979390] [right.robot_state_publisher]: got segment ur_right_wrist_3_link
+[static_transform_publisher-12] [INFO] [1745845150.805236021] [right.static_transform_publisher]: Spinning until stopped - publishing transform
+[static_transform_publisher-12] translation: ('0.660000', '0.000000', '0.000000')
+[static_transform_publisher-12] rotation: ('0.000000', '0.000000', '0.000000', '1.000000')
+[static_transform_publisher-12] from 'world' to 'right_summit_odom'
+[move_group-9] Error:   Could not parse the SRDF XML File. Error=XML_ERROR_PARSING_TEXT ErrorID=8 (0x8) Line number=1
+[move_group-9]          at line 732 in /ros2_ws/src/srdfdom/src/model.cpp
+[move_group-9] [ERROR] [1745845150.933709831] [moveit_rdf_loader.rdf_loader]: Unable to parse SRDF
+[move_group-15] Error:   Could not parse the SRDF XML File. Error=XML_ERROR_PARSING_TEXT ErrorID=8 (0x8) Line number=1
+[move_group-15]          at line 732 in /ros2_ws/src/srdfdom/src/model.cpp
+[move_group-15] [ERROR] [1745845151.036051679] [moveit_rdf_loader.rdf_loader]: Unable to parse SRDF
+[move_group-9] [ERROR] [1745845151.046911774] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Robot model not loaded
+[move_group-9] [ERROR] [1745845151.050854928] [moveit.ros_planning_interface.moveit_cpp]: Planning scene not configured
+[move_group-9] [FATAL] [1745845151.050913255] [moveit.ros_planning_interface.moveit_cpp]: Unable to configure planning scene monitor
+[move_group-9] terminate called after throwing an instance of 'std::runtime_error'
+[move_group-9]   what():  Unable to configure planning scene monitor
+[move_group-9] Stack trace (most recent call last):
+[move_group-9] #12   Object "", at 0xffffffffffffffff, in 
+[move_group-9] #11   Object "/ros2_ws/build/moveit_ros_move_group/move_group", at 0x5631b40d4eb4, in _start
+[move_group-9] #10   Object "/usr/lib/x86_64-linux-gnu/libc.so.6", at 0x7f441f091e3f, in __libc_start_main
+[move_group-9] #9    Object "/usr/lib/x86_64-linux-gnu/libc.so.6", at 0x7f441f091d8f, in 
+[move_group-9] #8    Object "/ros2_ws/build/moveit_ros_move_group/move_group", at 0x5631b40d41f3, in main
+[move_group-9] #7    Object "/ros2_ws/install/moveit_ros_planning/lib/libmoveit_cpp.so.2.5.8", at 0x7f441fa92301, in moveit_cpp::MoveItCpp::MoveItCpp(std::shared_ptr<rclcpp::Node> const&, moveit_cpp::MoveItCpp::Options const&) [clone .cold]
+[move_group-9] #6    Object "/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30", at 0x7f441f35f4d7, in __cxa_throw
+[move_group-9] #5    Object "/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30", at 0x7f441f35f276, in std::terminate()
+[move_group-9] #4    Object "/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30", at 0x7f441f35f20b, in 
+[move_group-9] #3    Object "/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30", at 0x7f441f353b9d, in 
+[move_group-9] #2    Object "/usr/lib/x86_64-linux-gnu/libc.so.6", at 0x7f441f0907f2, in abort
+[move_group-9] #1    Object "/usr/lib/x86_64-linux-gnu/libc.so.6", at 0x7f441f0aa475, in raise
+[move_group-9] #0    Object "/usr/lib/x86_64-linux-gnu/libc.so.6", at 0x7f441f0fe9fc, in pthread_kill
+[move_group-9] Aborted (Signal sent by tkill() 16441 0)
+[move_group-15] [ERROR] [1745845151.118641155] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Robot model not loaded
+[move_group-15] [ERROR] [1745845151.119949646] [moveit.ros_planning_interface.moveit_cpp]: Planning scene not configured
+[move_group-15] [FATAL] [1745845151.120004501] [moveit.ros_planning_interface.moveit_cpp]: Unable to configure planning scene monitor
+[move_group-15] terminate called after throwing an instance of 'std::runtime_error'
+[move_group-15]   what():  Unable to configure planning scene monitor
+[move_group-15] Stack trace (most recent call last):
+[move_group-15] #12   Object "", at 0xffffffffffffffff, in 
+[move_group-15] #11   Object "/ros2_ws/build/moveit_ros_move_group/move_group", at 0x55cb4de9feb4, in _start
+[move_group-15] #10   Object "/usr/lib/x86_64-linux-gnu/libc.so.6", at 0x7f81f309fe3f, in __libc_start_main
+[move_group-15] #9    Object "/usr/lib/x86_64-linux-gnu/libc.so.6", at 0x7f81f309fd8f, in 
+[move_group-15] #8    Object "/ros2_ws/build/moveit_ros_move_group/move_group", at 0x55cb4de9f1f3, in main
+[move_group-15] #7    Object "/ros2_ws/install/moveit_ros_planning/lib/libmoveit_cpp.so.2.5.8", at 0x7f81f3aa0301, in moveit_cpp::MoveItCpp::MoveItCpp(std::shared_ptr<rclcpp::Node> const&, moveit_cpp::MoveItCpp::Options const&) [clone .cold]
+[move_group-15] #6    Object "/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30", at 0x7f81f336d4d7, in __cxa_throw
+[move_group-15] #5    Object "/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30", at 0x7f81f336d276, in std::terminate()
+[move_group-15] #4    Object "/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30", at 0x7f81f336d20b, in 
+[move_group-15] #3    Object "/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30", at 0x7f81f3361b9d, in 
+[move_group-15] #2    Object "/usr/lib/x86_64-linux-gnu/libc.so.6", at 0x7f81f309e7f2, in abort
+[move_group-15] #1    Object "/usr/lib/x86_64-linux-gnu/libc.so.6", at 0x7f81f30b8475, in raise
+[move_group-15] #0    Object "/usr/lib/x86_64-linux-gnu/libc.so.6", at 0x7f81f310c9fc, in pthread_kill
+[move_group-15] Aborted (Signal sent by tkill() 16481 0)
+[spawn_entity.py-11] [INFO] [1745845151.515042015] [right]: Spawn Entity started
+[spawn_entity.py-11] [INFO] [1745845151.516125505] [right]: Loading entity published on topic /right/robot_description
+[spawn_entity.py-11] /opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/qos.py:307: UserWarning: DurabilityPolicy.RMW_QOS_POLICY_DURABILITY_TRANSIENT_LOCAL is deprecated. Use DurabilityPolicy.TRANSIENT_LOCAL instead.
+[spawn_entity.py-11]   warnings.warn(
+[spawn_entity.py-11] [INFO] [1745845151.527565361] [right]: Waiting for entity xml on /right/robot_description
+[spawn_entity.py-5] [INFO] [1745845151.537231261] [left]: Spawn Entity started
+[spawn_entity.py-5] [INFO] [1745845151.538641908] [left]: Loading entity published on topic /left/robot_description
+[spawn_entity.py-5] /opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/qos.py:307: UserWarning: DurabilityPolicy.RMW_QOS_POLICY_DURABILITY_TRANSIENT_LOCAL is deprecated. Use DurabilityPolicy.TRANSIENT_LOCAL instead.
+[spawn_entity.py-5]   warnings.warn(
+[spawn_entity.py-11] [INFO] [1745845151.541240928] [right]: Waiting for service /spawn_entity, timeout = 5
+[spawn_entity.py-11] [INFO] [1745845151.542365833] [right]: Waiting for service /spawn_entity
+[spawn_entity.py-5] [INFO] [1745845151.548705007] [left]: Waiting for entity xml on /left/robot_description
+[spawn_entity.py-5] [INFO] [1745845151.561729462] [left]: Waiting for service /spawn_entity, timeout = 5
+[spawn_entity.py-5] [INFO] [1745845151.562758727] [left]: Waiting for service /spawn_entity
+[spawner-7] [INFO] [1745845151.608883569] [left.spawner_joint_state_broadcaster]: waiting for service /left/controller_manager/list_controllers to become available...
+[spawner-8] [INFO] [1745845151.711055952] [left.spawner_ur_left_joint_group_vel_controller]: waiting for service /left/controller_manager/list_controllers to become available...
+[spawner-13] [INFO] [1745845151.782478142] [right.spawner_joint_state_broadcaster]: waiting for service /right/controller_manager/list_controllers to become available...
+[spawner-14] [INFO] [1745845151.845830304] [right.spawner_ur_right_joint_group_vel_controller]: waiting for service /right/controller_manager/list_controllers to become available...
+[rviz2-3] [INFO] [1745845152.009792924] [rviz2]: Stereo is NOT SUPPORTED
+[rviz2-3] [INFO] [1745845152.010110063] [rviz2]: OpenGl version: 4.6 (GLSL 4.6)
+[rviz2-3] [INFO] [1745845152.076401978] [rviz2]: Stereo is NOT SUPPORTED
+[gzserver-1] [WARN] [1745845153.759409831] [rcl]: Found remap rule 'model_states:=model_states'. This syntax is deprecated. Use '--ros-args --remap model_states:=model_states' instead.
+[gzserver-1] [WARN] [1745845153.759783482] [rcl]: Found remap rule 'link_states:=link_states'. This syntax is deprecated. Use '--ros-args --remap link_states:=link_states' instead.
+[gzserver-1] [INFO] [1745845153.777127292] [state.gazebo_ros_state]: Publishing states of gazebo models at [/state/model_states]
+[gzserver-1] [INFO] [1745845153.778577930] [state.gazebo_ros_state]: Publishing states of gazebo links at [/state/link_states]
+[spawn_entity.py-5] [INFO] [1745845153.827391532] [left]: Calling service /spawn_entity
+[gzserver-1] [INFO] [1745845154.749724417] [left_summit_imu_imu_plugin]: <initial_orientation_as_reference> is unset, using default value of false to comply with REP 145 (world as orientation reference)
+[spawn_entity.py-11] [INFO] [1745845154.810981948] [right]: Calling service /spawn_entity
+[spawn_entity.py-5] [INFO] [1745845155.111205736] [left]: Spawn status: SpawnEntity: Successfully spawned entity [left_robot]
+[spawn_entity.py-5] [INFO] [1745845155.119496968] [left]: Calling service /unpause_physics
+[INFO] [spawn_entity.py-5]: process has finished cleanly [pid 16414]
+[gzserver-1] [INFO] [1745845155.424841940] [left_summit.omni_steering]: Subscribed to [/left_summit/cmd_vel]
+[gzserver-1] [INFO] [1745845155.431711961] [left_summit.omni_steering]: Advertise odometry on [/left_summit/odom]
+[gzserver-1] [INFO] [1745845155.439986592] [left_summit.omni_steering]: Publishing odom transforms between [left_summit_odom] and [left_summit_base_footprint]
+[gzserver-1] [INFO] [1745845155.507652661] [gazebo_ros2_control]: Loading gazebo_ros2_control plugin
+[gzserver-1] [INFO] [1745845155.522353651] [left.left_gazebo_ros2_control]: Starting gazebo_ros2_control plugin in namespace: /left
+[gzserver-1] [INFO] [1745845155.522437549] [left.left_gazebo_ros2_control]: Starting gazebo_ros2_control plugin in ros 2 node: left_gazebo_ros2_control
+[gzserver-1] [INFO] [1745845155.533353506] [left.left_gazebo_ros2_control]: connected to service!! robot_state_publisher
+[gzserver-1] [INFO] [1745845155.539355574] [left.left_gazebo_ros2_control]: Received urdf from param server, parsing...
+[gzserver-1] [INFO] [1745845155.540824822] [left.left_gazebo_ros2_control]: Loading parameter files /ros2_ws/install/ur/share/ur/config/left_controller.yaml
+[gzserver-1] [INFO] [1745845155.552563273] [resource_manager]: Loading hardware 'left_ur' 
+[gzserver-1] [ERROR] [1745845155.552751707] [left.left_gazebo_ros2_control]: Error initializing URDF to resource manager!
+[gzserver-1] [INFO] [1745845155.585218637] [left.left_gazebo_ros2_control]: Loading joint: ur_left_shoulder_pan_joint
+[gzserver-1] [INFO] [1745845155.585761479] [left.left_gazebo_ros2_control]: 	State:
+[gzserver-1] [INFO] [1745845155.585886290] [left.left_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1745845155.586934264] [left.left_gazebo_ros2_control]: 			 found initial value: -1.400000
+[gzserver-1] [INFO] [1745845155.586996658] [left.left_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1745845155.587436894] [left.left_gazebo_ros2_control]: 		 effort
+[gzserver-1] [INFO] [1745845155.587648541] [left.left_gazebo_ros2_control]: 	Command:
+[gzserver-1] [INFO] [1745845155.587689090] [left.left_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1745845155.588880093] [left.left_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1745845155.589683250] [left.left_gazebo_ros2_control]: Loading joint: ur_left_shoulder_lift_joint
+[gzserver-1] [INFO] [1745845155.589746533] [left.left_gazebo_ros2_control]: 	State:
+[gzserver-1] [INFO] [1745845155.589776077] [left.left_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1745845155.589853824] [left.left_gazebo_ros2_control]: 			 found initial value: -1.227838
+[gzserver-1] [INFO] [1745845155.589898223] [left.left_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1745845155.589941639] [left.left_gazebo_ros2_control]: 		 effort
+[gzserver-1] [INFO] [1745845155.589975357] [left.left_gazebo_ros2_control]: 	Command:
+[gzserver-1] [INFO] [1745845155.590007320] [left.left_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1745845155.590101913] [left.left_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1745845155.590155919] [left.left_gazebo_ros2_control]: Loading joint: ur_left_elbow_joint
+[gzserver-1] [INFO] [1745845155.590189111] [left.left_gazebo_ros2_control]: 	State:
+[gzserver-1] [INFO] [1745845155.590218457] [left.left_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1745845155.590249640] [left.left_gazebo_ros2_control]: 			 found initial value: -1.791046
+[gzserver-1] [INFO] [1745845155.590282712] [left.left_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1745845155.590315548] [left.left_gazebo_ros2_control]: 		 effort
+[gzserver-1] [INFO] [1745845155.590508724] [left.left_gazebo_ros2_control]: 	Command:
+[gzserver-1] [INFO] [1745845155.590544289] [left.left_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1745845155.590617733] [left.left_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1745845155.590719831] [left.left_gazebo_ros2_control]: Loading joint: ur_left_wrist_1_joint
+[gzserver-1] [INFO] [1745845155.590765412] [left.left_gazebo_ros2_control]: 	State:
+[gzserver-1] [INFO] [1745845155.590794634] [left.left_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1745845155.590828199] [left.left_gazebo_ros2_control]: 			 found initial value: -1.447073
+[gzserver-1] [INFO] [1745845155.590865193] [left.left_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1745845155.590895555] [left.left_gazebo_ros2_control]: 		 effort
+[gzserver-1] [INFO] [1745845155.590922505] [left.left_gazebo_ros2_control]: 	Command:
+[gzserver-1] [INFO] [1745845155.590950165] [left.left_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1745845155.591014876] [left.left_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1745845155.591067884] [left.left_gazebo_ros2_control]: Loading joint: ur_left_wrist_2_joint
+[gzserver-1] [INFO] [1745845155.591103278] [left.left_gazebo_ros2_control]: 	State:
+[gzserver-1] [INFO] [1745845155.591128496] [left.left_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1745845155.591157985] [left.left_gazebo_ros2_control]: 			 found initial value: 1.900333
+[gzserver-1] [INFO] [1745845155.591193101] [left.left_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1745845155.591228014] [left.left_gazebo_ros2_control]: 		 effort
+[gzserver-1] [INFO] [1745845155.591262239] [left.left_gazebo_ros2_control]: 	Command:
+[gzserver-1] [INFO] [1745845155.591293675] [left.left_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1745845155.591366042] [left.left_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1745845155.591414434] [left.left_gazebo_ros2_control]: Loading joint: ur_left_wrist_3_joint
+[gzserver-1] [INFO] [1745845155.591447077] [left.left_gazebo_ros2_control]: 	State:
+[gzserver-1] [INFO] [1745845155.591470726] [left.left_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1745845155.591498104] [left.left_gazebo_ros2_control]: 			 found initial value: -0.755379
+[gzserver-1] [INFO] [1745845155.591546260] [left.left_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1745845155.591591241] [left.left_gazebo_ros2_control]: 		 effort
+[gzserver-1] [INFO] [1745845155.591621180] [left.left_gazebo_ros2_control]: 	Command:
+[gzserver-1] [INFO] [1745845155.591650024] [left.left_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1745845155.591704991] [left.left_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1745845155.592858080] [resource_manager]: Initialize hardware 'left_ur' 
+[gzserver-1] [INFO] [1745845155.596352746] [resource_manager]: Successful initialization of hardware 'left_ur'
+[gzserver-1] [INFO] [1745845155.596978907] [resource_manager]: 'configure' hardware 'left_ur' 
+[gzserver-1] [INFO] [1745845155.596998800] [resource_manager]: Successful 'configure' of hardware 'left_ur'
+[gzserver-1] [INFO] [1745845155.597014336] [resource_manager]: 'activate' hardware 'left_ur' 
+[gzserver-1] [INFO] [1745845155.597024069] [resource_manager]: Successful 'activate' of hardware 'left_ur'
+[gzserver-1] [INFO] [1745845155.598107411] [left.left_gazebo_ros2_control]: Loading controller_manager
+[gzserver-1] [WARN] [1745845155.662057228] [left.left_gazebo_ros2_control]:  Desired controller update period (0.002 s) is slower than the gazebo simulation period (0.001 s).
+[gzserver-1] [INFO] [1745845155.665697593] [left.left_gazebo_ros2_control]: Loaded gazebo_ros2_control.
+[gzserver-1] [INFO] [1745845155.721660047] [left.controller_manager]: Loading controller 'ur_left_joint_group_vel_controller'
+[spawner-8] [INFO] [1745845155.770097569] [left.spawner_ur_left_joint_group_vel_controller]: [94mLoaded [1mur_left_joint_group_vel_controller[0m
+[gzserver-1] [INFO] [1745845155.774475596] [left.controller_manager]: Configuring controller 'ur_left_joint_group_vel_controller'
+[gzserver-1] [INFO] [1745845155.778836371] [left.ur_left_joint_group_vel_controller]: configure successful
+[gzserver-1] [INFO] [1745845155.787484866] [left.ur_left_joint_group_vel_controller]: activate successful
+[spawner-8] [INFO] [1745845155.791582078] [left.spawner_ur_left_joint_group_vel_controller]: [92mConfigured and activated [1mur_left_joint_group_vel_controller[0m
+[gzserver-1] [INFO] [1745845155.872238919] [left.controller_manager]: Loading controller 'joint_state_broadcaster'
+[INFO] [spawner-8]: process has finished cleanly [pid 16431]
+[gzserver-1] [INFO] [1745845156.466611091] [right_summit_imu_imu_plugin]: <initial_orientation_as_reference> is unset, using default value of false to comply with REP 145 (world as orientation reference)
+[spawn_entity.py-11] [INFO] [1745845156.802030548] [right]: Spawn status: SpawnEntity: Successfully spawned entity [right_robot]
+[spawn_entity.py-11] [INFO] [1745845156.807673667] [right]: Calling service /unpause_physics
+[gzserver-1] [WARN] [1745845156.901746896] [gazebo.rclcpp]: failed to send response to /unpause_physics (timeout): client will not receive response, at ./src/rmw_response.cpp:154, at ./src/rcl/service.c:314
+[gzserver-1] [INFO] [1745845156.975448085] [right_summit.omni_steering]: Subscribed to [/right_summit/cmd_vel]
+[gzserver-1] [INFO] [1745845156.976515881] [right_summit.omni_steering]: Advertise odometry on [/right_summit/odom]
+[gzserver-1] [INFO] [1745845156.981740263] [right_summit.omni_steering]: Publishing odom transforms between [right_summit_odom] and [right_summit_base_footprint]
+[gzserver-1] [INFO] [1745845156.982159542] [gazebo_ros2_control]: Loading gazebo_ros2_control plugin
+[gzserver-1] [WARN] [1745845157.002618214] [gazebo.rclcpp]: failed to send response to /unpause_physics (timeout): client will not receive response, at ./src/rmw_response.cpp:154, at ./src/rcl/service.c:314
+[gzserver-1] [INFO] [1745845157.003369139] [right.right_gazebo_ros2_control]: Starting gazebo_ros2_control plugin in namespace: /right
+[gzserver-1] [INFO] [1745845157.003428293] [right.right_gazebo_ros2_control]: Starting gazebo_ros2_control plugin in ros 2 node: right_gazebo_ros2_control
+[INFO] [spawn_entity.py-11]: process has finished cleanly [pid 16454]
+[gzserver-1] [INFO] [1745845157.022386936] [right.right_gazebo_ros2_control]: connected to service!! robot_state_publisher
+[gzserver-1] [INFO] [1745845157.025504315] [right.right_gazebo_ros2_control]: Received urdf from param server, parsing...
+[gzserver-1] [INFO] [1745845157.028292825] [right.right_gazebo_ros2_control]: Loading parameter files /ros2_ws/install/ur/share/ur/config/right_controller.yaml
+[gzserver-1] [INFO] [1745845157.040436196] [resource_manager]: Loading hardware 'right_ur' 
+[gzserver-1] [ERROR] [1745845157.040542951] [right.right_gazebo_ros2_control]: Error initializing URDF to resource manager!
+[gzserver-1] [INFO] [1745845157.045722785] [right.right_gazebo_ros2_control]: Loading joint: ur_right_shoulder_pan_joint
+[gzserver-1] [INFO] [1745845157.045836007] [right.right_gazebo_ros2_control]: 	State:
+[gzserver-1] [INFO] [1745845157.045870595] [right.right_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1745845157.045927628] [right.right_gazebo_ros2_control]: 			 found initial value: -1.300000
+[gzserver-1] [INFO] [1745845157.045974434] [right.right_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1745845157.046014269] [right.right_gazebo_ros2_control]: 		 effort
+[gzserver-1] [INFO] [1745845157.046047249] [right.right_gazebo_ros2_control]: 	Command:
+[gzserver-1] [INFO] [1745845157.046076209] [right.right_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1745845157.046206267] [right.right_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1745845157.046270079] [right.right_gazebo_ros2_control]: Loading joint: ur_right_shoulder_lift_joint
+[gzserver-1] [INFO] [1745845157.046307920] [right.right_gazebo_ros2_control]: 	State:
+[gzserver-1] [INFO] [1745845157.046336005] [right.right_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1745845157.046368291] [right.right_gazebo_ros2_control]: 			 found initial value: -0.800000
+[gzserver-1] [INFO] [1745845157.046403748] [right.right_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1745845157.046438549] [right.right_gazebo_ros2_control]: 		 effort
+[gzserver-1] [INFO] [1745845157.046471522] [right.right_gazebo_ros2_control]: 	Command:
+[gzserver-1] [INFO] [1745845157.046502171] [right.right_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1745845157.046565790] [right.right_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1745845157.046614931] [right.right_gazebo_ros2_control]: Loading joint: ur_right_elbow_joint
+[gzserver-1] [INFO] [1745845157.046650025] [right.right_gazebo_ros2_control]: 	State:
+[gzserver-1] [INFO] [1745845157.046678615] [right.right_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1745845157.046709696] [right.right_gazebo_ros2_control]: 			 found initial value: -1.800000
+[gzserver-1] [INFO] [1745845157.046744913] [right.right_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1745845157.046777144] [right.right_gazebo_ros2_control]: 		 effort
+[gzserver-1] [INFO] [1745845157.046839755] [right.right_gazebo_ros2_control]: 	Command:
+[gzserver-1] [INFO] [1745845157.046868744] [right.right_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1745845157.046938788] [right.right_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1745845157.046986556] [right.right_gazebo_ros2_control]: Loading joint: ur_right_wrist_1_joint
+[gzserver-1] [INFO] [1745845157.047014540] [right.right_gazebo_ros2_control]: 	State:
+[gzserver-1] [INFO] [1745845157.047044015] [right.right_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1745845157.047074574] [right.right_gazebo_ros2_control]: 			 found initial value: -1.570000
+[gzserver-1] [INFO] [1745845157.047109030] [right.right_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1745845157.047138756] [right.right_gazebo_ros2_control]: 		 effort
+[gzserver-1] [INFO] [1745845157.047170445] [right.right_gazebo_ros2_control]: 	Command:
+[gzserver-1] [INFO] [1745845157.047255313] [right.right_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1745845157.047323090] [right.right_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1745845157.047378428] [right.right_gazebo_ros2_control]: Loading joint: ur_right_wrist_2_joint
+[gzserver-1] [INFO] [1745845157.047414909] [right.right_gazebo_ros2_control]: 	State:
+[gzserver-1] [INFO] [1745845157.047447249] [right.right_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1745845157.047476769] [right.right_gazebo_ros2_control]: 			 found initial value: 1.638000
+[gzserver-1] [INFO] [1745845157.047511115] [right.right_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1745845157.047566154] [right.right_gazebo_ros2_control]: 		 effort
+[gzserver-1] [INFO] [1745845157.047596191] [right.right_gazebo_ros2_control]: 	Command:
+[gzserver-1] [INFO] [1745845157.047619527] [right.right_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1745845157.047676695] [right.right_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1745845157.047723099] [right.right_gazebo_ros2_control]: Loading joint: ur_right_wrist_3_joint
+[gzserver-1] [INFO] [1745845157.047758579] [right.right_gazebo_ros2_control]: 	State:
+[gzserver-1] [INFO] [1745845157.047788211] [right.right_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1745845157.047817493] [right.right_gazebo_ros2_control]: 			 found initial value: 0.000000
+[gzserver-1] [INFO] [1745845157.047850020] [right.right_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1745845157.047895013] [right.right_gazebo_ros2_control]: 		 effort
+[gzserver-1] [INFO] [1745845157.047929696] [right.right_gazebo_ros2_control]: 	Command:
+[gzserver-1] [INFO] [1745845157.047960608] [right.right_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1745845157.048014945] [right.right_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1745845157.048093654] [resource_manager]: Initialize hardware 'right_ur' 
+[gzserver-1] [INFO] [1745845157.048202565] [resource_manager]: Successful initialization of hardware 'right_ur'
+[gzserver-1] [INFO] [1745845157.048298008] [resource_manager]: 'configure' hardware 'right_ur' 
+[gzserver-1] [INFO] [1745845157.048325923] [resource_manager]: Successful 'configure' of hardware 'right_ur'
+[gzserver-1] [INFO] [1745845157.048359193] [resource_manager]: 'activate' hardware 'right_ur' 
+[gzserver-1] [INFO] [1745845157.048380659] [resource_manager]: Successful 'activate' of hardware 'right_ur'
+[gzserver-1] [INFO] [1745845157.048509988] [right.right_gazebo_ros2_control]: Loading controller_manager
+[gzserver-1] [WARN] [1745845157.130549125] [right.right_gazebo_ros2_control]:  Desired controller update period (0.002 s) is slower than the gazebo simulation period (0.001 s).
+[gzserver-1] [INFO] [1745845157.132676560] [right.right_gazebo_ros2_control]: Loaded gazebo_ros2_control.
+[gzserver-1] [INFO] [1745845157.140728198] [left.controller_manager]: Configuring controller 'joint_state_broadcaster'
+[gzserver-1] [INFO] [1745845157.141200304] [left.joint_state_broadcaster]: 'joints' or 'interfaces' parameter is empty. All available state interfaces will be published
+[spawner-7] [INFO] [1745845157.135721303] [left.spawner_joint_state_broadcaster]: [94mLoaded [1mjoint_state_broadcaster[0m
+[spawner-7] [INFO] [1745845157.182666505] [left.spawner_joint_state_broadcaster]: [92mConfigured and activated [1mjoint_state_broadcaster[0m
+[gzserver-1] [INFO] [1745845157.295942788] [right.controller_manager]: Loading controller 'joint_state_broadcaster'
+[spawner-13] [INFO] [1745845157.336969415] [right.spawner_joint_state_broadcaster]: [94mLoaded [1mjoint_state_broadcaster[0m
+[gzserver-1] [INFO] [1745845157.340070032] [right.controller_manager]: Configuring controller 'joint_state_broadcaster'
+[gzserver-1] [INFO] [1745845157.340207150] [right.joint_state_broadcaster]: 'joints' or 'interfaces' parameter is empty. All available state interfaces will be published
+[spawner-13] [INFO] [1745845157.356235908] [right.spawner_joint_state_broadcaster]: [92mConfigured and activated [1mjoint_state_broadcaster[0m
+[gzserver-1] [INFO] [1745845157.359267668] [right.controller_manager]: Loading controller 'ur_right_joint_group_vel_controller'
+[INFO] [spawner-7]: process has finished cleanly [pid 16418]
+[spawner-14] [INFO] [1745845157.421833438] [right.spawner_ur_right_joint_group_vel_controller]: [94mLoaded [1mur_right_joint_group_vel_controller[0m
+[gzserver-1] [INFO] [1745845157.426475975] [right.controller_manager]: Configuring controller 'ur_right_joint_group_vel_controller'
+[gzserver-1] [INFO] [1745845157.428508027] [right.ur_right_joint_group_vel_controller]: configure successful
+[gzserver-1] [INFO] [1745845157.443915961] [right.ur_right_joint_group_vel_controller]: activate successful
+[spawner-14] [INFO] [1745845157.454409505] [right.spawner_ur_right_joint_group_vel_controller]: [92mConfigured and activated [1mur_right_joint_group_vel_controller[0m
+[INFO] [spawner-13]: process has finished cleanly [pid 16461]
+[INFO] [spawner-14]: process has finished cleanly [pid 16472]
+[INFO] [rviz2-3]: process has finished cleanly [pid 16410]
+[INFO] [gzclient-2]: process has finished cleanly [pid 16408]
+[WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+[static_transform_publisher-6] [INFO] [1745845175.960780354] [rclcpp]: signal_handler(signum=2)
+[robot_state_publisher-4] [INFO] [1745845175.960791952] [rclcpp]: signal_handler(signum=2)
+[static_transform_publisher-12] [INFO] [1745845175.960769703] [rclcpp]: signal_handler(signum=2)
+[robot_state_publisher-10] [INFO] [1745845175.960903185] [rclcpp]: signal_handler(signum=2)
+[INFO] [static_transform_publisher-6]: process has finished cleanly [pid 16416]
+[INFO] [static_transform_publisher-12]: process has finished cleanly [pid 16457]
+[INFO] [robot_state_publisher-10]: process has finished cleanly [pid 16444]
+[INFO] [robot_state_publisher-4]: process has finished cleanly [pid 16412]
+[INFO] [gzserver-1]: process has finished cleanly [pid 16406]
+[ERROR] [move_group-9]: process has died [pid 16441, exit code -6, cmd '/ros2_ws/install/moveit_ros_move_group/lib/moveit_ros_move_group/move_group --ros-args --params-file /tmp/launch_params_d2u2q11q --params-file /tmp/launch_params_9i2_py0r --params-file /tmp/launch_params_sds2_49w --params-file /tmp/launch_params_u5yiazv3 --params-file /tmp/launch_params_a4qr0c1t'].
+[ERROR] [move_group-15]: process has died [pid 16481, exit code -6, cmd '/ros2_ws/install/moveit_ros_move_group/lib/moveit_ros_move_group/move_group --ros-args --params-file /tmp/launch_params_sjlzeij2 --params-file /tmp/launch_params_359pfpt6 --params-file /tmp/launch_params_htrosqjo --params-file /tmp/launch_params_fh3oobxn --params-file /tmp/launch_params_8t_8zddm'].

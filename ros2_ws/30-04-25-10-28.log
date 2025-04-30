@@ -1,0 +1,414 @@
+[INFO] [launch]: All log files can be found below /root/.ros/log/2025-04-30-08-27-25-426260-outlander-Aspire-V3-571G-1166
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [gzserver-1]: process started with pid [1169]
+[INFO] [gzclient-2]: process started with pid [1171]
+[INFO] [rviz2-3]: process started with pid [1173]
+[INFO] [robot_state_publisher-4]: process started with pid [1175]
+[INFO] [spawn_entity.py-5]: process started with pid [1177]
+[INFO] [static_transform_publisher-6]: process started with pid [1179]
+[INFO] [spawner-7]: process started with pid [1181]
+[INFO] [spawner-8]: process started with pid [1183]
+[INFO] [move_group-9]: process started with pid [1185]
+[INFO] [robot_state_publisher-10]: process started with pid [1187]
+[INFO] [spawn_entity.py-11]: process started with pid [1189]
+[INFO] [static_transform_publisher-12]: process started with pid [1191]
+[INFO] [spawner-13]: process started with pid [1193]
+[INFO] [spawner-14]: process started with pid [1198]
+[INFO] [move_group-15]: process started with pid [1207]
+[static_transform_publisher-6] [WARN] [1746001649.591863572] []: Old-style arguments are deprecated; see --help for new-style arguments
+[static_transform_publisher-12] [WARN] [1746001649.653023364] []: Old-style arguments are deprecated; see --help for new-style arguments
+[static_transform_publisher-6] [INFO] [1746001649.691192710] [left.static_transform_publisher]: Spinning until stopped - publishing transform
+[static_transform_publisher-6] translation: ('-0.660000', '0.000000', '0.000000')
+[static_transform_publisher-6] rotation: ('0.000000', '0.000000', '0.000000', '1.000000')
+[static_transform_publisher-6] from 'world' to 'left_summit_odom'
+[robot_state_publisher-10] [INFO] [1746001649.696593140] [right.robot_state_publisher]: got segment right_summit_back_left_wheel_link
+[robot_state_publisher-10] [INFO] [1746001649.698251239] [right.robot_state_publisher]: got segment right_summit_back_right_wheel_link
+[static_transform_publisher-12] [INFO] [1746001649.699192818] [right.static_transform_publisher]: Spinning until stopped - publishing transform
+[static_transform_publisher-12] translation: ('0.660000', '0.000000', '0.000000')
+[static_transform_publisher-12] rotation: ('0.000000', '0.000000', '0.000000', '1.000000')
+[static_transform_publisher-12] from 'world' to 'right_summit_odom'
+[robot_state_publisher-10] [INFO] [1746001649.701511429] [right.robot_state_publisher]: got segment right_summit_base_chapa
+[robot_state_publisher-10] [INFO] [1746001649.702627531] [right.robot_state_publisher]: got segment right_summit_base_docking_contact
+[robot_state_publisher-10] [INFO] [1746001649.703678481] [right.robot_state_publisher]: got segment right_summit_base_footprint
+[robot_state_publisher-10] [INFO] [1746001649.704568816] [right.robot_state_publisher]: got segment right_summit_base_link
+[robot_state_publisher-10] [INFO] [1746001649.704596189] [right.robot_state_publisher]: got segment right_summit_base_logo_front
+[robot_state_publisher-10] [INFO] [1746001649.704616641] [right.robot_state_publisher]: got segment right_summit_base_logo_left
+[robot_state_publisher-10] [INFO] [1746001649.704637365] [right.robot_state_publisher]: got segment right_summit_base_logo_rear
+[robot_state_publisher-10] [INFO] [1746001649.704657686] [right.robot_state_publisher]: got segment right_summit_base_logo_right
+[robot_state_publisher-10] [INFO] [1746001649.704675893] [right.robot_state_publisher]: got segment right_summit_front_laser_base_link
+[robot_state_publisher-10] [INFO] [1746001649.704694490] [right.robot_state_publisher]: got segment right_summit_front_laser_link
+[robot_state_publisher-10] [INFO] [1746001649.704712091] [right.robot_state_publisher]: got segment right_summit_front_left_wheel_link
+[robot_state_publisher-10] [INFO] [1746001649.704731251] [right.robot_state_publisher]: got segment right_summit_front_right_wheel_link
+[robot_state_publisher-10] [INFO] [1746001649.704751508] [right.robot_state_publisher]: got segment right_summit_imu_link
+[robot_state_publisher-10] [INFO] [1746001649.704769998] [right.robot_state_publisher]: got segment right_summit_rear_laser_base_link
+[robot_state_publisher-10] [INFO] [1746001649.704789981] [right.robot_state_publisher]: got segment right_summit_rear_laser_link
+[robot_state_publisher-10] [INFO] [1746001649.704808908] [right.robot_state_publisher]: got segment ur_right_base
+[robot_state_publisher-10] [INFO] [1746001649.704827489] [right.robot_state_publisher]: got segment ur_right_base_link
+[robot_state_publisher-10] [INFO] [1746001649.704847016] [right.robot_state_publisher]: got segment ur_right_base_link_inertia
+[robot_state_publisher-10] [INFO] [1746001649.704868488] [right.robot_state_publisher]: got segment ur_right_finger_left
+[robot_state_publisher-10] [INFO] [1746001649.704888859] [right.robot_state_publisher]: got segment ur_right_finger_right
+[robot_state_publisher-10] [INFO] [1746001649.704907747] [right.robot_state_publisher]: got segment ur_right_finger_tip
+[robot_state_publisher-10] [INFO] [1746001649.704926472] [right.robot_state_publisher]: got segment ur_right_flange
+[robot_state_publisher-10] [INFO] [1746001649.704943956] [right.robot_state_publisher]: got segment ur_right_forearm_link
+[robot_state_publisher-10] [INFO] [1746001649.704962541] [right.robot_state_publisher]: got segment ur_right_ft_frame
+[robot_state_publisher-10] [INFO] [1746001649.704981348] [right.robot_state_publisher]: got segment ur_right_robotiq_hand
+[robot_state_publisher-10] [INFO] [1746001649.704999776] [right.robot_state_publisher]: got segment ur_right_shoulder_link
+[robot_state_publisher-10] [INFO] [1746001649.705017537] [right.robot_state_publisher]: got segment ur_right_tool0
+[robot_state_publisher-10] [INFO] [1746001649.705035383] [right.robot_state_publisher]: got segment ur_right_upper_arm_link
+[robot_state_publisher-10] [INFO] [1746001649.705053252] [right.robot_state_publisher]: got segment ur_right_wrist_1_link
+[robot_state_publisher-10] [INFO] [1746001649.705069928] [right.robot_state_publisher]: got segment ur_right_wrist_2_link
+[robot_state_publisher-10] [INFO] [1746001649.705087861] [right.robot_state_publisher]: got segment ur_right_wrist_3_link
+[robot_state_publisher-4] [INFO] [1746001649.707506379] [left.robot_state_publisher]: got segment left_summit_back_left_wheel_link
+[robot_state_publisher-4] [INFO] [1746001649.707770015] [left.robot_state_publisher]: got segment left_summit_back_right_wheel_link
+[robot_state_publisher-4] [INFO] [1746001649.707797741] [left.robot_state_publisher]: got segment left_summit_base_chapa
+[robot_state_publisher-4] [INFO] [1746001649.707819699] [left.robot_state_publisher]: got segment left_summit_base_docking_contact
+[robot_state_publisher-4] [INFO] [1746001649.707839638] [left.robot_state_publisher]: got segment left_summit_base_footprint
+[robot_state_publisher-4] [INFO] [1746001649.707857085] [left.robot_state_publisher]: got segment left_summit_base_link
+[robot_state_publisher-4] [INFO] [1746001649.707876252] [left.robot_state_publisher]: got segment left_summit_base_logo_front
+[robot_state_publisher-4] [INFO] [1746001649.707896381] [left.robot_state_publisher]: got segment left_summit_base_logo_left
+[robot_state_publisher-4] [INFO] [1746001649.707915793] [left.robot_state_publisher]: got segment left_summit_base_logo_rear
+[robot_state_publisher-4] [INFO] [1746001649.707933989] [left.robot_state_publisher]: got segment left_summit_base_logo_right
+[robot_state_publisher-4] [INFO] [1746001649.707951611] [left.robot_state_publisher]: got segment left_summit_front_laser_base_link
+[robot_state_publisher-4] [INFO] [1746001649.707969083] [left.robot_state_publisher]: got segment left_summit_front_laser_link
+[robot_state_publisher-4] [INFO] [1746001649.707987461] [left.robot_state_publisher]: got segment left_summit_front_left_wheel_link
+[robot_state_publisher-4] [INFO] [1746001649.708005877] [left.robot_state_publisher]: got segment left_summit_front_right_wheel_link
+[robot_state_publisher-4] [INFO] [1746001649.708024111] [left.robot_state_publisher]: got segment left_summit_imu_link
+[robot_state_publisher-4] [INFO] [1746001649.708041721] [left.robot_state_publisher]: got segment left_summit_rear_laser_base_link
+[robot_state_publisher-4] [INFO] [1746001649.708060009] [left.robot_state_publisher]: got segment left_summit_rear_laser_link
+[robot_state_publisher-4] [INFO] [1746001649.708077510] [left.robot_state_publisher]: got segment ur_left_base
+[robot_state_publisher-4] [INFO] [1746001649.708095953] [left.robot_state_publisher]: got segment ur_left_base_link
+[robot_state_publisher-4] [INFO] [1746001649.708115063] [left.robot_state_publisher]: got segment ur_left_base_link_inertia
+[robot_state_publisher-4] [INFO] [1746001649.708133130] [left.robot_state_publisher]: got segment ur_left_finger_left
+[robot_state_publisher-4] [INFO] [1746001649.708152005] [left.robot_state_publisher]: got segment ur_left_finger_right
+[robot_state_publisher-4] [INFO] [1746001649.708170486] [left.robot_state_publisher]: got segment ur_left_finger_tip
+[robot_state_publisher-4] [INFO] [1746001649.708188458] [left.robot_state_publisher]: got segment ur_left_flange
+[robot_state_publisher-4] [INFO] [1746001649.708207171] [left.robot_state_publisher]: got segment ur_left_forearm_link
+[robot_state_publisher-4] [INFO] [1746001649.708224620] [left.robot_state_publisher]: got segment ur_left_ft_frame
+[robot_state_publisher-4] [INFO] [1746001649.708242788] [left.robot_state_publisher]: got segment ur_left_robotiq_hand
+[robot_state_publisher-4] [INFO] [1746001649.708262820] [left.robot_state_publisher]: got segment ur_left_shoulder_link
+[robot_state_publisher-4] [INFO] [1746001649.708278714] [left.robot_state_publisher]: got segment ur_left_tool0
+[robot_state_publisher-4] [INFO] [1746001649.708295843] [left.robot_state_publisher]: got segment ur_left_upper_arm_link
+[robot_state_publisher-4] [INFO] [1746001649.708313416] [left.robot_state_publisher]: got segment ur_left_wrist_1_link
+[robot_state_publisher-4] [INFO] [1746001649.708330867] [left.robot_state_publisher]: got segment ur_left_wrist_2_link
+[robot_state_publisher-4] [INFO] [1746001649.708347728] [left.robot_state_publisher]: got segment ur_left_wrist_3_link
+[rviz2-3] QStandardPaths: XDG_RUNTIME_DIR not set, defaulting to '/tmp/runtime-root'
+[move_group-15] [INFO] [1746001649.894091753] [moveit_rdf_loader.rdf_loader]: Loaded robot model in 0.0345477 seconds
+[move_group-15] [INFO] [1746001649.894219232] [moveit_robot_model.robot_model]: Loading robot model 'dual'...
+[move_group-15] [WARN] [1746001649.894319156] [moveit_robot_model.robot_model]: Link right_summit_base_footprint has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[move_group-9] [INFO] [1746001649.899262072] [moveit_rdf_loader.rdf_loader]: Loaded robot model in 0.0208041 seconds
+[move_group-9] [INFO] [1746001649.899385794] [moveit_robot_model.robot_model]: Loading robot model 'dual'...
+[move_group-9] [WARN] [1746001649.899473597] [moveit_robot_model.robot_model]: Link left_summit_base_footprint has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[move_group-15] [WARN] [1746001649.904654181] [moveit_robot_model.robot_model]: Link right_summit_base_logo_front has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[move_group-15] [WARN] [1746001649.904718946] [moveit_robot_model.robot_model]: Link right_summit_base_logo_left has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[move_group-15] [WARN] [1746001649.904740662] [moveit_robot_model.robot_model]: Link right_summit_base_logo_rear has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[move_group-15] [WARN] [1746001649.904759412] [moveit_robot_model.robot_model]: Link right_summit_base_logo_right has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[move_group-15] [WARN] [1746001649.904777587] [moveit_robot_model.robot_model]: Link right_summit_base_chapa has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[move_group-9] [WARN] [1746001649.905661983] [moveit_robot_model.robot_model]: Link left_summit_base_logo_front has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[move_group-9] [WARN] [1746001649.905703861] [moveit_robot_model.robot_model]: Link left_summit_base_logo_left has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[move_group-9] [WARN] [1746001649.905723796] [moveit_robot_model.robot_model]: Link left_summit_base_logo_rear has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[move_group-9] [WARN] [1746001649.905742398] [moveit_robot_model.robot_model]: Link left_summit_base_logo_right has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[move_group-9] [WARN] [1746001649.905762220] [moveit_robot_model.robot_model]: Link left_summit_base_chapa has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[move_group-15] [WARN] [1746001649.911853126] [moveit_robot_model.robot_model]: Link right_summit_imu_link has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[move_group-9] [WARN] [1746001649.916191624] [moveit_robot_model.robot_model]: Link left_summit_imu_link has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+[robot_state_publisher-10] [INFO] [1746001649.926583601] [rclcpp]: signal_handler(signum=2)
+[ERROR] [gzclient-2]: process has died [pid 1171, exit code -2, cmd 'gzclient'].
+[ERROR] [gzserver-1]: process has died [pid 1169, exit code -2, cmd 'gzserver /ros2_ws/install/ur/share/ur/xacro/gazebo.world --physics False -slibgazebo_ros_init.so -slibgazebo_ros_factory.so -slibgazebo_ros_force_system.so'].
+[static_transform_publisher-12] [INFO] [1746001649.926583989] [rclcpp]: signal_handler(signum=2)
+[static_transform_publisher-6] [INFO] [1746001649.926659774] [rclcpp]: signal_handler(signum=2)
+[move_group-9] [INFO] [1746001649.926661871] [rclcpp]: signal_handler(signum=2)
+[robot_state_publisher-4] [INFO] [1746001649.926718780] [rclcpp]: signal_handler(signum=2)
+[spawner-13] Traceback (most recent call last):
+[spawner-13]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/controller_manager/controller_manager_services.py", line 35, in <module>
+[spawner-13]     from rclpy.parameter import get_parameter_value
+[spawner-13] ImportError: cannot import name 'get_parameter_value' from 'rclpy.parameter' (/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/parameter.py)
+[spawner-13] 
+[spawner-13] During handling of the above exception, another exception occurred:
+[spawner-13] 
+[spawner-13] Traceback (most recent call last):
+[spawner-13]   File "/opt/ros/humble/lib/controller_manager/spawner", line 33, in <module>
+[spawner-13]     sys.exit(load_entry_point('controller-manager==2.44.0', 'console_scripts', 'spawner')())
+[spawner-13]   File "/opt/ros/humble/lib/controller_manager/spawner", line 25, in importlib_load_entry_point
+[spawner-13]     return next(matches).load()
+[spawner-13]   File "/usr/lib/python3.10/importlib/metadata/__init__.py", line 171, in load
+[spawner-13]     module = import_module(match.group('module'))
+[spawner-13]   File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+[spawner-13]     return _bootstrap._gcd_import(name[level:], package, level)
+[spawner-13]   File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+[spawner-13]   File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+[spawner-13]   File "<frozen importlib._bootstrap>", line 992, in _find_and_load_unlocked
+[spawner-13]   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+[spawner-13]   File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+[spawner-13]   File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+[spawner-13]   File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+[spawner-13]   File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+[spawner-13]   File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+[spawner-13]   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+[spawner-13]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/controller_manager/__init__.py", line 15, in <module>
+[spawner-13]     from .controller_manager_services import (
+[spawner-13]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/controller_manager/controller_manager_services.py", line 37, in <module>
+[spawner-13]     from ros2param.api import get_parameter_value
+[spawner-13]   File "/opt/ros/humble/lib/python3.10/site-packages/ros2param/api/__init__.py", line 26, in <module>
+[spawner-13]     from ros2cli.node.direct import DirectNode
+[spawner-13]   File "/opt/ros/humble/lib/python3.10/site-packages/ros2cli/node/__init__.py", line 14, in <module>
+[spawner-13]     from rclpy.node import HIDDEN_NODE_PREFIX
+[spawner-13]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/node.py", line 75, in <module>
+[spawner-13]     from rclpy.time_source import TimeSource
+[spawner-13]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/time_source.py", line 24, in <module>
+[spawner-13]     import rosgraph_msgs.msg
+[spawner-13]   File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+[spawner-13]   File "<frozen importlib._bootstrap>", line 1002, in _find_and_load_unlocked
+[spawner-13]   File "<frozen importlib._bootstrap>", line 945, in _find_spec
+[spawner-13]   File "<frozen importlib._bootstrap_external>", line 1439, in find_spec
+[spawner-13]   File "<frozen importlib._bootstrap_external>", line 1411, in _get_spec
+[spawner-13]   File "<frozen importlib._bootstrap_external>", line 1544, in find_spec
+[spawner-13]   File "<frozen importlib._bootstrap_external>", line 147, in _path_stat
+[spawner-13] KeyboardInterrupt
+[spawner-8] Traceback (most recent call last):
+[spawner-8]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/controller_manager/controller_manager_services.py", line 35, in <module>
+[spawner-8]     from rclpy.parameter import get_parameter_value
+[spawner-8] ImportError: cannot import name 'get_parameter_value' from 'rclpy.parameter' (/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/parameter.py)
+[spawner-8] 
+[spawner-8] During handling of the above exception, another exception occurred:
+[spawner-8] 
+[spawner-8] Traceback (most recent call last):
+[spawner-8]   File "/opt/ros/humble/lib/controller_manager/spawner", line 33, in <module>
+[spawner-8]     sys.exit(load_entry_point('controller-manager==2.44.0', 'console_scripts', 'spawner')())
+[spawner-8]   File "/opt/ros/humble/lib/controller_manager/spawner", line 25, in importlib_load_entry_point
+[spawner-8]     return next(matches).load()
+[spawner-8]   File "/usr/lib/python3.10/importlib/metadata/__init__.py", line 171, in load
+[spawner-8]     module = import_module(match.group('module'))
+[spawner-8]   File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+[spawner-8]     return _bootstrap._gcd_import(name[level:], package, level)
+[spawner-8]   File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+[spawner-8]   File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+[spawner-8]   File "<frozen importlib._bootstrap>", line 992, in _find_and_load_unlocked
+[spawner-8]   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+[spawner-8]   File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+[spawner-8]   File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+[spawner-8]   File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+[spawner-8]   File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+[spawner-8]   File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+[spawner-8]   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+[spawner-8]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/controller_manager/__init__.py", line 15, in <module>
+[spawner-8]     from .controller_manager_services import (
+[spawner-8]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/controller_manager/controller_manager_services.py", line 37, in <module>
+[spawner-8]     from ros2param.api import get_parameter_value
+[spawner-8]   File "/opt/ros/humble/lib/python3.10/site-packages/ros2param/api/__init__.py", line 26, in <module>
+[spawner-8]     from ros2cli.node.direct import DirectNode
+[spawner-8]   File "/opt/ros/humble/lib/python3.10/site-packages/ros2cli/node/__init__.py", line 14, in <module>
+[spawner-8]     from rclpy.node import HIDDEN_NODE_PREFIX
+[spawner-8]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/node.py", line 75, in <module>
+[spawner-8]     from rclpy.time_source import TimeSource
+[spawner-8]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/time_source.py", line 24, in <module>
+[spawner-8]     import rosgraph_msgs.msg
+[spawner-8]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rosgraph_msgs/msg/__init__.py", line 1, in <module>
+[spawner-8]     from rosgraph_msgs.msg._clock import Clock  # noqa: F401
+[spawner-8]   File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+[spawner-8]   File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+[spawner-8]   File "<frozen importlib._bootstrap>", line 674, in _load_unlocked
+[spawner-8]   File "<frozen importlib._bootstrap>", line 577, in module_from_spec
+[spawner-8]   File "<frozen importlib._bootstrap>", line 555, in _init_module_attrs
+[spawner-8] KeyboardInterrupt
+[spawn_entity.py-5] Traceback (most recent call last):
+[spawn_entity.py-5]   File "/opt/ros/humble/lib/gazebo_ros/spawn_entity.py", line 30, in <module>
+[spawn_entity.py-5]     from geometry_msgs.msg import Pose
+[spawn_entity.py-5]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/geometry_msgs/msg/__init__.py", line 3, in <module>
+[spawn_entity.py-5]     from geometry_msgs.msg._accel_with_covariance import AccelWithCovariance  # noqa: F401
+[spawn_entity.py-5]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/geometry_msgs/msg/_accel_with_covariance.py", line 13, in <module>
+[spawn_entity.py-5]     import numpy  # noqa: E402, I100
+[spawn_entity.py-5]   File "/usr/lib/python3/dist-packages/numpy/__init__.py", line 150, in <module>
+[spawn_entity.py-5]     from . import core
+[spawn_entity.py-5]   File "/usr/lib/python3/dist-packages/numpy/core/__init__.py", line 102, in <module>
+[spawn_entity.py-5]     from . import _internal
+[spawn_entity.py-5]   File "/usr/lib/python3/dist-packages/numpy/core/_internal.py", line 7, in <module>
+[spawn_entity.py-5]     import ast
+[spawn_entity.py-5]   File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+[spawn_entity.py-5]   File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+[spawn_entity.py-5]   File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+[spawn_entity.py-5]   File "<frozen importlib._bootstrap_external>", line 879, in exec_module
+[spawn_entity.py-5]   File "<frozen importlib._bootstrap_external>", line 1012, in get_code
+[spawn_entity.py-5]   File "<frozen importlib._bootstrap_external>", line 672, in _compile_bytecode
+[spawn_entity.py-5] KeyboardInterrupt
+[rviz2-3] [INFO] [1746001649.928128360] [rclcpp]: signal_handler(signum=2)
+[rviz2-3] terminate called after throwing an instance of 'rclcpp::exceptions::RCLError'
+[rviz2-3]   what():  could not create subscription: rcl node's context is invalid, at ./src/rcl/node.c:428
+[ERROR] [spawn_entity.py-11]: process has died [pid 1189, exit code -2, cmd '/opt/ros/humble/lib/gazebo_ros/spawn_entity.py -entity right_robot -topic /right/robot_description -x 0.66 -y 0 -z 0 -timeout 5 -unpause --ros-args -r __node:=right'].
+[move_group-15] [INFO] [1746001649.928297401] [rclcpp]: signal_handler(signum=2)
+[ERROR] [spawn_entity.py-5]: process has died [pid 1177, exit code -2, cmd '/opt/ros/humble/lib/gazebo_ros/spawn_entity.py -entity left_robot -topic /left/robot_description -x -0.66 -y 0 -z 0 -timeout 5 -unpause --ros-args -r __node:=left'].
+[spawn_entity.py-11] Traceback (most recent call last):
+[spawn_entity.py-11]   File "/opt/ros/humble/lib/gazebo_ros/spawn_entity.py", line 30, in <module>
+[spawn_entity.py-11]     from geometry_msgs.msg import Pose
+[spawn_entity.py-11]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/geometry_msgs/msg/__init__.py", line 3, in <module>
+[spawn_entity.py-11]     from geometry_msgs.msg._accel_with_covariance import AccelWithCovariance  # noqa: F401
+[spawn_entity.py-11]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/geometry_msgs/msg/_accel_with_covariance.py", line 13, in <module>
+[spawn_entity.py-11]     import numpy  # noqa: E402, I100
+[spawn_entity.py-11]   File "/usr/lib/python3/dist-packages/numpy/__init__.py", line 150, in <module>
+[spawn_entity.py-11]     from . import core
+[spawn_entity.py-11]   File "/usr/lib/python3/dist-packages/numpy/core/__init__.py", line 101, in <module>
+[spawn_entity.py-11]     from . import _dtype_ctypes
+[spawn_entity.py-11]   File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+[spawn_entity.py-11]   File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+[spawn_entity.py-11]   File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+[spawn_entity.py-11]   File "<frozen importlib._bootstrap_external>", line 879, in exec_module
+[spawn_entity.py-11]   File "<frozen importlib._bootstrap_external>", line 975, in get_code
+[spawn_entity.py-11]   File "<frozen importlib._bootstrap_external>", line 1074, in get_data
+[spawn_entity.py-11] KeyboardInterrupt
+[spawner-7] Traceback (most recent call last):
+[spawner-7]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/controller_manager/controller_manager_services.py", line 35, in <module>
+[spawner-7]     from rclpy.parameter import get_parameter_value
+[spawner-7] ImportError: cannot import name 'get_parameter_value' from 'rclpy.parameter' (/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/parameter.py)
+[spawner-7] 
+[spawner-7] During handling of the above exception, another exception occurred:
+[spawner-7] 
+[spawner-7] Traceback (most recent call last):
+[spawner-7]   File "/opt/ros/humble/lib/controller_manager/spawner", line 33, in <module>
+[spawner-7]     sys.exit(load_entry_point('controller-manager==2.44.0', 'console_scripts', 'spawner')())
+[spawner-7]   File "/opt/ros/humble/lib/controller_manager/spawner", line 25, in importlib_load_entry_point
+[spawner-7]     return next(matches).load()
+[spawner-7]   File "/usr/lib/python3.10/importlib/metadata/__init__.py", line 171, in load
+[spawner-7]     module = import_module(match.group('module'))
+[spawner-7]   File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+[spawner-7]     return _bootstrap._gcd_import(name[level:], package, level)
+[spawner-7]   File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+[spawner-7]   File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+[spawner-7]   File "<frozen importlib._bootstrap>", line 992, in _find_and_load_unlocked
+[spawner-7]   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+[spawner-7]   File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+[spawner-7]   File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+[spawner-7]   File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+[spawner-7]   File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+[spawner-7]   File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+[spawner-7]   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+[spawner-7]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/controller_manager/__init__.py", line 15, in <module>
+[spawner-7]     from .controller_manager_services import (
+[spawner-7]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/controller_manager/controller_manager_services.py", line 37, in <module>
+[spawner-7]     from ros2param.api import get_parameter_value
+[spawner-7]   File "/opt/ros/humble/lib/python3.10/site-packages/ros2param/api/__init__.py", line 26, in <module>
+[spawner-7]     from ros2cli.node.direct import DirectNode
+[spawner-7]   File "/opt/ros/humble/lib/python3.10/site-packages/ros2cli/node/__init__.py", line 14, in <module>
+[spawner-7]     from rclpy.node import HIDDEN_NODE_PREFIX
+[spawner-7]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/node.py", line 75, in <module>
+[spawner-7]     from rclpy.time_source import TimeSource
+[spawner-7]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/time_source.py", line 24, in <module>
+[spawner-7]     import rosgraph_msgs.msg
+[spawner-7]   File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+[spawner-7]   File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+[spawner-7]   File "<frozen importlib._bootstrap>", line 674, in _load_unlocked
+[spawner-7]   File "<frozen importlib._bootstrap>", line 577, in module_from_spec
+[spawner-7]   File "<frozen importlib._bootstrap>", line 556, in _init_module_attrs
+[spawner-7]   File "<frozen importlib._bootstrap>", line 397, in cached
+[spawner-7]   File "<frozen importlib._bootstrap_external>", line 511, in _get_cached
+[spawner-7] KeyboardInterrupt
+[spawner-14] Traceback (most recent call last):
+[spawner-14]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/controller_manager/controller_manager_services.py", line 35, in <module>
+[spawner-14]     from rclpy.parameter import get_parameter_value
+[spawner-14] ImportError: cannot import name 'get_parameter_value' from 'rclpy.parameter' (/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/parameter.py)
+[spawner-14] 
+[spawner-14] During handling of the above exception, another exception occurred:
+[spawner-14] 
+[spawner-14] Traceback (most recent call last):
+[spawner-14]   File "/opt/ros/humble/lib/controller_manager/spawner", line 33, in <module>
+[spawner-14]     sys.exit(load_entry_point('controller-manager==2.44.0', 'console_scripts', 'spawner')())
+[spawner-14]   File "/opt/ros/humble/lib/controller_manager/spawner", line 25, in importlib_load_entry_point
+[spawner-14]     return next(matches).load()
+[spawner-14]   File "/usr/lib/python3.10/importlib/metadata/__init__.py", line 171, in load
+[spawner-14]     module = import_module(match.group('module'))
+[spawner-14]   File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+[spawner-14]     return _bootstrap._gcd_import(name[level:], package, level)
+[spawner-14]   File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+[spawner-14]   File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+[spawner-14]   File "<frozen importlib._bootstrap>", line 992, in _find_and_load_unlocked
+[spawner-14]   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+[spawner-14]   File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+[spawner-14]   File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+[spawner-14]   File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+[spawner-14]   File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+[spawner-14]   File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+[spawner-14]   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+[spawner-14]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/controller_manager/__init__.py", line 15, in <module>
+[spawner-14]     from .controller_manager_services import (
+[spawner-14]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/controller_manager/controller_manager_services.py", line 37, in <module>
+[spawner-14]     from ros2param.api import get_parameter_value
+[spawner-14]   File "/opt/ros/humble/lib/python3.10/site-packages/ros2param/api/__init__.py", line 26, in <module>
+[spawner-14]     from ros2cli.node.direct import DirectNode
+[spawner-14]   File "/opt/ros/humble/lib/python3.10/site-packages/ros2cli/node/__init__.py", line 14, in <module>
+[spawner-14]     from rclpy.node import HIDDEN_NODE_PREFIX
+[spawner-14]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/node.py", line 58, in <module>
+[spawner-14]     from rclpy.executors import Executor
+[spawner-14]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 18, in <module>
+[spawner-14]     import multiprocessing
+[spawner-14]   File "/usr/lib/python3.10/multiprocessing/__init__.py", line 16, in <module>
+[spawner-14]     from . import context
+[spawner-14]   File "/usr/lib/python3.10/multiprocessing/context.py", line 6, in <module>
+[spawner-14]     from . import reduction
+[spawner-14]   File "/usr/lib/python3.10/multiprocessing/reduction.py", line 15, in <module>
+[ERROR] [spawner-8]: process has died [pid 1183, exit code -2, cmd '/opt/ros/humble/lib/controller_manager/spawner ur_left_joint_group_vel_controller -c /left/controller_manager --ros-args -r __ns:=/left'].
+[ERROR] [spawner-14]: process has died [pid 1198, exit code -2, cmd '/opt/ros/humble/lib/controller_manager/spawner ur_right_joint_group_vel_controller -c /right/controller_manager --ros-args -r __ns:=/right'].
+[ERROR] [spawner-13]: process has died [pid 1193, exit code -2, cmd '/opt/ros/humble/lib/controller_manager/spawner joint_state_broadcaster -c /right/controller_manager --ros-args -r __ns:=/right'].
+[spawner-14]     import pickle
+[spawner-14]   File "/usr/lib/python3.10/pickle.py", line 37, in <module>
+[spawner-14]     import _compat_pickle
+[spawner-14]   File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+[spawner-14]   File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+[spawner-14]   File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+[spawner-14]   File "<frozen importlib._bootstrap_external>", line 877, in exec_module
+[spawner-14] KeyboardInterrupt
+[INFO] [static_transform_publisher-12]: process has finished cleanly [pid 1191]
+[INFO] [static_transform_publisher-6]: process has finished cleanly [pid 1179]
+[ERROR] [spawner-7]: process has died [pid 1181, exit code -2, cmd '/opt/ros/humble/lib/controller_manager/spawner joint_state_broadcaster -c /left/controller_manager --ros-args -r __ns:=/left'].
+[INFO] [robot_state_publisher-4]: process has finished cleanly [pid 1175]
+[INFO] [robot_state_publisher-10]: process has finished cleanly [pid 1187]
+[move_group-15] terminate called after throwing an instance of 'rclcpp::exceptions::RCLError'
+[move_group-15]   what():  failed to create guard condition: the given context is not valid, either rcl_init() was not called or rcl_shutdown() was called., at ./src/rcl/guard_condition.c:67
+[move_group-9] terminate called after throwing an instance of 'rclcpp::exceptions::RCLError'
+[move_group-9]   what():  failed to create guard condition: the given context is not valid, either rcl_init() was not called or rcl_shutdown() was called., at ./src/rcl/guard_condition.c:67
+[move_group-15] Stack trace (most recent call last):
+[move_group-9] Stack trace (most recent call last):
+[move_group-15] #20   Object "", at 0xffffffffffffffff, in 
+[move_group-15] #19   Object "/ros2_ws/build/moveit_ros_move_group/move_group", at 0x562d3efceeb4, in _start
+[move_group-9] #20   Object "", at 0xffffffffffffffff, in 
+[move_group-9] #19   Object "/ros2_ws/build/moveit_ros_move_group/move_group", at 0x56093fab6eb4, in _start
+[move_group-15] #18   Object "/usr/lib/x86_64-linux-gnu/libc.so.6", at 0x7f498d95fe3f, in __libc_start_main
+[move_group-15] #17   Object "/usr/lib/x86_64-linux-gnu/libc.so.6", at 0x7f498d95fd8f, in 
+[move_group-15] #16   Object "/ros2_ws/build/moveit_ros_move_group/move_group", at 0x562d3efce1f3, in main
+[move_group-9] #18   Object "/usr/lib/x86_64-linux-gnu/libc.so.6", at 0x7f4c2f8a7e3f, in __libc_start_main
+[move_group-9] #17   Object "/usr/lib/x86_64-linux-gnu/libc.so.6", at 0x7f4c2f8a7d8f, in 
+[move_group-9] #16   Object "/ros2_ws/build/moveit_ros_move_group/move_group", at 0x56093fab61f3, in main
+[move_group-15] #15   Object "/ros2_ws/install/moveit_ros_planning/lib/libmoveit_cpp.so.2.5.8", at 0x7f498e368be4, in moveit_cpp::MoveItCpp::MoveItCpp(std::shared_ptr<rclcpp::Node> const&, moveit_cpp::MoveItCpp::Options const&)
+[move_group-15] #14   Object "/ros2_ws/install/moveit_ros_planning/lib/libmoveit_cpp.so.2.5.8", at 0x7f498e3686cb, in moveit_cpp::MoveItCpp::loadPlanningSceneMonitor(moveit_cpp::MoveItCpp::PlanningSceneMonitorOptions const&)
+[move_group-9] #15   Object "/ros2_ws/install/moveit_ros_planning/lib/libmoveit_cpp.so.2.5.8", at 0x7f4c302aebe4, in moveit_cpp::MoveItCpp::MoveItCpp(std::shared_ptr<rclcpp::Node> const&, moveit_cpp::MoveItCpp::Options const&)
+[move_group-9] #14   Object "/ros2_ws/install/moveit_ros_planning/lib/libmoveit_cpp.so.2.5.8", at 0x7f4c302ae6cb, in moveit_cpp::MoveItCpp::loadPlanningSceneMonitor(moveit_cpp::MoveItCpp::PlanningSceneMonitorOptions const&)
+[move_group-15] #13   Object "/ros2_ws/install/moveit_ros_planning/lib/libmoveit_planning_scene_monitor.so.2.5.8", at 0x7f498e17ed01, in planning_scene_monitor::PlanningSceneMonitor::PlanningSceneMonitor(std::shared_ptr<rclcpp::Node> const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+[move_group-9] #13   Object "/ros2_ws/install/moveit_ros_planning/lib/libmoveit_planning_scene_monitor.so.2.5.8", at 0x7f4c3017ed01, in planning_scene_monitor::PlanningSceneMonitor::PlanningSceneMonitor(std::shared_ptr<rclcpp::Node> const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+[move_group-15] #12   Object "/ros2_ws/install/moveit_ros_planning/lib/libmoveit_planning_scene_monitor.so.2.5.8", at 0x7f498e17ec76, in planning_scene_monitor::PlanningSceneMonitor::PlanningSceneMonitor(std::shared_ptr<rclcpp::Node> const&, std::shared_ptr<planning_scene::PlanningScene> const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+[move_group-9] #12   Object "/ros2_ws/install/moveit_ros_planning/lib/libmoveit_planning_scene_monitor.so.2.5.8", at 0x7f4c3017ec76, in planning_scene_monitor::PlanningSceneMonitor::PlanningSceneMonitor(std::shared_ptr<rclcpp::Node> const&, std::shared_ptr<planning_scene::PlanningScene> const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+[move_group-15] #11   Object "/ros2_ws/install/moveit_ros_planning/lib/libmoveit_planning_scene_monitor.so.2.5.8", at 0x7f498e17dce3, in planning_scene_monitor::PlanningSceneMonitor::PlanningSceneMonitor(std::shared_ptr<rclcpp::Node> const&, std::shared_ptr<planning_scene::PlanningScene> const&, std::shared_ptr<robot_model_loader::RobotModelLoader> const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+[move_group-9] #11   Object "/ros2_ws/install/moveit_ros_planning/lib/libmoveit_planning_scene_monitor.so.2.5.8", at 0x7f4c3017dce3, in planning_scene_monitor::PlanningSceneMonitor::PlanningSceneMonitor(std::shared_ptr<rclcpp::Node> const&, std::shared_ptr<planning_scene::PlanningScene> const&, std::shared_ptr<robot_model_loader::RobotModelLoader> const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+[move_group-9] #10   Object "/opt/ros/humble/lib/librclcpp.so", at 0x7f4c2fe5bd6c, in rclcpp::executors::SingleThreadedExecutor::SingleThreadedExecutor(rclcpp::ExecutorOptions const&)
+[move_group-15] #10   Object "/opt/ros/humble/lib/librclcpp.so", at 0x7f498def5d6c, in rclcpp::executors::SingleThreadedExecutor::SingleThreadedExecutor(rclcpp::ExecutorOptions const&)
+[move_group-15] #9    Object "/opt/ros/humble/lib/librclcpp.so", at 0x7f498def1ff7, in rclcpp::Executor::Executor(rclcpp::ExecutorOptions const&)
+[move_group-15] #8    Object "/opt/ros/humble/lib/librclcpp.so", at 0x7f498df00dcd, in rclcpp::GuardCondition::GuardCondition(std::shared_ptr<rclcpp::Context>, rcl_guard_condition_options_s)
+[move_group-9] #9    Object "/opt/ros/humble/lib/librclcpp.so", at 0x7f4c2fe57ff7, in rclcpp::Executor::Executor(rclcpp::ExecutorOptions const&)
+[move_group-9] #8    Object "/opt/ros/humble/lib/librclcpp.so", at 0x7f4c2fe66dcd, in rclcpp::GuardCondition::GuardCondition(std::shared_ptr<rclcpp::Context>, rcl_guard_condition_options_s)
+[move_group-9] #7    Object "/opt/ros/humble/lib/librclcpp.so", at 0x7f4c2fe51128, in rclcpp::exceptions::throw_from_rcl_error(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, rcutils_error_state_s const*, void (*)())
+[move_group-15] #7    Object "/opt/ros/humble/lib/librclcpp.so", at 0x7f498deeb128, in rclcpp::exceptions::throw_from_rcl_error(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, rcutils_error_state_s const*, void (*)())
+[move_group-15] #6    Object "/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30", at 0x7f498dc2d1fd, in std::rethrow_exception(std::__exception_ptr::exception_ptr)
+[move_group-9] #6    Object "/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30", at 0x7f4c2fb751fd, in std::rethrow_exception(std::__exception_ptr::exception_ptr)
+[move_group-15] #5    Object "/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30", at 0x7f498dc2d276, in std::terminate()
+[move_group-9] #5    Object "/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30", at 0x7f4c2fb75276, in std::terminate()
+[move_group-15] #4    Object "/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30", at 0x7f498dc2d20b, in 
+[move_group-15] #3    Object "/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30", at 0x7f498dc21b9d, in 
+[move_group-9] #4    Object "/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30", at 0x7f4c2fb7520b, in 
+[move_group-9] #3    Object "/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30", at 0x7f4c2fb69b9d, in 
+[move_group-9] #2    Object "/usr/lib/x86_64-linux-gnu/libc.so.6", at 0x7f4c2f8a67f2, in abort
+[move_group-9] #1    Object "/usr/lib/x86_64-linux-gnu/libc.so.6", at 0x7f4c2f8c0475, in raise
+[move_group-15] #2    Object "/usr/lib/x86_64-linux-gnu/libc.so.6", at 0x7f498d95e7f2, in abort
+[move_group-15] #1    Object "/usr/lib/x86_64-linux-gnu/libc.so.6", at 0x7f498d978475, in raise
+[move_group-15] #0    Object "/usr/lib/x86_64-linux-gnu/libc.so.6", at 0x7f498d9cc9fc, in pthread_kill
+[move_group-15] Aborted (Signal sent by tkill() 1207 0)
+[move_group-9] #0    Object "/usr/lib/x86_64-linux-gnu/libc.so.6", at 0x7f4c2f9149fc, in pthread_kill
+[move_group-9] Aborted (Signal sent by tkill() 1185 0)
+[ERROR] [rviz2-3]: process has died [pid 1173, exit code -6, cmd '/opt/ros/humble/lib/rviz2/rviz2 -d /ros2_ws/install/ur/share/ur/rviz/rviz_config.rviz --ros-args -r __node:=rviz2 --params-file /tmp/launch_params_0j6jy5v2 --params-file /tmp/launch_params_sih8nrqk'].
+[ERROR] [move_group-15]: process has died [pid 1207, exit code -6, cmd '/ros2_ws/install/moveit_ros_move_group/lib/moveit_ros_move_group/move_group --ros-args --params-file /tmp/launch_params_exymrtiz --params-file /tmp/launch_params_xesfdin0'].
+[ERROR] [move_group-9]: process has died [pid 1185, exit code -6, cmd '/ros2_ws/install/moveit_ros_move_group/lib/moveit_ros_move_group/move_group --ros-args --params-file /tmp/launch_params_pbo72sxe --params-file /tmp/launch_params_8rewfr6v'].
