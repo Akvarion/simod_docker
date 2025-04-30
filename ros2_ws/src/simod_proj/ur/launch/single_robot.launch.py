@@ -274,9 +274,9 @@ def launch_setup(context, *args, **kwargs):
     )
        
     # planning_context
-    file = open(namespace+'_resolved.urdf.xacro','w')
-    file.write(robot_description_content.perform(context))   
-    file.close()
+    # file = open(namespace+'_resolved.urdf.xacro','w')
+    # file.write(robot_description_content.perform(context))   
+    # file.close()
 
     moveit_config = (
         MoveItConfigsBuilder("dual",package_name=namespace+'_srm_simod_moveit_config')
