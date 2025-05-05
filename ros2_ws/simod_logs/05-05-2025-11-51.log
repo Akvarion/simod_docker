@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "/opt/ros/humble/bin/ros2", line 33, in <module>
+    sys.exit(load_entry_point('ros2cli==0.18.11', 'console_scripts', 'ros2')())
+  File "/opt/ros/humble/lib/python3.10/site-packages/ros2cli/cli.py", line 91, in main
+    rc = extension.main(parser=parser, args=args)
+  File "/opt/ros/humble/lib/python3.10/site-packages/ros2launch/command/launch.py", line 149, in main
+    path = get_share_file_path_from_package(
+  File "/opt/ros/humble/lib/python3.10/site-packages/ros2launch/api/api.py", line 47, in get_share_file_path_from_package
+    package_share_directory = get_package_share_directory(package_name)
+  File "/opt/ros/humble/lib/python3.10/site-packages/ament_index_python/packages.py", line 80, in get_package_share_directory
+    path = os.path.join(get_package_prefix(package_name), 'share', package_name)
+  File "/opt/ros/humble/lib/python3.10/site-packages/ament_index_python/packages.py", line 55, in get_package_prefix
+    raise ValueError(
+ValueError: 'main.launch.py' is not a valid package name

@@ -4,18 +4,21 @@ moveit_controller_manager: moveit_simple_controller_manager/MoveItSimpleControll
 
 moveit_simple_controller_manager:
   controller_names:
-    - base_r_controller
-    - ur_r_controller
+    - ur_right_joint_group_vel_controller
+    - joint_state_broadcaster
 
-  base_r_controller:
-    type: FollowJointTrajectory
+  joint_state_broadcaster:
+    type: joint_state_broadcaster/JointStateBroadcaster
     joints:
-      - right_summit_back_left_wheel_joint
-      - right_summit_back_right_wheel_joint
-      - right_summit_front_left_wheel_joint
-      - right_summit_front_right_wheel_joint
-  ur_r_controller:
-    type: FollowJointTrajectory
+        - ur_right_shoulder_pan_joint
+        - ur_right_shoulder_lift_joint
+        - ur_right_elbow_joint
+        - ur_right_wrist_1_joint
+        - ur_right_wrist_2_joint
+        - ur_right_wrist_3_joint
+
+  ur_right_joint_group_vel_controller:
+    type: velocity_controllers/JointGroupVelocityController
     joints:
       - ur_right_shoulder_pan_joint
       - ur_right_shoulder_lift_joint

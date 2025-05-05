@@ -218,7 +218,15 @@ def launch_setup(context, *args, **kwargs):
         output="log",
         arguments=[(xyz_base.split()[0]+'"').replace('"', ''), ('"'+xyz_base.split()[1]+'"').replace('"', ''), ('"'+xyz_base.split()[2]).replace('"', ''), "0", "0", "0", "1", parent_base, base_prefix+"_odom"],
     )
-    
+
+    joint_state_publisher_node = Node(
+        package="joint_state_publisher",
+        executable="joint_state_publisher",
+        name="joint_state_publisher",
+        namespace=namespace,
+        output="screen",
+        parameters=[{'use_sim_time': True}],
+    )
 
     # Spawn from topic                                                      
     gazebo_spawn_robot_description = Node(
@@ -313,7 +321,8 @@ def launch_setup(context, *args, **kwargs):
         joint_state_broadcaster_spawner,
         velocity_controller,
         run_move_group_node,
-        static_tf_real
+        static_tf_real,
+        joint_state_publisher_node
     ]
 
     

@@ -59,6 +59,12 @@
     <end_effector name="EE_L" parent_link="ur_left_wrist_3_link" group="ur_ee_l" parent_group="ur_l"/>
     <!--VIRTUAL JOINT: Purpose: this element defines a virtual joint between a robot link and an external frame of reference (considered fixed with respect to the robot)-->
     <virtual_joint name="Vjoint_left" type="planar" parent_frame="left_summit_odom" child_link="left_summit_base_footprint"/>
+    <!-- VIRTUAL JOINTS FOR THE MOBILE BASE -->
+    <virtual_joint name="Vjoint_left_back_left_wheel" type="planar" parent_frame="world" child_link="left_summit_back_left_wheel_link" />
+    <virtual_joint name="Vjoint_left_back_right_wheel" type="planar" parent_frame="world" child_link="left_summit_back_right_wheel_link" />
+    <virtual_joint name="Vjoint_left_front_left_wheel" type="planar" parent_frame="world" child_link="left_summit_front_left_wheel_link" />
+    <virtual_joint name="Vjoint_left_front_right_wheel" type="planar" parent_frame="world" child_link="left_summit_front_right_wheel_link" />
+    
     <!--DISABLE COLLISIONS: By default it is assumed that any link of the robot could potentially come into collision with any other link in the robot. This tag disables collision checking between a specified pair of links. -->
     <disable_collisions link1="left_summit_back_left_wheel_link" link2="left_summit_back_right_wheel_link" reason="Never"/>
     <disable_collisions link1="left_summit_back_left_wheel_link" link2="left_summit_base_link" reason="Adjacent"/>
