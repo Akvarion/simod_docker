@@ -218,15 +218,38 @@ def launch_setup(context, *args, **kwargs):
         output="log",
         arguments=[(xyz_base.split()[0]+'"').replace('"', ''), ('"'+xyz_base.split()[1]+'"').replace('"', ''), ('"'+xyz_base.split()[2]).replace('"', ''), "0", "0", "0", "1", parent_base, base_prefix+"_odom"],
     )
-
-    joint_state_publisher_node = Node(
-        package="joint_state_publisher",
-        executable="joint_state_publisher",
-        name="joint_state_publisher",
-        namespace=namespace,
-        output="screen",
-        parameters=[{'use_sim_time': True}],
+    static_tf_wheel_back_left = Node(
+        package="tf2_ros",
+        executable="static_transform_publisher",
+        name=namespace+"_static_transform_publisher_back_left",
+        output="log",
+        arguments=["0.25", "0.15", "0", "0", "0", "0", "1", namespace+"_summit_base_link", namespace+"_summit_back_left_wheel_link"],
     )
+
+    static_tf_wheel_back_right = Node(
+        package="tf2_ros",
+        executable="static_transform_publisher",
+        name=namespace+"_static_transform_publisher_back_right",
+        output="log",
+        arguments=["0.25", "-0.15", "0", "0", "0", "0", "1", namespace+"_summit_base_link", namespace+"_summit_back_right_wheel_link"],
+    )
+
+    static_tf_wheel_front_left = Node(
+        package="tf2_ros",
+        executable="static_transform_publisher",
+        name=namespace+"_static_transform_publisher_front_left",
+        output="log",
+        arguments=["-0.25", "0.15", "0", "0", "0", "0", "1", namespace+"_summit_base_link", namespace+"_summit_front_left_wheel_link"],
+    )
+
+    static_tf_wheel_front_right = Node(
+        package="tf2_ros",
+        executable="static_transform_publisher",
+        name="static_transform_publisher_front_right",
+        output="log",
+        arguments=["-0.25", "-0.15", "0", "0", "0", "0", "1", namespace+"_summit_base_link", namespace+"_summit_front_right_wheel_link"],
+    )
+
 
     # Spawn from topic                                                      
     gazebo_spawn_robot_description = Node(
@@ -264,6 +287,22 @@ def launch_setup(context, *args, **kwargs):
         output='screen',
         
     )
+
+    # joint_state_publisher_node = Node(
+    #     package="joint_state_publisher",
+    #     executable="joint_state_publisher",
+    #     name="joint_state_publisher",
+    #     namespace=namespace,
+    #     output="screen",
+    #     parameters=[
+    #                 {'publish_default_positions': False},
+    #                 {'joint_names': [
+    #                                 namespace+"_summit_back_left_wheel_joint",
+    #                                 namespace+"_summit_back_right_wheel_joint",
+    #                                 namespace+"_summit_front_left_wheel_joint",
+    #                                 namespace+"_summit_front_right_wheel_joint"
+    #                                 ]}]
+    # )
 
     real_joint_controllers = PathJoinSubstitution(
         [FindPackageShare("ur"), "config", controller_file]
@@ -322,7 +361,11 @@ def launch_setup(context, *args, **kwargs):
         velocity_controller,
         run_move_group_node,
         static_tf_real,
-        joint_state_publisher_node
+        # joint_state_publisher_node
+        static_tf_wheel_back_left,
+        static_tf_wheel_back_right,
+        static_tf_wheel_front_left,
+        static_tf_wheel_front_right
     ]
 
     

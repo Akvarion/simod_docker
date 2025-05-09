@@ -1,0 +1,23 @@
+/left/joint_state_broadcaster
+  Subscribers:
+    /clock: rosgraph_msgs/msg/Clock
+    /parameter_events: rcl_interfaces/msg/ParameterEvent
+  Publishers:
+    /left/dynamic_joint_states: control_msgs/msg/DynamicJointState
+    /left/joint_state_broadcaster/transition_event: lifecycle_msgs/msg/TransitionEvent
+    /left/joint_states: sensor_msgs/msg/JointState
+    /parameter_events: rcl_interfaces/msg/ParameterEvent
+    /rosout: rcl_interfaces/msg/Log
+  Service Servers:
+    /left/joint_state_broadcaster/describe_parameters: rcl_interfaces/srv/DescribeParameters
+    /left/joint_state_broadcaster/get_parameter_types: rcl_interfaces/srv/GetParameterTypes
+    /left/joint_state_broadcaster/get_parameters: rcl_interfaces/srv/GetParameters
+    /left/joint_state_broadcaster/list_parameters: rcl_interfaces/srv/ListParameters
+    /left/joint_state_broadcaster/set_parameters: rcl_interfaces/srv/SetParameters
+    /left/joint_state_broadcaster/set_parameters_atomically: rcl_interfaces/srv/SetParametersAtomically
+  Service Clients:
+
+  Action Servers:
+
+  Action Clients:
+

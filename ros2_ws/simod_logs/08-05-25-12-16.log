@@ -1,0 +1,595 @@
+[INFO] [launch]: All log files can be found below /root/.ros/log/2025-05-08-10-16-29-528200-outlander-Aspire-V3-571G-95
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [gzserver-1]: process started with pid [98]
+[INFO] [gzclient-2]: process started with pid [100]
+[INFO] [rviz2-3]: process started with pid [102]
+[INFO] [robot_state_publisher-4]: process started with pid [104]
+[INFO] [spawn_entity.py-5]: process started with pid [106]
+[INFO] [spawner-6]: process started with pid [108]
+[INFO] [spawner-7]: process started with pid [110]
+[INFO] [move_group-8]: process started with pid [112]
+[INFO] [static_transform_publisher-9]: process started with pid [115]
+[INFO] [joint_state_publisher-10]: process started with pid [119]
+[INFO] [robot_state_publisher-11]: process started with pid [127]
+[INFO] [spawn_entity.py-12]: process started with pid [130]
+[INFO] [spawner-13]: process started with pid [141]
+[INFO] [spawner-14]: process started with pid [152]
+[INFO] [move_group-15]: process started with pid [158]
+[INFO] [static_transform_publisher-16]: process started with pid [164]
+[INFO] [joint_state_publisher-17]: process started with pid [175]
+[rviz2-3] QStandardPaths: XDG_RUNTIME_DIR not set, defaulting to '/tmp/runtime-root'
+[robot_state_publisher-4] [INFO] [1746699393.811192597] [left.robot_state_publisher]: got segment left_summit_back_left_wheel_link
+[robot_state_publisher-4] [INFO] [1746699393.811421970] [left.robot_state_publisher]: got segment left_summit_back_right_wheel_link
+[robot_state_publisher-4] [INFO] [1746699393.811471672] [left.robot_state_publisher]: got segment left_summit_base_chapa
+[robot_state_publisher-4] [INFO] [1746699393.811500796] [left.robot_state_publisher]: got segment left_summit_base_docking_contact
+[robot_state_publisher-4] [INFO] [1746699393.811523235] [left.robot_state_publisher]: got segment left_summit_base_footprint
+[robot_state_publisher-4] [INFO] [1746699393.811543392] [left.robot_state_publisher]: got segment left_summit_base_link
+[robot_state_publisher-4] [INFO] [1746699393.811561164] [left.robot_state_publisher]: got segment left_summit_base_logo_front
+[robot_state_publisher-4] [INFO] [1746699393.811576324] [left.robot_state_publisher]: got segment left_summit_base_logo_left
+[robot_state_publisher-4] [INFO] [1746699393.811592508] [left.robot_state_publisher]: got segment left_summit_base_logo_rear
+[robot_state_publisher-4] [INFO] [1746699393.811608032] [left.robot_state_publisher]: got segment left_summit_base_logo_right
+[robot_state_publisher-4] [INFO] [1746699393.811623471] [left.robot_state_publisher]: got segment left_summit_front_laser_base_link
+[robot_state_publisher-4] [INFO] [1746699393.811638553] [left.robot_state_publisher]: got segment left_summit_front_laser_link
+[robot_state_publisher-4] [INFO] [1746699393.811653252] [left.robot_state_publisher]: got segment left_summit_front_left_wheel_link
+[robot_state_publisher-4] [INFO] [1746699393.811668811] [left.robot_state_publisher]: got segment left_summit_front_right_wheel_link
+[robot_state_publisher-4] [INFO] [1746699393.811684698] [left.robot_state_publisher]: got segment left_summit_imu_link
+[robot_state_publisher-4] [INFO] [1746699393.811699570] [left.robot_state_publisher]: got segment left_summit_rear_laser_base_link
+[robot_state_publisher-4] [INFO] [1746699393.811714185] [left.robot_state_publisher]: got segment left_summit_rear_laser_link
+[robot_state_publisher-4] [INFO] [1746699393.811729845] [left.robot_state_publisher]: got segment ur_left_base
+[robot_state_publisher-4] [INFO] [1746699393.811745899] [left.robot_state_publisher]: got segment ur_left_base_link
+[robot_state_publisher-4] [INFO] [1746699393.811760813] [left.robot_state_publisher]: got segment ur_left_base_link_inertia
+[robot_state_publisher-4] [INFO] [1746699393.811777180] [left.robot_state_publisher]: got segment ur_left_finger_left
+[robot_state_publisher-4] [INFO] [1746699393.811792069] [left.robot_state_publisher]: got segment ur_left_finger_right
+[robot_state_publisher-4] [INFO] [1746699393.811807130] [left.robot_state_publisher]: got segment ur_left_finger_tip
+[robot_state_publisher-4] [INFO] [1746699393.811822380] [left.robot_state_publisher]: got segment ur_left_flange
+[robot_state_publisher-4] [INFO] [1746699393.811837443] [left.robot_state_publisher]: got segment ur_left_forearm_link
+[robot_state_publisher-4] [INFO] [1746699393.811852166] [left.robot_state_publisher]: got segment ur_left_ft_frame
+[robot_state_publisher-4] [INFO] [1746699393.811867708] [left.robot_state_publisher]: got segment ur_left_robotiq_hand
+[robot_state_publisher-4] [INFO] [1746699393.811882969] [left.robot_state_publisher]: got segment ur_left_shoulder_link
+[robot_state_publisher-4] [INFO] [1746699393.811898349] [left.robot_state_publisher]: got segment ur_left_tool0
+[robot_state_publisher-4] [INFO] [1746699393.811912779] [left.robot_state_publisher]: got segment ur_left_upper_arm_link
+[robot_state_publisher-4] [INFO] [1746699393.811927668] [left.robot_state_publisher]: got segment ur_left_wrist_1_link
+[robot_state_publisher-4] [INFO] [1746699393.811942643] [left.robot_state_publisher]: got segment ur_left_wrist_2_link
+[robot_state_publisher-4] [INFO] [1746699393.811957245] [left.robot_state_publisher]: got segment ur_left_wrist_3_link
+[static_transform_publisher-9] [WARN] [1746699393.808069659] []: Old-style arguments are deprecated; see --help for new-style arguments
+[static_transform_publisher-9] [INFO] [1746699393.876676889] [left.static_transform_publisher]: Spinning until stopped - publishing transform
+[static_transform_publisher-9] translation: ('-0.660000', '0.000000', '0.000000')
+[static_transform_publisher-9] rotation: ('0.000000', '0.000000', '0.000000', '1.000000')
+[static_transform_publisher-9] from 'world' to 'left_summit_odom'
+[move_group-8] [INFO] [1746699393.978778483] [moveit_rdf_loader.rdf_loader]: Loaded robot model in 0.0315107 seconds
+[move_group-8] [INFO] [1746699393.978917502] [moveit_robot_model.robot_model]: Loading robot model 'dual'...
+[move_group-8] [WARN] [1746699393.979026899] [moveit_robot_model.robot_model]: Link left_summit_base_footprint has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[robot_state_publisher-11] [INFO] [1746699393.988455519] [right.robot_state_publisher]: got segment right_summit_back_left_wheel_link
+[robot_state_publisher-11] [INFO] [1746699393.988650577] [right.robot_state_publisher]: got segment right_summit_back_right_wheel_link
+[robot_state_publisher-11] [INFO] [1746699393.988682491] [right.robot_state_publisher]: got segment right_summit_base_chapa
+[robot_state_publisher-11] [INFO] [1746699393.988704284] [right.robot_state_publisher]: got segment right_summit_base_docking_contact
+[robot_state_publisher-11] [INFO] [1746699393.988724318] [right.robot_state_publisher]: got segment right_summit_base_footprint
+[robot_state_publisher-11] [INFO] [1746699393.988744305] [right.robot_state_publisher]: got segment right_summit_base_link
+[robot_state_publisher-11] [INFO] [1746699393.988763583] [right.robot_state_publisher]: got segment right_summit_base_logo_front
+[robot_state_publisher-11] [INFO] [1746699393.988783330] [right.robot_state_publisher]: got segment right_summit_base_logo_left
+[robot_state_publisher-11] [INFO] [1746699393.988802802] [right.robot_state_publisher]: got segment right_summit_base_logo_rear
+[robot_state_publisher-11] [INFO] [1746699393.988821754] [right.robot_state_publisher]: got segment right_summit_base_logo_right
+[robot_state_publisher-11] [INFO] [1746699393.988840072] [right.robot_state_publisher]: got segment right_summit_front_laser_base_link
+[robot_state_publisher-11] [INFO] [1746699393.988859280] [right.robot_state_publisher]: got segment right_summit_front_laser_link
+[robot_state_publisher-11] [INFO] [1746699393.988877904] [right.robot_state_publisher]: got segment right_summit_front_left_wheel_link
+[robot_state_publisher-11] [INFO] [1746699393.988896417] [right.robot_state_publisher]: got segment right_summit_front_right_wheel_link
+[robot_state_publisher-11] [INFO] [1746699393.988914751] [right.robot_state_publisher]: got segment right_summit_imu_link
+[robot_state_publisher-11] [INFO] [1746699393.988933967] [right.robot_state_publisher]: got segment right_summit_rear_laser_base_link
+[robot_state_publisher-11] [INFO] [1746699393.988952259] [right.robot_state_publisher]: got segment right_summit_rear_laser_link
+[robot_state_publisher-11] [INFO] [1746699393.988970291] [right.robot_state_publisher]: got segment ur_right_base
+[robot_state_publisher-11] [INFO] [1746699393.988988742] [right.robot_state_publisher]: got segment ur_right_base_link
+[robot_state_publisher-11] [INFO] [1746699393.989008327] [right.robot_state_publisher]: got segment ur_right_base_link_inertia
+[robot_state_publisher-11] [INFO] [1746699393.989027069] [right.robot_state_publisher]: got segment ur_right_finger_left
+[robot_state_publisher-11] [INFO] [1746699393.989047100] [right.robot_state_publisher]: got segment ur_right_finger_right
+[robot_state_publisher-11] [INFO] [1746699393.989065733] [right.robot_state_publisher]: got segment ur_right_finger_tip
+[robot_state_publisher-11] [INFO] [1746699393.989084559] [right.robot_state_publisher]: got segment ur_right_flange
+[robot_state_publisher-11] [INFO] [1746699393.989103535] [right.robot_state_publisher]: got segment ur_right_forearm_link
+[robot_state_publisher-11] [INFO] [1746699393.989122535] [right.robot_state_publisher]: got segment ur_right_ft_frame
+[robot_state_publisher-11] [INFO] [1746699393.989141340] [right.robot_state_publisher]: got segment ur_right_robotiq_hand
+[robot_state_publisher-11] [INFO] [1746699393.989160131] [right.robot_state_publisher]: got segment ur_right_shoulder_link
+[robot_state_publisher-11] [INFO] [1746699393.989179241] [right.robot_state_publisher]: got segment ur_right_tool0
+[robot_state_publisher-11] [INFO] [1746699393.989197516] [right.robot_state_publisher]: got segment ur_right_upper_arm_link
+[robot_state_publisher-11] [INFO] [1746699393.989216188] [right.robot_state_publisher]: got segment ur_right_wrist_1_link
+[robot_state_publisher-11] [INFO] [1746699393.989235538] [right.robot_state_publisher]: got segment ur_right_wrist_2_link
+[robot_state_publisher-11] [INFO] [1746699393.989254428] [right.robot_state_publisher]: got segment ur_right_wrist_3_link
+[move_group-8] [WARN] [1746699393.991357275] [moveit_robot_model.robot_model]: Link left_summit_base_logo_front has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[move_group-8] [WARN] [1746699393.991437256] [moveit_robot_model.robot_model]: Link left_summit_base_logo_left has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[move_group-8] [WARN] [1746699393.991465706] [moveit_robot_model.robot_model]: Link left_summit_base_logo_rear has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[move_group-8] [WARN] [1746699393.991490922] [moveit_robot_model.robot_model]: Link left_summit_base_logo_right has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[move_group-8] [WARN] [1746699393.991513863] [moveit_robot_model.robot_model]: Link left_summit_base_chapa has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[static_transform_publisher-16] [WARN] [1746699394.014134533] []: Old-style arguments are deprecated; see --help for new-style arguments
+[move_group-8] [WARN] [1746699394.015356473] [moveit_robot_model.robot_model]: Link left_summit_imu_link has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[static_transform_publisher-16] [INFO] [1746699394.075897272] [right.static_transform_publisher]: Spinning until stopped - publishing transform
+[static_transform_publisher-16] translation: ('0.660000', '0.000000', '0.000000')
+[static_transform_publisher-16] rotation: ('0.000000', '0.000000', '0.000000', '1.000000')
+[static_transform_publisher-16] from 'world' to 'right_summit_odom'
+[move_group-15] [INFO] [1746699394.234274113] [moveit_rdf_loader.rdf_loader]: Loaded robot model in 0.0158733 seconds
+[move_group-15] [INFO] [1746699394.235682205] [moveit_robot_model.robot_model]: Loading robot model 'dual'...
+[move_group-15] [WARN] [1746699394.236654166] [moveit_robot_model.robot_model]: Link right_summit_base_footprint has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[move_group-15] [WARN] [1746699394.251544930] [moveit_robot_model.robot_model]: Link right_summit_base_logo_front has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[move_group-15] [WARN] [1746699394.259150313] [moveit_robot_model.robot_model]: Link right_summit_base_logo_left has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[move_group-15] [WARN] [1746699394.260293407] [moveit_robot_model.robot_model]: Link right_summit_base_logo_rear has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[move_group-15] [WARN] [1746699394.261080913] [moveit_robot_model.robot_model]: Link right_summit_base_logo_right has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[move_group-15] [WARN] [1746699394.261873541] [moveit_robot_model.robot_model]: Link right_summit_base_chapa has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[move_group-15] [WARN] [1746699394.269321280] [moveit_robot_model.robot_model]: Link right_summit_imu_link has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[spawn_entity.py-12] [INFO] [1746699394.929403800] [right]: Spawn Entity started
+[spawn_entity.py-12] [INFO] [1746699394.930575510] [right]: Loading entity published on topic /right/robot_description
+[spawn_entity.py-12] /opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/qos.py:307: UserWarning: DurabilityPolicy.RMW_QOS_POLICY_DURABILITY_TRANSIENT_LOCAL is deprecated. Use DurabilityPolicy.TRANSIENT_LOCAL instead.
+[spawn_entity.py-12]   warnings.warn(
+[spawn_entity.py-12] [INFO] [1746699394.941642464] [right]: Waiting for entity xml on /right/robot_description
+[spawn_entity.py-12] [INFO] [1746699394.952795097] [right]: Waiting for service /spawn_entity, timeout = 5
+[spawn_entity.py-12] [INFO] [1746699394.954841441] [right]: Waiting for service /spawn_entity
+[joint_state_publisher-17] [INFO] [1746699394.982114161] [right.joint_state_publisher]: Waiting for robot_description to be published on the robot_description topic...
+[spawner-7] [INFO] [1746699394.983780284] [left.spawner_ur_left_joint_group_vel_controller]: waiting for service /left/controller_manager/list_controllers to become available...
+[spawn_entity.py-5] [INFO] [1746699395.006405638] [left]: Spawn Entity started
+[spawn_entity.py-5] [INFO] [1746699395.007639353] [left]: Loading entity published on topic /left/robot_description
+[spawn_entity.py-5] /opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/qos.py:307: UserWarning: DurabilityPolicy.RMW_QOS_POLICY_DURABILITY_TRANSIENT_LOCAL is deprecated. Use DurabilityPolicy.TRANSIENT_LOCAL instead.
+[spawn_entity.py-5]   warnings.warn(
+[spawn_entity.py-5] [INFO] [1746699395.020799128] [left]: Waiting for entity xml on /left/robot_description
+[spawner-14] [INFO] [1746699395.029763900] [right.spawner_ur_right_joint_group_vel_controller]: waiting for service /right/controller_manager/list_controllers to become available...
+[spawn_entity.py-5] [INFO] [1746699395.042860244] [left]: Waiting for service /spawn_entity, timeout = 5
+[spawn_entity.py-5] [INFO] [1746699395.044304157] [left]: Waiting for service /spawn_entity
+[spawner-6] [INFO] [1746699395.184238377] [left.spawner_joint_state_broadcaster]: waiting for service /left/controller_manager/list_controllers to become available...
+[spawner-13] [INFO] [1746699395.276668499] [right.spawner_joint_state_broadcaster]: waiting for service /right/controller_manager/list_controllers to become available...
+[joint_state_publisher-10] [INFO] [1746699395.280762457] [left.joint_state_publisher]: Waiting for robot_description to be published on the robot_description topic...
+[move_group-8] [INFO] [1746699395.433709671] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Publishing maintained planning scene on 'monitored_planning_scene'
+[move_group-8] [INFO] [1746699395.433959704] [moveit.ros_planning_interface.moveit_cpp]: Listening to 'joint_states' for joint states
+[move_group-8] [INFO] [1746699395.439253664] [moveit_ros.current_state_monitor]: Listening to joint states on topic 'joint_states'
+[move_group-8] [INFO] [1746699395.441884883] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Listening to '/attached_collision_object' for attached collision objects
+[move_group-8] [INFO] [1746699395.441930058] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Starting planning scene monitor
+[move_group-8] [INFO] [1746699395.443500564] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Listening to '/planning_scene'
+[move_group-8] [INFO] [1746699395.443540713] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Starting world geometry update monitor for collision objects, attached objects, octomap updates.
+[move_group-8] [INFO] [1746699395.445310033] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Listening to 'collision_object'
+[move_group-8] [INFO] [1746699395.447359368] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Listening to 'planning_scene_world' for planning scene world geometry
+[move_group-8] [WARN] [1746699395.449108288] [moveit_ros.current_state_monitor]: Unable to update multi-DOF joint 'Vjoint_left':Failure to lookup transform between 'left_summit_odom'and 'left_summit_base_footprint' with TF exception: Could not find a connection between 'left_summit_odom' and 'left_summit_base_footprint' because they are not part of the same tree.Tf has two or more unconnected trees.
+[move_group-8] [WARN] [1746699395.449763018] [moveit.ros.occupancy_map_monitor.middleware_handle]: Resolution not specified for Octomap. Assuming resolution = 0.1 instead
+[move_group-15] [INFO] [1746699395.753986465] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Publishing maintained planning scene on 'monitored_planning_scene'
+[move_group-15] [INFO] [1746699395.754387146] [moveit.ros_planning_interface.moveit_cpp]: Listening to 'joint_states' for joint states
+[rviz2-3] [INFO] [1746699395.755017462] [rviz2]: Stereo is NOT SUPPORTED
+[rviz2-3] [INFO] [1746699395.755335928] [rviz2]: OpenGl version: 4.6 (GLSL 4.6)
+[move_group-15] [INFO] [1746699395.762723443] [moveit_ros.current_state_monitor]: Listening to joint states on topic 'joint_states'
+[move_group-15] [INFO] [1746699395.764983685] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Listening to '/attached_collision_object' for attached collision objects
+[move_group-15] [INFO] [1746699395.765052402] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Starting planning scene monitor
+[move_group-15] [INFO] [1746699395.768495438] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Listening to '/planning_scene'
+[move_group-15] [INFO] [1746699395.768541020] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Starting world geometry update monitor for collision objects, attached objects, octomap updates.
+[move_group-15] [INFO] [1746699395.770673103] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Listening to 'collision_object'
+[move_group-15] [WARN] [1746699395.773351644] [moveit_ros.current_state_monitor]: Unable to update multi-DOF joint 'Vjoint_right':Failure to lookup transform between 'right_summit_odom'and 'right_summit_base_footprint' with TF exception: Could not find a connection between 'right_summit_odom' and 'right_summit_base_footprint' because they are not part of the same tree.Tf has two or more unconnected trees.
+[move_group-15] [INFO] [1746699395.775048195] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Listening to 'planning_scene_world' for planning scene world geometry
+[move_group-15] [WARN] [1746699395.778276672] [moveit.ros.occupancy_map_monitor.middleware_handle]: Resolution not specified for Octomap. Assuming resolution = 0.1 instead
+[rviz2-3] [INFO] [1746699395.872362948] [rviz2]: Stereo is NOT SUPPORTED
+[rviz2-3] [WARN] [1746699396.918482100] [rcl.logging_rosout]: Publisher already registered for provided node name. If this is due to multiple nodes with the same name then all logs for that logger name will go out over the existing publisher. As soon as any node with that name is destructed it will unregister the publisher, preventing any further logs for that name from being published on the rosout topic.
+[move_group-8] [INFO] [1746699397.466534776] [moveit.ros_planning_interface.moveit_cpp]: Loading planning pipeline 'ompl'
+[move_group-8] [INFO] [1746699397.507287457] [moveit.ros_planning.planning_pipeline]: Using planning interface 'OMPL'
+[move_group-8] [INFO] [1746699397.520565544] [moveit_ros.add_time_optimal_parameterization]: Param 'ompl.path_tolerance' was not set. Using default value: 0.100000
+[move_group-8] [INFO] [1746699397.520612687] [moveit_ros.add_time_optimal_parameterization]: Param 'ompl.resample_dt' was not set. Using default value: 0.100000
+[move_group-8] [INFO] [1746699397.520686765] [moveit_ros.add_time_optimal_parameterization]: Param 'ompl.min_angle_change' was not set. Using default value: 0.001000
+[move_group-8] [INFO] [1746699397.520754972] [moveit_ros.fix_workspace_bounds]: Param 'ompl.default_workspace_bounds' was not set. Using default value: 10.000000
+[move_group-8] [INFO] [1746699397.520796451] [moveit_ros.fix_start_state_bounds]: Param 'ompl.start_state_max_bounds_error' was set to 0.100000
+[move_group-8] [INFO] [1746699397.520814227] [moveit_ros.fix_start_state_bounds]: Param 'ompl.start_state_max_dt' was not set. Using default value: 0.500000
+[move_group-8] [INFO] [1746699397.520846713] [moveit_ros.fix_start_state_collision]: Param 'ompl.start_state_max_dt' was not set. Using default value: 0.500000
+[move_group-8] [INFO] [1746699397.520862852] [moveit_ros.fix_start_state_collision]: Param 'ompl.jiggle_fraction' was set to 0.050000
+[move_group-8] [INFO] [1746699397.520892236] [moveit_ros.fix_start_state_collision]: Param 'ompl.max_sampling_attempts' was not set. Using default value: 100
+[move_group-8] [INFO] [1746699397.520926556] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Add Time Optimal Parameterization'
+[move_group-8] [INFO] [1746699397.520941504] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Resolve constraint frames to robot links'
+[move_group-8] [INFO] [1746699397.520952180] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Fix Workspace Bounds'
+[move_group-8] [INFO] [1746699397.520962378] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Fix Start State Bounds'
+[move_group-8] [INFO] [1746699397.520971878] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Fix Start State In Collision'
+[move_group-8] [INFO] [1746699397.520980856] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Fix Start State Path Constraints'
+[move_group-8] [INFO] [1746699397.527607819] [moveit.ros_planning_interface.moveit_cpp]: Loading planning pipeline 'chomp'
+[move_group-8] [INFO] [1746699397.543209115] [moveit.ros_planning.planning_pipeline]: Using planning interface 'CHOMP'
+[move_group-8] [INFO] [1746699397.550512163] [moveit_ros.add_time_optimal_parameterization]: Param 'chomp.path_tolerance' was not set. Using default value: 0.100000
+[move_group-8] [INFO] [1746699397.550540624] [moveit_ros.add_time_optimal_parameterization]: Param 'chomp.resample_dt' was not set. Using default value: 0.100000
+[move_group-8] [INFO] [1746699397.550549032] [moveit_ros.add_time_optimal_parameterization]: Param 'chomp.min_angle_change' was not set. Using default value: 0.001000
+[move_group-8] [INFO] [1746699397.550582888] [moveit_ros.fix_workspace_bounds]: Param 'chomp.default_workspace_bounds' was not set. Using default value: 10.000000
+[move_group-8] [INFO] [1746699397.550606996] [moveit_ros.fix_start_state_bounds]: Param 'chomp.start_state_max_bounds_error' was set to 0.100000
+[move_group-8] [INFO] [1746699397.550616108] [moveit_ros.fix_start_state_bounds]: Param 'chomp.start_state_max_dt' was not set. Using default value: 0.500000
+[move_group-8] [INFO] [1746699397.550635167] [moveit_ros.fix_start_state_collision]: Param 'chomp.start_state_max_dt' was not set. Using default value: 0.500000
+[move_group-8] [INFO] [1746699397.550644762] [moveit_ros.fix_start_state_collision]: Param 'chomp.jiggle_fraction' was set to 0.050000
+[move_group-8] [INFO] [1746699397.550652653] [moveit_ros.fix_start_state_collision]: Param 'chomp.max_sampling_attempts' was not set. Using default value: 100
+[move_group-8] [INFO] [1746699397.550669882] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Add Time Optimal Parameterization'
+[move_group-8] [INFO] [1746699397.550677307] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Resolve constraint frames to robot links'
+[move_group-8] [INFO] [1746699397.550682734] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Fix Workspace Bounds'
+[move_group-8] [INFO] [1746699397.550687930] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Fix Start State Bounds'
+[move_group-8] [INFO] [1746699397.550692999] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Fix Start State In Collision'
+[move_group-8] [INFO] [1746699397.550698151] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Fix Start State Path Constraints'
+[move_group-8] [INFO] [1746699397.553333131] [moveit.ros_planning_interface.moveit_cpp]: Loading planning pipeline 'pilz_industrial_motion_planner'
+[move_group-8] [INFO] [1746699397.561289571] [moveit.pilz_industrial_motion_planner.joint_limits_aggregator]: Reading limits from namespace robot_description_planning
+[move_group-8] [WARN] [1746699397.567139949] [moveit.pilz_industrial_motion_planner.joint_limits_aggregator]: Multi-DOF-Joint 'Vjoint_left' not supported.
+[move_group-8] [WARN] [1746699397.567202039] [moveit.pilz_industrial_motion_planner.joint_limits_aggregator]: Multi-DOF-Joint 'Vjoint_left' not supported.
+[move_group-8] [INFO] [1746699397.601404111] [moveit.pilz_industrial_motion_planner]: Available plugins: pilz_industrial_motion_planner/PlanningContextLoaderCIRC pilz_industrial_motion_planner/PlanningContextLoaderLIN pilz_industrial_motion_planner/PlanningContextLoaderPTP 
+[move_group-8] [INFO] [1746699397.601432496] [moveit.pilz_industrial_motion_planner]: About to load: pilz_industrial_motion_planner/PlanningContextLoaderCIRC
+[move_group-8] [INFO] [1746699397.604060606] [moveit.pilz_industrial_motion_planner]: Registered Algorithm [CIRC]
+[move_group-8] [INFO] [1746699397.604094284] [moveit.pilz_industrial_motion_planner]: About to load: pilz_industrial_motion_planner/PlanningContextLoaderLIN
+[move_group-8] [INFO] [1746699397.605662149] [moveit.pilz_industrial_motion_planner]: Registered Algorithm [LIN]
+[move_group-8] [INFO] [1746699397.605689665] [moveit.pilz_industrial_motion_planner]: About to load: pilz_industrial_motion_planner/PlanningContextLoaderPTP
+[move_group-8] [INFO] [1746699397.607740562] [moveit.pilz_industrial_motion_planner]: Registered Algorithm [PTP]
+[move_group-8] [INFO] [1746699397.607820659] [moveit.ros_planning.planning_pipeline]: Using planning interface 'Pilz Industrial Motion Planner'
+[move_group-8] [ERROR] [1746699397.782021596] [moveit.plugins.moveit_simple_controller_manager]: No controller_names specified.
+[move_group-8] [INFO] [1746699397.782258745] [moveit.plugins.moveit_simple_controller_manager]: Returned 0 controllers in list
+[move_group-8] [INFO] [1746699397.782281905] [moveit.plugins.moveit_simple_controller_manager]: Returned 0 controllers in list
+[move_group-8] [INFO] [1746699397.783650766] [moveit_ros.trajectory_execution_manager]: Trajectory execution is managing controllers
+[move_group-8] [INFO] [1746699397.783706216] [move_group.move_group]: MoveGroup debug mode is ON
+[move_group-8] [ERROR] [1746699397.803013709] [move_group.move_group]: Exception while loading move_group capability 'move_group/ExecuteTaskSolutionCapability': According to the loaded plugin descriptions the class move_group/ExecuteTaskSolutionCapability with base class type move_group::MoveGroupCapability does not exist. Declared types are  move_group/ApplyPlanningSceneService move_group/ClearOctomapService move_group/MoveGroupCartesianPathService move_group/MoveGroupExecuteService move_group/MoveGroupExecuteTrajectoryAction move_group/MoveGroupGetPlanningSceneService move_group/MoveGroupKinematicsService move_group/MoveGroupMoveAction move_group/MoveGroupPlanService move_group/MoveGroupQueryPlannersService move_group/MoveGroupStateValidationService move_group/TfPublisher pilz_industrial_motion_planner/MoveGroupSequenceAction pilz_industrial_motion_planner/MoveGroupSequenceService
+[move_group-8] [INFO] [1746699397.838634661] [move_group.move_group]: 
+[move_group-8] 
+[move_group-8] ********************************************************
+[move_group-8] * MoveGroup using: 
+[move_group-8] *     - ApplyPlanningSceneService
+[move_group-8] *     - ClearOctomapService
+[move_group-8] *     - CartesianPathService
+[move_group-8] *     - ExecuteTrajectoryAction
+[move_group-8] *     - GetPlanningSceneService
+[move_group-8] *     - KinematicsService
+[move_group-8] *     - MoveAction
+[move_group-8] *     - MotionPlanService
+[move_group-8] *     - QueryPlannersService
+[move_group-8] *     - StateValidationService
+[move_group-8] ********************************************************
+[move_group-8] 
+[move_group-8] [INFO] [1746699397.838696543] [moveit_move_group_capabilities_base.move_group_context]: MoveGroup context using planning plugin ompl_interface/OMPLPlanner
+[move_group-8] [INFO] [1746699397.838710548] [moveit_move_group_capabilities_base.move_group_context]: MoveGroup context initialization complete
+[move_group-8] [96mLoading 'move_group/ApplyPlanningSceneService'...
+[move_group-8] [0m[96mLoading 'move_group/ClearOctomapService'...
+[move_group-8] [0m[96mLoading 'move_group/ExecuteTaskSolutionCapability'...
+[move_group-8] [0m[96mLoading 'move_group/MoveGroupCartesianPathService'...
+[move_group-8] [0m[96mLoading 'move_group/MoveGroupExecuteTrajectoryAction'...
+[move_group-8] [0m[96mLoading 'move_group/MoveGroupGetPlanningSceneService'...
+[move_group-8] [0m[96mLoading 'move_group/MoveGroupKinematicsService'...
+[move_group-8] [0m[96mLoading 'move_group/MoveGroupMoveAction'...
+[move_group-8] [0m[96mLoading 'move_group/MoveGroupPlanService'...
+[move_group-8] [0m[96mLoading 'move_group/MoveGroupQueryPlannersService'...
+[move_group-8] [0m[96mLoading 'move_group/MoveGroupStateValidationService'...
+[move_group-8] [0m[92m
+[move_group-8] You can start planning now!
+[move_group-8] 
+[gzserver-1] ALSA lib pcm_dmix.c:1032:(snd_pcm_dmix_open) unable to open slave
+[gzserver-1] AL lib: (EE) ALCplaybackAlsa_open: Could not open playback device 'default': Device or resource busy
+[move_group-15] [INFO] [1746699397.920416713] [moveit.ros_planning_interface.moveit_cpp]: Loading planning pipeline 'ompl'
+[move_group-15] [INFO] [1746699397.952184894] [moveit.ros_planning.planning_pipeline]: Using planning interface 'OMPL'
+[move_group-15] [INFO] [1746699397.965627513] [moveit_ros.add_time_optimal_parameterization]: Param 'ompl.path_tolerance' was not set. Using default value: 0.100000
+[move_group-15] [INFO] [1746699397.965673253] [moveit_ros.add_time_optimal_parameterization]: Param 'ompl.resample_dt' was not set. Using default value: 0.100000
+[move_group-15] [INFO] [1746699397.965748701] [moveit_ros.add_time_optimal_parameterization]: Param 'ompl.min_angle_change' was not set. Using default value: 0.001000
+[move_group-15] [INFO] [1746699397.965815731] [moveit_ros.fix_workspace_bounds]: Param 'ompl.default_workspace_bounds' was not set. Using default value: 10.000000
+[move_group-15] [INFO] [1746699397.965858083] [moveit_ros.fix_start_state_bounds]: Param 'ompl.start_state_max_bounds_error' was set to 0.100000
+[move_group-15] [INFO] [1746699397.965875561] [moveit_ros.fix_start_state_bounds]: Param 'ompl.start_state_max_dt' was not set. Using default value: 0.500000
+[move_group-15] [INFO] [1746699397.965910092] [moveit_ros.fix_start_state_collision]: Param 'ompl.start_state_max_dt' was not set. Using default value: 0.500000
+[move_group-15] [INFO] [1746699397.965926748] [moveit_ros.fix_start_state_collision]: Param 'ompl.jiggle_fraction' was set to 0.050000
+[move_group-15] [INFO] [1746699397.965953500] [moveit_ros.fix_start_state_collision]: Param 'ompl.max_sampling_attempts' was not set. Using default value: 100
+[move_group-15] [INFO] [1746699397.965983930] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Add Time Optimal Parameterization'
+[move_group-15] [INFO] [1746699397.965995955] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Resolve constraint frames to robot links'
+[move_group-15] [INFO] [1746699397.966019773] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Fix Workspace Bounds'
+[move_group-15] [INFO] [1746699397.966029293] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Fix Start State Bounds'
+[move_group-15] [INFO] [1746699397.966037407] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Fix Start State In Collision'
+[move_group-15] [INFO] [1746699397.966046002] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Fix Start State Path Constraints'
+[move_group-15] [INFO] [1746699397.971739967] [moveit.ros_planning_interface.moveit_cpp]: Loading planning pipeline 'chomp'
+[move_group-15] [INFO] [1746699397.982481412] [moveit.ros_planning.planning_pipeline]: Using planning interface 'CHOMP'
+[move_group-15] [INFO] [1746699397.988213550] [moveit_ros.add_time_optimal_parameterization]: Param 'chomp.path_tolerance' was not set. Using default value: 0.100000
+[move_group-15] [INFO] [1746699397.988238655] [moveit_ros.add_time_optimal_parameterization]: Param 'chomp.resample_dt' was not set. Using default value: 0.100000
+[move_group-15] [INFO] [1746699397.988246860] [moveit_ros.add_time_optimal_parameterization]: Param 'chomp.min_angle_change' was not set. Using default value: 0.001000
+[move_group-15] [INFO] [1746699397.988279860] [moveit_ros.fix_workspace_bounds]: Param 'chomp.default_workspace_bounds' was not set. Using default value: 10.000000
+[move_group-15] [INFO] [1746699397.988303364] [moveit_ros.fix_start_state_bounds]: Param 'chomp.start_state_max_bounds_error' was set to 0.100000
+[move_group-15] [INFO] [1746699397.988312554] [moveit_ros.fix_start_state_bounds]: Param 'chomp.start_state_max_dt' was not set. Using default value: 0.500000
+[move_group-15] [INFO] [1746699397.988331794] [moveit_ros.fix_start_state_collision]: Param 'chomp.start_state_max_dt' was not set. Using default value: 0.500000
+[move_group-15] [INFO] [1746699397.988340686] [moveit_ros.fix_start_state_collision]: Param 'chomp.jiggle_fraction' was set to 0.050000
+[move_group-15] [INFO] [1746699397.988348582] [moveit_ros.fix_start_state_collision]: Param 'chomp.max_sampling_attempts' was not set. Using default value: 100
+[move_group-15] [INFO] [1746699397.988365822] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Add Time Optimal Parameterization'
+[move_group-15] [INFO] [1746699397.988373254] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Resolve constraint frames to robot links'
+[move_group-15] [INFO] [1746699397.988378718] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Fix Workspace Bounds'
+[move_group-15] [INFO] [1746699397.988384057] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Fix Start State Bounds'
+[move_group-15] [INFO] [1746699397.988389262] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Fix Start State In Collision'
+[move_group-15] [INFO] [1746699397.988394601] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Fix Start State Path Constraints'
+[move_group-15] [INFO] [1746699397.991633685] [moveit.ros_planning_interface.moveit_cpp]: Loading planning pipeline 'pilz_industrial_motion_planner'
+[gzserver-1] [WARN] [1746699397.992310186] [rcl]: Found remap rule 'model_states:=model_states'. This syntax is deprecated. Use '--ros-args --remap model_states:=model_states' instead.
+[gzserver-1] [WARN] [1746699397.992708405] [rcl]: Found remap rule 'link_states:=link_states'. This syntax is deprecated. Use '--ros-args --remap link_states:=link_states' instead.
+[move_group-15] [INFO] [1746699398.001516933] [moveit.pilz_industrial_motion_planner.joint_limits_aggregator]: Reading limits from namespace robot_description_planning
+[move_group-15] [WARN] [1746699398.004350279] [moveit.pilz_industrial_motion_planner.joint_limits_aggregator]: Multi-DOF-Joint 'Vjoint_right' not supported.
+[move_group-15] [WARN] [1746699398.004408752] [moveit.pilz_industrial_motion_planner.joint_limits_aggregator]: Multi-DOF-Joint 'Vjoint_right' not supported.
+[move_group-15] [INFO] [1746699398.027577915] [moveit.pilz_industrial_motion_planner]: Available plugins: pilz_industrial_motion_planner/PlanningContextLoaderCIRC pilz_industrial_motion_planner/PlanningContextLoaderLIN pilz_industrial_motion_planner/PlanningContextLoaderPTP 
+[move_group-15] [INFO] [1746699398.027616664] [moveit.pilz_industrial_motion_planner]: About to load: pilz_industrial_motion_planner/PlanningContextLoaderCIRC
+[gzserver-1] [INFO] [1746699398.028538355] [state.gazebo_ros_state]: Publishing states of gazebo models at [/state/model_states]
+[gzserver-1] [INFO] [1746699398.030090709] [state.gazebo_ros_state]: Publishing states of gazebo links at [/state/link_states]
+[move_group-15] [INFO] [1746699398.031651496] [moveit.pilz_industrial_motion_planner]: Registered Algorithm [CIRC]
+[move_group-15] [INFO] [1746699398.031692502] [moveit.pilz_industrial_motion_planner]: About to load: pilz_industrial_motion_planner/PlanningContextLoaderLIN
+[move_group-15] [INFO] [1746699398.034355122] [moveit.pilz_industrial_motion_planner]: Registered Algorithm [LIN]
+[move_group-15] [INFO] [1746699398.034397091] [moveit.pilz_industrial_motion_planner]: About to load: pilz_industrial_motion_planner/PlanningContextLoaderPTP
+[move_group-15] [INFO] [1746699398.036726166] [moveit.pilz_industrial_motion_planner]: Registered Algorithm [PTP]
+[move_group-15] [INFO] [1746699398.036789391] [moveit.ros_planning.planning_pipeline]: Using planning interface 'Pilz Industrial Motion Planner'
+[move_group-15] [ERROR] [1746699398.174607110] [moveit.plugins.moveit_simple_controller_manager]: No controller_names specified.
+[move_group-15] [INFO] [1746699398.174823523] [moveit.plugins.moveit_simple_controller_manager]: Returned 0 controllers in list
+[move_group-15] [INFO] [1746699398.174848667] [moveit.plugins.moveit_simple_controller_manager]: Returned 0 controllers in list
+[move_group-15] [INFO] [1746699398.176209019] [moveit_ros.trajectory_execution_manager]: Trajectory execution is managing controllers
+[move_group-15] [INFO] [1746699398.176245532] [move_group.move_group]: MoveGroup debug mode is ON
+[move_group-15] [ERROR] [1746699398.192885164] [move_group.move_group]: Exception while loading move_group capability 'move_group/ExecuteTaskSolutionCapability': According to the loaded plugin descriptions the class move_group/ExecuteTaskSolutionCapability with base class type move_group::MoveGroupCapability does not exist. Declared types are  move_group/ApplyPlanningSceneService move_group/ClearOctomapService move_group/MoveGroupCartesianPathService move_group/MoveGroupExecuteService move_group/MoveGroupExecuteTrajectoryAction move_group/MoveGroupGetPlanningSceneService move_group/MoveGroupKinematicsService move_group/MoveGroupMoveAction move_group/MoveGroupPlanService move_group/MoveGroupQueryPlannersService move_group/MoveGroupStateValidationService move_group/TfPublisher pilz_industrial_motion_planner/MoveGroupSequenceAction pilz_industrial_motion_planner/MoveGroupSequenceService
+[move_group-15] [INFO] [1746699398.230132143] [move_group.move_group]: 
+[move_group-15] 
+[move_group-15] ********************************************************
+[move_group-15] * MoveGroup using: 
+[move_group-15] *     - ApplyPlanningSceneService
+[move_group-15] *     - ClearOctomapService
+[move_group-15] *     - CartesianPathService
+[move_group-15] *     - ExecuteTrajectoryAction
+[move_group-15] *     - GetPlanningSceneService
+[move_group-15] *     - KinematicsService
+[move_group-15] *     - MoveAction
+[move_group-15] *     - MotionPlanService
+[move_group-15] *     - QueryPlannersService
+[move_group-15] *     - StateValidationService
+[move_group-15] ********************************************************
+[move_group-15] 
+[move_group-15] [INFO] [1746699398.230239048] [moveit_move_group_capabilities_base.move_group_context]: MoveGroup context using planning plugin ompl_interface/OMPLPlanner
+[move_group-15] [INFO] [1746699398.230262259] [moveit_move_group_capabilities_base.move_group_context]: MoveGroup context initialization complete
+[move_group-15] [96mLoading 'move_group/ApplyPlanningSceneService'...
+[move_group-15] [0m[96mLoading 'move_group/ClearOctomapService'...
+[move_group-15] [0m[96mLoading 'move_group/ExecuteTaskSolutionCapability'...
+[move_group-15] [0m[96mLoading 'move_group/MoveGroupCartesianPathService'...
+[move_group-15] [0m[96mLoading 'move_group/MoveGroupExecuteTrajectoryAction'...
+[move_group-15] [0m[96mLoading 'move_group/MoveGroupGetPlanningSceneService'...
+[move_group-15] [0m[96mLoading 'move_group/MoveGroupKinematicsService'...
+[move_group-15] [0m[96mLoading 'move_group/MoveGroupMoveAction'...
+[move_group-15] [0m[96mLoading 'move_group/MoveGroupPlanService'...
+[move_group-15] [0m[96mLoading 'move_group/MoveGroupQueryPlannersService'...
+[move_group-15] [0m[96mLoading 'move_group/MoveGroupStateValidationService'...
+[move_group-15] [0m[92m
+[move_group-15] You can start planning now!
+[move_group-15] 
+[spawn_entity.py-5] [INFO] [1746699398.329051419] [left]: Calling service /spawn_entity
+[spawn_entity.py-12] [INFO] [1746699398.481234408] [right]: Calling service /spawn_entity
+[gzserver-1] [INFO] [1746699399.149383884] [left_summit_imu_imu_plugin]: <initial_orientation_as_reference> is unset, using default value of false to comply with REP 145 (world as orientation reference)
+[spawn_entity.py-5] [INFO] [1746699399.494774016] [left]: Spawn status: SpawnEntity: Successfully spawned entity [left_robot]
+[spawn_entity.py-5] [INFO] [1746699399.503791691] [left]: Calling service /unpause_physics
+[INFO] [spawn_entity.py-5]: process has finished cleanly [pid 106]
+[gzserver-1] [INFO] [1746699399.817646860] [left_summit.omni_steering]: Subscribed to [/left_summit/cmd_vel]
+[gzserver-1] [INFO] [1746699399.824089562] [left_summit.omni_steering]: Advertise odometry on [/left_summit/odom]
+[gzserver-1] [INFO] [1746699399.830910836] [left_summit.omni_steering]: Publishing odom transforms between [left_summit_odom] and [left_summit_base_footprint]
+[gzserver-1] [INFO] [1746699399.876545929] [gazebo_ros2_control]: Loading gazebo_ros2_control plugin
+[gzserver-1] [INFO] [1746699399.906334406] [left.left_gazebo_ros2_control]: Starting gazebo_ros2_control plugin in namespace: /left
+[gzserver-1] [INFO] [1746699399.906435746] [left.left_gazebo_ros2_control]: Starting gazebo_ros2_control plugin in ros 2 node: left_gazebo_ros2_control
+[gzserver-1] [INFO] [1746699399.922339240] [left.left_gazebo_ros2_control]: connected to service!! robot_state_publisher
+[gzserver-1] [INFO] [1746699399.928445244] [left.left_gazebo_ros2_control]: Received urdf from param server, parsing...
+[gzserver-1] [INFO] [1746699399.929718134] [left.left_gazebo_ros2_control]: Loading parameter files /ros2_ws/install/ur/share/ur/config/left_controller.yaml
+[gzserver-1] [INFO] [1746699399.940336815] [resource_manager]: Loading hardware 'left_ur' 
+[gzserver-1] [ERROR] [1746699399.940498921] [left.left_gazebo_ros2_control]: Error initializing URDF to resource manager!
+[gzserver-1] [INFO] [1746699399.973777032] [left.left_gazebo_ros2_control]: Loading joint: ur_left_shoulder_pan_joint
+[gzserver-1] [INFO] [1746699399.974304886] [left.left_gazebo_ros2_control]: 	State:
+[gzserver-1] [INFO] [1746699399.974420012] [left.left_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1746699399.975503443] [left.left_gazebo_ros2_control]: 			 found initial value: -1.400000
+[gzserver-1] [INFO] [1746699399.975571424] [left.left_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1746699399.975911195] [left.left_gazebo_ros2_control]: 		 effort
+[gzserver-1] [INFO] [1746699399.976065626] [left.left_gazebo_ros2_control]: 	Command:
+[gzserver-1] [INFO] [1746699399.976094796] [left.left_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1746699399.977071366] [left.left_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1746699399.977802219] [left.left_gazebo_ros2_control]: Loading joint: ur_left_shoulder_lift_joint
+[gzserver-1] [INFO] [1746699399.977863712] [left.left_gazebo_ros2_control]: 	State:
+[gzserver-1] [INFO] [1746699399.977894305] [left.left_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1746699399.977930689] [left.left_gazebo_ros2_control]: 			 found initial value: -1.227838
+[gzserver-1] [INFO] [1746699399.977990803] [left.left_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1746699399.978078868] [left.left_gazebo_ros2_control]: 		 effort
+[gzserver-1] [INFO] [1746699399.978115248] [left.left_gazebo_ros2_control]: 	Command:
+[gzserver-1] [INFO] [1746699399.978145568] [left.left_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1746699399.978234290] [left.left_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1746699399.978285079] [left.left_gazebo_ros2_control]: Loading joint: ur_left_elbow_joint
+[gzserver-1] [INFO] [1746699399.978319000] [left.left_gazebo_ros2_control]: 	State:
+[gzserver-1] [INFO] [1746699399.978346677] [left.left_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1746699399.978376324] [left.left_gazebo_ros2_control]: 			 found initial value: -1.791046
+[gzserver-1] [INFO] [1746699399.978409155] [left.left_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1746699399.978439622] [left.left_gazebo_ros2_control]: 		 effort
+[gzserver-1] [INFO] [1746699399.978519702] [left.left_gazebo_ros2_control]: 	Command:
+[gzserver-1] [INFO] [1746699399.978553587] [left.left_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1746699399.978614039] [left.left_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1746699399.978712350] [left.left_gazebo_ros2_control]: Loading joint: ur_left_wrist_1_joint
+[gzserver-1] [INFO] [1746699399.978746584] [left.left_gazebo_ros2_control]: 	State:
+[gzserver-1] [INFO] [1746699399.978775491] [left.left_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1746699399.978805950] [left.left_gazebo_ros2_control]: 			 found initial value: -1.447073
+[gzserver-1] [INFO] [1746699399.978838410] [left.left_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1746699399.978869453] [left.left_gazebo_ros2_control]: 		 effort
+[gzserver-1] [INFO] [1746699399.978896249] [left.left_gazebo_ros2_control]: 	Command:
+[gzserver-1] [INFO] [1746699399.978919003] [left.left_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1746699399.978970501] [left.left_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1746699399.979017401] [left.left_gazebo_ros2_control]: Loading joint: ur_left_wrist_2_joint
+[gzserver-1] [INFO] [1746699399.979048725] [left.left_gazebo_ros2_control]: 	State:
+[gzserver-1] [INFO] [1746699399.979076288] [left.left_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1746699399.979103426] [left.left_gazebo_ros2_control]: 			 found initial value: 1.900333
+[gzserver-1] [INFO] [1746699399.979133312] [left.left_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1746699399.979162988] [left.left_gazebo_ros2_control]: 		 effort
+[gzserver-1] [INFO] [1746699399.979193064] [left.left_gazebo_ros2_control]: 	Command:
+[gzserver-1] [INFO] [1746699399.979221681] [left.left_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1746699399.979277713] [left.left_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1746699399.979324139] [left.left_gazebo_ros2_control]: Loading joint: ur_left_wrist_3_joint
+[gzserver-1] [INFO] [1746699399.979354191] [left.left_gazebo_ros2_control]: 	State:
+[gzserver-1] [INFO] [1746699399.979382196] [left.left_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1746699399.979412592] [left.left_gazebo_ros2_control]: 			 found initial value: -0.755379
+[gzserver-1] [INFO] [1746699399.979443669] [left.left_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1746699399.979483491] [left.left_gazebo_ros2_control]: 		 effort
+[gzserver-1] [INFO] [1746699399.979516309] [left.left_gazebo_ros2_control]: 	Command:
+[gzserver-1] [INFO] [1746699399.979544726] [left.left_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1746699399.979595583] [left.left_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1746699399.980486234] [resource_manager]: Initialize hardware 'left_ur' 
+[gzserver-1] [INFO] [1746699399.984531425] [resource_manager]: Successful initialization of hardware 'left_ur'
+[gzserver-1] [INFO] [1746699399.985372566] [resource_manager]: 'configure' hardware 'left_ur' 
+[gzserver-1] [INFO] [1746699399.985408697] [resource_manager]: Successful 'configure' of hardware 'left_ur'
+[gzserver-1] [INFO] [1746699399.985425496] [resource_manager]: 'activate' hardware 'left_ur' 
+[gzserver-1] [INFO] [1746699399.985435768] [resource_manager]: Successful 'activate' of hardware 'left_ur'
+[gzserver-1] [INFO] [1746699399.986592833] [left.left_gazebo_ros2_control]: Loading controller_manager
+[gzserver-1] [WARN] [1746699400.060618562] [left.left_gazebo_ros2_control]:  Desired controller update period (0.002 s) is slower than the gazebo simulation period (0.001 s).
+[gzserver-1] [INFO] [1746699400.064412476] [left.left_gazebo_ros2_control]: Loaded gazebo_ros2_control.
+[move_group-8] [WARN] [1746699400.134155187] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: The complete state of the robot is not yet known.  Missing left_summit_back_left_wheel_joint, left_summit_back_right_wheel_joint, left_summit_front_left_wheel_joint, left_summit_front_right_wheel_joint, ur_left_shoulder_pan_joint, ur_left_shoulder_lift_joint, ur_left_elbow_joint, ur_left_wrist_1_joint, ur_left_wrist_2_joint, ur_left_wrist_3_joint
+[gzserver-1] [INFO] [1746699400.197287163] [left.controller_manager]: Loading controller 'joint_state_broadcaster'
+[spawner-6] [INFO] [1746699400.242217892] [left.spawner_joint_state_broadcaster]: [94mLoaded [1mjoint_state_broadcaster[0m
+[gzserver-1] [INFO] [1746699400.246468844] [left.controller_manager]: Loading controller 'ur_left_joint_group_vel_controller'
+[gzserver-1] [INFO] [1746699400.832832202] [right_summit_imu_imu_plugin]: <initial_orientation_as_reference> is unset, using default value of false to comply with REP 145 (world as orientation reference)
+[spawn_entity.py-12] [INFO] [1746699401.161166469] [right]: Spawn status: SpawnEntity: Successfully spawned entity [right_robot]
+[spawn_entity.py-12] [INFO] [1746699401.167973014] [right]: Calling service /unpause_physics
+[gzserver-1] [WARN] [1746699401.261376173] [gazebo.rclcpp]: failed to send response to /unpause_physics (timeout): client will not receive response, at ./src/rmw_response.cpp:154, at ./src/rcl/service.c:314
+[gzserver-1] [INFO] [1746699401.332897718] [right_summit.omni_steering]: Subscribed to [/right_summit/cmd_vel]
+[gzserver-1] [INFO] [1746699401.335537565] [right_summit.omni_steering]: Advertise odometry on [/right_summit/odom]
+[gzserver-1] [INFO] [1746699401.340406666] [right_summit.omni_steering]: Publishing odom transforms between [right_summit_odom] and [right_summit_base_footprint]
+[gzserver-1] [INFO] [1746699401.340862529] [gazebo_ros2_control]: Loading gazebo_ros2_control plugin
+[gzserver-1] [WARN] [1746699401.362359726] [gazebo.rclcpp]: failed to send response to /unpause_physics (timeout): client will not receive response, at ./src/rmw_response.cpp:154, at ./src/rcl/service.c:314
+[gzserver-1] [INFO] [1746699401.362509623] [right.right_gazebo_ros2_control]: Starting gazebo_ros2_control plugin in namespace: /right
+[gzserver-1] [INFO] [1746699401.362559850] [right.right_gazebo_ros2_control]: Starting gazebo_ros2_control plugin in ros 2 node: right_gazebo_ros2_control
+[INFO] [spawn_entity.py-12]: process has finished cleanly [pid 130]
+[gzserver-1] [INFO] [1746699401.384998811] [right.right_gazebo_ros2_control]: connected to service!! robot_state_publisher
+[gzserver-1] [INFO] [1746699401.385857448] [right.right_gazebo_ros2_control]: Received urdf from param server, parsing...
+[gzserver-1] [INFO] [1746699401.385940525] [right.right_gazebo_ros2_control]: Loading parameter files /ros2_ws/install/ur/share/ur/config/right_controller.yaml
+[gzserver-1] [INFO] [1746699401.399320455] [resource_manager]: Loading hardware 'right_ur' 
+[gzserver-1] [ERROR] [1746699401.399403370] [right.right_gazebo_ros2_control]: Error initializing URDF to resource manager!
+[gzserver-1] [INFO] [1746699401.403019470] [right.right_gazebo_ros2_control]: Loading joint: ur_right_shoulder_pan_joint
+[gzserver-1] [INFO] [1746699401.403148065] [right.right_gazebo_ros2_control]: 	State:
+[gzserver-1] [INFO] [1746699401.403180490] [right.right_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1746699401.403220607] [right.right_gazebo_ros2_control]: 			 found initial value: -1.300000
+[gzserver-1] [INFO] [1746699401.403257679] [right.right_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1746699401.403290301] [right.right_gazebo_ros2_control]: 		 effort
+[gzserver-1] [INFO] [1746699401.403328624] [right.right_gazebo_ros2_control]: 	Command:
+[gzserver-1] [INFO] [1746699401.403357273] [right.right_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1746699401.403465713] [right.right_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1746699401.403518970] [right.right_gazebo_ros2_control]: Loading joint: ur_right_shoulder_lift_joint
+[gzserver-1] [INFO] [1746699401.403553679] [right.right_gazebo_ros2_control]: 	State:
+[gzserver-1] [INFO] [1746699401.403581414] [right.right_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1746699401.403607689] [right.right_gazebo_ros2_control]: 			 found initial value: -0.800000
+[gzserver-1] [INFO] [1746699401.403636329] [right.right_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1746699401.403664635] [right.right_gazebo_ros2_control]: 		 effort
+[gzserver-1] [INFO] [1746699401.403689644] [right.right_gazebo_ros2_control]: 	Command:
+[gzserver-1] [INFO] [1746699401.403710986] [right.right_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1746699401.403774278] [right.right_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1746699401.403822496] [right.right_gazebo_ros2_control]: Loading joint: ur_right_elbow_joint
+[gzserver-1] [INFO] [1746699401.403851690] [right.right_gazebo_ros2_control]: 	State:
+[gzserver-1] [INFO] [1746699401.403878232] [right.right_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1746699401.403909123] [right.right_gazebo_ros2_control]: 			 found initial value: -1.800000
+[gzserver-1] [INFO] [1746699401.403942890] [right.right_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1746699401.403972723] [right.right_gazebo_ros2_control]: 		 effort
+[gzserver-1] [INFO] [1746699401.404006625] [right.right_gazebo_ros2_control]: 	Command:
+[gzserver-1] [INFO] [1746699401.404031694] [right.right_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1746699401.404152439] [right.right_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1746699401.404193452] [right.right_gazebo_ros2_control]: Loading joint: ur_right_wrist_1_joint
+[gzserver-1] [INFO] [1746699401.404221826] [right.right_gazebo_ros2_control]: 	State:
+[gzserver-1] [INFO] [1746699401.404247484] [right.right_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1746699401.404272749] [right.right_gazebo_ros2_control]: 			 found initial value: -1.570000
+[gzserver-1] [INFO] [1746699401.404408609] [right.right_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1746699401.404443452] [right.right_gazebo_ros2_control]: 		 effort
+[gzserver-1] [INFO] [1746699401.404472398] [right.right_gazebo_ros2_control]: 	Command:
+[gzserver-1] [INFO] [1746699401.404500444] [right.right_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1746699401.404559244] [right.right_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1746699401.404611879] [right.right_gazebo_ros2_control]: Loading joint: ur_right_wrist_2_joint
+[gzserver-1] [INFO] [1746699401.404643044] [right.right_gazebo_ros2_control]: 	State:
+[gzserver-1] [INFO] [1746699401.404722690] [right.right_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1746699401.404756447] [right.right_gazebo_ros2_control]: 			 found initial value: 1.638000
+[gzserver-1] [INFO] [1746699401.404784086] [right.right_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1746699401.404810829] [right.right_gazebo_ros2_control]: 		 effort
+[gzserver-1] [INFO] [1746699401.404842198] [right.right_gazebo_ros2_control]: 	Command:
+[gzserver-1] [INFO] [1746699401.404870440] [right.right_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1746699401.404932474] [right.right_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1746699401.404977749] [right.right_gazebo_ros2_control]: Loading joint: ur_right_wrist_3_joint
+[gzserver-1] [INFO] [1746699401.405008392] [right.right_gazebo_ros2_control]: 	State:
+[gzserver-1] [INFO] [1746699401.405030981] [right.right_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1746699401.405054689] [right.right_gazebo_ros2_control]: 			 found initial value: 0.000000
+[gzserver-1] [INFO] [1746699401.405081405] [right.right_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1746699401.405116822] [right.right_gazebo_ros2_control]: 		 effort
+[gzserver-1] [INFO] [1746699401.405143607] [right.right_gazebo_ros2_control]: 	Command:
+[gzserver-1] [INFO] [1746699401.405166043] [right.right_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1746699401.405207281] [right.right_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1746699401.405272910] [resource_manager]: Initialize hardware 'right_ur' 
+[gzserver-1] [INFO] [1746699401.405364608] [resource_manager]: Successful initialization of hardware 'right_ur'
+[gzserver-1] [INFO] [1746699401.405474394] [resource_manager]: 'configure' hardware 'right_ur' 
+[gzserver-1] [INFO] [1746699401.405499594] [resource_manager]: Successful 'configure' of hardware 'right_ur'
+[gzserver-1] [INFO] [1746699401.405529720] [resource_manager]: 'activate' hardware 'right_ur' 
+[gzserver-1] [INFO] [1746699401.405546973] [resource_manager]: Successful 'activate' of hardware 'right_ur'
+[gzserver-1] [INFO] [1746699401.405637332] [right.right_gazebo_ros2_control]: Loading controller_manager
+[gzserver-1] [WARN] [1746699401.500002674] [right.right_gazebo_ros2_control]:  Desired controller update period (0.002 s) is slower than the gazebo simulation period (0.001 s).
+[gzserver-1] [INFO] [1746699401.500824336] [right.right_gazebo_ros2_control]: Loaded gazebo_ros2_control.
+[spawner-7] [INFO] [1746699401.507502322] [left.spawner_ur_left_joint_group_vel_controller]: [94mLoaded [1mur_left_joint_group_vel_controller[0m
+[gzserver-1] [INFO] [1746699401.507766553] [left.controller_manager]: Configuring controller 'joint_state_broadcaster'
+[gzserver-1] [INFO] [1746699401.508652704] [left.joint_state_broadcaster]: 'joints' or 'interfaces' parameter is empty. All available state interfaces will be published
+[gzserver-1] [INFO] [1746699401.532166728] [left.controller_manager]: Configuring controller 'ur_left_joint_group_vel_controller'
+[gzserver-1] [INFO] [1746699401.537642060] [left.ur_left_joint_group_vel_controller]: configure successful
+[gzserver-1] [INFO] [1746699401.541297504] [right.controller_manager]: Loading controller 'joint_state_broadcaster'
+[spawner-6] [INFO] [1746699401.555260817] [left.spawner_joint_state_broadcaster]: [92mConfigured and activated [1mjoint_state_broadcaster[0m
+[gzserver-1] [INFO] [1746699401.560554186] [left.ur_left_joint_group_vel_controller]: activate successful
+[spawner-7] [INFO] [1746699401.566139545] [left.spawner_ur_left_joint_group_vel_controller]: [92mConfigured and activated [1mur_left_joint_group_vel_controller[0m
+[spawner-13] [INFO] [1746699401.600993972] [right.spawner_joint_state_broadcaster]: [94mLoaded [1mjoint_state_broadcaster[0m
+[gzserver-1] [INFO] [1746699401.607882218] [right.controller_manager]: Loading controller 'ur_right_joint_group_vel_controller'
+[move_group-8] [WARN] [1746699401.614895824] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: The complete state of the robot is not yet known.  Missing left_summit_back_left_wheel_joint, left_summit_back_right_wheel_joint, left_summit_front_left_wheel_joint, left_summit_front_right_wheel_joint, ur_left_shoulder_pan_joint, ur_left_shoulder_lift_joint, ur_left_elbow_joint, ur_left_wrist_1_joint, ur_left_wrist_2_joint, ur_left_wrist_3_joint
+[move_group-15] [WARN] [1746699401.627112314] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: The complete state of the robot is not yet known.  Missing right_summit_back_left_wheel_joint, right_summit_back_right_wheel_joint, right_summit_front_left_wheel_joint, right_summit_front_right_wheel_joint, ur_right_shoulder_pan_joint, ur_right_shoulder_lift_joint, ur_right_elbow_joint, ur_right_wrist_1_joint, ur_right_wrist_2_joint, ur_right_wrist_3_joint
+[gzserver-1] [INFO] [1746699401.750694066] [right.controller_manager]: Configuring controller 'joint_state_broadcaster'
+[gzserver-1] [INFO] [1746699401.750821185] [right.joint_state_broadcaster]: 'joints' or 'interfaces' parameter is empty. All available state interfaces will be published
+[spawner-14] [INFO] [1746699401.754309275] [right.spawner_ur_right_joint_group_vel_controller]: [94mLoaded [1mur_right_joint_group_vel_controller[0m
+[gzserver-1] [INFO] [1746699401.768300378] [right.controller_manager]: Configuring controller 'ur_right_joint_group_vel_controller'
+[gzserver-1] [INFO] [1746699401.770878450] [right.ur_right_joint_group_vel_controller]: configure successful
+[gzserver-1] [INFO] [1746699401.797913531] [right.ur_right_joint_group_vel_controller]: activate successful
+[spawner-14] [INFO] [1746699401.808689663] [right.spawner_ur_right_joint_group_vel_controller]: [92mConfigured and activated [1mur_right_joint_group_vel_controller[0m
+[spawner-13] [INFO] [1746699401.862836746] [right.spawner_joint_state_broadcaster]: [92mConfigured and activated [1mjoint_state_broadcaster[0m
+[INFO] [spawner-6]: process has finished cleanly [pid 108]
+[INFO] [spawner-7]: process has finished cleanly [pid 110]
+[INFO] [spawner-14]: process has finished cleanly [pid 152]
+[INFO] [spawner-13]: process has finished cleanly [pid 141]
+[move_group-8] [WARN] [1746699402.672335304] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: The complete state of the robot is not yet known.  Missing left_summit_back_left_wheel_joint, left_summit_back_right_wheel_joint, left_summit_front_left_wheel_joint, left_summit_front_right_wheel_joint, ur_left_shoulder_pan_joint, ur_left_shoulder_lift_joint, ur_left_elbow_joint, ur_left_wrist_1_joint, ur_left_wrist_2_joint, ur_left_wrist_3_joint
+[move_group-15] [WARN] [1746699402.680875644] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: The complete state of the robot is not yet known.  Missing right_summit_back_left_wheel_joint, right_summit_back_right_wheel_joint, right_summit_front_left_wheel_joint, right_summit_front_right_wheel_joint, ur_right_shoulder_pan_joint, ur_right_shoulder_lift_joint, ur_right_elbow_joint, ur_right_wrist_1_joint, ur_right_wrist_2_joint, ur_right_wrist_3_joint
+[move_group-8] [WARN] [1746699403.717293794] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: The complete state of the robot is not yet known.  Missing left_summit_back_left_wheel_joint, left_summit_back_right_wheel_joint, left_summit_front_left_wheel_joint, left_summit_front_right_wheel_joint, ur_left_shoulder_pan_joint, ur_left_shoulder_lift_joint, ur_left_elbow_joint, ur_left_wrist_1_joint, ur_left_wrist_2_joint, ur_left_wrist_3_joint
+[move_group-15] [WARN] [1746699403.721669248] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: The complete state of the robot is not yet known.  Missing right_summit_back_left_wheel_joint, right_summit_back_right_wheel_joint, right_summit_front_left_wheel_joint, right_summit_front_right_wheel_joint, ur_right_shoulder_pan_joint, ur_right_shoulder_lift_joint, ur_right_elbow_joint, ur_right_wrist_1_joint, ur_right_wrist_2_joint, ur_right_wrist_3_joint
+[move_group-8] [WARN] [1746699404.737639074] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: The complete state of the robot is not yet known.  Missing left_summit_back_left_wheel_joint, left_summit_back_right_wheel_joint, left_summit_front_left_wheel_joint, left_summit_front_right_wheel_joint, ur_left_shoulder_pan_joint, ur_left_shoulder_lift_joint, ur_left_elbow_joint, ur_left_wrist_1_joint, ur_left_wrist_2_joint, ur_left_wrist_3_joint
+[move_group-8] [WARN] [1746699405.738441928] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: The complete state of the robot is not yet known.  Missing left_summit_back_left_wheel_joint, left_summit_back_right_wheel_joint, left_summit_front_left_wheel_joint, left_summit_front_right_wheel_joint, ur_left_shoulder_pan_joint, ur_left_shoulder_lift_joint, ur_left_elbow_joint, ur_left_wrist_1_joint, ur_left_wrist_2_joint, ur_left_wrist_3_joint
+[rviz2-3] [ERROR] [1746699406.951863603] [rviz2]: Could not find parameter robot_description and did not receive robot_description via std_msgs::msg::String subscription within 10.000000 seconds.
+[rviz2-3] Error:   Error document empty.
+[rviz2-3]          at line 100 in ./urdf_parser/src/model.cpp
+[rviz2-3] Failed to parse robot description using: urdf_xml_parser/URDFXMLParser
+[rviz2-3] [INFO] [1746699416.997345484] [moveit_rdf_loader.rdf_loader]: Unable to parse URDF
+[rviz2-3] [ERROR] [1746699417.043327416] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Robot model not loaded
+[ERROR] [gzclient-2]: process has died [pid 100, exit code -11, cmd 'gzclient'].
+[INFO] [rviz2-3]: process has finished cleanly [pid 102]
+[WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+[move_group-15] [INFO] [1746699430.074307990] [rclcpp]: signal_handler(signum=2)
+[static_transform_publisher-16] [INFO] [1746699430.074307591] [rclcpp]: signal_handler(signum=2)
+[static_transform_publisher-9] [INFO] [1746699430.074326822] [rclcpp]: signal_handler(signum=2)
+[move_group-8] [INFO] [1746699430.074366587] [rclcpp]: signal_handler(signum=2)
+[robot_state_publisher-4] [INFO] [1746699430.074378941] [rclcpp]: signal_handler(signum=2)
+[robot_state_publisher-11] [INFO] [1746699430.074307482] [rclcpp]: signal_handler(signum=2)
+[move_group-15] [INFO] [1746699430.123466722] [moveit.ros_planning_interface.moveit_cpp]: Deleting MoveItCpp
+[move_group-15] [INFO] [1746699430.125231483] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Stopped publishing maintained planning scene.
+[move_group-15] [INFO] [1746699430.127708788] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Stopping world geometry monitor
+[move_group-8] [INFO] [1746699430.127916002] [moveit.ros_planning_interface.moveit_cpp]: Deleting MoveItCpp
+[move_group-8] [INFO] [1746699430.129271214] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Stopped publishing maintained planning scene.
+[move_group-15] [INFO] [1746699430.130862612] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Stopping planning scene monitor
+[move_group-15] Warning: class_loader.ClassLoader: SEVERE WARNING!!! Attempting to unload library while objects created by this loader exist in the heap! You should delete your objects before attempting to unload the library or destroying the ClassLoader. The library will NOT be unloaded.
+[move_group-15]          at line 127 in ./src/class_loader.cpp
+[move_group-8] [INFO] [1746699430.133359219] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Stopping world geometry monitor
+[move_group-8] [INFO] [1746699430.136487868] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Stopping planning scene monitor
+[move_group-8] Warning: class_loader.ClassLoader: SEVERE WARNING!!! Attempting to unload library while objects created by this loader exist in the heap! You should delete your objects before attempting to unload the library or destroying the ClassLoader. The library will NOT be unloaded.
+[move_group-8]          at line 127 in ./src/class_loader.cpp
+[INFO] [static_transform_publisher-9]: process has finished cleanly [pid 115]
+[INFO] [static_transform_publisher-16]: process has finished cleanly [pid 164]
+[INFO] [robot_state_publisher-4]: process has finished cleanly [pid 104]
+[INFO] [robot_state_publisher-11]: process has finished cleanly [pid 127]
+[move_group-15] Stack trace (most recent call last):
+[move_group-15] #11   Object "", at 0xffffffffffffffff, in 
+[move_group-15] #10   Object "/ros2_ws/build/moveit_ros_move_group/move_group", at 0x564f1fc44eb4, in _start
+[move_group-8] Stack trace (most recent call last):
+[move_group-15] #9    Object "/usr/lib/x86_64-linux-gnu/libc.so.6", at 0x7f7ccb933e3f, in __libc_start_main
+[move_group-15] #8    Object "/usr/lib/x86_64-linux-gnu/libc.so.6", at 0x7f7ccb933d8f, in 
+[move_group-15] #7    Object "/ros2_ws/build/moveit_ros_move_group/move_group", at 0x564f1fc44483, in main
+[move_group-15] #6    Object "/ros2_ws/build/moveit_ros_move_group/move_group", at 0x564f1fc4b9c1, in std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release()
+[move_group-15] #5    Object "/opt/ros/humble/lib/librclcpp.so", at 0x7f7ccbee484e, in rclcpp::Node::~Node()
+[move_group-15] #4    Object "/opt/ros/humble/lib/librclcpp.so", at 0x7f7ccbebfc69, in 
+[move_group-15] #3    Object "/opt/ros/humble/lib/librclcpp.so", at 0x7f7ccbeedef9, in 
+[move_group-15] #2    Object "/opt/ros/humble/lib/librclcpp.so", at 0x7f7ccbeede40, in rclcpp::node_interfaces::NodeBase::~NodeBase()
+[move_group-15] #1    Object "/opt/ros/humble/lib/librclcpp.so", at 0x7f7ccbebfc69, in 
+[move_group-15] #0    Object "/opt/ros/humble/lib/librclcpp.so", at 0x7f7ccbec49e1, in rclcpp::CallbackGroup::~CallbackGroup()
+[move_group-15] Segmentation fault (Address not mapped to object [0x7f7cc0b40c70])
+[move_group-8] #11   Object "", at 0xffffffffffffffff, in 
+[move_group-8] #10   Object "/ros2_ws/build/moveit_ros_move_group/move_group", at 0x55bbcc99aeb4, in _start
+[move_group-8] #9    Object "/usr/lib/x86_64-linux-gnu/libc.so.6", at 0x7f5267928e3f, in __libc_start_main
+[move_group-8] #8    Object "/usr/lib/x86_64-linux-gnu/libc.so.6", at 0x7f5267928d8f, in 
+[move_group-8] #7    Object "/ros2_ws/build/moveit_ros_move_group/move_group", at 0x55bbcc99a483, in main
+[move_group-8] #6    Object "/ros2_ws/build/moveit_ros_move_group/move_group", at 0x55bbcc9a19c1, in std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release()
+[move_group-8] #5    Object "/opt/ros/humble/lib/librclcpp.so", at 0x7f5267ee484e, in rclcpp::Node::~Node()
+[move_group-8] #4    Object "/opt/ros/humble/lib/librclcpp.so", at 0x7f5267ebfc69, in 
+[move_group-8] #3    Object "/opt/ros/humble/lib/librclcpp.so", at 0x7f5267eedef9, in 
+[move_group-8] #2    Object "/opt/ros/humble/lib/librclcpp.so", at 0x7f5267eede40, in rclcpp::node_interfaces::NodeBase::~NodeBase()
+[move_group-8] #1    Object "/opt/ros/humble/lib/librclcpp.so", at 0x7f5267ebfc69, in 
+[move_group-8] #0    Object "/opt/ros/humble/lib/librclcpp.so", at 0x7f5267ec49e1, in rclcpp::CallbackGroup::~CallbackGroup()
+[move_group-8] Segmentation fault (Address not mapped to object [0x7f523fc90c70])
+[INFO] [joint_state_publisher-10]: process has finished cleanly [pid 119]
+[INFO] [joint_state_publisher-17]: process has finished cleanly [pid 175]
+[ERROR] [move_group-15]: process has died [pid 158, exit code -11, cmd '/ros2_ws/install/moveit_ros_move_group/lib/moveit_ros_move_group/move_group --ros-args --params-file /tmp/launch_params_gwo6t_kb --params-file /tmp/launch_params_7yx1t4xn --params-file /tmp/launch_params_3zq9b7i4 --params-file /tmp/launch_params_50f8lidd'].
+[move_group-15] [0m
+[ERROR] [move_group-8]: process has died [pid 112, exit code -11, cmd '/ros2_ws/install/moveit_ros_move_group/lib/moveit_ros_move_group/move_group --ros-args --params-file /tmp/launch_params_0vxhx8rv --params-file /tmp/launch_params___5efiqt --params-file /tmp/launch_params_riz09nim --params-file /tmp/launch_params_2raqnknd'].
+[move_group-8] [0m
+[INFO] [gzserver-1]: process has finished cleanly [pid 98]

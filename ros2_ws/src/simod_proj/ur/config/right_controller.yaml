@@ -12,6 +12,10 @@
   joint_state_broadcaster:
     ros__parameters:
       joints:
+        - right_summit_back_left_wheel_joint
+        - right_summit_back_right_wheel_joint
+        - right_summit_front_left_wheel_joint
+        - right_summit_front_right_wheel_joint
         - ur_right_shoulder_pan_joint
         - ur_right_shoulder_lift_joint
         - ur_right_elbow_joint

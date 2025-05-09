@@ -1,0 +1,823 @@
+[INFO] [launch]: All log files can be found below /root/.ros/log/2025-05-08-13-30-53-183918-outlander-Aspire-V3-571G-3905
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [gzserver-1]: process started with pid [3908]
+[INFO] [gzclient-2]: process started with pid [3910]
+[INFO] [rviz2-3]: process started with pid [3912]
+[INFO] [robot_state_publisher-4]: process started with pid [3914]
+[INFO] [spawn_entity.py-5]: process started with pid [3916]
+[INFO] [spawner-6]: process started with pid [3918]
+[INFO] [spawner-7]: process started with pid [3920]
+[INFO] [move_group-8]: process started with pid [3922]
+[INFO] [static_transform_publisher-9]: process started with pid [3924]
+[INFO] [joint_state_publisher-10]: process started with pid [3927]
+[INFO] [robot_state_publisher-11]: process started with pid [3941]
+[INFO] [spawn_entity.py-12]: process started with pid [3949]
+[INFO] [spawner-13]: process started with pid [3952]
+[INFO] [spawner-14]: process started with pid [3954]
+[INFO] [move_group-15]: process started with pid [3956]
+[INFO] [static_transform_publisher-16]: process started with pid [3972]
+[INFO] [joint_state_publisher-17]: process started with pid [3984]
+[rviz2-3] QStandardPaths: XDG_RUNTIME_DIR not set, defaulting to '/tmp/runtime-root'
+[robot_state_publisher-4] [INFO] [1746711057.433325320] [left.robot_state_publisher]: got segment left_summit_back_left_wheel_link
+[robot_state_publisher-4] [INFO] [1746711057.433507858] [left.robot_state_publisher]: got segment left_summit_back_right_wheel_link
+[robot_state_publisher-4] [INFO] [1746711057.433532698] [left.robot_state_publisher]: got segment left_summit_base_chapa
+[robot_state_publisher-4] [INFO] [1746711057.433552982] [left.robot_state_publisher]: got segment left_summit_base_docking_contact
+[robot_state_publisher-4] [INFO] [1746711057.433571510] [left.robot_state_publisher]: got segment left_summit_base_footprint
+[robot_state_publisher-4] [INFO] [1746711057.433589909] [left.robot_state_publisher]: got segment left_summit_base_link
+[robot_state_publisher-4] [INFO] [1746711057.433607177] [left.robot_state_publisher]: got segment left_summit_base_logo_front
+[robot_state_publisher-4] [INFO] [1746711057.433624423] [left.robot_state_publisher]: got segment left_summit_base_logo_left
+[robot_state_publisher-4] [INFO] [1746711057.433642611] [left.robot_state_publisher]: got segment left_summit_base_logo_rear
+[robot_state_publisher-4] [INFO] [1746711057.433659750] [left.robot_state_publisher]: got segment left_summit_base_logo_right
+[robot_state_publisher-4] [INFO] [1746711057.433677203] [left.robot_state_publisher]: got segment left_summit_front_laser_base_link
+[robot_state_publisher-4] [INFO] [1746711057.433695875] [left.robot_state_publisher]: got segment left_summit_front_laser_link
+[robot_state_publisher-4] [INFO] [1746711057.433713501] [left.robot_state_publisher]: got segment left_summit_front_left_wheel_link
+[robot_state_publisher-4] [INFO] [1746711057.433730883] [left.robot_state_publisher]: got segment left_summit_front_right_wheel_link
+[robot_state_publisher-4] [INFO] [1746711057.433747949] [left.robot_state_publisher]: got segment left_summit_imu_link
+[robot_state_publisher-4] [INFO] [1746711057.433764873] [left.robot_state_publisher]: got segment left_summit_rear_laser_base_link
+[robot_state_publisher-4] [INFO] [1746711057.433783330] [left.robot_state_publisher]: got segment left_summit_rear_laser_link
+[robot_state_publisher-4] [INFO] [1746711057.433800783] [left.robot_state_publisher]: got segment ur_left_base
+[robot_state_publisher-4] [INFO] [1746711057.433818694] [left.robot_state_publisher]: got segment ur_left_base_link
+[robot_state_publisher-4] [INFO] [1746711057.433835758] [left.robot_state_publisher]: got segment ur_left_base_link_inertia
+[robot_state_publisher-4] [INFO] [1746711057.433853718] [left.robot_state_publisher]: got segment ur_left_finger_left
+[robot_state_publisher-4] [INFO] [1746711057.433872120] [left.robot_state_publisher]: got segment ur_left_finger_right
+[robot_state_publisher-4] [INFO] [1746711057.433890652] [left.robot_state_publisher]: got segment ur_left_finger_tip
+[robot_state_publisher-4] [INFO] [1746711057.433909756] [left.robot_state_publisher]: got segment ur_left_flange
+[robot_state_publisher-4] [INFO] [1746711057.433928668] [left.robot_state_publisher]: got segment ur_left_forearm_link
+[robot_state_publisher-4] [INFO] [1746711057.433947645] [left.robot_state_publisher]: got segment ur_left_ft_frame
+[robot_state_publisher-4] [INFO] [1746711057.433967007] [left.robot_state_publisher]: got segment ur_left_robotiq_hand
+[robot_state_publisher-4] [INFO] [1746711057.433985453] [left.robot_state_publisher]: got segment ur_left_shoulder_link
+[robot_state_publisher-4] [INFO] [1746711057.434018360] [left.robot_state_publisher]: got segment ur_left_tool0
+[robot_state_publisher-4] [INFO] [1746711057.434039289] [left.robot_state_publisher]: got segment ur_left_upper_arm_link
+[robot_state_publisher-4] [INFO] [1746711057.434058385] [left.robot_state_publisher]: got segment ur_left_wrist_1_link
+[robot_state_publisher-4] [INFO] [1746711057.434077401] [left.robot_state_publisher]: got segment ur_left_wrist_2_link
+[robot_state_publisher-4] [INFO] [1746711057.434096154] [left.robot_state_publisher]: got segment ur_left_wrist_3_link
+[static_transform_publisher-9] [WARN] [1746711057.390170904] []: Old-style arguments are deprecated; see --help for new-style arguments
+[static_transform_publisher-9] [INFO] [1746711057.431764082] [left.static_transform_publisher]: Spinning until stopped - publishing transform
+[static_transform_publisher-9] translation: ('-0.660000', '0.000000', '0.000000')
+[static_transform_publisher-9] rotation: ('0.000000', '0.000000', '0.000000', '1.000000')
+[static_transform_publisher-9] from 'world' to 'left_summit_odom'
+[static_transform_publisher-16] [WARN] [1746711057.597342341] []: Old-style arguments are deprecated; see --help for new-style arguments
+[move_group-8] [INFO] [1746711057.605773739] [moveit_rdf_loader.rdf_loader]: Loaded robot model in 0.013121 seconds
+[move_group-8] [INFO] [1746711057.605893917] [moveit_robot_model.robot_model]: Loading robot model 'dual'...
+[move_group-8] [WARN] [1746711057.605987771] [moveit_robot_model.robot_model]: Link left_summit_base_footprint has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[move_group-8] [WARN] [1746711057.624675775] [moveit_robot_model.robot_model]: Link left_summit_base_logo_front has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[move_group-8] [WARN] [1746711057.624733964] [moveit_robot_model.robot_model]: Link left_summit_base_logo_left has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[move_group-8] [WARN] [1746711057.624754116] [moveit_robot_model.robot_model]: Link left_summit_base_logo_rear has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[move_group-8] [WARN] [1746711057.624772929] [moveit_robot_model.robot_model]: Link left_summit_base_logo_right has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[move_group-8] [WARN] [1746711057.624791592] [moveit_robot_model.robot_model]: Link left_summit_base_chapa has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[robot_state_publisher-11] [INFO] [1746711057.644124943] [right.robot_state_publisher]: got segment right_summit_back_left_wheel_link
+[robot_state_publisher-11] [INFO] [1746711057.644300393] [right.robot_state_publisher]: got segment right_summit_back_right_wheel_link
+[robot_state_publisher-11] [INFO] [1746711057.644324488] [right.robot_state_publisher]: got segment right_summit_base_chapa
+[robot_state_publisher-11] [INFO] [1746711057.644343285] [right.robot_state_publisher]: got segment right_summit_base_docking_contact
+[robot_state_publisher-11] [INFO] [1746711057.644360643] [right.robot_state_publisher]: got segment right_summit_base_footprint
+[robot_state_publisher-11] [INFO] [1746711057.644377565] [right.robot_state_publisher]: got segment right_summit_base_link
+[robot_state_publisher-11] [INFO] [1746711057.644393723] [right.robot_state_publisher]: got segment right_summit_base_logo_front
+[robot_state_publisher-11] [INFO] [1746711057.644409989] [right.robot_state_publisher]: got segment right_summit_base_logo_left
+[robot_state_publisher-11] [INFO] [1746711057.644426849] [right.robot_state_publisher]: got segment right_summit_base_logo_rear
+[robot_state_publisher-11] [INFO] [1746711057.644442899] [right.robot_state_publisher]: got segment right_summit_base_logo_right
+[robot_state_publisher-11] [INFO] [1746711057.644459806] [right.robot_state_publisher]: got segment right_summit_front_laser_base_link
+[robot_state_publisher-11] [INFO] [1746711057.644477634] [right.robot_state_publisher]: got segment right_summit_front_laser_link
+[robot_state_publisher-11] [INFO] [1746711057.644495948] [right.robot_state_publisher]: got segment right_summit_front_left_wheel_link
+[robot_state_publisher-11] [INFO] [1746711057.644513092] [right.robot_state_publisher]: got segment right_summit_front_right_wheel_link
+[robot_state_publisher-11] [INFO] [1746711057.644529747] [right.robot_state_publisher]: got segment right_summit_imu_link
+[robot_state_publisher-11] [INFO] [1746711057.644547434] [right.robot_state_publisher]: got segment right_summit_rear_laser_base_link
+[robot_state_publisher-11] [INFO] [1746711057.644565796] [right.robot_state_publisher]: got segment right_summit_rear_laser_link
+[robot_state_publisher-11] [INFO] [1746711057.644583122] [right.robot_state_publisher]: got segment ur_right_base
+[robot_state_publisher-11] [INFO] [1746711057.644601441] [right.robot_state_publisher]: got segment ur_right_base_link
+[robot_state_publisher-11] [INFO] [1746711057.644618856] [right.robot_state_publisher]: got segment ur_right_base_link_inertia
+[robot_state_publisher-11] [INFO] [1746711057.644635447] [right.robot_state_publisher]: got segment ur_right_finger_left
+[robot_state_publisher-11] [INFO] [1746711057.644652685] [right.robot_state_publisher]: got segment ur_right_finger_right
+[robot_state_publisher-11] [INFO] [1746711057.644669724] [right.robot_state_publisher]: got segment ur_right_finger_tip
+[robot_state_publisher-11] [INFO] [1746711057.644686923] [right.robot_state_publisher]: got segment ur_right_flange
+[robot_state_publisher-11] [INFO] [1746711057.644704089] [right.robot_state_publisher]: got segment ur_right_forearm_link
+[robot_state_publisher-11] [INFO] [1746711057.644727411] [right.robot_state_publisher]: got segment ur_right_ft_frame
+[robot_state_publisher-11] [INFO] [1746711057.644911593] [right.robot_state_publisher]: got segment ur_right_robotiq_hand
+[robot_state_publisher-11] [INFO] [1746711057.644930911] [right.robot_state_publisher]: got segment ur_right_shoulder_link
+[robot_state_publisher-11] [INFO] [1746711057.644946684] [right.robot_state_publisher]: got segment ur_right_tool0
+[robot_state_publisher-11] [INFO] [1746711057.644962324] [right.robot_state_publisher]: got segment ur_right_upper_arm_link
+[robot_state_publisher-11] [INFO] [1746711057.644978036] [right.robot_state_publisher]: got segment ur_right_wrist_1_link
+[robot_state_publisher-11] [INFO] [1746711057.644993937] [right.robot_state_publisher]: got segment ur_right_wrist_2_link
+[robot_state_publisher-11] [INFO] [1746711057.645009232] [right.robot_state_publisher]: got segment ur_right_wrist_3_link
+[move_group-8] [WARN] [1746711057.644422525] [moveit_robot_model.robot_model]: Link left_summit_imu_link has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[static_transform_publisher-16] [INFO] [1746711057.696874398] [right.static_transform_publisher]: Spinning until stopped - publishing transform
+[static_transform_publisher-16] translation: ('0.660000', '0.000000', '0.000000')
+[static_transform_publisher-16] rotation: ('0.000000', '0.000000', '0.000000', '1.000000')
+[static_transform_publisher-16] from 'world' to 'right_summit_odom'
+[move_group-15] [INFO] [1746711057.970366794] [moveit_rdf_loader.rdf_loader]: Loaded robot model in 0.0205983 seconds
+[move_group-15] [INFO] [1746711057.970493914] [moveit_robot_model.robot_model]: Loading robot model 'dual'...
+[move_group-15] [WARN] [1746711057.970601059] [moveit_robot_model.robot_model]: Link right_summit_base_footprint has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[move_group-15] [WARN] [1746711057.979791364] [moveit_robot_model.robot_model]: Link right_summit_base_logo_front has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[move_group-15] [WARN] [1746711057.979847450] [moveit_robot_model.robot_model]: Link right_summit_base_logo_left has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[move_group-15] [WARN] [1746711057.979866807] [moveit_robot_model.robot_model]: Link right_summit_base_logo_rear has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[move_group-15] [WARN] [1746711057.979883899] [moveit_robot_model.robot_model]: Link right_summit_base_logo_right has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[move_group-15] [WARN] [1746711057.979899091] [moveit_robot_model.robot_model]: Link right_summit_base_chapa has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[move_group-15] [WARN] [1746711057.989000444] [moveit_robot_model.robot_model]: Link right_summit_imu_link has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[spawner-7] [INFO] [1746711058.436283406] [left.spawner_ur_left_joint_group_vel_controller]: waiting for service /left/controller_manager/list_controllers to become available...
+[spawn_entity.py-5] [INFO] [1746711058.601689989] [left]: Spawn Entity started
+[spawn_entity.py-5] [INFO] [1746711058.602861749] [left]: Loading entity published on topic /left/robot_description
+[spawn_entity.py-5] /opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/qos.py:307: UserWarning: DurabilityPolicy.RMW_QOS_POLICY_DURABILITY_TRANSIENT_LOCAL is deprecated. Use DurabilityPolicy.TRANSIENT_LOCAL instead.
+[spawn_entity.py-5]   warnings.warn(
+[spawn_entity.py-5] [INFO] [1746711058.615663437] [left]: Waiting for entity xml on /left/robot_description
+[spawn_entity.py-5] [INFO] [1746711058.629894110] [left]: Waiting for service /spawn_entity, timeout = 5
+[spawn_entity.py-5] [INFO] [1746711058.630920929] [left]: Waiting for service /spawn_entity
+[spawner-6] [INFO] [1746711058.644878429] [left.spawner_joint_state_broadcaster]: waiting for service /left/controller_manager/list_controllers to become available...
+[spawn_entity.py-12] [INFO] [1746711058.806930902] [right]: Spawn Entity started
+[spawn_entity.py-12] [INFO] [1746711058.808282083] [right]: Loading entity published on topic /right/robot_description
+[spawn_entity.py-12] /opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/qos.py:307: UserWarning: DurabilityPolicy.RMW_QOS_POLICY_DURABILITY_TRANSIENT_LOCAL is deprecated. Use DurabilityPolicy.TRANSIENT_LOCAL instead.
+[spawn_entity.py-12]   warnings.warn(
+[joint_state_publisher-10] [INFO] [1746711058.815694389] [left.joint_state_publisher]: Waiting for robot_description to be published on the robot_description topic...
+[spawn_entity.py-12] [INFO] [1746711058.823119561] [right]: Waiting for entity xml on /right/robot_description
+[spawn_entity.py-12] [INFO] [1746711058.837779443] [right]: Waiting for service /spawn_entity, timeout = 5
+[spawn_entity.py-12] [INFO] [1746711058.840203059] [right]: Waiting for service /spawn_entity
+[joint_state_publisher-17] [INFO] [1746711058.863112601] [right.joint_state_publisher]: Waiting for robot_description to be published on the robot_description topic...
+[spawner-14] [INFO] [1746711058.943571335] [right.spawner_ur_right_joint_group_vel_controller]: waiting for service /right/controller_manager/list_controllers to become available...
+[move_group-15] [INFO] [1746711059.221327201] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Publishing maintained planning scene on 'monitored_planning_scene'
+[move_group-15] [INFO] [1746711059.221580918] [moveit.ros_planning_interface.moveit_cpp]: Listening to 'joint_states' for joint states
+[move_group-15] [INFO] [1746711059.227151266] [moveit_ros.current_state_monitor]: Listening to joint states on topic 'joint_states'
+[move_group-15] [INFO] [1746711059.228869613] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Listening to '/attached_collision_object' for attached collision objects
+[move_group-15] [INFO] [1746711059.229064713] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Starting planning scene monitor
+[move_group-15] [INFO] [1746711059.230764366] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Listening to '/planning_scene'
+[move_group-15] [INFO] [1746711059.230799053] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Starting world geometry update monitor for collision objects, attached objects, octomap updates.
+[move_group-15] [INFO] [1746711059.232289951] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Listening to 'collision_object'
+[move_group-15] [INFO] [1746711059.234352175] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Listening to 'planning_scene_world' for planning scene world geometry
+[move_group-15] [WARN] [1746711059.236372349] [moveit.ros.occupancy_map_monitor.middleware_handle]: Resolution not specified for Octomap. Assuming resolution = 0.1 instead
+[move_group-15] [WARN] [1746711059.237576942] [moveit_ros.current_state_monitor]: Unable to update multi-DOF joint 'Vjoint_right':Failure to lookup transform between 'right_summit_odom'and 'right_summit_base_footprint' with TF exception: Could not find a connection between 'right_summit_odom' and 'right_summit_base_footprint' because they are not part of the same tree.Tf has two or more unconnected trees.
+[move_group-8] [INFO] [1746711059.254316683] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Publishing maintained planning scene on 'monitored_planning_scene'
+[move_group-8] [INFO] [1746711059.254669959] [moveit.ros_planning_interface.moveit_cpp]: Listening to 'joint_states' for joint states
+[move_group-8] [INFO] [1746711059.260826066] [moveit_ros.current_state_monitor]: Listening to joint states on topic 'joint_states'
+[move_group-8] [INFO] [1746711059.262513529] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Listening to '/attached_collision_object' for attached collision objects
+[move_group-8] [INFO] [1746711059.262557054] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Starting planning scene monitor
+[move_group-8] [INFO] [1746711059.264544353] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Listening to '/planning_scene'
+[move_group-8] [INFO] [1746711059.264669094] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Starting world geometry update monitor for collision objects, attached objects, octomap updates.
+[move_group-8] [INFO] [1746711059.266924631] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Listening to 'collision_object'
+[move_group-8] [INFO] [1746711059.268866645] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Listening to 'planning_scene_world' for planning scene world geometry
+[move_group-8] [WARN] [1746711059.270776482] [moveit.ros.occupancy_map_monitor.middleware_handle]: Resolution not specified for Octomap. Assuming resolution = 0.1 instead
+[move_group-8] [WARN] [1746711059.272084337] [moveit_ros.current_state_monitor]: Unable to update multi-DOF joint 'Vjoint_left':Failure to lookup transform between 'left_summit_odom'and 'left_summit_base_footprint' with TF exception: Could not find a connection between 'left_summit_odom' and 'left_summit_base_footprint' because they are not part of the same tree.Tf has two or more unconnected trees.
+[rviz2-3] [INFO] [1746711059.610075119] [rviz2]: Stereo is NOT SUPPORTED
+[rviz2-3] [INFO] [1746711059.610331988] [rviz2]: OpenGl version: 4.6 (GLSL 4.6)
+[rviz2-3] [INFO] [1746711059.717018327] [rviz2]: Stereo is NOT SUPPORTED
+[spawner-13] [INFO] [1746711059.878954686] [right.spawner_joint_state_broadcaster]: waiting for service /right/controller_manager/list_controllers to become available...
+[rviz2-3] [WARN] [1746711060.790626395] [rcl.logging_rosout]: Publisher already registered for provided node name. If this is due to multiple nodes with the same name then all logs for that logger name will go out over the existing publisher. As soon as any node with that name is destructed it will unregister the publisher, preventing any further logs for that name from being published on the rosout topic.
+[move_group-15] [INFO] [1746711061.087660586] [moveit.ros_planning_interface.moveit_cpp]: Loading planning pipeline 'ompl'
+[move_group-8] [INFO] [1746711061.118351088] [moveit.ros_planning_interface.moveit_cpp]: Loading planning pipeline 'ompl'
+[move_group-15] [INFO] [1746711061.130479033] [moveit.ros_planning.planning_pipeline]: Using planning interface 'OMPL'
+[move_group-15] [INFO] [1746711061.140334127] [moveit_ros.add_time_optimal_parameterization]: Param 'ompl.path_tolerance' was not set. Using default value: 0.100000
+[move_group-15] [INFO] [1746711061.140366162] [moveit_ros.add_time_optimal_parameterization]: Param 'ompl.resample_dt' was not set. Using default value: 0.100000
+[move_group-15] [INFO] [1746711061.140425811] [moveit_ros.add_time_optimal_parameterization]: Param 'ompl.min_angle_change' was not set. Using default value: 0.001000
+[move_group-15] [INFO] [1746711061.140476466] [moveit_ros.fix_workspace_bounds]: Param 'ompl.default_workspace_bounds' was not set. Using default value: 10.000000
+[move_group-15] [INFO] [1746711061.140504801] [moveit_ros.fix_start_state_bounds]: Param 'ompl.start_state_max_bounds_error' was set to 0.100000
+[move_group-15] [INFO] [1746711061.140514137] [moveit_ros.fix_start_state_bounds]: Param 'ompl.start_state_max_dt' was not set. Using default value: 0.500000
+[move_group-15] [INFO] [1746711061.140534423] [moveit_ros.fix_start_state_collision]: Param 'ompl.start_state_max_dt' was not set. Using default value: 0.500000
+[move_group-15] [INFO] [1746711061.140544327] [moveit_ros.fix_start_state_collision]: Param 'ompl.jiggle_fraction' was set to 0.050000
+[move_group-15] [INFO] [1746711061.140564727] [moveit_ros.fix_start_state_collision]: Param 'ompl.max_sampling_attempts' was not set. Using default value: 100
+[move_group-15] [INFO] [1746711061.140585156] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Add Time Optimal Parameterization'
+[move_group-15] [INFO] [1746711061.140594483] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Resolve constraint frames to robot links'
+[move_group-15] [INFO] [1746711061.140600162] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Fix Workspace Bounds'
+[move_group-15] [INFO] [1746711061.140605592] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Fix Start State Bounds'
+[move_group-15] [INFO] [1746711061.140610886] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Fix Start State In Collision'
+[move_group-15] [INFO] [1746711061.140616215] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Fix Start State Path Constraints'
+[move_group-15] [INFO] [1746711061.145708133] [moveit.ros_planning_interface.moveit_cpp]: Loading planning pipeline 'chomp'
+[move_group-8] [INFO] [1746711061.147690339] [moveit.ros_planning.planning_pipeline]: Using planning interface 'OMPL'
+[move_group-8] [INFO] [1746711061.156315525] [moveit_ros.add_time_optimal_parameterization]: Param 'ompl.path_tolerance' was not set. Using default value: 0.100000
+[move_group-8] [INFO] [1746711061.156355528] [moveit_ros.add_time_optimal_parameterization]: Param 'ompl.resample_dt' was not set. Using default value: 0.100000
+[move_group-8] [INFO] [1746711061.156438845] [moveit_ros.add_time_optimal_parameterization]: Param 'ompl.min_angle_change' was not set. Using default value: 0.001000
+[move_group-8] [INFO] [1746711061.156516603] [moveit_ros.fix_workspace_bounds]: Param 'ompl.default_workspace_bounds' was not set. Using default value: 10.000000
+[move_group-8] [INFO] [1746711061.156549262] [moveit_ros.fix_start_state_bounds]: Param 'ompl.start_state_max_bounds_error' was set to 0.100000
+[move_group-8] [INFO] [1746711061.156560793] [moveit_ros.fix_start_state_bounds]: Param 'ompl.start_state_max_dt' was not set. Using default value: 0.500000
+[move_group-8] [INFO] [1746711061.156593187] [moveit_ros.fix_start_state_collision]: Param 'ompl.start_state_max_dt' was not set. Using default value: 0.500000
+[move_group-8] [INFO] [1746711061.156609776] [moveit_ros.fix_start_state_collision]: Param 'ompl.jiggle_fraction' was set to 0.050000
+[move_group-8] [INFO] [1746711061.156637079] [moveit_ros.fix_start_state_collision]: Param 'ompl.max_sampling_attempts' was not set. Using default value: 100
+[move_group-8] [INFO] [1746711061.156672169] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Add Time Optimal Parameterization'
+[move_group-8] [INFO] [1746711061.156683736] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Resolve constraint frames to robot links'
+[move_group-8] [INFO] [1746711061.156689590] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Fix Workspace Bounds'
+[move_group-8] [INFO] [1746711061.156694941] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Fix Start State Bounds'
+[move_group-8] [INFO] [1746711061.156700139] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Fix Start State In Collision'
+[move_group-8] [INFO] [1746711061.156705309] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Fix Start State Path Constraints'
+[move_group-15] [INFO] [1746711061.159775738] [moveit.ros_planning.planning_pipeline]: Using planning interface 'CHOMP'
+[move_group-8] [INFO] [1746711061.161459231] [moveit.ros_planning_interface.moveit_cpp]: Loading planning pipeline 'chomp'
+[move_group-15] [INFO] [1746711061.166092470] [moveit_ros.add_time_optimal_parameterization]: Param 'chomp.path_tolerance' was not set. Using default value: 0.100000
+[move_group-15] [INFO] [1746711061.166116679] [moveit_ros.add_time_optimal_parameterization]: Param 'chomp.resample_dt' was not set. Using default value: 0.100000
+[move_group-15] [INFO] [1746711061.166125427] [moveit_ros.add_time_optimal_parameterization]: Param 'chomp.min_angle_change' was not set. Using default value: 0.001000
+[move_group-15] [INFO] [1746711061.166158466] [moveit_ros.fix_workspace_bounds]: Param 'chomp.default_workspace_bounds' was not set. Using default value: 10.000000
+[move_group-15] [INFO] [1746711061.166181446] [moveit_ros.fix_start_state_bounds]: Param 'chomp.start_state_max_bounds_error' was set to 0.100000
+[move_group-15] [INFO] [1746711061.166190595] [moveit_ros.fix_start_state_bounds]: Param 'chomp.start_state_max_dt' was not set. Using default value: 0.500000
+[move_group-15] [INFO] [1746711061.166209771] [moveit_ros.fix_start_state_collision]: Param 'chomp.start_state_max_dt' was not set. Using default value: 0.500000
+[move_group-15] [INFO] [1746711061.166219036] [moveit_ros.fix_start_state_collision]: Param 'chomp.jiggle_fraction' was set to 0.050000
+[move_group-15] [INFO] [1746711061.166227063] [moveit_ros.fix_start_state_collision]: Param 'chomp.max_sampling_attempts' was not set. Using default value: 100
+[move_group-15] [INFO] [1746711061.166244287] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Add Time Optimal Parameterization'
+[move_group-15] [INFO] [1746711061.166251506] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Resolve constraint frames to robot links'
+[move_group-15] [INFO] [1746711061.166256974] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Fix Workspace Bounds'
+[move_group-15] [INFO] [1746711061.166262377] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Fix Start State Bounds'
+[move_group-15] [INFO] [1746711061.166267576] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Fix Start State In Collision'
+[move_group-15] [INFO] [1746711061.166272730] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Fix Start State Path Constraints'
+[move_group-15] [INFO] [1746711061.168944731] [moveit.ros_planning_interface.moveit_cpp]: Loading planning pipeline 'pilz_industrial_motion_planner'
+[move_group-8] [INFO] [1746711061.173567186] [moveit.ros_planning.planning_pipeline]: Using planning interface 'CHOMP'
+[move_group-8] [INFO] [1746711061.179326276] [moveit_ros.add_time_optimal_parameterization]: Param 'chomp.path_tolerance' was not set. Using default value: 0.100000
+[move_group-8] [INFO] [1746711061.179351505] [moveit_ros.add_time_optimal_parameterization]: Param 'chomp.resample_dt' was not set. Using default value: 0.100000
+[move_group-8] [INFO] [1746711061.179360147] [moveit_ros.add_time_optimal_parameterization]: Param 'chomp.min_angle_change' was not set. Using default value: 0.001000
+[move_group-8] [INFO] [1746711061.179394983] [moveit_ros.fix_workspace_bounds]: Param 'chomp.default_workspace_bounds' was not set. Using default value: 10.000000
+[move_group-8] [INFO] [1746711061.179420628] [moveit_ros.fix_start_state_bounds]: Param 'chomp.start_state_max_bounds_error' was set to 0.100000
+[move_group-8] [INFO] [1746711061.179431228] [moveit_ros.fix_start_state_bounds]: Param 'chomp.start_state_max_dt' was not set. Using default value: 0.500000
+[move_group-8] [INFO] [1746711061.179450662] [moveit_ros.fix_start_state_collision]: Param 'chomp.start_state_max_dt' was not set. Using default value: 0.500000
+[move_group-8] [INFO] [1746711061.179460165] [moveit_ros.fix_start_state_collision]: Param 'chomp.jiggle_fraction' was set to 0.050000
+[move_group-8] [INFO] [1746711061.179468108] [moveit_ros.fix_start_state_collision]: Param 'chomp.max_sampling_attempts' was not set. Using default value: 100
+[move_group-8] [INFO] [1746711061.179486219] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Add Time Optimal Parameterization'
+[move_group-8] [INFO] [1746711061.179493549] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Resolve constraint frames to robot links'
+[move_group-8] [INFO] [1746711061.179498988] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Fix Workspace Bounds'
+[move_group-8] [INFO] [1746711061.179504261] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Fix Start State Bounds'
+[move_group-8] [INFO] [1746711061.179509374] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Fix Start State In Collision'
+[move_group-8] [INFO] [1746711061.179514542] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Fix Start State Path Constraints'
+[move_group-15] [INFO] [1746711061.179816252] [moveit.pilz_industrial_motion_planner.joint_limits_aggregator]: Reading limits from namespace robot_description_planning
+[move_group-15] [WARN] [1746711061.181799982] [moveit.pilz_industrial_motion_planner.joint_limits_aggregator]: Multi-DOF-Joint 'Vjoint_right' not supported.
+[move_group-15] [WARN] [1746711061.181857798] [moveit.pilz_industrial_motion_planner.joint_limits_aggregator]: Multi-DOF-Joint 'Vjoint_right' not supported.
+[move_group-8] [INFO] [1746711061.183417217] [moveit.ros_planning_interface.moveit_cpp]: Loading planning pipeline 'pilz_industrial_motion_planner'
+[move_group-8] [INFO] [1746711061.195863230] [moveit.pilz_industrial_motion_planner.joint_limits_aggregator]: Reading limits from namespace robot_description_planning
+[move_group-8] [WARN] [1746711061.199819514] [moveit.pilz_industrial_motion_planner.joint_limits_aggregator]: Multi-DOF-Joint 'Vjoint_left' not supported.
+[move_group-8] [WARN] [1746711061.199874928] [moveit.pilz_industrial_motion_planner.joint_limits_aggregator]: Multi-DOF-Joint 'Vjoint_left' not supported.
+[move_group-15] [INFO] [1746711061.207746220] [moveit.pilz_industrial_motion_planner]: Available plugins: pilz_industrial_motion_planner/PlanningContextLoaderCIRC pilz_industrial_motion_planner/PlanningContextLoaderLIN pilz_industrial_motion_planner/PlanningContextLoaderPTP 
+[move_group-15] [INFO] [1746711061.207789185] [moveit.pilz_industrial_motion_planner]: About to load: pilz_industrial_motion_planner/PlanningContextLoaderCIRC
+[move_group-15] [INFO] [1746711061.212802814] [moveit.pilz_industrial_motion_planner]: Registered Algorithm [CIRC]
+[move_group-15] [INFO] [1746711061.212838102] [moveit.pilz_industrial_motion_planner]: About to load: pilz_industrial_motion_planner/PlanningContextLoaderLIN
+[move_group-15] [INFO] [1746711061.215906508] [moveit.pilz_industrial_motion_planner]: Registered Algorithm [LIN]
+[move_group-15] [INFO] [1746711061.215954571] [moveit.pilz_industrial_motion_planner]: About to load: pilz_industrial_motion_planner/PlanningContextLoaderPTP
+[move_group-15] [INFO] [1746711061.219188404] [moveit.pilz_industrial_motion_planner]: Registered Algorithm [PTP]
+[move_group-15] [INFO] [1746711061.219262275] [moveit.ros_planning.planning_pipeline]: Using planning interface 'Pilz Industrial Motion Planner'
+[move_group-8] [INFO] [1746711061.227380368] [moveit.pilz_industrial_motion_planner]: Available plugins: pilz_industrial_motion_planner/PlanningContextLoaderCIRC pilz_industrial_motion_planner/PlanningContextLoaderLIN pilz_industrial_motion_planner/PlanningContextLoaderPTP 
+[move_group-8] [INFO] [1746711061.227408686] [moveit.pilz_industrial_motion_planner]: About to load: pilz_industrial_motion_planner/PlanningContextLoaderCIRC
+[move_group-8] [INFO] [1746711061.230133207] [moveit.pilz_industrial_motion_planner]: Registered Algorithm [CIRC]
+[move_group-8] [INFO] [1746711061.230159684] [moveit.pilz_industrial_motion_planner]: About to load: pilz_industrial_motion_planner/PlanningContextLoaderLIN
+[move_group-8] [INFO] [1746711061.231611352] [moveit.pilz_industrial_motion_planner]: Registered Algorithm [LIN]
+[move_group-8] [INFO] [1746711061.231697781] [moveit.pilz_industrial_motion_planner]: About to load: pilz_industrial_motion_planner/PlanningContextLoaderPTP
+[move_group-8] [INFO] [1746711061.234235871] [moveit.pilz_industrial_motion_planner]: Registered Algorithm [PTP]
+[move_group-8] [INFO] [1746711061.234293111] [moveit.ros_planning.planning_pipeline]: Using planning interface 'Pilz Industrial Motion Planner'
+[move_group-15] [ERROR] [1746711061.352940463] [moveit.plugins.moveit_simple_controller_manager]: No controller_names specified.
+[move_group-15] [INFO] [1746711061.353191429] [moveit.plugins.moveit_simple_controller_manager]: Returned 0 controllers in list
+[move_group-15] [INFO] [1746711061.353220971] [moveit.plugins.moveit_simple_controller_manager]: Returned 0 controllers in list
+[move_group-15] [INFO] [1746711061.355313197] [moveit_ros.trajectory_execution_manager]: Trajectory execution is managing controllers
+[move_group-15] [INFO] [1746711061.355357100] [move_group.move_group]: MoveGroup debug mode is ON
+[gzserver-1] ALSA lib pcm_dmix.c:1032:(snd_pcm_dmix_open) unable to open slave
+[gzserver-1] AL lib: (EE) ALCplaybackAlsa_open: Could not open playback device 'default': Device or resource busy
+[move_group-15] [ERROR] [1746711061.395506886] [move_group.move_group]: Exception while loading move_group capability 'move_group/ExecuteTaskSolutionCapability': According to the loaded plugin descriptions the class move_group/ExecuteTaskSolutionCapability with base class type move_group::MoveGroupCapability does not exist. Declared types are  move_group/ApplyPlanningSceneService move_group/ClearOctomapService move_group/MoveGroupCartesianPathService move_group/MoveGroupExecuteService move_group/MoveGroupExecuteTrajectoryAction move_group/MoveGroupGetPlanningSceneService move_group/MoveGroupKinematicsService move_group/MoveGroupMoveAction move_group/MoveGroupPlanService move_group/MoveGroupQueryPlannersService move_group/MoveGroupStateValidationService move_group/TfPublisher pilz_industrial_motion_planner/MoveGroupSequenceAction pilz_industrial_motion_planner/MoveGroupSequenceService
+[move_group-8] [ERROR] [1746711061.436918163] [moveit.plugins.moveit_simple_controller_manager]: No controller_names specified.
+[move_group-8] [INFO] [1746711061.437171270] [moveit.plugins.moveit_simple_controller_manager]: Returned 0 controllers in list
+[move_group-8] [INFO] [1746711061.437202759] [moveit.plugins.moveit_simple_controller_manager]: Returned 0 controllers in list
+[move_group-8] [INFO] [1746711061.440412037] [moveit_ros.trajectory_execution_manager]: Trajectory execution is managing controllers
+[move_group-8] [INFO] [1746711061.440590814] [move_group.move_group]: MoveGroup debug mode is ON
+[move_group-8] [ERROR] [1746711061.462263274] [move_group.move_group]: Exception while loading move_group capability 'move_group/ExecuteTaskSolutionCapability': According to the loaded plugin descriptions the class move_group/ExecuteTaskSolutionCapability with base class type move_group::MoveGroupCapability does not exist. Declared types are  move_group/ApplyPlanningSceneService move_group/ClearOctomapService move_group/MoveGroupCartesianPathService move_group/MoveGroupExecuteService move_group/MoveGroupExecuteTrajectoryAction move_group/MoveGroupGetPlanningSceneService move_group/MoveGroupKinematicsService move_group/MoveGroupMoveAction move_group/MoveGroupPlanService move_group/MoveGroupQueryPlannersService move_group/MoveGroupStateValidationService move_group/TfPublisher pilz_industrial_motion_planner/MoveGroupSequenceAction pilz_industrial_motion_planner/MoveGroupSequenceService
+[move_group-15] [INFO] [1746711061.466461154] [move_group.move_group]: 
+[move_group-15] 
+[move_group-15] ********************************************************
+[move_group-15] * MoveGroup using: 
+[move_group-15] *     - ApplyPlanningSceneService
+[move_group-15] *     - ClearOctomapService
+[move_group-15] *     - CartesianPathService
+[move_group-15] *     - ExecuteTrajectoryAction
+[move_group-15] *     - GetPlanningSceneService
+[move_group-15] *     - KinematicsService
+[move_group-15] *     - MoveAction
+[move_group-15] *     - MotionPlanService
+[move_group-15] *     - QueryPlannersService
+[move_group-15] *     - StateValidationService
+[move_group-15] ********************************************************
+[move_group-15] 
+[move_group-15] [INFO] [1746711061.466546076] [moveit_move_group_capabilities_base.move_group_context]: MoveGroup context using planning plugin ompl_interface/OMPLPlanner
+[move_group-15] [INFO] [1746711061.466572838] [moveit_move_group_capabilities_base.move_group_context]: MoveGroup context initialization complete
+[move_group-15] [96mLoading 'move_group/ApplyPlanningSceneService'...
+[move_group-15] [0m[96mLoading 'move_group/ClearOctomapService'...
+[move_group-15] [0m[96mLoading 'move_group/ExecuteTaskSolutionCapability'...
+[move_group-15] [0m[96mLoading 'move_group/MoveGroupCartesianPathService'...
+[move_group-15] [0m[96mLoading 'move_group/MoveGroupExecuteTrajectoryAction'...
+[move_group-15] [0m[96mLoading 'move_group/MoveGroupGetPlanningSceneService'...
+[move_group-15] [0m[96mLoading 'move_group/MoveGroupKinematicsService'...
+[move_group-15] [0m[96mLoading 'move_group/MoveGroupMoveAction'...
+[move_group-15] [0m[96mLoading 'move_group/MoveGroupPlanService'...
+[move_group-15] [0m[96mLoading 'move_group/MoveGroupQueryPlannersService'...
+[move_group-15] [0m[96mLoading 'move_group/MoveGroupStateValidationService'...
+[move_group-15] [0m[92m
+[move_group-15] You can start planning now!
+[move_group-15] 
+[move_group-8] [INFO] [1746711061.501021406] [move_group.move_group]: 
+[move_group-8] 
+[move_group-8] ********************************************************
+[move_group-8] * MoveGroup using: 
+[move_group-8] *     - ApplyPlanningSceneService
+[move_group-8] *     - ClearOctomapService
+[move_group-8] *     - CartesianPathService
+[move_group-8] *     - ExecuteTrajectoryAction
+[move_group-8] *     - GetPlanningSceneService
+[move_group-8] *     - KinematicsService
+[move_group-8] *     - MoveAction
+[move_group-8] *     - MotionPlanService
+[move_group-8] *     - QueryPlannersService
+[move_group-8] *     - StateValidationService
+[move_group-8] ********************************************************
+[move_group-8] 
+[move_group-8] [INFO] [1746711061.501115581] [moveit_move_group_capabilities_base.move_group_context]: MoveGroup context using planning plugin ompl_interface/OMPLPlanner
+[move_group-8] [INFO] [1746711061.501133728] [moveit_move_group_capabilities_base.move_group_context]: MoveGroup context initialization complete
+[move_group-8] [96mLoading 'move_group/ApplyPlanningSceneService'...
+[move_group-8] [0m[96mLoading 'move_group/ClearOctomapService'...
+[move_group-8] [0m[96mLoading 'move_group/ExecuteTaskSolutionCapability'...
+[move_group-8] [0m[96mLoading 'move_group/MoveGroupCartesianPathService'...
+[move_group-8] [0m[96mLoading 'move_group/MoveGroupExecuteTrajectoryAction'...
+[move_group-8] [0m[96mLoading 'move_group/MoveGroupGetPlanningSceneService'...
+[move_group-8] [0m[96mLoading 'move_group/MoveGroupKinematicsService'...
+[move_group-8] [0m[96mLoading 'move_group/MoveGroupMoveAction'...
+[move_group-8] [0m[96mLoading 'move_group/MoveGroupPlanService'...
+[move_group-8] [0m[96mLoading 'move_group/MoveGroupQueryPlannersService'...
+[move_group-8] [0m[96mLoading 'move_group/MoveGroupStateValidationService'...
+[move_group-8] [0m[92m
+[move_group-8] You can start planning now!
+[move_group-8] 
+[gzserver-1] [WARN] [1746711061.525168991] [rcl]: Found remap rule 'model_states:=model_states'. This syntax is deprecated. Use '--ros-args --remap model_states:=model_states' instead.
+[gzserver-1] [WARN] [1746711061.525608812] [rcl]: Found remap rule 'link_states:=link_states'. This syntax is deprecated. Use '--ros-args --remap link_states:=link_states' instead.
+[gzserver-1] [INFO] [1746711061.563174986] [state.gazebo_ros_state]: Publishing states of gazebo models at [/state/model_states]
+[gzserver-1] [INFO] [1746711061.566546728] [state.gazebo_ros_state]: Publishing states of gazebo links at [/state/link_states]
+[robot_state_publisher-4] [WARN] [1746711061.613659871] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711061.613706350] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[spawn_entity.py-12] [INFO] [1746711061.641539962] [right]: Calling service /spawn_entity
+[robot_state_publisher-4] [WARN] [1746711061.713144109] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711061.713427475] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711061.813509048] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711061.813697135] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711061.913836900] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711061.913856647] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[spawn_entity.py-5] [INFO] [1746711061.916909796] [left]: Calling service /spawn_entity
+[gzserver-1] [INFO] [1746711062.646596403] [right_summit_imu_imu_plugin]: <initial_orientation_as_reference> is unset, using default value of false to comply with REP 145 (world as orientation reference)
+[spawn_entity.py-12] [INFO] [1746711063.020729003] [right]: Spawn status: SpawnEntity: Successfully spawned entity [right_robot]
+[spawn_entity.py-12] [INFO] [1746711063.041713068] [right]: Calling service /unpause_physics
+[INFO] [spawn_entity.py-12]: process has finished cleanly [pid 3949]
+[gzserver-1] [INFO] [1746711063.301533968] [right_summit.omni_steering]: Subscribed to [/right_summit/cmd_vel]
+[gzserver-1] [INFO] [1746711063.309694948] [right_summit.omni_steering]: Advertise odometry on [/right_summit/odom]
+[gzserver-1] [INFO] [1746711063.318607593] [right_summit.omni_steering]: Publishing odom transforms between [right_summit_odom] and [right_summit_base_footprint]
+[gzserver-1] [INFO] [1746711063.377786690] [gazebo_ros2_control]: Loading gazebo_ros2_control plugin
+[gzserver-1] [INFO] [1746711063.398115568] [right.right_gazebo_ros2_control]: Starting gazebo_ros2_control plugin in namespace: /right
+[gzserver-1] [INFO] [1746711063.398267165] [right.right_gazebo_ros2_control]: Starting gazebo_ros2_control plugin in ros 2 node: right_gazebo_ros2_control
+[gzserver-1] [INFO] [1746711063.416555797] [right.right_gazebo_ros2_control]: connected to service!! robot_state_publisher
+[gzserver-1] [INFO] [1746711063.425143349] [right.right_gazebo_ros2_control]: Received urdf from param server, parsing...
+[gzserver-1] [INFO] [1746711063.427051015] [right.right_gazebo_ros2_control]: Loading parameter files /ros2_ws/install/ur/share/ur/config/right_controller.yaml
+[gzserver-1] [INFO] [1746711063.444741373] [resource_manager]: Loading hardware 'right_ur' 
+[gzserver-1] [ERROR] [1746711063.444898432] [right.right_gazebo_ros2_control]: Error initializing URDF to resource manager!
+[gzserver-1] [INFO] [1746711063.487334037] [right.right_gazebo_ros2_control]: Loading joint: ur_right_shoulder_pan_joint
+[gzserver-1] [INFO] [1746711063.487863410] [right.right_gazebo_ros2_control]: 	State:
+[gzserver-1] [INFO] [1746711063.487983893] [right.right_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1746711063.489039992] [right.right_gazebo_ros2_control]: 			 found initial value: -1.300000
+[gzserver-1] [INFO] [1746711063.489103882] [right.right_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1746711063.489464764] [right.right_gazebo_ros2_control]: 		 effort
+[gzserver-1] [INFO] [1746711063.489623755] [right.right_gazebo_ros2_control]: 	Command:
+[gzserver-1] [INFO] [1746711063.489655954] [right.right_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1746711063.490887205] [right.right_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1746711063.491703226] [right.right_gazebo_ros2_control]: Loading joint: ur_right_shoulder_lift_joint
+[gzserver-1] [INFO] [1746711063.491784185] [right.right_gazebo_ros2_control]: 	State:
+[gzserver-1] [INFO] [1746711063.491813581] [right.right_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1746711063.491851593] [right.right_gazebo_ros2_control]: 			 found initial value: -0.800000
+[gzserver-1] [INFO] [1746711063.491885647] [right.right_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1746711063.491925319] [right.right_gazebo_ros2_control]: 		 effort
+[gzserver-1] [INFO] [1746711063.491955273] [right.right_gazebo_ros2_control]: 	Command:
+[gzserver-1] [INFO] [1746711063.491983898] [right.right_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1746711063.492075667] [right.right_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1746711063.492129028] [right.right_gazebo_ros2_control]: Loading joint: ur_right_elbow_joint
+[gzserver-1] [INFO] [1746711063.492161823] [right.right_gazebo_ros2_control]: 	State:
+[gzserver-1] [INFO] [1746711063.492188380] [right.right_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1746711063.492217176] [right.right_gazebo_ros2_control]: 			 found initial value: -1.800000
+[gzserver-1] [INFO] [1746711063.492248824] [right.right_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1746711063.492277862] [right.right_gazebo_ros2_control]: 		 effort
+[gzserver-1] [INFO] [1746711063.492369227] [right.right_gazebo_ros2_control]: 	Command:
+[gzserver-1] [INFO] [1746711063.492396633] [right.right_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1746711063.492541817] [right.right_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1746711063.492585149] [right.right_gazebo_ros2_control]: Loading joint: ur_right_wrist_1_joint
+[gzserver-1] [INFO] [1746711063.492615109] [right.right_gazebo_ros2_control]: 	State:
+[gzserver-1] [INFO] [1746711063.492639261] [right.right_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1746711063.492666931] [right.right_gazebo_ros2_control]: 			 found initial value: -1.570000
+[gzserver-1] [INFO] [1746711063.492694803] [right.right_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1746711063.492719253] [right.right_gazebo_ros2_control]: 		 effort
+[gzserver-1] [INFO] [1746711063.492743229] [right.right_gazebo_ros2_control]: 	Command:
+[gzserver-1] [INFO] [1746711063.492765304] [right.right_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1746711063.492806852] [right.right_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1746711063.492849259] [right.right_gazebo_ros2_control]: Loading joint: ur_right_wrist_2_joint
+[gzserver-1] [INFO] [1746711063.492876835] [right.right_gazebo_ros2_control]: 	State:
+[gzserver-1] [INFO] [1746711063.492899493] [right.right_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1746711063.492924133] [right.right_gazebo_ros2_control]: 			 found initial value: 1.638000
+[gzserver-1] [INFO] [1746711063.492950551] [right.right_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1746711063.493207848] [right.right_gazebo_ros2_control]: 		 effort
+[gzserver-1] [INFO] [1746711063.493244351] [right.right_gazebo_ros2_control]: 	Command:
+[gzserver-1] [INFO] [1746711063.493267914] [right.right_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1746711063.493346150] [right.right_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1746711063.493388792] [right.right_gazebo_ros2_control]: Loading joint: ur_right_wrist_3_joint
+[gzserver-1] [INFO] [1746711063.493419239] [right.right_gazebo_ros2_control]: 	State:
+[gzserver-1] [INFO] [1746711063.493444519] [right.right_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1746711063.493468581] [right.right_gazebo_ros2_control]: 			 found initial value: 0.000000
+[gzserver-1] [INFO] [1746711063.493495111] [right.right_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1746711063.493534449] [right.right_gazebo_ros2_control]: 		 effort
+[gzserver-1] [INFO] [1746711063.493562167] [right.right_gazebo_ros2_control]: 	Command:
+[gzserver-1] [INFO] [1746711063.493585896] [right.right_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1746711063.493628049] [right.right_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1746711063.494567606] [resource_manager]: Initialize hardware 'right_ur' 
+[gzserver-1] [INFO] [1746711063.498452449] [resource_manager]: Successful initialization of hardware 'right_ur'
+[gzserver-1] [INFO] [1746711063.499391375] [resource_manager]: 'configure' hardware 'right_ur' 
+[gzserver-1] [INFO] [1746711063.499433236] [resource_manager]: Successful 'configure' of hardware 'right_ur'
+[gzserver-1] [INFO] [1746711063.499464499] [resource_manager]: 'activate' hardware 'right_ur' 
+[gzserver-1] [INFO] [1746711063.499483335] [resource_manager]: Successful 'activate' of hardware 'right_ur'
+[gzserver-1] [INFO] [1746711063.501058855] [right.right_gazebo_ros2_control]: Loading controller_manager
+[gzserver-1] [WARN] [1746711063.571319143] [right.right_gazebo_ros2_control]:  Desired controller update period (0.002 s) is slower than the gazebo simulation period (0.001 s).
+[gzserver-1] [INFO] [1746711063.578417178] [right.right_gazebo_ros2_control]: Loaded gazebo_ros2_control.
+[robot_state_publisher-11] [WARN] [1746711063.580982010] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711063.581355856] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[gzserver-1] [INFO] [1746711063.640648387] [right.controller_manager]: Loading controller 'joint_state_broadcaster'
+[move_group-15] [WARN] [1746711063.649666004] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: The complete state of the robot is not yet known.  Missing right_summit_back_left_wheel_joint, right_summit_back_right_wheel_joint, right_summit_front_left_wheel_joint, right_summit_front_right_wheel_joint, ur_right_shoulder_pan_joint, ur_right_shoulder_lift_joint, ur_right_elbow_joint, ur_right_wrist_1_joint, ur_right_wrist_2_joint, ur_right_wrist_3_joint
+[spawner-13] [INFO] [1746711063.700446997] [right.spawner_joint_state_broadcaster]: [94mLoaded [1mjoint_state_broadcaster[0m
+[gzserver-1] [INFO] [1746711063.703023911] [right.controller_manager]: Configuring controller 'joint_state_broadcaster'
+[gzserver-1] [INFO] [1746711063.703962577] [right.joint_state_broadcaster]: 'joints' or 'interfaces' parameter is empty. All available state interfaces will be published
+[spawner-13] [INFO] [1746711063.734074738] [right.spawner_joint_state_broadcaster]: [92mConfigured and activated [1mjoint_state_broadcaster[0m
+[gzserver-1] [INFO] [1746711063.790705745] [right.controller_manager]: Loading controller 'ur_right_joint_group_vel_controller'
+[INFO] [spawner-13]: process has finished cleanly [pid 3952]
+[gzserver-1] [INFO] [1746711064.397300298] [left_summit_imu_imu_plugin]: <initial_orientation_as_reference> is unset, using default value of false to comply with REP 145 (world as orientation reference)
+[spawn_entity.py-5] [INFO] [1746711064.761489216] [left]: Spawn status: SpawnEntity: Successfully spawned entity [left_robot]
+[spawn_entity.py-5] [INFO] [1746711064.767629702] [left]: Calling service /unpause_physics
+[gzserver-1] [WARN] [1746711064.860545602] [gazebo.rclcpp]: failed to send response to /unpause_physics (timeout): client will not receive response, at ./src/rmw_response.cpp:154, at ./src/rcl/service.c:314
+[gzserver-1] [INFO] [1746711064.932172756] [left_summit.omni_steering]: Subscribed to [/left_summit/cmd_vel]
+[gzserver-1] [INFO] [1746711064.933598457] [left_summit.omni_steering]: Advertise odometry on [/left_summit/odom]
+[gzserver-1] [INFO] [1746711064.936715294] [left_summit.omni_steering]: Publishing odom transforms between [left_summit_odom] and [left_summit_base_footprint]
+[gzserver-1] [INFO] [1746711064.937801879] [gazebo_ros2_control]: Loading gazebo_ros2_control plugin
+[gzserver-1] [INFO] [1746711064.957948604] [left.left_gazebo_ros2_control]: Starting gazebo_ros2_control plugin in namespace: /left
+[gzserver-1] [INFO] [1746711064.959334572] [left.left_gazebo_ros2_control]: Starting gazebo_ros2_control plugin in ros 2 node: left_gazebo_ros2_control
+[gzserver-1] [WARN] [1746711064.961396432] [gazebo.rclcpp]: failed to send response to /unpause_physics (timeout): client will not receive response, at ./src/rmw_response.cpp:154, at ./src/rcl/service.c:314
+[INFO] [spawn_entity.py-5]: process has finished cleanly [pid 3916]
+[gzserver-1] [INFO] [1746711064.977711404] [left.left_gazebo_ros2_control]: connected to service!! robot_state_publisher
+[gzserver-1] [INFO] [1746711064.978361749] [left.left_gazebo_ros2_control]: Received urdf from param server, parsing...
+[gzserver-1] [INFO] [1746711064.978431543] [left.left_gazebo_ros2_control]: Loading parameter files /ros2_ws/install/ur/share/ur/config/left_controller.yaml
+[gzserver-1] [INFO] [1746711064.988633624] [resource_manager]: Loading hardware 'left_ur' 
+[gzserver-1] [ERROR] [1746711064.988733373] [left.left_gazebo_ros2_control]: Error initializing URDF to resource manager!
+[gzserver-1] [INFO] [1746711064.992819730] [left.left_gazebo_ros2_control]: Loading joint: ur_left_shoulder_pan_joint
+[gzserver-1] [INFO] [1746711064.993090116] [left.left_gazebo_ros2_control]: 	State:
+[gzserver-1] [INFO] [1746711064.993130022] [left.left_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1746711064.993172620] [left.left_gazebo_ros2_control]: 			 found initial value: -1.400000
+[gzserver-1] [INFO] [1746711064.993213688] [left.left_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1746711064.993249813] [left.left_gazebo_ros2_control]: 		 effort
+[gzserver-1] [INFO] [1746711064.993282197] [left.left_gazebo_ros2_control]: 	Command:
+[gzserver-1] [INFO] [1746711064.993308811] [left.left_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1746711064.993419127] [left.left_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1746711064.993475521] [left.left_gazebo_ros2_control]: Loading joint: ur_left_shoulder_lift_joint
+[gzserver-1] [INFO] [1746711064.993508193] [left.left_gazebo_ros2_control]: 	State:
+[gzserver-1] [INFO] [1746711064.993534769] [left.left_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1746711064.993564112] [left.left_gazebo_ros2_control]: 			 found initial value: -1.227838
+[gzserver-1] [INFO] [1746711064.993596139] [left.left_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1746711064.993629264] [left.left_gazebo_ros2_control]: 		 effort
+[gzserver-1] [INFO] [1746711064.993656466] [left.left_gazebo_ros2_control]: 	Command:
+[gzserver-1] [INFO] [1746711064.993679831] [left.left_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1746711064.993740877] [left.left_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1746711064.993789934] [left.left_gazebo_ros2_control]: Loading joint: ur_left_elbow_joint
+[gzserver-1] [INFO] [1746711064.993823472] [left.left_gazebo_ros2_control]: 	State:
+[gzserver-1] [INFO] [1746711064.993850997] [left.left_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1746711064.993881182] [left.left_gazebo_ros2_control]: 			 found initial value: -1.791046
+[gzserver-1] [INFO] [1746711064.993913921] [left.left_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1746711064.993945963] [left.left_gazebo_ros2_control]: 		 effort
+[gzserver-1] [INFO] [1746711064.994016092] [left.left_gazebo_ros2_control]: 	Command:
+[gzserver-1] [INFO] [1746711064.994047682] [left.left_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1746711064.994113092] [left.left_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1746711064.994156458] [left.left_gazebo_ros2_control]: Loading joint: ur_left_wrist_1_joint
+[gzserver-1] [INFO] [1746711064.994188221] [left.left_gazebo_ros2_control]: 	State:
+[gzserver-1] [INFO] [1746711064.994216692] [left.left_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1746711064.994247521] [left.left_gazebo_ros2_control]: 			 found initial value: -1.447073
+[gzserver-1] [INFO] [1746711064.994280692] [left.left_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1746711064.994309862] [left.left_gazebo_ros2_control]: 		 effort
+[gzserver-1] [INFO] [1746711064.994337642] [left.left_gazebo_ros2_control]: 	Command:
+[gzserver-1] [INFO] [1746711064.994398590] [left.left_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1746711064.994454962] [left.left_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1746711064.994502149] [left.left_gazebo_ros2_control]: Loading joint: ur_left_wrist_2_joint
+[gzserver-1] [INFO] [1746711064.994533763] [left.left_gazebo_ros2_control]: 	State:
+[gzserver-1] [INFO] [1746711064.994560271] [left.left_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1746711064.994587324] [left.left_gazebo_ros2_control]: 			 found initial value: 1.900333
+[gzserver-1] [INFO] [1746711064.994619728] [left.left_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1746711064.994651422] [left.left_gazebo_ros2_control]: 		 effort
+[gzserver-1] [INFO] [1746711064.994678048] [left.left_gazebo_ros2_control]: 	Command:
+[gzserver-1] [INFO] [1746711064.994700986] [left.left_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1746711064.994752928] [left.left_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1746711064.994796957] [left.left_gazebo_ros2_control]: Loading joint: ur_left_wrist_3_joint
+[gzserver-1] [INFO] [1746711064.994953660] [left.left_gazebo_ros2_control]: 	State:
+[gzserver-1] [INFO] [1746711064.994988023] [left.left_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1746711064.995017896] [left.left_gazebo_ros2_control]: 			 found initial value: -0.755379
+[gzserver-1] [INFO] [1746711064.995053417] [left.left_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1746711064.995106820] [left.left_gazebo_ros2_control]: 		 effort
+[gzserver-1] [INFO] [1746711064.995136573] [left.left_gazebo_ros2_control]: 	Command:
+[gzserver-1] [INFO] [1746711064.995163388] [left.left_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1746711064.995216163] [left.left_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1746711064.995270118] [resource_manager]: Initialize hardware 'left_ur' 
+[gzserver-1] [INFO] [1746711064.995343611] [resource_manager]: Successful initialization of hardware 'left_ur'
+[gzserver-1] [INFO] [1746711064.995412090] [resource_manager]: 'configure' hardware 'left_ur' 
+[gzserver-1] [INFO] [1746711064.995435179] [resource_manager]: Successful 'configure' of hardware 'left_ur'
+[gzserver-1] [INFO] [1746711064.995462096] [resource_manager]: 'activate' hardware 'left_ur' 
+[gzserver-1] [INFO] [1746711064.995482351] [resource_manager]: Successful 'activate' of hardware 'left_ur'
+[gzserver-1] [INFO] [1746711064.995575738] [left.left_gazebo_ros2_control]: Loading controller_manager
+[gzserver-1] [WARN] [1746711065.070086436] [left.left_gazebo_ros2_control]:  Desired controller update period (0.002 s) is slower than the gazebo simulation period (0.001 s).
+[gzserver-1] [INFO] [1746711065.070708204] [left.left_gazebo_ros2_control]: Loaded gazebo_ros2_control.
+[robot_state_publisher-11] [WARN] [1746711065.074700659] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[spawner-14] [INFO] [1746711065.076212085] [right.spawner_ur_right_joint_group_vel_controller]: [94mLoaded [1mur_right_joint_group_vel_controller[0m
+[robot_state_publisher-4] [WARN] [1746711065.077229226] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[gzserver-1] [INFO] [1746711065.083216461] [right.controller_manager]: Configuring controller 'ur_right_joint_group_vel_controller'
+[gzserver-1] [INFO] [1746711065.087998980] [right.ur_right_joint_group_vel_controller]: configure successful
+[gzserver-1] [INFO] [1746711065.097832527] [right.ur_right_joint_group_vel_controller]: activate successful
+[move_group-15] [WARN] [1746711065.100208599] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: The complete state of the robot is not yet known.  Missing right_summit_back_left_wheel_joint, right_summit_back_right_wheel_joint, right_summit_front_left_wheel_joint, right_summit_front_right_wheel_joint, ur_right_shoulder_pan_joint, ur_right_shoulder_lift_joint, ur_right_elbow_joint, ur_right_wrist_1_joint, ur_right_wrist_2_joint, ur_right_wrist_3_joint
+[spawner-14] [INFO] [1746711065.102733954] [right.spawner_ur_right_joint_group_vel_controller]: [92mConfigured and activated [1mur_right_joint_group_vel_controller[0m
+[move_group-8] [WARN] [1746711065.170609222] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: The complete state of the robot is not yet known.  Missing left_summit_back_left_wheel_joint, left_summit_back_right_wheel_joint, left_summit_front_left_wheel_joint, left_summit_front_right_wheel_joint, ur_left_shoulder_pan_joint, ur_left_shoulder_lift_joint, ur_left_elbow_joint, ur_left_wrist_1_joint, ur_left_wrist_2_joint, ur_left_wrist_3_joint
+[robot_state_publisher-11] [WARN] [1746711065.173992735] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711065.174710294] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[gzserver-1] [INFO] [1746711065.213634983] [left.controller_manager]: Loading controller 'ur_left_joint_group_vel_controller'
+[gzserver-1] [INFO] [1746711065.245396072] [left.controller_manager]: Loading controller 'joint_state_broadcaster'
+[spawner-7] [INFO] [1746711065.247728646] [left.spawner_ur_left_joint_group_vel_controller]: [94mLoaded [1mur_left_joint_group_vel_controller[0m
+[gzserver-1] [INFO] [1746711065.292496641] [left.controller_manager]: Configuring controller 'ur_left_joint_group_vel_controller'
+[gzserver-1] [ERROR] [1746711065.292620423] [left.ur_left_joint_group_vel_controller]: 'joints' parameter was empty
+[gzserver-1] [WARN] [1746711065.292849143] [left.ur_left_joint_group_vel_controller]: Error occurred while doing error handling.
+[gzserver-1] [ERROR] [1746711065.292916781] [left.controller_manager]: After configuring, controller 'ur_left_joint_group_vel_controller' is in state 'unconfigured' , expected inactive.
+[spawner-6] [INFO] [1746711065.294105157] [left.spawner_joint_state_broadcaster]: [94mLoaded [1mjoint_state_broadcaster[0m
+[spawner-7] [ERROR] [1746711065.295020287] [left.spawner_ur_left_joint_group_vel_controller]: [91mFailed to configure controller[0m
+[gzserver-1] [INFO] [1746711065.296864838] [left.controller_manager]: Configuring controller 'joint_state_broadcaster'
+[gzserver-1] [INFO] [1746711065.296942974] [left.joint_state_broadcaster]: 'joints' or 'interfaces' parameter is empty. All available state interfaces will be published
+[spawner-6] [INFO] [1746711065.314045730] [left.spawner_joint_state_broadcaster]: [92mConfigured and activated [1mjoint_state_broadcaster[0m
+[INFO] [spawner-14]: process has finished cleanly [pid 3954]
+[robot_state_publisher-11] [WARN] [1746711065.380048484] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711065.380311281] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[INFO] [spawner-6]: process has finished cleanly [pid 3918]
+[ERROR] [spawner-7]: process has died [pid 3920, exit code 1, cmd '/opt/ros/humble/lib/controller_manager/spawner ur_left_joint_group_vel_controller -c /left/controller_manager --ros-args -r __ns:=/left'].
+[robot_state_publisher-4] [WARN] [1746711065.581135132] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711065.581309586] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711065.681457079] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711065.681903434] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711065.781636489] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711065.782370919] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711065.982502389] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711065.982671851] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711066.084417095] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711066.084591525] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[move_group-15] [WARN] [1746711066.150329592] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: The complete state of the robot is not yet known.  Missing right_summit_back_left_wheel_joint, right_summit_back_right_wheel_joint, right_summit_front_left_wheel_joint, right_summit_front_right_wheel_joint, ur_right_shoulder_pan_joint, ur_right_shoulder_lift_joint, ur_right_elbow_joint, ur_right_wrist_1_joint, ur_right_wrist_2_joint, ur_right_wrist_3_joint
+[move_group-8] [WARN] [1746711066.217282336] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: The complete state of the robot is not yet known.  Missing left_summit_back_left_wheel_joint, left_summit_back_right_wheel_joint, left_summit_front_left_wheel_joint, left_summit_front_right_wheel_joint, ur_left_shoulder_pan_joint, ur_left_shoulder_lift_joint, ur_left_elbow_joint, ur_left_wrist_1_joint, ur_left_wrist_2_joint, ur_left_wrist_3_joint
+[robot_state_publisher-4] [WARN] [1746711066.286742386] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711066.288828856] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711066.488042765] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711066.488144272] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711066.589972911] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711066.591321790] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711066.790686236] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711066.791344845] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711066.890817863] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711066.891348947] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711066.991184094] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711066.991269550] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711067.091382674] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711067.091391252] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711067.191995374] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711067.192177799] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[move_group-15] [WARN] [1746711067.228779957] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: The complete state of the robot is not yet known.  Missing right_summit_back_left_wheel_joint, right_summit_back_right_wheel_joint, right_summit_front_left_wheel_joint, right_summit_front_right_wheel_joint, ur_right_shoulder_pan_joint, ur_right_shoulder_lift_joint, ur_right_elbow_joint, ur_right_wrist_1_joint, ur_right_wrist_2_joint, ur_right_wrist_3_joint
+[move_group-8] [WARN] [1746711067.271264176] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: The complete state of the robot is not yet known.  Missing left_summit_back_left_wheel_joint, left_summit_back_right_wheel_joint, left_summit_front_left_wheel_joint, left_summit_front_right_wheel_joint, ur_left_shoulder_pan_joint, ur_left_shoulder_lift_joint, ur_left_elbow_joint, ur_left_wrist_1_joint, ur_left_wrist_2_joint, ur_left_wrist_3_joint
+[robot_state_publisher-11] [WARN] [1746711067.292860306] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711067.293012780] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711067.393030783] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711067.393074155] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711067.493483343] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711067.493516833] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711067.694174552] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711067.694548492] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711067.795058075] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711067.795454824] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711067.895123982] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711067.895335604] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711067.995652201] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711067.995474393] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711068.096240168] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711068.096533154] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711068.197040390] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711068.197203314] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[move_group-8] [WARN] [1746711068.291654416] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: The complete state of the robot is not yet known.  Missing left_summit_back_left_wheel_joint, left_summit_back_right_wheel_joint, left_summit_front_left_wheel_joint, left_summit_front_right_wheel_joint, ur_left_shoulder_pan_joint, ur_left_shoulder_lift_joint, ur_left_elbow_joint, ur_left_wrist_1_joint, ur_left_wrist_2_joint, ur_left_wrist_3_joint
+[robot_state_publisher-11] [WARN] [1746711068.298358749] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711068.298732968] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711068.398695055] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711068.398984291] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711068.499774522] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711068.499901366] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711068.599727808] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711068.600078469] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711068.700163275] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711068.700390950] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711068.800545170] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711068.800921797] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711068.901744050] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711068.902097041] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711069.001762134] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711069.002147312] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711069.102599448] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711069.102640134] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711069.202552737] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711069.202755153] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711069.303509035] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711069.303686900] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[move_group-8] [WARN] [1746711069.345281522] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: The complete state of the robot is not yet known.  Missing left_summit_back_left_wheel_joint, left_summit_back_right_wheel_joint, left_summit_front_left_wheel_joint, left_summit_front_right_wheel_joint, ur_left_shoulder_pan_joint, ur_left_shoulder_lift_joint, ur_left_elbow_joint, ur_left_wrist_1_joint, ur_left_wrist_2_joint, ur_left_wrist_3_joint
+[robot_state_publisher-4] [WARN] [1746711069.506949341] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711069.507322346] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711069.605432821] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711069.605527151] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711069.706193362] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711069.706322973] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711069.806098095] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711069.806359921] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711069.906433312] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711069.906670866] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711070.010453547] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711070.016563083] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711070.111314172] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711070.111516475] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711070.311746346] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711070.317033914] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711070.411973345] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711070.412481463] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711070.510980416] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711070.511337481] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711070.611748075] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711070.611954562] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711070.711591527] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711070.712432450] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711070.811733009] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711070.812366764] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[rviz2-3] [ERROR] [1746711070.840997311] [rviz2]: Could not find parameter robot_description and did not receive robot_description via std_msgs::msg::String subscription within 10.000000 seconds.
+[robot_state_publisher-11] [WARN] [1746711071.013238246] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711071.013578094] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711071.114231882] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711071.114554723] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711071.214155999] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711071.214765334] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711071.314502839] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711071.314823556] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711071.414888831] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711071.415214969] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711071.515496572] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711071.515779277] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711071.616342481] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711071.616591814] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711071.717536866] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711071.717695339] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711071.817319067] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711071.817630724] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711071.917305863] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711071.917320769] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711072.018669661] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711072.020503147] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711072.118503863] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711072.118890042] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711072.218623068] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711072.218630590] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711072.319588359] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711072.319983915] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711072.421052196] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711072.421514498] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711072.520990470] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711072.521193529] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711072.621207958] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711072.621606615] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711072.721677580] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711072.721871824] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711072.822526164] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711072.823476876] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711072.922733524] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711072.923563900] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711073.022886322] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711073.023384256] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711073.123348803] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711073.123347554] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711073.324224985] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711073.324607573] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711073.424600984] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711073.424819458] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711073.525535191] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711073.525562734] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711073.624949869] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711073.624950375] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711073.725503150] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711073.725985258] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711073.825866053] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711073.826430259] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711073.926724397] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711073.927167192] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711074.026908115] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711074.027043167] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711074.128263625] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711074.128627808] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711074.228367523] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711074.228419210] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711074.329039845] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711074.329850803] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711074.429213942] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711074.429415877] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[INFO] [gzclient-2]: process has finished cleanly [pid 3910]
+[robot_state_publisher-4] [WARN] [1746711074.529276430] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711074.529457061] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711074.629373176] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711074.629405110] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711074.729800562] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711074.730094430] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711074.830018583] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711074.830186133] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711074.935561797] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711074.937356467] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711075.133952849] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711075.133939860] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711075.233954348] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711075.234038356] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711075.334952140] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711075.335559832] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711075.434981264] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711075.435638491] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711075.535979243] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711075.536376000] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711075.636375485] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711075.636546706] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711075.736898437] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711075.736895788] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711075.837146829] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711075.837178804] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711075.937519222] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711075.937716866] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711076.037514651] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711076.037931655] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711076.138638183] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711076.138637123] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711076.239158991] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711076.239678787] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711076.340573351] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711076.341168154] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711076.440021665] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711076.440301577] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711076.540230562] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711076.540555639] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711076.641022951] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711076.641026416] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711076.741204056] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711076.741204061] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711076.841762915] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711076.842096157] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711076.941815813] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711076.942316508] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-4] [WARN] [1746711077.042600028] [left.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_left_shoulder_pan_joint"(,...) whose position member was empty.
+[robot_state_publisher-11] [WARN] [1746711077.042643749] [right.robot_state_publisher]: Robot state publisher ignored a JointState message about joint(s) "ur_right_shoulder_pan_joint"(,...) whose position member was empty.
+[WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+[rviz2-3] [INFO] [1746711077.118016586] [rclcpp]: signal_handler(signum=2)
+[static_transform_publisher-16] [INFO] [1746711077.117995870] [rclcpp]: signal_handler(signum=2)
+[move_group-15] [INFO] [1746711077.118039881] [rclcpp]: signal_handler(signum=2)
+[static_transform_publisher-9] [INFO] [1746711077.118057897] [rclcpp]: signal_handler(signum=2)
+[move_group-8] [INFO] [1746711077.118118837] [rclcpp]: signal_handler(signum=2)
+[robot_state_publisher-11] [INFO] [1746711077.118097648] [rclcpp]: signal_handler(signum=2)
+[robot_state_publisher-4] [INFO] [1746711077.121480488] [rclcpp]: signal_handler(signum=2)
+[move_group-8] [INFO] [1746711077.183919820] [moveit.ros_planning_interface.moveit_cpp]: Deleting MoveItCpp
+[move_group-15] [INFO] [1746711077.184283841] [moveit.ros_planning_interface.moveit_cpp]: Deleting MoveItCpp
+[move_group-15] [INFO] [1746711077.185238191] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Stopped publishing maintained planning scene.
+[move_group-8] [INFO] [1746711077.187836472] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Stopped publishing maintained planning scene.
+[move_group-15] [INFO] [1746711077.188661043] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Stopping world geometry monitor
+[move_group-15] [INFO] [1746711077.192452865] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Stopping planning scene monitor
+[move_group-8] [INFO] [1746711077.193235036] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Stopping world geometry monitor
+[move_group-15] Warning: class_loader.ClassLoader: SEVERE WARNING!!! Attempting to unload library while objects created by this loader exist in the heap! You should delete your objects before attempting to unload the library or destroying the ClassLoader. The library will NOT be unloaded.
+[move_group-15]          at line 127 in ./src/class_loader.cpp
+[move_group-8] [INFO] [1746711077.198660481] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Stopping planning scene monitor
+[move_group-8] Warning: class_loader.ClassLoader: SEVERE WARNING!!! Attempting to unload library while objects created by this loader exist in the heap! You should delete your objects before attempting to unload the library or destroying the ClassLoader. The library will NOT be unloaded.
+[move_group-8]          at line 127 in ./src/class_loader.cpp
+[INFO] [static_transform_publisher-16]: process has finished cleanly [pid 3972]
+[INFO] [static_transform_publisher-9]: process has finished cleanly [pid 3924]
+[INFO] [robot_state_publisher-11]: process has finished cleanly [pid 3941]
+[INFO] [robot_state_publisher-4]: process has finished cleanly [pid 3914]
+[move_group-15] Stack trace (most recent call last):
+[move_group-15] #11   Object "", at 0xffffffffffffffff, in 
+[move_group-15] #10   Object "/ros2_ws/build/moveit_ros_move_group/move_group", at 0x556e23106eb4, in _start
+[move_group-15] #9    Object "/usr/lib/x86_64-linux-gnu/libc.so.6", at 0x7f5e02fdee3f, in __libc_start_main
+[move_group-15] #8    Object "/usr/lib/x86_64-linux-gnu/libc.so.6", at 0x7f5e02fded8f, in 
+[move_group-15] #7    Object "/ros2_ws/build/moveit_ros_move_group/move_group", at 0x556e23106483, in main
+[move_group-15] #6    Object "/ros2_ws/build/moveit_ros_move_group/move_group", at 0x556e2310d9c1, in std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release()
+[move_group-15] #5    Object "/opt/ros/humble/lib/librclcpp.so", at 0x7f5e0350384e, in rclcpp::Node::~Node()
+[move_group-8] Stack trace (most recent call last):
+[move_group-15] #4    Object "/opt/ros/humble/lib/librclcpp.so", at 0x7f5e034dec69, in 
+[move_group-15] #3    Object "/opt/ros/humble/lib/librclcpp.so", at 0x7f5e0350cef9, in 
+[move_group-15] #2    Object "/opt/ros/humble/lib/librclcpp.so", at 0x7f5e0350ce40, in rclcpp::node_interfaces::NodeBase::~NodeBase()
+[move_group-15] #1    Object "/opt/ros/humble/lib/librclcpp.so", at 0x7f5e034dec69, in 
+[move_group-15] #0    Object "/opt/ros/humble/lib/librclcpp.so", at 0x7f5e034e39e1, in rclcpp::CallbackGroup::~CallbackGroup()
+[move_group-15] Segmentation fault (Address not mapped to object [0x7f5df81d1c70])
+[move_group-8] #11   Object "", at 0xffffffffffffffff, in 
+[move_group-8] #10   Object "/ros2_ws/build/moveit_ros_move_group/move_group", at 0x559fad18beb4, in _start
+[move_group-8] #9    Object "/usr/lib/x86_64-linux-gnu/libc.so.6", at 0x7f7d241dee3f, in __libc_start_main
+[move_group-8] #8    Object "/usr/lib/x86_64-linux-gnu/libc.so.6", at 0x7f7d241ded8f, in 
+[move_group-8] #7    Object "/ros2_ws/build/moveit_ros_move_group/move_group", at 0x559fad18b483, in main
+[move_group-8] #6    Object "/ros2_ws/build/moveit_ros_move_group/move_group", at 0x559fad1929c1, in std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release()
+[move_group-8] #5    Object "/opt/ros/humble/lib/librclcpp.so", at 0x7f7d2470384e, in rclcpp::Node::~Node()
+[move_group-8] #4    Object "/opt/ros/humble/lib/librclcpp.so", at 0x7f7d246dec69, in 
+[move_group-8] #3    Object "/opt/ros/humble/lib/librclcpp.so", at 0x7f7d2470cef9, in 
+[move_group-8] #2    Object "/opt/ros/humble/lib/librclcpp.so", at 0x7f7d2470ce40, in rclcpp::node_interfaces::NodeBase::~NodeBase()
+[move_group-8] #1    Object "/opt/ros/humble/lib/librclcpp.so", at 0x7f7d246dec69, in 
+[move_group-8] #0    Object "/opt/ros/humble/lib/librclcpp.so", at 0x7f7d246e39e1, in rclcpp::CallbackGroup::~CallbackGroup()
+[move_group-8] Segmentation fault (Address not mapped to object [0x7f7d18326c70])
+[INFO] [joint_state_publisher-17]: process has finished cleanly [pid 3984]
+[INFO] [joint_state_publisher-10]: process has finished cleanly [pid 3927]
+[ERROR] [move_group-8]: process has died [pid 3922, exit code -11, cmd '/ros2_ws/install/moveit_ros_move_group/lib/moveit_ros_move_group/move_group --ros-args --params-file /tmp/launch_params_l9os_d8i --params-file /tmp/launch_params_zpyoa3hj --params-file /tmp/launch_params_rbjno84v --params-file /tmp/launch_params_65b_9_ce'].
+[move_group-8] [0m
+[ERROR] [move_group-15]: process has died [pid 3956, exit code -11, cmd '/ros2_ws/install/moveit_ros_move_group/lib/moveit_ros_move_group/move_group --ros-args --params-file /tmp/launch_params_wafzv2y1 --params-file /tmp/launch_params_yybvy6o2 --params-file /tmp/launch_params_qv9jbdqo --params-file /tmp/launch_params_0d5kpto5'].
+[move_group-15] [0m
+[INFO] [gzserver-1]: process has finished cleanly [pid 3908]
+[rviz2-3] Error:   Error document empty.
+[rviz2-3]          at line 100 in ./urdf_parser/src/model.cpp
+[rviz2-3] Failed to parse robot description using: urdf_xml_parser/URDFXMLParser
+[rviz2-3] [INFO] [1746711080.898976464] [moveit_rdf_loader.rdf_loader]: Unable to parse URDF
+[rviz2-3] [ERROR] [1746711080.899402071] [moveit_background_processing.background_processing]: Exception caught while processing action 'loadRobotModel': failed to create guard condition: the given context is not valid, either rcl_init() was not called or rcl_shutdown() was called., at ./src/rcl/guard_condition.c:67
+[INFO] [rviz2-3]: process has finished cleanly [pid 3912]
