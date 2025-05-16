@@ -154,9 +154,9 @@ def generate_launch_description():
 
     ld = LaunchDescription()
     ld.add_action(gazebo)
-    ld.add_action(rviz)
+
    #ld.add_action(joint_pub_ros1)
     ld.add_action(robot_spawner_left)
     ld.add_action(robot_spawner_right)
-    
+    ld.add_action(rviz)
     return ld

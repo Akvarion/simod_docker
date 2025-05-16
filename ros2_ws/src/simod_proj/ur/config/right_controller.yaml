@@ -2,6 +2,12 @@
   controller_manager:
     ros__parameters:
       update_rate: 500  # Hz
+      moveit_controller_manager: moveit_ros_control_interface/MoveItControllerManager
+
+      moveit_ros_control_interface:
+        controller_names:
+          - ur_right_joint_group_vel_controller
+          - joint_state_broadcaster
 
       joint_state_broadcaster:
         type: joint_state_broadcaster/JointStateBroadcaster
