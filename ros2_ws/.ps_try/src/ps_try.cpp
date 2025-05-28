@@ -43,6 +43,7 @@ class MTCTaskNode{
     rclcpp::Node::SharedPtr node_;
 };
 
+// This should set up an empty planning scene.
 void MTCTaskNode::setupPlanningScene(){
   // Create a planning scene interface
   moveit::planning_interface::PlanningSceneInterface psi;
@@ -68,9 +69,11 @@ void MTCTaskNode::setupPlanningScene(){
   RCLCPP_INFO(LOGGER, "Planning scene setup complete.");
 
 }
-
+// Create an MTC task with stages for the specified robot_side which can be "l" or "r",
+// left or right respectively. In hindsight, this should be a character instead of a string, todo.
 mtc::Task MTCTaskNode::createTask(const std::string *robot_side){
   mtc::Task task;
+  // Load the robot model from a URDF file into a buffer
   std::ifstream t ("/ros2_ws/"+*robot_side+"_resolved.urdf");
   std::stringstream buffer;
   buffer << t.rdbuf();
@@ -78,9 +81,11 @@ mtc::Task MTCTaskNode::createTask(const std::string *robot_side){
   task.stages()->setName("demo task");
   task.loadRobotModel(node_, buffer.str());
 
-  const auto& base_group_name = "base_"+*robot_side;
-  const auto& ur_group_name = "ur_"+*robot_side;
-  const auto& ee_frame = "ur_ee_"+*robot_side;
+  // define robot groups name
+  // They should match the names defined in the URDF/SRDF files
+  const auto& base_group_name = "srm_"+*robot_side+"_base";
+  const auto& ur_group_name = "srm_"+*robot_side+"_ur";
+  const auto& ee_frame = "srm_"+*robot_side+"_ee";
 
   // Set task properties
   task.setProperty("group", base_group_name);
