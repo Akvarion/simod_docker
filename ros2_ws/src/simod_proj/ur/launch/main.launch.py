@@ -2,13 +2,17 @@
 
 from launch import LaunchDescription, LaunchDescription
 from launch.actions import IncludeLaunchDescription, ExecuteProcess
+from launch.substitutions import Command, FindExecutable, LaunchConfiguration, PathJoinSubstitution, TextSubstitution
+
 from ament_index_python.packages import get_package_share_directory
 import os
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.conditions import IfCondition
 from launch_ros.actions import Node
 from launch.substitutions import PathJoinSubstitution
+import launch_ros.parameter_descriptions
 from launch_ros.substitutions import FindPackageShare
+from moveit_configs_utils import MoveItConfigsBuilder
 
 def generate_launch_description():
 
@@ -150,13 +154,107 @@ def generate_launch_description():
     #     condition=IfCondition(spawn_gazebo_base)
     #     )
 
+    # Planning Functionality
+    planning_pipelines_config = {
+        "default_planning_pipeline": "ompl",
+        "planning_pipelines": ["ompl"],
+        "ompl": {
+            "planning_plugins": ["ompl_interface/OMPLPlanner"],
+            "request_adapters": [
+                "default_planning_request_adapters/ResolveConstraintFrames",
+                "default_planning_request_adapters/ValidateWorkspaceBounds",
+                "default_planning_request_adapters/CheckStartStateBounds",
+                "default_planning_request_adapters/CheckStartStateCollision",
+            ],
+            "response_adapters": [
+                "default_planning_response_adapters/AddTimeOptimalParameterization",
+                "default_planning_response_adapters/ValidateSolution",
+            ],
+        },
+    }
+    # Planning scene monitor
+    planning_scene_monitor_parameters = {'publish_planning_scene': True,
+                                         'publish_geometry_updates': True,
+                                         'publish_state_updates': True,
+                                         'publish_transforms_updates': True}
 
+    moveit_config = (
+        MoveItConfigsBuilder("dual",package_name='srm_simod_moveit_config')
+        .robot_description(file_path=get_package_share_directory('ur')+"/xacro/srm.urdf.xacro")
+        .robot_description_semantic(file_path=get_package_share_directory('srm_simod_moveit_config')+"/config/dual.srdf")
+        .robot_description_kinematics(file_path=get_package_share_directory('srm_simod_moveit_config')+"/config/kinematics.yaml")
+        .planning_pipelines(
+            pipelines=["ompl", "chomp", "pilz_industrial_motion_planner"]
+        )
+        .trajectory_execution(file_path=get_package_share_directory('ur')+"/config/lr_controller.yaml")
+        .planning_scene_monitor(planning_scene_monitor_parameters)
+        .sensors_3d(file_path=get_package_share_directory('srm_simod_moveit_config')+"/config/sensors_3d.yaml")
+        .joint_limits(file_path=get_package_share_directory('srm_simod_moveit_config')+"/config/joint_limits.yaml")
+        .pilz_cartesian_limits(file_path=get_package_share_directory('srm_simod_moveit_config')+"/config/pilz_cartesian_limits.yaml")
+        .to_moveit_configs()
+    )
+    robot_description_content = Command(
+        [
+            PathJoinSubstitution([FindExecutable(name="xacro")]),
+            " ",
+            PathJoinSubstitution([FindPackageShare(description_package), "xacro", "srm.urdf.xacro"]),
+        ]
+    )
+    robot_description_param = launch_ros.descriptions.ParameterValue(robot_description_content, value_type=str)
+
+    # Load  ExecuteTaskSolutionCapability so we can execute found solutions in simulation
+    move_group_capabilities = {
+        "capabilities": "move_group/ExecuteTaskSolutionCapability"
+    }
+    # move_group/ApplyPlanningSceneService 
+    # move_group/ClearOctomapService 
+    # move_group/MoveGroupCartesianPathService 
+    # move_group/MoveGroupExecuteService 
+    # move_group/MoveGroupExecuteTrajectoryAction 
+    # move_group/MoveGroupGetPlanningSceneService 
+    # move_group/MoveGroupKinematicsService 
+    # move_group/MoveGroupMoveAction 
+    # move_group/MoveGroupPlanService 
+    # move_group/MoveGroupQueryPlannersService 
+    # move_group/MoveGroupStateValidationService 
+    # move_group/TfPublisher 
+    # pilz_industrial_motion_planner/MoveGroupSequenceAction 
+    # pilz_industrial
+    # motion_planner/MoveGroupSequenceService
+
+    # ros2_controllers_path = os.path.join(
+    #     get_package_share_directory(namespace+"_srm_simod_moveit_config"),
+    #     "config",
+    #     "ros2_controllers.yaml",
+    # )
+    # ros2_control_node = Node(
+    #     package="controller_manager",
+    #     executable="ros2_control_node",
+    #     name=namespace+"ros2_control_node",
+    #     parameters=[moveit_config.robot_description, ros2_controllers_path],
+    #     output="screen",
+    # )
+    #Start the actual move_group node/action server
+    run_move_group_node = Node(
+        package="moveit_ros_move_group",
+        executable="move_group",
+        #namespace=namespace,
+        output="screen",
+        parameters=[
+            moveit_config.to_dict(),
+            move_group_capabilities,
+            {'moveit_controller_manager': 'moveit_ros_control_interface/MoveItControllerManager'},
+            {'robot_description': robot_description_param},
+            {'publish_planning_scene': True}
+        ],
+    )
+ 
 
     ld = LaunchDescription()
     ld.add_action(gazebo)
-
    #ld.add_action(joint_pub_ros1)
     ld.add_action(robot_spawner_left)
     ld.add_action(robot_spawner_right)
     ld.add_action(rviz)
+    ld.add_action(run_move_group_node)
     return ld

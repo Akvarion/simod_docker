@@ -326,93 +326,7 @@ def launch_setup(context, *args, **kwargs):
     # file.write(robot_description_content.perform(context))   
     # file.close()
 
-    # Planning Functionality
-    planning_pipelines_config = {
-        "default_planning_pipeline": "ompl",
-        "planning_pipelines": ["ompl"],
-        "ompl": {
-            "planning_plugins": ["ompl_interface/OMPLPlanner"],
-            "request_adapters": [
-                "default_planning_request_adapters/ResolveConstraintFrames",
-                "default_planning_request_adapters/ValidateWorkspaceBounds",
-                "default_planning_request_adapters/CheckStartStateBounds",
-                "default_planning_request_adapters/CheckStartStateCollision",
-            ],
-            "response_adapters": [
-                "default_planning_response_adapters/AddTimeOptimalParameterization",
-                "default_planning_response_adapters/ValidateSolution",
-            ],
-        },
-    }
-    # Planning scene monitor
-    planning_scene_monitor_parameters = {'publish_planning_scene': True,
-                                         'publish_geometry_updates': True,
-                                         'publish_state_updates': True,
-                                         'publish_transforms_updates': True}
-
-    moveit_config = (
-        MoveItConfigsBuilder("dual",package_name=namespace+'_srm_simod_moveit_config')
-        .robot_description("/ros2_ws/"+namespace+"_resolved.urdf")
-        .robot_description_semantic(file_path=get_package_share_directory(namespace+'_srm_simod_moveit_config')+"/config/dual.srdf")
-        .robot_description_kinematics(file_path=get_package_share_directory(namespace+'_srm_simod_moveit_config')+"/config/kinematics.yaml")
-        .planning_pipelines(
-            pipelines=["ompl", "chomp", "pilz_industrial_motion_planner"]
-        )
-        .trajectory_execution(file_path=get_package_share_directory('ur')+"/config/"+namespace+"_controller.yaml")
-        .planning_scene_monitor(planning_scene_monitor_parameters)
-        .sensors_3d(file_path=get_package_share_directory(namespace+'_srm_simod_moveit_config')+"/config/sensors_3d.yaml")
-        .joint_limits(file_path=get_package_share_directory(namespace+'_srm_simod_moveit_config')+"/config/joint_limits.yaml")
-        .pilz_cartesian_limits(file_path=get_package_share_directory(namespace+'_srm_simod_moveit_config')+"/config/pilz_cartesian_limits.yaml")
-        .to_moveit_configs()
-    )
-
-    # Load  ExecuteTaskSolutionCapability so we can execute found solutions in simulation
-    move_group_capabilities = {
-        "capabilities": "move_group/ExecuteTaskSolutionCapability"
-    }
-    # move_group/ApplyPlanningSceneService 
-    # move_group/ClearOctomapService 
-    # move_group/MoveGroupCartesianPathService 
-    # move_group/MoveGroupExecuteService 
-    # move_group/MoveGroupExecuteTrajectoryAction 
-    # move_group/MoveGroupGetPlanningSceneService 
-    # move_group/MoveGroupKinematicsService 
-    # move_group/MoveGroupMoveAction 
-    # move_group/MoveGroupPlanService 
-    # move_group/MoveGroupQueryPlannersService 
-    # move_group/MoveGroupStateValidationService 
-    # move_group/TfPublisher 
-    # pilz_industrial_motion_planner/MoveGroupSequenceAction 
-    # pilz_industrial
-    # motion_planner/MoveGroupSequenceService
-
-    # ros2_controllers_path = os.path.join(
-    #     get_package_share_directory(namespace+"_srm_simod_moveit_config"),
-    #     "config",
-    #     "ros2_controllers.yaml",
-    # )
-    # ros2_control_node = Node(
-    #     package="controller_manager",
-    #     executable="ros2_control_node",
-    #     name=namespace+"ros2_control_node",
-    #     parameters=[moveit_config.robot_description, ros2_controllers_path],
-    #     output="screen",
-    # )
-    #Start the actual move_group node/action server
-    run_move_group_node = Node(
-        package="moveit_ros_move_group",
-        executable="move_group",
-        #namespace=namespace,
-        output="screen",
-        parameters=[
-            moveit_config.to_dict(),
-            move_group_capabilities,
-            {'moveit_controller_manager': 'moveit_ros_control_interface/MoveItControllerManager'},
-            {'robot_description': robot_description_param},
-            {'publish_planning_scene': True}
-        ],
-    )
- 
+  
     return [
         gazebo_spawn_robot_description,
         robot_state_publisher_node,
@@ -426,7 +340,7 @@ def launch_setup(context, *args, **kwargs):
 #       ros2_control_node,
         joint_state_broadcaster_spawner,
         velocity_controller,
-        run_move_group_node,
+       # run_move_group_node,
  
     ]
 

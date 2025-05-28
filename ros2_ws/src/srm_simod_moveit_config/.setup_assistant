@@ -1,0 +1,11 @@
+moveit_setup_assistant_config:
+  urdf:
+    package: ur
+    relative_path: xacro/srm.urdf.xacro
+    xacro_args:
+  srdf:
+    relative_path: config/dual.srdf
+  package_settings:
+    author_name: todo
+    author_email: todo@todo.com
+    generated_timestamp: 1748352270
