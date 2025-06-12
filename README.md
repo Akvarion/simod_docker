@@ -265,3 +265,16 @@ ros2 topic pub /left/ur_left_joint_group_vel_controller/commands std_msgs/msg/Fl
 
 ros2 topic pub /left_summit/cmd_vel geometry_msgs/msg/Twist "{linear: {x: 0.0, y: 0.0, z: 0.0}, angular: {x: 0.0, y: 0.0, z: 0.0}}"
 ```
+
+```
+git clone -b humble https://github.com/moveit/moveit_task_constructor.git
+git clone https://github.com/ros_planning/geometric_shapes.git
+git clone https://github.com/moveit/moveit_visual_tools.git
+git clone -b humble https://github.com/moveit/moveit2_tutorials.git
+git clone https://github.com/IntelRealSense/realsense-ros.git
+git clone https://github.com/ros_controls/realtime_tools.git
+git clone -b humble https://github.com/ros2/ros2_control.git
+git clone https://github.com/ros2/ros2_control_cmake.git
+git clone https://github.com/ros2/ros2_controllers.git
+git clone https://github.com/ros2/rosparam_shortcuts.git
+```
