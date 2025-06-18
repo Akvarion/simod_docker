@@ -49,8 +49,7 @@ def generate_launch_description():
     right_controller         = 'right_controller.yaml'
     vel_controller_right     = 'ur_right_joint_group_vel_controller'
 
-    # Combined controller
-    controller_file = 'lr_controller.yaml'
+
 
     hardware_interface   = 'hardware_interface/PositionJointInterface'
 
@@ -60,7 +59,7 @@ def generate_launch_description():
     spawn_gazebo_base    = 'True'
     rviz                 = 'True'
     gazebo_path = os.path.join(get_package_share_directory('ur'), 'xacro','gazebo.world')
-    mono_spawn_setup     = 0
+
     gazebo = IncludeLaunchDescription(
                  (os.path.join(get_package_share_directory('gazebo_ros'), 'launch','gazebo.launch.py')),
                  launch_arguments={'physics': 'False', 'world': gazebo_path}.items(),
@@ -144,68 +143,6 @@ def generate_launch_description():
     #                ],
     #     condition=IfCondition(spawn_gazebo_base)
     #     )
-    
-##### STARTING SINGLE SPAWNER NODE BLOCK
-    # ROBOT STATE PUBLISHER
-    robot_state_publisher_node = Node(
-        package="robot_state_publisher",
-        executable="robot_state_publisher",
-        name="robot_state_publisher",
-        output="both",
-        parameters=[{'use_sim_time': True},{'robot_description': robot_description_param}],
-    )
-    # TF PUBLISHING
-    static_tf_real = Node(
-        package="tf2_ros",
-        executable="static_transform_publisher",
-        name="static_transform_publisher",
-        output="log",
-        arguments=["0", "0", "0", "0", "0", "0", "1", 'world', "left_summit_odom"],
-    )
-    # GAZEBO ROBOT SPAWNER
-    gazebo_robot_spawn = Node(
-        package='gazebo_ros',
-        executable='spawn_entity.py',
-        name='multi_robot',
-        output='screen',
-        arguments=[
-            '-entity', 'multi_robot',
-            '-file', '/ros2_ws/src/simod_proj/ur/xacro/srm.urdf.xacro',
-            '-timeout', '5',
-            '-unpause'
-        ]
-    ) 
-    # CONTROLLERS
-    velocity_controller = Node(
-        package='controller_manager',
-        executable='spawner',
-        arguments=['ur_right_joint_group_vel_controller', '-c', "/controller_manager"],
-        output='screen'
-    )
-
-    # JOINT STATE BROADCASTER
-    joint_state_broadcaster_spawner = Node(
-        package='controller_manager',
-        name='joint_state_broadcaster_spawner',
-        executable='spawner',
-        arguments=['joint_state_broadcaster', '-c', "/controller_manager"],
-        output='screen',
-        
-    )
-    # UR ROS2 CONTROL NODE
-    real_joint_controllers = PathJoinSubstitution(
-        [FindPackageShare("ur"), "config", controller_file]
-    )
-
-    ur_control_node = Node(
-        package="ur_robot_driver",
-        executable="ur_ros2_control_node",
-        parameters=[
-            {'robot_description': "/robot_description"},
-            launch_ros.parameter_descriptions.ParameterFile(real_joint_controllers, allow_substs=True),
-        ],
-    )
-###### ENDING SINGLE SPAWNER NODE BLOCK
 
     # Planning Functionality
     planning_pipelines_config = {
@@ -252,18 +189,6 @@ def generate_launch_description():
         "capabilities": "move_group/ExecuteTaskSolutionCapability"
     }
 
-    ros2_controllers_path = os.path.join(get_package_share_directory("ur"),"config","lr_controllers.yaml")
-    ros2_control_node = Node(
-        package="controller_manager",
-        executable="ros2_control_node",
-        name="ros2_control_node",
-        parameters=[ros2_controllers_path],
-        remappings=[
-            ("/controller_manager/robot_description", "/robot_description"),
-        ],
-        output="screen",
-    )
-
     #Start the actual move_group node/action server
     run_move_group_node = Node(
         package="moveit_ros_move_group",
@@ -307,26 +232,13 @@ def generate_launch_description():
         period=10.0, #10 seconds delay to allow spawns and such
         actions=[joint_state_merger],
     )
-    delayed_joint_state_broadcaster = TimerAction(
-        period=4.0, #4 seconds delay to allow spawns and such
-        actions=[joint_state_broadcaster_spawner],
-    )
 
     ld = LaunchDescription()
     ld.add_action(gazebo)
    #ld.add_action(joint_pub_ros1)
-    if mono_spawn_setup == 1:
-        ld.add_action(robot_state_publisher_node)
-        ld.add_action(static_tf_real)
-        ld.add_action(gazebo_robot_spawn)
-        ld.add_action(ros2_control_node)
-        ld.add_action(velocity_controller)
-        ld.add_action(delayed_joint_state_broadcaster)
-    #    ld.add_action(ur_control_node)
-    else:
-        ld.add_action(robot_spawner_left)
-        ld.add_action(robot_spawner_right)
-        ld.add_action(delayed_joint_state_merger)
+    ld.add_action(robot_spawner_left)
+    ld.add_action(robot_spawner_right)
+    ld.add_action(delayed_joint_state_merger)
     
     ld.add_action(rviz)
     ld.add_action(run_move_group_node)
