@@ -24,7 +24,7 @@ namespace mtc = moveit::task_constructor;
 class MTCTaskNode{
   public:
     MTCTaskNode(const rclcpp::NodeOptions& options) : 
-      node_{std::make_shared<rclcpp::Node>("ps_try mtc node", options)} {
+      node_{std::make_shared<rclcpp::Node>("ps_try_mtc_node", options)} {
     };
 
     rclcpp::node_interfaces::NodeBaseInterface::SharedPtr getNodeBaseInterface(){
@@ -110,6 +110,7 @@ mtc::Task MTCTaskNode::createTask(const std::string *robot_side){
   cartesian_planner->setMaxAccelerationScalingFactor(1.0);
   cartesian_planner->setStepSize(.01);
   
+  return task;
 }
 
 int main(int argc, char ** argv){

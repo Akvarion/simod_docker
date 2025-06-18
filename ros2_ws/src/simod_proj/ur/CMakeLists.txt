@@ -9,12 +9,14 @@ endif()
 find_package(ament_cmake REQUIRED)
 find_package(gazebo_ros2_control REQUIRED)
 # find_package(depthai_descriptions REQUIRED)
-
+find_package(ament_cmake_python REQUIRED)
+#ament_python_install_module(${PROJECT_NAME})
 install(
   DIRECTORY launch xacro rviz config
   DESTINATION share/${PROJECT_NAME}
 )
-
+# Python stuff
+install(PROGRAMS ur/joint_state_merger.py DESTINATION lib/${PROJECT_NAME})
 # install(
 #   PROGRAMS dd.py
 #   DESTINATION lib/${PROJECT_NAME}

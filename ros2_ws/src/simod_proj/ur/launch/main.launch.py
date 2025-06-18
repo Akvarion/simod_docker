@@ -13,6 +13,7 @@ from launch.substitutions import PathJoinSubstitution
 import launch_ros.parameter_descriptions
 from launch_ros.substitutions import FindPackageShare
 from moveit_configs_utils import MoveItConfigsBuilder
+from launch.actions import TimerAction
 
 def generate_launch_description():
 
@@ -48,44 +49,34 @@ def generate_launch_description():
     right_controller         = 'right_controller.yaml'
     vel_controller_right     = 'ur_right_joint_group_vel_controller'
 
+    # Combined controller
+    controller_file = 'lr_controller.yaml'
+
     hardware_interface   = 'hardware_interface/PositionJointInterface'
+
 
     gazebo               = 'True'
     spawn_gazebo_robot   = 'True'
     spawn_gazebo_base    = 'True'
     rviz                 = 'True'
     gazebo_path = os.path.join(get_package_share_directory('ur'), 'xacro','gazebo.world')
-
+    mono_spawn_setup     = 0
     gazebo = IncludeLaunchDescription(
                  (os.path.join(get_package_share_directory('gazebo_ros'), 'launch','gazebo.launch.py')),
                  launch_arguments={'physics': 'False', 'world': gazebo_path}.items(),
                  condition=IfCondition(gazebo))
     
-    # Launch RViz
 
-    robot_description_left = PathJoinSubstitution(
-        ["/", namespace_left, "/robot_description"]
-    )
-
-    robot_description_right = PathJoinSubstitution(
-        ["/", namespace_right, "/robot_description"]
-    )
-    rviz_config_file = (
-        os.path.join(get_package_share_directory('ur'), 'rviz','rviz_config.rviz')
-    )
-    rviz = Node(
-        package='rviz2',
-        executable='rviz2',
-        name='rviz2',
-        output='screen',
-        arguments=['-d', rviz_config_file],
-        parameters=[
-            {'/left/robot_description': robot_description_left},
-            {'/right/robot_description': robot_description_right},
-        ],        
-    )
     #Open gazebo and spawn robots
-  
+    robot_description_content = Command(
+        [
+            PathJoinSubstitution([FindExecutable(name="xacro")]),
+            " ",
+            PathJoinSubstitution([FindPackageShare(description_package), "xacro", "srm.urdf.xacro"]),
+        ]
+    )
+    robot_description_param = launch_ros.descriptions.ParameterValue(robot_description_content, value_type=str)
+
     robot_spawner_left = IncludeLaunchDescription(
                         PythonLaunchDescriptionSource([get_package_share_directory(description_package), '/launch', '/single_robot.launch.py']),
                         launch_arguments={
@@ -153,6 +144,68 @@ def generate_launch_description():
     #                ],
     #     condition=IfCondition(spawn_gazebo_base)
     #     )
+    
+##### STARTING SINGLE SPAWNER NODE BLOCK
+    # ROBOT STATE PUBLISHER
+    robot_state_publisher_node = Node(
+        package="robot_state_publisher",
+        executable="robot_state_publisher",
+        name="robot_state_publisher",
+        output="both",
+        parameters=[{'use_sim_time': True},{'robot_description': robot_description_param}],
+    )
+    # TF PUBLISHING
+    static_tf_real = Node(
+        package="tf2_ros",
+        executable="static_transform_publisher",
+        name="static_transform_publisher",
+        output="log",
+        arguments=["0", "0", "0", "0", "0", "0", "1", 'world', "left_summit_odom"],
+    )
+    # GAZEBO ROBOT SPAWNER
+    gazebo_robot_spawn = Node(
+        package='gazebo_ros',
+        executable='spawn_entity.py',
+        name='multi_robot',
+        output='screen',
+        arguments=[
+            '-entity', 'multi_robot',
+            '-file', '/ros2_ws/src/simod_proj/ur/xacro/srm.urdf.xacro',
+            '-timeout', '5',
+            '-unpause'
+        ]
+    ) 
+    # CONTROLLERS
+    velocity_controller = Node(
+        package='controller_manager',
+        executable='spawner',
+        arguments=['ur_right_joint_group_vel_controller', '-c', "/controller_manager"],
+        output='screen'
+    )
+
+    # JOINT STATE BROADCASTER
+    joint_state_broadcaster_spawner = Node(
+        package='controller_manager',
+        name='joint_state_broadcaster_spawner',
+        executable='spawner',
+        arguments=['joint_state_broadcaster', '-c', "/controller_manager"],
+        output='screen',
+        
+    )
+    # UR ROS2 CONTROL NODE
+    real_joint_controllers = PathJoinSubstitution(
+        [FindPackageShare("ur"), "config", controller_file]
+    )
+
+    ur_control_node = Node(
+        package="ur_robot_driver",
+        executable="ur_ros2_control_node",
+        parameters=[
+            {'robot_description': "/robot_description"},
+            launch_ros.parameter_descriptions.ParameterFile(real_joint_controllers, allow_substs=True),
+        ],
+    )
+###### ENDING SINGLE SPAWNER NODE BLOCK
 
     # Planning Functionality
     planning_pipelines_config = {
@@ -193,47 +246,24 @@ def generate_launch_description():
         .pilz_cartesian_limits(file_path=get_package_share_directory('srm_simod_moveit_config')+"/config/pilz_cartesian_limits.yaml")
         .to_moveit_configs()
     )
-    robot_description_content = Command(
-        [
-            PathJoinSubstitution([FindExecutable(name="xacro")]),
-            " ",
-            PathJoinSubstitution([FindPackageShare(description_package), "xacro", "srm.urdf.xacro"]),
-        ]
-    )
-    robot_description_param = launch_ros.descriptions.ParameterValue(robot_description_content, value_type=str)
 
     # Load  ExecuteTaskSolutionCapability so we can execute found solutions in simulation
     move_group_capabilities = {
         "capabilities": "move_group/ExecuteTaskSolutionCapability"
     }
-    # move_group/ApplyPlanningSceneService 
-    # move_group/ClearOctomapService 
-    # move_group/MoveGroupCartesianPathService 
-    # move_group/MoveGroupExecuteService 
-    # move_group/MoveGroupExecuteTrajectoryAction 
-    # move_group/MoveGroupGetPlanningSceneService 
-    # move_group/MoveGroupKinematicsService 
-    # move_group/MoveGroupMoveAction 
-    # move_group/MoveGroupPlanService 
-    # move_group/MoveGroupQueryPlannersService 
-    # move_group/MoveGroupStateValidationService 
-    # move_group/TfPublisher 
-    # pilz_industrial_motion_planner/MoveGroupSequenceAction 
-    # pilz_industrial
-    # motion_planner/MoveGroupSequenceService
 
-    # ros2_controllers_path = os.path.join(
-    #     get_package_share_directory(namespace+"_srm_simod_moveit_config"),
-    #     "config",
-    #     "ros2_controllers.yaml",
-    # )
-    # ros2_control_node = Node(
-    #     package="controller_manager",
-    #     executable="ros2_control_node",
-    #     name=namespace+"ros2_control_node",
-    #     parameters=[moveit_config.robot_description, ros2_controllers_path],
-    #     output="screen",
-    # )
+    ros2_controllers_path = os.path.join(get_package_share_directory("ur"),"config","lr_controllers.yaml")
+    ros2_control_node = Node(
+        package="controller_manager",
+        executable="ros2_control_node",
+        name="ros2_control_node",
+        parameters=[ros2_controllers_path],
+        remappings=[
+            ("/controller_manager/robot_description", "/robot_description"),
+        ],
+        output="screen",
+    )
+
     #Start the actual move_group node/action server
     run_move_group_node = Node(
         package="moveit_ros_move_group",
@@ -248,13 +278,56 @@ def generate_launch_description():
             {'publish_planning_scene': True}
         ],
     )
- 
+    
+    rviz_config_file = (
+        os.path.join(get_package_share_directory('ur'), 'rviz','rviz_config.rviz')
+    )
+    rviz = Node(
+        package='rviz2',
+        executable='rviz2',
+        name='rviz2',
+        output='screen',
+        arguments=['-d', rviz_config_file],
+        parameters=[
+            moveit_config.robot_description,
+            moveit_config.robot_description_semantic,
+            moveit_config.robot_description_kinematics,
+            {'use_sim_time': True},
+        ],        
+    )
+
+    joint_state_merger = Node(
+        package="ur",
+        executable="joint_state_merger.py",
+        name="joint_state_merger",
+        output="screen"
+    )
+
+    delayed_joint_state_merger = TimerAction(
+        period=10.0, #10 seconds delay to allow spawns and such
+        actions=[joint_state_merger],
+    )
+    delayed_joint_state_broadcaster = TimerAction(
+        period=4.0, #4 seconds delay to allow spawns and such
+        actions=[joint_state_broadcaster_spawner],
+    )
 
     ld = LaunchDescription()
     ld.add_action(gazebo)
    #ld.add_action(joint_pub_ros1)
-    ld.add_action(robot_spawner_left)
-    ld.add_action(robot_spawner_right)
+    if mono_spawn_setup == 1:
+        ld.add_action(robot_state_publisher_node)
+        ld.add_action(static_tf_real)
+        ld.add_action(gazebo_robot_spawn)
+        ld.add_action(ros2_control_node)
+        ld.add_action(velocity_controller)
+        ld.add_action(delayed_joint_state_broadcaster)
+    #    ld.add_action(ur_control_node)
+    else:
+        ld.add_action(robot_spawner_left)
+        ld.add_action(robot_spawner_right)
+        ld.add_action(delayed_joint_state_merger)
+    
     ld.add_action(rviz)
     ld.add_action(run_move_group_node)
     return ld

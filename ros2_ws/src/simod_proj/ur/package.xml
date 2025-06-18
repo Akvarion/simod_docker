@@ -8,6 +8,7 @@
   <license>TODO: License declaration</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
+  <buildtool_depend>ament_cmake_python</buildtool_depend>
 
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>ament_lint_common</test_depend>
@@ -20,6 +21,7 @@
   <exec_depend>robotiq_hand_e</exec_depend>
   <exec_depend>robotiq_control</exec_depend>
   <exec_depend>gazebo_ros2_control</exec_depend>
+  <exec_depend>python3</exec_depend>
   <!-- <exec_depend>realsense2_description</exec_depend> -->
   <exec_depend>launch_ros</exec_depend>
   <!-- <depend>realsense2_camera_msgs</depend> -->
