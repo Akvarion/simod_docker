@@ -17,12 +17,30 @@
         <group name="srm_l_base"/>
         <group name="srm_l_ur"/>
     </group> -->
+
     <group name="srm_r_base">
         <joint name="right_summit_base_footprint_joint"/>
         <joint name="right_summit_back_left_wheel_joint"/>
         <joint name="right_summit_back_right_wheel_joint"/>
         <joint name="right_summit_front_left_wheel_joint"/>
         <joint name="right_summit_front_right_wheel_joint"/>
+        <joint name="right_summit_rear_laser_base_joint"/>
+        <joint name="right_summit_front_laser_base_joint"/>
+        <joint name="right_summit_base_link-base_link_inertia"/>
+        <chain base_link="right_summit_base_link" tip_link="right_summit_front_laser_base_link"/>
+        <chain base_link="right_summit_base_link" tip_link="right_summit_front_left_wheel_link"/>
+        <chain base_link="right_summit_base_link" tip_link="right_summit_front_right_wheel_link"/>
+        <chain base_link="right_summit_base_link" tip_link="right_summit_rear_laser_base_link"/>
+        <chain base_link="right_summit_base_link" tip_link="ur_right_base_link_inertia"/>
+        <chain base_link="right_summit_base_link" tip_link="ur_right_shoulder_link"/>
+        <chain base_link="right_summit_base_link" tip_link="ur_right_upper_arm_link"/>
+        <chain base_link="right_summit_base_link" tip_link="ur_right_forearm_link"/>
+        <chain base_link="right_summit_base_link" tip_link="ur_right_wrist_1_link"/>
+        <chain base_link="right_summit_base_link" tip_link="ur_right_wrist_2_link"/>
+        <chain base_link="right_summit_base_link" tip_link="ur_right_wrist_3_link"/>
+        <chain base_link="right_summit_base_link" tip_link="ur_right_finger_left"/>
+        <chain base_link="right_summit_base_link" tip_link="ur_right_finger_right"/>
+        <chain base_link="right_summit_base_link" tip_link="ur_right_robotiq_hand"/>
     </group>
     <group name="srm_r_ur">
         <joint name="ur_right_shoulder_pan_joint"/>
@@ -41,12 +59,30 @@
         <link name="ur_right_finger_tip"/>
         <chain base_link="ur_right_robotiq_hand" tip_link="ur_right_finger_right"/>
     </group>
+
     <group name="srm_l_base">
         <joint name="left_summit_base_footprint_joint"/>
         <joint name="left_summit_back_left_wheel_joint"/>
         <joint name="left_summit_back_right_wheel_joint"/>
         <joint name="left_summit_front_left_wheel_joint"/>
         <joint name="left_summit_front_right_wheel_joint"/>
+        <joint name="left_summit_rear_laser_base_joint"/>
+        <joint name="left_summit_front_laser_base_joint"/>
+        <joint name="left_summit_base_link-base_link_inertia"/>
+        <chain base_link="left_summit_base_link" tip_link="left_summit_front_laser_base_link"/>
+        <chain base_link="left_summit_base_link" tip_link="left_summit_front_left_wheel_link"/>
+        <chain base_link="left_summit_base_link" tip_link="left_summit_front_right_wheel_link"/>
+        <chain base_link="left_summit_base_link" tip_link="left_summit_rear_laser_base_link"/>
+        <chain base_link="left_summit_base_link" tip_link="ur_left_base_link_inertia"/>
+        <chain base_link="left_summit_base_link" tip_link="ur_left_shoulder_link"/>
+        <chain base_link="left_summit_base_link" tip_link="ur_left_upper_arm_link"/>
+        <chain base_link="left_summit_base_link" tip_link="ur_left_forearm_link"/>
+        <chain base_link="left_summit_base_link" tip_link="ur_left_wrist_1_link"/>
+        <chain base_link="left_summit_base_link" tip_link="ur_left_wrist_2_link"/>
+        <chain base_link="left_summit_base_link" tip_link="ur_left_wrist_3_link"/>
+        <chain base_link="left_summit_base_link" tip_link="ur_left_finger_left"/>
+        <chain base_link="left_summit_base_link" tip_link="ur_left_finger_right"/>
+        <chain base_link="left_summit_base_link" tip_link="ur_left_robotiq_hand"/>
     </group>
     <group name="srm_l_ur">
         <joint name="ur_left_base_link-base_link_inertia"/>
@@ -65,6 +101,19 @@
         <link name="ur_left_finger_tip"/>
         <chain base_link="ur_left_robotiq_hand" tip_link="ur_left_finger_right"/>
     </group>
+
+    <group name="srm_r_base_ur_ee">
+        <chain base_link="odom" tip_link="ur_right_robotiq_hand"/> 
+        <group name="srm_r_base"/>
+        <group name="srm_r_ur"/>
+        <group name="srm_r_ee"/>
+    </group>
+    <group name="srm_l_base_ur_ee">
+        <group name="srm_l_base"/>
+        <group name="srm_l_ur"/>
+        <group name="srm_l_ee"/>
+    </group>
+
     <!--GROUP STATES: Purpose: Define a named state for a particular group, in terms of joint values. This is useful to define states like 'folded arms'-->
     <group_state name="home_r" group="srm_r_ur">
 <!-- 
@@ -94,9 +143,39 @@
         <joint name="ur_left_wrist_2_joint" value="1.57"/>
         <joint name="ur_left_wrist_3_joint" value="0"/>
     </group_state>
+
+    <!-- Group state of the complete block base + ur + ee-->
+    <group_state name="home_r_base_ur_ee" group="srm_r_base_ur_ee">
+        <joint name="right_summit_back_left_wheel_joint" value="0"/>
+        <joint name="right_summit_back_right_wheel_joint" value="0"/>
+        <joint name="right_summit_front_left_wheel_joint" value="0"/>
+        <joint name="right_summit_front_right_wheel_joint" value="0"/>
+        <joint name="ur_right_elbow_joint" value="-2.6609"/>
+        <joint name="ur_right_shoulder_lift_joint" value="0.268"/>
+        <joint name="ur_right_shoulder_pan_joint" value="-1.57"/>
+        <joint name="ur_right_wrist_1_joint" value="-1.3893"/>
+        <joint name="ur_right_wrist_2_joint" value="1.3893"/>
+        <joint name="ur_right_wrist_3_joint" value="-0.1694"/>
+        <!-- <joint name="ur_right_base_link-base_link_inertia" value="0"/> -->
+    </group_state>
+        <group_state name="home_l_base_ur_ee" group="srm_l_base_ur_ee">
+        <joint name="left_summit_back_left_wheel_joint" value="0"/>
+        <joint name="left_summit_back_right_wheel_joint" value="0"/>
+        <joint name="left_summit_front_left_wheel_joint" value="0"/>
+        <joint name="left_summit_front_right_wheel_joint" value="0"/>
+        <joint name="ur_left_elbow_joint" value="-2.7601"/>
+        <joint name="ur_left_shoulder_lift_joint" value="0.305"/>
+        <joint name="ur_left_shoulder_pan_joint" value="-1.57"/>
+        <joint name="ur_left_wrist_1_joint" value="-1.3893"/>
+        <joint name="ur_left_wrist_2_joint" value="1.57"/>
+        <joint name="ur_left_wrist_3_joint" value="0"/>
+        <!-- <joint name="ur_right_base_link-base_link_inertia" value="0"/> -->
+    </group_state>
+
     <!--END EFFECTOR: Purpose: Represent information about an end effector.-->
     <end_effector name="ee_r" parent_link="ur_right_wrist_3_link" group="srm_r_ee" parent_group="srm_r_ur"/>
     <end_effector name="ee_l" parent_link="ur_left_wrist_3_link" group="srm_l_ee" parent_group="srm_l_ur"/>
+
     <!--VIRTUAL JOINT: Purpose: this element defines a virtual joint between a robot link and an external frame of reference (considered fixed with respect to the robot)-->
     <virtual_joint name="Vjoint_left" type="planar" parent_frame="world" child_link="left_summit_base_footprint"/>
     <virtual_joint name="Vjoint_right" type="planar" parent_frame="world" child_link="right_summit_base_footprint"/>
