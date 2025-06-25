@@ -15,7 +15,8 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'joint_state_merger = ur.joint_state_merger:main'
+            'joint_state_merger = ur.joint_state_merger:main',
+            'gazebo_moveit_bridge = ur.gazebo_moveit_bridge:main'
         ],
     },
 )

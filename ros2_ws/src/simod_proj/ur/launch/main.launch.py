@@ -170,7 +170,7 @@ def generate_launch_description():
 
     moveit_config = (
         MoveItConfigsBuilder("dual",package_name='srm_simod_moveit_config')
-        .robot_description(file_path=get_package_share_directory('ur')+"/xacro/srm.urdf.xacro")
+        .robot_description(file_path=get_package_share_directory('srm_simod_moveit_config')+"/config/srm.urdf.xacro")
         .robot_description_semantic(file_path=get_package_share_directory('srm_simod_moveit_config')+"/config/dual.srdf")
         .robot_description_kinematics(file_path=get_package_share_directory('srm_simod_moveit_config')+"/config/kinematics.yaml")
         .planning_pipelines(
@@ -229,8 +229,34 @@ def generate_launch_description():
     )
 
     delayed_joint_state_merger = TimerAction(
-        period=10.0, #10 seconds delay to allow spawns and such
+        period=8.0, #10 seconds delay to allow spawns and such
         actions=[joint_state_merger],
+    )
+
+    # controller_manager = Node(
+    #     package='controller_manager',
+    #     executable='ros2_control_node',
+    #     name='controller_manager',
+    #     parameters=[
+    #         moveit_config.robot_description,
+    #         get_package_share_directory('ur')+"/config/lr_controller.yaml"
+    #         ],
+    #     output='screen',
+    # )
+
+    # delayed_controller_manager = TimerAction(
+    #     period=4.0,  # 10 seconds delay to allow spawns and such
+    #     actions=[controller_manager],
+    # )
+    gazebo_moveit_bridge = Node(
+        package="ur",
+        executable="gazebo_moveit_bridge.py",
+        name="gazebo_moveit_bridge",
+        output="screen"
+    )
+    delayed_moveit_bridge = TimerAction(
+        period=5.0,  # 10 seconds delay to allow spawns and such
+        actions=[gazebo_moveit_bridge],
     )
 
     ld = LaunchDescription()
@@ -239,7 +265,7 @@ def generate_launch_description():
     ld.add_action(robot_spawner_left)
     ld.add_action(robot_spawner_right)
     ld.add_action(delayed_joint_state_merger)
-    
+    ld.add_action(delayed_moveit_bridge)
     ld.add_action(rviz)
     ld.add_action(run_move_group_node)
     return ld
