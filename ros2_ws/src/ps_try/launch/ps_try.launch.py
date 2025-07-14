@@ -4,7 +4,7 @@ from moveit_configs_utils import MoveItConfigsBuilder
 
 def generate_launch_description():
     moveit_config = MoveItConfigsBuilder("srm_simod").to_dict()
-
+    
     # Demo node
     ps_demo = Node(
         package="ps_try",

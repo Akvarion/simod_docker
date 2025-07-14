@@ -12,17 +12,20 @@
   <link name="world"/>
 
   <!-- Connect the left robot to the world -->
-  <joint name="left_base_joint" type="floating">
+
+  <joint name="left_base_joint" type="fixed">
     <parent link="world"/>
     <child link="left_summit_base_footprint"/>
-    <origin xyz="-1.32 0 0.123316" rpy="0 0 0"/> <!-- Adjust position as needed -->
+    <origin xyz="-1.32 0 0.123316" rpy="0 0 0"/>
   </joint>
 
+  
   <!-- Connect the right robot to the world -->
-  <joint name="right_base_joint" type="floating">
+   
+  <joint name="right_base_joint" type="fixed">
     <parent link="world"/>
     <child link="right_summit_base_footprint"/>
-    <origin xyz="1.32 0 0.123316" rpy="0 0 0"/> <!-- Adjust position as needed -->
+    <origin xyz="1.32 0 0.123316" rpy="0 0 0"/>
   </joint>
 
   <!-- istanziare la macro-->

@@ -16,6 +16,7 @@ setup(
     entry_points={
         'console_scripts': [
             'joint_state_merger = ur.joint_state_merger:main',
+            'gazebo_scene_sync = ur.gazebo_scene_sync:main',
             'gazebo_moveit_bridge = ur.gazebo_moveit_bridge:main'
         ],
     },

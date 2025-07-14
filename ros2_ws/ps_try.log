@@ -1,0 +1,15 @@
+[INFO] [launch]: All log files can be found below /root/.ros/log/2025-07-08-10-54-54-907740-outlander-Aspire-V3-571G-8138
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [ps_try-1]: process started with pid [8139]
+[ps_try-1] [INFO] [1751972097.706227225] [ps_try]: Setting up the planning scene...
+[ps_try-1] [INFO] [1751972097.706466626] [ps_try]: Robot description loaded successfully.
+[ps_try-1] [INFO] [1751972097.706512180] [ps_try]: Publishing the planning scene...
+[ps_try-1] [INFO] [1751972098.725114876] [ps_try]: Planning scene setup complete.
+[WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+[ps_try-1] [INFO] [1751978923.263056355] [rclcpp]: signal_handler(signum=2)
+[ERROR] [ps_try-1]: process[ps_try-1] failed to terminate '5' seconds after receiving 'SIGINT', escalating to 'SIGTERM'
+[INFO] [ps_try-1]: sending signal 'SIGTERM' to process[ps_try-1]
+[ps_try-1] [INFO] [1751978928.271402119] [rclcpp]: signal_handler(signum=15)
+[ERROR] [ps_try-1]: process[ps_try-1] failed to terminate '10.0' seconds after receiving 'SIGTERM', escalating to 'SIGKILL'
+[INFO] [ps_try-1]: sending signal 'SIGKILL' to process[ps_try-1]
+[ERROR] [ps_try-1]: process has died [pid 8139, exit code -9, cmd '/ros2_ws/install/ps_try/lib/ps_try/ps_try --ros-args --params-file /tmp/launch_params_5jsn7sk8'].

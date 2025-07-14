@@ -34,12 +34,17 @@ class MTCTaskNode{
     void doTask();
 
     void setupPlanningScene();
-
+    std::string robot_side;
+  
+    int print_name(void){
+      RCLCPP_INFO(LOGGER, "Node name: %s", node_->get_name());
+      return 0;
+    }
   private:
     // Compose an MTC task from a series of stages.
     mtc::Task createTask(const std::string *robot_side);
     mtc::Task task_;
-    std::string robot_side;
+    
     rclcpp::Node::SharedPtr node_;
 };
 
@@ -73,24 +78,37 @@ void MTCTaskNode::setupPlanningScene(){
 // left or right respectively. In hindsight, this should be a character instead of a string, todo.
 mtc::Task MTCTaskNode::createTask(const std::string *robot_side){
   mtc::Task task;
+  std::string robot_side_full;
   // Load the robot model from a URDF file into a buffer
-  std::ifstream t ("/ros2_ws/"+*robot_side+"_resolved.urdf");
+  if(*robot_side=="l") {
+    robot_side_full = "left";
+  }
+  else robot_side_full="right";
+
+  std::ifstream t ("/ros2_ws/src/simod_proj/ur/xacro/srm.urdf");
   std::stringstream buffer;
   buffer << t.rdbuf();
+
+  //std::string robot_description = node_->get_parameter("robot_description").as_string();
   
+  RCLCPP_INFO(LOGGER, "Reading Robot_model");
+  task.loadRobotModel(node_, "robot_description");
+  RCLCPP_INFO(LOGGER, "Robot_model loaded");
   task.stages()->setName("demo task");
-  task.loadRobotModel(node_, buffer.str());
+
 
   // define robot groups name
   // They should match the names defined in the URDF/SRDF files
-  const auto& base_group_name = "srm_"+*robot_side+"_base";
-  const auto& ur_group_name = "srm_"+*robot_side+"_ur";
-  const auto& ee_frame = "srm_"+*robot_side+"_ee";
+  const auto &base_group_name = "srm_"+*robot_side+"_base";
+  const auto &ur_group_name = "srm_"+*robot_side+"_ur";
+  const auto &ee_frame = "srm_"+*robot_side+"_ee";
 
+  const auto &srm_station = "srm_" + *robot_side;
+  
   // Set task properties
-  task.setProperty("group", base_group_name);
-  task.setProperty("group", ur_group_name);
-  task.setProperty("ik_frame", ee_frame);
+  // task.setProperty("base_group", base_group_name);
+  // task.setProperty("ur_group", ur_group_name);
+  // task.setProperty("ee_group", ee_frame);
 
  // Disable warnings for this line, as it's a variable that's set but not used in this example
  #pragma GCC diagnostic push
@@ -113,6 +131,23 @@ mtc::Task MTCTaskNode::createTask(const std::string *robot_side){
   return task;
 }
 
+void MTCTaskNode::doTask() {
+  // Create a task for the left robot side
+  std::cout<< "before createT";
+
+  mtc::Task task = createTask(&robot_side);
+  std::cout<< "after createT";
+  // Initialize the task
+  task.init();
+
+  // Plan the task
+  if (task.plan()) {
+    RCLCPP_INFO(LOGGER, "Task planning successful, publishing solution.");
+  } else {
+    RCLCPP_ERROR(LOGGER, "Task planning failed, no solution to publish.");
+  }
+}
+
 int main(int argc, char ** argv){
 
   rclcpp::init(argc, argv);
@@ -129,7 +164,12 @@ int main(int argc, char ** argv){
     executor.remove_node(mtc_task_node->getNodeBaseInterface());
   });
 
+
   mtc_task_node->setupPlanningScene();
+
+  mtc_task_node->robot_side = "l";  // Set the robot side to left, can be "l" or "r"
+  mtc_task_node->doTask();
+  RCLCPP_INFO(LOGGER, "Task execution complete, shutting down...");
 
   spin_thread->join();
   rclcpp::shutdown();

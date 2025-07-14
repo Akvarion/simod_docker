@@ -227,10 +227,21 @@ def generate_launch_description():
         name="joint_state_merger",
         output="screen"
     )
-
+    gazebo_scene_sync = Node(
+        package="ur",
+        executable="gazebo_scene_sync.py",
+        name="gazebo_scene_sync",
+        output="screen"
+    )
+    # Add a delay to allow the robots to spawn before merging joint states
     delayed_joint_state_merger = TimerAction(
-        period=8.0, #10 seconds delay to allow spawns and such
+        period=7.0, #7 seconds delay to allow spawns and such
         actions=[joint_state_merger],
+    )
+    # Add a delay to allow the robots to spawn before syncing the planning scene
+    delayed_gazebo_scene_sync = TimerAction(
+        period=.0, #8 seconds delay to allow spawns and such
+        actions=[gazebo_scene_sync],
     )
 
     # controller_manager = Node(
@@ -265,6 +276,7 @@ def generate_launch_description():
     ld.add_action(robot_spawner_left)
     ld.add_action(robot_spawner_right)
     ld.add_action(delayed_joint_state_merger)
+    ld.add_action(delayed_gazebo_scene_sync)
     ld.add_action(delayed_moveit_bridge)
     ld.add_action(rviz)
     ld.add_action(run_move_group_node)
