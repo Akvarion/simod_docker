@@ -79,6 +79,20 @@
         <group name="srm_l_ee"/>
     </group>
     
+    <group name="dual_arms">
+        <group name="srm_l"/>
+        <group name="srm_r"/>
+    </group>
+
+    <group name="dual_bases">
+        <group name="srm_base_l"/>
+        <group name="srm_base_r"/>
+    </group>
+
+    <group name="dual_system">
+        <group name="dual_arms"/>
+        <group name="dual_bases"/>
+    </group>
     <!--GROUP STATES: Purpose: Define a named state for a particular group, in terms of joint values. This is useful to define states like 'folded arms'-->
     <group_state name="home_r" group="srm_r_ur">
 <!-- 
