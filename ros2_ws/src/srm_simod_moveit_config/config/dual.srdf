@@ -124,7 +124,7 @@
     </group_state>
 
     <!-- Group state of the complete block base + ur + ee-->
-    <group_state name="home_r_base_ur_ee" group="srm_r_base_ur_ee">
+    <group_state name="home_r_base_ur_ee" group="srm_r">
         <joint name="right_summit_back_left_wheel_joint" value="0"/>
         <joint name="right_summit_back_right_wheel_joint" value="0"/>
         <joint name="right_summit_front_left_wheel_joint" value="0"/>
@@ -137,7 +137,7 @@
         <joint name="ur_right_wrist_3_joint" value="-0.1694"/>
         <!-- <joint name="ur_right_base_link-base_link_inertia" value="0"/> -->
     </group_state>
-        <group_state name="home_l_base_ur_ee" group="srm_l_base_ur_ee">
+        <group_state name="home_l_base_ur_ee" group="srm_l">
         <joint name="left_summit_back_left_wheel_joint" value="0"/>
         <joint name="left_summit_back_right_wheel_joint" value="0"/>
         <joint name="left_summit_front_left_wheel_joint" value="0"/>
