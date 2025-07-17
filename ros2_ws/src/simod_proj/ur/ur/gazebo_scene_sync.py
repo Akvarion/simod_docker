@@ -5,15 +5,18 @@ from rclpy.node import Node
 from gazebo_msgs.msg import ModelStates, LinkStates  # or appropriate message for your setup
 from moveit_msgs.msg import CollisionObject
 from shape_msgs.msg import SolidPrimitive,Mesh,MeshTriangle
-from geometry_msgs.msg import Pose,Point, Quaternion
+from geometry_msgs.msg import Pose,Point, Quaternion, TransformStamped
 from visualization_msgs.msg import Marker
 from moveit_msgs.msg import ObjectColor, PlanningScene
 from std_msgs.msg import ColorRGBA
+from tf2_ros import TransformBroadcaster
 
 class GazeboSceneSync(Node):
     def __init__(self):
         super().__init__('gazebo_scene_sync')
         
+        self.tf_broadcaster = TransformBroadcaster(self)
+
         self.planning_scene_pub = self.create_publisher(PlanningScene, '/monitored_planning_scene', 10)
 
         self.subscription = self.create_subscription(
@@ -33,6 +36,17 @@ class GazeboSceneSync(Node):
             '/collision_object',
             10
         )
+    def broadcast_tf(self, pose, parent_frame, child_frame):
+        t = TransformStamped()
+        t.header.stamp = self.get_clock().now().to_msg()
+        t.header.frame_id = parent_frame
+        t.child_frame_id = child_frame
+        t.transform.translation.x = pose.position.x
+        t.transform.translation.y = pose.position.y
+        t.transform.translation.z = pose.position.z
+        t.transform.rotation = pose.orientation
+        self.tf_broadcaster.sendTransform(t)
+
     def publish_collision_object(self, co):
         # Publish the collision object to the planning scene
         self.collision_object_pub.publish(co)
@@ -100,7 +114,8 @@ class GazeboSceneSync(Node):
                     co.operation = CollisionObject.ADD
 
                     self.publish_colored_object(co, (0.82, 0.71, 0.55, 1.0))
-                
+                    self.broadcast_tf(pose, "world", "pallet2")
+
                 case "aws_robomaker_warehouse_GroundB_01_0" :
                     co = CollisionObject()
                     co.header.frame_id = "world"
@@ -125,7 +140,8 @@ class GazeboSceneSync(Node):
                     co.primitive_poses = [pose]  # Use the pose from Gazebo
                     co.operation = CollisionObject.ADD
                     self.publish_collision_object(co)
-                
+                    self.broadcast_tf(pose, "world", "target_plane")
+
                 case "pacco" :
                     co = CollisionObject()
                     co.header.frame_id = "world"
@@ -137,7 +153,8 @@ class GazeboSceneSync(Node):
                     co.primitive_poses = [pose]  # Use the pose from Gazebo
                     co.operation = CollisionObject.ADD
                     self.publish_colored_object(co, (1.0, 0.0, 0.0, 1.0))
-                
+                    self.broadcast_tf(pose, "world", "pacco")
+
                 case "pacco_clone" :
                     co = CollisionObject()
                     co.header.frame_id = "world"
@@ -149,7 +166,8 @@ class GazeboSceneSync(Node):
                     co.primitive_poses = [pose]  # Use the pose from Gazebo
                     co.operation = CollisionObject.ADD
                     self.publish_colored_object(co, (1.0, 0.0, 0.0, 1.0))
-                
+                    self.broadcast_tf(pose, "world", "pacco_clone")
+
                 case "pacco_clone_0" :
                     co = CollisionObject()
                     co.header.frame_id = "world"
@@ -161,7 +179,8 @@ class GazeboSceneSync(Node):
                     co.primitive_poses = [pose]  # Use the pose from Gazebo
                     co.operation = CollisionObject.ADD
                     self.publish_colored_object(co, (1.0, 0.0, 0.0, 1.0))
-                
+                    self.broadcast_tf(pose, "world", "pacco_clone_0")
+
                 case "pacco_clone_1" :
                     co = CollisionObject()
                     co.header.frame_id = "world"
@@ -173,7 +192,8 @@ class GazeboSceneSync(Node):
                     co.primitive_poses = [pose]  # Use the pose from Gazebo
                     co.operation = CollisionObject.ADD
                     self.publish_colored_object(co, (1.0, 0.0, 0.0, 1.0))
-                
+                    self.broadcast_tf(pose, "world", "pacco_clone_1")
+
                 case "pacco_clone_2" :
                     co = CollisionObject()
                     co.header.frame_id = "world"
@@ -185,7 +205,8 @@ class GazeboSceneSync(Node):
                     co.primitive_poses = [pose]  # Use the pose from Gazebo
                     co.operation = CollisionObject.ADD
                     self.publish_colored_object(co, (1.0, 0.0, 0.0, 1.0))
-                
+                    self.broadcast_tf(pose, "world", "pacco_clone_2")
+
                 case "muraUse1":
                     co = CollisionObject()
                     co.header.frame_id = "world"
@@ -197,6 +218,7 @@ class GazeboSceneSync(Node):
                     co.operation = CollisionObject.ADD
 
                     self.publish_collision_object(co)
+                    self.broadcast_tf(pose, "world", "muraUse1")
                 case _:
                     self.get_logger().info(f"Model {name} not handled in callback.")
 

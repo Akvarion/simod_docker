@@ -13,7 +13,7 @@
 
   <!-- Connect the left robot to the world -->
 
-  <joint name="left_base_joint" type="fixed">
+  <joint name="left_base_joint" type="planar">
     <parent link="world"/>
     <child link="left_summit_base_footprint"/>
     <origin xyz="-1.32 0 0.123316" rpy="0 0 0"/>
@@ -21,8 +21,8 @@
 
   
   <!-- Connect the right robot to the world -->
-   
-  <joint name="right_base_joint" type="fixed">
+
+  <joint name="right_base_joint" type="planar">
     <parent link="world"/>
     <child link="right_summit_base_footprint"/>
     <origin xyz="1.32 0 0.123316" rpy="0 0 0"/>

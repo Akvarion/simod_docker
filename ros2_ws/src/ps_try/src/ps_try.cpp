@@ -31,14 +31,22 @@ std::map<std::string, double> compute_IK(const moveit::core::RobotModelPtr robot
     std::map<std::string, double> joint_goal;
     moveit::core::RobotState robot_state(robot_model);
     const moveit::core::JointModelGroup *jmg = robot_state.getJointModelGroup(robot_group);
-    bool found_ik = robot_state.setFromIK(jmg, pose.pose, pose.header.frame_id, 0.5);
-    if (found_ik) {
+    if (!jmg) {
+      RCLCPP_ERROR(LOGGER, "JointModelGroup '%s' not found!", robot_group.c_str());
+      return joint_goal;
+    }
+    bool found_ik = robot_state.setFromIK(jmg, pose.pose, pose.header.frame_id, 5.0);
+    if(!found_ik) {
+        RCLCPP_ERROR(LOGGER, "IK solution not found for group '%s'.", robot_group.c_str());
+        return joint_goal;
+    } else {
       std::vector<double> joint_positions;
       robot_state.copyJointGroupPositions(jmg, joint_positions);
       // Map joint names to values
       const auto& joint_names = jmg->getVariableNames();
-      for (size_t i = 0; i < joint_names.size(); ++i)
+      for (size_t i = 0; i < joint_names.size(); ++i){
           joint_goal[joint_names[i]] = joint_positions[i];
+      }
     }
     // Fill joint_goal with computed IK values
     return joint_goal;
@@ -221,40 +229,58 @@ mtc::Task MTCTaskNode::createTask(){
   // STAGE 2
   // Move Bases
   {
-    auto stage_bases = std::make_unique<mtc::stages::MoveTo>("move_bases",sampling_planner);
-    stage_bases->setGroup(dual_bases_group);
+    // Set up the MoveTo stage for left base
+    auto stage_base_left = std::make_unique<mtc::stages::MoveTo>("move_base_left",sampling_planner);
+    // Set stage group to identify the base in the srdf
+    stage_base_left->setGroup(left_base_group);
+    // Set orientation in the space
+    double theta = 90.0;
+    // Define pose goal for right and left base
+    geometry_msgs::msg::PoseStamped base_goal_right,base_goal_left;
+    base_goal_left.header.frame_id = "muraUse1";
+    base_goal_left.pose.position.x = -1.0;
+    base_goal_left.pose.position.y = 2.0;
+    base_goal_left.pose.orientation = tf2::toMsg(tf2::Quaternion(0, 0, sin(theta/2), cos(theta/2)));
+    // Set goal and add the task
+    stage_base_left->setGoal(base_goal_left);
+    task.add(std::move(stage_base_left));
 
-    // TARGET POSES TO BE SET HERE
+    // Repeat for right base
+    base_goal_right.header.frame_id = "muraUse1";
+    base_goal_right.pose.position.x = 1.0;
+    base_goal_right.pose.position.y = 2.0;
+    base_goal_right.pose.orientation = tf2::toMsg(tf2::Quaternion(0, 0, sin(-theta/2), cos(-theta/2)));
+    auto stage_base_right = std::make_unique<mtc::stages::MoveTo>("move_base_right", sampling_planner);
+    stage_base_right->setGroup(right_base_group); // e.g., "srm_base_l"
+    stage_base_right->setGoal(base_goal_right);
+    task.add(std::move(stage_base_right));
 
-    task.add(std::move(stage_bases));
   }
 
   // STAGE 3
   // Coordinated Dual-Arm Movement
   {
       auto stage_dual_arms = std::make_unique<mtc::stages::MoveTo>("move_dual_arms", sampling_planner);
-      stage_dual_arms->setGroup(dual_arms_group);
       
       
+      // Set pose goal relative to object in the scene
       geometry_msgs::msg::PoseStamped pose_goal;
-      pose_goal.header.frame_id = "object_1";  // The object's frame in the planning scene
+      pose_goal.header.frame_id = "pacco_clone_0";  // The object's frame in the planning scene
       pose_goal.pose.position.x = 0.0;         // Offset from the object's origin (e.g., for grasping)
       pose_goal.pose.position.y = 0.1;
       pose_goal.pose.position.z = 0.2;
       pose_goal.pose.orientation.w = 1.0;
 
-      
-      // Set a goal for both arms
+      // Calculate map goal for left and right arms
+      std::map<std::string,double> *joint_goal;
       std::map<std::string,double> joint_goal_right = compute_IK(right_robot_model,right_arm_group,pose_goal);
       std::map<std::string,double> joint_goal_left = compute_IK(left_robot_model,left_arm_group,pose_goal);
+      // Merge solutions
+      joint_goal_left.merge(joint_goal_right);
+      joint_goal = &joint_goal_left;
 
-      
-      // Fill joint_goal with both left and right arm joint targets
-      // joint_goal["left_shoulder_pan_joint"] = ...;
-      // joint_goal["right_shoulder_pan_joint"] = ...;
-      // stage_dual_arms->setGoal(joint_goal);
-
-      stage_dual_arms->setGoal(pose_goal);
+      stage_dual_arms->setGroup(dual_arms_group);
+      stage_dual_arms->setGoal(*joint_goal);
 
       task.add(std::move(stage_dual_arms));
   }
@@ -264,10 +290,10 @@ mtc::Task MTCTaskNode::createTask(){
 
 void MTCTaskNode::doTask() {
   // Create a task for the left robot side
-  std::cout<< "before createT";
+  std::cout<< "before createTask";
 
   mtc::Task task = createTask();
-  std::cout<< "after createT";
+  std::cout<< "after createTask";
   // Initialize the task
   task.init();
 
