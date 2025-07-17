@@ -240,7 +240,7 @@ def generate_launch_description():
     )
     # Add a delay to allow the robots to spawn before syncing the planning scene
     delayed_gazebo_scene_sync = TimerAction(
-        period=.0, #8 seconds delay to allow spawns and such
+        period=8.0, #8 seconds delay to allow spawns and such
         actions=[gazebo_scene_sync],
     )
 
