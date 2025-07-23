@@ -3,23 +3,23 @@
     This is a format for representing semantic information about the robot structure.
     A URDF file must exist for this robot as well, where the joints and the links that are referenced are defined
 -->
-<robot name="srm">
+<robot name="right_srm">
     <group name="srm_base_r">
         <joint name="right_base_joint"/>
-        <joint name="right_summit_base_footprint_joint"/>
         <joint name="right_summit_back_left_wheel_joint"/>
         <joint name="right_summit_back_right_wheel_joint"/>
         <joint name="right_summit_front_left_wheel_joint"/>
         <joint name="right_summit_front_right_wheel_joint"/>
+        <joint name="right_summit_base_footprint_joint"/>
     </group>
     <group name="srm_r_ur">
+        <joint name="ur_right_base_link-base_link_inertia"/>
         <joint name="ur_right_shoulder_pan_joint"/>
         <joint name="ur_right_shoulder_lift_joint"/>
         <joint name="ur_right_elbow_joint"/>
         <joint name="ur_right_wrist_1_joint"/>
         <joint name="ur_right_wrist_2_joint"/>
         <joint name="ur_right_wrist_3_joint"/>
-        <joint name="ur_right_base_link-base_link_inertia"/>
         <chain base_link="ur_right_base_link_inertia" tip_link="ur_right_wrist_3_link"/>
     </group>
     <group name="srm_r_ee">
@@ -28,7 +28,7 @@
         <link name="ur_right_finger_right"/>
         <link name="ur_right_finger_tip"/>
         <chain base_link="ur_right_robotiq_hand" tip_link="ur_right_finger_right"/>
-    </group>
+   </group>
 
     <group name="srm_r">
         <group name="srm_base_r"/>
@@ -53,11 +53,12 @@
     </group_state>
     
     <!-- Group state of the complete block base + ur + ee-->
-    <group_state name="home_r_base_ur_ee" group="srm_r_base_ur_ee">
+    <group_state name="home_r_base_ur_ee" group="srm_r">
         <joint name="right_summit_back_left_wheel_joint" value="0"/>
         <joint name="right_summit_back_right_wheel_joint" value="0"/>
         <joint name="right_summit_front_left_wheel_joint" value="0"/>
         <joint name="right_summit_front_right_wheel_joint" value="0"/>
+    
         <joint name="ur_right_elbow_joint" value="-2.6609"/>
         <joint name="ur_right_shoulder_lift_joint" value="0.268"/>
         <joint name="ur_right_shoulder_pan_joint" value="-1.57"/>
@@ -81,15 +82,11 @@
     <disable_collisions link1="right_summit_back_left_wheel_link" link2="ur_right_base_link_inertia" reason="Never"/>
     <disable_collisions link1="right_summit_back_left_wheel_link" link2="ur_right_shoulder_link" reason="Never"/>
     <disable_collisions link1="right_summit_back_left_wheel_link" link2="ur_right_upper_arm_link" reason="Never"/>
-
-
     <disable_collisions link1="right_summit_back_right_wheel_link" link2="right_summit_base_link" reason="Adjacent"/>
     <disable_collisions link1="right_summit_back_right_wheel_link" link2="right_summit_front_laser_base_link" reason="Never"/>
     <disable_collisions link1="right_summit_back_right_wheel_link" link2="right_summit_front_left_wheel_link" reason="Never"/>
     <disable_collisions link1="right_summit_back_right_wheel_link" link2="right_summit_front_right_wheel_link" reason="Never"/>
     <disable_collisions link1="right_summit_back_right_wheel_link" link2="right_summit_rear_laser_base_link" reason="Never"/>
-
-
     <disable_collisions link1="right_summit_back_right_wheel_link" link2="ur_right_base_link_inertia" reason="Never"/>
     <disable_collisions link1="right_summit_back_right_wheel_link" link2="ur_right_shoulder_link" reason="Never"/>
     <disable_collisions link1="right_summit_back_right_wheel_link" link2="ur_right_upper_arm_link" reason="Never"/>
@@ -97,14 +94,11 @@
     <disable_collisions link1="right_summit_base_link" link2="right_summit_front_left_wheel_link" reason="Adjacent"/>
     <disable_collisions link1="right_summit_base_link" link2="right_summit_front_right_wheel_link" reason="Adjacent"/>
     <disable_collisions link1="right_summit_base_link" link2="right_summit_rear_laser_base_link" reason="Adjacent"/>
-
-
     <disable_collisions link1="right_summit_base_link" link2="ur_right_base_link_inertia" reason="Adjacent"/>
     <disable_collisions link1="right_summit_base_link" link2="ur_right_shoulder_link" reason="Never"/>
     <disable_collisions link1="right_summit_front_laser_base_link" link2="right_summit_front_left_wheel_link" reason="Never"/>
     <disable_collisions link1="right_summit_front_laser_base_link" link2="right_summit_front_right_wheel_link" reason="Never"/>
     <disable_collisions link1="right_summit_front_laser_base_link" link2="right_summit_rear_laser_base_link" reason="Never"/>
-
     <disable_collisions link1="right_summit_front_laser_base_link" link2="ur_right_base_link_inertia" reason="Never"/>
     <disable_collisions link1="right_summit_front_laser_base_link" link2="ur_right_shoulder_link" reason="Never"/>
     <disable_collisions link1="right_summit_front_left_wheel_link" link2="right_summit_front_right_wheel_link" reason="Never"/>
@@ -116,11 +110,9 @@
     <disable_collisions link1="right_summit_front_right_wheel_link" link2="ur_right_base_link_inertia" reason="Never"/>
     <disable_collisions link1="right_summit_front_right_wheel_link" link2="ur_right_shoulder_link" reason="Never"/>
     <disable_collisions link1="right_summit_front_right_wheel_link" link2="ur_right_upper_arm_link" reason="Never"/>
-    
     <disable_collisions link1="right_summit_rear_laser_base_link" link2="ur_right_base_link_inertia" reason="Never"/>
     <disable_collisions link1="right_summit_rear_laser_base_link" link2="ur_right_shoulder_link" reason="Never"/>
-
-<disable_collisions link1="ur_right_base_link_inertia" link2="ur_right_shoulder_link" reason="Adjacent"/>
+    <disable_collisions link1="ur_right_base_link_inertia" link2="ur_right_shoulder_link" reason="Adjacent"/>
     <disable_collisions link1="ur_right_finger_left" link2="ur_right_finger_right" reason="Adjacent"/>
     <disable_collisions link1="ur_right_finger_left" link2="ur_right_robotiq_hand" reason="Adjacent"/>
     <disable_collisions link1="ur_right_finger_left" link2="ur_right_wrist_1_link" reason="Never"/>

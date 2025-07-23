@@ -3,7 +3,7 @@
     This is a format for representing semantic information about the robot structure.
     A URDF file must exist for this robot as well, where the joints and the links that are referenced are defined
 -->
-<robot name="srm">
+<robot name="left_srm">
     <group name="srm_base_l">
         <joint name="left_base_joint"/>
         <joint name="left_summit_base_footprint_joint"/>
@@ -49,7 +49,7 @@
         <joint name="ur_left_wrist_2_joint" value="1.57"/>
         <joint name="ur_left_wrist_3_joint" value="0"/>
     </group_state>
-    <group_state name="home_l_base_ur_ee" group="srm_l_base_ur_ee">
+    <group_state name="home_l_base_ur_ee" group="srm_l">
         <joint name="left_summit_back_left_wheel_joint" value="0"/>
         <joint name="left_summit_back_right_wheel_joint" value="0"/>
         <joint name="left_summit_front_left_wheel_joint" value="0"/>

@@ -21,8 +21,6 @@
 static const rclcpp::Logger LOGGER = rclcpp::get_logger("ps_try");
 namespace mtc = moveit::task_constructor;
 
-
-
 std::map<std::string, double> compute_IK(const moveit::core::RobotModelPtr robot_model,
                                           const std::string &robot_group,
                                           const geometry_msgs::msg::PoseStamped &pose) {
@@ -118,9 +116,9 @@ mtc::Task MTCTaskNode::createTask(){
 
   //std::string robot_description = node_->get_parameter("robot_description").as_string();
   
-  RCLCPP_INFO(LOGGER, "Reading Robot_model");
+  RCLCPP_INFO(LOGGER, "READING DUAL ROBOT MODEL...");
   task.loadRobotModel(node_, "robot_description");
-  RCLCPP_INFO(LOGGER, "Robot_model loaded");
+  RCLCPP_INFO(LOGGER, "DUAL ROBOT MODEL LOADED.");
   task.setName("Dual_System_Trial_01");
   
   // Define the namespaces
@@ -171,14 +169,16 @@ mtc::Task MTCTaskNode::createTask(){
   
 // LOAD SINGLE ROBOT DESCRIPTIONS FOR PLANNING.
 // This should be seprated from here as it may not be "clean".
-  //LOADING LEFT ROBOT URDF FROM PARAMETER
+  //LOADING LEFT ROBOT URDF FROM PARAMETER.
   std::string left_urdf;
-  try {
-    node_->get_parameter("/left/robot_description", left_urdf);
-  } catch (const std::exception &e) {
-    RCLCPP_ERROR(LOGGER, "Failed to get left robot description: %s", e.what());
-    exit(-1);  // Terminate program due to critical failure
-  }
+  // try {
+  //   node_->get_parameter("/left/robot_description", left_urdf);
+  // } catch (const std::exception &e) {
+  //   RCLCPP_ERROR(LOGGER, "Failed to get left robot description: %s", e.what());
+  //   exit(-1);  // Terminate program due to critical failure
+  // }
+
+
   //LOADING CUSTOM SEMANTICS LEFT, "HALF" OF THE DUAL ROBOT SRDF
   std::ifstream srdf_file_l("/ros2_ws/src/simod_proj/ur/xacro/left_semantic.srdf");
   std::stringstream srdf_buffer;
@@ -187,38 +187,72 @@ mtc::Task MTCTaskNode::createTask(){
   // Reset stringstream for reuse
   srdf_buffer.str("");
   
+  //LOADING URDF LEFT, "HALF" OF THE DUAL ROBOT URDF
+  std::ifstream urdf_file_l("/ros2_ws/left_resolved.urdf");
+  std::stringstream urdf_buffer;
+  urdf_buffer << urdf_file_l.rdbuf();
+  std::string urdf_string_l = urdf_buffer.str();
+  // Reset stringstream for reuse
+  urdf_buffer.str("");
+
   //PARSING
-  urdf::ModelInterfaceSharedPtr urdf_model_left = urdf::parseURDF(left_urdf);
+  RCLCPP_INFO(LOGGER, "Parsing left URDF...");
+  urdf::ModelInterfaceSharedPtr urdf_model_left = urdf::parseURDF(urdf_string_l);
+  RCLCPP_INFO(LOGGER, "Parsing complete.");
+  RCLCPP_INFO(LOGGER, "INITIALIZING MODEL...");
+
   srdf::ModelSharedPtr srdf_model_left = std::make_shared<srdf::Model>();
-  srdf_model_left->initString(*urdf_model_left, srdf_string_l);
+  
+  if(srdf_model_left->initFile(*urdf_model_left, "/ros2_ws/src/simod_proj/ur/xacro/left_semantic.srdf")){
+    RCLCPP_INFO(LOGGER, "LEFT SRDF INITIALIZATION COMPLETE.");
+  }
+  else {
+    RCLCPP_ERROR(LOGGER, "LEFT SRDF INITIALIZATION FAILED.");
+  }
 
   // Build the MoveIt RobotModel
+  RCLCPP_INFO(LOGGER, "CREATING LEFT ROBOT MODEL...");
   moveit::core::RobotModelPtr left_robot_model = std::make_shared<moveit::core::RobotModel>(urdf_model_left, srdf_model_left);
-  
+  RCLCPP_INFO(LOGGER, "LEFT ROBOT MODEL CREATED.");
   //Load right robot
   std::string right_urdf; 
-  try {
-    node_->get_parameter("/right/robot_description", right_urdf);
-  } catch (const std::exception &e) {
-    RCLCPP_ERROR(LOGGER, "Failed to get right robot description: %s", e.what());
-    exit(-1);  // Terminate program due to critical failure
-  }
+  // try {
+  //   node_->get_parameter("/right/robot_description", right_urdf);
+  // } catch (const std::exception &e) {
+  //   RCLCPP_ERROR(LOGGER, "Failed to get right robot description: %s", e.what());
+  //   exit(-1);  // Terminate program due to critical failure
+  // }
   
   //LOADING CUSTOM SEMANTICS RIGHT, "HALF" OF THE DUAL ROBOT SRDF
   std::ifstream srdf_file_r("/ros2_ws/src/simod_proj/ur/xacro/right_semantic.srdf");
   srdf_buffer << srdf_file_r.rdbuf();
   std::string srdf_string_r = srdf_buffer.str();
 
-  //PARSING
-  urdf::ModelInterfaceSharedPtr urdf_model_right = urdf::parseURDF(right_urdf);
-  srdf::ModelSharedPtr srdf_model_right = std::make_shared<srdf::Model>();
-  srdf_model_right->initString(*urdf_model_right, srdf_string_r);
+  // LOADING URDF RIGHT, "HALF" OF THE DUAL ROBOT URDF
+  std::ifstream urdf_file_r("/ros2_ws/right_resolved.urdf");
+  urdf_buffer << urdf_file_r.rdbuf();
+  std::string urdf_string_r = urdf_buffer.str();
 
-  
+  //PARSING
+  RCLCPP_INFO(LOGGER, "Parsing right URDF...");
+  urdf::ModelInterfaceSharedPtr urdf_model_right = urdf::parseURDF(urdf_string_r);
+  RCLCPP_INFO(LOGGER, "Parsing complete.");
+  RCLCPP_INFO(LOGGER, "INITIALIZING MODEL...");
+  srdf::ModelSharedPtr srdf_model_right = std::make_shared<srdf::Model>();
+
+  if(srdf_model_right->initString(*urdf_model_right, srdf_string_r)){
+    RCLCPP_INFO(LOGGER, "RIGHT SRDF INITIALIZATION COMPLETE.");
+  }
+  else {
+    RCLCPP_ERROR(LOGGER, "RIGHT SRDF INITIALIZATION FAILED.");
+  }
+
   // Build the MoveIt RobotModel
+  RCLCPP_INFO(LOGGER, "CREATING RIGHT ROBOT MODEL...");
   moveit::core::RobotModelPtr right_robot_model = std::make_shared<moveit::core::RobotModel>(urdf_model_right, srdf_model_right);
 
 
+  RCLCPP_INFO(LOGGER, "!ROBOT INITIALIZATION COMPLETE!");
   // STAGE 1
   // Current state stage needs to read from namespaced joint states
   {
@@ -290,19 +324,33 @@ mtc::Task MTCTaskNode::createTask(){
 
 void MTCTaskNode::doTask() {
   // Create a task for the left robot side
-  std::cout<< "before createTask";
+  task_ = createTask();
 
-  mtc::Task task = createTask();
-  std::cout<< "after createTask";
-  // Initialize the task
-  task.init();
-
-  // Plan the task
-  if (task.plan()) {
-    RCLCPP_INFO(LOGGER, "Task planning successful, publishing solution.");
-  } else {
-    RCLCPP_ERROR(LOGGER, "Task planning failed, no solution to publish.");
+  try
+  {
+    task_.init();
   }
+  catch (mtc::InitStageException& e)
+  {
+    RCLCPP_ERROR_STREAM(LOGGER, e);
+    return;
+  }
+
+  if (!task_.plan(5))
+  {
+    RCLCPP_ERROR_STREAM(LOGGER, "Task planning failed");
+    return;
+  }
+  task_.introspection().publishSolution(*task_.solutions().front());
+
+  auto result = task_.execute(*task_.solutions().front());
+  if (result.val != moveit_msgs::msg::MoveItErrorCodes::SUCCESS)
+  {
+    RCLCPP_ERROR_STREAM(LOGGER, "Task execution failed");
+    return;
+  }
+
+  return;
 }
 
 int main(int argc, char ** argv){
