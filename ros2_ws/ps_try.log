@@ -85,3 +85,6 @@ warning: Using load_yaml() directly is deprecated. Use xacro.load_yaml() instead
 [ps_try-1]  Dual_System_Trial_01: cannot connect end interface of 'current' (→) to start interface of 'current_state' (←)
 [ps_try-1] 
 [ps_try-1] [INFO] [1753277439.446801642] [ps_try]: Task execution complete, shutting down...
+[WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+[ps_try-1] [INFO] [1753277583.172449234] [rclcpp]: signal_handler(signum=2)
+[INFO] [ps_try-1]: process has finished cleanly [pid 3565]
