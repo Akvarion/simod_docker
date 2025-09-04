@@ -18,7 +18,6 @@
     <child link="left_summit_base_footprint"/>
     <origin xyz="0 0 0.123316" rpy="0 0 0"/>
   </joint>
-
   
   <!-- Connect the right robot to the world -->
 
@@ -407,7 +406,7 @@
     <gravity>0</gravity>
   </gazebo>
   <!-- *origin-->
-    <link name="ur_left_paletta">
+  <link name="ur_left_paletta">
     <visual>
       <origin rpy="0 -1.570796327 3.141592654" xyz="0 0 0"/>
       <geometry>
@@ -1082,8 +1081,8 @@
       <odometry_frame>left_summit_odom</odometry_frame>
       <odometryRate>50.0</odometryRate>
       <robot_base_frame>left_summit_base_footprint</robot_base_frame>
-      <publish_odom>true</publish_odom>
-      <publish_odom_tf>true</publish_odom_tf>
+      <publish_odom>false</publish_odom>
+      <publish_odom_tf>false</publish_odom_tf>
       <enableYAxis>true</enableYAxis>
     </plugin>
   </gazebo>
@@ -2157,8 +2156,8 @@
         <odometry_frame>right_summit_odom</odometry_frame>
         <odometryRate>50.0</odometryRate>
         <robot_base_frame>right_summit_base_footprint</robot_base_frame>
-        <publish_odom>true</publish_odom>
-        <publish_odom_tf>true</publish_odom_tf>
+        <publish_odom>false</publish_odom>
+        <publish_odom_tf>false</publish_odom_tf>
         <enableYAxis>true</enableYAxis>
     </plugin>
     </gazebo>

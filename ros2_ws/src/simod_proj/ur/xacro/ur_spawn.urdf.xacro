@@ -2,9 +2,7 @@
 <robot xmlns:xacro="http://wiki.ros.org/xacro" name="dual">
 
     <xacro:include filename="$(find ur_description)/urdf/ur_macro.xacro"/>
-    <xacro:include filename="$(find robotiq_hand_e)/urdf/robotiq_wiring.urdf.xacro"/>
-    <xacro:include filename="$(find robotiq_hand_e)/urdf/robotiq_trasmission.xacro"/>
-    
+
     <xacro:arg name="connected_to" default=""/>
     <xacro:arg name="namespace" default=""/>
     <xacro:arg name="ur_type" default="ur5e"/>
@@ -119,9 +117,32 @@
         <origin xyz="$(arg xyz)" rpy="$(arg rpy_base_ur)"/> 
     </xacro:ur_robot>
 
-    <xacro:wiring_gripper prefix="$(arg tf_prefix)" parent="$(arg parent_hand)" rpy="$(arg rpy)" finger_tip_cor="$(arg finger_tip_cor)"/>
-    <xacro:robotiq_trasmission prefix="$(arg tf_prefix)" hw_interface="$(arg hardware_interface)"/>
-
+    <xacro:wiring_gripper prefix="$(arg tf_prefix)" parent="$(arg parent_hand)" rpy="$(arg rpy)"/>
+    <link name="ur_left_paletta">
+        <visual>
+        <origin rpy="0 -1.570796327 3.141592654" xyz="0 0 0"/>
+        <geometry>
+            <mesh filename="file:///ros2_ws/src/simod_proj/paletta_simod/meshes/paletta_v1_simplified_to_mm.stl"> 
+            </mesh>
+        </geometry>
+        <material name="">
+            <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1"/>
+        </material>
+        </visual>
+        <collision>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <geometry>
+            <mesh filename="file:///ros2_ws/src/simod_proj/paletta_simod/meshes/paletta_v1_simplified_to_mm.stl"> 
+            </mesh>
+        </geometry>
+        </collision>
+        <gravity>0</gravity>
+    </link>
+    <joint name="ur_$(arg namespace)_paletta_joint" type="fixed">
+        <parent link="$(arg parent_hand)"/>
+        <child link="ur_$(arg namespace)_paletta"/>
+        <origin xyz="0.157 0 0.0018" rpy="0 0 0"/>
+    </joint>
     <xacro:if value="$(arg spawn_gazebo_base)">
         <xacro:include filename="$(find base)/xacro/base_spawn.urdf.xacro"/>
     </xacro:if>

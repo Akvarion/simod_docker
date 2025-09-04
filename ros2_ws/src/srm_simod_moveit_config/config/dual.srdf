@@ -35,13 +35,7 @@
         <joint name="ur_right_base_link-base_link_inertia"/>
         <chain base_link="ur_right_base_link_inertia" tip_link="ur_right_wrist_3_link"/>
     </group>
-    <group name="srm_r_ee">
-        <link name="ur_right_robotiq_hand"/>
-        <link name="ur_right_finger_left"/>
-        <link name="ur_right_finger_right"/>
-        <link name="ur_right_finger_tip"/>
-        <chain base_link="ur_right_robotiq_hand" tip_link="ur_right_finger_right"/>
-    </group>
+
     <group name="srm_base_l">
         <joint name="left_base_joint"/>
         <joint name="left_summit_base_footprint_joint"/>
@@ -59,13 +53,6 @@
         <joint name="ur_left_wrist_2_joint"/>
         <joint name="ur_left_wrist_3_joint"/>
         <chain base_link="ur_left_base_link_inertia" tip_link="ur_left_wrist_3_link"/>
-    </group>
-    <group name="srm_l_ee">
-        <link name="ur_left_robotiq_hand"/>
-        <link name="ur_left_finger_left"/>
-        <link name="ur_left_finger_right"/>
-        <link name="ur_left_finger_tip"/>
-        <chain base_link="ur_left_robotiq_hand" tip_link="ur_left_finger_right"/>
     </group>
     
     <group name="srm_r">
@@ -153,10 +140,6 @@
         <!-- <joint name="ur_right_base_link-base_link_inertia" value="0"/> -->
     </group_state>
 
-    <!--END EFFECTOR: Purpose: Represent information about an end effector.-->
-    <end_effector name="ee_r" parent_link="ur_right_wrist_3_link" group="srm_r_ee" parent_group="srm_r_ur"/>
-    <end_effector name="ee_l" parent_link="ur_left_wrist_3_link" group="srm_l_ee" parent_group="srm_l_ur"/>
-
     <!--VIRTUAL JOINT: Purpose: this element defines a virtual joint between a robot link and an external frame of reference (considered fixed with respect to the robot)-->
 <!--     
     <virtual_joint name="Vjoint_left" type="planar" parent_frame="world" child_link="left_summit_base_footprint"/>
@@ -180,10 +163,10 @@
     <disable_collisions link1="left_summit_back_left_wheel_link" link2="ur_left_shoulder_link" reason="Never"/>
     <disable_collisions link1="left_summit_back_left_wheel_link" link2="ur_left_upper_arm_link" reason="Never"/>
     <disable_collisions link1="left_summit_back_left_wheel_link" link2="ur_right_base_link_inertia" reason="Never"/>
-    <disable_collisions link1="left_summit_back_left_wheel_link" link2="ur_right_finger_left" reason="Never"/>
-    <disable_collisions link1="left_summit_back_left_wheel_link" link2="ur_right_finger_right" reason="Never"/>
+
+
     <disable_collisions link1="left_summit_back_left_wheel_link" link2="ur_right_forearm_link" reason="Never"/>
-    <disable_collisions link1="left_summit_back_left_wheel_link" link2="ur_right_robotiq_hand" reason="Never"/>
+
     <disable_collisions link1="left_summit_back_left_wheel_link" link2="ur_right_shoulder_link" reason="Never"/>
     <disable_collisions link1="left_summit_back_left_wheel_link" link2="ur_right_upper_arm_link" reason="Never"/>
     <disable_collisions link1="left_summit_back_left_wheel_link" link2="ur_right_wrist_1_link" reason="Never"/>
@@ -205,10 +188,10 @@
     <disable_collisions link1="left_summit_back_right_wheel_link" link2="ur_left_shoulder_link" reason="Never"/>
     <disable_collisions link1="left_summit_back_right_wheel_link" link2="ur_left_upper_arm_link" reason="Never"/>
     <disable_collisions link1="left_summit_back_right_wheel_link" link2="ur_right_base_link_inertia" reason="Never"/>
-    <disable_collisions link1="left_summit_back_right_wheel_link" link2="ur_right_finger_left" reason="Never"/>
-    <disable_collisions link1="left_summit_back_right_wheel_link" link2="ur_right_finger_right" reason="Never"/>
+
+
     <disable_collisions link1="left_summit_back_right_wheel_link" link2="ur_right_forearm_link" reason="Never"/>
-    <disable_collisions link1="left_summit_back_right_wheel_link" link2="ur_right_robotiq_hand" reason="Never"/>
+
     <disable_collisions link1="left_summit_back_right_wheel_link" link2="ur_right_shoulder_link" reason="Never"/>
     <disable_collisions link1="left_summit_back_right_wheel_link" link2="ur_right_upper_arm_link" reason="Never"/>
     <disable_collisions link1="left_summit_back_right_wheel_link" link2="ur_right_wrist_1_link" reason="Never"/>
@@ -247,10 +230,9 @@
     <disable_collisions link1="left_summit_front_laser_base_link" link2="ur_left_base_link_inertia" reason="Never"/>
     <disable_collisions link1="left_summit_front_laser_base_link" link2="ur_left_shoulder_link" reason="Never"/>
     <disable_collisions link1="left_summit_front_laser_base_link" link2="ur_right_base_link_inertia" reason="Never"/>
-    <disable_collisions link1="left_summit_front_laser_base_link" link2="ur_right_finger_left" reason="Never"/>
-    <disable_collisions link1="left_summit_front_laser_base_link" link2="ur_right_finger_right" reason="Never"/>
+
     <disable_collisions link1="left_summit_front_laser_base_link" link2="ur_right_forearm_link" reason="Never"/>
-    <disable_collisions link1="left_summit_front_laser_base_link" link2="ur_right_robotiq_hand" reason="Never"/>
+
     <disable_collisions link1="left_summit_front_laser_base_link" link2="ur_right_shoulder_link" reason="Never"/>
     <disable_collisions link1="left_summit_front_laser_base_link" link2="ur_right_upper_arm_link" reason="Never"/>
     <disable_collisions link1="left_summit_front_laser_base_link" link2="ur_right_wrist_1_link" reason="Never"/>
@@ -269,10 +251,10 @@
     <disable_collisions link1="left_summit_front_left_wheel_link" link2="ur_left_shoulder_link" reason="Never"/>
     <disable_collisions link1="left_summit_front_left_wheel_link" link2="ur_left_upper_arm_link" reason="Never"/>
     <disable_collisions link1="left_summit_front_left_wheel_link" link2="ur_right_base_link_inertia" reason="Never"/>
-    <disable_collisions link1="left_summit_front_left_wheel_link" link2="ur_right_finger_left" reason="Never"/>
-    <disable_collisions link1="left_summit_front_left_wheel_link" link2="ur_right_finger_right" reason="Never"/>
+
+
     <disable_collisions link1="left_summit_front_left_wheel_link" link2="ur_right_forearm_link" reason="Never"/>
-    <disable_collisions link1="left_summit_front_left_wheel_link" link2="ur_right_robotiq_hand" reason="Never"/>
+
     <disable_collisions link1="left_summit_front_left_wheel_link" link2="ur_right_shoulder_link" reason="Never"/>
     <disable_collisions link1="left_summit_front_left_wheel_link" link2="ur_right_upper_arm_link" reason="Never"/>
     <disable_collisions link1="left_summit_front_left_wheel_link" link2="ur_right_wrist_1_link" reason="Never"/>
@@ -290,10 +272,9 @@
     <disable_collisions link1="left_summit_front_right_wheel_link" link2="ur_left_shoulder_link" reason="Never"/>
     <disable_collisions link1="left_summit_front_right_wheel_link" link2="ur_left_upper_arm_link" reason="Never"/>
     <disable_collisions link1="left_summit_front_right_wheel_link" link2="ur_right_base_link_inertia" reason="Never"/>
-    <disable_collisions link1="left_summit_front_right_wheel_link" link2="ur_right_finger_left" reason="Never"/>
-    <disable_collisions link1="left_summit_front_right_wheel_link" link2="ur_right_finger_right" reason="Never"/>
+
+
     <disable_collisions link1="left_summit_front_right_wheel_link" link2="ur_right_forearm_link" reason="Never"/>
-    <disable_collisions link1="left_summit_front_right_wheel_link" link2="ur_right_robotiq_hand" reason="Never"/>
     <disable_collisions link1="left_summit_front_right_wheel_link" link2="ur_right_shoulder_link" reason="Never"/>
     <disable_collisions link1="left_summit_front_right_wheel_link" link2="ur_right_upper_arm_link" reason="Never"/>
     <disable_collisions link1="left_summit_front_right_wheel_link" link2="ur_right_wrist_1_link" reason="Never"/>
@@ -309,10 +290,9 @@
     <disable_collisions link1="left_summit_rear_laser_base_link" link2="ur_left_base_link_inertia" reason="Never"/>
     <disable_collisions link1="left_summit_rear_laser_base_link" link2="ur_left_shoulder_link" reason="Never"/>
     <disable_collisions link1="left_summit_rear_laser_base_link" link2="ur_right_base_link_inertia" reason="Never"/>
-    <disable_collisions link1="left_summit_rear_laser_base_link" link2="ur_right_finger_left" reason="Never"/>
-    <disable_collisions link1="left_summit_rear_laser_base_link" link2="ur_right_finger_right" reason="Never"/>
+
     <disable_collisions link1="left_summit_rear_laser_base_link" link2="ur_right_forearm_link" reason="Never"/>
-    <disable_collisions link1="left_summit_rear_laser_base_link" link2="ur_right_robotiq_hand" reason="Never"/>
+
     <disable_collisions link1="left_summit_rear_laser_base_link" link2="ur_right_shoulder_link" reason="Never"/>
     <disable_collisions link1="left_summit_rear_laser_base_link" link2="ur_right_upper_arm_link" reason="Never"/>
     <disable_collisions link1="left_summit_rear_laser_base_link" link2="ur_right_wrist_1_link" reason="Never"/>
@@ -325,10 +305,9 @@
     <disable_collisions link1="right_summit_back_left_wheel_link" link2="right_summit_front_right_wheel_link" reason="Never"/>
     <disable_collisions link1="right_summit_back_left_wheel_link" link2="right_summit_rear_laser_base_link" reason="Never"/>
     <disable_collisions link1="right_summit_back_left_wheel_link" link2="ur_left_base_link_inertia" reason="Never"/>
-    <disable_collisions link1="right_summit_back_left_wheel_link" link2="ur_left_finger_left" reason="Never"/>
-    <disable_collisions link1="right_summit_back_left_wheel_link" link2="ur_left_finger_right" reason="Never"/>
+
     <disable_collisions link1="right_summit_back_left_wheel_link" link2="ur_left_forearm_link" reason="Never"/>
-    <disable_collisions link1="right_summit_back_left_wheel_link" link2="ur_left_robotiq_hand" reason="Never"/>
+
     <disable_collisions link1="right_summit_back_left_wheel_link" link2="ur_left_shoulder_link" reason="Never"/>
     <disable_collisions link1="right_summit_back_left_wheel_link" link2="ur_left_upper_arm_link" reason="Never"/>
     <disable_collisions link1="right_summit_back_left_wheel_link" link2="ur_left_wrist_1_link" reason="Never"/>
@@ -343,10 +322,10 @@
     <disable_collisions link1="right_summit_back_right_wheel_link" link2="right_summit_front_right_wheel_link" reason="Never"/>
     <disable_collisions link1="right_summit_back_right_wheel_link" link2="right_summit_rear_laser_base_link" reason="Never"/>
     <disable_collisions link1="right_summit_back_right_wheel_link" link2="ur_left_base_link_inertia" reason="Never"/>
-    <disable_collisions link1="right_summit_back_right_wheel_link" link2="ur_left_finger_left" reason="Never"/>
-    <disable_collisions link1="right_summit_back_right_wheel_link" link2="ur_left_finger_right" reason="Never"/>
+
+
     <disable_collisions link1="right_summit_back_right_wheel_link" link2="ur_left_forearm_link" reason="Never"/>
-    <disable_collisions link1="right_summit_back_right_wheel_link" link2="ur_left_robotiq_hand" reason="Never"/>
+
     <disable_collisions link1="right_summit_back_right_wheel_link" link2="ur_left_shoulder_link" reason="Never"/>
     <disable_collisions link1="right_summit_back_right_wheel_link" link2="ur_left_upper_arm_link" reason="Never"/>
     <disable_collisions link1="right_summit_back_right_wheel_link" link2="ur_left_wrist_1_link" reason="Never"/>
@@ -372,10 +351,10 @@
     <disable_collisions link1="right_summit_front_laser_base_link" link2="right_summit_front_right_wheel_link" reason="Never"/>
     <disable_collisions link1="right_summit_front_laser_base_link" link2="right_summit_rear_laser_base_link" reason="Never"/>
     <disable_collisions link1="right_summit_front_laser_base_link" link2="ur_left_base_link_inertia" reason="Never"/>
-    <disable_collisions link1="right_summit_front_laser_base_link" link2="ur_left_finger_left" reason="Never"/>
-    <disable_collisions link1="right_summit_front_laser_base_link" link2="ur_left_finger_right" reason="Never"/>
+
+
     <disable_collisions link1="right_summit_front_laser_base_link" link2="ur_left_forearm_link" reason="Never"/>
-    <disable_collisions link1="right_summit_front_laser_base_link" link2="ur_left_robotiq_hand" reason="Never"/>
+
     <disable_collisions link1="right_summit_front_laser_base_link" link2="ur_left_shoulder_link" reason="Never"/>
     <disable_collisions link1="right_summit_front_laser_base_link" link2="ur_left_upper_arm_link" reason="Never"/>
     <disable_collisions link1="right_summit_front_laser_base_link" link2="ur_left_wrist_1_link" reason="Never"/>
@@ -386,10 +365,9 @@
     <disable_collisions link1="right_summit_front_left_wheel_link" link2="right_summit_front_right_wheel_link" reason="Never"/>
     <disable_collisions link1="right_summit_front_left_wheel_link" link2="right_summit_rear_laser_base_link" reason="Never"/>
     <disable_collisions link1="right_summit_front_left_wheel_link" link2="ur_left_base_link_inertia" reason="Never"/>
-    <disable_collisions link1="right_summit_front_left_wheel_link" link2="ur_left_finger_left" reason="Never"/>
-    <disable_collisions link1="right_summit_front_left_wheel_link" link2="ur_left_finger_right" reason="Never"/>
+
     <disable_collisions link1="right_summit_front_left_wheel_link" link2="ur_left_forearm_link" reason="Never"/>
-    <disable_collisions link1="right_summit_front_left_wheel_link" link2="ur_left_robotiq_hand" reason="Never"/>
+
     <disable_collisions link1="right_summit_front_left_wheel_link" link2="ur_left_shoulder_link" reason="Never"/>
     <disable_collisions link1="right_summit_front_left_wheel_link" link2="ur_left_upper_arm_link" reason="Never"/>
     <disable_collisions link1="right_summit_front_left_wheel_link" link2="ur_left_wrist_1_link" reason="Never"/>
@@ -400,10 +378,9 @@
     <disable_collisions link1="right_summit_front_left_wheel_link" link2="ur_right_upper_arm_link" reason="Never"/>
     <disable_collisions link1="right_summit_front_right_wheel_link" link2="right_summit_rear_laser_base_link" reason="Never"/>
     <disable_collisions link1="right_summit_front_right_wheel_link" link2="ur_left_base_link_inertia" reason="Never"/>
-    <disable_collisions link1="right_summit_front_right_wheel_link" link2="ur_left_finger_left" reason="Never"/>
-    <disable_collisions link1="right_summit_front_right_wheel_link" link2="ur_left_finger_right" reason="Never"/>
+
     <disable_collisions link1="right_summit_front_right_wheel_link" link2="ur_left_forearm_link" reason="Never"/>
-    <disable_collisions link1="right_summit_front_right_wheel_link" link2="ur_left_robotiq_hand" reason="Never"/>
+
     <disable_collisions link1="right_summit_front_right_wheel_link" link2="ur_left_shoulder_link" reason="Never"/>
     <disable_collisions link1="right_summit_front_right_wheel_link" link2="ur_left_upper_arm_link" reason="Never"/>
     <disable_collisions link1="right_summit_front_right_wheel_link" link2="ur_left_wrist_1_link" reason="Never"/>
@@ -414,7 +391,7 @@
     <disable_collisions link1="right_summit_front_right_wheel_link" link2="ur_right_upper_arm_link" reason="Never"/>
     <disable_collisions link1="right_summit_rear_laser_base_link" link2="ur_left_base_link_inertia" reason="Never"/>
     <disable_collisions link1="right_summit_rear_laser_base_link" link2="ur_left_forearm_link" reason="Never"/>
-    <disable_collisions link1="right_summit_rear_laser_base_link" link2="ur_left_robotiq_hand" reason="Never"/>
+
     <disable_collisions link1="right_summit_rear_laser_base_link" link2="ur_left_shoulder_link" reason="Never"/>
     <disable_collisions link1="right_summit_rear_laser_base_link" link2="ur_left_upper_arm_link" reason="Never"/>
     <disable_collisions link1="right_summit_rear_laser_base_link" link2="ur_left_wrist_1_link" reason="Never"/>
@@ -424,81 +401,35 @@
     <disable_collisions link1="right_summit_rear_laser_base_link" link2="ur_right_shoulder_link" reason="Never"/>
     <disable_collisions link1="ur_left_base_link_inertia" link2="ur_left_shoulder_link" reason="Adjacent"/>
     <disable_collisions link1="ur_left_base_link_inertia" link2="ur_right_base_link_inertia" reason="Adjacent"/>
-    <disable_collisions link1="ur_left_base_link_inertia" link2="ur_right_finger_left" reason="Never"/>
-    <disable_collisions link1="ur_left_base_link_inertia" link2="ur_right_finger_right" reason="Never"/>
+
     <disable_collisions link1="ur_left_base_link_inertia" link2="ur_right_forearm_link" reason="Never"/>
-    <disable_collisions link1="ur_left_base_link_inertia" link2="ur_right_robotiq_hand" reason="Never"/>
     <disable_collisions link1="ur_left_base_link_inertia" link2="ur_right_shoulder_link" reason="Never"/>
     <disable_collisions link1="ur_left_base_link_inertia" link2="ur_right_upper_arm_link" reason="Never"/>
     <disable_collisions link1="ur_left_base_link_inertia" link2="ur_right_wrist_1_link" reason="Never"/>
     <disable_collisions link1="ur_left_base_link_inertia" link2="ur_right_wrist_2_link" reason="Never"/>
     <disable_collisions link1="ur_left_base_link_inertia" link2="ur_right_wrist_3_link" reason="Never"/>
-    <disable_collisions link1="ur_left_finger_left" link2="ur_left_finger_right" reason="Adjacent"/>
-    <disable_collisions link1="ur_left_finger_left" link2="ur_left_robotiq_hand" reason="Adjacent"/>
-    <disable_collisions link1="ur_left_finger_left" link2="ur_left_wrist_1_link" reason="Never"/>
-    <disable_collisions link1="ur_left_finger_left" link2="ur_left_wrist_2_link" reason="Never"/>
-    <disable_collisions link1="ur_left_finger_left" link2="ur_left_wrist_3_link" reason="Never"/>
-    <disable_collisions link1="ur_left_finger_left" link2="ur_right_base_link_inertia" reason="Never"/>
-    <disable_collisions link1="ur_left_finger_left" link2="ur_right_finger_left" reason="Never"/>
-    <disable_collisions link1="ur_left_finger_left" link2="ur_right_finger_right" reason="Never"/>
-    <disable_collisions link1="ur_left_finger_left" link2="ur_right_forearm_link" reason="Never"/>
-    <disable_collisions link1="ur_left_finger_left" link2="ur_right_robotiq_hand" reason="Never"/>
-    <disable_collisions link1="ur_left_finger_left" link2="ur_right_shoulder_link" reason="Never"/>
-    <disable_collisions link1="ur_left_finger_left" link2="ur_right_upper_arm_link" reason="Never"/>
-    <disable_collisions link1="ur_left_finger_left" link2="ur_right_wrist_1_link" reason="Never"/>
-    <disable_collisions link1="ur_left_finger_left" link2="ur_right_wrist_2_link" reason="Never"/>
-    <disable_collisions link1="ur_left_finger_left" link2="ur_right_wrist_3_link" reason="Never"/>
-    <disable_collisions link1="ur_left_finger_right" link2="ur_left_robotiq_hand" reason="Default"/>
-    <disable_collisions link1="ur_left_finger_right" link2="ur_left_wrist_1_link" reason="Never"/>
-    <disable_collisions link1="ur_left_finger_right" link2="ur_left_wrist_2_link" reason="Never"/>
-    <disable_collisions link1="ur_left_finger_right" link2="ur_left_wrist_3_link" reason="Never"/>
-    <disable_collisions link1="ur_left_finger_right" link2="ur_right_base_link_inertia" reason="Never"/>
-    <disable_collisions link1="ur_left_finger_right" link2="ur_right_finger_left" reason="Never"/>
-    <disable_collisions link1="ur_left_finger_right" link2="ur_right_finger_right" reason="Never"/>
-    <disable_collisions link1="ur_left_finger_right" link2="ur_right_forearm_link" reason="Never"/>
-    <disable_collisions link1="ur_left_finger_right" link2="ur_right_robotiq_hand" reason="Never"/>
-    <disable_collisions link1="ur_left_finger_right" link2="ur_right_shoulder_link" reason="Never"/>
-    <disable_collisions link1="ur_left_finger_right" link2="ur_right_upper_arm_link" reason="Never"/>
-    <disable_collisions link1="ur_left_finger_right" link2="ur_right_wrist_1_link" reason="Never"/>
-    <disable_collisions link1="ur_left_finger_right" link2="ur_right_wrist_2_link" reason="Never"/>
-    <disable_collisions link1="ur_left_finger_right" link2="ur_right_wrist_3_link" reason="Never"/>
+
     <disable_collisions link1="ur_left_forearm_link" link2="ur_left_upper_arm_link" reason="Adjacent"/>
     <disable_collisions link1="ur_left_forearm_link" link2="ur_left_wrist_1_link" reason="Adjacent"/>
     <disable_collisions link1="ur_left_forearm_link" link2="ur_left_wrist_2_link" reason="Never"/>
     <disable_collisions link1="ur_left_forearm_link" link2="ur_right_base_link_inertia" reason="Never"/>
-    <disable_collisions link1="ur_left_forearm_link" link2="ur_right_finger_left" reason="Never"/>
-    <disable_collisions link1="ur_left_forearm_link" link2="ur_right_finger_right" reason="Never"/>
+   
+
     <disable_collisions link1="ur_left_forearm_link" link2="ur_right_shoulder_link" reason="Never"/>
     <disable_collisions link1="ur_left_forearm_link" link2="ur_right_upper_arm_link" reason="Never"/>
-    <disable_collisions link1="ur_left_robotiq_hand" link2="ur_left_wrist_1_link" reason="Never"/>
-    <disable_collisions link1="ur_left_robotiq_hand" link2="ur_left_wrist_2_link" reason="Never"/>
-    <disable_collisions link1="ur_left_robotiq_hand" link2="ur_left_wrist_3_link" reason="Adjacent"/>
-    <disable_collisions link1="ur_left_robotiq_hand" link2="ur_right_base_link_inertia" reason="Never"/>
-    <disable_collisions link1="ur_left_robotiq_hand" link2="ur_right_finger_left" reason="Never"/>
-    <disable_collisions link1="ur_left_robotiq_hand" link2="ur_right_finger_right" reason="Never"/>
-    <disable_collisions link1="ur_left_robotiq_hand" link2="ur_right_forearm_link" reason="Never"/>
-    <disable_collisions link1="ur_left_robotiq_hand" link2="ur_right_robotiq_hand" reason="Never"/>
-    <disable_collisions link1="ur_left_robotiq_hand" link2="ur_right_shoulder_link" reason="Never"/>
-    <disable_collisions link1="ur_left_robotiq_hand" link2="ur_right_upper_arm_link" reason="Never"/>
-    <disable_collisions link1="ur_left_robotiq_hand" link2="ur_right_wrist_1_link" reason="Never"/>
-    <disable_collisions link1="ur_left_robotiq_hand" link2="ur_right_wrist_2_link" reason="Never"/>
-    <disable_collisions link1="ur_left_robotiq_hand" link2="ur_right_wrist_3_link" reason="Never"/>
+
     <disable_collisions link1="ur_left_shoulder_link" link2="ur_left_upper_arm_link" reason="Adjacent"/>
     <disable_collisions link1="ur_left_shoulder_link" link2="ur_right_base_link_inertia" reason="Never"/>
-    <disable_collisions link1="ur_left_shoulder_link" link2="ur_right_finger_left" reason="Never"/>
-    <disable_collisions link1="ur_left_shoulder_link" link2="ur_right_finger_right" reason="Never"/>
+    
     <disable_collisions link1="ur_left_shoulder_link" link2="ur_right_forearm_link" reason="Never"/>
-    <disable_collisions link1="ur_left_shoulder_link" link2="ur_right_robotiq_hand" reason="Never"/>
+
     <disable_collisions link1="ur_left_shoulder_link" link2="ur_right_shoulder_link" reason="Never"/>
     <disable_collisions link1="ur_left_shoulder_link" link2="ur_right_upper_arm_link" reason="Never"/>
     <disable_collisions link1="ur_left_shoulder_link" link2="ur_right_wrist_1_link" reason="Never"/>
     <disable_collisions link1="ur_left_shoulder_link" link2="ur_right_wrist_2_link" reason="Never"/>
     <disable_collisions link1="ur_left_shoulder_link" link2="ur_right_wrist_3_link" reason="Never"/>
     <disable_collisions link1="ur_left_upper_arm_link" link2="ur_right_base_link_inertia" reason="Never"/>
-    <disable_collisions link1="ur_left_upper_arm_link" link2="ur_right_finger_left" reason="Never"/>
-    <disable_collisions link1="ur_left_upper_arm_link" link2="ur_right_finger_right" reason="Never"/>
     <disable_collisions link1="ur_left_upper_arm_link" link2="ur_right_forearm_link" reason="Never"/>
-    <disable_collisions link1="ur_left_upper_arm_link" link2="ur_right_robotiq_hand" reason="Never"/>
     <disable_collisions link1="ur_left_upper_arm_link" link2="ur_right_shoulder_link" reason="Never"/>
     <disable_collisions link1="ur_left_upper_arm_link" link2="ur_right_upper_arm_link" reason="Never"/>
     <disable_collisions link1="ur_left_upper_arm_link" link2="ur_right_wrist_1_link" reason="Never"/>
@@ -507,41 +438,26 @@
     <disable_collisions link1="ur_left_wrist_1_link" link2="ur_left_wrist_2_link" reason="Adjacent"/>
     <disable_collisions link1="ur_left_wrist_1_link" link2="ur_left_wrist_3_link" reason="Never"/>
     <disable_collisions link1="ur_left_wrist_1_link" link2="ur_right_base_link_inertia" reason="Never"/>
-    <disable_collisions link1="ur_left_wrist_1_link" link2="ur_right_finger_left" reason="Never"/>
-    <disable_collisions link1="ur_left_wrist_1_link" link2="ur_right_finger_right" reason="Never"/>
     <disable_collisions link1="ur_left_wrist_1_link" link2="ur_right_shoulder_link" reason="Never"/>
     <disable_collisions link1="ur_left_wrist_1_link" link2="ur_right_upper_arm_link" reason="Never"/>
     <disable_collisions link1="ur_left_wrist_1_link" link2="ur_right_wrist_2_link" reason="Never"/>
     <disable_collisions link1="ur_left_wrist_2_link" link2="ur_left_wrist_3_link" reason="Adjacent"/>
     <disable_collisions link1="ur_left_wrist_2_link" link2="ur_right_base_link_inertia" reason="Never"/>
-    <disable_collisions link1="ur_left_wrist_2_link" link2="ur_right_finger_right" reason="Never"/>
     <disable_collisions link1="ur_left_wrist_2_link" link2="ur_right_shoulder_link" reason="Never"/>
     <disable_collisions link1="ur_left_wrist_2_link" link2="ur_right_upper_arm_link" reason="Never"/>
     <disable_collisions link1="ur_left_wrist_2_link" link2="ur_right_wrist_2_link" reason="Never"/>
     <disable_collisions link1="ur_left_wrist_2_link" link2="ur_right_wrist_3_link" reason="Never"/>
     <disable_collisions link1="ur_left_wrist_3_link" link2="ur_right_base_link_inertia" reason="Never"/>
-    <disable_collisions link1="ur_left_wrist_3_link" link2="ur_right_finger_right" reason="Never"/>
     <disable_collisions link1="ur_left_wrist_3_link" link2="ur_right_shoulder_link" reason="Never"/>
     <disable_collisions link1="ur_left_wrist_3_link" link2="ur_right_upper_arm_link" reason="Never"/>
     <disable_collisions link1="ur_left_wrist_3_link" link2="ur_right_wrist_1_link" reason="Never"/>
     <disable_collisions link1="ur_left_wrist_3_link" link2="ur_right_wrist_2_link" reason="Never"/>
     <disable_collisions link1="ur_left_wrist_3_link" link2="ur_right_wrist_3_link" reason="Never"/>
     <disable_collisions link1="ur_right_base_link_inertia" link2="ur_right_shoulder_link" reason="Adjacent"/>
-    <disable_collisions link1="ur_right_finger_left" link2="ur_right_finger_right" reason="Adjacent"/>
-    <disable_collisions link1="ur_right_finger_left" link2="ur_right_robotiq_hand" reason="Adjacent"/>
-    <disable_collisions link1="ur_right_finger_left" link2="ur_right_wrist_1_link" reason="Never"/>
-    <disable_collisions link1="ur_right_finger_left" link2="ur_right_wrist_2_link" reason="Never"/>
-    <disable_collisions link1="ur_right_finger_left" link2="ur_right_wrist_3_link" reason="Never"/>
-    <disable_collisions link1="ur_right_finger_right" link2="ur_right_robotiq_hand" reason="Default"/>
-    <disable_collisions link1="ur_right_finger_right" link2="ur_right_wrist_1_link" reason="Never"/>
-    <disable_collisions link1="ur_right_finger_right" link2="ur_right_wrist_2_link" reason="Never"/>
-    <disable_collisions link1="ur_right_finger_right" link2="ur_right_wrist_3_link" reason="Never"/>
+
     <disable_collisions link1="ur_right_forearm_link" link2="ur_right_upper_arm_link" reason="Adjacent"/>
     <disable_collisions link1="ur_right_forearm_link" link2="ur_right_wrist_1_link" reason="Adjacent"/>
     <disable_collisions link1="ur_right_forearm_link" link2="ur_right_wrist_2_link" reason="Never"/>
-    <disable_collisions link1="ur_right_robotiq_hand" link2="ur_right_wrist_1_link" reason="Never"/>
-    <disable_collisions link1="ur_right_robotiq_hand" link2="ur_right_wrist_2_link" reason="Never"/>
-    <disable_collisions link1="ur_right_robotiq_hand" link2="ur_right_wrist_3_link" reason="Adjacent"/>
     <disable_collisions link1="ur_right_shoulder_link" link2="ur_right_upper_arm_link" reason="Adjacent"/>
     <disable_collisions link1="ur_right_wrist_1_link" link2="ur_right_wrist_2_link" reason="Adjacent"/>
     <disable_collisions link1="ur_right_wrist_1_link" link2="ur_right_wrist_3_link" reason="Never"/>

@@ -323,7 +323,7 @@
   <joint name="left_base_joint" type="fixed">
     <parent link="world"/>
     <child link="left_summit_base_footprint"/>
-    <origin rpy="0 0 0" xyz="-1.32 0 0.123316"/>
+    <origin rpy="0 0 0" xyz="0 0 0.123316"/>
   </joint>
   <joint name="ur_left_base_joint" type="fixed">
     <origin rpy="0 0 -1.57" xyz="0 0 0.543"/>
@@ -1122,7 +1122,7 @@
       <odometryRate>50.0</odometryRate>
       <robot_base_frame>left_summit_base_footprint</robot_base_frame>
       <publish_odom>true</publish_odom>
-      <publish_odom_tf>true</publish_odom_tf>
+      <publish_odom_tf>false</publish_odom_tf>
       <enableYAxis>true</enableYAxis>
     </plugin>
   </gazebo>
