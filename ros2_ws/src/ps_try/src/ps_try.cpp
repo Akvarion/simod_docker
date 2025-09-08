@@ -152,9 +152,9 @@ mtc::Task MTCTaskNode::createTask(){
   mtc::Stage *current_state_ptr = nullptr;  // Forward current_state on to grasp pose generator
  #pragma GCC diagnostic pop
 
-  auto stage_state_current = std::make_unique<mtc::stages::CurrentState>("current");
-  current_state_ptr = stage_state_current.get();
-  task.add(std::move(stage_state_current));
+  // auto stage_state_current = std::make_unique<mtc::stages::CurrentState>("current");
+  // current_state_ptr = stage_state_current.get();
+  // task.add(std::move(stage_state_current));
 
   // Setting up planner awareness
   auto sampling_planner = std::make_shared<mtc::solvers::PipelinePlanner>(node_);
@@ -338,7 +338,7 @@ void MTCTaskNode::doTask() {
 
   if (!task_.plan(5))
   {
-    RCLCPP_ERROR_STREAM(LOGGER, "Task planning failed");
+    RCLCPP_ERROR_STREAM(LOGGER, "Task planning failed.");
     return;
   }
   task_.introspection().publishSolution(*task_.solutions().front());

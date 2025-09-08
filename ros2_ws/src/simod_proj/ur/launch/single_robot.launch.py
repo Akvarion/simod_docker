@@ -11,8 +11,10 @@ from launch.actions import OpaqueFunction
 from launch.conditions import IfCondition, UnlessCondition
 from ament_index_python.packages import get_package_share_directory
 from moveit_configs_utils import MoveItConfigsBuilder
+from launch.actions import TimerAction
 import subprocess
 import os
+
 
 def generate_launch_description():
     namespace = DeclareLaunchArgument('namespace')
@@ -56,11 +58,11 @@ def generate_launch_description():
         OpaqueFunction(function=launch_setup) ]
         ) 
 
-def getRobotType(arg):
+def getRobotOffset(arg):
     if "right" in arg:
-        return "right"
+        return '0.66'
     else:
-        return "left"
+        return '-0.66'
 
 def launch_setup(context, *args, **kwargs):
 
@@ -251,25 +253,25 @@ def launch_setup(context, *args, **kwargs):
         output="log",
         arguments=["-0.25", "-0.15", "0", "0", "0", "0", "1", namespace+"_summit_base_link", namespace+"_summit_front_right_wheel_link"],
     )
-    static_tf_left_world = Node(
+    static_tf_world = Node(
         package='tf2_ros',
         executable='static_transform_publisher',
-        arguments=['0', '0', '0', '0', '0', '0', '1', 'world',namespace+'_robot']
+        arguments=[getRobotOffset(namespace), '0', '0', '0', '0', '0', '1', 'world',namespace+'_robot']
     )
-    static_tf_right_world = Node(
+
+    static_tf_base = Node(
         package='tf2_ros',
         executable='static_transform_publisher',
-        arguments=['0', '0', '0', '0', '0', '0', '1', 'world',namespace+'_robot']
+        arguments=['0', '0', '0', '0', '0', '0', '1', namespace+'_robot', namespace+'_summit_base_footprint']
     )
-    static_tf_right = Node(
-    package='tf2_ros',
-    executable='static_transform_publisher',
-    arguments=['0.66', '0', '0', '0', '0', '0', '1', namespace+'_robot', 'right_summit_base_footprint']
+
+    delayed_static_tf_world = TimerAction(
+        period=2.0,  # 2 seconds delay to allow spawns and such
+        actions=[static_tf_world],
     )
-    static_tf_left = Node(
-        package='tf2_ros',
-        executable='static_transform_publisher',
-        arguments=['-0.66', '0', '0', '0', '0', '0', '1', namespace+'_robot', 'left_summit_base_footprint']
+    delayed_static_tf_base = TimerAction(
+        period=2.5,  # 2.5 seconds delay to allow spawns and such
+        actions=[static_tf_base],
     )
 
     # Spawn from topic                                                      
@@ -346,20 +348,21 @@ def launch_setup(context, *args, **kwargs):
     # file.write(robot_description_content.perform(context))   
     # file.close()
 
+    
   
     return [
         gazebo_spawn_robot_description,
         robot_state_publisher_node,
-        static_tf_real,
+    #    static_tf_real,
         # joint_state_publisher_node
         static_tf_wheel_back_left,
         static_tf_wheel_back_right,
         static_tf_wheel_front_left,
         static_tf_wheel_front_right,
-        static_tf_left_world,
-        static_tf_right_world,
-        static_tf_right,
-        static_tf_left,
+        delayed_static_tf_world,
+        #static_tf_right_world,
+        #static_tf_right,
+        delayed_static_tf_base,
         ur_control_node,
 #       ros2_control_node,
         joint_state_broadcaster_spawner,
