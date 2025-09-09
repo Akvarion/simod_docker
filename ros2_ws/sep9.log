@@ -1,0 +1,931 @@
+[INFO] [launch]: All log files can be found below /root/.ros/log/2025-09-09-13-37-16-380727-outlander-Aspire-V3-571G-7102
+[INFO] [launch]: Default logging verbosity is set to INFO
+warning: Using load_yaml() directly is deprecated. Use xacro.load_yaml() instead.
+[INFO] [gzserver-1]: process started with pid [7104]
+[INFO] [gzclient-2]: process started with pid [7106]
+[INFO] [spawn_entity.py-3]: process started with pid [7108]
+[INFO] [robot_state_publisher-4]: process started with pid [7110]
+[INFO] [static_transform_publisher-5]: process started with pid [7112]
+[INFO] [static_transform_publisher-6]: process started with pid [7114]
+[INFO] [static_transform_publisher-7]: process started with pid [7116]
+[INFO] [static_transform_publisher-8]: process started with pid [7118]
+[INFO] [spawner-9]: process started with pid [7120]
+[INFO] [spawner-10]: process started with pid [7122]
+[INFO] [spawn_entity.py-11]: process started with pid [7124]
+[INFO] [robot_state_publisher-12]: process started with pid [7126]
+[INFO] [static_transform_publisher-13]: process started with pid [7130]
+[INFO] [static_transform_publisher-14]: process started with pid [7157]
+[INFO] [static_transform_publisher-15]: process started with pid [7170]
+[INFO] [static_transform_publisher-16]: process started with pid [7178]
+[INFO] [spawner-17]: process started with pid [7190]
+[INFO] [spawner-18]: process started with pid [7201]
+[INFO] [rviz2-19]: process started with pid [7221]
+[INFO] [move_group-20]: process started with pid [7224]
+[robot_state_publisher-4] [INFO] [1757425040.603018411] [left.robot_state_publisher]: got segment left_summit_back_left_wheel_link
+[robot_state_publisher-4] [INFO] [1757425040.607204065] [left.robot_state_publisher]: got segment left_summit_back_right_wheel_link
+[robot_state_publisher-4] [INFO] [1757425040.607250499] [left.robot_state_publisher]: got segment left_summit_base_chapa
+[robot_state_publisher-4] [INFO] [1757425040.607271816] [left.robot_state_publisher]: got segment left_summit_base_docking_contact
+[robot_state_publisher-4] [INFO] [1757425040.607290175] [left.robot_state_publisher]: got segment left_summit_base_footprint
+[robot_state_publisher-4] [INFO] [1757425040.607307765] [left.robot_state_publisher]: got segment left_summit_base_link
+[robot_state_publisher-4] [INFO] [1757425040.607325380] [left.robot_state_publisher]: got segment left_summit_base_logo_front
+[robot_state_publisher-4] [INFO] [1757425040.607344407] [left.robot_state_publisher]: got segment left_summit_base_logo_left
+[robot_state_publisher-4] [INFO] [1757425040.607361828] [left.robot_state_publisher]: got segment left_summit_base_logo_rear
+[robot_state_publisher-4] [INFO] [1757425040.607379263] [left.robot_state_publisher]: got segment left_summit_base_logo_right
+[robot_state_publisher-4] [INFO] [1757425040.607396409] [left.robot_state_publisher]: got segment left_summit_front_laser_base_link
+[robot_state_publisher-4] [INFO] [1757425040.607413078] [left.robot_state_publisher]: got segment left_summit_front_laser_link
+[robot_state_publisher-4] [INFO] [1757425040.607429764] [left.robot_state_publisher]: got segment left_summit_front_left_wheel_link
+[robot_state_publisher-4] [INFO] [1757425040.607447769] [left.robot_state_publisher]: got segment left_summit_front_right_wheel_link
+[robot_state_publisher-4] [INFO] [1757425040.607465373] [left.robot_state_publisher]: got segment left_summit_imu_link
+[robot_state_publisher-4] [INFO] [1757425040.607483859] [left.robot_state_publisher]: got segment left_summit_rear_laser_base_link
+[robot_state_publisher-4] [INFO] [1757425040.607501905] [left.robot_state_publisher]: got segment left_summit_rear_laser_link
+[robot_state_publisher-4] [INFO] [1757425040.607518710] [left.robot_state_publisher]: got segment ur_left_base
+[robot_state_publisher-4] [INFO] [1757425040.607535767] [left.robot_state_publisher]: got segment ur_left_base_link
+[robot_state_publisher-4] [INFO] [1757425040.607553090] [left.robot_state_publisher]: got segment ur_left_base_link_inertia
+[robot_state_publisher-4] [INFO] [1757425040.607570627] [left.robot_state_publisher]: got segment ur_left_flange
+[robot_state_publisher-4] [INFO] [1757425040.607588761] [left.robot_state_publisher]: got segment ur_left_forearm_link
+[robot_state_publisher-4] [INFO] [1757425040.607606999] [left.robot_state_publisher]: got segment ur_left_ft_frame
+[robot_state_publisher-4] [INFO] [1757425040.607626142] [left.robot_state_publisher]: got segment ur_left_paletta
+[robot_state_publisher-4] [INFO] [1757425040.607643759] [left.robot_state_publisher]: got segment ur_left_shoulder_link
+[robot_state_publisher-4] [INFO] [1757425040.607661018] [left.robot_state_publisher]: got segment ur_left_tool0
+[robot_state_publisher-4] [INFO] [1757425040.607677987] [left.robot_state_publisher]: got segment ur_left_upper_arm_link
+[robot_state_publisher-4] [INFO] [1757425040.607696339] [left.robot_state_publisher]: got segment ur_left_wrist_1_link
+[robot_state_publisher-4] [INFO] [1757425040.607715359] [left.robot_state_publisher]: got segment ur_left_wrist_2_link
+[robot_state_publisher-4] [INFO] [1757425040.607733796] [left.robot_state_publisher]: got segment ur_left_wrist_3_link
+[robot_state_publisher-4] [INFO] [1757425040.607751946] [left.robot_state_publisher]: got segment world
+[static_transform_publisher-5] [WARN] [1757425040.459752742] []: Old-style arguments are deprecated; see --help for new-style arguments
+[static_transform_publisher-5] [INFO] [1757425040.514881333] [left_static_transform_publisher_back_left]: Spinning until stopped - publishing transform
+[static_transform_publisher-5] translation: ('0.250000', '0.150000', '0.000000')
+[static_transform_publisher-5] rotation: ('0.000000', '0.000000', '0.000000', '1.000000')
+[static_transform_publisher-5] from 'left_summit_base_link' to 'left_summit_back_left_wheel_link'
+[static_transform_publisher-6] [WARN] [1757425040.435532158] []: Old-style arguments are deprecated; see --help for new-style arguments
+[static_transform_publisher-6] [INFO] [1757425040.518557152] [left_static_transform_publisher_back_right]: Spinning until stopped - publishing transform
+[static_transform_publisher-6] translation: ('0.250000', '-0.150000', '0.000000')
+[static_transform_publisher-6] rotation: ('0.000000', '0.000000', '0.000000', '1.000000')
+[static_transform_publisher-6] from 'left_summit_base_link' to 'left_summit_back_right_wheel_link'
+[static_transform_publisher-7] [WARN] [1757425040.441095643] []: Old-style arguments are deprecated; see --help for new-style arguments
+[static_transform_publisher-7] [INFO] [1757425040.512388983] [left_static_transform_publisher_front_left]: Spinning until stopped - publishing transform
+[static_transform_publisher-7] translation: ('-0.250000', '0.150000', '0.000000')
+[static_transform_publisher-7] rotation: ('0.000000', '0.000000', '0.000000', '1.000000')
+[static_transform_publisher-7] from 'left_summit_base_link' to 'left_summit_front_left_wheel_link'
+[static_transform_publisher-8] [WARN] [1757425040.429420423] []: Old-style arguments are deprecated; see --help for new-style arguments
+[static_transform_publisher-8] [INFO] [1757425040.509946331] [static_transform_publisher_front_right]: Spinning until stopped - publishing transform
+[static_transform_publisher-8] translation: ('-0.250000', '-0.150000', '0.000000')
+[static_transform_publisher-8] rotation: ('0.000000', '0.000000', '0.000000', '1.000000')
+[static_transform_publisher-8] from 'left_summit_base_link' to 'left_summit_front_right_wheel_link'
+[static_transform_publisher-13] [WARN] [1757425040.539345772] []: Old-style arguments are deprecated; see --help for new-style arguments
+[static_transform_publisher-14] [WARN] [1757425040.503939725] []: Old-style arguments are deprecated; see --help for new-style arguments
+[static_transform_publisher-14] [INFO] [1757425040.600815438] [right_static_transform_publisher_back_right]: Spinning until stopped - publishing transform
+[static_transform_publisher-14] translation: ('0.250000', '-0.150000', '0.000000')
+[static_transform_publisher-14] rotation: ('0.000000', '0.000000', '0.000000', '1.000000')
+[static_transform_publisher-14] from 'right_summit_base_link' to 'right_summit_back_right_wheel_link'
+[static_transform_publisher-15] [WARN] [1757425040.543710781] []: Old-style arguments are deprecated; see --help for new-style arguments
+[static_transform_publisher-15] [INFO] [1757425040.594530300] [right_static_transform_publisher_front_left]: Spinning until stopped - publishing transform
+[static_transform_publisher-15] translation: ('-0.250000', '0.150000', '0.000000')
+[static_transform_publisher-15] rotation: ('0.000000', '0.000000', '0.000000', '1.000000')
+[static_transform_publisher-15] from 'right_summit_base_link' to 'right_summit_front_left_wheel_link'
+[static_transform_publisher-16] [WARN] [1757425040.615082354] []: Old-style arguments are deprecated; see --help for new-style arguments
+[static_transform_publisher-13] [INFO] [1757425040.678412503] [right_static_transform_publisher_back_left]: Spinning until stopped - publishing transform
+[static_transform_publisher-13] translation: ('0.250000', '0.150000', '0.000000')
+[static_transform_publisher-13] rotation: ('0.000000', '0.000000', '0.000000', '1.000000')
+[static_transform_publisher-13] from 'right_summit_base_link' to 'right_summit_back_left_wheel_link'
+[robot_state_publisher-12] [INFO] [1757425040.687192051] [right.robot_state_publisher]: got segment right_summit_back_left_wheel_link
+[robot_state_publisher-12] [INFO] [1757425040.687394464] [right.robot_state_publisher]: got segment right_summit_back_right_wheel_link
+[robot_state_publisher-12] [INFO] [1757425040.687421391] [right.robot_state_publisher]: got segment right_summit_base_chapa
+[robot_state_publisher-12] [INFO] [1757425040.687442995] [right.robot_state_publisher]: got segment right_summit_base_docking_contact
+[robot_state_publisher-12] [INFO] [1757425040.687463677] [right.robot_state_publisher]: got segment right_summit_base_footprint
+[robot_state_publisher-12] [INFO] [1757425040.687483049] [right.robot_state_publisher]: got segment right_summit_base_link
+[robot_state_publisher-12] [INFO] [1757425040.687501181] [right.robot_state_publisher]: got segment right_summit_base_logo_front
+[robot_state_publisher-12] [INFO] [1757425040.687520312] [right.robot_state_publisher]: got segment right_summit_base_logo_left
+[robot_state_publisher-12] [INFO] [1757425040.687539900] [right.robot_state_publisher]: got segment right_summit_base_logo_rear
+[robot_state_publisher-12] [INFO] [1757425040.687559560] [right.robot_state_publisher]: got segment right_summit_base_logo_right
+[robot_state_publisher-12] [INFO] [1757425040.687578262] [right.robot_state_publisher]: got segment right_summit_front_laser_base_link
+[robot_state_publisher-12] [INFO] [1757425040.687596378] [right.robot_state_publisher]: got segment right_summit_front_laser_link
+[robot_state_publisher-12] [INFO] [1757425040.687614434] [right.robot_state_publisher]: got segment right_summit_front_left_wheel_link
+[robot_state_publisher-12] [INFO] [1757425040.687634128] [right.robot_state_publisher]: got segment right_summit_front_right_wheel_link
+[robot_state_publisher-12] [INFO] [1757425040.687653853] [right.robot_state_publisher]: got segment right_summit_imu_link
+[robot_state_publisher-12] [INFO] [1757425040.687672987] [right.robot_state_publisher]: got segment right_summit_rear_laser_base_link
+[robot_state_publisher-12] [INFO] [1757425040.687691939] [right.robot_state_publisher]: got segment right_summit_rear_laser_link
+[robot_state_publisher-12] [INFO] [1757425040.687711162] [right.robot_state_publisher]: got segment ur_right_base
+[robot_state_publisher-12] [INFO] [1757425040.687729290] [right.robot_state_publisher]: got segment ur_right_base_link
+[robot_state_publisher-12] [INFO] [1757425040.687748075] [right.robot_state_publisher]: got segment ur_right_base_link_inertia
+[robot_state_publisher-12] [INFO] [1757425040.687765769] [right.robot_state_publisher]: got segment ur_right_flange
+[robot_state_publisher-12] [INFO] [1757425040.687783105] [right.robot_state_publisher]: got segment ur_right_forearm_link
+[robot_state_publisher-12] [INFO] [1757425040.687799884] [right.robot_state_publisher]: got segment ur_right_ft_frame
+[robot_state_publisher-12] [INFO] [1757425040.687817649] [right.robot_state_publisher]: got segment ur_right_paletta
+[robot_state_publisher-12] [INFO] [1757425040.687834958] [right.robot_state_publisher]: got segment ur_right_shoulder_link
+[robot_state_publisher-12] [INFO] [1757425040.687851508] [right.robot_state_publisher]: got segment ur_right_tool0
+[robot_state_publisher-12] [INFO] [1757425040.687868177] [right.robot_state_publisher]: got segment ur_right_upper_arm_link
+[robot_state_publisher-12] [INFO] [1757425040.699241507] [right.robot_state_publisher]: got segment ur_right_wrist_1_link
+[robot_state_publisher-12] [INFO] [1757425040.699289005] [right.robot_state_publisher]: got segment ur_right_wrist_2_link
+[robot_state_publisher-12] [INFO] [1757425040.699312407] [right.robot_state_publisher]: got segment ur_right_wrist_3_link
+[robot_state_publisher-12] [INFO] [1757425040.699333037] [right.robot_state_publisher]: got segment world
+[static_transform_publisher-16] [INFO] [1757425040.731519014] [static_transform_publisher_front_right]: Spinning until stopped - publishing transform
+[static_transform_publisher-16] translation: ('-0.250000', '-0.150000', '0.000000')
+[static_transform_publisher-16] rotation: ('0.000000', '0.000000', '0.000000', '1.000000')
+[static_transform_publisher-16] from 'right_summit_base_link' to 'right_summit_front_right_wheel_link'
+[rviz2-19] QStandardPaths: XDG_RUNTIME_DIR not set, defaulting to '/tmp/runtime-root'
+[move_group-20] [INFO] [1757425041.293768835] [moveit_rdf_loader.rdf_loader]: Loaded robot model in 0.0386012 seconds
+[move_group-20] [INFO] [1757425041.293898110] [moveit_robot_model.robot_model]: Loading robot model 'srm'...
+[move_group-20] [INFO] [1757425041.293929092] [moveit_robot_model.robot_model]: No root/virtual joint specified in SRDF. Assuming fixed joint
+[move_group-20] [WARN] [1757425041.294020682] [moveit_robot_model.robot_model]: Link left_summit_base_footprint has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[move_group-20] [WARN] [1757425041.300991341] [moveit_robot_model.robot_model]: Link left_summit_base_logo_front has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[move_group-20] [WARN] [1757425041.301047089] [moveit_robot_model.robot_model]: Link left_summit_base_logo_left has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[move_group-20] [WARN] [1757425041.301069820] [moveit_robot_model.robot_model]: Link left_summit_base_logo_rear has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[move_group-20] [WARN] [1757425041.301089961] [moveit_robot_model.robot_model]: Link left_summit_base_logo_right has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[move_group-20] [WARN] [1757425041.301108293] [moveit_robot_model.robot_model]: Link left_summit_base_chapa has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[move_group-20] [WARN] [1757425041.312183730] [moveit_robot_model.robot_model]: Link left_summit_imu_link has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[move_group-20] [WARN] [1757425041.390558220] [moveit_robot_model.robot_model]: Link right_summit_base_footprint has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[move_group-20] [WARN] [1757425041.402903365] [moveit_robot_model.robot_model]: Link right_summit_base_logo_front has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[move_group-20] [WARN] [1757425041.402955980] [moveit_robot_model.robot_model]: Link right_summit_base_logo_left has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[move_group-20] [WARN] [1757425041.402977306] [moveit_robot_model.robot_model]: Link right_summit_base_logo_rear has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[move_group-20] [WARN] [1757425041.402996677] [moveit_robot_model.robot_model]: Link right_summit_base_logo_right has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[move_group-20] [WARN] [1757425041.403015228] [moveit_robot_model.robot_model]: Link right_summit_base_chapa has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[move_group-20] [WARN] [1757425041.422912175] [moveit_robot_model.robot_model]: Link right_summit_imu_link has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[move_group-20] [WARN] [1757425041.475443762] [moveit_robot_model.robot_model]: Group state 'home_r_base_ur_ee' doesn't specify all group joints in group 'srm_r'. right_base_joint, right_summit_back_left_wheel_joint, right_summit_back_right_wheel_joint, right_summit_front_left_wheel_joint, right_summit_front_right_wheel_joint are missing.
+[move_group-20] [WARN] [1757425041.475495721] [moveit_robot_model.robot_model]: Group state 'home_l_base_ur_ee' doesn't specify all group joints in group 'srm_l'. left_base_joint, left_summit_back_left_wheel_joint, left_summit_back_right_wheel_joint, left_summit_front_left_wheel_joint, left_summit_front_right_wheel_joint are missing.
+[move_group-20] [WARN] [1757425041.565310211] [kdl_parser]: Converting unknown joint type of joint 'left_base_joint' into a fixed joint
+[move_group-20] [WARN] [1757425041.565490729] [kdl_parser]: Converting unknown joint type of joint 'right_base_joint' into a fixed joint
+[move_group-20] [WARN] [1757425041.565829118] [kdl_parser]: Converting unknown joint type of joint 'left_base_joint' into a fixed joint
+[move_group-20] [WARN] [1757425041.565924140] [kdl_parser]: Converting unknown joint type of joint 'right_base_joint' into a fixed joint
+[spawn_entity.py-3] [INFO] [1757425041.597318248] [left]: Spawn Entity started
+[spawn_entity.py-3] [INFO] [1757425041.598757842] [left]: Loading entity published on topic /left/robot_description
+[spawn_entity.py-3] [INFO] [1757425041.612148178] [left]: Waiting for entity xml on /left/robot_description
+[spawn_entity.py-3] [INFO] [1757425041.623477862] [left]: Waiting for service /spawn_entity, timeout = 5
+[spawn_entity.py-3] [INFO] [1757425041.625763696] [left]: Waiting for service /spawn_entity
+[spawn_entity.py-11] [INFO] [1757425041.721665610] [right]: Spawn Entity started
+[spawn_entity.py-11] [INFO] [1757425041.722782990] [right]: Loading entity published on topic /right/robot_description
+[spawn_entity.py-11] [INFO] [1757425041.747494252] [right]: Waiting for entity xml on /right/robot_description
+[spawn_entity.py-11] [INFO] [1757425041.889246013] [right]: Waiting for service /spawn_entity, timeout = 5
+[spawn_entity.py-11] [INFO] [1757425041.890301108] [right]: Waiting for service /spawn_entity
+[spawner-10] [INFO] [1757425041.893139242] [left.spawner_ur_left_joint_group_vel_controller]: waiting for service /left/controller_manager/list_controllers to become available...
+[spawner-9] [INFO] [1757425041.926143128] [left.spawner_joint_state_broadcaster]: waiting for service /left/controller_manager/list_controllers to become available...
+[move_group-20] [INFO] [1757425041.985703366] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Publishing maintained planning scene on 'monitored_planning_scene'
+[spawner-17] [INFO] [1757425041.986289314] [right.spawner_joint_state_broadcaster]: waiting for service /right/controller_manager/list_controllers to become available...
+[move_group-20] [INFO] [1757425041.986606230] [moveit.ros_planning_interface.moveit_cpp]: Listening to 'joint_states' for joint states
+[move_group-20] [INFO] [1757425041.992362247] [moveit_ros.current_state_monitor]: Listening to joint states on topic 'joint_states'
+[move_group-20] [INFO] [1757425041.993977514] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Listening to '/attached_collision_object' for attached collision objects
+[move_group-20] [INFO] [1757425041.994011657] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Starting planning scene monitor
+[move_group-20] [INFO] [1757425041.995549571] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Listening to '/planning_scene'
+[move_group-20] [INFO] [1757425041.995576969] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Starting world geometry update monitor for collision objects, attached objects, octomap updates.
+[move_group-20] [INFO] [1757425041.997412202] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Listening to 'collision_object'
+[move_group-20] [INFO] [1757425041.999178250] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Listening to 'planning_scene_world' for planning scene world geometry
+[move_group-20] [WARN] [1757425042.001182971] [moveit.ros.occupancy_map_monitor.middleware_handle]: Resolution not specified for Octomap. Assuming resolution = 0.1 instead
+[spawner-18] [INFO] [1757425042.004760906] [right.spawner_ur_right_joint_group_vel_controller]: waiting for service /right/controller_manager/list_controllers to become available...
+[INFO] [static_transform_publisher-21]: process started with pid [7344]
+[static_transform_publisher-21] [WARN] [1757425042.445435477] []: Old-style arguments are deprecated; see --help for new-style arguments
+[INFO] [static_transform_publisher-22]: process started with pid [7356]
+[static_transform_publisher-22] [WARN] [1757425042.548082004] []: Old-style arguments are deprecated; see --help for new-style arguments
+[rviz2-19] [INFO] [1757425042.725346625] [rviz2]: Stereo is NOT SUPPORTED
+[rviz2-19] [INFO] [1757425042.725592685] [rviz2]: OpenGl version: 4.6 (GLSL 4.6)
+[rviz2-19] [INFO] [1757425042.796624484] [rviz2]: Stereo is NOT SUPPORTED
+[INFO] [static_transform_publisher-23]: process started with pid [7367]
+[static_transform_publisher-23] [WARN] [1757425042.953194506] []: Old-style arguments are deprecated; see --help for new-style arguments
+[static_transform_publisher-22] [INFO] [1757425042.983767301] [static_transform_publisher_IydR8d4TwLJIrTUJ]: Spinning until stopped - publishing transform
+[static_transform_publisher-22] translation: ('0.660000', '0.000000', '0.000000')
+[static_transform_publisher-22] rotation: ('0.000000', '0.000000', '0.000000', '1.000000')
+[static_transform_publisher-22] from 'world' to 'right_robot'
+[move_group-20] [INFO] [1757425043.013148677] [moveit.ros_planning_interface.moveit_cpp]: Loading planning pipeline 'ompl'
+[INFO] [static_transform_publisher-24]: process started with pid [7383]
+[move_group-20] [INFO] [1757425043.045328015] [moveit.ros_planning.planning_pipeline]: Using planning interface 'OMPL'
+[static_transform_publisher-24] [WARN] [1757425043.052647993] []: Old-style arguments are deprecated; see --help for new-style arguments
+[move_group-20] [INFO] [1757425043.061308507] [moveit_ros.add_time_optimal_parameterization]: Param 'ompl.path_tolerance' was not set. Using default value: 0.100000
+[move_group-20] [INFO] [1757425043.061348022] [moveit_ros.add_time_optimal_parameterization]: Param 'ompl.resample_dt' was not set. Using default value: 0.100000
+[move_group-20] [INFO] [1757425043.061362930] [moveit_ros.add_time_optimal_parameterization]: Param 'ompl.min_angle_change' was not set. Using default value: 0.001000
+[move_group-20] [INFO] [1757425043.061429397] [moveit_ros.fix_workspace_bounds]: Param 'ompl.default_workspace_bounds' was not set. Using default value: 10.000000
+[move_group-20] [INFO] [1757425043.061471495] [moveit_ros.fix_start_state_bounds]: Param 'ompl.start_state_max_bounds_error' was set to 0.100000
+[move_group-20] [INFO] [1757425043.061486218] [moveit_ros.fix_start_state_bounds]: Param 'ompl.start_state_max_dt' was not set. Using default value: 0.500000
+[move_group-20] [INFO] [1757425043.061516726] [moveit_ros.fix_start_state_collision]: Param 'ompl.start_state_max_dt' was not set. Using default value: 0.500000
+[move_group-20] [INFO] [1757425043.061530631] [moveit_ros.fix_start_state_collision]: Param 'ompl.jiggle_fraction' was set to 0.050000
+[move_group-20] [INFO] [1757425043.061557229] [moveit_ros.fix_start_state_collision]: Param 'ompl.max_sampling_attempts' was not set. Using default value: 100
+[move_group-20] [INFO] [1757425043.061589552] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Add Time Optimal Parameterization'
+[move_group-20] [INFO] [1757425043.061603604] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Resolve constraint frames to robot links'
+[move_group-20] [INFO] [1757425043.061612310] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Fix Workspace Bounds'
+[move_group-20] [INFO] [1757425043.061664866] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Fix Start State Bounds'
+[move_group-20] [INFO] [1757425043.061675298] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Fix Start State In Collision'
+[move_group-20] [INFO] [1757425043.061683801] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Fix Start State Path Constraints'
+[move_group-20] [INFO] [1757425043.068754114] [moveit.ros_planning_interface.moveit_cpp]: Loading planning pipeline 'chomp'
+[move_group-20] [INFO] [1757425043.087469753] [moveit.ros_planning.planning_pipeline]: Using planning interface 'CHOMP'
+[move_group-20] [INFO] [1757425043.099500014] [moveit_ros.add_time_optimal_parameterization]: Param 'chomp.path_tolerance' was not set. Using default value: 0.100000
+[move_group-20] [INFO] [1757425043.099536583] [moveit_ros.add_time_optimal_parameterization]: Param 'chomp.resample_dt' was not set. Using default value: 0.100000
+[move_group-20] [INFO] [1757425043.099551819] [moveit_ros.add_time_optimal_parameterization]: Param 'chomp.min_angle_change' was not set. Using default value: 0.001000
+[move_group-20] [INFO] [1757425043.099606151] [moveit_ros.fix_workspace_bounds]: Param 'chomp.default_workspace_bounds' was not set. Using default value: 10.000000
+[move_group-20] [INFO] [1757425043.099646538] [moveit_ros.fix_start_state_bounds]: Param 'chomp.start_state_max_bounds_error' was set to 0.100000
+[move_group-20] [INFO] [1757425043.099660587] [moveit_ros.fix_start_state_bounds]: Param 'chomp.start_state_max_dt' was not set. Using default value: 0.500000
+[move_group-20] [INFO] [1757425043.099694840] [moveit_ros.fix_start_state_collision]: Param 'chomp.start_state_max_dt' was not set. Using default value: 0.500000
+[move_group-20] [INFO] [1757425043.099712790] [moveit_ros.fix_start_state_collision]: Param 'chomp.jiggle_fraction' was set to 0.050000
+[move_group-20] [INFO] [1757425043.099726790] [moveit_ros.fix_start_state_collision]: Param 'chomp.max_sampling_attempts' was not set. Using default value: 100
+[move_group-20] [INFO] [1757425043.099761119] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Add Time Optimal Parameterization'
+[move_group-20] [INFO] [1757425043.099775616] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Resolve constraint frames to robot links'
+[move_group-20] [INFO] [1757425043.099785455] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Fix Workspace Bounds'
+[move_group-20] [INFO] [1757425043.099795056] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Fix Start State Bounds'
+[move_group-20] [INFO] [1757425043.099804288] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Fix Start State In Collision'
+[move_group-20] [INFO] [1757425043.099815971] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Fix Start State Path Constraints'
+[move_group-20] [INFO] [1757425043.102754015] [moveit.ros_planning_interface.moveit_cpp]: Loading planning pipeline 'pilz_industrial_motion_planner'
+[move_group-20] [INFO] [1757425043.118362904] [moveit.pilz_industrial_motion_planner.joint_limits_aggregator]: Reading limits from namespace robot_description_planning
+[move_group-20] [WARN] [1757425043.122658548] [moveit.pilz_industrial_motion_planner.joint_limits_aggregator]: Multi-DOF-Joint 'left_base_joint' not supported.
+[move_group-20] [WARN] [1757425043.122721329] [moveit.pilz_industrial_motion_planner.joint_limits_aggregator]: Multi-DOF-Joint 'left_base_joint' not supported.
+[move_group-20] [WARN] [1757425043.157539431] [moveit.pilz_industrial_motion_planner.joint_limits_aggregator]: Multi-DOF-Joint 'right_base_joint' not supported.
+[move_group-20] [WARN] [1757425043.157587967] [moveit.pilz_industrial_motion_planner.joint_limits_aggregator]: Multi-DOF-Joint 'right_base_joint' not supported.
+[move_group-20] [INFO] [1757425043.187575355] [moveit.pilz_industrial_motion_planner]: Available plugins: pilz_industrial_motion_planner/PlanningContextLoaderCIRC pilz_industrial_motion_planner/PlanningContextLoaderLIN pilz_industrial_motion_planner/PlanningContextLoaderPTP 
+[move_group-20] [INFO] [1757425043.187609009] [moveit.pilz_industrial_motion_planner]: About to load: pilz_industrial_motion_planner/PlanningContextLoaderCIRC
+[move_group-20] [INFO] [1757425043.191455662] [moveit.pilz_industrial_motion_planner]: Registered Algorithm [CIRC]
+[move_group-20] [INFO] [1757425043.191514533] [moveit.pilz_industrial_motion_planner]: About to load: pilz_industrial_motion_planner/PlanningContextLoaderLIN
+[move_group-20] [INFO] [1757425043.194254350] [moveit.pilz_industrial_motion_planner]: Registered Algorithm [LIN]
+[move_group-20] [INFO] [1757425043.194289130] [moveit.pilz_industrial_motion_planner]: About to load: pilz_industrial_motion_planner/PlanningContextLoaderPTP
+[move_group-20] [INFO] [1757425043.197286999] [moveit.pilz_industrial_motion_planner]: Registered Algorithm [PTP]
+[move_group-20] [INFO] [1757425043.197574766] [moveit.ros_planning.planning_pipeline]: Using planning interface 'Pilz Industrial Motion Planner'
+[move_group-20] [WARN] [1757425043.211635497] [moveit_ros.trajectory_execution_manager]: moveit_ros_control_interface/MoveItControllerManager is deprecated. Replace with `moveit_ros_control_interface/MoveItControllerManager.`
+[static_transform_publisher-21] [INFO] [1757425043.260948369] [static_transform_publisher_8UnwWPQea12r6boY]: Spinning until stopped - publishing transform
+[static_transform_publisher-21] translation: ('-0.660000', '0.000000', '0.000000')
+[static_transform_publisher-21] rotation: ('0.000000', '0.000000', '0.000000', '1.000000')
+[static_transform_publisher-21] from 'world' to 'left_robot'
+[static_transform_publisher-24] [INFO] [1757425043.364708418] [static_transform_publisher_nuTOSzCDCuogDR6r]: Spinning until stopped - publishing transform
+[static_transform_publisher-24] translation: ('0.000000', '0.000000', '0.000000')
+[static_transform_publisher-24] rotation: ('0.000000', '0.000000', '0.000000', '1.000000')
+[static_transform_publisher-24] from 'right_robot' to 'right_summit_base_footprint'
+[rviz2-19] [INFO] [1757425043.435857286] [moveit_rdf_loader.rdf_loader]: Loaded robot model in 0 seconds
+[rviz2-19] [INFO] [1757425043.436029336] [moveit_robot_model.robot_model]: Loading robot model 'srm'...
+[rviz2-19] [INFO] [1757425043.436085033] [moveit_robot_model.robot_model]: No root/virtual joint specified in SRDF. Assuming fixed joint
+[rviz2-19] [WARN] [1757425043.436269279] [moveit_robot_model.robot_model]: Link left_summit_base_footprint has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-19] [WARN] [1757425043.454274909] [moveit_robot_model.robot_model]: Link left_summit_base_logo_front has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-19] [WARN] [1757425043.454378697] [moveit_robot_model.robot_model]: Link left_summit_base_logo_left has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-19] [WARN] [1757425043.454402965] [moveit_robot_model.robot_model]: Link left_summit_base_logo_rear has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-19] [WARN] [1757425043.454423147] [moveit_robot_model.robot_model]: Link left_summit_base_logo_right has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-19] [WARN] [1757425043.454441667] [moveit_robot_model.robot_model]: Link left_summit_base_chapa has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-19] [WARN] [1757425043.463161616] [moveit_robot_model.robot_model]: Link left_summit_imu_link has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-19] [WARN] [1757425043.507074288] [moveit_robot_model.robot_model]: Link right_summit_base_footprint has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-19] [WARN] [1757425043.512402861] [moveit_robot_model.robot_model]: Link right_summit_base_logo_front has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-19] [WARN] [1757425043.512513530] [moveit_robot_model.robot_model]: Link right_summit_base_logo_left has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-19] [WARN] [1757425043.512674721] [moveit_robot_model.robot_model]: Link right_summit_base_logo_rear has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-19] [WARN] [1757425043.512696450] [moveit_robot_model.robot_model]: Link right_summit_base_logo_right has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-19] [WARN] [1757425043.512715091] [moveit_robot_model.robot_model]: Link right_summit_base_chapa has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-19] [WARN] [1757425043.522619397] [moveit_robot_model.robot_model]: Link right_summit_imu_link has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-19] [WARN] [1757425043.577116251] [moveit_robot_model.robot_model]: Group state 'home_r_base_ur_ee' doesn't specify all group joints in group 'srm_r'. right_base_joint, right_summit_back_left_wheel_joint, right_summit_back_right_wheel_joint, right_summit_front_left_wheel_joint, right_summit_front_right_wheel_joint are missing.
+[rviz2-19] [WARN] [1757425043.577322852] [moveit_robot_model.robot_model]: Group state 'home_l_base_ur_ee' doesn't specify all group joints in group 'srm_l'. left_base_joint, left_summit_back_left_wheel_joint, left_summit_back_right_wheel_joint, left_summit_front_left_wheel_joint, left_summit_front_right_wheel_joint are missing.
+[move_group-20] [INFO] [1757425043.663286860] [moveit.plugins.ros_control_interface]: Started moveit_ros_control_interface::Ros2ControlManager for namespace 
+[static_transform_publisher-23] [INFO] [1757425043.772633608] [static_transform_publisher_5qtsNc2O9IKuLh9J]: Spinning until stopped - publishing transform
+[static_transform_publisher-23] translation: ('0.000000', '0.000000', '0.000000')
+[static_transform_publisher-23] rotation: ('0.000000', '0.000000', '0.000000', '1.000000')
+[static_transform_publisher-23] from 'left_robot' to 'left_summit_base_footprint'
+[rviz2-19] [WARN] [1757425043.799354480] [kdl_parser]: Converting unknown joint type of joint 'left_base_joint' into a fixed joint
+[rviz2-19] [WARN] [1757425043.799573028] [kdl_parser]: Converting unknown joint type of joint 'right_base_joint' into a fixed joint
+[rviz2-19] [WARN] [1757425043.799943030] [kdl_parser]: Converting unknown joint type of joint 'left_base_joint' into a fixed joint
+[rviz2-19] [WARN] [1757425043.800047200] [kdl_parser]: Converting unknown joint type of joint 'right_base_joint' into a fixed joint
+[move_group-20] [WARN] [1757425044.047283855] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: The complete state of the robot is not yet known.  Missing left_summit_back_left_wheel_joint, left_summit_back_right_wheel_joint, left_summit_front_left_wheel_joint, left_summit_front_right_wheel_joint, ur_left_shoulder_pan_joint, ur_left_shoulder_lift_joint, ur_left_elbow_joint, ur_left_wrist_1_joint, ur_left_wrist_2_joint, ur_left_wrist_3_joint, right_summit_back_left_wheel_joint, right_summit_back_right_wheel_joint, right_summit_front_left_wheel_joint, right_summit_front_right_wheel_joint, ur_right_shoulder_pan_joint, ur_right_shoulder_lift_joint, ur_right_elbow_joint, ur_right_wrist_1_joint, ur_right_wrist_2_joint, ur_right_wrist_3_joint
+[rviz2-19] [INFO] [1757425044.086906764] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Starting planning scene monitor
+[rviz2-19] [INFO] [1757425044.104519843] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Listening to '/monitored_planning_scene'
+[move_group-20] [WARN] [1757425044.703619833] [moveit.plugins.ros_control_interface]: Failed to read controllers from /controller_manager/list_controllers within 1 seconds
+[gzserver-1] [WARN] [1757425045.066378934] [rcl]: Found remap rule 'model_states:=model_states'. This syntax is deprecated. Use '--ros-args --remap model_states:=model_states' instead.
+[gzserver-1] [WARN] [1757425045.066681077] [rcl]: Found remap rule 'link_states:=link_states'. This syntax is deprecated. Use '--ros-args --remap link_states:=link_states' instead.
+[gzserver-1] [INFO] [1757425045.099285474] [state.gazebo_ros_state]: Publishing states of gazebo models at [/state/model_states]
+[gzserver-1] [INFO] [1757425045.101272876] [state.gazebo_ros_state]: Publishing states of gazebo links at [/state/link_states]
+[spawn_entity.py-3] [INFO] [1757425045.150406987] [left]: Calling service /spawn_entity
+[spawn_entity.py-11] [INFO] [1757425045.186785282] [right]: Calling service /spawn_entity
+[INFO] [gazebo_moveit_bridge.py-25]: process started with pid [7459]
+[move_group-20] [WARN] [1757425045.703922757] [moveit.plugins.ros_control_interface]: Failed to read controllers from /controller_manager/list_controllers within 1 seconds
+[gzserver-1] [INFO] [1757425045.977379170] [left_summit_imu_imu_plugin]: <initial_orientation_as_reference> is unset, using default value of false to comply with REP 145 (world as orientation reference)
+[spawn_entity.py-3] [INFO] [1757425046.449733359] [left]: Spawn status: SpawnEntity: Successfully spawned entity [left_robot]
+[spawn_entity.py-3] [INFO] [1757425046.486555048] [left]: Calling service /unpause_physics
+[gzserver-1] [INFO] [1757425046.646691770] [left_summit.omni_steering]: Subscribed to [/left_summit/cmd_vel]
+[gzserver-1] [INFO] [1757425046.658326326] [left_summit.omni_steering]: Advertise odometry on [/left_summit/odom]
+[move_group-20] [WARN] [1757425046.704088566] [moveit.plugins.ros_control_interface]: Failed to read controllers from /controller_manager/list_controllers within 1 seconds
+[move_group-20] [INFO] [1757425046.706459564] [moveit_ros.trajectory_execution_manager]: Trajectory execution is managing controllers
+[move_group-20] [INFO] [1757425046.706507422] [move_group.move_group]: MoveGroup debug mode is ON
+[INFO] [spawn_entity.py-3]: process has finished cleanly [pid 7108]
+[gzserver-1] [INFO] [1757425046.880006837] [gazebo_ros2_control]: Loading gazebo_ros2_control plugin
+[move_group-20] [INFO] [1757425046.892862382] [move_group.move_group]: 
+[move_group-20] 
+[move_group-20] ********************************************************
+[move_group-20] * MoveGroup using: 
+[move_group-20] *     - ApplyPlanningSceneService
+[move_group-20] *     - ClearOctomapService
+[move_group-20] *     - ExecuteTaskSolution
+[move_group-20] *     - CartesianPathService
+[move_group-20] *     - ExecuteTrajectoryAction
+[move_group-20] *     - GetPlanningSceneService
+[move_group-20] *     - KinematicsService
+[move_group-20] *     - MoveAction
+[move_group-20] *     - MotionPlanService
+[move_group-20] *     - QueryPlannersService
+[move_group-20] *     - StateValidationService
+[move_group-20] ********************************************************
+[move_group-20] 
+[move_group-20] [INFO] [1757425046.892984235] [moveit_move_group_capabilities_base.move_group_context]: MoveGroup context using planning plugin ompl_interface/OMPLPlanner
+[move_group-20] [INFO] [1757425046.893045839] [moveit_move_group_capabilities_base.move_group_context]: MoveGroup context initialization complete
+[move_group-20] [96mLoading 'move_group/ApplyPlanningSceneService'...
+[move_group-20] [0m[96mLoading 'move_group/ClearOctomapService'...
+[move_group-20] [0m[96mLoading 'move_group/ExecuteTaskSolutionCapability'...
+[move_group-20] [0m[96mLoading 'move_group/MoveGroupCartesianPathService'...
+[move_group-20] [0m[96mLoading 'move_group/MoveGroupExecuteTrajectoryAction'...
+[move_group-20] [0m[96mLoading 'move_group/MoveGroupGetPlanningSceneService'...
+[move_group-20] [0m[96mLoading 'move_group/MoveGroupKinematicsService'...
+[move_group-20] [0m[96mLoading 'move_group/MoveGroupMoveAction'...
+[move_group-20] [0m[96mLoading 'move_group/MoveGroupPlanService'...
+[move_group-20] [0m[96mLoading 'move_group/MoveGroupQueryPlannersService'...
+[move_group-20] [0m[96mLoading 'move_group/MoveGroupStateValidationService'...
+[move_group-20] [0m[92m
+[move_group-20] You can start planning now!
+[move_group-20] 
+[gzserver-1] [INFO] [1757425046.929182050] [left.left_gazebo_ros2_control]: Starting gazebo_ros2_control plugin in namespace: /left
+[gzserver-1] [INFO] [1757425046.929265115] [left.left_gazebo_ros2_control]: Starting gazebo_ros2_control plugin in ros 2 node: left_gazebo_ros2_control
+[gzserver-1] [INFO] [1757425046.961581320] [left.left_gazebo_ros2_control]: connected to service!! robot_state_publisher
+[gzserver-1] [INFO] [1757425046.974283906] [left.left_gazebo_ros2_control]: Received urdf from param server, parsing...
+[gzserver-1] [INFO] [1757425046.975785896] [left.left_gazebo_ros2_control]: Loading parameter files /ros2_ws/install/ur/share/ur/config/left_controller.yaml
+[gzserver-1] [INFO] [1757425047.164406519] [left.left_gazebo_ros2_control]: Loading joint: ur_left_shoulder_pan_joint
+[gzserver-1] [INFO] [1757425047.164684495] [left.left_gazebo_ros2_control]: 	State:
+[gzserver-1] [INFO] [1757425047.164760823] [left.left_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1757425047.165595415] [left.left_gazebo_ros2_control]: 			 found initial value: -1.400000
+[gzserver-1] [INFO] [1757425047.165636668] [left.left_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1757425047.168311773] [left.left_gazebo_ros2_control]: 		 effort
+[gzserver-1] [INFO] [1757425047.168654894] [left.left_gazebo_ros2_control]: 	Command:
+[gzserver-1] [INFO] [1757425047.168689143] [left.left_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1757425047.170250170] [left.left_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1757425047.174307252] [left.left_gazebo_ros2_control]: Loading joint: ur_left_shoulder_lift_joint
+[gzserver-1] [INFO] [1757425047.174389001] [left.left_gazebo_ros2_control]: 	State:
+[gzserver-1] [INFO] [1757425047.174415863] [left.left_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1757425047.174446842] [left.left_gazebo_ros2_control]: 			 found initial value: -1.227838
+[gzserver-1] [INFO] [1757425047.174476769] [left.left_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1757425047.174512973] [left.left_gazebo_ros2_control]: 		 effort
+[gzserver-1] [INFO] [1757425047.174541338] [left.left_gazebo_ros2_control]: 	Command:
+[gzserver-1] [INFO] [1757425047.174565384] [left.left_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1757425047.174672269] [left.left_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1757425047.174719993] [left.left_gazebo_ros2_control]: Loading joint: ur_left_elbow_joint
+[gzserver-1] [INFO] [1757425047.174748831] [left.left_gazebo_ros2_control]: 	State:
+[gzserver-1] [INFO] [1757425047.174772590] [left.left_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1757425047.174798683] [left.left_gazebo_ros2_control]: 			 found initial value: -1.791046
+[gzserver-1] [INFO] [1757425047.174826808] [left.left_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1757425047.174853618] [left.left_gazebo_ros2_control]: 		 effort
+[gzserver-1] [INFO] [1757425047.174986061] [left.left_gazebo_ros2_control]: 	Command:
+[gzserver-1] [INFO] [1757425047.175013300] [left.left_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1757425047.175068146] [left.left_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1757425047.175107028] [left.left_gazebo_ros2_control]: Loading joint: ur_left_wrist_1_joint
+[gzserver-1] [INFO] [1757425047.175134800] [left.left_gazebo_ros2_control]: 	State:
+[gzserver-1] [INFO] [1757425047.175157832] [left.left_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1757425047.175182104] [left.left_gazebo_ros2_control]: 			 found initial value: -1.447073
+[gzserver-1] [INFO] [1757425047.175256288] [left.left_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1757425047.175286629] [left.left_gazebo_ros2_control]: 		 effort
+[gzserver-1] [INFO] [1757425047.175312041] [left.left_gazebo_ros2_control]: 	Command:
+[gzserver-1] [INFO] [1757425047.175335367] [left.left_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1757425047.175391089] [left.left_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1757425047.175448616] [left.left_gazebo_ros2_control]: Loading joint: ur_left_wrist_2_joint
+[gzserver-1] [INFO] [1757425047.175478442] [left.left_gazebo_ros2_control]: 	State:
+[gzserver-1] [INFO] [1757425047.175501744] [left.left_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1757425047.175527959] [left.left_gazebo_ros2_control]: 			 found initial value: 1.900333
+[gzserver-1] [INFO] [1757425047.175559458] [left.left_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1757425047.175590145] [left.left_gazebo_ros2_control]: 		 effort
+[gzserver-1] [INFO] [1757425047.175724205] [left.left_gazebo_ros2_control]: 	Command:
+[gzserver-1] [INFO] [1757425047.175754656] [left.left_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1757425047.175831528] [left.left_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1757425047.175872948] [left.left_gazebo_ros2_control]: Loading joint: ur_left_wrist_3_joint
+[gzserver-1] [INFO] [1757425047.175919913] [left.left_gazebo_ros2_control]: 	State:
+[gzserver-1] [INFO] [1757425047.175944605] [left.left_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1757425047.175969555] [left.left_gazebo_ros2_control]: 			 found initial value: -0.755379
+[gzserver-1] [INFO] [1757425047.175999693] [left.left_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1757425047.176036031] [left.left_gazebo_ros2_control]: 		 effort
+[gzserver-1] [INFO] [1757425047.176062651] [left.left_gazebo_ros2_control]: 	Command:
+[gzserver-1] [INFO] [1757425047.176086169] [left.left_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1757425047.176126863] [left.left_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1757425047.177669296] [resource_manager]: Initialize hardware 'left_ur' 
+[gzserver-1] [INFO] [1757425047.180569249] [resource_manager]: Successful initialization of hardware 'left_ur'
+[gzserver-1] [INFO] [1757425047.191163099] [resource_manager]: 'configure' hardware 'left_ur' 
+[gzserver-1] [INFO] [1757425047.191485248] [resource_manager]: Successful 'configure' of hardware 'left_ur'
+[gzserver-1] [INFO] [1757425047.191856137] [resource_manager]: 'activate' hardware 'left_ur' 
+[gzserver-1] [INFO] [1757425047.191877268] [resource_manager]: Successful 'activate' of hardware 'left_ur'
+[gzserver-1] [INFO] [1757425047.193185241] [left.left_gazebo_ros2_control]: Loading controller_manager
+[gzserver-1] [WARN] [1757425047.440652107] [left.left_gazebo_ros2_control]:  Desired controller update period (0.002 s) is slower than the gazebo simulation period (0.001 s).
+[gzserver-1] [INFO] [1757425047.451850715] [left.left_gazebo_ros2_control]: Loaded gazebo_ros2_control.
+[gzserver-1] [INFO] [1757425047.478965035] [left.controller_manager]: Loading controller 'ur_left_joint_group_vel_controller'
+[INFO] [joint_state_merger.py-26]: process started with pid [7503]
+[gzserver-1] [INFO] [1757425047.634610698] [left.controller_manager]: Loading controller 'joint_state_broadcaster'
+[spawner-10] [INFO] [1757425047.635938677] [left.spawner_ur_left_joint_group_vel_controller]: [94mLoaded [1mur_left_joint_group_vel_controller[0m
+[gzserver-1] [INFO] [1757425048.547749575] [right_summit_imu_imu_plugin]: <initial_orientation_as_reference> is unset, using default value of false to comply with REP 145 (world as orientation reference)
+[INFO] [gazebo_scene_sync.py-27]: process started with pid [7524]
+[spawn_entity.py-11] [INFO] [1757425048.897536877] [right]: Spawn status: SpawnEntity: Successfully spawned entity [right_robot]
+[spawn_entity.py-11] [INFO] [1757425048.921048744] [right]: Calling service /unpause_physics
+[gzserver-1] [WARN] [1757425048.997235525] [gazebo.rclcpp]: failed to send response to /unpause_physics (timeout): client will not receive response, at ./src/rmw_response.cpp:154, at ./src/rcl/service.c:314
+[gzserver-1] [INFO] [1757425049.067669775] [right_summit.omni_steering]: Subscribed to [/right_summit/cmd_vel]
+[gzserver-1] [INFO] [1757425049.071270867] [right_summit.omni_steering]: Advertise odometry on [/right_summit/odom]
+[gzserver-1] [INFO] [1757425049.071759128] [gazebo_ros2_control]: Loading gazebo_ros2_control plugin
+[gzserver-1] [INFO] [1757425049.126989224] [right.right_gazebo_ros2_control]: Starting gazebo_ros2_control plugin in namespace: /right
+[gzserver-1] [INFO] [1757425049.127076005] [right.right_gazebo_ros2_control]: Starting gazebo_ros2_control plugin in ros 2 node: right_gazebo_ros2_control
+[INFO] [spawn_entity.py-11]: process has finished cleanly [pid 7124]
+[gzserver-1] [INFO] [1757425049.162755811] [right.right_gazebo_ros2_control]: connected to service!! robot_state_publisher
+[gzserver-1] [INFO] [1757425049.163661607] [right.right_gazebo_ros2_control]: Received urdf from param server, parsing...
+[gzserver-1] [INFO] [1757425049.163780127] [right.right_gazebo_ros2_control]: Loading parameter files /ros2_ws/install/ur/share/ur/config/right_controller.yaml
+[gzserver-1] [INFO] [1757425049.189407142] [right.right_gazebo_ros2_control]: Loading joint: ur_right_shoulder_pan_joint
+[gzserver-1] [INFO] [1757425049.189490734] [right.right_gazebo_ros2_control]: 	State:
+[gzserver-1] [INFO] [1757425049.189518273] [right.right_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1757425049.189549535] [right.right_gazebo_ros2_control]: 			 found initial value: -1.300000
+[gzserver-1] [INFO] [1757425049.189578412] [right.right_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1757425049.189606180] [right.right_gazebo_ros2_control]: 		 effort
+[gzserver-1] [INFO] [1757425049.189631066] [right.right_gazebo_ros2_control]: 	Command:
+[gzserver-1] [INFO] [1757425049.189652110] [right.right_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1757425049.189752414] [right.right_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1757425049.189802797] [right.right_gazebo_ros2_control]: Loading joint: ur_right_shoulder_lift_joint
+[gzserver-1] [INFO] [1757425049.189831018] [right.right_gazebo_ros2_control]: 	State:
+[gzserver-1] [INFO] [1757425049.189851711] [right.right_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1757425049.189873462] [right.right_gazebo_ros2_control]: 			 found initial value: -0.800000
+[gzserver-1] [INFO] [1757425049.189899270] [right.right_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1757425049.189924570] [right.right_gazebo_ros2_control]: 		 effort
+[gzserver-1] [INFO] [1757425049.189946818] [right.right_gazebo_ros2_control]: 	Command:
+[gzserver-1] [INFO] [1757425049.189966994] [right.right_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1757425049.190015114] [right.right_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1757425049.190051227] [right.right_gazebo_ros2_control]: Loading joint: ur_right_elbow_joint
+[gzserver-1] [INFO] [1757425049.190076547] [right.right_gazebo_ros2_control]: 	State:
+[gzserver-1] [INFO] [1757425049.190097386] [right.right_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1757425049.190119211] [right.right_gazebo_ros2_control]: 			 found initial value: -1.800000
+[gzserver-1] [INFO] [1757425049.190143108] [right.right_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1757425049.190164692] [right.right_gazebo_ros2_control]: 		 effort
+[gzserver-1] [INFO] [1757425049.190193797] [right.right_gazebo_ros2_control]: 	Command:
+[gzserver-1] [INFO] [1757425049.190214253] [right.right_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1757425049.190262865] [right.right_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1757425049.190297295] [right.right_gazebo_ros2_control]: Loading joint: ur_right_wrist_1_joint
+[gzserver-1] [INFO] [1757425049.190653615] [right.right_gazebo_ros2_control]: 	State:
+[gzserver-1] [INFO] [1757425049.190683128] [right.right_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1757425049.190708844] [right.right_gazebo_ros2_control]: 			 found initial value: -1.570000
+[gzserver-1] [INFO] [1757425049.190735770] [right.right_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1757425049.190758340] [right.right_gazebo_ros2_control]: 		 effort
+[gzserver-1] [INFO] [1757425049.190780472] [right.right_gazebo_ros2_control]: 	Command:
+[gzserver-1] [INFO] [1757425049.190800540] [right.right_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1757425049.190853544] [right.right_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1757425049.190896062] [right.right_gazebo_ros2_control]: Loading joint: ur_right_wrist_2_joint
+[gzserver-1] [INFO] [1757425049.190921475] [right.right_gazebo_ros2_control]: 	State:
+[gzserver-1] [INFO] [1757425049.190941628] [right.right_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1757425049.190963392] [right.right_gazebo_ros2_control]: 			 found initial value: 1.638000
+[gzserver-1] [INFO] [1757425049.190987791] [right.right_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1757425049.191009355] [right.right_gazebo_ros2_control]: 		 effort
+[gzserver-1] [INFO] [1757425049.191041234] [right.right_gazebo_ros2_control]: 	Command:
+[gzserver-1] [INFO] [1757425049.191061872] [right.right_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1757425049.191109661] [right.right_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1757425049.191145561] [right.right_gazebo_ros2_control]: Loading joint: ur_right_wrist_3_joint
+[gzserver-1] [INFO] [1757425049.191170046] [right.right_gazebo_ros2_control]: 	State:
+[gzserver-1] [INFO] [1757425049.191189828] [right.right_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1757425049.191210732] [right.right_gazebo_ros2_control]: 			 found initial value: 0.000000
+[gzserver-1] [INFO] [1757425049.191298277] [right.right_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1757425049.191338738] [right.right_gazebo_ros2_control]: 		 effort
+[gzserver-1] [INFO] [1757425049.191362912] [right.right_gazebo_ros2_control]: 	Command:
+[gzserver-1] [INFO] [1757425049.191383031] [right.right_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1757425049.191422529] [right.right_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1757425049.191547190] [resource_manager]: Initialize hardware 'right_ur' 
+[gzserver-1] [INFO] [1757425049.191684721] [resource_manager]: Successful initialization of hardware 'right_ur'
+[gzserver-1] [INFO] [1757425049.192124834] [resource_manager]: 'configure' hardware 'right_ur' 
+[gzserver-1] [INFO] [1757425049.192154486] [resource_manager]: Successful 'configure' of hardware 'right_ur'
+[gzserver-1] [INFO] [1757425049.192314561] [resource_manager]: 'activate' hardware 'right_ur' 
+[gzserver-1] [INFO] [1757425049.192336561] [resource_manager]: Successful 'activate' of hardware 'right_ur'
+[gzserver-1] [INFO] [1757425049.192441189] [right.right_gazebo_ros2_control]: Loading controller_manager
+[gzserver-1] [WARN] [1757425049.363840240] [right.right_gazebo_ros2_control]:  Desired controller update period (0.002 s) is slower than the gazebo simulation period (0.001 s).
+[gzserver-1] [INFO] [1757425049.364647923] [right.right_gazebo_ros2_control]: Loaded gazebo_ros2_control.
+[spawner-9] [INFO] [1757425049.370749486] [left.spawner_joint_state_broadcaster]: [94mLoaded [1mjoint_state_broadcaster[0m
+[gzserver-1] [INFO] [1757425049.376070079] [left.controller_manager]: Configuring controller 'ur_left_joint_group_vel_controller'
+[gzserver-1] [INFO] [1757425049.411924470] [left.ur_left_joint_group_vel_controller]: configure successful
+[gzserver-1] [INFO] [1757425049.415789906] [left.controller_manager]: Configuring controller 'joint_state_broadcaster'
+[gzserver-1] [INFO] [1757425049.416198503] [left.joint_state_broadcaster]: 'joints' or 'interfaces' parameter is empty. All available state interfaces will be published
+[gzserver-1] [INFO] [1757425049.482437237] [left.ur_left_joint_group_vel_controller]: activate successful
+[spawner-10] [INFO] [1757425049.486874763] [left.spawner_ur_left_joint_group_vel_controller]: [92mConfigured and activated [1mur_left_joint_group_vel_controller[0m
+[spawner-9] [INFO] [1757425049.504138153] [left.spawner_joint_state_broadcaster]: [92mConfigured and activated [1mjoint_state_broadcaster[0m
+[move_group-20] [WARN] [1757425049.520352293] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: The complete state of the robot is not yet known.  Missing left_summit_back_left_wheel_joint, left_summit_back_right_wheel_joint, left_summit_front_left_wheel_joint, left_summit_front_right_wheel_joint, right_summit_back_left_wheel_joint, right_summit_back_right_wheel_joint, right_summit_front_left_wheel_joint, right_summit_front_right_wheel_joint, ur_right_shoulder_pan_joint, ur_right_shoulder_lift_joint, ur_right_elbow_joint, ur_right_wrist_1_joint, ur_right_wrist_2_joint, ur_right_wrist_3_joint
+[gzserver-1] [INFO] [1757425049.608067759] [right.controller_manager]: Loading controller 'joint_state_broadcaster'
+[gzserver-1] [INFO] [1757425049.710244014] [right.controller_manager]: Loading controller 'ur_right_joint_group_vel_controller'
+[spawner-17] [INFO] [1757425049.712745639] [right.spawner_joint_state_broadcaster]: [94mLoaded [1mjoint_state_broadcaster[0m
+[gzserver-1] [INFO] [1757425049.813775773] [right.controller_manager]: Configuring controller 'joint_state_broadcaster'
+[gzserver-1] [INFO] [1757425049.813988286] [right.joint_state_broadcaster]: 'joints' or 'interfaces' parameter is empty. All available state interfaces will be published
+[spawner-18] [INFO] [1757425049.815502693] [right.spawner_ur_right_joint_group_vel_controller]: [94mLoaded [1mur_right_joint_group_vel_controller[0m
+[gzserver-1] [INFO] [1757425049.820969263] [right.controller_manager]: Configuring controller 'ur_right_joint_group_vel_controller'
+[gzserver-1] [INFO] [1757425049.824358452] [right.ur_right_joint_group_vel_controller]: configure successful
+[gzserver-1] [INFO] [1757425049.839470116] [right.ur_right_joint_group_vel_controller]: activate successful
+[INFO] [spawner-10]: process has finished cleanly [pid 7122]
+[spawner-18] [INFO] [1757425049.844425966] [right.spawner_ur_right_joint_group_vel_controller]: [92mConfigured and activated [1mur_right_joint_group_vel_controller[0m
+[INFO] [spawner-9]: process has finished cleanly [pid 7120]
+[spawner-17] [INFO] [1757425049.918484492] [right.spawner_joint_state_broadcaster]: [92mConfigured and activated [1mjoint_state_broadcaster[0m
+[INFO] [spawner-18]: process has finished cleanly [pid 7201]
+[INFO] [spawner-17]: process has finished cleanly [pid 7190]
+[move_group-20] [WARN] [1757425050.521806480] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: The complete state of the robot is not yet known.  Missing left_summit_back_left_wheel_joint, left_summit_back_right_wheel_joint, left_summit_front_left_wheel_joint, left_summit_front_right_wheel_joint, right_summit_back_left_wheel_joint, right_summit_back_right_wheel_joint, right_summit_front_left_wheel_joint, right_summit_front_right_wheel_joint
+[move_group-20] [WARN] [1757425051.532591892] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: The complete state of the robot is not yet known.  Missing left_summit_back_left_wheel_joint, left_summit_back_right_wheel_joint, left_summit_front_left_wheel_joint, left_summit_front_right_wheel_joint, right_summit_back_left_wheel_joint, right_summit_back_right_wheel_joint, right_summit_front_left_wheel_joint, right_summit_front_right_wheel_joint
+[move_group-20] [WARN] [1757425052.554960494] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: The complete state of the robot is not yet known.  Missing left_summit_back_left_wheel_joint, left_summit_back_right_wheel_joint, left_summit_front_left_wheel_joint, left_summit_front_right_wheel_joint, right_summit_back_left_wheel_joint, right_summit_back_right_wheel_joint, right_summit_front_left_wheel_joint, right_summit_front_right_wheel_joint
+[gazebo_scene_sync.py-27] [INFO] [1757425052.614551728] [gazebo_scene_sync]: Model ground_plane not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425053.174576763] [gazebo_scene_sync]: Published colored collision object: pallet2
+[gazebo_scene_sync.py-27] [INFO] [1757425053.181725283] [gazebo_scene_sync]: Published colored collision object: warehouse_ground
+[gazebo_scene_sync.py-27] [INFO] [1757425053.183654517] [gazebo_scene_sync]: Published collision object: target_plane
+[gazebo_scene_sync.py-27] [INFO] [1757425053.189777198] [gazebo_scene_sync]: Published colored collision object: pacco
+[gazebo_scene_sync.py-27] [INFO] [1757425053.195997403] [gazebo_scene_sync]: Published colored collision object: pacco_clone
+[gazebo_scene_sync.py-27] [INFO] [1757425053.200185700] [gazebo_scene_sync]: Published colored collision object: pacco_clone_0
+[gazebo_scene_sync.py-27] [INFO] [1757425053.204065651] [gazebo_scene_sync]: Published colored collision object: pacco_clone_1
+[gazebo_scene_sync.py-27] [INFO] [1757425053.207427742] [gazebo_scene_sync]: Published colored collision object: pacco_clone_2
+[gazebo_scene_sync.py-27] [INFO] [1757425053.215026279] [gazebo_scene_sync]: Published collision object: muraUse1
+[gazebo_scene_sync.py-27] [INFO] [1757425053.216057519] [gazebo_scene_sync]: Model left_robot not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425053.217084917] [gazebo_scene_sync]: Model right_robot not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425053.221454459] [gazebo_scene_sync]: Model ground_plane::link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425053.222639287] [gazebo_scene_sync]: Model pallet2::pallet_base not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425053.223746645] [gazebo_scene_sync]: Model aws_robomaker_warehouse_GroundB_01_0::link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425053.224835384] [gazebo_scene_sync]: Model target_plane::link_0 not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425053.226763499] [gazebo_scene_sync]: Published collision object: pacco
+[gazebo_scene_sync.py-27] [INFO] [1757425053.229584545] [gazebo_scene_sync]: Published collision object: pacco_clone
+[gazebo_scene_sync.py-27] [INFO] [1757425053.234348663] [gazebo_scene_sync]: Published collision object: pacco_clone_0
+[gazebo_scene_sync.py-27] [INFO] [1757425053.236608249] [gazebo_scene_sync]: Published collision object: pacco_clone_1
+[gazebo_scene_sync.py-27] [INFO] [1757425053.238703287] [gazebo_scene_sync]: Published collision object: pacco_clone_2
+[gazebo_scene_sync.py-27] [INFO] [1757425053.239528431] [gazebo_scene_sync]: Model muraUse1::link_0 not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425053.240797630] [gazebo_scene_sync]: Model left_robot::left_summit_base_footprint not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425053.243062447] [gazebo_scene_sync]: Model left_robot::left_summit_back_left_wheel_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425053.244492706] [gazebo_scene_sync]: Model left_robot::left_summit_back_right_wheel_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425053.245394965] [gazebo_scene_sync]: Model left_robot::left_summit_front_left_wheel_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425053.246634737] [gazebo_scene_sync]: Model left_robot::left_summit_front_right_wheel_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425053.247909965] [gazebo_scene_sync]: Model left_robot::ur_left_shoulder_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425053.248831908] [gazebo_scene_sync]: Model left_robot::ur_left_upper_arm_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425053.249719880] [gazebo_scene_sync]: Model left_robot::ur_left_forearm_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425053.251079709] [gazebo_scene_sync]: Model left_robot::ur_left_wrist_1_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425053.252244217] [gazebo_scene_sync]: Model left_robot::ur_left_wrist_2_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425053.253212020] [gazebo_scene_sync]: Model left_robot::ur_left_wrist_3_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425053.254104229] [gazebo_scene_sync]: Model right_robot::right_summit_base_footprint not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425053.255168521] [gazebo_scene_sync]: Model right_robot::right_summit_back_left_wheel_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425053.256368119] [gazebo_scene_sync]: Model right_robot::right_summit_back_right_wheel_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425053.257530446] [gazebo_scene_sync]: Model right_robot::right_summit_front_left_wheel_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425053.258587847] [gazebo_scene_sync]: Model right_robot::right_summit_front_right_wheel_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425053.260739365] [gazebo_scene_sync]: Model right_robot::ur_right_shoulder_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425053.262110745] [gazebo_scene_sync]: Model right_robot::ur_right_upper_arm_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425053.263403774] [gazebo_scene_sync]: Model right_robot::ur_right_forearm_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425053.264779374] [gazebo_scene_sync]: Model right_robot::ur_right_wrist_1_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425053.265754595] [gazebo_scene_sync]: Model right_robot::ur_right_wrist_2_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425053.266778683] [gazebo_scene_sync]: Model right_robot::ur_right_wrist_3_link not handled in callback.
+[move_group-20] [WARN] [1757425053.557446591] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: The complete state of the robot is not yet known.  Missing left_summit_back_left_wheel_joint, left_summit_back_right_wheel_joint, left_summit_front_left_wheel_joint, left_summit_front_right_wheel_joint, right_summit_back_left_wheel_joint, right_summit_back_right_wheel_joint, right_summit_front_left_wheel_joint, right_summit_front_right_wheel_joint
+[gazebo_scene_sync.py-27] [INFO] [1757425053.912720518] [gazebo_scene_sync]: Model ground_plane not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425054.182319629] [gazebo_scene_sync]: Published colored collision object: pallet2
+[gazebo_scene_sync.py-27] [INFO] [1757425054.187114662] [gazebo_scene_sync]: Published colored collision object: warehouse_ground
+[gazebo_scene_sync.py-27] [INFO] [1757425054.190212946] [gazebo_scene_sync]: Published collision object: target_plane
+[gazebo_scene_sync.py-27] [INFO] [1757425054.194006007] [gazebo_scene_sync]: Published colored collision object: pacco
+[gazebo_scene_sync.py-27] [INFO] [1757425054.197862822] [gazebo_scene_sync]: Published colored collision object: pacco_clone
+[gazebo_scene_sync.py-27] [INFO] [1757425054.200948973] [gazebo_scene_sync]: Published colored collision object: pacco_clone_0
+[gazebo_scene_sync.py-27] [INFO] [1757425054.205026512] [gazebo_scene_sync]: Published colored collision object: pacco_clone_1
+[gazebo_scene_sync.py-27] [INFO] [1757425054.207771302] [gazebo_scene_sync]: Published colored collision object: pacco_clone_2
+[gazebo_scene_sync.py-27] [INFO] [1757425054.215565992] [gazebo_scene_sync]: Published collision object: muraUse1
+[gazebo_scene_sync.py-27] [INFO] [1757425054.217253559] [gazebo_scene_sync]: Model left_robot not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425054.217967408] [gazebo_scene_sync]: Model right_robot not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425054.221221635] [gazebo_scene_sync]: Model ground_plane::link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425054.221968522] [gazebo_scene_sync]: Model pallet2::pallet_base not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425054.222611019] [gazebo_scene_sync]: Model aws_robomaker_warehouse_GroundB_01_0::link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425054.223330556] [gazebo_scene_sync]: Model target_plane::link_0 not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425054.224799017] [gazebo_scene_sync]: Published collision object: pacco
+[gazebo_scene_sync.py-27] [INFO] [1757425054.226191719] [gazebo_scene_sync]: Published collision object: pacco_clone
+[gazebo_scene_sync.py-27] [INFO] [1757425054.227393194] [gazebo_scene_sync]: Published collision object: pacco_clone_0
+[gazebo_scene_sync.py-27] [INFO] [1757425054.228646817] [gazebo_scene_sync]: Published collision object: pacco_clone_1
+[gazebo_scene_sync.py-27] [INFO] [1757425054.229995620] [gazebo_scene_sync]: Published collision object: pacco_clone_2
+[gazebo_scene_sync.py-27] [INFO] [1757425054.230684380] [gazebo_scene_sync]: Model muraUse1::link_0 not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425054.231456593] [gazebo_scene_sync]: Model left_robot::left_summit_base_footprint not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425054.232365150] [gazebo_scene_sync]: Model left_robot::left_summit_back_left_wheel_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425054.233329185] [gazebo_scene_sync]: Model left_robot::left_summit_back_right_wheel_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425054.234399013] [gazebo_scene_sync]: Model left_robot::left_summit_front_left_wheel_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425054.235421433] [gazebo_scene_sync]: Model left_robot::left_summit_front_right_wheel_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425054.236463181] [gazebo_scene_sync]: Model left_robot::ur_left_shoulder_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425054.237431117] [gazebo_scene_sync]: Model left_robot::ur_left_upper_arm_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425054.238562962] [gazebo_scene_sync]: Model left_robot::ur_left_forearm_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425054.239600228] [gazebo_scene_sync]: Model left_robot::ur_left_wrist_1_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425054.240682369] [gazebo_scene_sync]: Model left_robot::ur_left_wrist_2_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425054.241712839] [gazebo_scene_sync]: Model left_robot::ur_left_wrist_3_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425054.242655240] [gazebo_scene_sync]: Model right_robot::right_summit_base_footprint not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425054.243311994] [gazebo_scene_sync]: Model right_robot::right_summit_back_left_wheel_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425054.244413856] [gazebo_scene_sync]: Model right_robot::right_summit_back_right_wheel_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425054.245289745] [gazebo_scene_sync]: Model right_robot::right_summit_front_left_wheel_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425054.246575285] [gazebo_scene_sync]: Model right_robot::right_summit_front_right_wheel_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425054.247718834] [gazebo_scene_sync]: Model right_robot::ur_right_shoulder_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425054.249055450] [gazebo_scene_sync]: Model right_robot::ur_right_upper_arm_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425054.250094125] [gazebo_scene_sync]: Model right_robot::ur_right_forearm_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425054.251052685] [gazebo_scene_sync]: Model right_robot::ur_right_wrist_1_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425054.252051165] [gazebo_scene_sync]: Model right_robot::ur_right_wrist_2_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425054.252748589] [gazebo_scene_sync]: Model right_robot::ur_right_wrist_3_link not handled in callback.
+[move_group-20] [WARN] [1757425054.557835234] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: The complete state of the robot is not yet known.  Missing left_summit_back_left_wheel_joint, left_summit_back_right_wheel_joint, left_summit_front_left_wheel_joint, left_summit_front_right_wheel_joint, right_summit_back_left_wheel_joint, right_summit_back_right_wheel_joint, right_summit_front_left_wheel_joint, right_summit_front_right_wheel_joint
+[gazebo_scene_sync.py-27] [INFO] [1757425055.170126216] [gazebo_scene_sync]: Model ground_plane not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425055.537076264] [gazebo_scene_sync]: Published colored collision object: pallet2
+[gazebo_scene_sync.py-27] [INFO] [1757425055.540687365] [gazebo_scene_sync]: Published colored collision object: warehouse_ground
+[gazebo_scene_sync.py-27] [INFO] [1757425055.542187845] [gazebo_scene_sync]: Published collision object: target_plane
+[gazebo_scene_sync.py-27] [INFO] [1757425055.544474842] [gazebo_scene_sync]: Published colored collision object: pacco
+[gazebo_scene_sync.py-27] [INFO] [1757425055.546669801] [gazebo_scene_sync]: Published colored collision object: pacco_clone
+[gazebo_scene_sync.py-27] [INFO] [1757425055.548779105] [gazebo_scene_sync]: Published colored collision object: pacco_clone_0
+[gazebo_scene_sync.py-27] [INFO] [1757425055.551042969] [gazebo_scene_sync]: Published colored collision object: pacco_clone_1
+[gazebo_scene_sync.py-27] [INFO] [1757425055.553102473] [gazebo_scene_sync]: Published colored collision object: pacco_clone_2
+[gazebo_scene_sync.py-27] [INFO] [1757425055.560426262] [gazebo_scene_sync]: Published collision object: muraUse1
+[gazebo_scene_sync.py-27] [INFO] [1757425055.562123909] [gazebo_scene_sync]: Model left_robot not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425055.563295813] [gazebo_scene_sync]: Model right_robot not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425055.567740266] [gazebo_scene_sync]: Model ground_plane::link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425055.568899620] [gazebo_scene_sync]: Model pallet2::pallet_base not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425055.569998870] [gazebo_scene_sync]: Model aws_robomaker_warehouse_GroundB_01_0::link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425055.571097220] [gazebo_scene_sync]: Model target_plane::link_0 not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425055.573259943] [gazebo_scene_sync]: Published collision object: pacco
+[gazebo_scene_sync.py-27] [INFO] [1757425055.575317380] [gazebo_scene_sync]: Published collision object: pacco_clone
+[gazebo_scene_sync.py-27] [INFO] [1757425055.576989077] [gazebo_scene_sync]: Published collision object: pacco_clone_0
+[gazebo_scene_sync.py-27] [INFO] [1757425055.578841235] [gazebo_scene_sync]: Published collision object: pacco_clone_1
+[gazebo_scene_sync.py-27] [INFO] [1757425055.580362606] [gazebo_scene_sync]: Published collision object: pacco_clone_2
+[gazebo_scene_sync.py-27] [INFO] [1757425055.581004574] [gazebo_scene_sync]: Model muraUse1::link_0 not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425055.581606396] [gazebo_scene_sync]: Model left_robot::left_summit_base_footprint not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425055.582211778] [gazebo_scene_sync]: Model left_robot::left_summit_back_left_wheel_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425055.582822508] [gazebo_scene_sync]: Model left_robot::left_summit_back_right_wheel_link not handled in callback.
+[move_group-20] [WARN] [1757425055.582668881] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: The complete state of the robot is not yet known.  Missing left_summit_back_left_wheel_joint, left_summit_back_right_wheel_joint, left_summit_front_left_wheel_joint, left_summit_front_right_wheel_joint, right_summit_back_left_wheel_joint, right_summit_back_right_wheel_joint, right_summit_front_left_wheel_joint, right_summit_front_right_wheel_joint
+[gazebo_scene_sync.py-27] [INFO] [1757425055.583578815] [gazebo_scene_sync]: Model left_robot::left_summit_front_left_wheel_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425055.584277599] [gazebo_scene_sync]: Model left_robot::left_summit_front_right_wheel_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425055.584949662] [gazebo_scene_sync]: Model left_robot::ur_left_shoulder_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425055.585561689] [gazebo_scene_sync]: Model left_robot::ur_left_upper_arm_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425055.586154641] [gazebo_scene_sync]: Model left_robot::ur_left_forearm_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425055.586894245] [gazebo_scene_sync]: Model left_robot::ur_left_wrist_1_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425055.587503308] [gazebo_scene_sync]: Model left_robot::ur_left_wrist_2_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425055.588314249] [gazebo_scene_sync]: Model left_robot::ur_left_wrist_3_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425055.589000184] [gazebo_scene_sync]: Model right_robot::right_summit_base_footprint not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425055.589618102] [gazebo_scene_sync]: Model right_robot::right_summit_back_left_wheel_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425055.590266928] [gazebo_scene_sync]: Model right_robot::right_summit_back_right_wheel_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425055.590851928] [gazebo_scene_sync]: Model right_robot::right_summit_front_left_wheel_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425055.591476692] [gazebo_scene_sync]: Model right_robot::right_summit_front_right_wheel_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425055.592103558] [gazebo_scene_sync]: Model right_robot::ur_right_shoulder_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425055.592723455] [gazebo_scene_sync]: Model right_robot::ur_right_upper_arm_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425055.593628439] [gazebo_scene_sync]: Model right_robot::ur_right_forearm_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425055.594700800] [gazebo_scene_sync]: Model right_robot::ur_right_wrist_1_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425055.595762950] [gazebo_scene_sync]: Model right_robot::ur_right_wrist_2_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425055.596909746] [gazebo_scene_sync]: Model right_robot::ur_right_wrist_3_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425056.513151310] [gazebo_scene_sync]: Model ground_plane not handled in callback.
+[move_group-20] [WARN] [1757425056.628941817] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: The complete state of the robot is not yet known.  Missing left_summit_back_left_wheel_joint, left_summit_back_right_wheel_joint, left_summit_front_left_wheel_joint, left_summit_front_right_wheel_joint, right_summit_back_left_wheel_joint, right_summit_back_right_wheel_joint, right_summit_front_left_wheel_joint, right_summit_front_right_wheel_joint
+[gazebo_scene_sync.py-27] [INFO] [1757425056.812763520] [gazebo_scene_sync]: Published colored collision object: pallet2
+[gazebo_scene_sync.py-27] [INFO] [1757425056.819671205] [gazebo_scene_sync]: Published colored collision object: warehouse_ground
+[gazebo_scene_sync.py-27] [INFO] [1757425056.821598074] [gazebo_scene_sync]: Published collision object: target_plane
+[gazebo_scene_sync.py-27] [INFO] [1757425056.824668225] [gazebo_scene_sync]: Published colored collision object: pacco
+[gazebo_scene_sync.py-27] [INFO] [1757425056.827667957] [gazebo_scene_sync]: Published colored collision object: pacco_clone
+[gazebo_scene_sync.py-27] [INFO] [1757425056.830657642] [gazebo_scene_sync]: Published colored collision object: pacco_clone_0
+[gazebo_scene_sync.py-27] [INFO] [1757425056.833832465] [gazebo_scene_sync]: Published colored collision object: pacco_clone_1
+[gazebo_scene_sync.py-27] [INFO] [1757425056.836316165] [gazebo_scene_sync]: Published colored collision object: pacco_clone_2
+[gazebo_scene_sync.py-27] [INFO] [1757425056.843051819] [gazebo_scene_sync]: Published collision object: muraUse1
+[gazebo_scene_sync.py-27] [INFO] [1757425056.845350699] [gazebo_scene_sync]: Model left_robot not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425056.846480170] [gazebo_scene_sync]: Model right_robot not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425056.850011891] [gazebo_scene_sync]: Model ground_plane::link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425056.851070642] [gazebo_scene_sync]: Model pallet2::pallet_base not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425056.852178492] [gazebo_scene_sync]: Model aws_robomaker_warehouse_GroundB_01_0::link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425056.853252478] [gazebo_scene_sync]: Model target_plane::link_0 not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425056.855040611] [gazebo_scene_sync]: Published collision object: pacco
+[gazebo_scene_sync.py-27] [INFO] [1757425056.856800206] [gazebo_scene_sync]: Published collision object: pacco_clone
+[gazebo_scene_sync.py-27] [INFO] [1757425056.858528337] [gazebo_scene_sync]: Published collision object: pacco_clone_0
+[gazebo_scene_sync.py-27] [INFO] [1757425056.860318284] [gazebo_scene_sync]: Published collision object: pacco_clone_1
+[gazebo_scene_sync.py-27] [INFO] [1757425056.861857661] [gazebo_scene_sync]: Published collision object: pacco_clone_2
+[gazebo_scene_sync.py-27] [INFO] [1757425056.862941761] [gazebo_scene_sync]: Model muraUse1::link_0 not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425056.864043576] [gazebo_scene_sync]: Model left_robot::left_summit_base_footprint not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425056.865142192] [gazebo_scene_sync]: Model left_robot::left_summit_back_left_wheel_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425056.866262347] [gazebo_scene_sync]: Model left_robot::left_summit_back_right_wheel_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425056.867360625] [gazebo_scene_sync]: Model left_robot::left_summit_front_left_wheel_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425056.868466363] [gazebo_scene_sync]: Model left_robot::left_summit_front_right_wheel_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425056.869562298] [gazebo_scene_sync]: Model left_robot::ur_left_shoulder_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425056.870686341] [gazebo_scene_sync]: Model left_robot::ur_left_upper_arm_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425056.871826000] [gazebo_scene_sync]: Model left_robot::ur_left_forearm_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425056.872831269] [gazebo_scene_sync]: Model left_robot::ur_left_wrist_1_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425056.873843024] [gazebo_scene_sync]: Model left_robot::ur_left_wrist_2_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425056.874868991] [gazebo_scene_sync]: Model left_robot::ur_left_wrist_3_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425056.875906590] [gazebo_scene_sync]: Model right_robot::right_summit_base_footprint not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425056.876735093] [gazebo_scene_sync]: Model right_robot::right_summit_back_left_wheel_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425056.877637569] [gazebo_scene_sync]: Model right_robot::right_summit_back_right_wheel_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425056.878584471] [gazebo_scene_sync]: Model right_robot::right_summit_front_left_wheel_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425056.879651678] [gazebo_scene_sync]: Model right_robot::right_summit_front_right_wheel_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425056.880396015] [gazebo_scene_sync]: Model right_robot::ur_right_shoulder_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425056.881160216] [gazebo_scene_sync]: Model right_robot::ur_right_upper_arm_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425056.881877247] [gazebo_scene_sync]: Model right_robot::ur_right_forearm_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425056.882725136] [gazebo_scene_sync]: Model right_robot::ur_right_wrist_1_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425056.883445904] [gazebo_scene_sync]: Model right_robot::ur_right_wrist_2_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425056.884504885] [gazebo_scene_sync]: Model right_robot::ur_right_wrist_3_link not handled in callback.
+[move_group-20] [WARN] [1757425057.659230165] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: The complete state of the robot is not yet known.  Missing left_summit_back_left_wheel_joint, left_summit_back_right_wheel_joint, left_summit_front_left_wheel_joint, left_summit_front_right_wheel_joint, right_summit_back_left_wheel_joint, right_summit_back_right_wheel_joint, right_summit_front_left_wheel_joint, right_summit_front_right_wheel_joint
+[gazebo_scene_sync.py-27] [INFO] [1757425057.732802382] [gazebo_scene_sync]: Model ground_plane not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425057.994482428] [gazebo_scene_sync]: Published colored collision object: pallet2
+[gazebo_scene_sync.py-27] [INFO] [1757425057.999846024] [gazebo_scene_sync]: Published colored collision object: warehouse_ground
+[gazebo_scene_sync.py-27] [INFO] [1757425058.002011990] [gazebo_scene_sync]: Published collision object: target_plane
+[gazebo_scene_sync.py-27] [INFO] [1757425058.005486104] [gazebo_scene_sync]: Published colored collision object: pacco
+[gazebo_scene_sync.py-27] [INFO] [1757425058.008456125] [gazebo_scene_sync]: Published colored collision object: pacco_clone
+[gazebo_scene_sync.py-27] [INFO] [1757425058.011210991] [gazebo_scene_sync]: Published colored collision object: pacco_clone_0
+[gazebo_scene_sync.py-27] [INFO] [1757425058.013905744] [gazebo_scene_sync]: Published colored collision object: pacco_clone_1
+[gazebo_scene_sync.py-27] [INFO] [1757425058.017632226] [gazebo_scene_sync]: Published colored collision object: pacco_clone_2
+[gazebo_scene_sync.py-27] [INFO] [1757425058.027762465] [gazebo_scene_sync]: Published collision object: muraUse1
+[gazebo_scene_sync.py-27] [INFO] [1757425058.030574797] [gazebo_scene_sync]: Model left_robot not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425058.031644688] [gazebo_scene_sync]: Model right_robot not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425058.036003722] [gazebo_scene_sync]: Model ground_plane::link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425058.037562895] [gazebo_scene_sync]: Model pallet2::pallet_base not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425058.038920922] [gazebo_scene_sync]: Model aws_robomaker_warehouse_GroundB_01_0::link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425058.039836421] [gazebo_scene_sync]: Model target_plane::link_0 not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425058.041532880] [gazebo_scene_sync]: Published collision object: pacco
+[gazebo_scene_sync.py-27] [INFO] [1757425058.043222337] [gazebo_scene_sync]: Published collision object: pacco_clone
+[gazebo_scene_sync.py-27] [INFO] [1757425058.045240856] [gazebo_scene_sync]: Published collision object: pacco_clone_0
+[gazebo_scene_sync.py-27] [INFO] [1757425058.046979070] [gazebo_scene_sync]: Published collision object: pacco_clone_1
+[gazebo_scene_sync.py-27] [INFO] [1757425058.048674817] [gazebo_scene_sync]: Published collision object: pacco_clone_2
+[gazebo_scene_sync.py-27] [INFO] [1757425058.049848875] [gazebo_scene_sync]: Model muraUse1::link_0 not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425058.051094745] [gazebo_scene_sync]: Model left_robot::left_summit_base_footprint not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425058.052302435] [gazebo_scene_sync]: Model left_robot::left_summit_back_left_wheel_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425058.053402643] [gazebo_scene_sync]: Model left_robot::left_summit_back_right_wheel_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425058.054624487] [gazebo_scene_sync]: Model left_robot::left_summit_front_left_wheel_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425058.055714773] [gazebo_scene_sync]: Model left_robot::left_summit_front_right_wheel_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425058.056798812] [gazebo_scene_sync]: Model left_robot::ur_left_shoulder_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425058.057878051] [gazebo_scene_sync]: Model left_robot::ur_left_upper_arm_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425058.058936530] [gazebo_scene_sync]: Model left_robot::ur_left_forearm_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425058.060257749] [gazebo_scene_sync]: Model left_robot::ur_left_wrist_1_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425058.061349168] [gazebo_scene_sync]: Model left_robot::ur_left_wrist_2_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425058.062573890] [gazebo_scene_sync]: Model left_robot::ur_left_wrist_3_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425058.063783788] [gazebo_scene_sync]: Model right_robot::right_summit_base_footprint not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425058.064987735] [gazebo_scene_sync]: Model right_robot::right_summit_back_left_wheel_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425058.066180625] [gazebo_scene_sync]: Model right_robot::right_summit_back_right_wheel_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425058.067384310] [gazebo_scene_sync]: Model right_robot::right_summit_front_left_wheel_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425058.068560186] [gazebo_scene_sync]: Model right_robot::right_summit_front_right_wheel_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425058.069638509] [gazebo_scene_sync]: Model right_robot::ur_right_shoulder_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425058.071121459] [gazebo_scene_sync]: Model right_robot::ur_right_upper_arm_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425058.072343855] [gazebo_scene_sync]: Model right_robot::ur_right_forearm_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425058.073429256] [gazebo_scene_sync]: Model right_robot::ur_right_wrist_1_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425058.074538667] [gazebo_scene_sync]: Model right_robot::ur_right_wrist_2_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425058.077671101] [gazebo_scene_sync]: Model right_robot::ur_right_wrist_3_link not handled in callback.
+[move_group-20] [WARN] [1757425058.691005621] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: The complete state of the robot is not yet known.  Missing left_summit_back_left_wheel_joint, left_summit_back_right_wheel_joint, left_summit_front_left_wheel_joint, left_summit_front_right_wheel_joint, right_summit_back_left_wheel_joint, right_summit_back_right_wheel_joint, right_summit_front_left_wheel_joint, right_summit_front_right_wheel_joint
+[gazebo_scene_sync.py-27] [INFO] [1757425058.958058656] [gazebo_scene_sync]: Model ground_plane not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425059.281354340] [gazebo_scene_sync]: Published colored collision object: pallet2
+[gazebo_scene_sync.py-27] [INFO] [1757425059.288283021] [gazebo_scene_sync]: Published colored collision object: warehouse_ground
+[gazebo_scene_sync.py-27] [INFO] [1757425059.289769000] [gazebo_scene_sync]: Published collision object: target_plane
+[gazebo_scene_sync.py-27] [INFO] [1757425059.291774730] [gazebo_scene_sync]: Published colored collision object: pacco
+[gazebo_scene_sync.py-27] [INFO] [1757425059.294053423] [gazebo_scene_sync]: Published colored collision object: pacco_clone
+[gazebo_scene_sync.py-27] [INFO] [1757425059.296823670] [gazebo_scene_sync]: Published colored collision object: pacco_clone_0
+[gazebo_scene_sync.py-27] [INFO] [1757425059.298926655] [gazebo_scene_sync]: Published colored collision object: pacco_clone_1
+[gazebo_scene_sync.py-27] [INFO] [1757425059.300959276] [gazebo_scene_sync]: Published colored collision object: pacco_clone_2
+[gazebo_scene_sync.py-27] [INFO] [1757425059.308712525] [gazebo_scene_sync]: Published collision object: muraUse1
+[gazebo_scene_sync.py-27] [INFO] [1757425059.309951794] [gazebo_scene_sync]: Model left_robot not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425059.310715499] [gazebo_scene_sync]: Model right_robot not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425059.314336923] [gazebo_scene_sync]: Model ground_plane::link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425059.315037910] [gazebo_scene_sync]: Model pallet2::pallet_base not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425059.315667501] [gazebo_scene_sync]: Model aws_robomaker_warehouse_GroundB_01_0::link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425059.316670423] [gazebo_scene_sync]: Model target_plane::link_0 not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425059.319473216] [gazebo_scene_sync]: Published collision object: pacco
+[gazebo_scene_sync.py-27] [INFO] [1757425059.322115244] [gazebo_scene_sync]: Published collision object: pacco_clone
+[gazebo_scene_sync.py-27] [INFO] [1757425059.325628587] [gazebo_scene_sync]: Published collision object: pacco_clone_0
+[gazebo_scene_sync.py-27] [INFO] [1757425059.327583852] [gazebo_scene_sync]: Published collision object: pacco_clone_1
+[gazebo_scene_sync.py-27] [INFO] [1757425059.329336172] [gazebo_scene_sync]: Published collision object: pacco_clone_2
+[gazebo_scene_sync.py-27] [INFO] [1757425059.330484725] [gazebo_scene_sync]: Model muraUse1::link_0 not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425059.331541466] [gazebo_scene_sync]: Model left_robot::left_summit_base_footprint not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425059.332691402] [gazebo_scene_sync]: Model left_robot::left_summit_back_left_wheel_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425059.333839823] [gazebo_scene_sync]: Model left_robot::left_summit_back_right_wheel_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425059.335115057] [gazebo_scene_sync]: Model left_robot::left_summit_front_left_wheel_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425059.336421990] [gazebo_scene_sync]: Model left_robot::left_summit_front_right_wheel_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425059.337673379] [gazebo_scene_sync]: Model left_robot::ur_left_shoulder_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425059.338960448] [gazebo_scene_sync]: Model left_robot::ur_left_upper_arm_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425059.340230888] [gazebo_scene_sync]: Model left_robot::ur_left_forearm_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425059.341623549] [gazebo_scene_sync]: Model left_robot::ur_left_wrist_1_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425059.342713516] [gazebo_scene_sync]: Model left_robot::ur_left_wrist_2_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425059.343754804] [gazebo_scene_sync]: Model left_robot::ur_left_wrist_3_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425059.344943352] [gazebo_scene_sync]: Model right_robot::right_summit_base_footprint not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425059.346154953] [gazebo_scene_sync]: Model right_robot::right_summit_back_left_wheel_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425059.347299487] [gazebo_scene_sync]: Model right_robot::right_summit_back_right_wheel_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425059.348381725] [gazebo_scene_sync]: Model right_robot::right_summit_front_left_wheel_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425059.349543078] [gazebo_scene_sync]: Model right_robot::right_summit_front_right_wheel_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425059.350671056] [gazebo_scene_sync]: Model right_robot::ur_right_shoulder_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425059.351749827] [gazebo_scene_sync]: Model right_robot::ur_right_upper_arm_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425059.352918678] [gazebo_scene_sync]: Model right_robot::ur_right_forearm_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425059.354088878] [gazebo_scene_sync]: Model right_robot::ur_right_wrist_1_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425059.355234292] [gazebo_scene_sync]: Model right_robot::ur_right_wrist_2_link not handled in callback.
+[gazebo_scene_sync.py-27] [INFO] [1757425059.356435433] [gazebo_scene_sync]: Model right_robot::ur_right_wrist_3_link not handled in callback.
+[move_group-20] [WARN] [1757425059.724555225] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: The complete state of the robot is not yet known.  Missing left_summit_back_left_wheel_joint, left_summit_back_right_wheel_joint, left_summit_front_left_wheel_joint, left_summit_front_right_wheel_joint, right_summit_back_left_wheel_joint, right_summit_back_right_wheel_joint, right_summit_front_left_wheel_joint, right_summit_front_right_wheel_joint
+[gazebo_scene_sync.py-27] [INFO] [1757425060.223280126] [gazebo_scene_sync]: Model ground_plane not handled in callback.
+[WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+[static_transform_publisher-24] [INFO] [1757425060.235351368] [rclcpp]: signal_handler(signum=2)
+[static_transform_publisher-22] [INFO] [1757425060.235352874] [rclcpp]: signal_handler(signum=2)
+[static_transform_publisher-23] [INFO] [1757425060.235348080] [rclcpp]: signal_handler(signum=2)
+[static_transform_publisher-21] [INFO] [1757425060.235401737] [rclcpp]: signal_handler(signum=2)
+[static_transform_publisher-8] [INFO] [1757425060.235401922] [rclcpp]: signal_handler(signum=2)
+[static_transform_publisher-14] [INFO] [1757425060.235423366] [rclcpp]: signal_handler(signum=2)
+[static_transform_publisher-7] [INFO] [1757425060.235436075] [rclcpp]: signal_handler(signum=2)
+[static_transform_publisher-16] [INFO] [1757425060.235438445] [rclcpp]: signal_handler(signum=2)
+[static_transform_publisher-15] [INFO] [1757425060.235467448] [rclcpp]: signal_handler(signum=2)
+[static_transform_publisher-5] [INFO] [1757425060.235481194] [rclcpp]: signal_handler(signum=2)
+[static_transform_publisher-13] [INFO] [1757425060.235523426] [rclcpp]: signal_handler(signum=2)
+[static_transform_publisher-6] [INFO] [1757425060.235555310] [rclcpp]: signal_handler(signum=2)
+[move_group-20] [INFO] [1757425060.235612073] [rclcpp]: signal_handler(signum=2)
+[robot_state_publisher-4] [INFO] [1757425060.242854831] [rclcpp]: signal_handler(signum=2)
+[rviz2-19] [INFO] [1757425060.243524130] [rclcpp]: signal_handler(signum=2)
+[robot_state_publisher-12] [INFO] [1757425060.248803953] [rclcpp]: signal_handler(signum=2)
+[joint_state_merger.py-26] Traceback (most recent call last):
+[joint_state_merger.py-26]   File "/ros2_ws/install/ur/lib/ur/joint_state_merger.py", line 46, in <module>
+[joint_state_merger.py-26]     main()
+[joint_state_merger.py-26]   File "/ros2_ws/install/ur/lib/ur/joint_state_merger.py", line 41, in main
+[joint_state_merger.py-26]     rclpy.spin(node)
+[joint_state_merger.py-26]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 226, in spin
+[joint_state_merger.py-26]     executor.spin_once()
+[joint_state_merger.py-26]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 751, in spin_once
+[joint_state_merger.py-26]     self._spin_once_impl(timeout_sec)
+[joint_state_merger.py-26]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 746, in _spin_once_impl
+[joint_state_merger.py-26]     handler()
+[joint_state_merger.py-26]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/task.py", line 254, in __call__
+[joint_state_merger.py-26]     self._handler.send(None)
+[joint_state_merger.py-26]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 447, in handler
+[joint_state_merger.py-26]     await call_coroutine(entity, arg)
+[joint_state_merger.py-26]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 361, in _execute_timer
+[joint_state_merger.py-26]     await await_or_execute(tmr.callback)
+[joint_state_merger.py-26]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 107, in await_or_execute
+[joint_state_merger.py-26]     return callback(*args)
+[joint_state_merger.py-26]   File "/ros2_ws/install/ur/lib/ur/joint_state_merger.py", line 32, in publish_merged
+[joint_state_merger.py-26]     merged.position = positions
+[joint_state_merger.py-26]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/sensor_msgs/msg/_joint_state.py", line 209, in position
+[joint_state_merger.py-26]     all(isinstance(v, float) for v in value) and
+[joint_state_merger.py-26]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/sensor_msgs/msg/_joint_state.py", line 209, in <genexpr>
+[joint_state_merger.py-26]     all(isinstance(v, float) for v in value) and
+[joint_state_merger.py-26] KeyboardInterrupt
+[gazebo_moveit_bridge.py-25] Traceback (most recent call last):
+[gazebo_moveit_bridge.py-25]   File "/ros2_ws/install/ur/lib/ur/gazebo_moveit_bridge.py", line 90, in main
+[gazebo_moveit_bridge.py-25]     rclpy.spin(node)
+[gazebo_moveit_bridge.py-25]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 226, in spin
+[gazebo_moveit_bridge.py-25]     executor.spin_once()
+[gazebo_moveit_bridge.py-25]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 751, in spin_once
+[gazebo_moveit_bridge.py-25]     self._spin_once_impl(timeout_sec)
+[gazebo_moveit_bridge.py-25]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 740, in _spin_once_impl
+[gazebo_moveit_bridge.py-25]     handler, entity, node = self.wait_for_ready_callbacks(timeout_sec=timeout_sec)
+[gazebo_moveit_bridge.py-25]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 723, in wait_for_ready_callbacks
+[gazebo_moveit_bridge.py-25]     return next(self._cb_iter)
+[gazebo_moveit_bridge.py-25]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 620, in _wait_for_ready_callbacks
+[gazebo_moveit_bridge.py-25]     wait_set.wait(timeout_nsec)
+[gazebo_moveit_bridge.py-25] KeyboardInterrupt
+[gazebo_moveit_bridge.py-25] 
+[gazebo_moveit_bridge.py-25] During handling of the above exception, another exception occurred:
+[gazebo_moveit_bridge.py-25] 
+[gazebo_moveit_bridge.py-25] Traceback (most recent call last):
+[gazebo_moveit_bridge.py-25]   File "/ros2_ws/install/ur/lib/ur/gazebo_moveit_bridge.py", line 96, in <module>
+[gazebo_moveit_bridge.py-25]     main()
+[gazebo_moveit_bridge.py-25]   File "/ros2_ws/install/ur/lib/ur/gazebo_moveit_bridge.py", line 93, in main
+[gazebo_moveit_bridge.py-25]     rclpy.shutdown()
+[gazebo_moveit_bridge.py-25]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 130, in shutdown
+[gazebo_moveit_bridge.py-25]     _shutdown(context=context)
+[gazebo_moveit_bridge.py-25]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/utilities.py", line 58, in shutdown
+[gazebo_moveit_bridge.py-25]     return context.shutdown()
+[gazebo_moveit_bridge.py-25]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/context.py", line 102, in shutdown
+[gazebo_moveit_bridge.py-25]     self.__context.shutdown()
+[gazebo_moveit_bridge.py-25] rclpy._rclpy_pybind11.RCLError: failed to shutdown: rcl_shutdown already called on the given context, at ./src/rcl/init.c:241
+[gazebo_scene_sync.py-27] Traceback (most recent call last):
+[gazebo_scene_sync.py-27]   File "/ros2_ws/install/ur/lib/ur/gazebo_scene_sync.py", line 301, in <module>
+[gazebo_scene_sync.py-27]     main()
+[gazebo_scene_sync.py-27]   File "/ros2_ws/install/ur/lib/ur/gazebo_scene_sync.py", line 296, in main
+[gazebo_scene_sync.py-27]     rclpy.spin(node)
+[gazebo_scene_sync.py-27]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 226, in spin
+[gazebo_scene_sync.py-27]     executor.spin_once()
+[gazebo_scene_sync.py-27]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 751, in spin_once
+[gazebo_scene_sync.py-27]     self._spin_once_impl(timeout_sec)
+[gazebo_scene_sync.py-27]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 746, in _spin_once_impl
+[gazebo_scene_sync.py-27]     handler()
+[gazebo_scene_sync.py-27]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/task.py", line 254, in __call__
+[gazebo_scene_sync.py-27]     self._handler.send(None)
+[gazebo_scene_sync.py-27]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 447, in handler
+[gazebo_scene_sync.py-27]     await call_coroutine(entity, arg)
+[gazebo_scene_sync.py-27]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 372, in _execute_subscription
+[gazebo_scene_sync.py-27]     await await_or_execute(sub.callback, msg)
+[gazebo_scene_sync.py-27]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 107, in await_or_execute
+[gazebo_scene_sync.py-27]     return callback(*args)
+[gazebo_scene_sync.py-27]   File "/ros2_ws/install/ur/lib/ur/gazebo_scene_sync.py", line 111, in model_states_callback
+[gazebo_scene_sync.py-27]     self.rviz_load_mesh(co, '/ros2_ws/install/ur/share/ur/xacro/./Models/pallet/meshes/pallet.dae')
+[gazebo_scene_sync.py-27]   File "/ros2_ws/install/ur/lib/ur/gazebo_scene_sync.py", line 57, in rviz_load_mesh
+[gazebo_scene_sync.py-27]     mesh = trimesh.load_mesh(mesh_path)
+[gazebo_scene_sync.py-27]   File "/usr/local/lib/python3.10/dist-packages/trimesh/exchange/load.py", line 276, in load_mesh
+[gazebo_scene_sync.py-27]     return load_scene(*args, **kwargs).to_mesh()
+[gazebo_scene_sync.py-27]   File "/usr/local/lib/python3.10/dist-packages/trimesh/exchange/load.py", line 216, in load_scene
+[gazebo_scene_sync.py-27]     mesh_loaders[arg.file_type](
+[gazebo_scene_sync.py-27]   File "/usr/local/lib/python3.10/dist-packages/trimesh/exchange/dae.py", line 52, in load_collada
+[gazebo_scene_sync.py-27]     c = collada.Collada(file_obj, ignore=ignores)
+[gazebo_scene_sync.py-27]   File "/usr/local/lib/python3.10/dist-packages/collada/__init__.py", line 231, in __init__
+[gazebo_scene_sync.py-27]     self._loadGeometry()
+[gazebo_scene_sync.py-27]   File "/usr/local/lib/python3.10/dist-packages/collada/__init__.py", line 314, in _loadGeometry
+[gazebo_scene_sync.py-27]     G = geometry.Geometry.load(self, {}, geomnode)
+[gazebo_scene_sync.py-27]   File "/usr/local/lib/python3.10/dist-packages/collada/geometry.py", line 180, in load
+[gazebo_scene_sync.py-27]     ch = source.Source.load(collada, {}, sourcenode)
+[gazebo_scene_sync.py-27]   File "/usr/local/lib/python3.10/dist-packages/collada/source.py", line 89, in load
+[gazebo_scene_sync.py-27]     return FloatSource.load(collada, localscope, node)
+[gazebo_scene_sync.py-27]   File "/usr/local/lib/python3.10/dist-packages/collada/source.py", line 201, in load
+[gazebo_scene_sync.py-27]     data = numpy.fromstring(arraynode.text, dtype=numpy.float32, sep=' ')
+[gazebo_scene_sync.py-27] KeyboardInterrupt
+[move_group-20] [INFO] [1757425060.375506867] [moveit.ros_planning_interface.moveit_cpp]: Deleting MoveItCpp
+[rviz2-19] [INFO] [1757425060.383439441] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Stopping planning scene monitor
+[INFO] [static_transform_publisher-14]: process has finished cleanly [pid 7157]
+[INFO] [static_transform_publisher-8]: process has finished cleanly [pid 7118]
+[INFO] [static_transform_publisher-24]: process has finished cleanly [pid 7383]
+[INFO] [static_transform_publisher-6]: process has finished cleanly [pid 7114]
+[INFO] [static_transform_publisher-16]: process has finished cleanly [pid 7178]
+[INFO] [static_transform_publisher-23]: process has finished cleanly [pid 7367]
+[INFO] [static_transform_publisher-15]: process has finished cleanly [pid 7170]
+[INFO] [robot_state_publisher-12]: process has finished cleanly [pid 7126]
+[INFO] [static_transform_publisher-7]: process has finished cleanly [pid 7116]
+[INFO] [static_transform_publisher-22]: process has finished cleanly [pid 7356]
+[INFO] [robot_state_publisher-4]: process has finished cleanly [pid 7110]
+[INFO] [static_transform_publisher-13]: process has finished cleanly [pid 7130]
+[INFO] [static_transform_publisher-5]: process has finished cleanly [pid 7112]
+[INFO] [static_transform_publisher-21]: process has finished cleanly [pid 7344]
+[ERROR] [joint_state_merger.py-26]: process has died [pid 7503, exit code -2, cmd '/ros2_ws/install/ur/lib/ur/joint_state_merger.py --ros-args -r __node:=joint_state_merger'].
+[move_group-20] [INFO] [1757425060.490416389] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Stopped publishing maintained planning scene.
+[move_group-20] [INFO] [1757425060.493031101] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Stopping world geometry monitor
+[move_group-20] [INFO] [1757425060.494774137] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Stopping planning scene monitor
+[move_group-20] Warning: class_loader.ClassLoader: SEVERE WARNING!!! Attempting to unload library while objects created by this loader exist in the heap! You should delete your objects before attempting to unload the library or destroying the ClassLoader. The library will NOT be unloaded.
+[move_group-20]          at line 127 in ./src/class_loader.cpp
+[ERROR] [gazebo_scene_sync.py-27]: process has died [pid 7524, exit code -2, cmd '/ros2_ws/install/ur/lib/ur/gazebo_scene_sync.py --ros-args -r __node:=gazebo_scene_sync'].
+[move_group-20] Stack trace (most recent call last):
+[move_group-20] #11   Object "", at 0xffffffffffffffff, in 
+[move_group-20] #10   Object "/ros2_ws/build/moveit_ros_move_group/move_group", at 0x563dee0faeb4, in _start
+[move_group-20] #9    Object "/usr/lib/x86_64-linux-gnu/libc.so.6", at 0x7f4880105e3f, in __libc_start_main
+[move_group-20] #8    Object "/usr/lib/x86_64-linux-gnu/libc.so.6", at 0x7f4880105d8f, in 
+[move_group-20] #7    Object "/ros2_ws/build/moveit_ros_move_group/move_group", at 0x563dee0fa483, in main
+[move_group-20] #6    Object "/ros2_ws/build/moveit_ros_move_group/move_group", at 0x563dee1019c1, in std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release()
+[move_group-20] #5    Object "/opt/ros/humble/lib/librclcpp.so", at 0x7f4880668ade, in rclcpp::Node::~Node()
+[move_group-20] #4    Object "/opt/ros/humble/lib/librclcpp.so", at 0x7f4880643d49, in 
+[move_group-20] #3    Object "/opt/ros/humble/lib/librclcpp.so", at 0x7f4880672189, in 
+[move_group-20] #2    Object "/opt/ros/humble/lib/librclcpp.so", at 0x7f48806720d0, in rclcpp::node_interfaces::NodeBase::~NodeBase()
+[move_group-20] #1    Object "/opt/ros/humble/lib/librclcpp.so", at 0x7f4880643d49, in 
+[move_group-20] #0    Object "/opt/ros/humble/lib/librclcpp.so", at 0x7f4880648ac1, in rclcpp::CallbackGroup::~CallbackGroup()
+[move_group-20] Segmentation fault (Address not mapped to object [0x7f48690ffc70])
+[ERROR] [gazebo_moveit_bridge.py-25]: process has died [pid 7459, exit code 1, cmd '/ros2_ws/install/ur/lib/ur/gazebo_moveit_bridge.py --ros-args -r __node:=gazebo_moveit_bridge'].
+[INFO] [rviz2-19]: process has finished cleanly [pid 7221]
+[ERROR] [move_group-20]: process has died [pid 7224, exit code -11, cmd '/ros2_ws/install/moveit_ros_move_group/lib/moveit_ros_move_group/move_group --ros-args --params-file /tmp/launch_params_mxopv_ij --params-file /tmp/launch_params_dpc6xwco --params-file /tmp/launch_params_hgk836xv --params-file /tmp/launch_params_4ljcjvxl --params-file /tmp/launch_params_xu9izznv'].
+[move_group-20] [0m
+[INFO] [gzserver-1]: process has finished cleanly [pid 7104]
+[ERROR] [gzclient-2]: process has died [pid 7106, exit code -11, cmd 'gzclient --gui-client-plugin=libgazebo_ros_eol_gui.so'].

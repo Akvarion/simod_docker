@@ -80,27 +80,21 @@ class MTCTaskNode{
 
 // This should set up an empty planning scene.
 void MTCTaskNode::setupPlanningScene(){
+  
   // Create a planning scene interface
   moveit::planning_interface::PlanningSceneInterface psi;
-
-  // Log the setup process
-  RCLCPP_INFO(LOGGER, "Setting up the planning scene...");
-  // Load the robot model (URDF and SRDF)
-  auto robot_description = node_->get_parameter("robot_description").as_string();
-    if (robot_description.empty()) {
-        RCLCPP_ERROR(LOGGER, "Robot description (URDF) is not loaded. Check your parameters.");
-        return;
-    }
-  // Optionally, you can load additional robot-specific parameters here
-  RCLCPP_INFO(LOGGER, "Robot description loaded successfully.");
+  // Synchronize the planning scene with the current state of the world
+  auto objects = psi.getObjects();
+  for (const auto& [id, obj] : objects) {
+      RCLCPP_INFO(LOGGER, "Object in planning scene: %s", id.c_str());
+  }
   
   // Create a PlanningScene message
-  moveit_msgs::msg::PlanningScene planning_scene_msg;
-  planning_scene_msg.is_diff = false; // Indicates that this is a diff update to the planning scene
+  // moveit_msgs::msg::PlanningScene planning_scene_msg;
+  // planning_scene_msg.is_diff = false; // Indicates that this is a diff update to the planning scene
   
   // Publish the planning scene
-  RCLCPP_INFO(LOGGER, "Publishing the planning scene...");
-  psi.applyPlanningScene(planning_scene_msg);
+
   RCLCPP_INFO(LOGGER, "Planning scene setup complete.");
 
 }
@@ -188,14 +182,14 @@ mtc::Task MTCTaskNode::createTask(){
   srdf_buffer.str("");
   
   //LOADING URDF LEFT, "HALF" OF THE DUAL ROBOT URDF
-  std::ifstream urdf_file_l("/ros2_ws/left_resolved.urdf");
+  std::ifstream urdf_file_l("/ros2_ws/left_resolved_paletta.urdf");
   std::stringstream urdf_buffer;
   urdf_buffer << urdf_file_l.rdbuf();
   std::string urdf_string_l = urdf_buffer.str();
   // Reset stringstream for reuse
   urdf_buffer.str("");
 
-  //PARSING
+  //PARSING LEFT URDF
   RCLCPP_INFO(LOGGER, "Parsing left URDF...");
   urdf::ModelInterfaceSharedPtr urdf_model_left = urdf::parseURDF(urdf_string_l);
   RCLCPP_INFO(LOGGER, "Parsing complete.");
@@ -210,7 +204,7 @@ mtc::Task MTCTaskNode::createTask(){
     RCLCPP_ERROR(LOGGER, "LEFT SRDF INITIALIZATION FAILED.");
   }
 
-  // Build the MoveIt RobotModel
+  // Build the MoveIt RobotModel for left robotS
   RCLCPP_INFO(LOGGER, "CREATING LEFT ROBOT MODEL...");
   moveit::core::RobotModelPtr left_robot_model = std::make_shared<moveit::core::RobotModel>(urdf_model_left, srdf_model_left);
   RCLCPP_INFO(LOGGER, "LEFT ROBOT MODEL CREATED.");
@@ -229,7 +223,7 @@ mtc::Task MTCTaskNode::createTask(){
   std::string srdf_string_r = srdf_buffer.str();
 
   // LOADING URDF RIGHT, "HALF" OF THE DUAL ROBOT URDF
-  std::ifstream urdf_file_r("/ros2_ws/right_resolved.urdf");
+  std::ifstream urdf_file_r("/ros2_ws/right_resolved_paletta.urdf");
   urdf_buffer << urdf_file_r.rdbuf();
   std::string urdf_string_r = urdf_buffer.str();
 

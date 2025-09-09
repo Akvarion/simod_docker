@@ -33,7 +33,7 @@
         <joint name="ur_right_wrist_2_joint"/>
         <joint name="ur_right_wrist_3_joint"/>
         <joint name="ur_right_base_link-base_link_inertia"/>
-        <chain base_link="ur_right_base_link_inertia" tip_link="ur_right_wrist_3_link"/>
+        <chain base_link="ur_right_base_link_inertia" tip_link="ur_right_tool0"/>
     </group>
 
     <group name="srm_base_l">
@@ -45,16 +45,22 @@
         <joint name="left_summit_front_right_wheel_joint"/>
     </group>
     <group name="srm_l_ur">
-        <joint name="ur_left_base_link-base_link_inertia"/>
         <joint name="ur_left_shoulder_pan_joint"/>
         <joint name="ur_left_shoulder_lift_joint"/>
         <joint name="ur_left_elbow_joint"/>
         <joint name="ur_left_wrist_1_joint"/>
         <joint name="ur_left_wrist_2_joint"/>
         <joint name="ur_left_wrist_3_joint"/>
-        <chain base_link="ur_left_base_link_inertia" tip_link="ur_left_wrist_3_link"/>
+        <joint name="ur_left_base_link-base_link_inertia"/>
+        <chain base_link="ur_left_base_link_inertia" tip_link="ur_left_tool0"/>
     </group>
-    
+    <group name="srm_r_ee">
+        <link name="ur_right_paletta"/>
+    </group>
+    <group name="srm_l_ee">
+        <link name="ur_left_paletta"/>
+    </group>
+
     <group name="srm_r">
         <group name="srm_base_r"/>
         <group name="srm_r_ur"/>
@@ -112,10 +118,10 @@
 
     <!-- Group state of the complete block base + ur + ee-->
     <group_state name="home_r_base_ur_ee" group="srm_r">
-        <joint name="right_summit_back_left_wheel_joint" value="0"/>
+        <!-- <joint name="right_summit_back_left_wheel_joint" value="0"/>
         <joint name="right_summit_back_right_wheel_joint" value="0"/>
         <joint name="right_summit_front_left_wheel_joint" value="0"/>
-        <joint name="right_summit_front_right_wheel_joint" value="0"/>
+        <joint name="right_summit_front_right_wheel_joint" value="0"/> -->
         <joint name="ur_right_elbow_joint" value="-2.6609"/>
         <joint name="ur_right_shoulder_lift_joint" value="0.268"/>
         <joint name="ur_right_shoulder_pan_joint" value="-1.57"/>
@@ -126,10 +132,10 @@
         <!-- <joint name="ur_right_base_link-base_link_inertia" value="0"/> -->
     </group_state>
         <group_state name="home_l_base_ur_ee" group="srm_l">
-        <joint name="left_summit_back_left_wheel_joint" value="0"/>
+        <!-- <joint name="left_summit_back_left_wheel_joint" value="0"/>
         <joint name="left_summit_back_right_wheel_joint" value="0"/>
         <joint name="left_summit_front_left_wheel_joint" value="0"/>
-        <joint name="left_summit_front_right_wheel_joint" value="0"/>
+        <joint name="left_summit_front_right_wheel_joint" value="0"/> -->
         <joint name="ur_left_elbow_joint" value="-2.7601"/>
         <joint name="ur_left_shoulder_lift_joint" value="0.305"/>
         <joint name="ur_left_shoulder_pan_joint" value="-1.57"/>
@@ -145,6 +151,11 @@
     <virtual_joint name="Vjoint_left" type="planar" parent_frame="world" child_link="left_summit_base_footprint"/>
     <virtual_joint name="Vjoint_right" type="planar" parent_frame="world" child_link="right_summit_base_footprint"/>
      -->
+
+    <!--END EFFECTOR: Purpose: Represent information about an end effector.-->
+    <end_effector name="ee_r" parent_link="ur_right_tool0" group="srm_r_ee" parent_group="srm_r_ur"/>
+    <end_effector name="ee_l" parent_link="ur_left_tool0" group="srm_l_ee" parent_group="srm_l_ur"/>
+
     <!--DISABLE COLLISIONS: By default it is assumed that any link of the robot could potentially come into collision with any other link in the robot. This tag disables collision checking between a specified pair of links. -->
     <disable_collisions link1="left_summit_back_left_wheel_link" link2="left_summit_back_right_wheel_link" reason="Never"/>
     <disable_collisions link1="left_summit_back_left_wheel_link" link2="left_summit_base_link" reason="Adjacent"/>

@@ -1,90 +1,100 @@
-[INFO] [launch]: All log files can be found below /root/.ros/log/2025-07-23-13-30-35-452785-outlander-Aspire-V3-571G-3564
+[INFO] [launch]: All log files can be found below /root/.ros/log/2025-09-09-13-32-47-053240-outlander-Aspire-V3-571G-6711
 [INFO] [launch]: Default logging verbosity is set to INFO
 warning: Using load_yaml() directly is deprecated. Use xacro.load_yaml() instead.
-[INFO] [ps_try-1]: process started with pid [3565]
-[ps_try-1] [INFO] [1753277437.936288169] [ps_try]: Setting up the planning scene...
-[ps_try-1] [INFO] [1753277437.936882126] [ps_try]: Robot description loaded successfully.
-[ps_try-1] [INFO] [1753277437.936910231] [ps_try]: Publishing the planning scene...
-[ps_try-1] [INFO] [1753277438.070302455] [ps_try]: Planning scene setup complete.
-[ps_try-1] [INFO] [1753277438.249387262] [ps_try]: READING DUAL ROBOT MODEL...
-[ps_try-1] [INFO] [1753277438.274797761] [moveit_rdf_loader.rdf_loader]: Loaded robot model in 0.0252696 seconds
-[ps_try-1] [INFO] [1753277438.274872975] [moveit_robot_model.robot_model]: Loading robot model 'srm'...
-[ps_try-1] [INFO] [1753277438.274890625] [moveit_robot_model.robot_model]: No root/virtual joint specified in SRDF. Assuming fixed joint
-[ps_try-1] [WARN] [1753277438.274962025] [moveit_robot_model.robot_model]: Link left_summit_base_footprint has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
-[ps_try-1] [WARN] [1753277438.281307355] [moveit_robot_model.robot_model]: Link left_summit_base_logo_front has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
-[ps_try-1] [WARN] [1753277438.281368813] [moveit_robot_model.robot_model]: Link left_summit_base_logo_left has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
-[ps_try-1] [WARN] [1753277438.281388815] [moveit_robot_model.robot_model]: Link left_summit_base_logo_rear has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
-[ps_try-1] [WARN] [1753277438.281406427] [moveit_robot_model.robot_model]: Link left_summit_base_logo_right has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
-[ps_try-1] [WARN] [1753277438.281426229] [moveit_robot_model.robot_model]: Link left_summit_base_chapa has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
-[ps_try-1] [WARN] [1753277438.289328002] [moveit_robot_model.robot_model]: Link left_summit_imu_link has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
-[ps_try-1] [WARN] [1753277438.528528501] [moveit_robot_model.robot_model]: Link right_summit_base_footprint has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
-[ps_try-1] [WARN] [1753277438.532874121] [moveit_robot_model.robot_model]: Link right_summit_base_logo_front has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
-[ps_try-1] [WARN] [1753277438.532913353] [moveit_robot_model.robot_model]: Link right_summit_base_logo_left has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
-[ps_try-1] [WARN] [1753277438.532928556] [moveit_robot_model.robot_model]: Link right_summit_base_logo_rear has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
-[ps_try-1] [WARN] [1753277438.532943040] [moveit_robot_model.robot_model]: Link right_summit_base_logo_right has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
-[ps_try-1] [WARN] [1753277438.532956535] [moveit_robot_model.robot_model]: Link right_summit_base_chapa has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
-[ps_try-1] [WARN] [1753277438.539071782] [moveit_robot_model.robot_model]: Link right_summit_imu_link has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
-[ps_try-1] [WARN] [1753277438.765877331] [moveit_robot_model.robot_model]: Group state 'home_r_base_ur_ee' doesn't specify all group joints in group 'srm_r'. right_base_joint is missing.
-[ps_try-1] [WARN] [1753277438.765945070] [moveit_robot_model.robot_model]: Group state 'home_l_base_ur_ee' doesn't specify all group joints in group 'srm_l'. left_base_joint is missing.
-[ps_try-1] [WARN] [1753277438.818678352] [kdl_parser]: Converting unknown joint type of joint 'left_base_joint' into a fixed joint
-[ps_try-1] [WARN] [1753277438.819397950] [kdl_parser]: Converting unknown joint type of joint 'right_base_joint' into a fixed joint
-[ps_try-1] [WARN] [1753277438.819904067] [kdl_parser]: Converting unknown joint type of joint 'left_base_joint' into a fixed joint
-[ps_try-1] [WARN] [1753277438.820681928] [kdl_parser]: Converting unknown joint type of joint 'right_base_joint' into a fixed joint
-[ps_try-1] [INFO] [1753277438.821202444] [ps_try]: DUAL ROBOT MODEL LOADED.
-[ps_try-1] [INFO] [1753277438.821500110] [ps_try]: Parsing left URDF...
-[ps_try-1] [INFO] [1753277438.824897948] [ps_try]: Parsing complete.
-[ps_try-1] [INFO] [1753277438.824934558] [ps_try]: INITIALIZING MODEL...
-[ps_try-1] [INFO] [1753277438.825541063] [ps_try]: LEFT SRDF INITIALIZATION COMPLETE.
-[ps_try-1] [INFO] [1753277438.825556394] [ps_try]: CREATING LEFT ROBOT MODEL...
-[ps_try-1] [INFO] [1753277438.825564046] [moveit_robot_model.robot_model]: Loading robot model 'left_srm'...
-[ps_try-1] [INFO] [1753277438.825571633] [moveit_robot_model.robot_model]: No root/virtual joint specified in SRDF. Assuming fixed joint
-[ps_try-1] [WARN] [1753277438.825590027] [moveit_robot_model.robot_model]: Link left_summit_base_footprint has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
-[ps_try-1] [WARN] [1753277438.829365615] [moveit_robot_model.robot_model]: Link left_summit_base_logo_front has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
-[ps_try-1] [WARN] [1753277438.829428429] [moveit_robot_model.robot_model]: Link left_summit_base_logo_left has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
-[ps_try-1] [WARN] [1753277438.829448695] [moveit_robot_model.robot_model]: Link left_summit_base_logo_rear has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
-[ps_try-1] [WARN] [1753277438.829466334] [moveit_robot_model.robot_model]: Link left_summit_base_logo_right has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
-[ps_try-1] [WARN] [1753277438.829482744] [moveit_robot_model.robot_model]: Link left_summit_base_chapa has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
-[ps_try-1] [WARN] [1753277438.836811679] [moveit_robot_model.robot_model]: Link left_summit_imu_link has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
-[ps_try-1] [INFO] [1753277439.045551671] [ps_try]: LEFT ROBOT MODEL CREATED.
-[ps_try-1] [INFO] [1753277439.045676506] [ps_try]: Parsing right URDF...
-[ps_try-1] [INFO] [1753277439.048094457] [ps_try]: Parsing complete.
-[ps_try-1] [INFO] [1753277439.048128444] [ps_try]: INITIALIZING MODEL...
-[ps_try-1] [INFO] [1753277439.048600033] [ps_try]: RIGHT SRDF INITIALIZATION COMPLETE.
-[ps_try-1] [INFO] [1753277439.048613053] [ps_try]: CREATING RIGHT ROBOT MODEL...
-[ps_try-1] [INFO] [1753277439.048620771] [moveit_robot_model.robot_model]: Loading robot model 'right_srm'...
-[ps_try-1] [INFO] [1753277439.048627833] [moveit_robot_model.robot_model]: No root/virtual joint specified in SRDF. Assuming fixed joint
-[ps_try-1] [WARN] [1753277439.048646532] [moveit_robot_model.robot_model]: Link right_summit_base_footprint has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
-[ps_try-1] [WARN] [1753277439.051832531] [moveit_robot_model.robot_model]: Link right_summit_base_logo_front has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
-[ps_try-1] [WARN] [1753277439.051941368] [moveit_robot_model.robot_model]: Link right_summit_base_logo_left has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
-[ps_try-1] [WARN] [1753277439.051963041] [moveit_robot_model.robot_model]: Link right_summit_base_logo_rear has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
-[ps_try-1] [WARN] [1753277439.051982151] [moveit_robot_model.robot_model]: Link right_summit_base_logo_right has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
-[ps_try-1] [WARN] [1753277439.051999208] [moveit_robot_model.robot_model]: Link right_summit_base_chapa has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
-[ps_try-1] [WARN] [1753277439.057214910] [moveit_robot_model.robot_model]: Link right_summit_imu_link has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
-[ps_try-1] [INFO] [1753277439.354121671] [ps_try]: !ROBOT INITIALIZATION COMPLETE!
-[ps_try-1] [ERROR] [1753277439.354337590] [moveit_robot_state.robot_state]: No kinematics solver instantiated for group 'srm_r_ur'
-[ps_try-1] [ERROR] [1753277439.354360942] [ps_try]: IK solution not found for group 'srm_r_ur'.
-[ps_try-1] [ERROR] [1753277439.354380634] [moveit_robot_state.robot_state]: No kinematics solver instantiated for group 'srm_l_ur'
-[ps_try-1] [ERROR] [1753277439.354391935] [ps_try]: IK solution not found for group 'srm_l_ur'.
-[ps_try-1] [INFO] [1753277439.425017219] [moveit.ros_planning.planning_pipeline]: Using planning interface 'OMPL'
-[ps_try-1] [INFO] [1753277439.441228518] [moveit_ros.add_time_optimal_parameterization]: Param 'ompl.path_tolerance' was not set. Using default value: 0.100000
-[ps_try-1] [INFO] [1753277439.441270432] [moveit_ros.add_time_optimal_parameterization]: Param 'ompl.resample_dt' was not set. Using default value: 0.100000
-[ps_try-1] [INFO] [1753277439.441283567] [moveit_ros.add_time_optimal_parameterization]: Param 'ompl.min_angle_change' was not set. Using default value: 0.001000
-[ps_try-1] [INFO] [1753277439.441342332] [moveit_ros.fix_workspace_bounds]: Param 'ompl.default_workspace_bounds' was not set. Using default value: 10.000000
-[ps_try-1] [INFO] [1753277439.441379687] [moveit_ros.fix_start_state_bounds]: Param 'ompl.start_state_max_bounds_error' was set to 0.100000
-[ps_try-1] [INFO] [1753277439.441394388] [moveit_ros.fix_start_state_bounds]: Param 'ompl.start_state_max_dt' was not set. Using default value: 0.500000
-[ps_try-1] [INFO] [1753277439.441424830] [moveit_ros.fix_start_state_collision]: Param 'ompl.start_state_max_dt' was not set. Using default value: 0.500000
-[ps_try-1] [INFO] [1753277439.441440163] [moveit_ros.fix_start_state_collision]: Param 'ompl.jiggle_fraction' was set to 0.050000
-[ps_try-1] [INFO] [1753277439.441469295] [moveit_ros.fix_start_state_collision]: Param 'ompl.max_sampling_attempts' was not set. Using default value: 100
-[ps_try-1] [INFO] [1753277439.441500691] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Add Time Optimal Parameterization'
-[ps_try-1] [INFO] [1753277439.441515272] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Resolve constraint frames to robot links'
-[ps_try-1] [INFO] [1753277439.441524516] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Fix Workspace Bounds'
-[ps_try-1] [INFO] [1753277439.441533189] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Fix Start State Bounds'
-[ps_try-1] [INFO] [1753277439.441541483] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Fix Start State In Collision'
-[ps_try-1] [INFO] [1753277439.441549837] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Fix Start State Path Constraints'
-[ps_try-1] [ERROR] [1753277439.446706080] [ps_try]: Error initializing stage:
-[ps_try-1]  Dual_System_Trial_01: cannot connect end interface of 'current' (→) to start interface of 'current_state' (←)
-[ps_try-1] 
-[ps_try-1] [INFO] [1753277439.446801642] [ps_try]: Task execution complete, shutting down...
+[INFO] [ps_try-1]: process started with pid [6712]
+[ps_try-1] [INFO] [1757424771.465678082] [ps_try]: Object in planning scene: muraUse1
+[ps_try-1] [INFO] [1757424771.465777823] [ps_try]: Object in planning scene: pacco
+[ps_try-1] [INFO] [1757424771.465788628] [ps_try]: Object in planning scene: pacco_clone
+[ps_try-1] [INFO] [1757424771.465796503] [ps_try]: Object in planning scene: pacco_clone_0
+[ps_try-1] [INFO] [1757424771.465804067] [ps_try]: Object in planning scene: pacco_clone_1
+[ps_try-1] [INFO] [1757424771.465811662] [ps_try]: Object in planning scene: pacco_clone_2
+[ps_try-1] [INFO] [1757424771.465819048] [ps_try]: Object in planning scene: target_plane
+[ps_try-1] [INFO] [1757424771.465826854] [ps_try]: Planning scene setup complete.
+[ps_try-1] [INFO] [1757424771.707937670] [ps_try]: READING DUAL ROBOT MODEL...
+[ps_try-1] [INFO] [1757424771.730088736] [moveit_rdf_loader.rdf_loader]: Loaded robot model in 0.0220163 seconds
+[ps_try-1] [INFO] [1757424771.730243049] [moveit_robot_model.robot_model]: Loading robot model 'srm'...
+[ps_try-1] [INFO] [1757424771.730269423] [moveit_robot_model.robot_model]: No root/virtual joint specified in SRDF. Assuming fixed joint
+[ps_try-1] [WARN] [1757424771.730359225] [moveit_robot_model.robot_model]: Link left_summit_base_footprint has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[ps_try-1] [WARN] [1757424771.736822688] [moveit_robot_model.robot_model]: Link left_summit_base_logo_front has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[ps_try-1] [WARN] [1757424771.736876821] [moveit_robot_model.robot_model]: Link left_summit_base_logo_left has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[ps_try-1] [WARN] [1757424771.736896771] [moveit_robot_model.robot_model]: Link left_summit_base_logo_rear has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[ps_try-1] [WARN] [1757424771.736914570] [moveit_robot_model.robot_model]: Link left_summit_base_logo_right has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[ps_try-1] [WARN] [1757424771.736932068] [moveit_robot_model.robot_model]: Link left_summit_base_chapa has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[ps_try-1] [WARN] [1757424771.744767441] [moveit_robot_model.robot_model]: Link left_summit_imu_link has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[ps_try-1] [WARN] [1757424771.776453601] [moveit_robot_model.robot_model]: Link right_summit_base_footprint has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[ps_try-1] [WARN] [1757424771.782963147] [moveit_robot_model.robot_model]: Link right_summit_base_logo_front has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[ps_try-1] [WARN] [1757424771.783022575] [moveit_robot_model.robot_model]: Link right_summit_base_logo_left has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[ps_try-1] [WARN] [1757424771.783044527] [moveit_robot_model.robot_model]: Link right_summit_base_logo_rear has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[ps_try-1] [WARN] [1757424771.783063935] [moveit_robot_model.robot_model]: Link right_summit_base_logo_right has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[ps_try-1] [WARN] [1757424771.783082727] [moveit_robot_model.robot_model]: Link right_summit_base_chapa has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[ps_try-1] [WARN] [1757424771.791001093] [moveit_robot_model.robot_model]: Link right_summit_imu_link has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[ps_try-1] [WARN] [1757424771.853966831] [moveit_robot_model.robot_model]: Group state 'home_r_base_ur_ee' doesn't specify all group joints in group 'srm_r'. right_base_joint, right_summit_back_left_wheel_joint, right_summit_back_right_wheel_joint, right_summit_front_left_wheel_joint, right_summit_front_right_wheel_joint are missing.
+[ps_try-1] [WARN] [1757424771.854028995] [moveit_robot_model.robot_model]: Group state 'home_l_base_ur_ee' doesn't specify all group joints in group 'srm_l'. left_base_joint, left_summit_back_left_wheel_joint, left_summit_back_right_wheel_joint, left_summit_front_left_wheel_joint, left_summit_front_right_wheel_joint are missing.
+[ps_try-1] [WARN] [1757424772.064232784] [kdl_parser]: Converting unknown joint type of joint 'left_base_joint' into a fixed joint
+[ps_try-1] [WARN] [1757424772.064431287] [kdl_parser]: Converting unknown joint type of joint 'right_base_joint' into a fixed joint
+[ps_try-1] [WARN] [1757424772.066204423] [kdl_parser]: Converting unknown joint type of joint 'left_base_joint' into a fixed joint
+[ps_try-1] [WARN] [1757424772.066342043] [kdl_parser]: Converting unknown joint type of joint 'right_base_joint' into a fixed joint
+[ps_try-1] [INFO] [1757424772.066858947] [ps_try]: DUAL ROBOT MODEL LOADED.
+[ps_try-1] [INFO] [1757424772.072270084] [ps_try]: Parsing left URDF...
+[ps_try-1] [INFO] [1757424772.075812734] [ps_try]: Parsing complete.
+[ps_try-1] [INFO] [1757424772.075859300] [ps_try]: INITIALIZING MODEL...
+[ps_try-1] [INFO] [1757424772.077570274] [ps_try]: LEFT SRDF INITIALIZATION COMPLETE.
+[ps_try-1] [INFO] [1757424772.077612942] [ps_try]: CREATING LEFT ROBOT MODEL...
+[ps_try-1] [INFO] [1757424772.077628749] [moveit_robot_model.robot_model]: Loading robot model 'left_srm'...
+[ps_try-1] [INFO] [1757424772.077641627] [moveit_robot_model.robot_model]: No root/virtual joint specified in SRDF. Assuming fixed joint
+[ps_try-1] [WARN] [1757424772.077679474] [moveit_robot_model.robot_model]: Link left_summit_base_footprint has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[ps_try-1] [WARN] [1757424772.083218969] [moveit_robot_model.robot_model]: Link left_summit_base_logo_front has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[ps_try-1] [WARN] [1757424772.083276538] [moveit_robot_model.robot_model]: Link left_summit_base_logo_left has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[ps_try-1] [WARN] [1757424772.083298037] [moveit_robot_model.robot_model]: Link left_summit_base_logo_rear has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[ps_try-1] [WARN] [1757424772.083318028] [moveit_robot_model.robot_model]: Link left_summit_base_logo_right has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[ps_try-1] [WARN] [1757424772.083336637] [moveit_robot_model.robot_model]: Link left_summit_base_chapa has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[ps_try-1] [WARN] [1757424772.090083439] [moveit_robot_model.robot_model]: Link left_summit_imu_link has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[ps_try-1] [INFO] [1757424772.172215689] [ps_try]: LEFT ROBOT MODEL CREATED.
+[ps_try-1] [INFO] [1757424772.172397172] [ps_try]: Parsing right URDF...
+[ps_try-1] [INFO] [1757424772.175682132] [ps_try]: Parsing complete.
+[ps_try-1] [INFO] [1757424772.175734349] [ps_try]: INITIALIZING MODEL...
+[ps_try-1] [INFO] [1757424772.176584540] [ps_try]: RIGHT SRDF INITIALIZATION COMPLETE.
+[ps_try-1] [INFO] [1757424772.176655733] [ps_try]: CREATING RIGHT ROBOT MODEL...
+[ps_try-1] [INFO] [1757424772.176671747] [moveit_robot_model.robot_model]: Loading robot model 'right_srm'...
+[ps_try-1] [INFO] [1757424772.176684563] [moveit_robot_model.robot_model]: No root/virtual joint specified in SRDF. Assuming fixed joint
+[ps_try-1] [WARN] [1757424772.176716611] [moveit_robot_model.robot_model]: Link right_summit_base_footprint has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[ps_try-1] [WARN] [1757424772.184038549] [moveit_robot_model.robot_model]: Link right_summit_base_logo_front has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[ps_try-1] [WARN] [1757424772.184101554] [moveit_robot_model.robot_model]: Link right_summit_base_logo_left has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[ps_try-1] [WARN] [1757424772.184125243] [moveit_robot_model.robot_model]: Link right_summit_base_logo_rear has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[ps_try-1] [WARN] [1757424772.184145202] [moveit_robot_model.robot_model]: Link right_summit_base_logo_right has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[ps_try-1] [WARN] [1757424772.184162408] [moveit_robot_model.robot_model]: Link right_summit_base_chapa has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[ps_try-1] [WARN] [1757424772.191015892] [moveit_robot_model.robot_model]: Link right_summit_imu_link has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[ps_try-1] [WARN] [1757424772.224881570] [moveit_robot_model.robot_model]: Group state 'home_r_base_ur_ee' doesn't specify all group joints in group 'srm_r'. right_summit_back_left_wheel_joint, right_summit_back_right_wheel_joint, right_summit_front_left_wheel_joint, right_summit_front_right_wheel_joint are missing.
+[ps_try-1] [INFO] [1757424772.224943612] [ps_try]: !ROBOT INITIALIZATION COMPLETE!
+[ps_try-1] [ERROR] [1757424772.225150065] [moveit_robot_state.robot_state]: No kinematics solver instantiated for group 'srm_r_ur'
+[ps_try-1] [ERROR] [1757424772.225177298] [ps_try]: IK solution not found for group 'srm_r_ur'.
+[ps_try-1] [ERROR] [1757424772.225201390] [moveit_robot_state.robot_state]: No kinematics solver instantiated for group 'srm_l_ur'
+[ps_try-1] [ERROR] [1757424772.225212687] [ps_try]: IK solution not found for group 'srm_l_ur'.
+[ps_try-1] [INFO] [1757424772.442247594] [moveit.ros_planning.planning_pipeline]: Using planning interface 'OMPL'
+[ps_try-1] [INFO] [1757424772.490921524] [moveit_ros.add_time_optimal_parameterization]: Param 'ompl.path_tolerance' was not set. Using default value: 0.100000
+[ps_try-1] [INFO] [1757424772.490972830] [moveit_ros.add_time_optimal_parameterization]: Param 'ompl.resample_dt' was not set. Using default value: 0.100000
+[ps_try-1] [INFO] [1757424772.490988543] [moveit_ros.add_time_optimal_parameterization]: Param 'ompl.min_angle_change' was not set. Using default value: 0.001000
+[ps_try-1] [INFO] [1757424772.491050692] [moveit_ros.fix_workspace_bounds]: Param 'ompl.default_workspace_bounds' was not set. Using default value: 10.000000
+[ps_try-1] [INFO] [1757424772.491090663] [moveit_ros.fix_start_state_bounds]: Param 'ompl.start_state_max_bounds_error' was set to 0.100000
+[ps_try-1] [INFO] [1757424772.491105551] [moveit_ros.fix_start_state_bounds]: Param 'ompl.start_state_max_dt' was not set. Using default value: 0.500000
+[ps_try-1] [INFO] [1757424772.491138221] [moveit_ros.fix_start_state_collision]: Param 'ompl.start_state_max_dt' was not set. Using default value: 0.500000
+[ps_try-1] [INFO] [1757424772.491154665] [moveit_ros.fix_start_state_collision]: Param 'ompl.jiggle_fraction' was set to 0.050000
+[ps_try-1] [INFO] [1757424772.491208056] [moveit_ros.fix_start_state_collision]: Param 'ompl.max_sampling_attempts' was not set. Using default value: 100
+[ps_try-1] [INFO] [1757424772.491295227] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Add Time Optimal Parameterization'
+[ps_try-1] [INFO] [1757424772.491312882] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Resolve constraint frames to robot links'
+[ps_try-1] [INFO] [1757424772.491323222] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Fix Workspace Bounds'
+[ps_try-1] [INFO] [1757424772.491332841] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Fix Start State Bounds'
+[ps_try-1] [INFO] [1757424772.491342023] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Fix Start State In Collision'
+[ps_try-1] [INFO] [1757424772.491351218] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Fix Start State Path Constraints'
+[ps_try-1] [ERROR] [1757424772.851145222] [ps_try]: Task planning failed.
+[ps_try-1] [INFO] [1757424772.851183400] [ps_try]: Task execution complete, shutting down...
 [WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
-[ps_try-1] [INFO] [1753277583.172449234] [rclcpp]: signal_handler(signum=2)
-[INFO] [ps_try-1]: process has finished cleanly [pid 3565]
+[ps_try-1] [INFO] [1757424794.725508252] [rclcpp]: signal_handler(signum=2)
+[ps_try-1]   0  - ←   0 →   -  0 / Dual_System_Trial_01
+[ps_try-1]     1  - ←   1 →   -  0 / current_state
+[ps_try-1]     -  0 →   0 →   -  0 / move_base_left
+[ps_try-1]     -  0 →   0 →   -  0 / move_base_right
+[ps_try-1]     -  0 →   0 →   -  0 / move_dual_arms
+[ps_try-1] Failing stage(s):
+[ps_try-1] move_base_left (0/1): missing ik_frame
+[INFO] [ps_try-1]: process has finished cleanly [pid 6712]
