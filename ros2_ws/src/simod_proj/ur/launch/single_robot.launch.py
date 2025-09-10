@@ -198,6 +198,7 @@ def launch_setup(context, *args, **kwargs):
     #         " ",
     #     ]
     # )
+    # robot_description_param = launch_ros.descriptions.ParameterValue(robot_description_content, value_type=str)
 
     with open("/ros2_ws/"+namespace+"_resolved_paletta.urdf","r") as robot_description_file:
         robot_description_content = robot_description_file.read()
@@ -256,18 +257,30 @@ def launch_setup(context, *args, **kwargs):
     static_tf_world = Node(
         package='tf2_ros',
         executable='static_transform_publisher',
-        arguments=[getRobotOffset(namespace), '0', '0', '0', '0', '0', '1', 'world',namespace+'_robot']
+        arguments=['0', '0', '0', '0', '0', '0', '1', 'world',namespace+'_robot']
     )
 
     static_tf_base = Node(
         package='tf2_ros',
         executable='static_transform_publisher',
-        arguments=['0', '0', '0', '0', '0', '0', '1', namespace+'_robot', namespace+'_summit_base_footprint']
+        arguments=['0', '0', '0', '0', '0', '0', '1', namespace+'_robot', base_prefix+"_odom"]
+    )
+    static_tf_odom = Node(
+        package="tf2_ros",
+        executable="static_transform_publisher",
+        namespace=namespace,
+        name="static_transform_publisher",
+        output="log",
+        arguments=['0', '0', '0', "0", "0", "0", "1", base_prefix+"_odom", namespace+'_summit_base_footprint'],
     )
 
     delayed_static_tf_world = TimerAction(
         period=2.0,  # 2 seconds delay to allow spawns and such
         actions=[static_tf_world],
+    )
+    delayed_static_tf_odom= TimerAction(
+        period=2.25,  # 2 seconds delay to allow spawns and such
+        actions=[static_tf_odom],
     )
     delayed_static_tf_base = TimerAction(
         period=2.5,  # 2.5 seconds delay to allow spawns and such
@@ -360,6 +373,7 @@ def launch_setup(context, *args, **kwargs):
         static_tf_wheel_front_left,
         static_tf_wheel_front_right,
         delayed_static_tf_world,
+        #delayed_static_tf_odom,
         #static_tf_right_world,
         #static_tf_right,
         delayed_static_tf_base,
