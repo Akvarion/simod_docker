@@ -7,6 +7,9 @@
 #include <moveit/task_constructor/solvers.h>
 #include <moveit/task_constructor/stages.h>
 #include <urdf_parser/urdf_parser.h> // Provided by urdfdom
+#include <moveit/kinematics_base/kinematics_base.h>
+#include <pluginlib/class_loader.hpp>
+#include <yaml-cpp/yaml.h>
 #if __has_include(<tf2_geometry_msgs/tf2_geometry_msgs.hpp>)
 #include <tf2_geometry_msgs/tf2_geometry_msgs.hpp>
 #else
@@ -17,35 +20,86 @@
 #else
 #include <tf2_eigen/tf2_eigen.h>
 #endif
+#include <tf2_ros/buffer.h>
+#include <tf2_ros/transform_listener.h>
+
 
 static const rclcpp::Logger LOGGER = rclcpp::get_logger("ps_try");
 namespace mtc = moveit::task_constructor;
 
-std::map<std::string, double> compute_IK(const moveit::core::RobotModelPtr robot_model,
+
+
+std::map<std::string, double> compute_IK( const rclcpp::Node::SharedPtr& node,
+                                          const moveit::core::RobotModelPtr robot_model,
                                           const std::string &robot_group,
+                                          const std::string& kinematics_yaml_path,
                                           const geometry_msgs::msg::PoseStamped &pose) {
     // This function should compute the IK for the given pose and robot group
     // For now, we return an empty map as a placeholder
     std::map<std::string, double> joint_goal;
+    // Load kinematics.yaml
+    YAML::Node config = YAML::LoadFile(kinematics_yaml_path);
+    if (!config[robot_group]) {
+        RCLCPP_ERROR(LOGGER, "No kinematics config for group '%s'", robot_group.c_str());
+        return joint_goal;
+    }
+    // Parse data into something we can use
+    std::string solver_plugin = config[robot_group]["kinematics_solver"].as<std::string>();
+    double search_res = config[robot_group]["kinematics_solver_search_resolution"].as<double>();
+    double timeout = config[robot_group]["kinematics_solver_timeout"].as<double>();
+
+    pluginlib::ClassLoader<kinematics::KinematicsBase> loader("moveit_core", "kinematics::KinematicsBase");
+    kinematics::KinematicsBasePtr solver = loader.createSharedInstance(solver_plugin);
+
     moveit::core::RobotState robot_state(robot_model);
     const moveit::core::JointModelGroup *jmg = robot_state.getJointModelGroup(robot_group);
     if (!jmg) {
       RCLCPP_ERROR(LOGGER, "JointModelGroup '%s' not found!", robot_group.c_str());
       return joint_goal;
     }
-    bool found_ik = robot_state.setFromIK(jmg, pose.pose, pose.header.frame_id, 5.0);
-    if(!found_ik) {
+    
+    // Get base and tip frames
+    std::string base_frame = robot_model->getJointModelNames().front();
+    std::vector<std::string> tip_frames = { jmg->getLinkModelNames().back() };
+   
+    // Initialize
+    if (!solver->initialize(node,*robot_model, robot_group, base_frame, tip_frames, search_res)) {
+        RCLCPP_ERROR(LOGGER, "Failed to initialize kinematics solver for group '%s'", robot_group.c_str());
+        return joint_goal;
+    }
+
+    // Prepare IK input
+    std::vector<geometry_msgs::msg::Pose> poses = { pose.pose };
+    std::vector<double> seed(jmg->getVariableCount(), 0.0);
+    std::vector<std::vector<double>> solutions;
+    kinematics::KinematicsResult result;
+
+    // Call IK
+    bool found_ik = solver->getPositionIK(poses, seed, solutions, result, kinematics::KinematicsQueryOptions());
+    if (!found_ik || solutions.empty()) {
         RCLCPP_ERROR(LOGGER, "IK solution not found for group '%s'.", robot_group.c_str());
         return joint_goal;
-    } else {
-      std::vector<double> joint_positions;
-      robot_state.copyJointGroupPositions(jmg, joint_positions);
-      // Map joint names to values
-      const auto& joint_names = jmg->getVariableNames();
-      for (size_t i = 0; i < joint_names.size(); ++i){
-          joint_goal[joint_names[i]] = joint_positions[i];
-      }
     }
+
+    // Map joint names to values
+    const auto& joint_names = jmg->getVariableNames();
+    for (size_t i = 0; i < joint_names.size(); ++i) {
+        joint_goal[joint_names[i]] = solutions[0][i];
+    }
+    
+    // bool found_ik = robot_state.setFromIK(jmg, pose.pose, pose.header.frame_id, 5.0);
+    // if(!found_ik) {
+    //     RCLCPP_ERROR(LOGGER, "IK solution not found for group '%s'.", robot_group.c_str());
+    //     return joint_goal;
+    // } else {
+    //   std::vector<double> joint_positions;
+    //   robot_state.copyJointGroupPositions(jmg, joint_positions);
+    //   // Map joint names to values
+    //   const auto& joint_names = jmg->getVariableNames();
+    //   for (size_t i = 0; i < joint_names.size(); ++i){
+    //       joint_goal[joint_names[i]] = joint_positions[i];
+    //   }
+    // }
     // Fill joint_goal with computed IK values
     return joint_goal;
 }
@@ -74,8 +128,7 @@ class MTCTaskNode{
     // Compose an MTC task from a series of stages.
     mtc::Task createTask(void);
     mtc::Task task_;
-    
-    rclcpp::Node::SharedPtr node_;
+    rclcpp::Node::SharedPtr node_;  
 };
 
 // This should set up an empty planning scene.
@@ -109,7 +162,10 @@ mtc::Task MTCTaskNode::createTask(){
   // buffer << t.rdbuf();
 
   //std::string robot_description = node_->get_parameter("robot_description").as_string();
-  
+
+  tf2_ros::Buffer tf_buffer(this->node_->get_clock());
+  tf2_ros::TransformListener tf_listener(tf_buffer);
+
   RCLCPP_INFO(LOGGER, "READING DUAL ROBOT MODEL...");
   task.loadRobotModel(node_, "robot_description");
   RCLCPP_INFO(LOGGER, "DUAL ROBOT MODEL LOADED.");
@@ -247,6 +303,11 @@ mtc::Task MTCTaskNode::createTask(){
 
 
   RCLCPP_INFO(LOGGER, "!ROBOT INITIALIZATION COMPLETE!");
+  
+  // Load kinematics solvers paths
+  std::string right_kinematics_path = "/ros2_ws/src/ps_try/config/right_kinematics.yaml";
+  std::string left_kinematics_path = "/ros2_ws/src/ps_try/config/left_kinematics.yaml";
+
   // STAGE 1
   // Current state stage needs to read from namespaced joint states
   {
@@ -292,17 +353,28 @@ mtc::Task MTCTaskNode::createTask(){
       
       
       // Set pose goal relative to object in the scene
-      geometry_msgs::msg::PoseStamped pose_goal;
-      pose_goal.header.frame_id = "pacco_clone_0";  // The object's frame in the planning scene
-      pose_goal.pose.position.x = 0.0;         // Offset from the object's origin (e.g., for grasping)
-      pose_goal.pose.position.y = 0.1;
-      pose_goal.pose.position.z = 0.2;
-      pose_goal.pose.orientation.w = 1.0;
+      geometry_msgs::msg::PoseStamped pose_goal_left,pose_goal_right, pose_in_base_frame;
+      pose_goal_left.header.frame_id = "pacco_clone_0";  // The object's frame in the planning scene
+      pose_goal_left.pose.position.x = 0.0;     // Offset from the object's origin (e.g., for grasping)
+      pose_goal_left.pose.position.y = 0.1;
+      pose_goal_left.pose.position.z = 0.2;
+      pose_goal_left.pose.orientation.w = 1.0;
+      
+      // We drive manual, so we need to convert the pose to be relative to the robot in the world
+      // hooray more complex stuff
+      try {
+        pose_in_base_frame = tf_buffer.transform(
+          pose_goal_left, "left_robot", tf2::durationFromSec(0.1));
+        // Now pose_in_base_frame.pose can be used for IK
+        
+      } catch (tf2::TransformException &ex) {
+          RCLCPP_ERROR(LOGGER, "Transform failed: %s", ex.what());
+      }
 
       // Calculate map goal for left and right arms
       std::map<std::string,double> *joint_goal;
-      std::map<std::string,double> joint_goal_right = compute_IK(right_robot_model,right_arm_group,pose_goal);
-      std::map<std::string,double> joint_goal_left = compute_IK(left_robot_model,left_arm_group,pose_goal);
+      std::map<std::string,double> joint_goal_right = compute_IK(this->node_,right_robot_model,right_arm_group,left_kinematics_path,pose_goal_right);
+      std::map<std::string,double> joint_goal_left = compute_IK(this->node_,left_robot_model,left_arm_group,right_kinematics_path,pose_goal_left);
       // Merge solutions
       joint_goal_left.merge(joint_goal_right);
       joint_goal = &joint_goal_left;
