@@ -9,6 +9,8 @@ endif()
 find_package(ament_cmake REQUIRED)
 find_package(moveit_task_constructor_core REQUIRED)
 find_package(rclcpp REQUIRED)
+find_package(yaml-cpp REQUIRED)
+
 # uncomment the following section in order to fill in
 # further dependencies manually.
 # find_package(<dependency> REQUIRED)
@@ -16,6 +18,7 @@ find_package(rclcpp REQUIRED)
 add_executable(ps_try src/ps_try.cpp)
 
 ament_target_dependencies(ps_try moveit_task_constructor_core rclcpp)
+target_link_libraries(ps_try yaml-cpp)
 
 target_include_directories(ps_try PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>

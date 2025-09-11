@@ -22,18 +22,64 @@
 #endif
 #include <tf2_ros/buffer.h>
 #include <tf2_ros/transform_listener.h>
+#include <tf2/convert.h>
 
 
 static const rclcpp::Logger LOGGER = rclcpp::get_logger("ps_try");
 namespace mtc = moveit::task_constructor;
 
+geometry_msgs::msg::Pose tf2_transform_to_pose(geometry_msgs::msg::Transform tf){
+    geometry_msgs::msg::Pose pose;
+    pose.position.x = tf.translation.x;
+    pose.position.y = tf.translation.y;
+    pose.position.z = tf.translation.z;
+    pose.orientation = tf.rotation;
+    return pose;
+}
 
+geometry_msgs::msg::PoseStamped get_pose_from_ps(const std::string &object_name){
+  geometry_msgs::msg::PoseStamped pose;
+  moveit::planning_interface::PlanningSceneInterface psi;
+  auto objects = psi.getObjects({object_name});
+  if (!objects.empty() && !objects[object_name].primitive_poses.empty()) {
+      pose.pose = objects[object_name].primitive_poses[0];
+  }
+  return pose;
+}
+
+geometry_msgs::msg::Pose pose_to_base_frame(
+  const rclcpp::Node::SharedPtr& node,
+  const geometry_msgs::msg::PoseStamped &pose_goal,
+  const std::string &target_frame) {
+      geometry_msgs::msg::PoseStamped pose_in_base_frame;
+      static tf2_ros::Buffer tf_buffer(node->get_clock());
+      static tf2_ros::TransformListener tf_listener(tf_buffer);
+      try {
+        pose_in_base_frame = tf_buffer.transform(
+          pose_goal, target_frame, tf2::durationFromSec(0.1));
+        // Now pose_in_base_frame.pose can be used for IK
+        
+      } catch (tf2::TransformException &ex) {
+          RCLCPP_ERROR(LOGGER, "Transform failed: %s. ", ex.what());
+      }
+      return pose_in_base_frame.pose;
+}
+
+void load_file(const std::string &input_path, std::string &output) {
+  std::ifstream file(input_path);
+  if (!file) {
+      throw std::runtime_error("Could not open file: " + input_path);
+ }
+  std::stringstream buffer;
+  buffer << file.rdbuf();
+  output = buffer.str();
+}
 
 std::map<std::string, double> compute_IK( const rclcpp::Node::SharedPtr& node,
                                           const moveit::core::RobotModelPtr robot_model,
                                           const std::string &robot_group,
                                           const std::string& kinematics_yaml_path,
-                                          const geometry_msgs::msg::PoseStamped &pose) {
+                                          const geometry_msgs::msg::Pose &pose) {
     // This function should compute the IK for the given pose and robot group
     // For now, we return an empty map as a placeholder
     std::map<std::string, double> joint_goal;
@@ -59,9 +105,18 @@ std::map<std::string, double> compute_IK( const rclcpp::Node::SharedPtr& node,
     }
     
     // Get base and tip frames
-    std::string base_frame = robot_model->getJointModelNames().front();
+    // std::string base_frame = robot_model->getJointModelNames().front();
     std::vector<std::string> tip_frames = { jmg->getLinkModelNames().back() };
-   
+    std::string base_frame;
+    // Left ur or right ur?
+    if(robot_group.find('l')!= std::string::npos){
+      base_frame="ur_left_base_link_inertia";
+    }
+    else {
+      base_frame="ur_right_base_link_inertia";
+    }
+    RCLCPP_INFO(LOGGER, "BASE FRAME IS: '%s'", base_frame.c_str());
+    RCLCPP_INFO(LOGGER, "TIP FRAME IS: '%s'", tip_frames[0].c_str());
     // Initialize
     if (!solver->initialize(node,*robot_model, robot_group, base_frame, tip_frames, search_res)) {
         RCLCPP_ERROR(LOGGER, "Failed to initialize kinematics solver for group '%s'", robot_group.c_str());
@@ -69,7 +124,7 @@ std::map<std::string, double> compute_IK( const rclcpp::Node::SharedPtr& node,
     }
 
     // Prepare IK input
-    std::vector<geometry_msgs::msg::Pose> poses = { pose.pose };
+    std::vector<geometry_msgs::msg::Pose> poses = { pose };
     std::vector<double> seed(jmg->getVariableCount(), 0.0);
     std::vector<std::vector<double>> solutions;
     kinematics::KinematicsResult result;
@@ -131,6 +186,7 @@ class MTCTaskNode{
     rclcpp::Node::SharedPtr node_;  
 };
 
+
 // This should set up an empty planning scene.
 void MTCTaskNode::setupPlanningScene(){
   
@@ -163,8 +219,6 @@ mtc::Task MTCTaskNode::createTask(){
 
   //std::string robot_description = node_->get_parameter("robot_description").as_string();
 
-  tf2_ros::Buffer tf_buffer(this->node_->get_clock());
-  tf2_ros::TransformListener tf_listener(tf_buffer);
 
   RCLCPP_INFO(LOGGER, "READING DUAL ROBOT MODEL...");
   task.loadRobotModel(node_, "robot_description");
@@ -230,20 +284,25 @@ mtc::Task MTCTaskNode::createTask(){
 
 
   //LOADING CUSTOM SEMANTICS LEFT, "HALF" OF THE DUAL ROBOT SRDF
-  std::ifstream srdf_file_l("/ros2_ws/src/simod_proj/ur/xacro/left_semantic.srdf");
-  std::stringstream srdf_buffer;
-  srdf_buffer << srdf_file_l.rdbuf();
-  std::string srdf_string_l = srdf_buffer.str();
-  // Reset stringstream for reuse
-  srdf_buffer.str("");
+  std::string srdf_string_l;
+  // std::ifstream srdf_file_l("/ros2_ws/src/simod_proj/ur/xacro/left_semantic.srdf");
+  // std::stringstream srdf_buffer;
+  // srdf_buffer << srdf_file_l.rdbuf();
+  // srdf_string_l = srdf_buffer.str();
+  // // Reset stringstream for reuse
+  // srdf_buffer.str("");
   
+  load_file("/ros2_ws/src/simod_proj/ur/xacro/left_semantic.srdf",srdf_string_l);
+
   //LOADING URDF LEFT, "HALF" OF THE DUAL ROBOT URDF
-  std::ifstream urdf_file_l("/ros2_ws/left_resolved_paletta.urdf");
-  std::stringstream urdf_buffer;
-  urdf_buffer << urdf_file_l.rdbuf();
-  std::string urdf_string_l = urdf_buffer.str();
-  // Reset stringstream for reuse
-  urdf_buffer.str("");
+  std::string urdf_string_l;
+  load_file("/ros2_ws/left_resolved_paletta.urdf", urdf_string_l);
+  // std::ifstream urdf_file_l("/ros2_ws/left_resolved_paletta.urdf");
+  // std::stringstream urdf_buffer;
+  // urdf_buffer << urdf_file_l.rdbuf();
+  // std::string urdf_string_l = urdf_buffer.str();
+  // // Reset stringstream for reuse
+  // urdf_buffer.str("");
 
   //PARSING LEFT URDF
   RCLCPP_INFO(LOGGER, "Parsing left URDF...");
@@ -274,14 +333,18 @@ mtc::Task MTCTaskNode::createTask(){
   // }
   
   //LOADING CUSTOM SEMANTICS RIGHT, "HALF" OF THE DUAL ROBOT SRDF
-  std::ifstream srdf_file_r("/ros2_ws/src/simod_proj/ur/xacro/right_semantic.srdf");
-  srdf_buffer << srdf_file_r.rdbuf();
-  std::string srdf_string_r = srdf_buffer.str();
+  std::string srdf_string_r;
+  load_file("/ros2_ws/src/simod_proj/ur/xacro/right_semantic.srdf",srdf_string_r);
+  // std::ifstream srdf_file_r("/ros2_ws/src/simod_proj/ur/xacro/right_semantic.srdf");
+  // srdf_buffer << srdf_file_r.rdbuf();
+  // std::string srdf_string_r = srdf_buffer.str();
 
   // LOADING URDF RIGHT, "HALF" OF THE DUAL ROBOT URDF
-  std::ifstream urdf_file_r("/ros2_ws/right_resolved_paletta.urdf");
-  urdf_buffer << urdf_file_r.rdbuf();
-  std::string urdf_string_r = urdf_buffer.str();
+  std::string urdf_string_r;
+  load_file("/ros2_ws/right_resolved_paletta.urdf",urdf_string_r);
+  // std::ifstream urdf_file_r("/ros2_ws/right_resolved_paletta.urdf");
+  // urdf_buffer << urdf_file_r.rdbuf();
+  // std::string urdf_string_r = urdf_buffer.str();
 
   //PARSING
   RCLCPP_INFO(LOGGER, "Parsing right URDF...");
@@ -353,32 +416,41 @@ mtc::Task MTCTaskNode::createTask(){
       
       
       // Set pose goal relative to object in the scene
-      geometry_msgs::msg::PoseStamped pose_goal_left,pose_goal_right, pose_in_base_frame;
-      pose_goal_left.header.frame_id = "pacco_clone_0";  // The object's frame in the planning scene
-      pose_goal_left.pose.position.x = 0.0;     // Offset from the object's origin (e.g., for grasping)
-      pose_goal_left.pose.position.y = 0.1;
-      pose_goal_left.pose.position.z = 0.2;
-      pose_goal_left.pose.orientation.w = 1.0;
-      
+      geometry_msgs::msg::PoseStamped pose_goal;
+      geometry_msgs::msg::Pose pose_in_base_frame_left, pose_in_base_frame_right;
+      //pose_goal.header.frame_id = "pacco_clone_0";  // The object's frame in the planning scene
+      geometry_msgs::msg::PoseStamped object_pose_world = get_pose_from_ps("pacco_clone_0");
+
+      pose_goal.pose.position.x = 0.0;     // Offset from the object's origin (e.g., for grasping)
+      pose_goal.pose.position.y = 0.1;
+      pose_goal.pose.position.z = 0.2;
+      pose_goal.pose.orientation.w = 1.0;
+
+      // Transform offset_pose from object frame to world frame
+      tf2::Transform tf_object, tf_offset;
+      tf2::fromMsg(object_pose_world.pose, tf_object);
+      tf2::fromMsg(pose_goal.pose, tf_offset);
+
+      tf2::Transform tf_goal_world = tf_object * tf_offset;
+      geometry_msgs::msg::PoseStamped goal_pose_world ;
+      goal_pose_world.pose = tf2_transform_to_pose(tf2::toMsg(tf_goal_world));
+
       // We drive manual, so we need to convert the pose to be relative to the robot in the world
       // hooray more complex stuff
-      try {
-        pose_in_base_frame = tf_buffer.transform(
-          pose_goal_left, "left_robot", tf2::durationFromSec(0.1));
-        // Now pose_in_base_frame.pose can be used for IK
-        
-      } catch (tf2::TransformException &ex) {
-          RCLCPP_ERROR(LOGGER, "Transform failed: %s", ex.what());
-      }
+
+      pose_in_base_frame_left = pose_to_base_frame(this->node_,goal_pose_world,"ur_left_base_link_inertia");
+      pose_in_base_frame_right = pose_to_base_frame(this->node_,goal_pose_world,"ur_right_base_link_inertia");
+
 
       // Calculate map goal for left and right arms
       std::map<std::string,double> *joint_goal;
-      std::map<std::string,double> joint_goal_right = compute_IK(this->node_,right_robot_model,right_arm_group,left_kinematics_path,pose_goal_right);
-      std::map<std::string,double> joint_goal_left = compute_IK(this->node_,left_robot_model,left_arm_group,right_kinematics_path,pose_goal_left);
+      std::map<std::string,double> joint_goal_right = compute_IK(this->node_,right_robot_model,right_arm_group,right_kinematics_path,pose_in_base_frame_right);
+      std::map<std::string,double> joint_goal_left = compute_IK(this->node_,left_robot_model,left_arm_group,left_kinematics_path,pose_in_base_frame_left);
       // Merge solutions
       joint_goal_left.merge(joint_goal_right);
       joint_goal = &joint_goal_left;
 
+      // go back to dual model
       stage_dual_arms->setGroup(dual_arms_group);
       stage_dual_arms->setGoal(*joint_goal);
 

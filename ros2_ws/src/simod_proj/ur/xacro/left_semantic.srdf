@@ -5,7 +5,6 @@
 -->
 <robot name="left_srm">
     <group name="srm_base_l">
-        <joint name="left_base_joint"/>
         <joint name="left_summit_base_footprint_joint"/>
         <joint name="left_summit_back_left_wheel_joint"/>
         <joint name="left_summit_back_right_wheel_joint"/>
@@ -13,7 +12,6 @@
         <joint name="left_summit_front_right_wheel_joint"/>
     </group>
     <group name="srm_l_ur">
-        <joint name="ur_left_base_link-base_link_inertia"/>
         <joint name="ur_left_shoulder_pan_joint"/>
         <joint name="ur_left_shoulder_lift_joint"/>
         <joint name="ur_left_elbow_joint"/>
