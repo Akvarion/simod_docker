@@ -33,7 +33,12 @@ install(DIRECTORY launch DESTINATION share/${PROJECT_NAME})
 install(PROGRAMS
   scripts/move_demo.py
   scripts/pick_and_place_demo.py
+  scripts/return_robots_home.py
   DESTINATION lib/${PROJECT_NAME}
+  PERMISSIONS
+    OWNER_READ OWNER_WRITE OWNER_EXECUTE
+    GROUP_READ GROUP_EXECUTE
+    WORLD_READ WORLD_EXECUTE
 )
 
 if(BUILD_TESTING)

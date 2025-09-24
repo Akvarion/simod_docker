@@ -1,0 +1,9 @@
+# Richiesta: specifica il link su cui agire e lo stato di gravità desiderato
+# Se link_name è in forma 'model::link', model_name può essere vuoto.
+# In alternativa, puoi passare model_name='mio_modello' e link_name='link_1'.
+string model_name
+string link_name
+bool gravity
+---
+bool success
+string message

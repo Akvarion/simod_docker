@@ -3,7 +3,6 @@
 
 import rclpy
 from rclpy.node import Node
-from rclpy.duration import Duration
 import argparse, time
 from geometry_msgs.msg import Twist, Pose
 from std_msgs.msg import Float64MultiArray
@@ -14,6 +13,7 @@ from gazebo_msgs.srv import (
 )
 from gazebo_msgs.msg import ModelState, EntityState
 import tf2_ros
+from rclpy.duration import Duration
 
 # Servizi del link-attacher (assicurati di avere il pacchetto corretto)
 # Se i nomi dei tipi nel tuo plugin sono diversi, aggiorna questi import.
@@ -22,62 +22,28 @@ from linkattacher_msgs.srv import AttachLink, DetachLink
 from gazebo_link_gravity_toggle.srv import SetLinkGravity
 from gazebo_collision_toggle.srv import SetCollisionEnabled
 
-import level_paletta_utils as lpu
-
 # ========= CONFIG GENERALI =========
 # Durate (s)
-APPROACH_TIME = 20.3
+APPROACH_TIME = 20.5
 DESCEND_AND_PICK_TIME = 12.0
-COLLECT_TIME = 10.0
-TRANSPORT_TIME = 16.0
-DESCEND_AND_PLACE_TIME = 12.0
-RELEASE_TIME = 1.0
+TRANSPORT_TIME = 20.0
+RELEASE_TIME = 10.0
 
-# =========== APPROACH ==========
 # Velocità base in approach
-
-APPROACH_LEFT_BASE_XY_VEL  = (0.0018, 0.25)
-APPROACH_RIGHT_BASE_XY_VEL = (-0.022, 0.25)
-
-# APPROACH_LEFT_BASE_XY_VEL  = (0.002, 0.25)
-# APPROACH_RIGHT_BASE_XY_VEL = (-0.022, 0.25)
+APPROACH_LEFT_BASE_XY_VEL  = (0.0019, 0.247)
+APPROACH_RIGHT_BASE_XY_VEL = (-0.022, 0.247)
 
 # Velocità bracci (esempio; usa le tue)
-LEFT_ARM_VEL   =  [0.075, -0.01, 0.01, -0.01, -0.01, -0.01]
-RIGHT_ARM_VEL  = [-0.09, -0.01, 0.01, -0.01, 0.01, 0.021]
-# LEFT_ARM_VEL   =  [0.072, -0.01, 0.01, -0.01, -0.01, -0.01]
-# RIGHT_ARM_VEL  = [-0.09, -0.01, 0.01, -0.01, 0.01, 0.021]
+LEFT_ARM_VEL   =  [0.078, -0.01, 0.01, -0.01, -0.01, -0.01]
+RIGHT_ARM_VEL  = [-0.09, -0.01, 0.01, -0.01, 0.01, 0.022]
 
-# =========== PICK ==========
 # Pose per “calata” e presa (comandi velocità giunti o target semplici)
-LEFT_ARM_PICK   =  [-0.001, -0.08, 0.08, 0.0, -0.12, -0.055]
-RIGHT_ARM_PICK  =  [0.001, -0.12, 0.08, 0.0, 0.12, 0.055]
+LEFT_ARM_PICK   =  [-0.001, -0.082, 0.08, 0.0, -0.12, -0.057]
+RIGHT_ARM_PICK  =  [0.001, -0.12, 0.08, 0.0, 0.12, 0.051]
 
-# =========== COLLECT ==========
-# Velocità base nel collect
-COLLECT_LEFT_BASE_XY_VEL  = (0.001, -0.15)
-COLLECT_RIGHT_BASE_XY_VEL = (-0.0, -0.15)
-
-LEFT_ARM_COLLECT   =  [0.0, 0.08, -0.08, 0.0, 0.0, -0.020]
-RIGHT_ARM_COLLECT  =  [0.0, 0.08, -0.08, 0.0, 0.0, -0.025]
-
-# =========== TRANSPORT ==========
 # Velocità base nel trasporto
-LEFT_TRANSPORT_VEL_XY  = (-0.24, 0.0)
-RIGHT_TRANSPORT_VEL_XY = (-0.24 , -0.055)
-
-# ========== DESCEND & PLACE ==========
-# breve avvicinamento al pallet
-PLACE_LEFT_BASE_XY_VEL  = (0.0, 0.09)
-PLACE_RIGHT_BASE_XY_VEL = (0.0, 0.06)
-# Pose per calata
-LEFT_ARM_PLACE   =  [-0.001, -0.12, 0.08, 0.0, 0.0, 0.05]
-RIGHT_ARM_PLACE  =  [0.001,  -0.12, 0.08, 0.0, -0.0, 0.0]
-
-# ========== RELEASE ==========
-# Pose per rilascio
-LEFT_ARM_RELEASE   =  [0.01, 0.0, 0.0, 0.0, 0.1, 0.0]
-RIGHT_ARM_RELEASE  =  [-0.01, 0.0, 0.0, 0.0, -0.1, 0.0]
+LEFT_TRANSPORT_VEL_XY  = (-0.002, -0.24)
+RIGHT_TRANSPORT_VEL_XY = ( 0.02 , -0.24)
 
 class PickAndPlaceDemo(Node):
     def __init__(self, args):
@@ -111,24 +77,6 @@ class PickAndPlaceDemo(Node):
         self.tf_buffer   = tf2_ros.Buffer(cache_time=Duration(seconds=5.0))
         self.tf_listener = tf2_ros.TransformListener(self.tf_buffer, self)
 
-        # WristLeveler (mantiene orizzontale la paletta sinistra)
-        self.left_leveler = lpu.WristLeveler(
-            self, ee_frame='ur_left_tool0', base_frame='right_summit_odom', #world',
-            idx_wrist_pitch=4, idx_wrist_roll=5,   # 0-based: giunti 5 e 6
-            kp_r=1.5, kd_r=0.2, kp_p=1.5, kd_p=0.2, vmax=1.0
-        )
-        self.left_leveler.set_target(roll_des=-1.57, pitch_des=3.14)  # orizzontale (default)
-        self.left_leveler.enable(False)  # lo attivi quando vuoi
-        
-        self.right_leveler = lpu.WristLeveler(
-            self, ee_frame='ur_right_tool0', base_frame='right_summit_odom', #world',
-            idx_wrist_pitch=4, idx_wrist_roll=5,   # 0-based: giunti 5 e 6
-            kp_r=1.5, kd_r=0.2, kp_p=1.5, kd_p=0.2, vmax=1.0
-        )
-        self.right_leveler.set_target(roll_des=1.57, pitch_des=0.0)  # orizzontale (default)
-        self.right_leveler.enable(False)  # lo attivi quando vuoi
-
-
         # Gazebo services (per eventuali snap/fallback o set pose finale)
         self.cli_set_model_state  = self.create_client(SetModelState,   '/gazebo/set_model_state')
         self.cli_get_entity_state = self.create_client(GetEntityState,  '/state/get_entity_state')
@@ -137,6 +85,7 @@ class PickAndPlaceDemo(Node):
         self.toggle_gravity_cli = self.create_client(SetLinkGravity, '/set_link_gravity')
         # service per toggle collisioni link
         self.toggle_collision_cli = self.create_client(SetCollisionEnabled, '/set_collision_enabled')
+
 
         # Link Attacher services
         self.attach_cli = self.create_client(AttachLink, '/ATTACHLINK')
@@ -168,11 +117,8 @@ class PickAndPlaceDemo(Node):
         self.durations = {
             'approach': APPROACH_TIME,
             'descend_and_pick': DESCEND_AND_PICK_TIME,
-            'collect': COLLECT_TIME,
             'transport': TRANSPORT_TIME,
-            'descend_and_place': DESCEND_AND_PICK_TIME,
-            'release': RELEASE_TIME,
-            'getaway': COLLECT_TIME,
+            'release': RELEASE_TIME
         }
         self.attached = False
 
@@ -194,8 +140,7 @@ class PickAndPlaceDemo(Node):
             self.right_base_pub.publish(tr)
             # Muovi bracci (velocità giunti)
             la, ra = Float64MultiArray(), Float64MultiArray()
-            la.data, ra.data = self.left_leveler.apply_on(LEFT_ARM_VEL), self.right_leveler.apply_on(RIGHT_ARM_VEL)
-            
+            la.data, ra.data = LEFT_ARM_VEL, RIGHT_ARM_VEL
             self.left_arm_pub.publish(la)
             self.right_arm_pub.publish(ra)
 
@@ -205,19 +150,41 @@ class PickAndPlaceDemo(Node):
                 self.set_paletta_collision(False, side='right')  # disabilita collisione paletta destra
                 self.transition('descend_and_pick')
 
-                self.left_leveler.enable(False)  # attiva il wrist leveler
-                self.right_leveler.enable(False)  # attiva il wrist leveler
-
         elif self.state == 'descend_and_pick':
             # Calata/chiusura paletta
             la, ra = Float64MultiArray(), Float64MultiArray()
-            la.data, ra.data = self.left_leveler.apply_on(LEFT_ARM_PICK), self.right_leveler.apply_on(RIGHT_ARM_PICK)
             la.data, ra.data = LEFT_ARM_PICK, RIGHT_ARM_PICK
             self.left_arm_pub.publish(la)
             self.right_arm_pub.publish(ra)
 
             if elapsed > self.durations['descend_and_pick']:
                 self.stop_all_movement()
+
+                # # Try to lookup EE pose
+                # try:
+                #     trans = self.tf_buffer.lookup_transform('world', self.left_ee, rclpy.time.Time(), timeout=rclpy.duration.Duration(seconds=1.0))
+                # except Exception as e:
+                #     # On failure, also try to dump known frames from the buffer to help debugging
+                #     frames_info = ''
+                #     try:
+                #         frames_info = self.tf_buffer.all_frames_as_yaml()
+                #     except Exception as _e2:
+                #         frames_info = f'<failed to list frames: {_e2}>'
+                #     self.get_logger().error(f'Failed to get transform for {self.left_ee}:\n        {e}\nAvailable TF frames:\n{frames_info}')
+                #     return False
+
+                # pose = Pose()
+                # pose.position.x = trans.transform.translation.x
+                # pose.position.y = trans.transform.translation.y
+                # pose.position.z = trans.transform.translation.z + 0.5
+                # pose.orientation = trans.transform.rotation
+
+                # # snap iniziale PRIMA dell’attach (opzionale)
+                # self.call_set_model_state(
+                #     model_name=self.object_name,
+                #     pose=pose,  # personalizza se vuoi
+                #     reference_frame='world'
+                # )
 
                 # ==== ATTACH FISICO ====
                 ok = self.attach_fixed_joint(
@@ -234,23 +201,6 @@ class PickAndPlaceDemo(Node):
                 
                 self.set_pacco_gravity(False)
 
-                self.transition('collect')
-
-        elif self.state == 'collect':
-            # Muovi basi indietro
-            tl, tr = Twist(), Twist()
-            tl.linear.x, tl.linear.y = COLLECT_LEFT_BASE_XY_VEL
-            tr.linear.x, tr.linear.y = COLLECT_RIGHT_BASE_XY_VEL
-            self.left_base_pub.publish(tl)
-            self.right_base_pub.publish(tr)
-            # Muovi bracci (velocità giunti)
-            la, ra = Float64MultiArray(), Float64MultiArray()
-            la.data, ra.data = self.left_leveler.apply_on(LEFT_ARM_COLLECT), self.right_leveler.apply_on(RIGHT_ARM_COLLECT)
-            self.left_arm_pub.publish(la)
-            self.right_arm_pub.publish(ra)
-
-            if elapsed > self.durations['collect']:
-                self.stop_all_movement()
                 self.transition('transport')
 
         elif self.state == 'transport':
@@ -260,47 +210,19 @@ class PickAndPlaceDemo(Node):
             self.left_base_pub.publish(tl)
             self.right_base_pub.publish(tr)
 
-            la, ra = Float64MultiArray(), Float64MultiArray()
-            la.data, ra.data = self.left_leveler.apply_on(), self.right_leveler.apply_on()
-            self.left_arm_pub.publish(la)
-            self.right_arm_pub.publish(ra)
-
             # Con attach fisico NON teletrasportare il pacco: ci pensa la fisica
             # if not self.attached:
             #     (eventuale fallback di follow, sconsigliato mentre c’è joint)
 
             if elapsed > self.durations['transport']:
                 self.stop_all_movement()
-                self.transition('descend_and_place')
-
-
-        elif self.state == 'descend_and_place':
-            # Muovi basi verso l’oggetto
-            tl, tr = Twist(), Twist()
-            tl.linear.x, tl.linear.y = PLACE_LEFT_BASE_XY_VEL
-            tr.linear.x, tr.linear.y = PLACE_RIGHT_BASE_XY_VEL
-            self.left_base_pub.publish(tl)
-            self.right_base_pub.publish(tr)
-            # calata bracci
-            la, ra = Float64MultiArray(), Float64MultiArray()
-            la.data, ra.data = self.left_leveler.apply_on(LEFT_ARM_PLACE), self.right_leveler.apply_on(RIGHT_ARM_PLACE)
-            self.left_arm_pub.publish(la)
-            self.right_arm_pub.publish(ra)
-
-            if elapsed > self.durations['descend_and_place']:
-                self.stop_all_movement()
                 self.transition('release')
 
         elif self.state == 'release':
-            la, ra = Float64MultiArray(), Float64MultiArray()
-            la.data, ra.data = self.left_leveler.apply_on(LEFT_ARM_RELEASE), self.right_leveler.apply_on(RIGHT_ARM_RELEASE)
-            self.left_arm_pub.publish(la)
-            self.right_arm_pub.publish(ra)
-
             if True or self.attached: # funziona anche se attach fallito
                 # ==== DETACH ====
                 self.set_paletta_collision(True, side='left')  # riabilita collisione paletta sinistra
-                # self.set_paletta_collision(True, side='right')  # riabilita collisione paletta destra
+                self.set_paletta_collision(True, side='right')  # riabilita collisione paletta destra
                 ok = self.detach_fixed_joint(
                     model1=self.attach_robot_model,
                     link1=self.attach_robot_link,
@@ -314,37 +236,9 @@ class PickAndPlaceDemo(Node):
 
                 self.attached = False
 
-            
-            if elapsed > self.durations['release']:
-                self.stop_all_movement()
                 self.set_pacco_gravity(True)  # riattiva gravità sul pacco
 
-            # self.left_leveler.set_target(roll_des=1.0, pitch_des=1.0)  # inclino paletta per far scivolare il pacco
-            # self.right_leveler.set_target(roll_des=-1.0, pitch_des=-1.0) 
-            # la, ra = Float64MultiArray(), Float64MultiArray()
-            # la.data, ra.data = self.left_leveler.apply_on(), self.left_leveler.apply_on()
-            # self.left_arm_pub.publish(la)
-            # self.right_arm_pub.publish(ra)
-
-                self.transition('getaway')
-
-        elif self.state == 'getaway':
-            # Muovi basi indietro
-
-            self.set_pacco_gravity(True)  # riattiva gravità sul pacco
-            tl, tr = Twist(), Twist()
-            tl.linear.x, tl.linear.y = COLLECT_LEFT_BASE_XY_VEL
-            tr.linear.x, tr.linear.y = COLLECT_RIGHT_BASE_XY_VEL
-            self.left_base_pub.publish(tl)
-            self.right_base_pub.publish(tr)
-            # Muovi bracci (velocità giunti)
-            la, ra = Float64MultiArray(), Float64MultiArray()
-            la.data, ra.data = self.left_leveler.apply_on(LEFT_ARM_COLLECT), self.right_leveler.apply_on(RIGHT_ARM_COLLECT)
-            self.left_arm_pub.publish(la)
-            self.right_arm_pub.publish(ra)
-
-            if elapsed > self.durations['getaway']:
-                self.stop_all_movement()
+            if elapsed > self.durations['release']:
                 self.get_logger().info('Demo completata')
                 self.timer.cancel()
 
@@ -484,13 +378,14 @@ class PickAndPlaceDemo(Node):
 
     def set_paletta_collision(self, enable: bool, side='left'):
         if not self.toggle_collision_cli.service_is_ready():
-            try: self.toggle_collision_cli.wait_for_service(timeout_sec=1.0)
-            except Exception: 
+            try:
+                self.toggle_collision_cli.wait_for_service(timeout_sec=1.0)
+            except Exception:
                 self.get_logger().warn('set_collision_enabled wait failed')
-                pass
         if not self.toggle_collision_cli.service_is_ready():
             self.get_logger().warn('set_collision_enabled not ready')
             return False
+
         req = SetCollisionEnabled.Request()
         if side == 'left':
             req.model_name = 'left_robot'
@@ -498,11 +393,19 @@ class PickAndPlaceDemo(Node):
         else:
             req.model_name = 'right_robot'
             req.link_name  = 'ur_right_wrist_3_link'
-        req.collision_name = ''  # tutte le collision del link
+
+        req.collision_name = ''   # tutte le collision del link
         req.enable = enable
+
         fut = self.toggle_collision_cli.call_async(req)
         rclpy.spin_until_future_complete(self, fut, timeout_sec=2.0)
-        return fut.done() and fut.result() and fut.result().success
+        if not (fut.done() and fut.result()):
+            self.get_logger().warn('set_collision_enabled call failed')
+            return False
+
+        res = fut.result()
+        self.get_logger().info(f"paletta {side}: collisions {'ENABLED' if enable else 'DISABLED'} — {res.message}")
+        return bool(res.success)
 
 def main():
     parser = argparse.ArgumentParser(

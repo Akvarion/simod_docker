@@ -1,0 +1,8 @@
+# Disattiva/riattiva collisioni su una collision (o su tutte le collision del link se collision_name è vuoto)
+string model_name
+string link_name
+string collision_name  # opzionale: se vuoto, applica a tutte le collision del link
+bool enable            # true = collisione attiva, false = disattivata
+---
+bool success
+string message

@@ -1,5 +1,9 @@
 <sdf version='1.7'>
   <world name='default'>
+    <plugin name="gazebo_link_attacher" filename="libgazebo_link_attacher.so"/>
+    <plugin name="gazebo_ros_api_plugin" filename="libgazebo_ros_api_plugin.so"/>
+    <plugin name="toggle_link_gravity" filename="libtoggle_link_gravity_plugin.so"/>
+    <plugin name="toggle_collision" filename="libtoggle_collision_plugin.so"/>
     <plugin name='gazebo_ros_state' filename='libgazebo_ros_state.so'>
       <ros>
         <namespace>/state</namespace>
@@ -164,6 +168,7 @@
         </link>
       </model>
       <model name='pacco_clone_1'>
+        <static>true</static>
         <pose>-0.241949 4.83685 0.984316 1e-06 -7e-06 -0.015858</pose>
         <scale>1 1 1</scale>
         <link name='link_1'>
