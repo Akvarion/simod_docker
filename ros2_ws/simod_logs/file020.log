@@ -1,0 +1,115 @@
+[INFO] [launch]: All log files can be found below /root/.ros/log/2025-10-16-15-13-09-894163-outlander-Aspire-V3-571G-14803
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [gzserver-1]: process started with pid [14804]
+[INFO] [gzclient-2]: process started with pid [14806]
+[INFO] [spawn_entity.py-3]: process started with pid [14808]
+[INFO] [robot_state_publisher-4]: process started with pid [14810]
+[INFO] [static_transform_publisher-5]: process started with pid [14812]
+[INFO] [static_transform_publisher-6]: process started with pid [14814]
+[INFO] [static_transform_publisher-7]: process started with pid [14816]
+[INFO] [static_transform_publisher-8]: process started with pid [14818]
+[INFO] [ros2_control_node-9]: process started with pid [14820]
+[INFO] [spawner-10]: process started with pid [14822]
+[static_transform_publisher-6] [WARN] [1760627593.863510960] []: Old-style arguments are deprecated; see --help for new-style arguments
+[static_transform_publisher-7] [WARN] [1760627593.864948744] []: Old-style arguments are deprecated; see --help for new-style arguments
+[static_transform_publisher-8] [WARN] [1760627593.867420794] []: Old-style arguments are deprecated; see --help for new-style arguments
+[static_transform_publisher-5] [WARN] [1760627593.867634084] []: Old-style arguments are deprecated; see --help for new-style arguments
+[static_transform_publisher-6] [INFO] [1760627594.078758690] [left.left_static_transform_publisher_back_right]: Spinning until stopped - publishing transform
+[static_transform_publisher-6] translation: ('0.250000', '-0.150000', '0.000000')
+[static_transform_publisher-6] rotation: ('0.000000', '0.000000', '0.000000', '1.000000')
+[static_transform_publisher-6] from 'left_summit_base_link' to 'left_summit_back_right_wheel_link'
+[static_transform_publisher-5] [INFO] [1760627594.078758751] [left.left_static_transform_publisher_back_left]: Spinning until stopped - publishing transform
+[static_transform_publisher-5] translation: ('0.250000', '0.150000', '0.000000')
+[static_transform_publisher-5] rotation: ('0.000000', '0.000000', '0.000000', '1.000000')
+[static_transform_publisher-5] from 'left_summit_base_link' to 'left_summit_back_left_wheel_link'
+[static_transform_publisher-8] [INFO] [1760627594.080655959] [left.left_static_transform_publisher_front_right]: Spinning until stopped - publishing transform
+[static_transform_publisher-8] translation: ('-0.250000', '-0.150000', '0.000000')
+[static_transform_publisher-8] rotation: ('0.000000', '0.000000', '0.000000', '1.000000')
+[static_transform_publisher-8] from 'left_summit_base_link' to 'left_summit_front_right_wheel_link'
+[static_transform_publisher-7] [INFO] [1760627594.081494012] [left.left_static_transform_publisher_front_left]: Spinning until stopped - publishing transform
+[static_transform_publisher-7] translation: ('-0.250000', '0.150000', '0.000000')
+[static_transform_publisher-7] rotation: ('0.000000', '0.000000', '0.000000', '1.000000')
+[static_transform_publisher-7] from 'left_summit_base_link' to 'left_summit_front_left_wheel_link'
+[robot_state_publisher-4] [INFO] [1760627594.147276383] [left.robot_state_publisher]: got segment left_summit_back_left_wheel_link
+[robot_state_publisher-4] [INFO] [1760627594.147784378] [left.robot_state_publisher]: got segment left_summit_back_right_wheel_link
+[robot_state_publisher-4] [INFO] [1760627594.147808209] [left.robot_state_publisher]: got segment left_summit_base_chapa
+[robot_state_publisher-4] [INFO] [1760627594.147820208] [left.robot_state_publisher]: got segment left_summit_base_docking_contact
+[robot_state_publisher-4] [INFO] [1760627594.147831101] [left.robot_state_publisher]: got segment left_summit_base_footprint
+[robot_state_publisher-4] [INFO] [1760627594.147841044] [left.robot_state_publisher]: got segment left_summit_base_link
+[robot_state_publisher-4] [INFO] [1760627594.147851035] [left.robot_state_publisher]: got segment left_summit_base_logo_front
+[robot_state_publisher-4] [INFO] [1760627594.147860968] [left.robot_state_publisher]: got segment left_summit_base_logo_left
+[robot_state_publisher-4] [INFO] [1760627594.147871141] [left.robot_state_publisher]: got segment left_summit_base_logo_rear
+[robot_state_publisher-4] [INFO] [1760627594.147881280] [left.robot_state_publisher]: got segment left_summit_base_logo_right
+[robot_state_publisher-4] [INFO] [1760627594.147891151] [left.robot_state_publisher]: got segment left_summit_front_laser_base_link
+[robot_state_publisher-4] [INFO] [1760627594.147901401] [left.robot_state_publisher]: got segment left_summit_front_laser_link
+[robot_state_publisher-4] [INFO] [1760627594.147911487] [left.robot_state_publisher]: got segment left_summit_front_left_wheel_link
+[robot_state_publisher-4] [INFO] [1760627594.147922048] [left.robot_state_publisher]: got segment left_summit_front_right_wheel_link
+[robot_state_publisher-4] [INFO] [1760627594.147932087] [left.robot_state_publisher]: got segment left_summit_imu_link
+[robot_state_publisher-4] [INFO] [1760627594.147942065] [left.robot_state_publisher]: got segment left_summit_rear_laser_base_link
+[robot_state_publisher-4] [INFO] [1760627594.147952419] [left.robot_state_publisher]: got segment left_summit_rear_laser_link
+[robot_state_publisher-4] [INFO] [1760627594.147962228] [left.robot_state_publisher]: got segment ur_left_base
+[robot_state_publisher-4] [INFO] [1760627594.147972382] [left.robot_state_publisher]: got segment ur_left_base_link
+[robot_state_publisher-4] [INFO] [1760627594.147982239] [left.robot_state_publisher]: got segment ur_left_base_link_inertia
+[robot_state_publisher-4] [INFO] [1760627594.147991979] [left.robot_state_publisher]: got segment ur_left_flange
+[robot_state_publisher-4] [INFO] [1760627594.148001801] [left.robot_state_publisher]: got segment ur_left_forearm_link
+[robot_state_publisher-4] [INFO] [1760627594.148011608] [left.robot_state_publisher]: got segment ur_left_ft_frame
+[robot_state_publisher-4] [INFO] [1760627594.148021323] [left.robot_state_publisher]: got segment ur_left_paletta
+[robot_state_publisher-4] [INFO] [1760627594.148031130] [left.robot_state_publisher]: got segment ur_left_shoulder_link
+[robot_state_publisher-4] [INFO] [1760627594.148040905] [left.robot_state_publisher]: got segment ur_left_tool0
+[robot_state_publisher-4] [INFO] [1760627594.148050559] [left.robot_state_publisher]: got segment ur_left_upper_arm_link
+[robot_state_publisher-4] [INFO] [1760627594.148060123] [left.robot_state_publisher]: got segment ur_left_wrist_1_link
+[robot_state_publisher-4] [INFO] [1760627594.148069781] [left.robot_state_publisher]: got segment ur_left_wrist_2_link
+[robot_state_publisher-4] [INFO] [1760627594.148079703] [left.robot_state_publisher]: got segment ur_left_wrist_3_link
+[ros2_control_node-9] [WARN] [1760627594.253730272] [left.controller_manager]: 'update_rate' parameter not set, using default value.
+[ros2_control_node-9] [INFO] [1760627594.253879871] [left.controller_manager]: Subscribing to '~/robot_description' topic for robot description file.
+[ros2_control_node-9] [INFO] [1760627594.272686286] [left.controller_manager]: update rate is 100 Hz
+[ros2_control_node-9] [INFO] [1760627594.272841298] [left.controller_manager]: Spawning controller_manager RT thread with scheduler priority: 50
+[ros2_control_node-9] [WARN] [1760627594.273096629] [left.controller_manager]: No real-time kernel detected on this system. See [https://control.ros.org/master/doc/ros2_control/controller_manager/doc/userdoc.html] for details on how to enable realtime scheduling.
+[spawner-10] [INFO] [1760627595.515874685] [spawner_ur_left_joint_group_vel_controller]: waiting for service /left/controller_manager/list_controllers to become available...
+[spawn_entity.py-3] [INFO] [1760627595.585244342] [spawn_entity]: Spawn Entity started
+[spawn_entity.py-3] [INFO] [1760627595.586200404] [spawn_entity]: Loading entity published on topic /left/robot_description
+[INFO] [static_transform_publisher-11]: process started with pid [14924]
+[INFO] [spawner-12]: process started with pid [14926]
+[spawn_entity.py-3] [INFO] [1760627595.666938746] [spawn_entity]: Waiting for entity xml on /left/robot_description
+[static_transform_publisher-11] [WARN] [1760627595.693866394] []: Old-style arguments are deprecated; see --help for new-style arguments
+[static_transform_publisher-11] [INFO] [1760627595.778849825] [left.static_transform_publisher_fHdwMjDD4zCvjaok]: Spinning until stopped - publishing transform
+[static_transform_publisher-11] translation: ('0.000000', '0.000000', '0.000000')
+[static_transform_publisher-11] rotation: ('0.000000', '0.000000', '0.000000', '1.000000')
+[static_transform_publisher-11] from 'world' to 'left_summit_odom'
+[spawn_entity.py-3] [INFO] [1760627595.819427539] [spawn_entity]: Waiting for service /spawn_entity, timeout = 5
+[spawn_entity.py-3] [INFO] [1760627595.820732125] [spawn_entity]: Waiting for service /spawn_entity
+[spawner-12] [INFO] [1760627596.404891195] [left.spawner_joint_state_broadcaster]: waiting for service /left/controller_manager/list_controllers to become available...
+[spawn_entity.py-3] [ERROR] [1760627600.970238075] [spawn_entity]: Service /spawn_entity unavailable. Was Gazebo started with GazeboRosFactory?
+[spawn_entity.py-3] [ERROR] [1760627600.971261889] [spawn_entity]: Spawn service failed. Exiting.
+[gzserver-1] ALSA lib pcm_dmix.c:1032:(snd_pcm_dmix_open) unable to open slave
+[gzserver-1] AL lib: (EE) ALCplaybackAlsa_open: Could not open playback device 'default': Device or resource busy
+[ERROR] [spawn_entity.py-3]: process has died [pid 14808, exit code 1, cmd '/opt/ros/humble/lib/gazebo_ros/spawn_entity.py -entity left_robot -topic /left/robot_description -x -0.66 -y 0 -z 0 -timeout 5 -unpause --ros-args'].
+[gzserver-1] [WARN] [1760627601.321570877] [rcl]: Found remap rule 'model_states:=model_states'. This syntax is deprecated. Use '--ros-args --remap model_states:=model_states' instead.
+[gzserver-1] [WARN] [1760627601.321878746] [rcl]: Found remap rule 'link_states:=link_states'. This syntax is deprecated. Use '--ros-args --remap link_states:=link_states' instead.
+[gzserver-1] [INFO] [1760627601.339601432] [state.gazebo_ros_state]: Publishing states of gazebo models at [/state/model_states]
+[gzserver-1] [INFO] [1760627601.341341711] [state.gazebo_ros_state]: Publishing states of gazebo links at [/state/link_states]
+[spawner-10] [WARN] [1760627605.534594724] [spawner_ur_left_joint_group_vel_controller]: Could not contact service /left/controller_manager/list_controllers
+[spawner-10] [INFO] [1760627605.535304442] [spawner_ur_left_joint_group_vel_controller]: waiting for service /left/controller_manager/list_controllers to become available...
+[spawner-12] [FATAL] [1760627606.423794094] [left.spawner_joint_state_broadcaster]: Could not contact service /left/controller_manager/list_controllers
+[ERROR] [spawner-12]: process has died [pid 14926, exit code 1, cmd '/ros2_ws/install/controller_manager/lib/controller_manager/spawner joint_state_broadcaster -c /left/controller_manager --controller-manager-timeout 10 --ros-args -r __ns:=/left'].
+[WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+[static_transform_publisher-8] [INFO] [1760627609.132797715] [rclcpp]: signal_handler(signum=2)
+[static_transform_publisher-7] [INFO] [1760627609.132797618] [rclcpp]: signal_handler(signum=2)
+[static_transform_publisher-11] [INFO] [1760627609.132797732] [rclcpp]: signal_handler(signum=2)
+[ros2_control_node-9] [INFO] [1760627609.132808128] [rclcpp]: signal_handler(signum=2)
+[robot_state_publisher-4] [INFO] [1760627609.132895771] [rclcpp]: signal_handler(signum=2)
+[static_transform_publisher-6] [INFO] [1760627609.132900455] [rclcpp]: signal_handler(signum=2)
+[static_transform_publisher-5] [INFO] [1760627609.132899909] [rclcpp]: signal_handler(signum=2)
+[INFO] [static_transform_publisher-8]: process has finished cleanly [pid 14818]
+[INFO] [static_transform_publisher-6]: process has finished cleanly [pid 14814]
+[INFO] [static_transform_publisher-7]: process has finished cleanly [pid 14816]
+[INFO] [static_transform_publisher-5]: process has finished cleanly [pid 14812]
+[INFO] [static_transform_publisher-11]: process has finished cleanly [pid 14924]
+[INFO] [robot_state_publisher-4]: process has finished cleanly [pid 14810]
+[INFO] [ros2_control_node-9]: process has finished cleanly [pid 14820]
+[INFO] [spawner-10]: process has finished cleanly [pid 14822]
+[INFO] [gzclient-2]: process has finished cleanly [pid 14806]
+[ERROR] [gzserver-1]: process[gzserver-1] failed to terminate '5' seconds after receiving 'SIGINT', escalating to 'SIGTERM'
+[INFO] [gzserver-1]: sending signal 'SIGTERM' to process[gzserver-1]
+[gzserver-1] [INFO] [1760627614.165486893] [rclcpp]: signal_handler(signum=15)
+[INFO] [gzserver-1]: process has finished cleanly [pid 14804]

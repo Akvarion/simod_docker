@@ -8,4 +8,21 @@ moveit_setup_assistant_config:
   package_settings:
     author_name: todo
     author_email: todo@todo.com
-    generated_timestamp: 1748352270
+    generated_timestamp: 1758707195
+  control_xacro:
+    command:
+      - position
+      - velocity
+    state:
+      - position
+      - velocity
+  modified_urdf:
+    xacros:
+      - control_xacro
+  control_xacro:
+    command:
+      - position
+      - velocity
+    state:
+      - position
+      - velocity

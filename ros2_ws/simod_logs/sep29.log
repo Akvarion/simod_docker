@@ -1,0 +1,393 @@
+[INFO] [launch]: All log files can be found below /root/.ros/log/2025-09-29-15-37-28-279731-outlander-Aspire-V3-571G-4091
+[INFO] [launch]: Default logging verbosity is set to INFO
+[WARNING] [launch_ros.actions.node]: Parameter file path is not a file: --params-file
+[INFO] [gzserver-1]: process started with pid [4093]
+[INFO] [gzclient-2]: process started with pid [4095]
+[INFO] [spawn_entity.py-3]: process started with pid [4097]
+[INFO] [robot_state_publisher-4]: process started with pid [4099]
+[INFO] [static_transform_publisher-5]: process started with pid [4101]
+[INFO] [static_transform_publisher-6]: process started with pid [4103]
+[INFO] [static_transform_publisher-7]: process started with pid [4105]
+[INFO] [static_transform_publisher-8]: process started with pid [4107]
+[INFO] [spawner-9]: process started with pid [4109]
+[INFO] [spawn_entity.py-10]: process started with pid [4111]
+[INFO] [robot_state_publisher-11]: process started with pid [4113]
+[INFO] [static_transform_publisher-12]: process started with pid [4115]
+[INFO] [static_transform_publisher-13]: process started with pid [4117]
+[INFO] [static_transform_publisher-14]: process started with pid [4119]
+[INFO] [static_transform_publisher-15]: process started with pid [4121]
+[INFO] [spawner-16]: process started with pid [4125]
+[INFO] [ros2_control_node-17]: process started with pid [4194]
+[INFO] [rviz2-18]: process started with pid [4201]
+[INFO] [move_group-19]: process started with pid [4212]
+[static_transform_publisher-5] [WARN] [1759160252.478268822] []: Old-style arguments are deprecated; see --help for new-style arguments
+[static_transform_publisher-6] [WARN] [1759160252.484564724] []: Old-style arguments are deprecated; see --help for new-style arguments
+[static_transform_publisher-6] [INFO] [1759160252.581386261] [left_static_transform_publisher_back_right]: Spinning until stopped - publishing transform
+[static_transform_publisher-6] translation: ('0.250000', '-0.150000', '0.000000')
+[static_transform_publisher-6] rotation: ('0.000000', '0.000000', '0.000000', '1.000000')
+[static_transform_publisher-6] from 'left_summit_base_link' to 'left_summit_back_right_wheel_link'
+[static_transform_publisher-7] [WARN] [1759160252.478457260] []: Old-style arguments are deprecated; see --help for new-style arguments
+[static_transform_publisher-7] [INFO] [1759160252.576873260] [left_static_transform_publisher_front_left]: Spinning until stopped - publishing transform
+[static_transform_publisher-7] translation: ('-0.250000', '0.150000', '0.000000')
+[static_transform_publisher-7] rotation: ('0.000000', '0.000000', '0.000000', '1.000000')
+[static_transform_publisher-7] from 'left_summit_base_link' to 'left_summit_front_left_wheel_link'
+[static_transform_publisher-8] [WARN] [1759160252.450685891] []: Old-style arguments are deprecated; see --help for new-style arguments
+[static_transform_publisher-8] [INFO] [1759160252.581386276] [static_transform_publisher_front_right]: Spinning until stopped - publishing transform
+[static_transform_publisher-8] translation: ('-0.250000', '-0.150000', '0.000000')
+[static_transform_publisher-8] rotation: ('0.000000', '0.000000', '0.000000', '1.000000')
+[static_transform_publisher-8] from 'left_summit_base_link' to 'left_summit_front_right_wheel_link'
+[static_transform_publisher-12] [WARN] [1759160252.529580750] []: Old-style arguments are deprecated; see --help for new-style arguments
+[static_transform_publisher-13] [WARN] [1759160252.484600001] []: Old-style arguments are deprecated; see --help for new-style arguments
+[static_transform_publisher-13] [INFO] [1759160252.568581280] [right_static_transform_publisher_back_right]: Spinning until stopped - publishing transform
+[static_transform_publisher-13] translation: ('0.250000', '-0.150000', '0.000000')
+[static_transform_publisher-13] rotation: ('0.000000', '0.000000', '0.000000', '1.000000')
+[static_transform_publisher-13] from 'right_summit_base_link' to 'right_summit_back_right_wheel_link'
+[static_transform_publisher-14] [WARN] [1759160252.587938064] []: Old-style arguments are deprecated; see --help for new-style arguments
+[static_transform_publisher-15] [WARN] [1759160252.561170492] []: Old-style arguments are deprecated; see --help for new-style arguments
+[static_transform_publisher-15] [INFO] [1759160252.612683548] [static_transform_publisher_front_right]: Spinning until stopped - publishing transform
+[static_transform_publisher-15] translation: ('-0.250000', '-0.150000', '0.000000')
+[static_transform_publisher-15] rotation: ('0.000000', '0.000000', '0.000000', '1.000000')
+[static_transform_publisher-15] from 'right_summit_base_link' to 'right_summit_front_right_wheel_link'
+[static_transform_publisher-5] [INFO] [1759160252.620385145] [left_static_transform_publisher_back_left]: Spinning until stopped - publishing transform
+[static_transform_publisher-5] translation: ('0.250000', '0.150000', '0.000000')
+[static_transform_publisher-5] rotation: ('0.000000', '0.000000', '0.000000', '1.000000')
+[static_transform_publisher-5] from 'left_summit_base_link' to 'left_summit_back_left_wheel_link'
+[static_transform_publisher-12] [INFO] [1759160252.668499845] [right_static_transform_publisher_back_left]: Spinning until stopped - publishing transform
+[static_transform_publisher-12] translation: ('0.250000', '0.150000', '0.000000')
+[static_transform_publisher-12] rotation: ('0.000000', '0.000000', '0.000000', '1.000000')
+[static_transform_publisher-12] from 'right_summit_base_link' to 'right_summit_back_left_wheel_link'
+[robot_state_publisher-11] [INFO] [1759160252.687970036] [right_robot_state_publisher]: got segment right_summit_back_left_wheel_link
+[robot_state_publisher-11] [INFO] [1759160252.691347429] [right_robot_state_publisher]: got segment right_summit_back_right_wheel_link
+[robot_state_publisher-11] [INFO] [1759160252.691396325] [right_robot_state_publisher]: got segment right_summit_base_chapa
+[robot_state_publisher-11] [INFO] [1759160252.691420283] [right_robot_state_publisher]: got segment right_summit_base_docking_contact
+[robot_state_publisher-11] [INFO] [1759160252.691441036] [right_robot_state_publisher]: got segment right_summit_base_footprint
+[robot_state_publisher-11] [INFO] [1759160252.691461635] [right_robot_state_publisher]: got segment right_summit_base_link
+[robot_state_publisher-11] [INFO] [1759160252.691480756] [right_robot_state_publisher]: got segment right_summit_base_logo_front
+[robot_state_publisher-11] [INFO] [1759160252.691501261] [right_robot_state_publisher]: got segment right_summit_base_logo_left
+[robot_state_publisher-11] [INFO] [1759160252.691521490] [right_robot_state_publisher]: got segment right_summit_base_logo_rear
+[robot_state_publisher-11] [INFO] [1759160252.691541878] [right_robot_state_publisher]: got segment right_summit_base_logo_right
+[robot_state_publisher-11] [INFO] [1759160252.691561484] [right_robot_state_publisher]: got segment right_summit_front_laser_base_link
+[robot_state_publisher-11] [INFO] [1759160252.691580505] [right_robot_state_publisher]: got segment right_summit_front_laser_link
+[robot_state_publisher-11] [INFO] [1759160252.691599992] [right_robot_state_publisher]: got segment right_summit_front_left_wheel_link
+[robot_state_publisher-11] [INFO] [1759160252.691620030] [right_robot_state_publisher]: got segment right_summit_front_right_wheel_link
+[robot_state_publisher-11] [INFO] [1759160252.691641502] [right_robot_state_publisher]: got segment right_summit_imu_link
+[robot_state_publisher-11] [INFO] [1759160252.691661694] [right_robot_state_publisher]: got segment right_summit_rear_laser_base_link
+[robot_state_publisher-11] [INFO] [1759160252.691680801] [right_robot_state_publisher]: got segment right_summit_rear_laser_link
+[robot_state_publisher-11] [INFO] [1759160252.691699701] [right_robot_state_publisher]: got segment ur_right_base
+[robot_state_publisher-11] [INFO] [1759160252.691719454] [right_robot_state_publisher]: got segment ur_right_base_link
+[robot_state_publisher-11] [INFO] [1759160252.691739500] [right_robot_state_publisher]: got segment ur_right_base_link_inertia
+[robot_state_publisher-11] [INFO] [1759160252.691758397] [right_robot_state_publisher]: got segment ur_right_flange
+[robot_state_publisher-11] [INFO] [1759160252.691777885] [right_robot_state_publisher]: got segment ur_right_forearm_link
+[robot_state_publisher-11] [INFO] [1759160252.691795536] [right_robot_state_publisher]: got segment ur_right_ft_frame
+[robot_state_publisher-11] [INFO] [1759160252.691811284] [right_robot_state_publisher]: got segment ur_right_paletta
+[robot_state_publisher-11] [INFO] [1759160252.691827262] [right_robot_state_publisher]: got segment ur_right_shoulder_link
+[robot_state_publisher-11] [INFO] [1759160252.691843895] [right_robot_state_publisher]: got segment ur_right_tool0
+[robot_state_publisher-11] [INFO] [1759160252.691861786] [right_robot_state_publisher]: got segment ur_right_upper_arm_link
+[robot_state_publisher-11] [INFO] [1759160252.691879630] [right_robot_state_publisher]: got segment ur_right_wrist_1_link
+[robot_state_publisher-11] [INFO] [1759160252.691898229] [right_robot_state_publisher]: got segment ur_right_wrist_2_link
+[robot_state_publisher-11] [INFO] [1759160252.691914739] [right_robot_state_publisher]: got segment ur_right_wrist_3_link
+[static_transform_publisher-14] [INFO] [1759160252.696267046] [right_static_transform_publisher_front_left]: Spinning until stopped - publishing transform
+[static_transform_publisher-14] translation: ('-0.250000', '0.150000', '0.000000')
+[static_transform_publisher-14] rotation: ('0.000000', '0.000000', '0.000000', '1.000000')
+[static_transform_publisher-14] from 'right_summit_base_link' to 'right_summit_front_left_wheel_link'
+[robot_state_publisher-4] [INFO] [1759160252.697389338] [left_robot_state_publisher]: got segment left_summit_back_left_wheel_link
+[robot_state_publisher-4] [INFO] [1759160252.697624129] [left_robot_state_publisher]: got segment left_summit_back_right_wheel_link
+[robot_state_publisher-4] [INFO] [1759160252.697652485] [left_robot_state_publisher]: got segment left_summit_base_chapa
+[robot_state_publisher-4] [INFO] [1759160252.697672731] [left_robot_state_publisher]: got segment left_summit_base_docking_contact
+[robot_state_publisher-4] [INFO] [1759160252.697690486] [left_robot_state_publisher]: got segment left_summit_base_footprint
+[robot_state_publisher-4] [INFO] [1759160252.697706977] [left_robot_state_publisher]: got segment left_summit_base_link
+[robot_state_publisher-4] [INFO] [1759160252.697725043] [left_robot_state_publisher]: got segment left_summit_base_logo_front
+[robot_state_publisher-4] [INFO] [1759160252.697744316] [left_robot_state_publisher]: got segment left_summit_base_logo_left
+[robot_state_publisher-4] [INFO] [1759160252.697763260] [left_robot_state_publisher]: got segment left_summit_base_logo_rear
+[robot_state_publisher-4] [INFO] [1759160252.697783069] [left_robot_state_publisher]: got segment left_summit_base_logo_right
+[robot_state_publisher-4] [INFO] [1759160252.697801596] [left_robot_state_publisher]: got segment left_summit_front_laser_base_link
+[robot_state_publisher-4] [INFO] [1759160252.697821259] [left_robot_state_publisher]: got segment left_summit_front_laser_link
+[robot_state_publisher-4] [INFO] [1759160252.697840454] [left_robot_state_publisher]: got segment left_summit_front_left_wheel_link
+[robot_state_publisher-4] [INFO] [1759160252.697860711] [left_robot_state_publisher]: got segment left_summit_front_right_wheel_link
+[robot_state_publisher-4] [INFO] [1759160252.697879562] [left_robot_state_publisher]: got segment left_summit_imu_link
+[robot_state_publisher-4] [INFO] [1759160252.697899375] [left_robot_state_publisher]: got segment left_summit_rear_laser_base_link
+[robot_state_publisher-4] [INFO] [1759160252.697919129] [left_robot_state_publisher]: got segment left_summit_rear_laser_link
+[robot_state_publisher-4] [INFO] [1759160252.697938830] [left_robot_state_publisher]: got segment ur_left_base
+[robot_state_publisher-4] [INFO] [1759160252.697958599] [left_robot_state_publisher]: got segment ur_left_base_link
+[robot_state_publisher-4] [INFO] [1759160252.697978453] [left_robot_state_publisher]: got segment ur_left_base_link_inertia
+[robot_state_publisher-4] [INFO] [1759160252.697996812] [left_robot_state_publisher]: got segment ur_left_flange
+[robot_state_publisher-4] [INFO] [1759160252.698016754] [left_robot_state_publisher]: got segment ur_left_forearm_link
+[robot_state_publisher-4] [INFO] [1759160252.698036812] [left_robot_state_publisher]: got segment ur_left_ft_frame
+[robot_state_publisher-4] [INFO] [1759160252.698056033] [left_robot_state_publisher]: got segment ur_left_paletta
+[robot_state_publisher-4] [INFO] [1759160252.698076478] [left_robot_state_publisher]: got segment ur_left_shoulder_link
+[robot_state_publisher-4] [INFO] [1759160252.698096974] [left_robot_state_publisher]: got segment ur_left_tool0
+[robot_state_publisher-4] [INFO] [1759160252.698116403] [left_robot_state_publisher]: got segment ur_left_upper_arm_link
+[robot_state_publisher-4] [INFO] [1759160252.698135551] [left_robot_state_publisher]: got segment ur_left_wrist_1_link
+[robot_state_publisher-4] [INFO] [1759160252.698155430] [left_robot_state_publisher]: got segment ur_left_wrist_2_link
+[robot_state_publisher-4] [INFO] [1759160252.698174538] [left_robot_state_publisher]: got segment ur_left_wrist_3_link
+[rviz2-18] QStandardPaths: XDG_RUNTIME_DIR not set, defaulting to '/tmp/runtime-root'
+[move_group-19] [INFO] [1759160252.931295488] [moveit_rdf_loader.rdf_loader]: Loaded robot model in 0.032131 seconds
+[move_group-19] [INFO] [1759160252.936504975] [moveit_robot_model.robot_model]: Loading robot model 'srm'...
+[move_group-19] [INFO] [1759160252.937971360] [moveit_robot_model.robot_model]: No root/virtual joint specified in SRDF. Assuming fixed joint
+[move_group-19] [WARN] [1759160252.939380865] [moveit_robot_model.robot_model]: Link left_summit_base_footprint has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[move_group-19] [WARN] [1759160252.952528749] [moveit_robot_model.robot_model]: Link left_summit_base_logo_front has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[move_group-19] [WARN] [1759160252.954044801] [moveit_robot_model.robot_model]: Link left_summit_base_logo_left has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[move_group-19] [WARN] [1759160252.955253793] [moveit_robot_model.robot_model]: Link left_summit_base_logo_rear has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[move_group-19] [WARN] [1759160252.956381326] [moveit_robot_model.robot_model]: Link left_summit_base_logo_right has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[move_group-19] [WARN] [1759160252.957540471] [moveit_robot_model.robot_model]: Link left_summit_base_chapa has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[move_group-19] [WARN] [1759160252.971575449] [moveit_robot_model.robot_model]: Link left_summit_imu_link has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[ros2_control_node-17] [INFO] [1759160253.004966238] [controller_manager]: Subscribing to '~/robot_description' topic for robot description file.
+[ros2_control_node-17] [INFO] [1759160253.013972632] [controller_manager]: update rate is 500 Hz
+[ros2_control_node-17] [INFO] [1759160253.015412867] [controller_manager]: Spawning controller_manager RT thread with scheduler priority: 50
+[ros2_control_node-17] [WARN] [1759160253.020330924] [controller_manager]: No real-time kernel detected on this system. See [https://control.ros.org/master/doc/ros2_control/controller_manager/doc/userdoc.html] for details on how to enable realtime scheduling.
+[move_group-19] [WARN] [1759160253.048377124] [moveit_robot_model.robot_model]: Link right_summit_base_footprint has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[move_group-19] [WARN] [1759160253.055617051] [moveit_robot_model.robot_model]: Link right_summit_base_logo_front has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[move_group-19] [WARN] [1759160253.059324135] [moveit_robot_model.robot_model]: Link right_summit_base_logo_left has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[move_group-19] [WARN] [1759160253.060909648] [moveit_robot_model.robot_model]: Link right_summit_base_logo_rear has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[move_group-19] [WARN] [1759160253.065060750] [moveit_robot_model.robot_model]: Link right_summit_base_logo_right has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[move_group-19] [WARN] [1759160253.066851986] [moveit_robot_model.robot_model]: Link right_summit_base_chapa has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[move_group-19] [WARN] [1759160253.077723835] [moveit_robot_model.robot_model]: Link right_summit_imu_link has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[move_group-19] [WARN] [1759160253.261997583] [kdl_parser]: Converting unknown joint type of joint 'left_base_joint' into a fixed joint
+[move_group-19] [WARN] [1759160253.262182592] [kdl_parser]: Converting unknown joint type of joint 'right_base_joint' into a fixed joint
+[move_group-19] [WARN] [1759160253.262534331] [kdl_parser]: Converting unknown joint type of joint 'left_base_joint' into a fixed joint
+[move_group-19] [WARN] [1759160253.262709405] [kdl_parser]: Converting unknown joint type of joint 'right_base_joint' into a fixed joint
+[spawn_entity.py-10] [INFO] [1759160253.624178462] [right]: Spawn Entity started
+[spawn_entity.py-10] [INFO] [1759160253.625304552] [right]: Loading entity published on topic /right/robot_description
+[spawn_entity.py-10] [INFO] [1759160253.633948355] [right]: Waiting for entity xml on /right/robot_description
+[move_group-19] [INFO] [1759160253.665216411] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Publishing maintained planning scene on 'monitored_planning_scene'
+[move_group-19] [INFO] [1759160253.665528776] [moveit.ros_planning_interface.moveit_cpp]: Listening to 'joint_states' for joint states
+[spawner-16] [INFO] [1759160253.671654492] [right.spawner_joint_state_broadcaster]: waiting for service /controller_manager/list_controllers to become available...
+[move_group-19] [INFO] [1759160253.673722969] [moveit_ros.current_state_monitor]: Listening to joint states on topic 'joint_states'
+[move_group-19] [INFO] [1759160253.675608111] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Listening to '/attached_collision_object' for attached collision objects
+[move_group-19] [INFO] [1759160253.675660209] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Starting planning scene monitor
+[move_group-19] [INFO] [1759160253.677263113] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Listening to '/planning_scene'
+[move_group-19] [INFO] [1759160253.677310839] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Starting world geometry update monitor for collision objects, attached objects, octomap updates.
+[move_group-19] [INFO] [1759160253.679398085] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Listening to 'collision_object'
+[move_group-19] [INFO] [1759160253.681168053] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Listening to 'planning_scene_world' for planning scene world geometry
+[move_group-19] [WARN] [1759160253.684367569] [moveit_ros.current_state_monitor]: Unable to update multi-DOF joint 'left_base_joint':Failure to lookup transform between 'world'and 'left_summit_base_footprint' with TF exception: "world" passed to lookupTransform argument target_frame does not exist. 
+[move_group-19] [WARN] [1759160253.685770290] [moveit.ros.occupancy_map_monitor.middleware_handle]: Resolution not specified for Octomap. Assuming resolution = 0.1 instead
+[spawner-9] [INFO] [1759160253.711357173] [left.spawner_joint_state_broadcaster]: waiting for service /controller_manager/list_controllers to become available...
+[spawn_entity.py-3] [INFO] [1759160253.740434331] [left]: Spawn Entity started
+[spawn_entity.py-3] [INFO] [1759160253.741424344] [left]: Loading entity published on topic /left/robot_description
+[spawn_entity.py-3] [INFO] [1759160253.748611937] [left]: Waiting for entity xml on /left/robot_description
+[move_group-19] [INFO] [1759160254.162847801] [moveit.ros_planning_interface.moveit_cpp]: Loading planning pipeline 'ompl'
+[move_group-19] [INFO] [1759160254.203515264] [moveit.ros_planning.planning_pipeline]: Using planning interface 'OMPL'
+[move_group-19] [INFO] [1759160254.221936372] [moveit_ros.add_time_optimal_parameterization]: Param 'ompl.path_tolerance' was not set. Using default value: 0.100000
+[move_group-19] [INFO] [1759160254.221982857] [moveit_ros.add_time_optimal_parameterization]: Param 'ompl.resample_dt' was not set. Using default value: 0.100000
+[move_group-19] [INFO] [1759160254.221999816] [moveit_ros.add_time_optimal_parameterization]: Param 'ompl.min_angle_change' was not set. Using default value: 0.001000
+[move_group-19] [INFO] [1759160254.222073863] [moveit_ros.fix_workspace_bounds]: Param 'ompl.default_workspace_bounds' was not set. Using default value: 10.000000
+[move_group-19] [INFO] [1759160254.222118968] [moveit_ros.fix_start_state_bounds]: Param 'ompl.start_state_max_bounds_error' was set to 0.100000
+[move_group-19] [INFO] [1759160254.222137172] [moveit_ros.fix_start_state_bounds]: Param 'ompl.start_state_max_dt' was not set. Using default value: 0.500000
+[move_group-19] [INFO] [1759160254.222174470] [moveit_ros.fix_start_state_collision]: Param 'ompl.start_state_max_dt' was not set. Using default value: 0.500000
+[move_group-19] [INFO] [1759160254.222193773] [moveit_ros.fix_start_state_collision]: Param 'ompl.jiggle_fraction' was set to 0.050000
+[move_group-19] [INFO] [1759160254.222226208] [moveit_ros.fix_start_state_collision]: Param 'ompl.max_sampling_attempts' was not set. Using default value: 100
+[move_group-19] [INFO] [1759160254.222263461] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Add Time Optimal Parameterization'
+[move_group-19] [INFO] [1759160254.222280178] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Resolve constraint frames to robot links'
+[move_group-19] [INFO] [1759160254.222291220] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Fix Workspace Bounds'
+[move_group-19] [INFO] [1759160254.222301524] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Fix Start State Bounds'
+[move_group-19] [INFO] [1759160254.222311303] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Fix Start State In Collision'
+[move_group-19] [INFO] [1759160254.222321476] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Fix Start State Path Constraints'
+[move_group-19] [INFO] [1759160254.228234123] [moveit.ros_planning_interface.moveit_cpp]: Loading planning pipeline 'chomp'
+[move_group-19] [INFO] [1759160254.258795227] [moveit.ros_planning.planning_pipeline]: Using planning interface 'CHOMP'
+[move_group-19] [INFO] [1759160254.275168722] [moveit_ros.add_time_optimal_parameterization]: Param 'chomp.path_tolerance' was not set. Using default value: 0.100000
+[move_group-19] [INFO] [1759160254.275211597] [moveit_ros.add_time_optimal_parameterization]: Param 'chomp.resample_dt' was not set. Using default value: 0.100000
+[move_group-19] [INFO] [1759160254.275228371] [moveit_ros.add_time_optimal_parameterization]: Param 'chomp.min_angle_change' was not set. Using default value: 0.001000
+[move_group-19] [INFO] [1759160254.275290323] [moveit_ros.fix_workspace_bounds]: Param 'chomp.default_workspace_bounds' was not set. Using default value: 10.000000
+[move_group-19] [INFO] [1759160254.275335372] [moveit_ros.fix_start_state_bounds]: Param 'chomp.start_state_max_bounds_error' was set to 0.100000
+[move_group-19] [INFO] [1759160254.275352752] [moveit_ros.fix_start_state_bounds]: Param 'chomp.start_state_max_dt' was not set. Using default value: 0.500000
+[move_group-19] [INFO] [1759160254.275390150] [moveit_ros.fix_start_state_collision]: Param 'chomp.start_state_max_dt' was not set. Using default value: 0.500000
+[move_group-19] [INFO] [1759160254.275409885] [moveit_ros.fix_start_state_collision]: Param 'chomp.jiggle_fraction' was set to 0.050000
+[move_group-19] [INFO] [1759160254.275424739] [moveit_ros.fix_start_state_collision]: Param 'chomp.max_sampling_attempts' was not set. Using default value: 100
+[move_group-19] [INFO] [1759160254.275458626] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Add Time Optimal Parameterization'
+[move_group-19] [INFO] [1759160254.275473493] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Resolve constraint frames to robot links'
+[move_group-19] [INFO] [1759160254.275484172] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Fix Workspace Bounds'
+[move_group-19] [INFO] [1759160254.275495196] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Fix Start State Bounds'
+[move_group-19] [INFO] [1759160254.275505525] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Fix Start State In Collision'
+[move_group-19] [INFO] [1759160254.275516117] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Fix Start State Path Constraints'
+[INFO] [static_transform_publisher-20]: process started with pid [4321]
+[move_group-19] [INFO] [1759160254.419887288] [moveit.ros_planning_interface.moveit_cpp]: Loading planning pipeline 'pilz_industrial_motion_planner'
+[move_group-19] [INFO] [1759160254.437079410] [moveit.pilz_industrial_motion_planner.joint_limits_aggregator]: Reading limits from namespace robot_description_planning
+[move_group-19] [WARN] [1759160254.444610777] [moveit.pilz_industrial_motion_planner.joint_limits_aggregator]: Multi-DOF-Joint 'left_base_joint' not supported.
+[move_group-19] [WARN] [1759160254.444690280] [moveit.pilz_industrial_motion_planner.joint_limits_aggregator]: Multi-DOF-Joint 'left_base_joint' not supported.
+[static_transform_publisher-20] [WARN] [1759160254.452074826] []: Old-style arguments are deprecated; see --help for new-style arguments
+[INFO] [static_transform_publisher-21]: process started with pid [4339]
+[rviz2-18] [INFO] [1759160254.516455198] [rviz2]: Stereo is NOT SUPPORTED
+[rviz2-18] [INFO] [1759160254.516787428] [rviz2]: OpenGl version: 4.6 (GLSL 4.6)
+[move_group-19] [WARN] [1759160254.528536665] [moveit.pilz_industrial_motion_planner.joint_limits_aggregator]: Multi-DOF-Joint 'right_base_joint' not supported.
+[move_group-19] [WARN] [1759160254.528599205] [moveit.pilz_industrial_motion_planner.joint_limits_aggregator]: Multi-DOF-Joint 'right_base_joint' not supported.
+[static_transform_publisher-21] [WARN] [1759160254.563255009] []: Old-style arguments are deprecated; see --help for new-style arguments
+[move_group-19] [INFO] [1759160254.577345902] [moveit.pilz_industrial_motion_planner]: Available plugins: pilz_industrial_motion_planner/PlanningContextLoaderCIRC pilz_industrial_motion_planner/PlanningContextLoaderLIN pilz_industrial_motion_planner/PlanningContextLoaderPTP 
+[move_group-19] [INFO] [1759160254.577379482] [moveit.pilz_industrial_motion_planner]: About to load: pilz_industrial_motion_planner/PlanningContextLoaderCIRC
+[move_group-19] [INFO] [1759160254.580815980] [moveit.pilz_industrial_motion_planner]: Registered Algorithm [CIRC]
+[move_group-19] [INFO] [1759160254.580853713] [moveit.pilz_industrial_motion_planner]: About to load: pilz_industrial_motion_planner/PlanningContextLoaderLIN
+[move_group-19] [INFO] [1759160254.582959978] [moveit.pilz_industrial_motion_planner]: Registered Algorithm [LIN]
+[move_group-19] [INFO] [1759160254.583023235] [moveit.pilz_industrial_motion_planner]: About to load: pilz_industrial_motion_planner/PlanningContextLoaderPTP
+[move_group-19] [INFO] [1759160254.585429235] [moveit.pilz_industrial_motion_planner]: Registered Algorithm [PTP]
+[move_group-19] [INFO] [1759160254.585536457] [moveit.ros_planning.planning_pipeline]: Using planning interface 'Pilz Industrial Motion Planner'
+[move_group-19] [WARN] [1759160254.596205040] [moveit_ros.trajectory_execution_manager]: moveit_ros_control_interface/MoveItControllerManager is deprecated. Replace with `moveit_ros_control_interface/MoveItControllerManager.`
+[rviz2-18] [INFO] [1759160254.625534998] [rviz2]: Stereo is NOT SUPPORTED
+[move_group-19] [INFO] [1759160254.724995789] [moveit.plugins.ros_control_interface]: Started moveit_ros_control_interface::Ros2ControlManager for namespace 
+[WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+Task exception was never retrieved
+future: <Task finished name='Task-157' coro=<ExecuteLocal.__execute_process() done, defined at /opt/ros/humble/lib/python3.10/site-packages/launch/actions/execute_local.py:521> exception=KeyboardInterrupt()>
+Traceback (most recent call last):
+  File "/opt/ros/humble/lib/python3.10/site-packages/launch/launch_service.py", line 375, in run
+    return loop.run_until_complete(run_async_task)
+  File "/usr/lib/python3.10/asyncio/base_events.py", line 636, in run_until_complete
+    self.run_forever()
+  File "/usr/lib/python3.10/asyncio/base_events.py", line 603, in run_forever
+    self._run_once()
+  File "/usr/lib/python3.10/asyncio/base_events.py", line 1909, in _run_once
+    handle._run()
+  File "/usr/lib/python3.10/asyncio/events.py", line 80, in _run
+    self._context.run(self._callback, *self._args)
+  File "/opt/ros/humble/lib/python3.10/site-packages/launch/actions/execute_local.py", line 546, in __execute_process
+    transport, self._subprocess_protocol = await async_execute_process(
+  File "/opt/ros/humble/lib/python3.10/site-packages/osrf_pycommon/process_utils/async_execute_process_asyncio/impl.py", line 139, in async_execute_process
+    transport, protocol = await _async_execute_process_nopty(
+  File "/opt/ros/humble/lib/python3.10/site-packages/osrf_pycommon/process_utils/async_execute_process_asyncio/impl.py", line 45, in _async_execute_process_nopty
+    transport, protocol = await loop.subprocess_exec(
+  File "/usr/lib/python3.10/asyncio/base_events.py", line 1681, in subprocess_exec
+    transport = await self._make_subprocess_transport(
+  File "/usr/lib/python3.10/asyncio/unix_events.py", line 207, in _make_subprocess_transport
+    transp = _UnixSubprocessTransport(self, protocol, args, shell,
+  File "/usr/lib/python3.10/asyncio/base_subprocess.py", line 36, in __init__
+    self._start(args=args, shell=shell, stdin=stdin, stdout=stdout,
+  File "/usr/lib/python3.10/asyncio/unix_events.py", line 799, in _start
+    self._proc = subprocess.Popen(
+  File "/usr/lib/python3.10/subprocess.py", line 971, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "/usr/lib/python3.10/subprocess.py", line 1751, in _execute_child
+    self._posix_spawn(args, executable, env, restore_signals,
+  File "/usr/lib/python3.10/subprocess.py", line 1696, in _posix_spawn
+    self.pid = os.posix_spawn(executable, args, env, **kwargs)
+KeyboardInterrupt
+[static_transform_publisher-20] [INFO] [1759160254.895068931] [static_transform_publisher_LAtYkaYcMiosAKJC]: Spinning until stopped - publishing transform
+[static_transform_publisher-20] translation: ('0.000000', '0.000000', '0.000000')
+[static_transform_publisher-20] rotation: ('0.000000', '0.000000', '0.000000', '1.000000')
+[static_transform_publisher-20] from 'world' to 'left_robot'
+[ERROR] [gzclient-2]: process has died [pid 4095, exit code -2, cmd 'gzclient --gui-client-plugin=libgazebo_ros_eol_gui.so'].
+[robot_state_publisher-11] [INFO] [1759160254.906842246] [rclcpp]: signal_handler(signum=2)
+[INFO] [static_transform_publisher-15]: process has finished cleanly [pid 4121]
+[static_transform_publisher-13] [INFO] [1759160254.906836045] [rclcpp]: signal_handler(signum=2)
+[static_transform_publisher-14] [INFO] [1759160254.906897784] [rclcpp]: signal_handler(signum=2)
+[move_group-19] [INFO] [1759160254.906912281] [rclcpp]: signal_handler(signum=2)
+[ros2_control_node-17] [INFO] [1759160254.906979621] [rclcpp]: signal_handler(signum=2)
+[static_transform_publisher-6] [INFO] [1759160254.907167978] [rclcpp]: signal_handler(signum=2)
+[robot_state_publisher-4] [INFO] [1759160254.907224490] [rclcpp]: signal_handler(signum=2)
+[static_transform_publisher-15] [INFO] [1759160254.907343853] [rclcpp]: signal_handler(signum=2)
+[static_transform_publisher-12] [INFO] [1759160254.907394911] [rclcpp]: signal_handler(signum=2)
+[static_transform_publisher-8] [INFO] [1759160254.907447352] [rclcpp]: signal_handler(signum=2)
+[static_transform_publisher-7] [INFO] [1759160254.907500355] [rclcpp]: signal_handler(signum=2)
+[static_transform_publisher-5] [INFO] [1759160254.907550848] [rclcpp]: signal_handler(signum=2)
+[spawn_entity.py-3] Traceback (most recent call last):
+[spawn_entity.py-3]   File "/opt/ros/humble/lib/gazebo_ros/spawn_entity.py", line 372, in <module>
+[spawn_entity.py-3]     main()
+[spawn_entity.py-3]   File "/opt/ros/humble/lib/gazebo_ros/spawn_entity.py", line 367, in main
+[spawn_entity.py-3]     exit_code = spawn_entity_node.run()
+[spawn_entity.py-3]   File "/opt/ros/humble/lib/gazebo_ros/spawn_entity.py", line 176, in run
+[spawn_entity.py-3]     rclpy.spin_once(self)
+[spawn_entity.py-3]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 206, in spin_once
+[spawn_entity.py-3]     executor.spin_once(timeout_sec=timeout_sec)
+[spawn_entity.py-3]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 751, in spin_once
+[spawn_entity.py-3]     self._spin_once_impl(timeout_sec)
+[spawn_entity.py-3]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 740, in _spin_once_impl
+[spawn_entity.py-3]     handler, entity, node = self.wait_for_ready_callbacks(timeout_sec=timeout_sec)
+[spawn_entity.py-3]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 723, in wait_for_ready_callbacks
+[spawn_entity.py-3]     return next(self._cb_iter)
+[spawn_entity.py-3]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 620, in _wait_for_ready_callbacks
+[spawn_entity.py-3]     wait_set.wait(timeout_nsec)
+[spawn_entity.py-3] KeyboardInterrupt
+[spawn_entity.py-10] Traceback (most recent call last):
+[spawn_entity.py-10]   File "/opt/ros/humble/lib/gazebo_ros/spawn_entity.py", line 372, in <module>
+[spawn_entity.py-10]     main()
+[spawn_entity.py-10]   File "/opt/ros/humble/lib/gazebo_ros/spawn_entity.py", line 367, in main
+[spawn_entity.py-10]     exit_code = spawn_entity_node.run()
+[spawn_entity.py-10]   File "/opt/ros/humble/lib/gazebo_ros/spawn_entity.py", line 176, in run
+[spawn_entity.py-10]     rclpy.spin_once(self)
+[spawn_entity.py-10]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 206, in spin_once
+[spawn_entity.py-10]     executor.spin_once(timeout_sec=timeout_sec)
+[spawn_entity.py-10]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 751, in spin_once
+[spawn_entity.py-10]     self._spin_once_impl(timeout_sec)
+[spawn_entity.py-10]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 740, in _spin_once_impl
+[spawn_entity.py-10]     handler, entity, node = self.wait_for_ready_callbacks(timeout_sec=timeout_sec)
+[spawn_entity.py-10]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 723, in wait_for_ready_callbacks
+[spawn_entity.py-10]     return next(self._cb_iter)
+[spawn_entity.py-10]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 620, in _wait_for_ready_callbacks
+[spawn_entity.py-10]     wait_set.wait(timeout_nsec)
+[spawn_entity.py-10] KeyboardInterrupt
+[rviz2-18] [INFO] [1759160254.954246632] [rclcpp]: signal_handler(signum=2)
+[static_transform_publisher-21] [INFO] [1759160254.956538945] [rclcpp]: signal_handler(signum=2)
+[static_transform_publisher-21] terminate called after throwing an instance of 'rclcpp::exceptions::RCLError'
+[static_transform_publisher-21]   what():  could not create subscription: rcl node's context is invalid, at ./src/rcl/node.c:428
+[INFO] [static_transform_publisher-14]: process has finished cleanly [pid 4119]
+[INFO] [static_transform_publisher-8]: process has finished cleanly [pid 4107]
+[gzserver-1] [INFO] [1759160254.957228312] [rclcpp]: signal_handler(signum=2)
+[static_transform_publisher-20] [INFO] [1759160254.973460607] [rclcpp]: signal_handler(signum=2)
+[INFO] [static_transform_publisher-6]: process has finished cleanly [pid 4103]
+[INFO] [static_transform_publisher-5]: process has finished cleanly [pid 4101]
+[INFO] [static_transform_publisher-7]: process has finished cleanly [pid 4105]
+[INFO] [robot_state_publisher-4]: process has finished cleanly [pid 4099]
+[INFO] [ros2_control_node-17]: process has finished cleanly [pid 4194]
+[rviz2-18] [INFO] [1759160255.122373645] [moveit_rdf_loader.rdf_loader]: Loaded robot model in 0 seconds
+[rviz2-18] [INFO] [1759160255.122488700] [moveit_robot_model.robot_model]: Loading robot model 'srm'...
+[rviz2-18] [INFO] [1759160255.122514616] [moveit_robot_model.robot_model]: No root/virtual joint specified in SRDF. Assuming fixed joint
+[rviz2-18] [WARN] [1759160255.122683128] [moveit_robot_model.robot_model]: Link left_summit_base_footprint has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-18] [WARN] [1759160255.129790186] [moveit_robot_model.robot_model]: Link left_summit_base_logo_front has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-18] [WARN] [1759160255.129839711] [moveit_robot_model.robot_model]: Link left_summit_base_logo_left has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-18] [WARN] [1759160255.129856562] [moveit_robot_model.robot_model]: Link left_summit_base_logo_rear has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-18] [WARN] [1759160255.129868781] [moveit_robot_model.robot_model]: Link left_summit_base_logo_right has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-18] [WARN] [1759160255.129880178] [moveit_robot_model.robot_model]: Link left_summit_base_chapa has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[INFO] [static_transform_publisher-20]: process has finished cleanly [pid 4321]
+[INFO] [static_transform_publisher-12]: process has finished cleanly [pid 4115]
+[rviz2-18] [WARN] [1759160255.137550050] [moveit_robot_model.robot_model]: Link left_summit_imu_link has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[ERROR] [spawn_entity.py-3]: process has died [pid 4097, exit code -2, cmd '/opt/ros/humble/lib/gazebo_ros/spawn_entity.py -entity left_robot -topic /left/robot_description -x -0.66 -y 0 -z 0 -timeout 5 -unpause --ros-args -r __node:=left'].
+[INFO] [static_transform_publisher-13]: process has finished cleanly [pid 4117]
+[INFO] [robot_state_publisher-11]: process has finished cleanly [pid 4113]
+[rviz2-18] [WARN] [1759160255.160158573] [moveit_robot_model.robot_model]: Link right_summit_base_footprint has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-18] [WARN] [1759160255.163348338] [moveit_robot_model.robot_model]: Link right_summit_base_logo_front has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-18] [WARN] [1759160255.163372057] [moveit_robot_model.robot_model]: Link right_summit_base_logo_left has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-18] [WARN] [1759160255.163379886] [moveit_robot_model.robot_model]: Link right_summit_base_logo_rear has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-18] [WARN] [1759160255.163387314] [moveit_robot_model.robot_model]: Link right_summit_base_logo_right has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-18] [WARN] [1759160255.163393857] [moveit_robot_model.robot_model]: Link right_summit_base_chapa has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[ERROR] [spawn_entity.py-10]: process has died [pid 4111, exit code -2, cmd '/opt/ros/humble/lib/gazebo_ros/spawn_entity.py -entity right_robot -topic /right/robot_description -x 0.66 -y 0 -z 0 -timeout 5 -unpause --ros-args -r __node:=right'].
+[rviz2-18] [WARN] [1759160255.167797843] [moveit_robot_model.robot_model]: Link right_summit_imu_link has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[INFO] [spawner-9]: process has finished cleanly [pid 4109]
+[INFO] [spawner-16]: process has finished cleanly [pid 4125]
+[move_group-19] [WARN] [1759160255.735825967] [moveit.plugins.ros_control_interface]: Failed to read controllers from /controller_manager/list_controllers within 1 seconds
+[move_group-19] terminate called after throwing an instance of 'rclcpp::exceptions::RCLError'
+[move_group-19]   what():  failed to create guard condition: the given context is not valid, either rcl_init() was not called or rcl_shutdown() was called., at ./src/rcl/guard_condition.c:67
+[move_group-19] Stack trace (most recent call last):
+[move_group-19] #18   Object "", at 0xffffffffffffffff, in 
+[move_group-19] #17   Object "/ros2_ws/build/moveit_ros_move_group/move_group", at 0x55c43d485eb4, in _start
+[move_group-19] #16   Object "/usr/lib/x86_64-linux-gnu/libc.so.6", at 0x7f7d4e136e3f, in __libc_start_main
+[move_group-19] #15   Object "/usr/lib/x86_64-linux-gnu/libc.so.6", at 0x7f7d4e136d8f, in 
+[move_group-19] #14   Object "/ros2_ws/build/moveit_ros_move_group/move_group", at 0x55c43d4851f3, in main
+[move_group-19] #13   Object "/ros2_ws/install/moveit_ros_planning/lib/libmoveit_cpp.so.2.5.8", at 0x7f7d4eb41da0, in moveit_cpp::MoveItCpp::MoveItCpp(std::shared_ptr<rclcpp::Node> const&, moveit_cpp::MoveItCpp::Options const&)
+[move_group-19] #12   Object "/ros2_ws/install/moveit_ros_planning/lib/libmoveit_trajectory_execution_manager.so.2.5.8", at 0x7f7d4ddea736, in trajectory_execution_manager::TrajectoryExecutionManager::TrajectoryExecutionManager(std::shared_ptr<rclcpp::Node> const&, std::shared_ptr<moveit::core::RobotModel const> const&, std::shared_ptr<planning_scene_monitor::CurrentStateMonitor> const&)
+[move_group-19] #11   Object "/ros2_ws/install/moveit_ros_planning/lib/libmoveit_trajectory_execution_manager.so.2.5.8", at 0x7f7d4dde9ad1, in trajectory_execution_manager::TrajectoryExecutionManager::initialize()
+[move_group-19] #10   Object "/opt/ros/humble/lib/librclcpp.so", at 0x7f7d4e6d3dec, in rclcpp::executors::SingleThreadedExecutor::SingleThreadedExecutor(rclcpp::ExecutorOptions const&)
+[move_group-19] #9    Object "/opt/ros/humble/lib/librclcpp.so", at 0x7f7d4e6d0077, in rclcpp::Executor::Executor(rclcpp::ExecutorOptions const&)
+[move_group-19] #8    Object "/opt/ros/humble/lib/librclcpp.so", at 0x7f7d4e6df05d, in rclcpp::GuardCondition::GuardCondition(std::shared_ptr<rclcpp::Context>, rcl_guard_condition_options_s)
+[move_group-19] #7    Object "/opt/ros/humble/lib/librclcpp.so", at 0x7f7d4e6c9208, in rclcpp::exceptions::throw_from_rcl_error(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, rcutils_error_state_s const*, void (*)())
+[move_group-19] #6    Object "/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30", at 0x7f7d4e4041fd, in std::rethrow_exception(std::__exception_ptr::exception_ptr)
+[move_group-19] #5    Object "/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30", at 0x7f7d4e404276, in std::terminate()
+[move_group-19] #4    Object "/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30", at 0x7f7d4e40420b, in 
+[move_group-19] #3    Object "/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30", at 0x7f7d4e3f8b9d, in 
+[move_group-19] #2    Object "/usr/lib/x86_64-linux-gnu/libc.so.6", at 0x7f7d4e1357f2, in abort
+[move_group-19] #1    Object "/usr/lib/x86_64-linux-gnu/libc.so.6", at 0x7f7d4e14f475, in raise
+[move_group-19] #0    Object "/usr/lib/x86_64-linux-gnu/libc.so.6", at 0x7f7d4e1a39fc, in pthread_kill
+[move_group-19] Aborted (Signal sent by tkill() 4212 0)
+[rviz2-18] [ERROR] [1759160255.905573888] [rviz2]: Could not load display config: could not create subscription: rcl node's context is invalid, at ./src/rcl/node.c:428
+[gzserver-1] ALSA lib pcm_dmix.c:1032:(snd_pcm_dmix_open) unable to open slave
+[gzserver-1] AL lib: (EE) ALCplaybackAlsa_open: Could not open playback device 'default': Device or resource busy
+[gzserver-1] terminate called after throwing an instance of 'rclcpp::exceptions::RCLError'
+[gzserver-1]   what():  could not create service: rcl node's context is invalid, at ./src/rcl/node.c:428
+[ERROR] [static_transform_publisher-21]: process has died [pid 4339, exit code -6, cmd '/opt/ros/humble/lib/tf2_ros/static_transform_publisher 0 0 0 0 0 0 1 world right_robot --ros-args'].
+[ERROR] [move_group-19]: process has died [pid 4212, exit code -6, cmd '/ros2_ws/install/moveit_ros_move_group/lib/moveit_ros_move_group/move_group --ros-args --params-file /tmp/launch_params_iup7r0po --params-file /tmp/launch_params_1xu3o_ep --params-file /tmp/launch_params_kn0sglgv --params-file /tmp/launch_params_fv0uqpmq --params-file /tmp/launch_params_ze446v9t'].
+[ERROR] [gzserver-1]: process has died [pid 4093, exit code -6, cmd 'gzserver /ros2_ws/install/ur/share/ur/xacro/gazebo.world --physics=False -slibgazebo_ros_init.so -slibgazebo_ros_factory.so -slibgazebo_ros_force_system.so'].
+[ERROR] [rviz2-18]: process[rviz2-18] failed to terminate '5' seconds after receiving 'SIGINT', escalating to 'SIGTERM'
+[INFO] [rviz2-18]: sending signal 'SIGTERM' to process[rviz2-18]
+[ERROR] [rviz2-18]: process has died [pid 4201, exit code -15, cmd '/opt/ros/humble/lib/rviz2/rviz2 -d /ros2_ws/install/ur/share/ur/rviz/rviz_config.rviz --ros-args -r __node:=rviz2 --params-file /tmp/launch_params_gk4tzftd --params-file /tmp/launch_params_2bu3s4ws --params-file /tmp/launch_params_e5cm6hqp --params-file /tmp/launch_params_wtig_dgg'].
+[WARNING] [launch]: user interrupted with ctrl-c (SIGINT) again, ignoring...
+[WARNING] [launch]: user interrupted with ctrl-c (SIGINT) again, ignoring...
+[WARNING] [launch]: user interrupted with ctrl-c (SIGINT) again, ignoring...
+[WARNING] [launch]: user interrupted with ctrl-c (SIGINT) again, ignoring...
+[WARNING] [launch]: user interrupted with ctrl-c (SIGINT) again, ignoring...
+[WARNING] [launch]: user interrupted with ctrl-c (SIGINT) again, ignoring...
+[WARNING] [launch]: user interrupted with ctrl-c (SIGINT) again, ignoring...

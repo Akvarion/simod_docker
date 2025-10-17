@@ -43,6 +43,7 @@ geometry_msgs::msg::PoseStamped get_pose_from_ps(const std::string &object_name)
   auto objects = psi.getObjects({object_name});
   if (!objects.empty() && !objects[object_name].primitive_poses.empty()) {
       pose.pose = objects[object_name].primitive_poses[0];
+      pose.header.frame_id = objects[object_name].header.frame_id;
   }
   return pose;
 }
@@ -50,19 +51,46 @@ geometry_msgs::msg::PoseStamped get_pose_from_ps(const std::string &object_name)
 geometry_msgs::msg::Pose pose_to_base_frame(
   const rclcpp::Node::SharedPtr& node,
   const geometry_msgs::msg::PoseStamped &pose_goal,
-  const std::string &target_frame) {
+  const std::string &base_link_frame) {
       geometry_msgs::msg::PoseStamped pose_in_base_frame;
       static tf2_ros::Buffer tf_buffer(node->get_clock());
       static tf2_ros::TransformListener tf_listener(tf_buffer);
-      try {
-        pose_in_base_frame = tf_buffer.transform(
-          pose_goal, target_frame, tf2::durationFromSec(0.1));
-        // Now pose_in_base_frame.pose can be used for IK
-        
-      } catch (tf2::TransformException &ex) {
-          RCLCPP_ERROR(LOGGER, "Transform failed: %s. ", ex.what());
+      // Find target
+    // Wait for the base_link_frame to be available in TF
+      while (tf_buffer.allFramesAsString().find(base_link_frame) == std::string::npos) {
+          RCLCPP_WARN(LOGGER, "Frame '%s' not found in TF buffer. Waiting...", base_link_frame.c_str());
+          rclcpp::sleep_for(std::chrono::milliseconds(100));
       }
-      return pose_in_base_frame.pose;
+
+      
+      // // find source
+      // while(true) {
+      //     if(tf_buffer.allFramesAsString().find(pose_goal.header.frame_id) != std::string::npos) {
+      //       RCLCPP_INFO(LOGGER, "Target frame '%s' found in TF buffer.", pose_goal.header.frame_id.c_str());
+      //       break;
+      //     }
+      //     else {
+      //       RCLCPP_WARN(LOGGER, "Frame '%s' not found in TF buffer.", pose_goal.header.frame_id.c_str());
+      //     }
+      // }
+
+      // pose_in_base_frame = get_pose_from_ps(base_link_frame);
+
+    // Get the robot base link pose in world
+    geometry_msgs::msg::TransformStamped base_in_world = tf_buffer.lookupTransform(
+        "world", base_link_frame, tf2::TimePointZero);
+    tf2::Transform tf_base_in_world;
+    tf2::fromMsg(base_in_world.transform, tf_base_in_world);
+
+    // Convert goal_pose_world to tf2::Transform
+    tf2::Transform tf_goal_world;
+    tf2::fromMsg(pose_goal.pose, tf_goal_world);
+
+    // Transform goal from world to base frame
+    tf2::Transform tf_goal_in_base = tf_base_in_world.inverse() * tf_goal_world;
+    geometry_msgs::msg::Pose goal_pose_in_base = tf2_transform_to_pose(tf2::toMsg(tf_goal_in_base));
+    
+    return goal_pose_in_base;
 }
 
 void load_file(const std::string &input_path, std::string &output) {
@@ -381,81 +409,141 @@ mtc::Task MTCTaskNode::createTask(){
   // STAGE 2
   // Move Bases
   {
-    // Set up the MoveTo stage for left base
-    auto stage_base_left = std::make_unique<mtc::stages::MoveTo>("move_base_left",sampling_planner);
-    // Set stage group to identify the base in the srdf
-    stage_base_left->setGroup(left_base_group);
-    // Set orientation in the space
-    double theta = 90.0;
-    // Define pose goal for right and left base
-    geometry_msgs::msg::PoseStamped base_goal_right,base_goal_left;
-    base_goal_left.header.frame_id = "muraUse1";
-    base_goal_left.pose.position.x = -1.0;
-    base_goal_left.pose.position.y = 2.0;
-    base_goal_left.pose.orientation = tf2::toMsg(tf2::Quaternion(0, 0, sin(theta/2), cos(theta/2)));
-    // Set goal and add the task
-    stage_base_left->setGoal(base_goal_left);
-    task.add(std::move(stage_base_left));
+      // auto cartesian_planner_left = std::make_shared<mtc::solvers::CartesianPath>();
+      // auto move_base_left = std::make_unique<mtc::stages::MoveRelative>("move_base_left", cartesian_planner_left);
 
-    // Repeat for right base
-    base_goal_right.header.frame_id = "muraUse1";
-    base_goal_right.pose.position.x = 1.0;
-    base_goal_right.pose.position.y = 2.0;
-    base_goal_right.pose.orientation = tf2::toMsg(tf2::Quaternion(0, 0, sin(-theta/2), cos(-theta/2)));
-    auto stage_base_right = std::make_unique<mtc::stages::MoveTo>("move_base_right", sampling_planner);
-    stage_base_right->setGroup(right_base_group); // e.g., "srm_base_l"
-    stage_base_right->setGoal(base_goal_right);
-    task.add(std::move(stage_base_right));
 
+      pluginlib::ClassLoader<kinematics::KinematicsBase> loader("moveit_core", "kinematics::KinematicsBase");
+      kinematics::KinematicsBasePtr stretch_solver = loader.createSharedInstance("stretch_kinematics_plugin/StretchKinematicsPlugin");
+      std::vector<std::string> tip_frames = { "ur_right_tool0" };
+
+      //maybe should be "right_summit_base_footprint"?
+      std::string base_frame= "right_summit_base_footprint";
+      // Set the group to your base group
+      stretch_solver->initialize(this->node_, *task.getRobotModel().get(), "srm_r", base_frame, tip_frames, 0.01);
+
+      geometry_msgs::msg::Pose goal_pose;
+      goal_pose.position.x = -1.4;
+      goal_pose.position.y = -0.8;
+      goal_pose.position.z = 0.0;
+      goal_pose.orientation = tf2::toMsg(tf2::Quaternion(0, 0, 0, 1));
+
+      std::vector<double> seed_state(9, 0.0); // or current state
+      std::vector<double> solution;
+      moveit_msgs::msg::MoveItErrorCodes error_code;
+
+      //here we get false as return, but no output on why. which is strange.
+      bool found = stretch_solver->getPositionIK(goal_pose, seed_state, solution, error_code, kinematics::KinematicsQueryOptions());
+      if (!found) {
+      RCLCPP_ERROR(LOGGER, "IK solution not found for base movement. Error code: %d", error_code.val);
+      // Optionally, print a human-readable reason:
+      switch (error_code.val) {
+          case moveit_msgs::msg::MoveItErrorCodes::NO_IK_SOLUTION:
+              RCLCPP_ERROR(LOGGER, "Reason: NO_IK_SOLUTION");
+              break;
+          case moveit_msgs::msg::MoveItErrorCodes::TIMED_OUT:
+              RCLCPP_ERROR(LOGGER, "Reason: TIMED_OUT");
+              break;
+          // Add more cases as needed
+          default:
+              RCLCPP_ERROR(LOGGER, "Reason: Unknown error code");
+      }
+    }
+
+     // move_base_left->setGroup("srm_base_l");
+
+     // Set the IK frame to the base link (the link moved by the virtual joint)
+     // move_base_left->setIKFrame("left_summit_base_footprint"); // or "left_summit_base_link" if that's your base
+      // geometry_msgs::msg::TwistStamped twist;
+      // twist.header.frame_id = "left_summit_base_footprint";
+      // twist.twist.angular.z = M_PI / 2; // 90 degrees in radians
+
+      // // move_base_left->setDirection(twist);
+      // // Define the movement direction (e.g., move 1m in x, 2m in y, 0 rad in yaw)
+      // geometry_msgs::msg::Vector3Stamped move_vector;
+      // move_vector.header.frame_id = "left_summit_base_footprint"; // or base link
+      // move_vector.vector.x = 1.0; // meters
+      // move_vector.vector.y = 2.0; // meters
+      // move_vector.vector.z = 0.0; // meters (for planar, z is ignored)
+
+      // move_base_left->setDirection(move_vector);
+
+      // Optionally, restrict direction if needed
+      // move_base_left->restrictDirection(mtc::stages::MoveRelative::FORWARD);
+
+      // task.add(std::move(move_base_left));
+
+    // // Repeat for right base
+    // std::map<std::string, double> base_goal_right;
+    // base_goal_right["right_base_joint/x"] = 1.0;
+    // base_goal_right["right_base_joint/y"] = 2.0;
+    // //base_goal_right["right_base_joint/z"] = -theta/2;
+    // auto stage_base_right = std::make_unique<mtc::stages::MoveTo>("move_base_right", sampling_planner);
+    // stage_base_right->properties().set("joint_state_topic", "/joint_states");  // Using merged joint states
+    // stage_base_right->setGroup(right_base_group); // e.g., "srm_base_l"
+    // stage_base_right->setGoal(base_goal_right);
+    // // stage_base_right->setIKFrame("right_summit_base_link");
+    // task.add(std::move(stage_base_right));
+    // std::cout<<"Base movement stages added."<<std::endl;
   }
 
-  // STAGE 3
-  // Coordinated Dual-Arm Movement
-  {
-      auto stage_dual_arms = std::make_unique<mtc::stages::MoveTo>("move_dual_arms", sampling_planner);
+  // // STAGE 3
+  // // Coordinated Dual-Arm Movement
+  // {
+  //     auto stage_dual_arms = std::make_unique<mtc::stages::MoveTo>("move_dual_arms", sampling_planner);
       
+      /*Ok, I decided to just comment out the arm movement and focus on the bases as there will never be a solution if the bases are not in place.
+Oddly I get:
+[ps_try-1] terminate called after throwing an instance of 'moveit::task_constructor::InitStageException'
+[ps_try-1]   what():  Error initializing stage(s). RCLCPP_ERROR_STREAM(e) for details.
+[ERROR] [ps_try-1]: process has died [pid 12159, exit code -6, cmd '/ros2_ws/install/ps_try/lib/ps_try/ps_try --ros-args --params-file /tmp/launch_params_e35c65ge'].
+
+I think this may be caused by the fact that the launch file #file:ps_try.launch.py has the dual set up, while I'm trying to move the single bases, effectively creating a solution for the virtual joints which can't be on the dual robot set-up, because there can be at most only one virtual joint per urdf.
+Now, in order to go around this restriction I do have a joint that lets me move around the bases in both gazebo and rviz (tested with console commands).
+Only for the bases,  */
+
+  //     geometry_msgs::msg::Pose pose_in_base_frame_left, pose_in_base_frame_right;
+  //     //pose_goal.header.frame_id = "pacco_clone_0";  // The object's frame in the planning scene
+  //     geometry_msgs::msg::PoseStamped object_pose_world = get_pose_from_ps("pacco_clone_0");
       
-      // Set pose goal relative to object in the scene
-      geometry_msgs::msg::PoseStamped pose_goal;
-      geometry_msgs::msg::Pose pose_in_base_frame_left, pose_in_base_frame_right;
-      //pose_goal.header.frame_id = "pacco_clone_0";  // The object's frame in the planning scene
-      geometry_msgs::msg::PoseStamped object_pose_world = get_pose_from_ps("pacco_clone_0");
+  //     // Set pose goal relative to object in the scene
+  //     geometry_msgs::msg::PoseStamped pose_goal;
+  //     pose_goal.pose.position.x = 0.0;     // Offset from the object's origin (e.g., for grasping)
+  //     pose_goal.pose.position.y = 0.1;
+  //     pose_goal.pose.position.z = 0.2;
+  //     pose_goal.pose.orientation.w = 1.0;
 
-      pose_goal.pose.position.x = 0.0;     // Offset from the object's origin (e.g., for grasping)
-      pose_goal.pose.position.y = 0.1;
-      pose_goal.pose.position.z = 0.2;
-      pose_goal.pose.orientation.w = 1.0;
+  //     // Transform offset_pose from object frame to world frame
+  //     geometry_msgs::msg::PoseStamped goal_pose_world;
+      
+  //     tf2::Transform tf_object, tf_offset;
+  //     tf2::fromMsg(object_pose_world.pose, tf_object);
+  //     tf2::fromMsg(pose_goal.pose, tf_offset);
+  //     tf2::Transform tf_goal_world = tf_object * tf_offset;
+  //     goal_pose_world.pose = tf2_transform_to_pose(tf2::toMsg(tf_goal_world));
+  //     goal_pose_world.header.frame_id = "world";
+      
+  //     // We drive manual, so we need to convert the pose to be relative to the robot in the world
+  //     // hooray more complex stuff
 
-      // Transform offset_pose from object frame to world frame
-      tf2::Transform tf_object, tf_offset;
-      tf2::fromMsg(object_pose_world.pose, tf_object);
-      tf2::fromMsg(pose_goal.pose, tf_offset);
-
-      tf2::Transform tf_goal_world = tf_object * tf_offset;
-      geometry_msgs::msg::PoseStamped goal_pose_world ;
-      goal_pose_world.pose = tf2_transform_to_pose(tf2::toMsg(tf_goal_world));
-
-      // We drive manual, so we need to convert the pose to be relative to the robot in the world
-      // hooray more complex stuff
-
-      pose_in_base_frame_left = pose_to_base_frame(this->node_,goal_pose_world,"ur_left_base_link_inertia");
-      pose_in_base_frame_right = pose_to_base_frame(this->node_,goal_pose_world,"ur_right_base_link_inertia");
+  //     pose_in_base_frame_left = pose_to_base_frame(this->node_,goal_pose_world,"ur_left_base_link_inertia");
+  //     pose_in_base_frame_right = pose_to_base_frame(this->node_,goal_pose_world,"ur_right_base_link_inertia");
 
 
-      // Calculate map goal for left and right arms
-      std::map<std::string,double> *joint_goal;
-      std::map<std::string,double> joint_goal_right = compute_IK(this->node_,right_robot_model,right_arm_group,right_kinematics_path,pose_in_base_frame_right);
-      std::map<std::string,double> joint_goal_left = compute_IK(this->node_,left_robot_model,left_arm_group,left_kinematics_path,pose_in_base_frame_left);
-      // Merge solutions
-      joint_goal_left.merge(joint_goal_right);
-      joint_goal = &joint_goal_left;
+  //     // Calculate map goal for left and right arms
+  //     std::map<std::string,double> *joint_goal;
+  //     std::map<std::string,double> joint_goal_right = compute_IK(this->node_,right_robot_model,right_arm_group,right_kinematics_path,pose_in_base_frame_right);
+  //     std::map<std::string,double> joint_goal_left = compute_IK(this->node_,left_robot_model,left_arm_group,left_kinematics_path,pose_in_base_frame_left);
+  //     // Merge solutions
+  //     joint_goal_left.merge(joint_goal_right);
+  //     joint_goal = &joint_goal_left;
 
-      // go back to dual model
-      stage_dual_arms->setGroup(dual_arms_group);
-      stage_dual_arms->setGoal(*joint_goal);
+  //     // go back to dual model
+  //     stage_dual_arms->setGroup(dual_arms_group);
+  //     stage_dual_arms->setGoal(*joint_goal);
 
-      task.add(std::move(stage_dual_arms));
-  }
+  //     task.add(std::move(stage_dual_arms));
+  // }
 
   return task;
 }
@@ -511,7 +599,13 @@ int main(int argc, char ** argv){
   mtc_task_node->setupPlanningScene();
 
   mtc_task_node->robot_side = "l";  // Set the robot side to left, can be "l" or "r"
-  mtc_task_node->doTask();
+  try{
+    mtc_task_node->doTask();
+  } catch (mtc::InitStageException& e){
+    RCLCPP_ERROR_STREAM(LOGGER, e);
+    return -1;
+  }
+  
   RCLCPP_INFO(LOGGER, "Task execution complete, shutting down...");
 
   spin_thread->join();

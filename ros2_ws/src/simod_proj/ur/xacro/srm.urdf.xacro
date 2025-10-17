@@ -1087,7 +1087,7 @@
     </plugin>
   </gazebo>
   <!-- <xacro:summit_xl prefix="${prefix)}" publish_bf="true" hq="true"/> -->
-  <gazebo reference="world">
+  <!-- <gazebo reference="world">
         </gazebo>
   <gazebo>
     <plugin filename="libgazebo_ros2_control.so" name="left_gazebo_ros2_control">
@@ -1100,7 +1100,7 @@
       <namespace>left</namespace>
     </ros>
     <update_rate>1.0</update_rate>
-  </plugin>
+  </plugin> -->
 
   <!-- ROBOT RIGHT: istanziare la macro-->
   <ros2_control name="right_ur" type="system">
@@ -2164,18 +2164,18 @@
     <!-- <xacro:summit_xl prefix="${prefix)}" publish_bf="true" hq="true"/> -->
     <gazebo reference="world">
         </gazebo>
-    <gazebo>
+    <!-- <gazebo>
     <plugin filename="libgazebo_ros2_control.so" name="right_gazebo_ros2_control">
         <parameters>/ros2_ws/install/ur/share/ur/config/right_controller.yaml</parameters>
         <ros>
         <namespace>right</namespace>
         </ros>
     </plugin>
-    </gazebo>
-    <plugin filename="libgazebo_ros2_state.so" name="right_gazebo_ros_state">
+    </gazebo> -->
+    <!-- <plugin filename="libgazebo_ros2_state.so" name="right_gazebo_ros_state">
     <ros>
         <namespace>right</namespace>
     </ros>
     <update_rate>1.0</update_rate>
-    </plugin>
+    </plugin> -->
 </robot>

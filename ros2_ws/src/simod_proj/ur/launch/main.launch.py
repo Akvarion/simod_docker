@@ -2,6 +2,7 @@
 
 from launch import LaunchDescription, LaunchDescription
 from launch.actions import IncludeLaunchDescription, ExecuteProcess
+
 from launch.substitutions import Command, FindExecutable, LaunchConfiguration, PathJoinSubstitution, TextSubstitution
 
 from ament_index_python.packages import get_package_share_directory
@@ -13,7 +14,10 @@ from launch.substitutions import PathJoinSubstitution
 import launch_ros.parameter_descriptions
 from launch_ros.substitutions import FindPackageShare
 from moveit_configs_utils import MoveItConfigsBuilder
-from launch.actions import TimerAction
+from launch.actions import TimerAction, RegisterEventHandler
+from launch.event_handlers import OnProcessStart, OnProcessExit
+
+
 
 def generate_launch_description():
 
@@ -54,17 +58,17 @@ def generate_launch_description():
     hardware_interface   = 'hardware_interface/PositionJointInterface'
 
 
-    gazebo               = 'True'
-    spawn_gazebo_robot   = 'True'
-    spawn_gazebo_base    = 'True'
+
     rviz                 = 'True'
     gazebo_path = os.path.join(get_package_share_directory('ur'), 'xacro','gazebo.world')
 
+
     gazebo = IncludeLaunchDescription(
-                 (os.path.join(get_package_share_directory('gazebo_ros'), 'launch','gazebo.launch.py')),
-                 launch_arguments={'physics': 'False', 'world': gazebo_path}.items(),
-                 condition=IfCondition(gazebo))
-    
+        PythonLaunchDescriptionSource(
+            os.path.join(get_package_share_directory('gazebo_ros'), 'launch', 'gazebo.launch.py')
+        ),
+        launch_arguments={'physics': 'False', 'world': gazebo_path}.items()
+    )
 
     #Open gazebo and spawn robots
     robot_description_content = Command(
@@ -76,64 +80,22 @@ def generate_launch_description():
     )
     robot_description_param = launch_ros.descriptions.ParameterValue(robot_description_content, value_type=str)
 
-    robot_spawner_left = IncludeLaunchDescription(
-                        PythonLaunchDescriptionSource([get_package_share_directory(description_package), '/launch', '/single_robot.launch.py']),
-                        launch_arguments={
-                            'spawn_gazebo_robot': spawn_gazebo_robot,
-                            'ur_type': ur_type_left, 
-                            'namespace': namespace_left,
-                            'tf_prefix': tf_prefix_left,
-                            'base_prefix': 'left_summit',
-                            'parent_ur': parent_ur_left,
-                            'parent_hand': parent_hand_left,
-                            'xyz': xyz_left,
-                            'rpy_base_ur': '"0 0 -1.57"',
-                            'xyz_base': xyz_base_left,
-                            'rpy': rpy_left,
-                            'finger_tip_cor': finger_tip_cor_left,
-                            'hardware_interface': hardware_interface,
-                            'robot_ip': robot_ip_left,
-                            'initial_positions_file': initial_positions_file_l,
-                            'physical_parameters_file': physical_parameters_l,
-                            'controller_file': left_controller,
-                            'vel_controller': vel_controller_left,
-                            'spawn_gazebo_base': spawn_gazebo_base,
-                            'parent_base': 'world',
-                            'script_sender_port': '50002',
-                            'reverse_port': '50005',
-                            'script_command_port': '50008',
-                            'trajectory_port': '50007',
-                            }.items())
-    
-    robot_spawner_right = IncludeLaunchDescription(
-                        PythonLaunchDescriptionSource([get_package_share_directory(description_package), '/launch', '/single_robot.launch.py']),
-                        launch_arguments={
-                            'spawn_gazebo_robot': spawn_gazebo_robot,
-                            'ur_type': ur_type_right, 
-                            'namespace': namespace_right,
-                            'tf_prefix': tf_prefix_right,
-                            'base_prefix': 'right_summit',
-                            'parent_ur': parent_ur_right,
-                            'parent_hand': parent_hand_right,
-                            'xyz': xyz_right,
-                            'rpy_base_ur': '"0 0 1.57"',
-                            'xyz_base': xyz_base_right,
-                            'rpy': rpy_right,
-                            'finger_tip_cor': finger_tip_cor_right,
-                            'hardware_interface': hardware_interface,
-                            'robot_ip': robot_ip_right,
-                            'initial_positions_file': initial_positions_file_r,
-                            'physical_parameters_file': physical_parameters_r,
-                            'controller_file': right_controller,
-                            'vel_controller': vel_controller_right,
-                            'spawn_gazebo_base': spawn_gazebo_base,
-                            'parent_base': 'world',
-                            'script_sender_port': '50006',
-                            'reverse_port': '50001',
-                            'script_command_port': '50004',
-                            'trajectory_port': '50003',
-                            }.items())
-    
+    robot_spawner_left = ExecuteProcess(
+        cmd=[
+            'ros2', 'launch', 'ur', 'new_single.launch.py', 'robot:=left'
+        ],
+        name='left_robot_spawner',
+        output='screen'
+    )
+
+    robot_spawner_right = ExecuteProcess(
+        cmd=[
+            'ros2', 'launch', 'ur', 'new_single.launch.py', 'robot:=right'
+        ],
+        name='right_robot_spawner',
+        output='screen'
+    )
+
     # joint_pub_ros1 = Node(
     #     package="py_pubsub",
     #     executable="ros1_bridge",
@@ -233,16 +195,6 @@ def generate_launch_description():
         name="gazebo_scene_sync",
         output="screen"
     )
-    # Add a delay to allow the robots to spawn before merging joint states
-    delayed_joint_state_merger = TimerAction(
-        period=7.0, #7 seconds delay to allow spawns and such
-        actions=[joint_state_merger],
-    )
-    # Add a delay to allow the robots to spawn before syncing the planning scene
-    delayed_gazebo_scene_sync = TimerAction(
-        period=8.0, #8 seconds delay to allow spawns and such
-        actions=[gazebo_scene_sync],
-    )
 
     # controller_manager = Node(
     #     package='controller_manager',
@@ -259,25 +211,59 @@ def generate_launch_description():
     #     period=4.0,  # 10 seconds delay to allow spawns and such
     #     actions=[controller_manager],
     # )
-    gazebo_moveit_bridge = Node(
+    delayed_moveit_bridge = Node(
         package="ur",
         executable="gazebo_moveit_bridge.py",
         name="gazebo_moveit_bridge",
         output="screen"
     )
-    delayed_moveit_bridge = TimerAction(
-        period=5.0,  # 10 seconds delay to allow spawns and such
-        actions=[gazebo_moveit_bridge],
+
+    right_spawner_handler = RegisterEventHandler(
+        event_handler = OnProcessStart(
+            target_action=robot_spawner_left,
+            on_start=TimerAction(period=10.0, actions=[robot_spawner_right]),
+        )
+    )
+    rviz_handler = RegisterEventHandler(
+        event_handler = OnProcessStart(
+            target_action=robot_spawner_right,
+            on_start=TimerAction(period=1.0, actions=[rviz]),
+        )
+    )
+    
+    move_group_handler = RegisterEventHandler(
+        event_handler = OnProcessStart(
+            target_action=rviz,
+            on_start=TimerAction(period=8.0, actions=[run_move_group_node]),
+        )
+    )
+    
+    # Add a delay to allow the robots to spawn before merging joint states
+    joint_state_merger_handler = RegisterEventHandler(
+        event_handler = OnProcessStart(
+            target_action=robot_spawner_right,
+            on_start=TimerAction(period=2.0, actions=[joint_state_merger]),
+        )
+    )
+    # Add a delay to allow the robots to spawn before syncing the planning scene
+    gazebo_scene_sync_handler = RegisterEventHandler(
+        event_handler = OnProcessStart(
+            target_action=rviz,
+            on_start=TimerAction(period=4.0, actions=[gazebo_scene_sync]),
+        )
     )
 
     ld = LaunchDescription()
+
     ld.add_action(gazebo)
    #ld.add_action(joint_pub_ros1)
     ld.add_action(robot_spawner_left)
-    ld.add_action(robot_spawner_right)
-    ld.add_action(delayed_joint_state_merger)
-    ld.add_action(delayed_gazebo_scene_sync)
-    ld.add_action(delayed_moveit_bridge)
-    ld.add_action(rviz)
-    ld.add_action(run_move_group_node)
+    ld.add_action(right_spawner_handler)
+    ld.add_action(rviz_handler)
+
+   # ld.add_action(move_group_handler)
+    ld.add_action(joint_state_merger_handler)
+    ld.add_action(gazebo_scene_sync_handler)
+   # ld.add_action(delayed_moveit_bridge)
+
     return ld

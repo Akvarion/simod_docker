@@ -62,6 +62,9 @@
         <joint name="ur_right_wrist_3_joint" value="-0.1694"/>
         <!-- <joint name="ur_right_base_link-base_link_inertia" value="0"/> -->
     </group_state>
+
+    <!--VIRTUAL JOINT -->
+    <virtual_joint name="virtual_base_joint_right" type="planar" parent_frame="world" child_link="right_summit_base_footprint"/>
     
     <!--END EFFECTOR: Purpose: Represent information about an end effector.-->
     <end_effector name="ee_r" parent_link="ur_right_tool0" group="srm_r_ee" parent_group="srm_r_ur"/>

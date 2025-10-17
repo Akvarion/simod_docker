@@ -5,6 +5,7 @@
 -->
 <robot name="left_srm">
     <group name="srm_base_l">
+        <joint name="virtual_base_joint_left"/>
         <joint name="left_summit_base_footprint_joint"/>
         <joint name="left_summit_back_left_wheel_joint"/>
         <joint name="left_summit_back_right_wheel_joint"/>
@@ -57,7 +58,8 @@
         <joint name="ur_left_wrist_3_joint" value="0"/>
         <!-- <joint name="ur_right_base_link-base_link_inertia" value="0"/> -->
     </group_state>
-
+    <!--VIRTUAL JOINT -->
+    <virtual_joint name="virtual_base_joint_left" type="planar" parent_frame="world" child_link="left_summit_base_footprint"/>
     <!--END EFFECTOR: Purpose: Represent information about an end effector.-->
     <end_effector name="ee_l" parent_link="ur_left_tool0" group="srm_l_ee" parent_group="srm_l_ur"/>
     <!--DISABLE COLLISIONS: By default it is assumed that any link of the robot could potentially come into collision with any other link in the robot. This tag disables collision checking between a specified pair of links. -->

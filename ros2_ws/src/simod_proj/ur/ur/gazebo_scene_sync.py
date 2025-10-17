@@ -50,7 +50,7 @@ class GazeboSceneSync(Node):
     def publish_collision_object(self, co):
         # Publish the collision object to the planning scene
         self.collision_object_pub.publish(co)
-        self.get_logger().info(f"Published collision object: {co.id}")
+        #self.get_logger().info(f"Published collision object: {co.id}")
     
     def rviz_load_mesh(self, co, mesh_path):
         # Load the mesh from the specified path
@@ -99,7 +99,7 @@ class GazeboSceneSync(Node):
         planning_scene_msg.object_colors.append(object_color)
 
         self.planning_scene_pub.publish(planning_scene_msg)
-        self.get_logger().info(f"Published colored collision object: {co.id}")
+        #self.get_logger().info(f"Published colored collision object: {co.id}")
 
     def model_states_callback(self, msg):
         for name, pose in zip(msg.name, msg.pose):
@@ -116,18 +116,18 @@ class GazeboSceneSync(Node):
                     self.publish_colored_object(co, (0.82, 0.71, 0.55, 1.0))
                     self.broadcast_tf(pose, "world", "pallet2")
 
-                case "aws_robomaker_warehouse_GroundB_01_0" :
-                    co = CollisionObject()
-                    co.header.frame_id = "world"
-                    co.id = "warehouse_ground"
-                    primitive = SolidPrimitive()
-                    primitive.type = SolidPrimitive.BOX
-                    primitive.dimensions = [14.0, 20.9, 0.123316]  # Fill in actual dimensions
-                    co.primitives = [primitive]
-                    co.primitive_poses = [pose]  # Use the pose from Gazebo
-                    co.operation = CollisionObject.ADD
+                # case "aws_robomaker_warehouse_GroundB_01_0" :
+                #     co = CollisionObject()
+                #     co.header.frame_id = "world"
+                #     co.id = "warehouse_ground"
+                #     primitive = SolidPrimitive()
+                #     primitive.type = SolidPrimitive.BOX
+                #     primitive.dimensions = [14.0, 20.9, 0.123316]  # Fill in actual dimensions
+                #     co.primitives = [primitive]
+                #     co.primitive_poses = [pose]  # Use the pose from Gazebo
+                #     co.operation = CollisionObject.ADD
 
-                    self.publish_colored_object(co, (0.8, 0.7, 1.0, 1.0))
+                #     self.publish_colored_object(co, (0.8, 0.7, 1.0, 1.0))
 
                 case "target_plane" :
                     co = CollisionObject()
@@ -219,8 +219,8 @@ class GazeboSceneSync(Node):
 
                     self.publish_collision_object(co)
                     self.broadcast_tf(pose, "world", "muraUse1")
-                case _:
-                    self.get_logger().info(f"Model {name} not handled in callback.")
+                # case _:
+                #     self.get_logger().info(f"Model {name} not handled in callback.")
 
     def link_states_callback(self, msg):
         # Example: update a box named "box::box_link" in the planning scene
@@ -286,8 +286,8 @@ class GazeboSceneSync(Node):
                     co.operation = CollisionObject.ADD
                     self.publish_collision_object(co)
                 
-                case _:
-                    self.get_logger().info(f"Model {name} not handled in callback.")
+                # case _:
+                #     self.get_logger().info(f"Model {name} not handled in callback.")
                 
 
 def main(args=None):

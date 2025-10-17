@@ -1,14 +1,14 @@
 moveit_setup_assistant_config:
   urdf:
     package: ur
-    relative_path: xacro/left_resolved.urdf.xacro
+    relative_path: xacro/left_resolved_paletta.urdf
     xacro_args:
   srdf:
     relative_path: config/dual.srdf
   package_settings:
     author_name: todo
     author_email: todo@todo.com
-    generated_timestamp: 1744813506
+    generated_timestamp: 1759310253
   control_xacro:
     command:
       - position

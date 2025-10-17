@@ -38,6 +38,7 @@
 #include <moveit_simple_controller_manager/action_based_controller_handle.h>
 #include <moveit_simple_controller_manager/gripper_controller_handle.h>
 #include <moveit_simple_controller_manager/follow_joint_trajectory_controller_handle.h>
+#include <moveit_simple_controller_manager/multi_dof_follow_joint_trajectory_controller_handle.h>
 #include <boost/algorithm/string/join.hpp>
 #include <pluginlib/class_list_macros.hpp>
 #include <rclcpp/logger.hpp>
@@ -180,6 +181,12 @@ public:
         {
           new_handle = std::make_shared<FollowJointTrajectoryControllerHandle>(node_, controller_name, action_ns);
           RCLCPP_INFO_STREAM(LOGGER, "Added FollowJointTrajectory controller for " << controller_name);
+          controllers_[controller_name] = new_handle;
+        }
+
+        else if (type == "MultiDofFollowJointTrajectory"){
+          new_handle = std::make_shared<MultiDofFollowJointTrajectoryControllerHandle>(node_, controller_name, action_ns);
+          RCLCPP_INFO_STREAM(node_->get_logger(), "Added MultiDofFollowJointTrajectory controller for "<< controller_name);
           controllers_[controller_name] = new_handle;
         }
         else

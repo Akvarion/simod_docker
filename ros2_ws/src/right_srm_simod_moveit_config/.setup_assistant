@@ -1,10 +1,10 @@
 moveit_setup_assistant_config:
   urdf:
-    package: ur
-    relative_path: xacro/right_resolved.urdf.xacro
+    absolute_path: xacro/right_resolved_paletta.urdf
     xacro_args:
   srdf:
-    relative_path: config/dual.srdf
+    package: ur
+    relative_path: xacro/right_semantics.srdf
   package_settings:
     author_name: todo
     author_email: todo@todo.com

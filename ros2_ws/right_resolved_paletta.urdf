@@ -1115,10 +1115,10 @@
 			<origin xyz="${gps_offset_x} ${gps_offset_y} ${gps_offset_z}" rpy="0 0 0"/>
 		</xacro:sensor_gps-->
   <gazebo>
-    <plugin filename="libgazebo_ros_planar_move.so" name="omni_steering">
-      <namespace>right_summit</namespace>
-      <command_topic>right_summit/cmd_vel</command_topic>
-      <odometry_topic>right_summit/odom</odometry_topic>
+    <plugin filename="libgazebo_ros_planar_move.so" name="right_omni_steering">
+      <remapping>cmd_vel:=right_summit_cmd_vel</remapping>
+      <remapping>odom:=right_summit_odom</remapping>
+
       <odometry_frame>right_summit_odom</odometry_frame>
       <odometryRate>50.0</odometryRate>
       <robot_base_frame>right_summit_base_footprint</robot_base_frame>
