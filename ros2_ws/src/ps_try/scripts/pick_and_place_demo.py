@@ -521,8 +521,8 @@ def main():
                         help='Link name (end-effector/paletta) of the attaching robot')
 
     # Topic movimento
-    parser.add_argument('--left_base_topic',  default='/left_summit/cmd_vel')
-    parser.add_argument('--right_base_topic', default='/right_summit/cmd_vel')
+    parser.add_argument('--left_base_topic',  default='/left_summit_cmd_vel')
+    parser.add_argument('--right_base_topic', default='/right_summit_cmd_vel')
     parser.add_argument('--left_arm_topic',   default='/left/ur_left_joint_group_vel_controller/commands')
     parser.add_argument('--right_arm_topic',  default='/right/ur_right_joint_group_vel_controller/commands')
 

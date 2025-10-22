@@ -135,12 +135,3 @@ Hai ora un esempio funzionante dove:
 * Il **BT è usato per orchestrare** la sequenza e fallback.
 * Il **MTC è usato per gestire la manipolazione vera e propria**.
 * Puoi modularizzare logicamente task più grandi, sfruttando il meglio dei due mondi.
-
----
-
-Se vuoi, posso anche prepararti:
-
-* un **progetto CMake completo** con questi file,
-* oppure spiegarti **come farlo in Python**.
-
-Vuoi procedere con uno di questi?
