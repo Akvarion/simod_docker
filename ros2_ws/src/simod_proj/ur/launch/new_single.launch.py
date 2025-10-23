@@ -9,7 +9,9 @@ from launch_ros.actions import Node
 from launch.event_handlers import OnProcessStart, OnProcessExit
 from launch_ros.substitutions import FindPackageShare
 from launch.actions import DeclareLaunchArgument
+from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch import LaunchDescription
+
 import launch_ros.parameter_descriptions
 from launch.actions import OpaqueFunction
 from launch.conditions import IfCondition, UnlessCondition
@@ -23,9 +25,9 @@ import xacro
 
 def generate_launch_description():
     robot_ = DeclareLaunchArgument('robot', default_value='left', description='L/R Robot')
+    gazebo_flag= DeclareLaunchArgument('gazebo', default_value='false', description='Whether to launch gazebo simulation')
+    return LaunchDescription([robot_, gazebo_flag, OpaqueFunction(function=launch_setup)])
 
-    return LaunchDescription([robot_, OpaqueFunction(function=launch_setup)])
-    
 def load_file(package_name, file_path):
     package_path = get_package_share_directory(package_name)
     absolute_file_path = os.path.join(package_path, file_path)
@@ -98,6 +100,7 @@ def load_yaml(package_name, file_path):
 def launch_setup(context, *args, **kwargs):
     
     robot_ = LaunchConfiguration('robot').perform(context)
+    gazebo_flag = LaunchConfiguration('gazebo').perform(context)
     # Load urdf file
     with open("/ros2_ws/"+robot_+"_resolved_paletta.urdf","r") as robot_description_file:
         robot_description_content = robot_description_file.read()
@@ -175,6 +178,7 @@ def launch_setup(context, *args, **kwargs):
     #     executable='static_transform_publisher',
     #     arguments=['0', '0', '0', '0', '0', '0', '1', 'left_robot', "left_summit_odom"]
     # )
+
     static_tf_odom = Node(
         package="tf2_ros",
         executable="static_transform_publisher",
@@ -256,121 +260,135 @@ def launch_setup(context, *args, **kwargs):
     gazebo = IncludeLaunchDescription(
                  (os.path.join(get_package_share_directory('gazebo_ros'), 'launch','gazebo.launch.py')),
                  launch_arguments={'physics': 'False', 'world': gazebo_path}.items(),
-                 )
+                 condition=IfCondition(LaunchConfiguration('gazebo'))
+    )
+
+    ##############
+    # MOVEIT STUFF
+    ##############
+        # Planning scene monitor
+    planning_scene_monitor_parameters = {'publish_planning_scene': True,
+                                         'publish_geometry_updates': True,
+                                         'publish_state_updates': True,
+                                         'publish_transforms_updates': True,
+                                         }
+    planning_pipelines_config = {
+        "default_planning_pipeline": "ompl",
+        "planning_pipelines": ["ompl"],
+        "ompl": {
+            "planning_plugins": ["ompl_interface/OMPLPlanner"],
+            "request_adapters": [
+                "default_planner_request_adapters/ResolveConstraintFrames",
+                "default_planner_request_adapters/FixWorkspaceBounds",
+                "default_planner_request_adapters/FixStartStateBounds",
+                "default_planner_request_adapters/FixStartStateCollision",
+            ],
+            "response_adapters": [
+                "default_planner_response_adapters/AddTimeOptimalParameterization",
+                "default_planner_response_adapters/ValidateSolution",
+            ],
+        },
+    }
+    ompl_planning_yaml = load_yaml("left_srm_simod_moveit_config", "config/ompl_planning.yaml")
+    planning_pipelines_config["ompl"].update(ompl_planning_yaml)
+    parameters_pipeline={
+        "default_planning_pipeline": "ompl",
+        "planning_pipelines": ["ompl"],
+        "ompl": {
+            "planning_plugins": ["ompl_interface/OMPLPlanner"],
+            "planner_configs": {
+                "RRTConnect": {
+                    "type": "geometric::RRTConnect",
+                    "range": 0.0
+                }
+            }
+        }   
+    }
+
+    # Trajectory control
+    controllers_yaml = load_yaml("left_srm_simod_moveit_config", "config/moveit_controllers.yaml")
+
+    moveit_controllers_config = {'moveit_simple_controller_manager': controllers_yaml,
+                          'moveit_controller_manager': 'moveit_simple_controller_manager/MoveItSimpleControllerManager'}
     
-  
-    # ##############
-    # # MOVEIT STUFF
-    # ##############
-    #     # Planning scene monitor
-    # planning_scene_monitor_parameters = {'publish_planning_scene': True,
-    #                                      'publish_geometry_updates': True,
-    #                                      'publish_state_updates': True,
-    #                                      'publish_transforms_updates': True,
-    #                                      }
-    # planning_pipelines_config = {
-    #     "default_planning_pipeline": "ompl",
-    #     "planning_pipelines": ["ompl"],
-    #     "ompl": {
-    #         "planning_plugins": ["ompl_interface/OMPLPlanner"],
-    #         "request_adapters": [
-    #             "default_planner_request_adapters/ResolveConstraintFrames",
-    #             "default_planner_request_adapters/FixWorkspaceBounds",
-    #             "default_planner_request_adapters/FixStartStateBounds",
-    #             "default_planner_request_adapters/FixStartStateCollision",
-    #         ],
-    #         "response_adapters": [
-    #             "default_planner_response_adapters/AddTimeOptimalParameterization",
-    #             "default_planner_response_adapters/ValidateSolution",
-    #         ],
-    #     },
-    # }
-    # ompl_planning_yaml = load_yaml("left_srm_simod_moveit_config", "config/ompl_planning.yaml")
-    # planning_pipelines_config["ompl"].update(ompl_planning_yaml)
-    # # parameters_pipeline={
-    # #     "default_planning_pipeline": "ompl",
-    # #     "planning_pipelines": ["ompl"],
-    # #     "ompl": {
-    # #         "planning_plugins": ["ompl_interface/OMPLPlanner"],
-    # #         "planner_configs": {
-    # #             "RRTConnect": {
-    # #                 "type": "geometric::RRTConnect",
-    # #                 "range": 0.0
-    # #             }
-    # #         }
-    # #     }   
-    # # }
-
-    # # Trajectory control
-    # controllers_yaml = load_yaml("left_srm_simod_moveit_config", "config/moveit_controllers.yaml")
-
-    # moveit_controllers_config = {'moveit_simple_controller_manager': controllers_yaml,
-    #                       'moveit_controller_manager': 'moveit_simple_controller_manager/MoveItSimpleControllerManager'}
-    
-    # trajectory_execution_config = {'moveit_manage_controllers': True,
-    #                         'trajectory_execution.allowed_execution_duration_scaling': 1.2,
-    #                         'trajectory_execution.allowed_goal_duration_margin': 0.5,
-    #                         'trajectory_execution.allowed_start_tolerance': 0.01}
+    trajectory_execution_config = {'moveit_manage_controllers': True,
+                            'trajectory_execution.allowed_execution_duration_scaling': 1.2,
+                            'trajectory_execution.allowed_goal_duration_margin': 0.5,
+                            'trajectory_execution.allowed_start_tolerance': 0.01}
 
 
-    # # Load  ExecuteTaskSolutionCapability so we can execute found solutions in simulation
-    # move_group_capabilities = {
-    #     "capabilities": "move_group/ExecuteTaskSolutionCapability"
-    # }
-    # robot_description_config = xacro.process_file(os.path.join(get_package_share_directory('ur'),
-    #                                                            'xacro',
-    #                                                            'left_resolved_paletta.urdf'),
-    #                                             )
-    # robot_description = {'robot_description': robot_description_config.toxml()}
-    # robot_description_semantic_config = load_file('left_srm_simod_moveit_config', 'config/dual.srdf')
-    # robot_description_semantic = {'robot_description_semantic': robot_description_semantic_config}
+    # Load  ExecuteTaskSolutionCapability so we can execute found solutions in simulation
+    move_group_capabilities = {
+        "capabilities": "move_group/ExecuteTaskSolutionCapability"
+    }
+    robot_description_config = xacro.process_file(os.path.join(get_package_share_directory('ur'),
+                                                               'xacro',
+                                                               'left_resolved_paletta.urdf'),
+                                                )
+    robot_description = {'robot_description': robot_description_config.toxml()}
+    robot_description_semantic_config = load_file('left_srm_simod_moveit_config', 'config/dual.srdf')
+    robot_description_semantic = {'robot_description_semantic': robot_description_semantic_config}
 
-    # kinematics_yaml = load_yaml('left_srm_simod_moveit_config', 'config/kinematics.yaml')
-    # robot_description_kinematics = {
-    #     "robot_description_kinematics": kinematics_yaml
-    # }
+    kinematics_yaml = load_yaml('left_srm_simod_moveit_config', 'config/kinematics.yaml')
+    robot_description_kinematics = {
+        "robot_description_kinematics": kinematics_yaml
+    }
 
-    # sensors_yaml = load_yaml('left_srm_simod_moveit_config', 'config/sensors_3d.yaml')
-    # joint_limits_yaml = load_yaml('left_srm_simod_moveit_config', 'config/joint_limits.yaml')
-    # #Start the actual move_group node/action server
-    # #moveit_config = MoveItConfigsBuilder("left_srm_simod").to_dict()
+    sensors_yaml = load_yaml('left_srm_simod_moveit_config', 'config/sensors_3d.yaml')
+    joint_limits_yaml = load_yaml('left_srm_simod_moveit_config', 'config/joint_limits.yaml')
+    #Start the actual move_group node/action server
+    #moveit_config = MoveItConfigsBuilder("left_srm_simod").to_dict()
 
-    # run_move_group_node = Node(
-    #     package="moveit_ros_move_group",
-    #     executable="move_group",
-    #     #namespace=namespace,
-    #     output="screen",
-    #     parameters=[
-    #         {'use_sim_time': True},
-    #         {"tf_buffer_cache_time": 30.0},
-    #         robot_description,
-    #         robot_description_semantic,
-    #         robot_description_kinematics,
-    #         sensors_yaml,
-    #         joint_limits_yaml,
-    #         planning_pipelines_config,
-    #         trajectory_execution_config,
-    #         moveit_controllers_config,
-    #         planning_scene_monitor_parameters
-    #     ],
-    # )
-    # rviz_config_file = (
-    #     os.path.join(get_package_share_directory('ur'), 'rviz','rviz_config.rviz')
-    # )
-    # rviz = Node(
-    #     package='rviz2',
-    #     executable='rviz2',
-    #     name='rviz2',
-    #     output='screen',
-    #     # arguments=['-d', rviz_config_file],
-    #     parameters=[
-    #         robot_description,
-    #         robot_description_semantic,
-    #         robot_description_kinematics,
-    #         planning_pipelines_config,
-    #         {'use_sim_time': True},
-    #     ],        
-    # )
+    run_move_group_node = Node(
+        package="moveit_ros_move_group",
+        executable="move_group",
+        #namespace=namespace,
+        output="screen",
+        parameters=[
+            {'use_sim_time': True},
+            {"tf_buffer_cache_time": 30.0},
+            robot_description,
+            robot_description_semantic,
+            robot_description_kinematics,
+            sensors_yaml,
+            joint_limits_yaml,
+            planning_pipelines_config,
+            trajectory_execution_config,
+            moveit_controllers_config,
+            planning_scene_monitor_parameters
+        ],
+        condition=IfCondition(LaunchConfiguration('gazebo'))
+    )
+    rviz_config_file = (
+        os.path.join(get_package_share_directory('ur'), 'rviz','rviz_config.rviz')
+    )
+    rviz = Node(
+        package='rviz2',
+        executable='rviz2',
+        name='rviz2',
+        output='screen',
+        # arguments=['-d', rviz_config_file],
+        parameters=[
+            robot_description,
+            robot_description_semantic,
+            robot_description_kinematics,
+            planning_pipelines_config,
+            {'use_sim_time': True},
+        ],        
+        condition=IfCondition(LaunchConfiguration('gazebo'))
+    )
+    ##############
+    # Action Server for MoveIt to control the robots in Gazebo
+    ##############
+
+    simod_mac_node = Node(
+        package="simod_moveit_action_controller",
+        executable="simod_mac",
+        name="simod_moveit_action_controller",
+        output="screen",
+        condition=IfCondition(LaunchConfiguration('gazebo'))
+    )
+
     controller_manager = Node(
         package='controller_manager',
         executable='ros2_control_node',
@@ -382,36 +400,48 @@ def launch_setup(context, *args, **kwargs):
         output='screen',
         
     )
-    delayed_controller_manager = TimerAction(
-        period=3.0,  # 3 seconds delay to allow spawns and such
-        actions=[controller_manager],
-    )
-    
-    # register_handler = RegisterEventHandler(
-    #     event_handler = OnProcessExit(
-    #         target_action=gazebo_spawn_robot_description,
-    #         on_exit=TimerAction(period=2.0, actions=[run_move_group_node]),
-    #     )
-    # )
 
-    # delayed_rviz_node = TimerAction(
-    #     period=10.0,  # 10 seconds delay to allow spawns and such
-    #     actions=[rviz],
-    # )
+    joint_state_merger_node = Node(
+        package='ur',
+        executable='joint_state_merger.py',
+        name='joint_state_merger',
+        output='screen',
+        parameters=[{'side': robot_}],
+        condition=IfCondition(LaunchConfiguration('gazebo'))
+    )
+
+    register_handler = RegisterEventHandler(
+        event_handler = OnProcessExit(
+            target_action=gazebo_spawn_robot_description,
+            on_exit=TimerAction(period=2.0, actions=[run_move_group_node]),
+        )
+    )
+
+    delayed_rviz_node = TimerAction(
+        period=10.0,  # 10 seconds delay to allow spawns and such
+        actions=[rviz],
+    )
     delayed_joint_state_broadcaster_spawner = TimerAction(
         period=2.0,  # 2 seconds delay to allow spawns and such
         actions=[joint_state_broadcaster_spawner],
     )
 
-
     gazebo_spawn_robot_description_delayed = TimerAction(
         period=4.0,  # 4 seconds delay to allow gazebo to start
         actions=[gazebo_spawn_robot_description],
     )
-    
+    joint_state_meger_handler = RegisterEventHandler(
+        event_handler = OnProcessStart(
+            target_action=joint_state_broadcaster_spawner,
+            on_start=TimerAction(
+                period=2.0,  # 2 seconds delay to allow spawns and such
+                actions=[joint_state_merger_node],
+            )
+        )
+    )
     return [
-    #    register_handler,
-    #    gazebo,
+        register_handler,
+        gazebo,
         gazebo_spawn_robot_description_delayed,
         robot_state_publisher_node,
     #   static_tf_real,
@@ -421,17 +451,19 @@ def launch_setup(context, *args, **kwargs):
         static_tf_wheel_front_left,
         static_tf_wheel_front_right,
         delayed_static_tf_world,
-        # delayed_static_tf_odom,
+        delayed_static_tf_odom,
         #static_tf_right_world,
+        simod_mac_node,
         #static_tf_right,
     #    delayed_static_tf_base,
     #   ur_control_node is creating conflict. Gazebo can work without it.
-    #   ur_control_node,
+    #    ur_control_node,
     #   ros2_control_node,
         controller_manager,
         delayed_joint_state_broadcaster_spawner,
         velocity_controller,
-    #    delayed_rviz_node,
+        delayed_rviz_node,
+        joint_state_meger_handler
         #delayed_move_group,
     ]
 

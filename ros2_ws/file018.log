@@ -1,0 +1,521 @@
+[INFO] [launch]: All log files can be found below /root/.ros/log/2025-10-22-13-24-25-339526-outlander-Aspire-V3-571G-11037
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [gzserver-1]: process started with pid [11038]
+[INFO] [gzclient-2]: process started with pid [11040]
+[INFO] [robot_state_publisher-3]: process started with pid [11042]
+[INFO] [static_transform_publisher-4]: process started with pid [11044]
+[INFO] [static_transform_publisher-5]: process started with pid [11046]
+[INFO] [static_transform_publisher-6]: process started with pid [11048]
+[INFO] [static_transform_publisher-7]: process started with pid [11050]
+[INFO] [simod_mac-8]: process started with pid [11052]
+[INFO] [ur_ros2_control_node-9]: process started with pid [11054]
+[INFO] [ros2_control_node-10]: process started with pid [11063]
+[INFO] [spawner-11]: process started with pid [11098]
+[static_transform_publisher-4] [WARN] [1761139468.019787104] []: Old-style arguments are deprecated; see --help for new-style arguments
+[static_transform_publisher-5] [WARN] [1761139468.021368401] []: Old-style arguments are deprecated; see --help for new-style arguments
+[static_transform_publisher-6] [WARN] [1761139468.024964460] []: Old-style arguments are deprecated; see --help for new-style arguments
+[static_transform_publisher-7] [WARN] [1761139468.021744977] []: Old-style arguments are deprecated; see --help for new-style arguments
+[static_transform_publisher-6] [INFO] [1761139468.093291041] [left.left_static_transform_publisher_front_left]: Spinning until stopped - publishing transform
+[static_transform_publisher-6] translation: ('-0.250000', '0.150000', '0.000000')
+[static_transform_publisher-6] rotation: ('0.000000', '0.000000', '0.000000', '1.000000')
+[static_transform_publisher-6] from 'left_summit_base_link' to 'left_summit_front_left_wheel_link'
+[static_transform_publisher-5] [INFO] [1761139468.116798273] [left.left_static_transform_publisher_back_right]: Spinning until stopped - publishing transform
+[static_transform_publisher-5] translation: ('0.250000', '-0.150000', '0.000000')
+[static_transform_publisher-5] rotation: ('0.000000', '0.000000', '0.000000', '1.000000')
+[static_transform_publisher-5] from 'left_summit_base_link' to 'left_summit_back_right_wheel_link'
+[static_transform_publisher-7] [INFO] [1761139468.126878149] [left.left_static_transform_publisher_front_right]: Spinning until stopped - publishing transform
+[static_transform_publisher-7] translation: ('-0.250000', '-0.150000', '0.000000')
+[static_transform_publisher-7] rotation: ('0.000000', '0.000000', '0.000000', '1.000000')
+[static_transform_publisher-7] from 'left_summit_base_link' to 'left_summit_front_right_wheel_link'
+[simod_mac-8] [INFO] [1761139468.137889684] [simod_moveit_action_controller]: MultiDOF Action Controller ready.
+[static_transform_publisher-4] [INFO] [1761139468.180902027] [left.left_static_transform_publisher_back_left]: Spinning until stopped - publishing transform
+[static_transform_publisher-4] translation: ('0.250000', '0.150000', '0.000000')
+[static_transform_publisher-4] rotation: ('0.000000', '0.000000', '0.000000', '1.000000')
+[static_transform_publisher-4] from 'left_summit_base_link' to 'left_summit_back_left_wheel_link'
+[robot_state_publisher-3] [INFO] [1761139468.206164292] [left.robot_state_publisher]: got segment left_summit_back_left_wheel_link
+[robot_state_publisher-3] [INFO] [1761139468.206427776] [left.robot_state_publisher]: got segment left_summit_back_right_wheel_link
+[robot_state_publisher-3] [INFO] [1761139468.206456817] [left.robot_state_publisher]: got segment left_summit_base_chapa
+[robot_state_publisher-3] [INFO] [1761139468.206478458] [left.robot_state_publisher]: got segment left_summit_base_docking_contact
+[robot_state_publisher-3] [INFO] [1761139468.206498264] [left.robot_state_publisher]: got segment left_summit_base_footprint
+[robot_state_publisher-3] [INFO] [1761139468.206518255] [left.robot_state_publisher]: got segment left_summit_base_link
+[robot_state_publisher-3] [INFO] [1761139468.206538618] [left.robot_state_publisher]: got segment left_summit_base_logo_front
+[robot_state_publisher-3] [INFO] [1761139468.206592547] [left.robot_state_publisher]: got segment left_summit_base_logo_left
+[robot_state_publisher-3] [INFO] [1761139468.206614442] [left.robot_state_publisher]: got segment left_summit_base_logo_rear
+[robot_state_publisher-3] [INFO] [1761139468.206634686] [left.robot_state_publisher]: got segment left_summit_base_logo_right
+[robot_state_publisher-3] [INFO] [1761139468.206654289] [left.robot_state_publisher]: got segment left_summit_front_laser_base_link
+[robot_state_publisher-3] [INFO] [1761139468.206706506] [left.robot_state_publisher]: got segment left_summit_front_laser_link
+[robot_state_publisher-3] [INFO] [1761139468.206749529] [left.robot_state_publisher]: got segment left_summit_front_left_wheel_link
+[robot_state_publisher-3] [INFO] [1761139468.206790658] [left.robot_state_publisher]: got segment left_summit_front_right_wheel_link
+[robot_state_publisher-3] [INFO] [1761139468.206812740] [left.robot_state_publisher]: got segment left_summit_imu_link
+[robot_state_publisher-3] [INFO] [1761139468.206832704] [left.robot_state_publisher]: got segment left_summit_rear_laser_base_link
+[robot_state_publisher-3] [INFO] [1761139468.206853127] [left.robot_state_publisher]: got segment left_summit_rear_laser_link
+[robot_state_publisher-3] [INFO] [1761139468.206872250] [left.robot_state_publisher]: got segment ur_left_base
+[robot_state_publisher-3] [INFO] [1761139468.206891543] [left.robot_state_publisher]: got segment ur_left_base_link
+[robot_state_publisher-3] [INFO] [1761139468.206910987] [left.robot_state_publisher]: got segment ur_left_base_link_inertia
+[robot_state_publisher-3] [INFO] [1761139468.206930183] [left.robot_state_publisher]: got segment ur_left_flange
+[robot_state_publisher-3] [INFO] [1761139468.206948908] [left.robot_state_publisher]: got segment ur_left_forearm_link
+[robot_state_publisher-3] [INFO] [1761139468.206968723] [left.robot_state_publisher]: got segment ur_left_ft_frame
+[robot_state_publisher-3] [INFO] [1761139468.206988080] [left.robot_state_publisher]: got segment ur_left_paletta
+[robot_state_publisher-3] [INFO] [1761139468.207007142] [left.robot_state_publisher]: got segment ur_left_shoulder_link
+[robot_state_publisher-3] [INFO] [1761139468.207026895] [left.robot_state_publisher]: got segment ur_left_tool0
+[robot_state_publisher-3] [INFO] [1761139468.207046688] [left.robot_state_publisher]: got segment ur_left_upper_arm_link
+[robot_state_publisher-3] [INFO] [1761139468.207065352] [left.robot_state_publisher]: got segment ur_left_wrist_1_link
+[robot_state_publisher-3] [INFO] [1761139468.207084199] [left.robot_state_publisher]: got segment ur_left_wrist_2_link
+[robot_state_publisher-3] [INFO] [1761139468.207103269] [left.robot_state_publisher]: got segment ur_left_wrist_3_link
+[ros2_control_node-10] [WARN] [1761139468.227747846] [left.controller_manager]: 'update_rate' parameter not set, using default value.
+[ros2_control_node-10] [INFO] [1761139468.227891636] [left.controller_manager]: Subscribing to '~/robot_description' topic for robot description file.
+[ur_ros2_control_node-9] [WARN] [1761139468.230401292] [controller_manager]: [Deprecated] Passing the robot description parameter directly to the control_manager node is deprecated. Use '~/robot_description' topic from 'robot_state_publisher' instead.
+[ros2_control_node-10] [INFO] [1761139468.231651271] [left.controller_manager]: update rate is 100 Hz
+[ros2_control_node-10] [INFO] [1761139468.231696286] [left.controller_manager]: Spawning controller_manager RT thread with scheduler priority: 50
+[ros2_control_node-10] [WARN] [1761139468.231899643] [left.controller_manager]: No real-time kernel detected on this system. See [https://control.ros.org/master/doc/ros2_control/controller_manager/doc/userdoc.html] for details on how to enable realtime scheduling.
+[ur_ros2_control_node-9] [INFO] [1761139468.232584162] [resource_manager]: Loading hardware 'left_ur' 
+[ur_ros2_control_node-9] terminate called after throwing an instance of 'pluginlib::LibraryLoadException'
+[ur_ros2_control_node-9]   what():  According to the loaded plugin descriptions the class gazebo_ros2_control/GazeboSystem with base class type hardware_interface::SystemInterface does not exist. Declared types are  fake_components/GenericSystem mock_components/GenericSystem test_hardware_components/TestSystemCommandModes test_hardware_components/TestTwoJointSystem test_system test_unitilizable_system ur_robot_driver/URPositionHardwareInterface
+[ur_ros2_control_node-9] Stack trace (most recent call last):
+[ur_ros2_control_node-9] #19   Object "", at 0xffffffffffffffff, in 
+[ur_ros2_control_node-9] #18   Source "/usr/include/c++/11/bits/shared_ptr_base.h", line 704, in _start [0x5596f87f3ca4]
+[ur_ros2_control_node-9]         702:       ~__shared_count() noexcept
+[ur_ros2_control_node-9]         703:       {
+[ur_ros2_control_node-9]       > 704: 	if (_M_pi != nullptr)
+[ur_ros2_control_node-9]         705: 	  _M_pi->_M_release();
+[ur_ros2_control_node-9]         706:       }
+[ur_ros2_control_node-9] #17   Object "/usr/lib/x86_64-linux-gnu/libc.so.6", at 0x7f62a21dde3f, in __libc_start_main
+[ur_ros2_control_node-9] #16   Object "/usr/lib/x86_64-linux-gnu/libc.so.6", at 0x7f62a21ddd8f, in 
+[ur_ros2_control_node-9] #15 | Source "/ros2_ws/src/Universal_Robots_ROS2_Driver/ur_robot_driver/src/ur_ros2_control_node.cpp", line 56, in make_shared<controller_manager::ControllerManager, std::shared_ptr<rclcpp::Executor>&, char const (&)[19]>
+[ur_ros2_control_node-9]     |    54:   std::shared_ptr<rclcpp::Executor> e = std::make_shared<rclcpp::executors::MultiThreadedExecutor>();
+[ur_ros2_control_node-9]     |    55:   // create controller manager instance
+[ur_ros2_control_node-9]     | >  56:   auto controller_manager = std::make_shared<controller_manager::ControllerManager>(e, "controller_manager");
+[ur_ros2_control_node-9]     |    57: 
+[ur_ros2_control_node-9]     |    58:   // control loop thread
+[ur_ros2_control_node-9]     | Source "/usr/include/c++/11/bits/shared_ptr.h", line 879, in allocate_shared<controller_manager::ControllerManager, std::allocator<controller_manager::ControllerManager>, std::shared_ptr<rclcpp::Executor>&, char const (&)[19]>
+[ur_ros2_control_node-9]     |   877:       typedef typename std::remove_cv<_Tp>::type _Tp_nc;
+[ur_ros2_control_node-9]     |   878:       return std::allocate_shared<_Tp>(std::allocator<_Tp_nc>(),
+[ur_ros2_control_node-9]     | > 879: 				       std::forward<_Args>(__args)...);
+[ur_ros2_control_node-9]     |   880:     }
+[ur_ros2_control_node-9]     | Source "/usr/include/c++/11/bits/shared_ptr.h", line 863, in shared_ptr<std::allocator<controller_manager::ControllerManager>, std::shared_ptr<rclcpp::Executor>&, char const (&)[19]>
+[ur_ros2_control_node-9]     |   862:       return shared_ptr<_Tp>(_Sp_alloc_shared_tag<_Alloc>{__a},
+[ur_ros2_control_node-9]     | > 863: 			     std::forward<_Args>(__args)...);
+[ur_ros2_control_node-9]     |   864:     }
+[ur_ros2_control_node-9]     | Source "/usr/include/c++/11/bits/shared_ptr.h", line 409, in __shared_ptr<std::allocator<controller_manager::ControllerManager>, std::shared_ptr<rclcpp::Executor>&, char const (&)[19]>
+[ur_ros2_control_node-9]     |   407:       template<typename _Alloc, typename... _Args>
+[ur_ros2_control_node-9]     |   408: 	shared_ptr(_Sp_alloc_shared_tag<_Alloc> __tag, _Args&&... __args)
+[ur_ros2_control_node-9]     | > 409: 	: __shared_ptr<_Tp>(__tag, std::forward<_Args>(__args)...)
+[ur_ros2_control_node-9]     |   410: 	{ }
+[ur_ros2_control_node-9]     | Source "/usr/include/c++/11/bits/shared_ptr_base.h", line 1342, in __shared_count<controller_manager::ControllerManager, std::allocator<controller_manager::ControllerManager>, std::shared_ptr<rclcpp::Executor>&, char const (&)[19]>
+[ur_ros2_control_node-9]     |  1340:       template<typename _Alloc, typename... _Args>
+[ur_ros2_control_node-9]     |  1341: 	__shared_ptr(_Sp_alloc_shared_tag<_Alloc> __tag, _Args&&... __args)
+[ur_ros2_control_node-9]     | >1342: 	: _M_ptr(), _M_refcount(_M_ptr, __tag, std::forward<_Args>(__args)...)
+[ur_ros2_control_node-9]     |  1343: 	{ _M_enable_shared_from_this_with(_M_ptr); }
+[ur_ros2_control_node-9]     | Source "/usr/include/c++/11/bits/shared_ptr_base.h", line 650, in _Sp_counted_ptr_inplace<std::shared_ptr<rclcpp::Executor>&, char const (&)[19]>
+[ur_ros2_control_node-9]     |   648: 	  auto __guard = std::__allocate_guarded(__a2);
+[ur_ros2_control_node-9]     |   649: 	  _Sp_cp_type* __mem = __guard.get();
+[ur_ros2_control_node-9]     | > 650: 	  auto __pi = ::new (__mem)
+[ur_ros2_control_node-9]     |   651: 	    _Sp_cp_type(__a._M_a, std::forward<_Args>(__args)...);
+[ur_ros2_control_node-9]     |   652: 	  __guard = nullptr;
+[ur_ros2_control_node-9]     | Source "/usr/include/c++/11/bits/shared_ptr_base.h", line 519, in construct<controller_manager::ControllerManager, std::shared_ptr<rclcpp::Executor>&, char const (&)[19]>
+[ur_ros2_control_node-9]     |   517: 	  // _GLIBCXX_RESOLVE_LIB_DEFECTS
+[ur_ros2_control_node-9]     |   518: 	  // 2070.  allocate_shared should use allocator_traits<A>::construct
+[ur_ros2_control_node-9]     | > 519: 	  allocator_traits<_Alloc>::construct(__a, _M_ptr(),
+[ur_ros2_control_node-9]     |   520: 	      std::forward<_Args>(__args)...); // might throw
+[ur_ros2_control_node-9]     |   521: 	}
+[ur_ros2_control_node-9]     | Source "/usr/include/c++/11/bits/alloc_traits.h", line 516, in construct<controller_manager::ControllerManager, std::shared_ptr<rclcpp::Executor>&, char const (&)[19]>
+[ur_ros2_control_node-9]     |   514: 	{
+[ur_ros2_control_node-9]     |   515: #if __cplusplus <= 201703L
+[ur_ros2_control_node-9]     | > 516: 	  __a.construct(__p, std::forward<_Args>(__args)...);
+[ur_ros2_control_node-9]     |   517: #else
+[ur_ros2_control_node-9]     |   518: 	  std::construct_at(__p, std::forward<_Args>(__args)...);
+[ur_ros2_control_node-9]       Source "/usr/include/c++/11/ext/new_allocator.h", line 162, in main [0x5596f87f3915]
+[ur_ros2_control_node-9]         159: 	void
+[ur_ros2_control_node-9]         160: 	construct(_Up* __p, _Args&&... __args)
+[ur_ros2_control_node-9]         161: 	noexcept(std::is_nothrow_constructible<_Up, _Args...>::value)
+[ur_ros2_control_node-9]       > 162: 	{ ::new((void *)__p) _Up(std::forward<_Args>(__args)...); }
+[ur_ros2_control_node-9]         163: 
+[ur_ros2_control_node-9]         164:       template<typename _Up>
+[ur_ros2_control_node-9]         165: 	void
+[ur_ros2_control_node-9] #14   Object "/ros2_ws/build/controller_manager/libcontroller_manager.so", at 0x7f62a2e7ab06, in controller_manager::ControllerManager::ControllerManager(std::shared_ptr<rclcpp::Executor>, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, rclcpp::NodeOptions const&)
+[ur_ros2_control_node-9] #13   Object "/ros2_ws/build/controller_manager/libcontroller_manager.so", at 0x7f62a2e7d9ff, in controller_manager::ControllerManager::init_resource_manager(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+[ur_ros2_control_node-9] #12   Object "/ros2_ws/build/hardware_interface/libhardware_interface.so", at 0x7f62a2120602, in hardware_interface::ResourceManager::load_urdf(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, bool, bool)
+[ur_ros2_control_node-9] #11   Object "/ros2_ws/build/hardware_interface/libhardware_interface.so", at 0x7f62a212acde, in hardware_interface::ResourceStorage::load_and_initialize_system(hardware_interface::HardwareInfo const&)
+[ur_ros2_control_node-9] #10   Object "/ros2_ws/build/hardware_interface/libhardware_interface.so", at 0x7f62a212aaa4, in auto hardware_interface::ResourceStorage::load_and_initialize_system(hardware_interface::HardwareInfo const&)::{lambda(auto:1&)#1}::operator()<std::vector<hardware_interface::System, std::allocator<hardware_interface::System> > >(std::vector<hardware_interface::System, std::allocator<hardware_interface::System> >&) const
+[ur_ros2_control_node-9] #9    Object "/ros2_ws/build/hardware_interface/libhardware_interface.so", at 0x7f62a21305b8, in void hardware_interface::ResourceStorage::load_hardware<hardware_interface::System, hardware_interface::SystemInterface>(hardware_interface::HardwareInfo const&, pluginlib::ClassLoader<hardware_interface::SystemInterface>&, std::vector<hardware_interface::System, std::allocator<hardware_interface::System> >&)
+[ur_ros2_control_node-9] #8    Object "/ros2_ws/build/hardware_interface/libhardware_interface.so", at 0x7f62a21396f8, in pluginlib::ClassLoader<hardware_interface::SystemInterface>::createUnmanagedInstance(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+[ur_ros2_control_node-9] #7    Object "/ros2_ws/build/hardware_interface/libhardware_interface.so", at 0x7f62a21472b2, in pluginlib::ClassLoader<hardware_interface::SystemInterface>::loadLibraryForClass(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+[ur_ros2_control_node-9] #6    Object "/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30", at 0x7f62a248b4d7, in __cxa_throw
+[ur_ros2_control_node-9] #5    Object "/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30", at 0x7f62a248b276, in std::terminate()
+[ur_ros2_control_node-9] #4    Object "/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30", at 0x7f62a248b20b, in 
+[ur_ros2_control_node-9] #3    Object "/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30", at 0x7f62a247fb9d, in 
+[ur_ros2_control_node-9] #2    Object "/usr/lib/x86_64-linux-gnu/libc.so.6", at 0x7f62a21dc7f2, in abort
+[ur_ros2_control_node-9] #1    Object "/usr/lib/x86_64-linux-gnu/libc.so.6", at 0x7f62a21f6475, in raise
+[ur_ros2_control_node-9] #0    Object "/usr/lib/x86_64-linux-gnu/libc.so.6", at 0x7f62a224a9fc, in pthread_kill
+[ur_ros2_control_node-9] Aborted (Signal sent by tkill() 11054 0)
+[ERROR] [ur_ros2_control_node-9]: process has died [pid 11054, exit code -6, cmd '/ros2_ws/install/ur_robot_driver/lib/ur_robot_driver/ur_ros2_control_node --ros-args --params-file /tmp/launch_params_482nmx8e --params-file /tmp/launch_params_iitp44vx'].
+[spawner-11] [INFO] [1761139468.642753498] [spawner_ur_left_joint_group_vel_controller]: waiting for service /left/controller_manager/list_controllers to become available...
+[INFO] [static_transform_publisher-12]: process started with pid [11186]
+[static_transform_publisher-12] [WARN] [1761139470.019685547] []: Old-style arguments are deprecated; see --help for new-style arguments
+[INFO] [spawner-13]: process started with pid [11197]
+[static_transform_publisher-12] [INFO] [1761139470.059682554] [left.static_transform_publisher_F3yUV59P0RoFQ9F3]: Spinning until stopped - publishing transform
+[static_transform_publisher-12] translation: ('0.000000', '0.000000', '0.000000')
+[static_transform_publisher-12] rotation: ('0.000000', '0.000000', '0.000000', '1.000000')
+[static_transform_publisher-12] from 'world' to 'left_summit_odom'
+[INFO] [static_transform_publisher-14]: process started with pid [11200]
+[static_transform_publisher-14] [WARN] [1761139470.270624648] []: Old-style arguments are deprecated; see --help for new-style arguments
+[static_transform_publisher-14] [INFO] [1761139470.320764731] [left.static_transform_publisher]: Spinning until stopped - publishing transform
+[static_transform_publisher-14] translation: ('0.000000', '0.000000', '0.000000')
+[static_transform_publisher-14] rotation: ('0.000000', '0.000000', '0.000000', '1.000000')
+[static_transform_publisher-14] from 'left_summit_odom' to 'left_summit_base_footprint'
+[spawner-13] [INFO] [1761139470.571367659] [left.spawner_joint_state_broadcaster]: waiting for service /left/controller_manager/list_controllers to become available...
+[gzserver-1] [WARN] [1761139470.890764324] [rcl]: Found remap rule 'model_states:=model_states'. This syntax is deprecated. Use '--ros-args --remap model_states:=model_states' instead.
+[gzserver-1] [WARN] [1761139470.891211964] [rcl]: Found remap rule 'link_states:=link_states'. This syntax is deprecated. Use '--ros-args --remap link_states:=link_states' instead.
+[gzserver-1] [INFO] [1761139470.908966078] [state.gazebo_ros_state]: Publishing states of gazebo models at [/state/model_states]
+[gzserver-1] [INFO] [1761139470.910241816] [state.gazebo_ros_state]: Publishing states of gazebo links at [/state/link_states]
+[INFO] [spawn_entity.py-15]: process started with pid [11286]
+[spawn_entity.py-15] [INFO] [1761139472.464772212] [spawn_entity]: Spawn Entity started
+[spawn_entity.py-15] [INFO] [1761139472.465508476] [spawn_entity]: Loading entity published on topic /left/robot_description
+[spawn_entity.py-15] [INFO] [1761139472.470559467] [spawn_entity]: Waiting for entity xml on /left/robot_description
+[spawn_entity.py-15] [INFO] [1761139474.740253561] [spawn_entity]: Waiting for service /spawn_entity, timeout = 5
+[spawn_entity.py-15] [INFO] [1761139474.740948836] [spawn_entity]: Waiting for service /spawn_entity
+[spawn_entity.py-15] [INFO] [1761139474.750290300] [spawn_entity]: Calling service /spawn_entity
+[gzserver-1] [INFO] [1761139475.487145882] [left_summit_imu_imu_plugin]: <initial_orientation_as_reference> is unset, using default value of false to comply with REP 145 (world as orientation reference)
+[spawn_entity.py-15] [INFO] [1761139475.770986433] [spawn_entity]: Spawn status: SpawnEntity: Successfully spawned entity [left_robot]
+[spawn_entity.py-15] [INFO] [1761139475.776591551] [spawn_entity]: Calling service /unpause_physics
+[gzserver-1] [INFO] [1761139475.861795936] [left_omni_steering]: Subscribed to [/left_summit_cmd_vel]
+[gzserver-1] [INFO] [1761139475.867151314] [left_omni_steering]: Advertise odometry on [/left_summit_odom]
+[gzserver-1] [INFO] [1761139475.873140886] [left_omni_steering]: Publishing odom transforms between [left_summit_odom] and [left_summit_base_footprint]
+[gzserver-1] [INFO] [1761139475.940787446] [gazebo_ros2_control]: Loading gazebo_ros2_control plugin
+[gzserver-1] [INFO] [1761139475.955502820] [left.left_gazebo_ros2_control]: Starting gazebo_ros2_control plugin in namespace: /left
+[gzserver-1] [INFO] [1761139475.955593706] [left.left_gazebo_ros2_control]: Starting gazebo_ros2_control plugin in ros 2 node: left_gazebo_ros2_control
+[INFO] [spawn_entity.py-15]: process has finished cleanly [pid 11286]
+[gzserver-1] [INFO] [1761139475.968245156] [left.left_gazebo_ros2_control]: connected to service!! robot_state_publisher
+[gzserver-1] [INFO] [1761139475.973762400] [left.left_gazebo_ros2_control]: Received urdf from param server, parsing...
+[gzserver-1] [INFO] [1761139475.974942855] [left.left_gazebo_ros2_control]: Loading parameter files /ros2_ws/install/ur/share/ur/config/left_controller.yaml
+[gzserver-1] [INFO] [1761139476.030501825] [left.left_gazebo_ros2_control]: Loading joint: ur_left_shoulder_pan_joint
+[gzserver-1] [INFO] [1761139476.031007249] [left.left_gazebo_ros2_control]: 	State:
+[gzserver-1] [INFO] [1761139476.031154259] [left.left_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1761139476.032418722] [left.left_gazebo_ros2_control]: 			 found initial value: -1.400000
+[gzserver-1] [INFO] [1761139476.032540460] [left.left_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1761139476.033007288] [left.left_gazebo_ros2_control]: 		 effort
+[gzserver-1] [INFO] [1761139476.033225506] [left.left_gazebo_ros2_control]: 	Command:
+[gzserver-1] [INFO] [1761139476.033265765] [left.left_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1761139476.034584299] [left.left_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1761139476.035434855] [left.left_gazebo_ros2_control]: Loading joint: ur_left_shoulder_lift_joint
+[gzserver-1] [INFO] [1761139476.035503960] [left.left_gazebo_ros2_control]: 	State:
+[gzserver-1] [INFO] [1761139476.035538538] [left.left_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1761139476.035577020] [left.left_gazebo_ros2_control]: 			 found initial value: -1.227838
+[gzserver-1] [INFO] [1761139476.035615948] [left.left_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1761139476.035659413] [left.left_gazebo_ros2_control]: 		 effort
+[gzserver-1] [INFO] [1761139476.035689682] [left.left_gazebo_ros2_control]: 	Command:
+[gzserver-1] [INFO] [1761139476.035715850] [left.left_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1761139476.035843212] [left.left_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1761139476.035998441] [left.left_gazebo_ros2_control]: Loading joint: ur_left_elbow_joint
+[gzserver-1] [INFO] [1761139476.036036074] [left.left_gazebo_ros2_control]: 	State:
+[gzserver-1] [INFO] [1761139476.036065146] [left.left_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1761139476.036093237] [left.left_gazebo_ros2_control]: 			 found initial value: -1.791046
+[gzserver-1] [INFO] [1761139476.036120568] [left.left_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1761139476.036145804] [left.left_gazebo_ros2_control]: 		 effort
+[gzserver-1] [INFO] [1761139476.036257958] [left.left_gazebo_ros2_control]: 	Command:
+[gzserver-1] [INFO] [1761139476.036288904] [left.left_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1761139476.036350791] [left.left_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1761139476.036398300] [left.left_gazebo_ros2_control]: Loading joint: ur_left_wrist_1_joint
+[gzserver-1] [INFO] [1761139476.036431777] [left.left_gazebo_ros2_control]: 	State:
+[gzserver-1] [INFO] [1761139476.036566436] [left.left_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1761139476.036603899] [left.left_gazebo_ros2_control]: 			 found initial value: -1.447073
+[gzserver-1] [INFO] [1761139476.036632631] [left.left_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1761139476.036657895] [left.left_gazebo_ros2_control]: 		 effort
+[gzserver-1] [INFO] [1761139476.036684508] [left.left_gazebo_ros2_control]: 	Command:
+[gzserver-1] [INFO] [1761139476.036709884] [left.left_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1761139476.036762226] [left.left_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1761139476.036807399] [left.left_gazebo_ros2_control]: Loading joint: ur_left_wrist_2_joint
+[gzserver-1] [INFO] [1761139476.036839068] [left.left_gazebo_ros2_control]: 	State:
+[gzserver-1] [INFO] [1761139476.036865327] [left.left_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1761139476.036892831] [left.left_gazebo_ros2_control]: 			 found initial value: 1.900333
+[gzserver-1] [INFO] [1761139476.036922621] [left.left_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1761139476.036950961] [left.left_gazebo_ros2_control]: 		 effort
+[gzserver-1] [INFO] [1761139476.036979203] [left.left_gazebo_ros2_control]: 	Command:
+[gzserver-1] [INFO] [1761139476.037004816] [left.left_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1761139476.037070860] [left.left_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1761139476.037128991] [left.left_gazebo_ros2_control]: Loading joint: ur_left_wrist_3_joint
+[gzserver-1] [INFO] [1761139476.037159525] [left.left_gazebo_ros2_control]: 	State:
+[gzserver-1] [INFO] [1761139476.037184882] [left.left_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1761139476.037212363] [left.left_gazebo_ros2_control]: 			 found initial value: -0.755379
+[gzserver-1] [INFO] [1761139476.037243442] [left.left_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1761139476.037279752] [left.left_gazebo_ros2_control]: 		 effort
+[gzserver-1] [INFO] [1761139476.037309126] [left.left_gazebo_ros2_control]: 	Command:
+[gzserver-1] [INFO] [1761139476.037335152] [left.left_gazebo_ros2_control]: 		 position
+[gzserver-1] [INFO] [1761139476.037377342] [left.left_gazebo_ros2_control]: 		 velocity
+[gzserver-1] [INFO] [1761139476.039610762] [resource_manager]: Initialize hardware 'left_ur' 
+[gzserver-1] [INFO] [1761139476.042251883] [resource_manager]: Successful initialization of hardware 'left_ur'
+[gzserver-1] [INFO] [1761139476.049098836] [resource_manager]: 'configure' hardware 'left_ur' 
+[gzserver-1] [INFO] [1761139476.049339356] [resource_manager]: Successful 'configure' of hardware 'left_ur'
+[gzserver-1] [INFO] [1761139476.049593677] [resource_manager]: 'activate' hardware 'left_ur' 
+[gzserver-1] [INFO] [1761139476.049609525] [resource_manager]: Successful 'activate' of hardware 'left_ur'
+[gzserver-1] [INFO] [1761139476.050490208] [left.left_gazebo_ros2_control]: Loading controller_manager
+[gzserver-1] [WARN] [1761139476.182920833] [left.left_gazebo_ros2_control]:  Desired controller update period (0.002 s) is slower than the gazebo simulation period (0.001 s).
+[gzserver-1] [INFO] [1761139476.186443237] [left.left_gazebo_ros2_control]: Loaded gazebo_ros2_control.
+[gzserver-1] [INFO] [1761139476.196627639] [left.controller_manager]: Loading controller 'ur_left_joint_group_vel_controller'
+[spawner-11] [INFO] [1761139476.272969719] [spawner_ur_left_joint_group_vel_controller]: [94mLoaded [1mur_left_joint_group_vel_controller[0m
+[gzserver-1] [INFO] [1761139476.277625301] [left.controller_manager]: Configuring controller 'ur_left_joint_group_vel_controller'
+[gzserver-1] [INFO] [1761139476.297299584] [left.ur_left_joint_group_vel_controller]: configure successful
+[gzserver-1] [INFO] [1761139476.313695541] [left.ur_left_joint_group_vel_controller]: activate successful
+[spawner-11] [INFO] [1761139476.317479566] [spawner_ur_left_joint_group_vel_controller]: [92mConfigured and activated [1mur_left_joint_group_vel_controller[0m
+[gzserver-1] [INFO] [1761139476.340595501] [left.controller_manager]: Loading controller 'joint_state_broadcaster'
+[spawner-13] [INFO] [1761139476.389154098] [left.spawner_joint_state_broadcaster]: [94mLoaded [1mjoint_state_broadcaster[0m
+[gzserver-1] [INFO] [1761139476.392073298] [left.controller_manager]: Configuring controller 'joint_state_broadcaster'
+[gzserver-1] [INFO] [1761139476.392371715] [left.joint_state_broadcaster]: 'joints' or 'interfaces' parameter is empty. All available state interfaces will be published
+[spawner-13] [INFO] [1761139476.432389292] [left.spawner_joint_state_broadcaster]: [92mConfigured and activated [1mjoint_state_broadcaster[0m
+[INFO] [spawner-11]: process has finished cleanly [pid 11098]
+[INFO] [spawner-13]: process has finished cleanly [pid 11197]
+[INFO] [move_group-16]: process started with pid [11350]
+[INFO] [rviz2-17]: process started with pid [11367]
+[move_group-16] [INFO] [1761139478.304825618] [moveit_rdf_loader.rdf_loader]: Loaded robot model in 0 seconds
+[move_group-16] [INFO] [1761139478.304905167] [moveit_robot_model.robot_model]: Loading robot model 'srm_left'...
+[move_group-16] [WARN] [1761139478.304971827] [moveit_robot_model.robot_model]: Link left_summit_base_footprint has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[move_group-16] [WARN] [1761139478.309129235] [moveit_robot_model.robot_model]: Link left_summit_base_logo_front has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[move_group-16] [WARN] [1761139478.309158939] [moveit_robot_model.robot_model]: Link left_summit_base_logo_left has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[move_group-16] [WARN] [1761139478.309169202] [moveit_robot_model.robot_model]: Link left_summit_base_logo_rear has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[move_group-16] [WARN] [1761139478.309178593] [moveit_robot_model.robot_model]: Link left_summit_base_logo_right has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[move_group-16] [WARN] [1761139478.309187965] [moveit_robot_model.robot_model]: Link left_summit_base_chapa has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[move_group-16] [WARN] [1761139478.315077171] [moveit_robot_model.robot_model]: Link left_summit_imu_link has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[move_group-16] [WARN] [1761139478.322823493] [moveit_robot_model.robot_model]: Link ur_left_upper_arm_link has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[move_group-16] [WARN] [1761139478.322853729] [moveit_robot_model.robot_model]: Link ur_left_forearm_link has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[move_group-16] [WARN] [1761139478.322865297] [moveit_robot_model.robot_model]: Link ur_left_wrist_1_link has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[move_group-16] [WARN] [1761139478.322877344] [moveit_robot_model.robot_model]: Link ur_left_wrist_2_link has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[move_group-16] [WARN] [1761139478.322887510] [moveit_robot_model.robot_model]: Link ur_left_wrist_3_link has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[move_group-16] [WARN] [1761139478.322900765] [moveit_robot_model.robot_model]: Link ur_left_paletta has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[move_group-16] [INFO] [1761139478.409887122] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Publishing maintained planning scene on 'monitored_planning_scene'
+[move_group-16] [INFO] [1761139478.410143920] [moveit.ros_planning_interface.moveit_cpp]: Listening to 'joint_states' for joint states
+[move_group-16] [INFO] [1761139478.412169849] [moveit_ros.current_state_monitor]: Listening to joint states on topic 'joint_states'
+[move_group-16] [INFO] [1761139478.412698080] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Listening to '/attached_collision_object' for attached collision objects
+[move_group-16] [INFO] [1761139478.412728619] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Starting planning scene monitor
+[move_group-16] [INFO] [1761139478.413139049] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Listening to '/planning_scene'
+[move_group-16] [INFO] [1761139478.413213200] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Starting world geometry update monitor for collision objects, attached objects, octomap updates.
+[move_group-16] [INFO] [1761139478.413736113] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Listening to 'collision_object'
+[move_group-16] [INFO] [1761139478.414519902] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Listening to 'planning_scene_world' for planning scene world geometry
+[move_group-16] [WARN] [1761139478.417828153] [moveit.ros.occupancy_map_monitor.middleware_handle]: Resolution not specified for Octomap. Assuming resolution = 0.1 instead
+[move_group-16] [WARN] [1761139478.422750660] [moveit_ros.current_state_monitor]: Unable to update multi-DOF joint 'position':Failure to lookup transform between 'left_summit_odom'and 'left_summit_base_footprint' with TF exception: "left_summit_odom" passed to lookupTransform argument target_frame does not exist. 
+[rviz2-17] QStandardPaths: XDG_RUNTIME_DIR not set, defaulting to '/tmp/runtime-root'
+[move_group-16] [WARN] [1761139478.746465963] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: The complete state of the robot is not yet known.  Missing left_summit_back_left_wheel_joint, left_summit_back_right_wheel_joint, left_summit_front_left_wheel_joint, left_summit_front_right_wheel_joint, ur_left_shoulder_pan_joint, ur_left_shoulder_lift_joint, ur_left_elbow_joint, ur_left_wrist_1_joint, ur_left_wrist_2_joint, ur_left_wrist_3_joint
+[move_group-16] [INFO] [1761139478.998199851] [moveit.ros_planning_interface.moveit_cpp]: Loading planning pipeline 'ompl'
+[move_group-16] [INFO] [1761139479.009670865] [moveit.ros_planning.planning_pipeline]: Multiple planning plugins available. You should specify the '~planning_plugin' parameter. Using 'chomp_interface/CHOMPPlanner' for now.
+[move_group-16] [INFO] [1761139479.016216037] [moveit.ros_planning.planning_pipeline]: Using planning interface 'CHOMP'
+[move_group-16] [INFO] [1761139479.028190483] [moveit_ros.fix_workspace_bounds]: Param 'ompl.default_workspace_bounds' was not set. Using default value: 10.000000
+[move_group-16] [INFO] [1761139479.028254431] [moveit_ros.fix_start_state_bounds]: Param 'ompl.start_state_max_bounds_error' was not set. Using default value: 0.050000
+[move_group-16] [INFO] [1761139479.028269570] [moveit_ros.fix_start_state_bounds]: Param 'ompl.start_state_max_dt' was not set. Using default value: 0.500000
+[move_group-16] [INFO] [1761139479.028290787] [moveit_ros.fix_start_state_collision]: Param 'ompl.start_state_max_dt' was not set. Using default value: 0.500000
+[move_group-16] [INFO] [1761139479.028300422] [moveit_ros.fix_start_state_collision]: Param 'ompl.jiggle_fraction' was not set. Using default value: 0.020000
+[move_group-16] [INFO] [1761139479.028317470] [moveit_ros.fix_start_state_collision]: Param 'ompl.max_sampling_attempts' was not set. Using default value: 100
+[move_group-16] [INFO] [1761139479.028325277] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Resolve constraint frames to robot links'
+[move_group-16] [INFO] [1761139479.028333540] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Fix Workspace Bounds'
+[move_group-16] [INFO] [1761139479.028339394] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Fix Start State Bounds'
+[move_group-16] [INFO] [1761139479.028344523] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Fix Start State In Collision'
+[move_group-16] [INFO] [1761139479.192919079] [moveit.plugins.moveit_simple_controller_manager]: Added FollowJointTrajectory controller for srm_l_ur_controller
+[move_group-16] [INFO] [1761139479.201799012] [moveit_simple_controller_manager]: Added MultiDofFollowJointTrajectory controller for multi_dof_joint_trajectory_action
+[move_group-16] [INFO] [1761139479.202331231] [moveit.plugins.moveit_simple_controller_manager]: Returned 2 controllers in list
+[move_group-16] [INFO] [1761139479.202476553] [moveit.plugins.moveit_simple_controller_manager]: Returned 2 controllers in list
+[move_group-16] [INFO] [1761139479.203985888] [moveit_ros.trajectory_execution_manager]: Trajectory execution is managing controllers
+[move_group-16] [INFO] [1761139479.204076075] [move_group.move_group]: MoveGroup debug mode is ON
+[move_group-16] [INFO] [1761139479.254072144] [move_group.move_group]: 
+[move_group-16] 
+[move_group-16] ********************************************************
+[move_group-16] * MoveGroup using: 
+[move_group-16] *     - ApplyPlanningSceneService
+[move_group-16] *     - ClearOctomapService
+[move_group-16] *     - CartesianPathService
+[move_group-16] *     - ExecuteTrajectoryAction
+[move_group-16] *     - GetPlanningSceneService
+[move_group-16] *     - KinematicsService
+[move_group-16] *     - MoveAction
+[move_group-16] *     - MotionPlanService
+[move_group-16] *     - QueryPlannersService
+[move_group-16] *     - StateValidationService
+[move_group-16] ********************************************************
+[move_group-16] 
+[move_group-16] [INFO] [1761139479.254279034] [moveit_move_group_capabilities_base.move_group_context]: MoveGroup context using planning plugin chomp_interface/CHOMPPlanner
+[move_group-16] [INFO] [1761139479.254308050] [moveit_move_group_capabilities_base.move_group_context]: MoveGroup context initialization complete
+[move_group-16] [96mLoading 'move_group/ApplyPlanningSceneService'...
+[move_group-16] [0m[96mLoading 'move_group/ClearOctomapService'...
+[move_group-16] [0m[96mLoading 'move_group/MoveGroupCartesianPathService'...
+[move_group-16] [0m[96mLoading 'move_group/MoveGroupExecuteTrajectoryAction'...
+[move_group-16] [0m[96mLoading 'move_group/MoveGroupGetPlanningSceneService'...
+[move_group-16] [0m[96mLoading 'move_group/MoveGroupKinematicsService'...
+[move_group-16] [0m[96mLoading 'move_group/MoveGroupMoveAction'...
+[move_group-16] [0m[96mLoading 'move_group/MoveGroupPlanService'...
+[move_group-16] [0m[96mLoading 'move_group/MoveGroupQueryPlannersService'...
+[move_group-16] [0m[96mLoading 'move_group/MoveGroupStateValidationService'...
+[move_group-16] [0m[92m
+[move_group-16] You can start planning now!
+[move_group-16] 
+[rviz2-17] [INFO] [1761139479.942960438] [rviz2]: Stereo is NOT SUPPORTED
+[rviz2-17] [INFO] [1761139479.943213937] [rviz2]: OpenGl version: 4.6 (GLSL 4.6)
+[rviz2-17] [INFO] [1761139480.027598977] [rviz2]: Stereo is NOT SUPPORTED
+[rviz2-17] [INFO] [1761139480.335463538] [moveit_rdf_loader.rdf_loader]: Loaded robot model in 0 seconds
+[rviz2-17] [INFO] [1761139480.335516367] [moveit_robot_model.robot_model]: Loading robot model 'srm_left'...
+[rviz2-17] [WARN] [1761139480.335608121] [moveit_robot_model.robot_model]: Link left_summit_base_footprint has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-17] [WARN] [1761139480.339828252] [moveit_robot_model.robot_model]: Link left_summit_base_logo_front has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-17] [WARN] [1761139480.339862668] [moveit_robot_model.robot_model]: Link left_summit_base_logo_left has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-17] [WARN] [1761139480.339874861] [moveit_robot_model.robot_model]: Link left_summit_base_logo_rear has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-17] [WARN] [1761139480.339884966] [moveit_robot_model.robot_model]: Link left_summit_base_logo_right has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-17] [WARN] [1761139480.339894924] [moveit_robot_model.robot_model]: Link left_summit_base_chapa has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-17] [WARN] [1761139480.345355975] [moveit_robot_model.robot_model]: Link left_summit_imu_link has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-17] [WARN] [1761139480.353981724] [moveit_robot_model.robot_model]: Link ur_left_upper_arm_link has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-17] [WARN] [1761139480.354023686] [moveit_robot_model.robot_model]: Link ur_left_forearm_link has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-17] [WARN] [1761139480.354046365] [moveit_robot_model.robot_model]: Link ur_left_wrist_1_link has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-17] [WARN] [1761139480.354066311] [moveit_robot_model.robot_model]: Link ur_left_wrist_2_link has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-17] [WARN] [1761139480.354078056] [moveit_robot_model.robot_model]: Link ur_left_wrist_3_link has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-17] [WARN] [1761139480.354092320] [moveit_robot_model.robot_model]: Link ur_left_paletta has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-17] [INFO] [1761139480.537150916] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Starting planning scene monitor
+[rviz2-17] [INFO] [1761139480.552020982] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Listening to '/monitored_planning_scene'
+[rviz2-17] [INFO] [1761139486.871765961] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Stopping planning scene monitor
+[rviz2-17] [ERROR] [1761139486.888827025] [moveit_background_processing.background_processing]: Exception caught while processing action 'loadRobotModel': Invalid node name: node name must not contain characters other than alphanumerics or '_':
+[rviz2-17]   'rviz2_ssp_/left/robot_description'
+[rviz2-17]              ^
+[rviz2-17] 
+[rviz2-17] [ERROR] [1761139492.049713091] [moveit_background_processing.background_processing]: Exception caught while processing action 'loadRobotModel': Invalid node name: node name must not contain characters other than alphanumerics or '_':
+[rviz2-17]   'rviz2_ssp_left/robot_description'
+[rviz2-17]                  ^
+[rviz2-17] 
+[rviz2-17] [INFO] [1761139500.058581467] [moveit_rdf_loader.rdf_loader]: Loaded robot model in 0 seconds
+[rviz2-17] [INFO] [1761139500.058619920] [moveit_robot_model.robot_model]: Loading robot model 'srm_left'...
+[rviz2-17] [WARN] [1761139500.058653984] [moveit_robot_model.robot_model]: Link left_summit_base_footprint has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-17] [WARN] [1761139500.062912422] [moveit_robot_model.robot_model]: Link left_summit_base_logo_front has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-17] [WARN] [1761139500.062956448] [moveit_robot_model.robot_model]: Link left_summit_base_logo_left has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-17] [WARN] [1761139500.062968811] [moveit_robot_model.robot_model]: Link left_summit_base_logo_rear has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-17] [WARN] [1761139500.062979373] [moveit_robot_model.robot_model]: Link left_summit_base_logo_right has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-17] [WARN] [1761139500.062989317] [moveit_robot_model.robot_model]: Link left_summit_base_chapa has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-17] [WARN] [1761139500.067753627] [moveit_robot_model.robot_model]: Link left_summit_imu_link has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-17] [WARN] [1761139500.075794293] [moveit_robot_model.robot_model]: Link ur_left_upper_arm_link has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-17] [WARN] [1761139500.075832938] [moveit_robot_model.robot_model]: Link ur_left_forearm_link has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-17] [WARN] [1761139500.075845954] [moveit_robot_model.robot_model]: Link ur_left_wrist_1_link has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-17] [WARN] [1761139500.075859250] [moveit_robot_model.robot_model]: Link ur_left_wrist_2_link has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-17] [WARN] [1761139500.075871092] [moveit_robot_model.robot_model]: Link ur_left_wrist_3_link has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-17] [WARN] [1761139500.075885672] [moveit_robot_model.robot_model]: Link ur_left_paletta has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-17] [INFO] [1761139500.177799260] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Starting planning scene monitor
+[rviz2-17] [INFO] [1761139500.179108470] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Listening to '/monitored_planning_scene'
+[rviz2-17] [INFO] [1761139506.746365717] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Stopping planning scene monitor
+[rviz2-17] [INFO] [1761139506.771789985] [moveit_rdf_loader.rdf_loader]: Loaded robot model in 0 seconds
+[rviz2-17] [INFO] [1761139506.771828094] [moveit_robot_model.robot_model]: Loading robot model 'srm_left'...
+[rviz2-17] [WARN] [1761139506.771859535] [moveit_robot_model.robot_model]: Link left_summit_base_footprint has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-17] [WARN] [1761139506.776674610] [moveit_robot_model.robot_model]: Link left_summit_base_logo_front has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-17] [WARN] [1761139506.776730755] [moveit_robot_model.robot_model]: Link left_summit_base_logo_left has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-17] [WARN] [1761139506.776752226] [moveit_robot_model.robot_model]: Link left_summit_base_logo_rear has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-17] [WARN] [1761139506.776773429] [moveit_robot_model.robot_model]: Link left_summit_base_logo_right has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-17] [WARN] [1761139506.776793788] [moveit_robot_model.robot_model]: Link left_summit_base_chapa has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-17] [WARN] [1761139506.783438113] [moveit_robot_model.robot_model]: Link left_summit_imu_link has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-17] [WARN] [1761139506.791850401] [moveit_robot_model.robot_model]: Link ur_left_upper_arm_link has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-17] [WARN] [1761139506.791893422] [moveit_robot_model.robot_model]: Link ur_left_forearm_link has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-17] [WARN] [1761139506.791913202] [moveit_robot_model.robot_model]: Link ur_left_wrist_1_link has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-17] [WARN] [1761139506.791928130] [moveit_robot_model.robot_model]: Link ur_left_wrist_2_link has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-17] [WARN] [1761139506.791939776] [moveit_robot_model.robot_model]: Link ur_left_wrist_3_link has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-17] [WARN] [1761139506.791953753] [moveit_robot_model.robot_model]: Link ur_left_paletta has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-17] [INFO] [1761139506.897037958] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Starting planning scene monitor
+[rviz2-17] [INFO] [1761139506.898200890] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Listening to '/monitored_planning_scene'
+[rviz2-17] [INFO] [1761139511.909061887] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Failed to call service /left/get_planning_scene, have you launched move_group or called psm.providePlanningSceneService()?
+[rviz2-17] [INFO] [1761139511.921265036] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Stopping planning scene monitor
+[rviz2-17] [INFO] [1761139511.951452300] [moveit_rdf_loader.rdf_loader]: Loaded robot model in 0 seconds
+[rviz2-17] [INFO] [1761139511.951484539] [moveit_robot_model.robot_model]: Loading robot model 'srm_left'...
+[rviz2-17] [WARN] [1761139511.951560612] [moveit_robot_model.robot_model]: Link left_summit_base_footprint has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-17] [WARN] [1761139511.955951864] [moveit_robot_model.robot_model]: Link left_summit_base_logo_front has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-17] [WARN] [1761139511.955995018] [moveit_robot_model.robot_model]: Link left_summit_base_logo_left has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-17] [WARN] [1761139511.956015948] [moveit_robot_model.robot_model]: Link left_summit_base_logo_rear has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-17] [WARN] [1761139511.956037372] [moveit_robot_model.robot_model]: Link left_summit_base_logo_right has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-17] [WARN] [1761139511.956057720] [moveit_robot_model.robot_model]: Link left_summit_base_chapa has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-17] [WARN] [1761139511.962349832] [moveit_robot_model.robot_model]: Link left_summit_imu_link has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-17] [WARN] [1761139511.971218623] [moveit_robot_model.robot_model]: Link ur_left_upper_arm_link has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-17] [WARN] [1761139511.971263412] [moveit_robot_model.robot_model]: Link ur_left_forearm_link has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-17] [WARN] [1761139511.971276728] [moveit_robot_model.robot_model]: Link ur_left_wrist_1_link has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-17] [WARN] [1761139511.971294958] [moveit_robot_model.robot_model]: Link ur_left_wrist_2_link has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-17] [WARN] [1761139511.971316200] [moveit_robot_model.robot_model]: Link ur_left_wrist_3_link has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-17] [WARN] [1761139511.971339301] [moveit_robot_model.robot_model]: Link ur_left_paletta has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-17] [INFO] [1761139512.081262979] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Starting planning scene monitor
+[rviz2-17] [INFO] [1761139512.082603736] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Listening to '/monitored_planning_scene'
+[rviz2-17] [INFO] [1761139541.649312033] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Stopping planning scene monitor
+[rviz2-17] [ERROR] [1761139541.670168084] [moveit_background_processing.background_processing]: Exception caught while processing action 'loadRobotModel': Invalid node name: node name must not contain characters other than alphanumerics or '_':
+[rviz2-17]   'rviz2_ssp_/left/controller_manager/robot_description'
+[rviz2-17]              ^
+[rviz2-17] 
+[rviz2-17] [ERROR] [1761139551.506264088] [moveit_background_processing.background_processing]: Exception caught while processing action 'loadRobotModel': Invalid node name: node name must not contain characters other than alphanumerics or '_':
+[rviz2-17]   'rviz2_ssp_/left/controller_manager/robot_description'
+[rviz2-17]              ^
+[rviz2-17] 
+[rviz2-17] [ERROR] [1761139556.052836366] [moveit_background_processing.background_processing]: Exception caught while processing action 'loadRobotModel': parameter name must not be empty
+[rviz2-17] [INFO] [1761139563.545836271] [moveit_rdf_loader.rdf_loader]: Loaded robot model in 0 seconds
+[rviz2-17] [INFO] [1761139563.545883012] [moveit_robot_model.robot_model]: Loading robot model 'srm_left'...
+[rviz2-17] [WARN] [1761139563.545919190] [moveit_robot_model.robot_model]: Link left_summit_base_footprint has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-17] [WARN] [1761139563.550947393] [moveit_robot_model.robot_model]: Link left_summit_base_logo_front has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-17] [WARN] [1761139563.550997030] [moveit_robot_model.robot_model]: Link left_summit_base_logo_left has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-17] [WARN] [1761139563.551016875] [moveit_robot_model.robot_model]: Link left_summit_base_logo_rear has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-17] [WARN] [1761139563.551034957] [moveit_robot_model.robot_model]: Link left_summit_base_logo_right has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-17] [WARN] [1761139563.551053266] [moveit_robot_model.robot_model]: Link left_summit_base_chapa has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-17] [WARN] [1761139563.557763983] [moveit_robot_model.robot_model]: Link left_summit_imu_link has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-17] [WARN] [1761139563.566886750] [moveit_robot_model.robot_model]: Link ur_left_upper_arm_link has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-17] [WARN] [1761139563.566922668] [moveit_robot_model.robot_model]: Link ur_left_forearm_link has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-17] [WARN] [1761139563.566935589] [moveit_robot_model.robot_model]: Link ur_left_wrist_1_link has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-17] [WARN] [1761139563.566947054] [moveit_robot_model.robot_model]: Link ur_left_wrist_2_link has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-17] [WARN] [1761139563.566958266] [moveit_robot_model.robot_model]: Link ur_left_wrist_3_link has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-17] [WARN] [1761139563.566972481] [moveit_robot_model.robot_model]: Link ur_left_paletta has visual geometry but no collision geometry. Collision geometry will be left empty. Fix your URDF file by explicitly specifying collision geometry.
+[rviz2-17] [INFO] [1761139563.665515193] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Starting planning scene monitor
+[rviz2-17] [INFO] [1761139563.666780538] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Listening to '/monitored_planning_scene'
+[WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+[move_group-16] [INFO] [1761140503.596893207] [rclcpp]: signal_handler(signum=2)
+[static_transform_publisher-14] [INFO] [1761140503.596892567] [rclcpp]: signal_handler(signum=2)
+[static_transform_publisher-12] [INFO] [1761140503.596893727] [rclcpp]: signal_handler(signum=2)
+[rviz2-17] [INFO] [1761140503.596903945] [rclcpp]: signal_handler(signum=2)
+[ros2_control_node-10] [INFO] [1761140503.596907642] [rclcpp]: signal_handler(signum=2)
+[simod_mac-8] [INFO] [1761140503.596911996] [rclcpp]: signal_handler(signum=2)
+[static_transform_publisher-7] [INFO] [1761140503.596949253] [rclcpp]: signal_handler(signum=2)
+[static_transform_publisher-5] [INFO] [1761140503.596981848] [rclcpp]: signal_handler(signum=2)
+[static_transform_publisher-6] [INFO] [1761140503.597032257] [rclcpp]: signal_handler(signum=2)
+[static_transform_publisher-4] [INFO] [1761140503.597093454] [rclcpp]: signal_handler(signum=2)
+[robot_state_publisher-3] [INFO] [1761140503.597729927] [rclcpp]: signal_handler(signum=2)
+[move_group-16] [INFO] [1761140503.660614275] [moveit.ros_planning_interface.moveit_cpp]: Deleting MoveItCpp
+[move_group-16] [INFO] [1761140503.661344110] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Stopped publishing maintained planning scene.
+[move_group-16] [INFO] [1761140503.663429270] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Stopping world geometry monitor
+[move_group-16] [INFO] [1761140503.665563419] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Stopping planning scene monitor
+[move_group-16] Warning: class_loader.ClassLoader: SEVERE WARNING!!! Attempting to unload library while objects created by this loader exist in the heap! You should delete your objects before attempting to unload the library or destroying the ClassLoader. The library will NOT be unloaded.
+[move_group-16]          at line 127 in ./src/class_loader.cpp
+[move_group-16] Warning: class_loader.ClassLoader: SEVERE WARNING!!! Attempting to unload library while objects created by this loader exist in the heap! You should delete your objects before attempting to unload the library or destroying the ClassLoader. The library will NOT be unloaded.
+[move_group-16]          at line 127 in ./src/class_loader.cpp
+[rviz2-17] [INFO] [1761140503.708035769] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Stopping planning scene monitor
+[INFO] [static_transform_publisher-7]: process has finished cleanly [pid 11050]
+[INFO] [static_transform_publisher-6]: process has finished cleanly [pid 11048]
+[INFO] [ros2_control_node-10]: process has finished cleanly [pid 11063]
+[INFO] [static_transform_publisher-12]: process has finished cleanly [pid 11186]
+[INFO] [static_transform_publisher-14]: process has finished cleanly [pid 11200]
+[INFO] [static_transform_publisher-5]: process has finished cleanly [pid 11046]
+[INFO] [static_transform_publisher-4]: process has finished cleanly [pid 11044]
+[INFO] [simod_mac-8]: process has finished cleanly [pid 11052]
+[INFO] [robot_state_publisher-3]: process has finished cleanly [pid 11042]
+[move_group-16] Stack trace (most recent call last):
+[move_group-16] #11   Object "", at 0xffffffffffffffff, in 
+[move_group-16] #10   Object "/ros2_ws/build/moveit_ros_move_group/move_group", at 0x555be7adeeb4, in _start
+[move_group-16] #9    Object "/usr/lib/x86_64-linux-gnu/libc.so.6", at 0x7f5eda1dde3f, in __libc_start_main
+[move_group-16] #8    Object "/usr/lib/x86_64-linux-gnu/libc.so.6", at 0x7f5eda1ddd8f, in 
+[move_group-16] #7    Object "/ros2_ws/build/moveit_ros_move_group/move_group", at 0x555be7ade483, in main
+[move_group-16] #6    Object "/ros2_ws/build/moveit_ros_move_group/move_group", at 0x555be7ae59c1, in std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release()
+[move_group-16] #5    Object "/opt/ros/humble/lib/librclcpp.so", at 0x7f5eda702ade, in rclcpp::Node::~Node()
+[move_group-16] #4    Object "/opt/ros/humble/lib/librclcpp.so", at 0x7f5eda6ddd49, in 
+[move_group-16] #3    Object "/opt/ros/humble/lib/librclcpp.so", at 0x7f5eda70c189, in 
+[move_group-16] #2    Object "/opt/ros/humble/lib/librclcpp.so", at 0x7f5eda70c0d0, in rclcpp::node_interfaces::NodeBase::~NodeBase()
+[move_group-16] #1    Object "/opt/ros/humble/lib/librclcpp.so", at 0x7f5eda6ddd49, in 
+[move_group-16] #0    Object "/opt/ros/humble/lib/librclcpp.so", at 0x7f5eda6e2ac1, in rclcpp::CallbackGroup::~CallbackGroup()
+[move_group-16] Segmentation fault (Address not mapped to object [0x7f5eb1ff5c70])
+[INFO] [gzclient-2]: process has finished cleanly [pid 11040]
+[INFO] [rviz2-17]: process has finished cleanly [pid 11367]
+[ERROR] [move_group-16]: process has died [pid 11350, exit code -11, cmd '/ros2_ws/install/moveit_ros_move_group/lib/moveit_ros_move_group/move_group --ros-args --params-file /tmp/launch_params_gc5nuuf0 --params-file /tmp/launch_params_imrmn78e --params-file /tmp/launch_params_yn6a9o_i --params-file /tmp/launch_params_mls3fyqe --params-file /tmp/launch_params_62t77yed --params-file /tmp/launch_params_qed5vpnl --params-file /tmp/launch_params_vyn8208q --params-file /tmp/launch_params_s1hm86rz --params-file /tmp/launch_params_u3su50ou --params-file /tmp/launch_params_9sagt1ef --params-file /tmp/launch_params_zy7__7gl'].
+[move_group-16] [0m
+[ERROR] [gzserver-1]: process[gzserver-1] failed to terminate '5' seconds after receiving 'SIGINT', escalating to 'SIGTERM'
+[INFO] [gzserver-1]: sending signal 'SIGTERM' to process[gzserver-1]
+[gzserver-1] [INFO] [1761140508.632874330] [rclcpp]: signal_handler(signum=15)
+[gzserver-1] [INFO] [1761140508.633237476] [left.controller_manager]: Shutdown request received....
+[gzserver-1] [INFO] [1761140508.633480990] [left.controller_manager]: Shutting down all controllers in the controller manager.
+[gzserver-1] [INFO] [1761140508.633607763] [left.controller_manager]: Deactivating controller 'ur_left_joint_group_vel_controller'
+[gzserver-1] [INFO] [1761140508.634607847] [left.controller_manager]: Shutting down controller 'ur_left_joint_group_vel_controller'
+[gzserver-1] [INFO] [1761140508.634802163] [left.controller_manager]: Deactivating controller 'joint_state_broadcaster'
+[gzserver-1] [INFO] [1761140508.635726961] [left.controller_manager]: Shutting down controller 'joint_state_broadcaster'
+[gzserver-1] [INFO] [1761140508.636125858] [resource_manager]: 'deactivate' hardware 'left_ur' 
+[gzserver-1] [INFO] [1761140508.636160648] [resource_manager]: Successful 'deactivate' of hardware 'left_ur'
+[gzserver-1] [INFO] [1761140508.636200683] [resource_manager]: 'shutdown' hardware 'left_ur' 
+[gzserver-1] [INFO] [1761140508.636218078] [resource_manager]: Successful 'shutdown' of hardware 'left_ur'
+[gzserver-1] [INFO] [1761140508.636366769] [left.controller_manager]: Shutting down the controller manager.
+[gzserver-1] terminate called after throwing an instance of 'std::runtime_error'
+[gzserver-1]   what():  Node needs to be associated with an executor.
+[ERROR] [gzserver-1]: process has died [pid 11038, exit code -6, cmd 'gzserver /ros2_ws/install/ur/share/ur/xacro/gazebo.world --physics=False -slibgazebo_ros_init.so -slibgazebo_ros_factory.so -slibgazebo_ros_force_system.so'].

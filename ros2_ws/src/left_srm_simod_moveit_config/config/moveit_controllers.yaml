@@ -4,8 +4,7 @@ moveit_controller_manager: moveit_simple_controller_manager/MoveItSimpleControll
 
 controller_names:
   - srm_l_ur_controller
-  - srm_l_base_controller
-  - srm_l_controller
+  - multi_dof_joint_trajectory_action
 
 srm_l_ur_controller:
   action_ns: follow_joint_trajectory
@@ -17,19 +16,9 @@ srm_l_ur_controller:
     - ur_left_wrist_1_joint
     - ur_left_wrist_2_joint
     - ur_left_wrist_3_joint
-srm_l_base_controller:
-  action_ns: follow_joint_trajectory
-  type: FollowJointTrajectory
+    
+multi_dof_joint_trajectory_action:
+  type: MultiDofFollowJointTrajectory
+  action_ns: multi_dof_joint_trajectory_action
   joints:
     - position
-srm_l_controller:
-  action_ns: follow_joint_trajectory
-  type: FollowJointTrajectory
-  joints:
-    - position
-    - ur_left_shoulder_pan_joint
-    - ur_left_shoulder_lift_joint
-    - ur_left_elbow_joint
-    - ur_left_wrist_1_joint
-    - ur_left_wrist_2_joint
-    - ur_left_wrist_3_joint

@@ -11,9 +11,11 @@ find_package(pluginlib REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(control_msgs REQUIRED)
 find_package(rclcpp_action REQUIRED)
+find_package(simod_moveit_action_controller REQUIRED)
 
 # Finds Boost Components
 include(ConfigExtras.cmake)
+
 
 set(THIS_PACKAGE_INCLUDE_DEPENDS
   control_msgs
@@ -21,11 +23,13 @@ set(THIS_PACKAGE_INCLUDE_DEPENDS
   rclcpp_action
   moveit_core
   pluginlib
+  simod_moveit_action_controller
 )
 
 include_directories(
   include
 )
+
 
 add_library(${PROJECT_NAME} SHARED
   src/moveit_simple_controller_manager.cpp

@@ -18,16 +18,6 @@ find_package(std_msgs REQUIRED)
 find_package(moveit_core REQUIRED)
 find_package(rosidl_default_generators REQUIRED)
 
-# Generate the action messages
-rosidl_generate_interfaces(${PROJECT_NAME}
-  "action/MultiDofFollowJointTrajectory.action"
-  DEPENDENCIES std_msgs trajectory_msgs
-)
-# Make sure interface targets are available
-ament_export_dependencies(rosidl_default_runtime)
-
-rosidl_get_typesupport_target(typesupport_target ${PROJECT_NAME} "rosidl_typesupport_cpp")
-
 # uncomment the following section in order to fill in
 # further dependencies manually.
 # find_package(<dependency> REQUIRED)
@@ -40,6 +30,17 @@ ament_target_dependencies(simod_mac
   trajectory_msgs
   moveit_core
 )
+
+# Generate the action messages
+rosidl_generate_interfaces(${PROJECT_NAME}
+  "action/MultiDofFollowJointTrajectory.action"
+  DEPENDENCIES builtin_interfaces std_msgs trajectory_msgs
+)
+# Make sure interface targets are available
+ament_export_dependencies(rosidl_default_runtime)
+
+rosidl_get_typesupport_target(typesupport_target ${PROJECT_NAME} "rosidl_typesupport_cpp")
+
 target_link_libraries(simod_mac "${typesupport_target}")
 
 target_include_directories(simod_mac PUBLIC
@@ -68,5 +69,6 @@ if(BUILD_TESTING)
   set(ament_cmake_cpplint_FOUND TRUE)
   ament_lint_auto_find_test_dependencies()
 endif()
+
 
 ament_package()
