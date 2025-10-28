@@ -5,8 +5,11 @@ from rclpy.node import Node
 from sensor_msgs.msg import JointState
 
 class JointStateMerger(Node):
-    def __init__(self, side='both'):
+    def __init__(self):
         super().__init__('joint_state_merger')
+        self.declare_parameter('side')
+        side = self.get_parameter('side').value
+        self.get_logger().info(f"Selected side: {side}")
         self.pub = self.create_publisher(JointState, '/joint_states', 10)
         self.joint_states = {}
         
@@ -42,16 +45,7 @@ class JointStateMerger(Node):
 
 def main(args=None):
     rclpy.init(args=args)
-
-    # Default to merging both unless specified
-    side = 'both'
-    if len(sys.argv) > 1:
-        side = sys.argv[1].lower()
-        if side not in ('left', 'right', 'both'):
-            print("Usage: ros2 run ur joint_state_merger [left|right|both]")
-            return
-    
-    node = JointStateMerger(side)
+    node = JointStateMerger()
     rclpy.spin(node)
     node.destroy_node()
     rclpy.shutdown()

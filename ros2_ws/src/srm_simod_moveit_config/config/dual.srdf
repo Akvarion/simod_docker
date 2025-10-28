@@ -84,8 +84,8 @@
     <end_effector name="ee_r" parent_link="ur_right_tool0" group="srm_r_ee" parent_group="srm_r_ur"/>
     <end_effector name="ee_l" parent_link="ur_left_tool0" group="srm_l_ee" parent_group="srm_l_ur"/>
     <!--VIRTUAL JOINT: Purpose: this element defines a virtual joint between a robot link and an external frame of reference (considered fixed with respect to the robot)-->
-    <!-- <virtual_joint name="left_base_joint" type="planar" parent_frame="left_summit_odom" child_link="world"/>
-    <virtual_joint name="right_base_joint" type="planar" parent_frame="right_summit_odom" child_link="world"/> -->
+    <!-- <virtual_joint name="left_base_joint" type="planar" parent_frame="left_summit_odom" child_link="left_summit_base_footprint"/> -->
+    <!-- <virtual_joint name="right_base_joint" type="planar" parent_frame="right_summit_odom" child_link="right_summit_base_footprint"/> -->
     <!--PASSIVE JOINT: Purpose: this element is used to mark joints that are not actuated-->
     <passive_joint name="left_summit_back_left_wheel_joint"/>
     <passive_joint name="left_summit_back_right_wheel_joint"/>
@@ -102,7 +102,7 @@
 
     <joint_property joint_name="right_base_joint" property_name="motion_model" value="holonomic"/>
     <joint_property joint_name="right_base_joint" property_name="min_translational_distance" value="0.01"/>
-        <joint_property joint_name="right_base_joint" property_name="angular_distance_weight" value="0.5" />
+    <joint_property joint_name="right_base_joint" property_name="angular_distance_weight" value="0.5" />
     <!--DISABLE COLLISIONS: By default it is assumed that any link of the robot could potentially come into collision with any other link in the robot. This tag disables collision checking between a specified pair of links. -->
     <disable_collisions link1="left_summit_back_left_wheel_link" link2="left_summit_back_right_wheel_link" reason="Never"/>
     <disable_collisions link1="left_summit_back_left_wheel_link" link2="left_summit_base_link" reason="Adjacent"/>

@@ -377,6 +377,17 @@ def launch_setup(context, *args, **kwargs):
         ],        
         condition=IfCondition(LaunchConfiguration('gazebo'))
     )
+
+        # Sync Gazebo scene with MoveIt planning scene
+    gazebo_scene_sync = Node(
+        package="ur",
+        executable="gazebo_scene_sync.py",
+        name="gazebo_scene_sync",
+        output="screen",
+        condition=IfCondition(LaunchConfiguration('gazebo'))
+
+    )
+
     ##############
     # Action Server for MoveIt to control the robots in Gazebo
     ##############
@@ -430,13 +441,20 @@ def launch_setup(context, *args, **kwargs):
         period=4.0,  # 4 seconds delay to allow gazebo to start
         actions=[gazebo_spawn_robot_description],
     )
-    joint_state_meger_handler = RegisterEventHandler(
+    joint_state_merger_handler = RegisterEventHandler(
         event_handler = OnProcessStart(
             target_action=joint_state_broadcaster_spawner,
             on_start=TimerAction(
                 period=2.0,  # 2 seconds delay to allow spawns and such
                 actions=[joint_state_merger_node],
             )
+        )
+    )
+
+    gazebo_scene_sync_handler = RegisterEventHandler(
+        event_handler = OnProcessStart(
+            target_action=rviz,
+            on_start=TimerAction(period=4.0, actions=[gazebo_scene_sync]),
         )
     )
     return [
@@ -463,7 +481,8 @@ def launch_setup(context, *args, **kwargs):
         delayed_joint_state_broadcaster_spawner,
         velocity_controller,
         delayed_rviz_node,
-        joint_state_meger_handler
+        joint_state_merger_handler,
+        gazebo_scene_sync_handler,
         #delayed_move_group,
     ]
 

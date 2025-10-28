@@ -120,7 +120,9 @@ def generate_launch_description():
         name='right_robot_spawner',
         output='screen'
     )
-
+    ##############
+    # ROS1 BRIDGE
+    ##############
     # joint_pub_ros1 = Node(
     #     package="py_pubsub",
     #     executable="ros1_bridge",
@@ -130,7 +132,9 @@ def generate_launch_description():
     #                ],
     #     condition=IfCondition(spawn_gazebo_base)
     #     )
-
+    ##############
+    # Previous MOVEIT STUFF, switched to non-ConfigsBuilder approach.
+    ##############
     # Planning Functionality
     # planning_pipelines_config = {
     #     "default_planning_pipeline": "ompl",
@@ -191,10 +195,12 @@ def generate_launch_description():
     #     ],
     # )
     
-    ##############
+    ##########################################
     # MOVEIT STUFF
-    ##############
-        # Planning scene monitor
+    # Currently only for left robot, needs to be seen if dual setup can be adapted and perform 
+    ##########################################
+    
+    # Planning scene monitor
     planning_scene_monitor_parameters = {'publish_planning_scene': True,
                                          'publish_geometry_updates': True,
                                          'publish_state_updates': True,
@@ -217,7 +223,7 @@ def generate_launch_description():
             ],
         },
     }
-    ompl_planning_yaml = load_yaml("left_srm_simod_moveit_config", "config/ompl_planning.yaml")
+    ompl_planning_yaml = load_yaml("srm_simod_moveit_config", "config/ompl_planning.yaml")
     planning_pipelines_config["ompl"].update(ompl_planning_yaml)
     # parameters_pipeline={
     #     "default_planning_pipeline": "ompl",
@@ -234,7 +240,7 @@ def generate_launch_description():
     # }
 
     # Trajectory control
-    controllers_yaml = load_yaml("left_srm_simod_moveit_config", "config/moveit_controllers.yaml")
+    controllers_yaml = load_yaml("srm_simod_moveit_config", "config/moveit_controllers.yaml")
 
     moveit_controllers_config = {'moveit_simple_controller_manager': controllers_yaml,
                           'moveit_controller_manager': 'moveit_simple_controller_manager/MoveItSimpleControllerManager'}
@@ -251,21 +257,21 @@ def generate_launch_description():
     }
     robot_description_config = xacro.process_file(os.path.join(get_package_share_directory('ur'),
                                                                'xacro',
-                                                               'left_resolved_paletta.urdf'),
+                                                               'srm.urdf.xacro'),
                                                 )
     robot_description = {'robot_description': robot_description_config.toxml()}
-    robot_description_semantic_config = load_file('left_srm_simod_moveit_config', 'config/dual.srdf')
+    robot_description_semantic_config = load_file('srm_simod_moveit_config', 'config/dual.srdf')
     robot_description_semantic = {'robot_description_semantic': robot_description_semantic_config}
 
-    kinematics_yaml = load_yaml('left_srm_simod_moveit_config', 'config/kinematics.yaml')
+    kinematics_yaml = load_yaml('srm_simod_moveit_config', 'config/kinematics.yaml')
     robot_description_kinematics = {
         "robot_description_kinematics": kinematics_yaml
     }
 
-    sensors_yaml = load_yaml('left_srm_simod_moveit_config', 'config/sensors_3d.yaml')
-    joint_limits_yaml = load_yaml('left_srm_simod_moveit_config', 'config/joint_limits.yaml')
+    sensors_yaml = load_yaml('srm_simod_moveit_config', 'config/sensors_3d.yaml')
+    joint_limits_yaml = load_yaml('srm_simod_moveit_config', 'config/joint_limits.yaml')
     #Start the actual move_group node/action server
-    #moveit_config = MoveItConfigsBuilder("left_srm_simod").to_dict()
+    #moveit_config = MoveItConfigsBuilder("srm_simod").to_dict()
 
     run_move_group_node = Node(
         package="moveit_ros_move_group",
@@ -297,7 +303,8 @@ def generate_launch_description():
                                                 )
 
     dual_robot_description = {'robot_description': dual_robot_description_config.toxml()}
-
+    dual_semantic = load_file('srm_simod_moveit_config', 'config/dual.srdf')
+    dual_robot_semantic = {'robot_description_semantic': dual_semantic}
     rviz_config_file = (
         os.path.join(get_package_share_directory('ur'), 'rviz','rviz_config.rviz')
     )
@@ -309,7 +316,8 @@ def generate_launch_description():
         arguments=['-d', rviz_config_file],
         parameters=[
             {'use_sim_time': True},
-            dual_robot_description
+            dual_robot_description,
+            dual_robot_semantic,
         ],        
     )
     ##############
@@ -320,7 +328,8 @@ def generate_launch_description():
         package="ur",
         executable="joint_state_merger.py",
         name="joint_state_merger",
-        output="screen"
+        output="screen",
+        parameters=[{'side': 'both'}],
     )
     # Sync Gazebo scene with MoveIt planning scene
     gazebo_scene_sync = Node(
@@ -385,9 +394,9 @@ def generate_launch_description():
     move_group_handler = RegisterEventHandler(
         event_handler = OnProcessStart(
             target_action=rviz,
-            on_start=TimerAction(period=8.0, actions=[run_move_group_node]),
+            on_start=run_move_group_node
+        ),
         )
-    )
     
     action_controller_handler = RegisterEventHandler(
         event_handler = OnProcessStart(
@@ -401,7 +410,7 @@ def generate_launch_description():
     joint_state_merger_handler = RegisterEventHandler(
         event_handler = OnProcessStart(
             target_action=robot_spawner_right,
-            on_start=TimerAction(period=5.0, actions=[joint_state_merger]),
+            on_start=TimerAction(period=8.0, actions=[joint_state_merger]),
         )
     )
     # Add a delay to allow the robots to spawn before syncing the planning scene
@@ -419,9 +428,9 @@ def generate_launch_description():
     ld.add_action(robot_spawner_left)
     ld.add_action(right_spawner_handler)
     ld.add_action(rviz_handler)
-    ld.add_action(run_move_group_node)
+    #ld.add_action(run_move_group_node)
     ld.add_action(action_controller_handler)
-   # ld.add_action(move_group_handler)
+    ld.add_action(move_group_handler)
     ld.add_action(joint_state_merger_handler)
     ld.add_action(gazebo_scene_sync_handler)
    # ld.add_action(delayed_moveit_bridge)

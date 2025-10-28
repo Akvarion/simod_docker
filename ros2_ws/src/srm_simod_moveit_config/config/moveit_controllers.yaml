@@ -4,18 +4,11 @@ moveit_controller_manager: moveit_simple_controller_manager/MoveItSimpleControll
 
 moveit_simple_controller_manager:
   controller_names:
-    - srm_r_base_controller
     - srm_r_ur_controller
-    - srm_l_base_controller
+    - multi_dof_joint_trajectory_action_right
+    - multi_dof_joint_trajectory_action_left
     - srm_l_ur_controller
 
-  srm_r_base_controller:
-    type: FollowJointTrajectory
-    joints:
-      - right_summit_back_left_wheel_joint
-      - right_summit_back_right_wheel_joint
-      - right_summit_front_left_wheel_joint
-      - right_summit_front_right_wheel_joint
   srm_r_ur_controller:
     type: FollowJointTrajectory
     joints:
@@ -25,13 +18,7 @@ moveit_simple_controller_manager:
       - ur_right_wrist_1_joint
       - ur_right_wrist_2_joint
       - ur_right_wrist_3_joint
-  srm_l_base_controller:
-    type: FollowJointTrajectory
-    joints:
-      - left_summit_back_left_wheel_joint
-      - left_summit_back_right_wheel_joint
-      - left_summit_front_left_wheel_joint
-      - left_summit_front_right_wheel_joint
+
   srm_l_ur_controller:
     type: FollowJointTrajectory
     joints:
@@ -41,3 +28,15 @@ moveit_simple_controller_manager:
       - ur_left_wrist_1_joint
       - ur_left_wrist_2_joint
       - ur_left_wrist_3_joint
+      
+  multi_dof_joint_trajectory_action_left:
+    type: MultiDofFollowJointTrajectory
+    action_ns: multi_dof_joint_trajectory_action
+    joints:
+      - left_base_joint
+
+  multi_dof_joint_trajectory_action_right:
+    type: MultiDofFollowJointTrajectory
+    action_ns: multi_dof_joint_trajectory_action
+    joints:
+      - right_base_joint
