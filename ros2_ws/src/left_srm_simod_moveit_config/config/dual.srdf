@@ -21,11 +21,12 @@
     </group>
     <group name="srm_l_base">
         <link name="left_summit_base_footprint"/>
-        <joint name="position"/>
+        <joint name="left_base_joint"/>
     </group>
     <group name="srm_l">
         <group name="srm_l_ur"/>
         <group name="srm_l_base"/>
+        <chain base_link="left_summit_base_footprint" tip_link="ur_left_wrist_3_link"/>
     </group>
     <group name="srm_l_paletta">
         <link name="ur_left_tool0"/>
@@ -51,11 +52,11 @@
     <!--END EFFECTOR: Purpose: Represent information about an end effector.-->
     <end_effector name="srm_l_ee" parent_link="ur_left_tool0" group="srm_l_ur" parent_group="srm_l_paletta"/>
     <!--VIRTUAL JOINT: Purpose: this element defines a virtual joint between a robot link and an external frame of reference (considered fixed with respect to the robot)-->
-    <virtual_joint name="position" type="planar" parent_frame="left_summit_odom" child_link="left_summit_base_footprint"/>
+    <!-- <virtual_joint name="position" type="planar" parent_frame="left_summit_odom" child_link="left_summit_base_footprint"/> -->
     <!--VIRTUAL JOINT PROPERTIES -->
-    <joint_property joint_name="position" property_name="min_translational_distance" value="0.01" />
+    <!-- <joint_property joint_name="position" property_name="min_translational_distance" value="0.01" />
     <joint_property joint_name="position" property_name="motion_model" value="holonomic" />
-    <joint_property joint_name="position" property_name="angular_distance_weight" value="0.5" />
+    <joint_property joint_name="position" property_name="angular_distance_weight" value="0.5" /> -->
 
     <!--PASSIVE JOINT: Purpose: this element is used to mark joints that are not actuated-->
     <passive_joint name="left_summit_back_left_wheel_joint"/>

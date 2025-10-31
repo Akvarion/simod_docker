@@ -19,6 +19,7 @@ install(
 install(PROGRAMS ur/joint_state_merger.py DESTINATION lib/${PROJECT_NAME})
 install(PROGRAMS ur/gazebo_scene_sync.py DESTINATION lib/${PROJECT_NAME})
 install(PROGRAMS ur/controller_manager_bridge.py DESTINATION lib/${PROJECT_NAME})
+install(PROGRAMS ur/fakebase_state_publisher.py DESTINATION lib/${PROJECT_NAME})
 
 # install(
 #   PROGRAMS dd.py

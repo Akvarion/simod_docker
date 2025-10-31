@@ -19,6 +19,6 @@ srm_l_ur_controller:
     
 multi_dof_joint_trajectory_action:
   type: MultiDofFollowJointTrajectory
-  action_ns: multi_dof_joint_trajectory_action
+  action_ns: ""
   joints:
     - position

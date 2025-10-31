@@ -1,9 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<!-- This contains all xml trees. 
-Was split for ease of implementation into SRM1.xml, SRM2.xml, SRM_Superv.xml-->
-
-
 <root BTCPP_format="4">
   <BehaviorTree ID="DropOff">
     <Sequence>
@@ -140,28 +135,28 @@ Was split for ease of implementation into SRM1.xml, SRM2.xml, SRM_Superv.xml-->
         <CloseGripper/>
         <ParallelAll max_failures="0">
           <Controller name="ForceControllerInit"/>
+          <Controller name="AlignmentBaseControl"/>
           <Controller name="AngleControllerInit"/>
-        </ParallelAll>
-        <Sequence name="TransportSequence">
-          <Fallback>
-            <LiftObj/>
-            <SaySomething message="PackageLost,Call Operator"/>
-          </Fallback>
-          <ParallelAll max_failures="0">
-            <Controller name="BasePosControllerInit"/>
-            <Controller name="ForceControllerInit"/>
-            <MoveBase goal="DST"/>
-          </ParallelAll>
-          <Sequence name="DropSequence">
+          <Sequence name="TransportSequence">
             <Fallback>
-              <CheckAlignment name="InAPositionToDrop?"/>
-              <MoveBase goal="AdjstPositioning"/>
+              <LiftObj/>
+              <SaySomething message="PackageLost,Call Operator"/>
             </Fallback>
-            <Drop/>
-            <Release/>
-            <MoveBase goal="ReturnToPallet"/>
+            <ParallelAll max_failures="0">
+              <Controller name="BasePosControllerInit"/>
+              <MoveBase goal="DST"/>
+            </ParallelAll>
+            <Sequence name="DropSequence">
+              <Fallback>
+                <CheckAlignment name="InAPositionToDrop?"/>
+                <MoveBase goal="AdjstPositioning"/>
+              </Fallback>
+              <Drop/>
+              <Release/>
+            </Sequence>
           </Sequence>
-        </Sequence>
+        </ParallelAll>
+        <MoveBase goal="ReturnToPallet"/>
       </Sequence>
     </Sequence>
   </BehaviorTree>

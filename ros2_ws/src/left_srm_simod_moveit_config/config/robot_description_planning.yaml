@@ -1,0 +1,49 @@
+# Specific joint properties can be changed with the keys [max_position, min_position, max_velocity, max_acceleration]
+# Joint limits can be turned off with [has_velocity_limits, has_acceleration_limits]
+joint_limits:
+  ur_left_elbow_joint:
+    has_velocity_limits: true
+    max_velocity: 3.1415926535897931
+    has_acceleration_limits: false
+    max_acceleration: 0
+  ur_left_shoulder_lift_joint:
+    has_velocity_limits: true
+    max_velocity: 3.1415926535897931
+    has_acceleration_limits: false
+    max_acceleration: 0
+  ur_left_shoulder_pan_joint:
+    has_velocity_limits: true
+    max_velocity: 3.1415926535897931
+    has_acceleration_limits: false
+    max_acceleration: 0
+  ur_left_wrist_1_joint:
+    has_velocity_limits: true
+    max_velocity: 3.1415926535897931
+    has_acceleration_limits: false
+    max_acceleration: 0
+  ur_left_wrist_2_joint:
+    has_velocity_limits: true
+    max_velocity: 3.1415926535897931
+    has_acceleration_limits: false
+    max_acceleration: 0
+  ur_left_wrist_3_joint:
+    has_velocity_limits: true
+    max_velocity: 3.1415926535897931
+    has_acceleration_limits: false
+    max_acceleration: 0
+  position/x:
+    has_velocity_limits: true
+    max_velocity: 0.15
+    has_acceleration_limits: true
+    max_acceleration: 0.2
+  position/theta:
+    has_velocity_limits: true
+    max_velocity: 0.15
+    has_acceleration_limits: true
+    max_acceleration: 0.2
+
+cartesian_limits:
+  max_translational_velocity: 1.0
+  max_translational_acceleration: 2.25
+  max_rotational_velocity: 1.57
+  max_rotational_acceleration: 3.14

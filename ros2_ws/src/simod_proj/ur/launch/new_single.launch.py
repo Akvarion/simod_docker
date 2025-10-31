@@ -293,16 +293,15 @@ def launch_setup(context, *args, **kwargs):
     planning_pipelines_config["ompl"].update(ompl_planning_yaml)
     parameters_pipeline={
         "default_planning_pipeline": "ompl",
-        "planning_pipelines": ["ompl"],
-        "ompl": {
-            "planning_plugins": ["ompl_interface/OMPLPlanner"],
-            "planner_configs": {
-                "RRTConnect": {
-                    "type": "geometric::RRTConnect",
-                    "range": 0.0
-                }
+        "planning_pipelines": ["ompl","ompl_rrt_star"],
+        "planning_plugins": ["ompl_interface/OMPLPlanner"],
+        "planner_configs": {
+            "RRTConnect": {
+                "type": "geometric::RRTConnect",
+                "range": 0.0
             }
-        }   
+        }
+           
     }
 
     # Trajectory control
@@ -339,6 +338,8 @@ def launch_setup(context, *args, **kwargs):
     #Start the actual move_group node/action server
     #moveit_config = MoveItConfigsBuilder("left_srm_simod").to_dict()
 
+    robot_description_planning = load_yaml("left_srm_simod_moveit_config", "config/robot_description_planning.yaml")
+
     run_move_group_node = Node(
         package="moveit_ros_move_group",
         executable="move_group",
@@ -347,15 +348,17 @@ def launch_setup(context, *args, **kwargs):
         parameters=[
             {'use_sim_time': True},
             {"tf_buffer_cache_time": 30.0},
+            move_group_capabilities,
             robot_description,
             robot_description_semantic,
             robot_description_kinematics,
+            robot_description_planning,
             sensors_yaml,
             joint_limits_yaml,
             planning_pipelines_config,
             trajectory_execution_config,
             moveit_controllers_config,
-            planning_scene_monitor_parameters
+            planning_scene_monitor_parameters,
         ],
         condition=IfCondition(LaunchConfiguration('gazebo'))
     )
@@ -421,6 +424,14 @@ def launch_setup(context, *args, **kwargs):
         condition=IfCondition(LaunchConfiguration('gazebo'))
     )
 
+    fakebase_state_publisher_node = Node(
+        package='ur',
+        executable='fakebase_state_publisher.py',
+        name='fakebase_state_publisher',
+        output='screen',
+        condition=IfCondition(LaunchConfiguration('gazebo'))
+    )
+
     register_handler = RegisterEventHandler(
         event_handler = OnProcessExit(
             target_action=gazebo_spawn_robot_description,
@@ -447,6 +458,16 @@ def launch_setup(context, *args, **kwargs):
             on_start=TimerAction(
                 period=2.0,  # 2 seconds delay to allow spawns and such
                 actions=[joint_state_merger_node],
+            )
+        )
+    )
+    
+    fakebase_state_publisher_handler = RegisterEventHandler(
+        event_handler = OnProcessStart(
+            target_action=joint_state_broadcaster_spawner,
+            on_start=TimerAction(
+                period=5.0,  # 5 seconds delay to allow spawns and such
+                actions=[fakebase_state_publisher_node],
             )
         )
     )
@@ -482,6 +503,7 @@ def launch_setup(context, *args, **kwargs):
         velocity_controller,
         delayed_rviz_node,
         joint_state_merger_handler,
+        fakebase_state_publisher_handler,
         gazebo_scene_sync_handler,
         #delayed_move_group,
     ]

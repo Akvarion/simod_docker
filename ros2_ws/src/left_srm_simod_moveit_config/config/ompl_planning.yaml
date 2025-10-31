@@ -193,3 +193,11 @@ srm_l_paletta:
     - LazyPRMstar
     - SPARS
     - SPARStwo
+srm_l_base:
+  default_planner_config: RRTConnect
+  planner_configs:
+    - RRTConnect
+srm_l:
+  default_planner_config: RRTConnect
+  planner_configs:
+    - RRTConnect

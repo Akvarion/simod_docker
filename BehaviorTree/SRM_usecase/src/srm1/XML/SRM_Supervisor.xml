@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root BTCPP_format="4">
-  <BehaviorTree ID="scenario1-SRMSupervisor">
+<BehaviorTree ID="scenario1-SRMSupervisor">
     <Sequence name="IdentifySequence">
       <RetryUntilSuccessful num_attempts="1000">
         <Sync name="SyncSRM1-SRM2"/>
@@ -22,36 +22,33 @@
         <CloseGripper/>
         <ParallelAll max_failures="0">
           <Controller name="ForceControllerInit"/>
+          <Controller name="AlignmentBaseControl"/>
           <Controller name="AngleControllerInit"/>
-        </ParallelAll>
-        <Sequence name="TransportSequence">
-          <Fallback>
-            <LiftObj/>
-            <SaySomething message="PackageLost,Call Operator"/>
-          </Fallback>
-          <ParallelAll max_failures="0">
-            <Controller name="BasePosControllerInit"/>
-            <Controller name="ForceControllerInit"/>
-            <MoveBase goal="DST"/>
-          </ParallelAll>
-          <Sequence name="DropSequence">
+          <Sequence name="TransportSequence">
             <Fallback>
-              <CheckAlignment name="InAPositionToDrop?"/>
-              <MoveBase goal="AdjstPositioning"/>
+              <LiftObj/>
+              <SaySomething message="PackageLost,Call Operator"/>
             </Fallback>
-            <Drop/>
-            <Release/>
-            <MoveBase goal="ReturnToPallet"/>
+            <ParallelAll max_failures="0">
+              <Controller name="BasePosControllerInit"/>
+              <MoveBase goal="DST"/>
+            </ParallelAll>
+            <Sequence name="DropSequence">
+              <Fallback>
+                <CheckAlignment name="InAPositionToDrop?"/>
+                <MoveBase goal="AdjstPositioning"/>
+              </Fallback>
+              <Drop/>
+              <Release/>
+            </Sequence>
           </Sequence>
-        </Sequence>
+        </ParallelAll>
+        <MoveBase goal="ReturnToPallet"/>
       </Sequence>
     </Sequence>
   </BehaviorTree>
 
-
-
-
-<!-- Description of Node Models (used by Groot) -->
+  <!-- Description of Node Models (used by Groot) -->
   <TreeNodesModel>
     <Action ID="AngleControl"
             editable="true"/>
@@ -96,5 +93,4 @@
     <Action ID="Sync"
             editable="true"/>
   </TreeNodesModel>
-
 </root>
