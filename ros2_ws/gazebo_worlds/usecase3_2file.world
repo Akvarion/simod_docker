@@ -1,9 +1,9 @@
 <sdf version='1.7'>
   <world name='default'>
-    <plugin name="gazebo_link_attacher" filename="libgazebo_link_attacher.so"/>
-    <plugin name="gazebo_ros_api_plugin" filename="libgazebo_ros_api_plugin.so"/>
-    <plugin name="toggle_link_gravity" filename="libtoggle_link_gravity_plugin.so"/>
-    <plugin name="toggle_collision" filename="libtoggle_collision_plugin.so"/>
+    <plugin name='gazebo_link_attacher' filename='libgazebo_link_attacher.so'/>
+    <plugin name='gazebo_ros_api_plugin' filename='libgazebo_ros_api_plugin.so'/>
+    <plugin name='toggle_link_gravity' filename='libtoggle_link_gravity_plugin.so'/>
+    <plugin name='toggle_collision' filename='libtoggle_collision_plugin.so'/>
     <plugin name='gazebo_ros_state' filename='libgazebo_ros_state.so'>
       <ros>
         <namespace>/state</namespace>
@@ -103,10 +103,20 @@
       <heading_deg>0</heading_deg>
     </spherical_coordinates>
     <state world_name='default'>
-      <sim_time>95 842000000</sim_time>
-      <real_time>40 321941863</real_time>
-      <wall_time>1737391949 924465553</wall_time>
-      <iterations>36979</iterations>
+      <sim_time>280 810000000</sim_time>
+      <real_time>50 281533983</real_time>
+      <wall_time>1762425797 548187620</wall_time>
+      <iterations>48463</iterations>
+      <model name='muraUse1'>
+        <pose>-0.235411 6.15644 0 -1e-06 3e-06 0.00263</pose>
+        <scale>1 1 1</scale>
+        <link name='link_0'>
+          <pose>-0.235411 6.15644 0 -3e-06 -1e-06 -1.56817</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
       <model name='aws_robomaker_warehouse_GroundB_01_0'>
         <pose>0.748933 -0.442162 -0.1233 0 -0 0</pose>
         <scale>1 1 1</scale>
@@ -127,75 +137,104 @@
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
       </model>
-      <model name='muraUse1'>
-        <pose>-0.235411 6.15644 0 -1e-06 3e-06 0.002576</pose>
-        <scale>1 1 1</scale>
-        <link name='link_0'>
-          <pose>-0.235411 6.15644 0 -3e-06 -1e-06 -1.56817</pose>
-          <velocity>0.002649 9.5e-05 0.000185 -0.000105 0.002651 3.9e-05</velocity>
-          <acceleration>0.216911 0.127936 -0.916404 0 -0 0</acceleration>
-          <wrench>21.6911 12.7936 -91.6403 0 -0 0</wrench>
-        </link>
-      </model>
       <model name='pacco'>
-        <pose>-0.24047 5.20052 0.984316 1e-06 -8e-06 -0.015905</pose>
+        <pose>-0.261522 5.19855 0.851245 0.00213 -0.000287 -0.015455</pose>
         <scale>1 1 1</scale>
         <link name='link_1'>
-          <pose>-0.24047 5.20052 0.984316 1e-06 -8e-06 -0.015905</pose>
-          <velocity>0.002218 0.000159 0.001135 -0.000868 0.001103 9.8e-05</velocity>
-          <acceleration>-0.169461 0.099929 -0.993565 3.0512 0.134831 3.13628</acceleration>
-          <wrench>-0.169461 0.099929 -0.993565 0 -0 0</wrench>
+          <pose>-0.261522 5.19855 0.851245 0.00213 -0.000287 -0.015455</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>2.3e-05 -2.9e-05 -29.4 -1.11417 -0.835493 0</acceleration>
+          <wrench>2.3e-05 -2.9e-05 -29.4 0 -0 0</wrench>
         </link>
       </model>
       <model name='pacco_clone'>
-        <pose>-0.226039 5.5475 0.984317 1e-06 -6e-06 -0.020432</pose>
+        <pose>-0.235212 5.53953 0.840985 -0.00312 -0.003665 -0.029718</pose>
         <scale>1 1 1</scale>
         <link name='link_1'>
-          <pose>-0.226039 5.5475 0.984317 1e-06 -6e-06 -0.020432</pose>
-          <velocity>0.002169 0.000148 0.000752 -0.000774 0.001203 5.5e-05</velocity>
-          <acceleration>-0.107598 0.094048 -1.12136 3.09475 -0.39467 -3.13746</acceleration>
-          <wrench>-0.107598 0.094048 -1.12136 0 -0 0</wrench>
+          <pose>-0.235212 5.53953 0.840985 -0.00312 -0.003665 -0.029718</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0.00012 -0.000108 -29.4 -0.732125 1.14953 -3.14159</acceleration>
+          <wrench>0.00012 -0.000108 -29.4 0 -0 0</wrench>
         </link>
       </model>
       <model name='pacco_clone_0'>
-        <pose>-0.231972 5.89531 0.984318 -1e-06 1e-06 -0.022243</pose>
+        <pose>-0.23979 5.8947 0.859475 -0.061979 -0.000919 -0.011952</pose>
         <scale>1 1 1</scale>
         <link name='link_1'>
-          <pose>-0.231972 5.89531 0.984318 -1e-06 1e-06 -0.022243</pose>
-          <velocity>0.002152 0.000139 0.000413 -0.000691 0.00127 4.8e-05</velocity>
-          <acceleration>0.036164 0.093915 -0.867255 -0.055076 -1.29405 0.000573</acceleration>
-          <wrench>0.036164 0.093915 -0.867255 0 -0 0</wrench>
+          <pose>-0.23979 5.8947 0.859475 -0.061979 -0.000919 -0.011952</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>-0.002001 1.30906 9.89641 -1.33902 -0.047505 -0.411272</acceleration>
+          <wrench>-0.002001 1.30906 9.89641 0 -0 0</wrench>
         </link>
       </model>
       <model name='pacco_clone_1'>
-        <static>true</static>
-        <pose>-0.241949 4.83685 0.984316 1e-06 -7e-06 -0.015858</pose>
+        <pose>-0.249211 4.84091 0.860377 -0.002452 -1.4e-05 -0.036946</pose>
         <scale>1 1 1</scale>
         <link name='link_1'>
-          <pose>-0.241949 4.83685 0.984316 1e-06 -7e-06 -0.015858</pose>
-          <velocity>0.002228 0.000142 0.001339 -0.000724 0.001079 8e-05</velocity>
-          <acceleration>-0.148638 0.194195 -1.1953 2.06013 -0.0472 -3.14103</acceleration>
-          <wrench>-0.148638 0.194195 -1.1953 0 -0 0</wrench>
+          <pose>-0.249211 4.84091 0.860377 -0.002452 -1.4e-05 -0.036946</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>3.94583 0.421509 -3.39237 -3.13137 -0.044049 2.44789</acceleration>
+          <wrench>3.94583 0.421509 -3.39237 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='pacco_clone_3'>
+        <pose>-0.268628 5.20803 1.05123 0.002128 -0.000293 -0.013248</pose>
+        <scale>1 1 1</scale>
+        <link name='link_1'>
+          <pose>-0.268628 5.20803 1.05123 0.002128 -0.000293 -0.013248</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 -9.8 0 -0 0</acceleration>
+          <wrench>0 0 -9.8 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='pacco_clone_4'>
+        <pose>-0.242008 5.90051 1.0595 -0.061985 -1.5e-05 0.002617</pose>
+        <scale>1 1 1</scale>
+        <link name='link_1'>
+          <pose>-0.242008 5.90051 1.0595 -0.061985 -1.5e-05 0.002617</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>4.54611 2.93983 29.7875 -1.39803 -1.22974 -0.836247</acceleration>
+          <wrench>4.54611 2.93983 29.7875 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='pacco_clone_5'>
+        <pose>-0.271707 5.57247 1.04072 -0.003176 -0.003625 -0.01533</pose>
+        <scale>1 1 1</scale>
+        <link name='link_1'>
+          <pose>-0.271707 5.57247 1.04072 -0.003176 -0.003625 -0.01533</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 -9.8 0 -0 0</acceleration>
+          <wrench>0 0 -9.8 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='pacco_clone_6'>
+        <pose>-0.249702 4.83782 1.06038 -0.002452 -2e-06 -0.032428</pose>
+        <scale>1 1 1</scale>
+        <link name='link_1'>
+          <pose>-0.249702 4.83782 1.06038 -0.002452 -2e-06 -0.032428</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>12.9603 1.52326 16.8975 -2.08472 -0.044375 -1.83334</acceleration>
+          <wrench>12.9603 1.52326 16.8975 0 -0 0</wrench>
         </link>
       </model>
       <model name='pacco_clone_2'>
-        <pose>-3.73271 4.23247 0.364265 1e-05 -6e-06 0.000377</pose>
+        <pose>-3.74289 4.21634 0.220638 0.002855 -0.001862 0.000318</pose>
         <scale>1 1 1</scale>
         <link name='link_1'>
-          <pose>-3.73271 4.23247 0.364265 1e-05 -6e-06 0.000377</pose>
-          <velocity>-0.00053 -0.000811 -0.010198 0.003312 -0.002163 0</velocity>
-          <acceleration>-6e-06 -9e-06 9.79998 3.5e-05 -2.3e-05 -0</acceleration>
-          <wrench>-6e-06 -9e-06 9.79998 0 -0 0</wrench>
+          <pose>-3.74289 4.21634 0.220638 0.002855 -0.001862 0.000318</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 -9.8 0 -0 0</acceleration>
+          <wrench>0 0 -9.8 0 -0 0</wrench>
         </link>
       </model>
       <model name='pallet2'>
-        <pose>-3.62237 4.40139 0.119268 1e-05 -6e-06 -6.3e-05</pose>
+        <pose>-3.62159 4.40249 -0.023577 0.002852 -0.001858 -0.000102</pose>
         <scale>1 1 1</scale>
         <link name='pallet_base'>
-          <pose>-3.62237 4.40139 0.119268 1e-05 -6e-06 -6.3e-05</pose>
-          <velocity>0 0 -0.0194 0.003312 -0.002163 0</velocity>
-          <acceleration>6e-06 9e-06 -29.4 0.169224 -0.978955 3.14159</acceleration>
-          <wrench>6e-06 9e-06 -29.4 0 -0 0</wrench>
+          <pose>-3.62159 4.40249 -0.023577 0.002852 -0.001858 -0.000102</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>4e-05 6.1e-05 -29.4 0.506902 -0.76411 3.14159</acceleration>
+          <wrench>4e-05 6.1e-05 -29.4 0 -0 0</wrench>
         </link>
       </model>
       <model name='target_plane'>
@@ -203,9 +242,9 @@
         <scale>1 1 1</scale>
         <link name='link_0'>
           <pose>6.58171 -8.56484 0.134058 0 -0 0</pose>
-          <velocity>0 0 1e-06 -2e-06 1e-06 -0</velocity>
-          <acceleration>0.01595 0.01058 -0.645038 2.05554 1.50436 -3.14159</acceleration>
-          <wrench>0.001202 0.000797 -0.04862 0 -0 0</wrench>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
         </link>
       </model>
       <light name='sun'>
@@ -330,7 +369,7 @@
     </model>
     <gui fullscreen='0'>
       <camera name='user_camera'>
-        <pose>3.85854 -16.1504 2.81159 -0 0.181798 1.74018</pose>
+        <pose>-0.07309 1.00233 3.37268 0 0.546609 1.49044</pose>
         <view_controller>orbit</view_controller>
         <projection_type>perspective</projection_type>
       </camera>
@@ -525,16 +564,12 @@
           <material>
             <lighting>1</lighting>
             <script>
-              <uri>file://media/materials/scripts/gazebo.material</uri>
-              <name>Gazebo/Grey</name>
+              <uri>file://assets/materials/scripts/package.material</uri>
+              <uri>file://assets/materials/textures/texture_package.png</uri>
+              <name>PackageSimod</name>
             </script>
             <shader type='pixel'>
-              <normal_map>__default__</normal_map>
             </shader>
-            <ambient>0.6 0 0 0</ambient>
-            <diffuse>0.5 0.7 0.7 1</diffuse>
-            <specular>0.01 0.01 0.01 1</specular>
-            <emissive>0 0 0 1</emissive>
           </material>
           <transparency>0</transparency>
           <cast_shadows>1</cast_shadows>
@@ -629,16 +664,12 @@
           <material>
             <lighting>1</lighting>
             <script>
-              <uri>file://media/materials/scripts/gazebo.material</uri>
-              <name>Gazebo/Grey</name>
+              <uri>file://assets/materials/scripts/package.material</uri>
+              <uri>file://assets/materials/textures/texture_package.png</uri>
+              <name>PackageSimod</name>
             </script>
             <shader type='pixel'>
-              <normal_map>__default__</normal_map>
             </shader>
-            <ambient>0.6 0 0 0</ambient>
-            <diffuse>0.5 0.7 0.7 1</diffuse>
-            <specular>0.01 0.01 0.01 1</specular>
-            <emissive>0 0 0 1</emissive>
           </material>
           <transparency>0</transparency>
           <cast_shadows>1</cast_shadows>
@@ -724,7 +755,7 @@
         <enable_wind>0</enable_wind>
         <visual name='visual'>
           <pose>0 0 0 0 -0 0</pose>
-          <geometry>
+           <geometry>
             <mesh>
               <uri>/ros2_ws/install/ur/share/ur/xacro/./Models/package_800x300x200/package.dae</uri>
               <scale>1 1 1</scale>
@@ -733,16 +764,12 @@
           <material>
             <lighting>1</lighting>
             <script>
-              <uri>file://media/materials/scripts/gazebo.material</uri>
-              <name>Gazebo/Grey</name>
+              <uri>file://assets/materials/scripts/package.material</uri>
+              <uri>file://assets/materials/textures/texture_package.png</uri>
+              <name>PackageSimod</name>
             </script>
             <shader type='pixel'>
-              <normal_map>__default__</normal_map>
             </shader>
-            <ambient>0.6 0 0 0</ambient>
-            <diffuse>0.5 0.7 0.7 1</diffuse>
-            <specular>0.01 0.01 0.01 1</specular>
-            <emissive>0 0 0 1</emissive>
           </material>
           <transparency>0</transparency>
           <cast_shadows>1</cast_shadows>
@@ -837,16 +864,12 @@
           <material>
             <lighting>1</lighting>
             <script>
-              <uri>file://media/materials/scripts/gazebo.material</uri>
-              <name>Gazebo/Grey</name>
+              <uri>file://assets/materials/scripts/package.material</uri>
+              <uri>file://assets/materials/textures/texture_package.png</uri>
+              <name>PackageSimod</name>
             </script>
             <shader type='pixel'>
-              <normal_map>__default__</normal_map>
             </shader>
-            <ambient>0.6 0 0 0</ambient>
-            <diffuse>0.5 0.7 0.7 1</diffuse>
-            <specular>0.01 0.01 0.01 1</specular>
-            <emissive>0 0 0 1</emissive>
           </material>
           <transparency>0</transparency>
           <cast_shadows>1</cast_shadows>
@@ -941,16 +964,12 @@
           <material>
             <lighting>1</lighting>
             <script>
-              <uri>file://media/materials/scripts/gazebo.material</uri>
-              <name>Gazebo/Grey</name>
+              <uri>file://assets/materials/scripts/package.material</uri>
+              <uri>file://assets/materials/textures/texture_package.png</uri>
+              <name>PackageSimod</name>
             </script>
             <shader type='pixel'>
-              <normal_map>__default__</normal_map>
             </shader>
-            <ambient>0.6 0 0 0</ambient>
-            <diffuse>0.5 0.7 0.7 1</diffuse>
-            <specular>0.01 0.01 0.01 1</specular>
-            <emissive>0 0 0 1</emissive>
           </material>
           <transparency>0</transparency>
           <cast_shadows>1</cast_shadows>
@@ -1018,39 +1037,34 @@
     <model name='muraUse1'>
       <link name='link_0'>
         <inertial>
-          <mass>100</mass>
+          <mass>1</mass>
           <inertia>
-            <ixx>0</ixx>
+            <ixx>0.166667</ixx>
             <ixy>0</ixy>
             <ixz>0</ixz>
-            <iyy>0</iyy>
+            <iyy>0.166667</iyy>
             <iyz>0</iyz>
-            <izz>0</izz>
+            <izz>0.166667</izz>
           </inertia>
           <pose>0 0 0 0 -0 0</pose>
         </inertial>
-        <pose>0 0 0 0 0 -1.57075</pose>
-        <gravity>1</gravity>
-        <self_collide>0</self_collide>
-        <kinematic>0</kinematic>
-        <enable_wind>0</enable_wind>
+        <pose>-0 3e-06 -0 0 0 -1.5708</pose>
         <visual name='visual'>
           <pose>0 0 0 0 -0 0</pose>
           <geometry>
             <mesh>
-              <uri>/ros2_ws/assets/usecase1_meshed_1strato.stl</uri>
+              <uri>/ros2_ws/assets/usecase3_meshed_2strati.dae</uri>
               <scale>1 1 1</scale>
             </mesh>
           </geometry>
           <material>
             <lighting>1</lighting>
             <script>
-              <uri>file://media/materials/scripts/gazebo.material</uri>
-              <name>Gazebo/Grey</name>
+              <uri>file://assets/materials/scripts/usecase2_meshed_1strato.material</uri>
+              <uri>file://assets/materials/textures/usecase2_meshed_1strato.jpg</uri>
+              <name>SimodLoadTgt2</name>
             </script>
-            <shader type='pixel'>
-              <normal_map>__default__</normal_map>
-            </shader>
+            <shader type='pixel'/>
           </material>
           <transparency>0</transparency>
           <cast_shadows>1</cast_shadows>
@@ -1061,15 +1075,118 @@
           <pose>0 0 0 0 -0 0</pose>
           <geometry>
             <mesh>
-              <uri>/ros2_ws/assets/usecase1_meshed_1strato.stl</uri>
+              <uri>/ros2_ws/assets/usecase3_meshed_2strati.dae</uri>
               <scale>1 1 1</scale>
             </mesh>
           </geometry>
           <surface>
             <friction>
               <ode>
-                <mu>5000</mu>
-                <mu2>5000</mu2>
+                <mu>1</mu>
+                <mu2>1</mu2>
+                <fdir1>0 0 0</fdir1>
+                <slip1>0</slip1>
+                <slip2>0</slip2>
+              </ode>
+              <torsional>
+                <coefficient>1</coefficient>
+                <patch_radius>0</patch_radius>
+                <surface_radius>0</surface_radius>
+                <use_patch_radius>1</use_patch_radius>
+                <ode>
+                  <slip>0</slip>
+                </ode>
+              </torsional>
+            </friction>
+            <bounce>
+              <restitution_coefficient>0</restitution_coefficient>
+              <threshold>1e+06</threshold>
+            </bounce>
+            <contact>
+              <collide_without_contact>0</collide_without_contact>
+              <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+              <collide_bitmask>1</collide_bitmask>
+              <ode>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.2</soft_erp>
+                <kp>1e+13</kp>
+                <kd>1</kd>
+                <max_vel>0.01</max_vel>
+                <min_depth>0</min_depth>
+              </ode>
+              <bullet>
+                <split_impulse>1</split_impulse>
+                <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.2</soft_erp>
+                <kp>1e+13</kp>
+                <kd>1</kd>
+              </bullet>
+            </contact>
+          </surface>
+        </collision>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <static>1</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <pose>-0.2366 7.71632 0 0 -0 0</pose>
+    </model>
+    <model name='pacco_clone_3'>
+      <link name='link_1'>
+        <inertial>
+          <mass>1</mass>
+          <inertia>
+            <ixx>0.166667</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.166667</iyy>
+            <iyz>0</iyz>
+            <izz>0.166667</izz>
+          </inertia>
+          <pose>0 0 0 0 -0 0</pose>
+        </inertial>
+        <pose>0 -0 0 0 -0 0</pose>
+        <gravity>1</gravity>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <enable_wind>0</enable_wind>
+        <visual name='visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>/ros2_ws/install/ur/share/ur/xacro/./Models/package_800x300x200/package.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <lighting>1</lighting>
+            <script>
+              <uri>file://assets/materials/scripts/package.material</uri>
+              <uri>file://assets/materials/textures/texture_package.png</uri>
+              <name>PackageSimod</name>
+            </script>
+            <shader type='pixel'>
+            </shader>
+          </material>
+          <transparency>0</transparency>
+          <cast_shadows>1</cast_shadows>
+        </visual>
+        <collision name='collision_1'>
+          <laser_retro>0</laser_retro>
+          <max_contacts>10</max_contacts>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.8 0.3 0.2</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1</mu>
+                <mu2>1</mu2>
                 <fdir1>0 0 0</fdir1>
                 <slip1>0</slip1>
                 <slip2>0</slip2>
@@ -1112,9 +1229,309 @@
           </surface>
         </collision>
       </link>
-      <static>1</static>
+      <static>0</static>
       <allow_auto_disable>1</allow_auto_disable>
-      <pose>1.72555 4.14006 0 0 -0 0</pose>
+      <pose>-1.29608 2.96094 0.861417 -0.002551 -4.1e-05 -0.018775</pose>
+    </model>
+    <model name='pacco_clone_4'>
+      <link name='link_1'>
+        <inertial>
+          <mass>1</mass>
+          <inertia>
+            <ixx>0.166667</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.166667</iyy>
+            <iyz>0</iyz>
+            <izz>0.166667</izz>
+          </inertia>
+          <pose>0 0 0 0 -0 0</pose>
+        </inertial>
+        <pose>0 -0 0 0 -0 0</pose>
+        <gravity>1</gravity>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <enable_wind>0</enable_wind>
+        <visual name='visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>/ros2_ws/install/ur/share/ur/xacro/./Models/package_800x300x200/package.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <lighting>1</lighting>
+            <script>
+              <uri>file://assets/materials/scripts/package.material</uri>
+              <uri>file://assets/materials/textures/texture_package.png</uri>
+              <name>PackageSimod</name>
+            </script>
+            <shader type='pixel'>
+            </shader>
+          </material>
+          <transparency>0</transparency>
+          <cast_shadows>1</cast_shadows>
+        </visual>
+        <collision name='collision_1'>
+          <laser_retro>0</laser_retro>
+          <max_contacts>10</max_contacts>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.8 0.3 0.2</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1</mu>
+                <mu2>1</mu2>
+                <fdir1>0 0 0</fdir1>
+                <slip1>0</slip1>
+                <slip2>0</slip2>
+              </ode>
+              <torsional>
+                <coefficient>1</coefficient>
+                <patch_radius>0</patch_radius>
+                <surface_radius>0</surface_radius>
+                <use_patch_radius>1</use_patch_radius>
+                <ode>
+                  <slip>0</slip>
+                </ode>
+              </torsional>
+            </friction>
+            <bounce>
+              <restitution_coefficient>0</restitution_coefficient>
+              <threshold>1e+06</threshold>
+            </bounce>
+            <contact>
+              <collide_without_contact>0</collide_without_contact>
+              <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+              <collide_bitmask>1</collide_bitmask>
+              <ode>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.2</soft_erp>
+                <kp>1e+13</kp>
+                <kd>1</kd>
+                <max_vel>0.01</max_vel>
+                <min_depth>0</min_depth>
+              </ode>
+              <bullet>
+                <split_impulse>1</split_impulse>
+                <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.2</soft_erp>
+                <kp>1e+13</kp>
+                <kd>1</kd>
+              </bullet>
+            </contact>
+          </surface>
+        </collision>
+      </link>
+      <static>0</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <pose>-0.235474 5.8904 1.08042 0 0 -0.018775</pose>
+    </model>
+    <model name='pacco_clone_5'>
+      <link name='link_1'>
+        <inertial>
+          <mass>1</mass>
+          <inertia>
+            <ixx>0.166667</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.166667</iyy>
+            <iyz>0</iyz>
+            <izz>0.166667</izz>
+          </inertia>
+          <pose>0 0 0 0 -0 0</pose>
+        </inertial>
+        <pose>0 -0 0 0 -0 0</pose>
+        <gravity>1</gravity>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <enable_wind>0</enable_wind>
+        <visual name='visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>/ros2_ws/install/ur/share/ur/xacro/./Models/package_800x300x200/package.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <lighting>1</lighting>
+            <script>
+              <uri>file://assets/materials/scripts/package.material</uri>
+              <uri>file://assets/materials/textures/texture_package.png</uri>
+              <name>PackageSimod</name>
+            </script>
+            <shader type='pixel'>
+            </shader>
+          </material>
+          <transparency>0</transparency>
+          <cast_shadows>1</cast_shadows>
+        </visual>
+        <collision name='collision_1'>
+          <laser_retro>0</laser_retro>
+          <max_contacts>10</max_contacts>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.8 0.3 0.2</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1</mu>
+                <mu2>1</mu2>
+                <fdir1>0 0 0</fdir1>
+                <slip1>0</slip1>
+                <slip2>0</slip2>
+              </ode>
+              <torsional>
+                <coefficient>1</coefficient>
+                <patch_radius>0</patch_radius>
+                <surface_radius>0</surface_radius>
+                <use_patch_radius>1</use_patch_radius>
+                <ode>
+                  <slip>0</slip>
+                </ode>
+              </torsional>
+            </friction>
+            <bounce>
+              <restitution_coefficient>0</restitution_coefficient>
+              <threshold>1e+06</threshold>
+            </bounce>
+            <contact>
+              <collide_without_contact>0</collide_without_contact>
+              <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+              <collide_bitmask>1</collide_bitmask>
+              <ode>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.2</soft_erp>
+                <kp>1e+13</kp>
+                <kd>1</kd>
+                <max_vel>0.01</max_vel>
+                <min_depth>0</min_depth>
+              </ode>
+              <bullet>
+                <split_impulse>1</split_impulse>
+                <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.2</soft_erp>
+                <kp>1e+13</kp>
+                <kd>1</kd>
+              </bullet>
+            </contact>
+          </surface>
+        </collision>
+      </link>
+      <static>0</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <pose>-0.254495 5.52883 1.08042 0 0 -0.018775</pose>
+    </model>
+    <model name='pacco_clone_6'>
+      <link name='link_1'>
+        <inertial>
+          <mass>1</mass>
+          <inertia>
+            <ixx>0.166667</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.166667</iyy>
+            <iyz>0</iyz>
+            <izz>0.166667</izz>
+          </inertia>
+          <pose>0 0 0 0 -0 0</pose>
+        </inertial>
+        <pose>0 -0 0 0 -0 0</pose>
+        <gravity>1</gravity>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <enable_wind>0</enable_wind>
+        <visual name='visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>/ros2_ws/install/ur/share/ur/xacro/./Models/package_800x300x200/package.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <lighting>1</lighting>
+            <script>
+              <uri>file://assets/materials/scripts/package.material</uri>
+              <uri>file://assets/materials/textures/texture_package.png</uri>
+              <name>PackageSimod</name>
+            </script>
+            <shader type='pixel'>
+            </shader>
+          </material>
+          <transparency>0</transparency>
+          <cast_shadows>1</cast_shadows>
+        </visual>
+        <collision name='collision_1'>
+          <laser_retro>0</laser_retro>
+          <max_contacts>10</max_contacts>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.8 0.3 0.2</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1</mu>
+                <mu2>1</mu2>
+                <fdir1>0 0 0</fdir1>
+                <slip1>0</slip1>
+                <slip2>0</slip2>
+              </ode>
+              <torsional>
+                <coefficient>1</coefficient>
+                <patch_radius>0</patch_radius>
+                <surface_radius>0</surface_radius>
+                <use_patch_radius>1</use_patch_radius>
+                <ode>
+                  <slip>0</slip>
+                </ode>
+              </torsional>
+            </friction>
+            <bounce>
+              <restitution_coefficient>0</restitution_coefficient>
+              <threshold>1e+06</threshold>
+            </bounce>
+            <contact>
+              <collide_without_contact>0</collide_without_contact>
+              <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+              <collide_bitmask>1</collide_bitmask>
+              <ode>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.2</soft_erp>
+                <kp>1e+13</kp>
+                <kd>1</kd>
+                <max_vel>0.01</max_vel>
+                <min_depth>0</min_depth>
+              </ode>
+              <bullet>
+                <split_impulse>1</split_impulse>
+                <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.2</soft_erp>
+                <kp>1e+13</kp>
+                <kd>1</kd>
+              </bullet>
+            </contact>
+          </surface>
+        </collision>
+      </link>
+      <static>0</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <pose>-0.255352 4.84095 1.08042 0 0 -0.018775</pose>
     </model>
   </world>
 </sdf>

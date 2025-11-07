@@ -14,7 +14,9 @@ from tf2_ros import TransformBroadcaster
 class GazeboSceneSync(Node):
     def __init__(self):
         super().__init__('gazebo_scene_sync')
-        
+        self.declare_parameter('usecase')
+        self.usecase = self.get_parameter('usecase').value
+        print (f"GazeboSceneSync initialized with usecase: {self.usecase}")
         self.tf_broadcaster = TransformBroadcaster(self)
 
         self.planning_scene_pub = self.create_publisher(PlanningScene, '/monitored_planning_scene', 10)
@@ -206,13 +208,77 @@ class GazeboSceneSync(Node):
                     co.operation = CollisionObject.ADD
                     self.publish_colored_object(co, (1.0, 0.0, 0.0, 1.0))
                     self.broadcast_tf(pose, "world", "pacco_clone_2")
+                
+                case "pacco_clone_3" :
+                    co = CollisionObject()
+                    co.header.frame_id = "world"
+                    co.id = "pacco_clone_3"
+                    primitive = SolidPrimitive()
+                    primitive.type = SolidPrimitive.BOX
+                    primitive.dimensions = [0.8, 0.3, 0.2]  # Fill in actual dimensions
+                    co.primitives = [primitive]
+                    co.primitive_poses = [pose]  # Use the pose from Gazebo
+                    co.operation = CollisionObject.ADD
+                    self.publish_colored_object(co, (1.0, 0.0, 0.0, 1.0))
+                    self.broadcast_tf(pose, "world", "pacco_clone_3")
+
+                case "pacco_clone_4" :
+                    co = CollisionObject()
+                    co.header.frame_id = "world"
+                    co.id = "pacco_clone_4"
+                    primitive = SolidPrimitive()
+                    primitive.type = SolidPrimitive.BOX
+                    primitive.dimensions = [0.8, 0.3, 0.2]  # Fill in actual dimensions
+                    co.primitives = [primitive]
+                    co.primitive_poses = [pose]  # Use the pose from Gazebo
+                    co.operation = CollisionObject.ADD
+                    self.publish_colored_object(co, (1.0, 0.0, 0.0, 1.0))
+                    self.broadcast_tf(pose, "world", "pacco_clone_4")
+
+                case "pacco_clone_5" :
+                    co = CollisionObject()
+                    co.header.frame_id = "world"
+                    co.id = "pacco_clone_5"
+                    primitive = SolidPrimitive()
+                    primitive.type = SolidPrimitive.BOX
+                    primitive.dimensions = [0.8, 0.3, 0.2]  # Fill in actual dimensions
+                    co.primitives = [primitive]
+                    co.primitive_poses = [pose]  # Use the pose from Gazebo
+                    co.operation = CollisionObject.ADD
+                    self.publish_colored_object(co, (1.0, 0.0, 0.0, 1.0))
+                    self.broadcast_tf(pose, "world", "pacco_clone_5")
+
+                case "pacco_clone_6" :
+                    co = CollisionObject()
+                    co.header.frame_id = "world"
+                    co.id = "pacco_clone_6"
+                    primitive = SolidPrimitive()
+                    primitive.type = SolidPrimitive.BOX
+                    primitive.dimensions = [0.8, 0.3, 0.2]  # Fill in actual dimensions
+                    co.primitives = [primitive]
+                    co.primitive_poses = [pose]  # Use the pose from Gazebo
+                    co.operation = CollisionObject.ADD
+                    self.publish_colored_object(co, (1.0, 0.0, 0.0, 1.0))
+                    self.broadcast_tf(pose, "world", "pacco_clone_6")
 
                 case "muraUse1":
                     co = CollisionObject()
                     co.header.frame_id = "world"
                     co.id = "muraUse1"
+                    stl_path = '/ros2_ws/assets/usecase1_meshed_1strato.stl'
                     
-                    self.rviz_load_mesh(co, '/ros2_ws/assets/usecase1(mura+pallet).stl')
+                    match self.usecase:
+                        case 12:
+                            stl_path = '/ros2_ws/assets/usecase1_meshed_2strati.stl'
+                        case 21:
+                            stl_path = '/ros2_ws/assets/usecase2_meshed_1strato.stl'
+                        case 22:
+                            stl_path = '/ros2_ws/assets/usecase2_meshed_2strati.stl'
+                        case 31:
+                            stl_path = '/ros2_ws/assets/usecase3_meshed_1strato.stl'
+                        case 32:
+                            stl_path = '/ros2_ws/assets/usecase3_meshed_2strati.stl'
+                    self.rviz_load_mesh(co, stl_path)
                     pose=self.rotate_pose_z_90(pose)  # Rotate the pose by 90 degrees around Z-axis
                     co.mesh_poses = [pose]  # Use the pose from Gazebo
                     co.operation = CollisionObject.ADD
@@ -285,7 +351,55 @@ class GazeboSceneSync(Node):
                     co.primitive_poses = [pose]  # Use the pose from Gazebo
                     co.operation = CollisionObject.ADD
                     self.publish_collision_object(co)
+
+                case "pacco_clone_3::link_1" :
+                    co = CollisionObject()
+                    co.header.frame_id = "world"
+                    co.id = "pacco_clone_3"
+                    primitive = SolidPrimitive()
+                    primitive.type = SolidPrimitive.BOX
+                    primitive.dimensions = [0.8, 0.3, 0.2]  # Fill in actual dimensions
+                    co.primitives = [primitive]
+                    co.primitive_poses = [pose]  # Use the pose from Gazebo
+                    co.operation = CollisionObject.ADD
+                    self.publish_collision_object(co)        
                 
+                case "pacco_clone_4::link_1" :
+                    co = CollisionObject()
+                    co.header.frame_id = "world"
+                    co.id = "pacco_clone_4"
+                    primitive = SolidPrimitive()
+                    primitive.type = SolidPrimitive.BOX
+                    primitive.dimensions = [0.8, 0.3, 0.2]  # Fill in actual dimensions
+                    co.primitives = [primitive]
+                    co.primitive_poses = [pose]  # Use the pose from Gazebo
+                    co.operation = CollisionObject.ADD
+                    self.publish_collision_object(co)            
+
+                case "pacco_clone_5::link_1" :
+                    co = CollisionObject()
+                    co.header.frame_id = "world"
+                    co.id = "pacco_clone_5"
+                    primitive = SolidPrimitive()
+                    primitive.type = SolidPrimitive.BOX
+                    primitive.dimensions = [0.8, 0.3, 0.2]  # Fill in actual dimensions
+                    co.primitives = [primitive]
+                    co.primitive_poses = [pose]  # Use the pose from Gazebo
+                    co.operation = CollisionObject.ADD
+                    self.publish_collision_object(co)
+
+                case "pacco_clone_6::link_1" :
+                    co = CollisionObject()
+                    co.header.frame_id = "world"
+                    co.id = "pacco_clone_6"
+                    primitive = SolidPrimitive()
+                    primitive.type = SolidPrimitive.BOX
+                    primitive.dimensions = [0.8, 0.3, 0.2]  # Fill in actual dimensions
+                    co.primitives = [primitive]
+                    co.primitive_poses = [pose]  # Use the pose from Gazebo
+                    co.operation = CollisionObject.ADD
+                    self.publish_collision_object(co)    
+
                 # case _:
                 #     self.get_logger().info(f"Model {name} not handled in callback.")
                 

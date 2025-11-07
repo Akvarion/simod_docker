@@ -65,12 +65,6 @@
 
   <!-- Connect the left robot to the world -->
 
-  <joint name="left_base_joint" type="planar">
-    <parent link="world"/>
-    <child link="left_summit_base_footprint"/>
-    <origin xyz="0 0 0" rpy="0 0 0"/>
-  </joint>
-
   <!-- istanziare la macro-->
   <ros2_control name="left_ur" type="system">
     <hardware>

@@ -7,6 +7,8 @@ from launch.substitutions import Command, FindExecutable, LaunchConfiguration, P
 
 from ament_index_python.packages import get_package_share_directory
 import os
+import sys
+from launch.actions import DeclareLaunchArgument,OpaqueFunction
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.conditions import IfCondition
 from launch_ros.actions import Node
@@ -29,7 +31,6 @@ def load_file(package_name, file_path):
         print(f"[ERROR] EnvironmentError in load_file: {e}")
         traceback.print_exc()
         return []
-
     
 def load_yaml(package_name, file_path):
     package_path = get_package_share_directory(package_name)
@@ -43,9 +44,38 @@ def load_yaml(package_name, file_path):
         traceback.print_exc()
         return []
 
+def launch_setup(context, *args, **kwargs):
+    usecase = LaunchConfiguration('usecase').perform(context)
+
+    match usecase:
+        case '1_1':
+            gazebo_path = "/ros2_ws/gazebo_worlds/usecase1_1fila.world"
+        case '1_2':
+            gazebo_path = "/ros2_ws/gazebo_worlds/usecase1_2file.world"
+        case '2_1':
+            gazebo_path = "/ros2_ws/gazebo_worlds/usecase2_1fila.world"
+        case '2_2':
+            gazebo_path = "/ros2_ws/gazebo_worlds/usecase2_2file.world"
+        case '3_1':
+            gazebo_path = "/ros2_ws/gazebo_worlds/usecase3_1fila.world"
+        case '3_2':
+            gazebo_path = "/ros2_ws/gazebo_worlds/usecase3_2file.world"
+        case _:
+            print("Something went wrong while choosing the correct usecase.")
+            print(usecase)
+            sys.exit()
+
+    gazebo = IncludeLaunchDescription( 
+                PythonLaunchDescriptionSource(
+                    os.path.join(get_package_share_directory('gazebo_ros'), 'launch', 'gazebo.launch.py')),
+        launch_arguments={'physics': 'False', 'world': gazebo_path}.items()
+    )
+    return [gazebo]
+
 
 def generate_launch_description():
-
+    
+    usecase_arg = DeclareLaunchArgument('usecase', default_value='1_1')
     description_package = "ur"
 
     ur_type_left             = 'ur5e'
@@ -82,18 +112,9 @@ def generate_launch_description():
 
     hardware_interface   = 'hardware_interface/PositionJointInterface'
 
-
-
+    
     rviz                 = 'True'
-    gazebo_path = os.path.join(get_package_share_directory('ur'), 'xacro','gazebo.world')
-
-
-    gazebo = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(
-            os.path.join(get_package_share_directory('gazebo_ros'), 'launch', 'gazebo.launch.py')
-        ),
-        launch_arguments={'physics': 'False', 'world': gazebo_path}.items()
-    )
+    
 
     #Open gazebo and spawn robots
     robot_description_content = Command(
@@ -336,6 +357,7 @@ def generate_launch_description():
         package="ur",
         executable="gazebo_scene_sync.py",
         name="gazebo_scene_sync",
+        parameters=[{'usecase': LaunchConfiguration('usecase')}],
         output="screen"
     )
     ##############
@@ -371,7 +393,18 @@ def generate_launch_description():
         name="gazebo_moveit_bridge",
         output="screen"
     )
-
+    ###########
+    # FAKE BASE STATE PUBLISHER
+    # Basically noise to have proper joint states for both robots in simulation
+    # so that Moveit doesn't complain about missing joint states.
+    ###########
+    fakebase_state_publisher_node = Node(
+        package='ur',
+        executable='fakebase_state_publisher.py',
+        name='fakebase_state_publisher',
+        parameters=[{'side': 'both'}],
+        output='screen',
+    )
 
     ##############
     # HANDLERS/TIMERS
@@ -420,10 +453,21 @@ def generate_launch_description():
             on_start=TimerAction(period=4.0, actions=[gazebo_scene_sync]),
         )
     )
+    
+    fakebase_state_publisher_handler = RegisterEventHandler(
+        event_handler = OnProcessStart(
+            target_action=joint_state_merger,
+            on_start=TimerAction(
+                period=5.0,  # 5 seconds delay to allow spawns and such
+                actions=[fakebase_state_publisher_node],
+            )
+        )
+    )
 
     ld = LaunchDescription()
 
-    ld.add_action(gazebo)
+    ld.add_action(usecase_arg)
+    ld.add_action(OpaqueFunction(function=launch_setup))
    #ld.add_action(joint_pub_ros1)
     ld.add_action(robot_spawner_left)
     ld.add_action(right_spawner_handler)
@@ -432,6 +476,7 @@ def generate_launch_description():
     ld.add_action(action_controller_handler)
     ld.add_action(move_group_handler)
     ld.add_action(joint_state_merger_handler)
+    ld.add_action(fakebase_state_publisher_handler)
     ld.add_action(gazebo_scene_sync_handler)
    # ld.add_action(delayed_moveit_bridge)
 
