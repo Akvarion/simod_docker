@@ -34,6 +34,7 @@ install(PROGRAMS
   scripts/move_demo.py
   scripts/pick_and_place_demo.py
   scripts/return_robots_home.py
+  scripts/bt_ros2_demo.py
   DESTINATION lib/${PROJECT_NAME}
   PERMISSIONS
     OWNER_READ OWNER_WRITE OWNER_EXECUTE
