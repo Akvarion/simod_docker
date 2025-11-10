@@ -35,14 +35,14 @@ docker compose -f docker-compose-gui.yml up
  
 Terminator GUI will open up with the Docker container running inside it and the ros1 and ros2 environments already sourced.
 
-#### Starting a single container
+#### 2.1 Starting a single container
 To start a single container, simply run the following (change the `<options>` into one of the followings: `ros1_simod`, `bridge_simod`, `ros2_simod`):
 ```bash
 docker compose -f docker-compose-gui.yml up <options>
 ```
-### 2.1 Nvidia GPU hardware acceleration
+### 2.2 Nvidia GPU hardware acceleration
 Some machines may use a setup with a dual GPU combo (Integrated + Dedicated Nvidia Cards). To use the Nvidia graphics card as the rendering device, a few requirements must be met:
-#### 1. Nvidia Container Toolkit
+#### 2.2.1 Nvidia Container Toolkit
 To install this tool, you need to:
 
 ##### Configure the production repository
@@ -73,7 +73,49 @@ sudo systemctl restart docker
 
 Further information can be found at the official [Nvidia Container Toolkit installation page](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html).
 
-### 3. Running
+### 3. ROS2 Simulation
+
+At first start ( with `docker compose -f docker-compose-gui.yml up ros2_simod`), it will be necessary to build the workspace:
+
+```bash
+cd ./src
+rosdep install -r --from-paths . --ignore-src -y
+cd ..
+MAKEFLAGS="-j4 -l1" colcon build --symlink-install --executor sequential
+pip install trimesh pycollada
+apt install ros-humble-tf-transformations
+```
+These commands allow the resolution of dependencies and compilation of the workspace, including Moveit2 Framework. 
+Note: during compilation of "moveit_simple_controller_manager", an error regarding the lack of a package may appear:
+
+"simod_moveit_action_controller: package not found". The package is present, but for some reason not yet built.
+Running:
+```bash
+colcon build --symlink-install --packages-select simod_moveit_action_controller
+```
+should fix this issue.
+After building, to start the simulation environment, simply:
+```bash
+source install/setup.bash
+ros2 launch ur main.launch.py usecase:=1_1
+```
+The argument `usecase` defines which of the usecases considered is loaded into gazebo. There are 6 possible combinations:
+```bash
+usecase:=1_1
+usecase:=1_2
+usecase:=2_1
+usecase:=2_2
+usecase:=3_1
+usecase:=3_2
+```
+This is done to the reflect the possibility of 2 layers of packages to be picked, as the structure ceiling changes. 
+Since the amount of messages flooding the console will be considerable, it is advisable to redirect all output to a log file with `&> userlogname.log`.
+Also, it is possible to launch a single robot in the simulation with:
+
+```bash
+ros2 launch ur new_single.launch.py robot:=left gazebo:=true
+```
+the arguments `robot` and `gazebo` select which robot is to be loaded and if the simulation tools are needed to be launched. The argument `gazebo` is always true if this command is run standalone, and only the `left` robot will not cause Moveit to complain in the logs.
 
 #### Bridge Container
 This container operates the ros1 bridge. It has to be compiled.
@@ -117,29 +159,7 @@ roslaunch summit_xl_gazebo parameter.launch
 roslaunch summit_xl_gazebo environment.launch
 ```
 
-#### ROS2_DOCKER CONTAINER
 
-1° Terminale
-
-*solo la prima volta che si compila il workspace
-```bash
-cd ./src
-rosdep install -r --from-paths . --ignore-src
-cd ..
-MAKEFLAGS="-j4 -l1" colcon build --symlink-install --executor sequential
-```
-Questi comandi permettono la risoluzione delle dipendenze e la compilazione del framework MoveIt2 e del workspace. 
-
-2° Terminale
-
-```bash
-# . install/setup.bash
-# export RMW_IMPLEMENTATION=rmw_fastrtps_cpp
-# . /usr/share/gazebo/setup.bash
-
-source ros2_setup.bash
-ros2 launch ur main.launch.py
-```
 
 ### 4. Useful topics
 
