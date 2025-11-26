@@ -24,10 +24,10 @@ import tf2_ros
 # ========= CONFIG: durate e profili (ripresi dalla demo) =========
 
 # Durate (s)
-APPROACH_TIME = 10.7
+APPROACH_TIME = 14.5
 DESCEND_AND_PICK_TIME = 12.0
 COLLECT_TIME = 10.0
-TRANSPORT_TIME = 16.0
+TRANSPORT_TIME = 17.0
 DESCEND_AND_PLACE_TIME = 11.0
 RELEASE_TIME = 1.0
 
@@ -139,6 +139,7 @@ class DemoNode(Node):
 
     # ——— Le stesse utility della demo, riusate nelle foglie ———
     def stop_all_movement(self):
+        """Ferma basi e braccia nella loro posizione corrente, pubblicando una serie di zeri sui topic cmd_vel."""
         zero = Twist()
         self.left_base_pub.publish(zero)
         self.right_base_pub.publish(zero)
@@ -149,6 +150,7 @@ class DemoNode(Node):
         time.sleep(0.1)
 
     def set_paletta_collision(self, enable: bool, side="left") -> bool:
+        """Imposta collisioni della paletta"""
         if not self.toggle_collision_cli.service_is_ready():
             try: self.toggle_collision_cli.wait_for_service(timeout_sec=1.0)
             except Exception: pass
@@ -180,6 +182,7 @@ class DemoNode(Node):
         return bool(fut.done() and fut.result() and getattr(fut.result(), "success", True))
 
     def attach_fixed_joint(self) -> bool:
+        """Attacca un fixed joint tra robot e oggetto da prendere."""
         if not self.attach_cli.service_is_ready():
             try: self.attach_cli.wait_for_service(timeout_sec=1.0)
             except Exception: pass
@@ -200,6 +203,7 @@ class DemoNode(Node):
         return bool(ok)
 
     def detach_fixed_joint(self) -> bool:
+        """Stacca il fixed joint tra robot e oggetto preso."""
         if not self.detach_cli.service_is_ready():
             try: self.detach_cli.wait_for_service(timeout_sec=1.0)
             except Exception: pass

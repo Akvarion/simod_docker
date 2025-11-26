@@ -26,7 +26,8 @@ import xacro
 def generate_launch_description():
     robot_ = DeclareLaunchArgument('robot', default_value='left', description='L/R Robot')
     gazebo_flag= DeclareLaunchArgument('gazebo', default_value='false', description='Whether to launch gazebo simulation')
-    return LaunchDescription([robot_, gazebo_flag, OpaqueFunction(function=launch_setup)])
+    moveit_flag= DeclareLaunchArgument('moveit', default_value='false', description='Whether to launch moveit')
+    return LaunchDescription([robot_, gazebo_flag, moveit_flag, OpaqueFunction(function=launch_setup)])
 
 def load_file(package_name, file_path):
     package_path = get_package_share_directory(package_name)
@@ -101,6 +102,7 @@ def launch_setup(context, *args, **kwargs):
     
     robot_ = LaunchConfiguration('robot').perform(context)
     gazebo_flag = LaunchConfiguration('gazebo').perform(context)
+    moveit_flag = LaunchConfiguration('moveit').perform(context)
     # Load urdf file
     with open("/ros2_ws/"+robot_+"_resolved_paletta.urdf","r") as robot_description_file:
         robot_description_content = robot_description_file.read()
@@ -172,7 +174,13 @@ def launch_setup(context, *args, **kwargs):
         arguments=['0', '0', '0', '0', '0', '0', '1', 'world', robot_+'_summit_odom'],
         parameters=[{'use_sim_time': True}],
     )
-
+    static_tf_camera = Node(
+        package='tf2_ros', 
+        executable='static_transform_publisher',
+        namespace=robot_,
+        arguments=['0', '0', '0', '0', '0', '0', '1', 'ur_'+robot_+'_wrist_1_link', 'ur_' + robot_ + '_camera_mount_link'],
+        parameters=[{'use_sim_time': True}],   
+    )
     # static_tf_base = Node(
     #     package='tf2_ros',
     #     executable='static_transform_publisher',
@@ -360,7 +368,7 @@ def launch_setup(context, *args, **kwargs):
             moveit_controllers_config,
             planning_scene_monitor_parameters,
         ],
-        condition=IfCondition(LaunchConfiguration('gazebo'))
+        condition=IfCondition(LaunchConfiguration('moveit'))
     )
     rviz_config_file = (
         os.path.join(get_package_share_directory('ur'), 'rviz','rviz_config.rviz')
@@ -378,7 +386,7 @@ def launch_setup(context, *args, **kwargs):
             planning_pipelines_config,
             {'use_sim_time': True},
         ],        
-        condition=IfCondition(LaunchConfiguration('gazebo'))
+        condition=IfCondition(LaunchConfiguration('moveit'))
     )
 
         # Sync Gazebo scene with MoveIt planning scene
@@ -478,6 +486,23 @@ def launch_setup(context, *args, **kwargs):
             on_start=TimerAction(period=4.0, actions=[gazebo_scene_sync]),
         )
     )
+    camera_node_handler = RegisterEventHandler(
+        event_handler=OnProcessStart(
+            target_action=fakebase_state_publisher_node,
+            on_start=[TimerAction(
+                period=0.5,  # small delay to ensure robot is fully loaded
+                actions=[Node(
+                    package='gazebo_ros',
+                    executable='spawn_entity.py',
+                    arguments=[
+                        '-file', '/ros2_ws/src/simod_proj/camera_dummy/camera.sdf',
+                        '-entity', 'camera_left',
+                    ],
+                    output='screen'
+                )]
+            )]
+        )
+    )
     return [
         register_handler,
         gazebo,
@@ -489,6 +514,7 @@ def launch_setup(context, *args, **kwargs):
         static_tf_wheel_back_right,
         static_tf_wheel_front_left,
         static_tf_wheel_front_right,
+        static_tf_camera,
         delayed_static_tf_world,
         delayed_static_tf_odom,
         #static_tf_right_world,
@@ -505,6 +531,7 @@ def launch_setup(context, *args, **kwargs):
         joint_state_merger_handler,
         fakebase_state_publisher_handler,
         gazebo_scene_sync_handler,
+  #      camera_node_handler,
         #delayed_move_group,
     ]
 
