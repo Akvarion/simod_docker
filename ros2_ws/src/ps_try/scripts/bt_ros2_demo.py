@@ -24,7 +24,7 @@ import tf2_ros
 # ========= CONFIG: durate e profili (ripresi dalla demo) =========
 
 # Durate (s)
-APPROACH_TIME = 14.5
+APPROACH_TIME = 15.5
 DESCEND_AND_PICK_TIME = 12.0
 COLLECT_TIME = 10.0
 TRANSPORT_TIME = 17.0

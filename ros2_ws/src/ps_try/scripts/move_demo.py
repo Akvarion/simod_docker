@@ -15,6 +15,7 @@ from geometry_msgs.msg import Twist
 from gazebo_msgs.srv import SetModelState
 import tf2_ros
 
+APPROACH_TIME= 10.0
 
 class ApproachObjDemo(Node):
     def __init__(self, args):
@@ -40,13 +41,13 @@ class ApproachObjDemo(Node):
             self.get_logger().warn('/gazebo/set_model_state service not available. Object attach will fail if not present.')
 
         # State machine
-        self.start_time = time.time()
+        self.start_time = self.get_clock().now()
         self.state = 'approach'
-        self.state_start = time.time()
+        self.state_start = self.get_clock().now()
 
         # Durations (seconds)
         self.durations = {
-            'approach': 4.0,
+            'approach': APPROACH_TIME,
             'descend_and_pick': 3.0,
             'transport': 5.0,
             'release': 1.0
@@ -65,7 +66,7 @@ class ApproachObjDemo(Node):
         self.get_logger().info('PickAndPlaceDemo initialized')
 
     def control_loop(self):
-        now = time.time()
+        now = self.get_clock().now()
         elapsed = now - self.state_start
 
         if self.state == 'approach':
@@ -80,7 +81,7 @@ class ApproachObjDemo(Node):
             self.left_base_pub.publish(twist)
             self.right_base_pub.publish(twist)
 
-            if elapsed > self.durations['approach']:
+            if elapsed.nanoseconds / 1e9 > self.durations['approach']:
                 # stop motion
                 self.get_logger().info('Reached approach position, stop and prepare to pick')
                 self.stop_all_movement()
@@ -98,8 +99,8 @@ class ApproachObjDemo(Node):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--object', default='pacco_clone_1', help='Gazebo model name of the object to pick')
-    parser.add_argument('--left_base_topic', default='/left_summit/cmd_vel')
-    parser.add_argument('--right_base_topic', default='/right_summit/cmd_vel')
+    parser.add_argument('--left_base_topic', default='/left_summit_cmd_vel')
+    parser.add_argument('--right_base_topic', default='/right_summit_cmd_vel')
     args = parser.parse_args()
 
     rclpy.init()

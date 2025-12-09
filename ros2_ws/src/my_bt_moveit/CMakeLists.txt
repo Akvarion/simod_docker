@@ -12,6 +12,7 @@ find_package(moveit_ros_planning REQUIRED)
 find_package(moveit_ros_planning_interface REQUIRED)
 find_package(behaviortree_cpp REQUIRED)
 find_package(geometry_msgs REQUIRED)
+find_package(yaml-cpp REQUIRED)  
 
 add_executable(bt_moveit_node 
                src/bt_moveit_node.cpp 
@@ -22,6 +23,11 @@ ament_target_dependencies(bt_moveit_node
                           geometry_msgs 
                           behaviortree_cpp 
                           moveit_ros_planning_interface)
+
+# Link yaml-cpp explicitly
+target_link_libraries(bt_moveit_node
+    yaml-cpp
+)
 
 install(TARGETS
         bt_moveit_node

@@ -115,7 +115,7 @@ Also, it is possible to launch a single robot in the simulation with:
 ```bash
 ros2 launch ur new_single.launch.py robot:=left gazebo:=true
 ```
-the arguments `robot` and `gazebo` select which robot is to be loaded and if the simulation tools are needed to be launched. The argument `gazebo` is always true if this command is run standalone, and only the `left` robot will not cause Moveit to complain in the logs.
+the arguments `robot` and `gazebo` select which robot is to be loaded and if the simulation tools are needed to be launched. The argument `gazebo` must be true, otherwise gazebo and rviz won't load; also, at the moment, only the `left` robot will not cause Moveit to complain in the logs.
 
 #### Bridge Container
 This container operates the ros1 bridge. It has to be compiled.

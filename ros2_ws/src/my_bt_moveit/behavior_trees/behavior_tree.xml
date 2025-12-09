@@ -1,11 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root BTCPP_format="4">
-    <BehaviorTree ID="MainTree">
-        <Sequence>
-            <MoveBase target_x="1.0" target_y="0.0" target_theta="0.0" />
-            <MoveBase target_x="0.0" target_y="0.0" target_theta="1.57" />
-            <MoveBase target_x="0.0" target_y="0.0" target_theta="-1.57" />
-            <MoveBase target_x="0.0" target_y="0.0" target_theta="0.0" />
-        </Sequence>
-    </BehaviorTree>
+  <BehaviorTree ID="MainTree">
+    <Sequence>
+      <MoveBase
+          APPROACH_RIGHT_BASE_XY_VEL="{APPROACH_RIGHT_BASE_XY_VEL}"
+          APPROACH_LEFT_BASE_XY_VEL="{APPROACH_LEFT_BASE_XY_VEL}"
+          APPROACH_TIME="{APPROACH_TIME}"
+
+      />
+      <StopBase/>
+    </Sequence>
+  </BehaviorTree>
+
+  <!-- Description of Node Models (used by Groot) -->
+  <TreeNodesModel>
+    <Action ID="MoveBase"
+            editable="true"/>
+    <Action ID="StopBase"
+            editable="true"/>
+  </TreeNodesModel>
+
 </root>

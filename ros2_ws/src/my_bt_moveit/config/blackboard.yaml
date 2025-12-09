@@ -1,0 +1,57 @@
+##################
+##  BLACKBOARD  ##
+##################
+
+# ========= CONFIG GENERALI =========
+# Durate (s)
+APPROACH_TIME: 18.1
+DESCEND_AND_PICK_TIME: 18.0
+COLLECT_TIME: 10.0
+TRANSPORT_TIME: 14.5
+DESCEND_AND_PLACE_TIME: 12.0
+RELEASE_TIME: 1.0
+# =========== APPROACH ==========
+# Velocità base in approach
+
+APPROACH_LEFT_BASE_XY_VEL: [0.0018, 0.25]
+APPROACH_RIGHT_BASE_XY_VEL: [-0.022, 0.25]
+
+# APPROACH_LEFT_BASE_XY_VEL: [0.002, 0.25]
+# APPROACH_RIGHT_BASE_XY_VEL: [-0.022, 0.25]
+
+# Velocità bracci (esempio; usa le tue)
+LEFT_ARM_VEL: [0.075, -0.01, 0.01, -0.01, -0.01, -0.01]
+RIGHT_ARM_VEL: [-0.09, -0.01, 0.01, -0.01, 0.01, 0.021]
+# LEFT_ARM_VEL: [0.072, -0.01, 0.01, -0.01, -0.01, -0.01]
+# RIGHT_ARM_VEL: [-0.09, -0.01, 0.01, -0.01, 0.01, 0.021]
+
+# =========== PICK ==========
+# Pose per “calata” e presa (comandi velocità giunti o target semplici)
+LEFT_ARM_PICK: [-0.001, -0.08, 0.08, 0.0, -0.12, -0.055]
+RIGHT_ARM_PICK: [0.001, -0.12, 0.08, 0.0, 0.12, 0.055]
+
+# =========== COLLECT ==========
+# Velocità base nel collect
+COLLECT_LEFT_BASE_XY_VEL: [0.001, -0.15]
+COLLECT_RIGHT_BASE_XY_VEL: [-0.0, -0.15]
+
+LEFT_ARM_COLLECT: [0.0, 0.08, -0.08, 0.0, 0.0, -0.020]
+RIGHT_ARM_COLLECT: [0.0, 0.08, -0.08, 0.0, 0.0, -0.025]
+
+# =========== TRANSPORT ==========
+# Velocità base nel trasporto
+LEFT_TRANSPORT_VEL_XY: [-0.24, 0.0]
+RIGHT_TRANSPORT_VEL_XY: [-0.24 , -0.055]
+
+# ========== DESCEND & PLACE ==========
+# breve avvicinamento al pallet
+PLACE_LEFT_BASE_XY_VEL: [0.0, 0.09]
+PLACE_RIGHT_BASE_XY_VEL: [0.0, 0.06]
+# Pose per calata
+LEFT_ARM_PLACE: [-0.001, -0.12, 0.08, 0.0, 0.0, 0.05]
+RIGHT_ARM_PLACE: [0.001,  -0.12, 0.08, 0.0, -0.0, 0.0]
+
+# ========== RELEASE ==========
+# Pose per rilascio
+LEFT_ARM_RELEASE: [0.01, 0.0, 0.0, 0.0, 0.1, 0.0]
+RIGHT_ARM_RELEASE: [-0.01, 0.0, 0.0, 0.0, -0.1, 0.0]

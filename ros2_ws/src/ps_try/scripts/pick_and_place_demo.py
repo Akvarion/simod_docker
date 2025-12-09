@@ -24,12 +24,16 @@ from gazebo_collision_toggle.srv import SetCollisionEnabled
 
 import level_paletta_utils as lpu
 
+# add simulation-clock imports
+from rosgraph_msgs.msg import Clock
+from rclpy.qos import QoSProfile, QoSReliabilityPolicy
+
 # ========= CONFIG GENERALI =========
 # Durate (s)
-APPROACH_TIME = 20.3
-DESCEND_AND_PICK_TIME = 12.0
+APPROACH_TIME = 18.1
+DESCEND_AND_PICK_TIME = 18.0
 COLLECT_TIME = 10.0
-TRANSPORT_TIME = 16.0
+TRANSPORT_TIME = 14.5
 DESCEND_AND_PLACE_TIME = 12.0
 RELEASE_TIME = 1.0
 
@@ -143,8 +147,8 @@ class PickAndPlaceDemo(Node):
         self.detach_cli = self.create_client(DetachLink, '/DETACHLINK')
 
         # Attendi servizi essenziali con timeout morbido
-        deadline = time.time() + 10.0
-        while time.time() < deadline:
+        deadline = self.get_clock().now().nanoseconds / 1e9 + 10.0
+        while self.get_clock().now().nanoseconds / 1e9 < deadline:
             ok_model = (self.cli_set_model_state.service_is_ready() or
                         self.cli_set_entity_state.service_is_ready())
             ok_attach = self.attach_cli.service_is_ready() and self.detach_cli.service_is_ready()
@@ -162,9 +166,12 @@ class PickAndPlaceDemo(Node):
             except Exception:
                 pass
 
-        # State machine
+        # state timing: keep both wall and sim-clock bases
         self.state = 'approach'
-        self.state_start = time.time()
+        self.state_start = self.get_clock().now().nanoseconds / 1e9      # fallback wall-clock
+        self.state_start_sim = None           # simulation time start (seconds float), set when /clock arrives or on transition
+        self.sim_clock = None                 # latest sim time (seconds float)
+
         self.durations = {
             'approach': APPROACH_TIME,
             'descend_and_pick': DESCEND_AND_PICK_TIME,
@@ -176,14 +183,33 @@ class PickAndPlaceDemo(Node):
         }
         self.attached = False
 
+        # subscribe to /clock with BEST_EFFORT QoS to read Gazebo sim time
+        qos = QoSProfile(depth=10)
+        qos.reliability = QoSReliabilityPolicy.BEST_EFFORT
+        self.create_subscription(Clock, '/clock', self._clock_cb, qos_profile=qos)
+        self.get_logger().info('Subscribed to /clock (BEST_EFFORT) to track simulation time.')
+
         # Timer controllo a 50 Hz
         self.timer = self.create_timer(0.02, self.control_loop)
         self.get_logger().info('PickAndPlaceDemo (attach fisico) avviato @50Hz')
 
+    # clock callback — store latest sim time (seconds float)
+    def _clock_cb(self, msg: Clock):
+        sim_seconds = float(msg.clock.sec) + float(msg.clock.nanosec) * 1e-9
+        # on first arrival, if a state start in sim wasn't set, set it so current state uses sim time
+        if self.sim_clock is None and self.state_start_sim is None:
+            self.state_start_sim = sim_seconds
+        self.sim_clock = sim_seconds
+
     # ===== Loop di controllo / State machine =====
     def control_loop(self):
-        now = time.time()
-        elapsed = now - self.state_start
+        # prefer sim clock if available, otherwise fallback to wall time
+        if self.sim_clock is not None and self.state_start_sim is not None:
+            now_sim = self.sim_clock
+            elapsed = now_sim - self.state_start_sim
+        else:
+            now = self.get_clock().now().nanoseconds / 1e9
+            elapsed = now - self.state_start
 
         if self.state == 'approach':
             # Muovi basi verso l’oggetto
@@ -205,8 +231,8 @@ class PickAndPlaceDemo(Node):
                 self.set_paletta_collision(False, side='right')  # disabilita collisione paletta destra
                 self.transition('descend_and_pick')
 
-                self.left_leveler.enable(False)  # attiva il wrist leveler
-                self.right_leveler.enable(False)  # attiva il wrist leveler
+                self.left_leveler.enable(False)  # lo attivi quando vuoi
+                self.right_leveler.enable(False)  # lo attivi quando vuoi
 
         elif self.state == 'descend_and_pick':
             # Calata/chiusura paletta
@@ -350,7 +376,11 @@ class PickAndPlaceDemo(Node):
 
     def transition(self, new_state):
         self.state = new_state
-        self.state_start = time.time()
+        # prefer sim clock for start if available, otherwise wall-clock
+        if self.sim_clock is not None:
+            self.state_start_sim = self.sim_clock
+        else:
+            self.state_start = self.get_clock().now().nanoseconds / 1e9
         self.get_logger().info(f'Transition -> {new_state}')
 
     def stop_all_movement(self):

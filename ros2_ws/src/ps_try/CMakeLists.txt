@@ -35,6 +35,7 @@ install(PROGRAMS
   scripts/pick_and_place_demo.py
   scripts/return_robots_home.py
   scripts/bt_ros2_demo.py
+  scripts/test_sim_time.py
   DESTINATION lib/${PROJECT_NAME}
   PERMISSIONS
     OWNER_READ OWNER_WRITE OWNER_EXECUTE
