@@ -29,6 +29,12 @@ install(TARGETS ps_try DESTINATION lib/${PROJECT_NAME})
 
 install(DIRECTORY launch DESTINATION share/${PROJECT_NAME})
 
+# Install XML behavior tree files
+install(DIRECTORY scripts/behaviortree_XML_demo
+  DESTINATION share/${PROJECT_NAME}/scripts
+  FILES_MATCHING PATTERN "*.xml"
+)
+
 # Install Python scripts so they are available as executables after colcon build
 install(PROGRAMS
   scripts/move_demo.py
@@ -36,6 +42,7 @@ install(PROGRAMS
   scripts/return_robots_home.py
   scripts/bt_ros2_demo.py
   scripts/test_sim_time.py
+  scripts/bt_ros2_demo-xml.py
   DESTINATION lib/${PROJECT_NAME}
   PERMISSIONS
     OWNER_READ OWNER_WRITE OWNER_EXECUTE

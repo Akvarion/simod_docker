@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root BTCPP_format="4">
+<BehaviorTree ID="scenario1-SRMSupervisor">
+    <Sequence name="IdentifySequence">
+      <RetryUntilSuccessful num_attempts="1000">
+        <Sync name="SyncSRM1-SRM2"/>
+      </RetryUntilSuccessful>
+      <Fallback>
+        <FindObj name="IdentifyPacco"/>
+        <SaySomething message="Can&apos;t Identify Pkg,Call Operator"/>
+      </Fallback>
+      <CalculateGoal goal="PackagePositionAnalisys"/>
+      <Fallback>
+        <CheckAlignment name="ARM1-ARM2"/>
+        <CorrectBasePos goal="CorrectBasePos"/>
+      </Fallback>
+      <Sequence name="Pick-upPrepSequence">
+        <Fallback>
+          <CheckAlignment name="EE"/>
+          <Set name="EE"/>
+        </Fallback>
+        <CloseGripper/>
+        <ParallelAll max_failures="0">
+          <Controller name="ForceControllerInit"/>
+          <Controller name="AlignmentBaseControl"/>
+          <Controller name="AngleControllerInit"/>
+          <Sequence name="TransportSequence">
+            <Fallback>
+              <LiftObj/>
+              <SaySomething message="PackageLost,Call Operator"/>
+            </Fallback>
+            <ParallelAll max_failures="0">
+              <Controller name="BasePosControllerInit"/>
+              <MoveBase goal="DST"/>
+            </ParallelAll>
+            <Sequence name="DropSequence">
+              <Fallback>
+                <CheckAlignment name="InAPositionToDrop?"/>
+                <AdjustPositioning goal="AdjstPositioning"/>
+              </Fallback>
+              <Drop/>
+              <Release/>
+            </Sequence>
+          </Sequence>
+        </ParallelAll>
+        <ReturnToPallet goal="ReturnToPallet"/>
+      </Sequence>
+    </Sequence>
+  </BehaviorTree>
+
+  <!-- Description of Node Models (used by Groot) -->
+  <TreeNodesModel>
+    <Action ID="AngleControl"
+            editable="true"/>
+    <Action ID="ApproachObject"
+            editable="true"/>
+    <Action ID="CalculateGoal"
+            editable="true">
+      <output_port name="goal"/>
+    </Action>
+    <Condition ID="Check"
+               editable="true"/>
+    <Condition ID="CheckAlignment"
+               editable="true"/>
+    <Action ID="CloseGripper"
+            editable="true"/>
+    <Action ID="Controller"
+            editable="true"/>
+    <Condition ID="DataReceived"
+               editable="true"/>
+    <Action ID="Drop"
+            editable="true"/>
+    <Action ID="FindObj"
+            editable="true"/>
+    <Action ID="ForceControl"
+            editable="true"/>
+    <Action ID="LiftObj"
+            editable="true"/>
+    <Action ID="MoveBase"
+            editable="true">
+      <input_port name="goal"/>
+    </Action>
+    <Action ID="CorrectBasePos"
+            editable="true">
+      <input_port name="goal"/>
+    </Action>
+    <Action ID="AdjustPositioning"
+            editable="true">
+      <input_port name="goal"/>
+    </Action>
+    <Action ID="ReturnToPallet"
+            editable="true">
+      <input_port name="goal"/>
+    </Action>
+    <Condition ID="NearObj"
+               editable="true"/>
+    <Action ID="Release"
+            editable="true"/>
+    <Action ID="SaySomething"
+            editable="true">
+      <input_port name="message"/>
+    </Action>
+    <Action ID="Set"
+            editable="true"/>
+    <Action ID="Sync"
+            editable="true"/>
+  </TreeNodesModel>
+</root>
