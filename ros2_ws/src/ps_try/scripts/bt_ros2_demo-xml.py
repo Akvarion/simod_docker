@@ -47,10 +47,10 @@ from ament_index_python.packages import get_package_share_directory
 # =============================================================================
 
 # Durate fasi (s) – puoi riallinearle ai valori della tua demo a stati
-APPROACH_TIME = 20.3
-DESCEND_AND_PICK_TIME = 12.0
+APPROACH_TIME = 31.8
+DESCEND_AND_PICK_TIME = 20.5
 COLLECT_TIME = 10.0
-TRANSPORT_TIME = 16.0
+TRANSPORT_TIME = 25.0
 DESCEND_AND_PLACE_TIME = 12.0
 RELEASE_TIME = 1.0
 
@@ -146,7 +146,7 @@ class BTDemoNode(Node):
 
     def start_action_timer(self, name: str):
         """Avvia (o resetta) il timer per l'azione `name`."""
-        t = time.time()
+        t = self.get_clock().now().nanoseconds/1e9
         self.action_timers[name] = t
         return t
 
@@ -454,7 +454,7 @@ def Sync():
         node.get_logger().info(bt_fmt("[Sync] start"))
         t0 = node.start_action_timer("Sync")
 
-    if time.time() - t0 < 1.0:
+    if node.get_clock().now().nanoseconds/1e9 - t0 < 1.0:
         return None  # RUNNING
     node.clear_action_timer("Sync")
     node.get_logger().info(bt_fmt("[Sync] done"))
@@ -472,7 +472,7 @@ def FindObj():
         node.get_logger().info(bt_fmt("[FindObj] start (mock)"))
         t0 = node.start_action_timer("FindObj")
 
-    if time.time() - t0 < 1.0:
+    if node.get_clock().now().nanoseconds/1e9 - t0 < 1.0:
         return None
     node.clear_action_timer("FindObj")
     node.bb["target_found"] = True
@@ -556,7 +556,7 @@ def DataReceived():
         node.get_logger().info(bt_fmt("[DataReceived] waiting (mock)"))
         t0 = node.start_action_timer("DataReceived")
 
-    if time.time() - t0 < 1.0:
+    if node.get_clock().now().nanoseconds/1e9 - t0 < 1.0:
         return None
     node.clear_action_timer("DataReceived")
     node.get_logger().info(bt_fmt("[DataReceived] done (mock)"))
@@ -626,7 +626,7 @@ def ApproachObject():
         node.get_logger().info(bt_fmt(f"[ApproachObject] start (dur: {APPROACH_TIME}s)"))
         t0 = node.start_action_timer(timer_key)
 
-    elapsed = time.time() - t0
+    elapsed = node.get_clock().now().nanoseconds/1e9 - t0
 
     if elapsed < APPROACH_TIME:
         tl = Twist()
@@ -687,7 +687,7 @@ def LiftObj():
         t0 = node.start_action_timer("LiftObj")
         node.lift_phase = "descend_pick"
 
-    elapsed = time.time() - t0
+    elapsed = node.get_clock().now().nanoseconds/1e9 - t0
 
     # 1) Discesa e pick
     if node.lift_phase == "descend_pick":
@@ -779,7 +779,7 @@ def MoveBase():
         node.get_logger().info(bt_fmt(f"[MoveBase] start ({TRANSPORT_TIME}s)"))
         t0 = node.start_action_timer("MoveBase")
 
-    if time.time() - t0 < TRANSPORT_TIME:
+    if node.get_clock().now().nanoseconds/1e9 - t0 < TRANSPORT_TIME:
         tl = Twist()
         tr = Twist()
         tl.linear.x, tl.linear.y = LEFT_TRANSPORT_VEL_XY
@@ -808,7 +808,7 @@ def Drop():
         node.get_logger().info(bt_fmt(f"[Drop] start ({DESCEND_AND_PLACE_TIME}s)"))
         t0 = node.start_action_timer("Drop")
 
-    if time.time() - t0 < DESCEND_AND_PLACE_TIME:
+    if node.get_clock().now().nanoseconds/1e9 - t0 < DESCEND_AND_PLACE_TIME:
         tl = Twist()
         tr = Twist()
         tl.linear.x, tl.linear.y = PLACE_LEFT_BASE_XY_VEL
@@ -846,7 +846,7 @@ def Release():
         node.get_logger().info(bt_fmt(f"[Release] start ({RELEASE_TIME}s)"))
         t0 = node.start_action_timer("Release")
 
-    if time.time() - t0 < RELEASE_TIME:
+    if node.get_clock().now().nanoseconds/1e9 - t0 < RELEASE_TIME:
         la = Float64MultiArray()
         ra = Float64MultiArray()
         la.data = LEFT_ARM_RELEASE
@@ -876,7 +876,7 @@ def Release():
         retreat_t0 = node.start_action_timer("ReleaseRetreat")
         node.get_logger().info(bt_fmt("[Release] retreat phase started"))
 
-        while time.time() - retreat_t0 < COLLECT_TIME:
+        while node.get_clock().now().nanoseconds/1e9 - retreat_t0 < COLLECT_TIME:
             tl = Twist()
             tr = Twist()
             tl.linear.x, tl.linear.y = COLLECT_LEFT_BASE_XY_VEL

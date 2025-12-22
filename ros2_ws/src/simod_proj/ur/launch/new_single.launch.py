@@ -328,10 +328,7 @@ def launch_setup(context, *args, **kwargs):
     move_group_capabilities = {
         "capabilities": "move_group/ExecuteTaskSolutionCapability"
     }
-    robot_description_config = xacro.process_file(os.path.join(get_package_share_directory('ur'),
-                                                               'xacro',
-                                                               'left_resolved_paletta.urdf'),
-                                                )
+    robot_description_config = xacro.process_file('/ros2_ws/left_resolved_paletta.urdf')
     robot_description = {'robot_description': robot_description_config.toxml()}
     robot_description_semantic_config = load_file('left_srm_simod_moveit_config', 'config/dual.srdf')
     robot_description_semantic = {'robot_description_semantic': robot_description_semantic_config}
