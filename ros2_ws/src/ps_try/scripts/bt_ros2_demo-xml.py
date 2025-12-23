@@ -41,6 +41,14 @@ from gazebo_collision_toggle.srv import SetCollisionEnabled
 
 from ament_index_python.packages import get_package_share_directory
 
+import os
+import sys
+import numpy as np
+# sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+ 
+from TaskPrioritization.task_priority import TPManager
+from TaskPrioritization.Trajectories.trajectory import Trajectory
+
 
 # =============================================================================
 # CONFIG: Durate e profili di movimento (ripresi dalla demo originale)
@@ -92,6 +100,8 @@ RIGHT_ARM_RELEASE  =  [-0.01, 0.0, 0.0, 0.0, -0.1, 0.0]
 PACKAGE_LINK_NAME = "pacco_clone_1::link_1"
 
 
+
+
 # =============================================================================
 # Nodo ROS2: publisher + client servizi di base
 # =============================================================================
@@ -112,7 +122,7 @@ class BTDemoNode(Node):
         self.right_base_topic = "/right_summit_cmd_vel"
         self.left_arm_topic = "/left/ur_left_joint_group_vel_controller/commands"
         self.right_arm_topic = "/right/ur_right_joint_group_vel_controller/commands"
-
+          # /joint_states  
         # Publisher
         self.left_base_pub = self.create_publisher(Twist, self.left_base_topic, 10)
         self.right_base_pub = self.create_publisher(Twist, self.right_base_topic, 10)
@@ -125,6 +135,29 @@ class BTDemoNode(Node):
         self.toggle_gravity_cli = self.create_client(SetLinkGravity, "/set_link_gravity")
         self.toggle_collision_cli = self.create_client(SetCollisionEnabled, "/set_collision_enabled")
 
+        self.tp = TPManager(device='cuda', dtype='float32')
+        self.tp.add_robot(robot_name='robot', config_file='/ros2_ws/src/ps_try/config/dual_paletta.yaml')
+        
+        initial_ee = self.robot.get_arm_ee_poses()
+        self.tr_left  = Trajectory()
+        self.tr_right = Trajectory()
+        self.tr_left.poly5(p_i=initial_ee[0], p_f=np.array([0.5, 0.5, 0.5, 0.5, 0.0, 0.5]), period=5.0)
+        self.tr_right.poly5(p_i=initial_ee[1], p_f=np.array([-0.5, 0.5, -0.5, -0.5, 0.0, -0.5]), period=5.0)
+
+        self.ee_task = self.tp.add_EE_task('/ros2_ws/src/ps_try/config/ee_task.yaml')
+        self.ee_task.use_base = False
+        self.ee_task.set_trajectory([self.tr_left, None])
+        
+
+        # self.tp.initialize(initial_joint_pos=joint_pos)
+        
+        # posizione arm base-link rispetto al base-footprint
+        # costruzione cinematica robot 
+        # dentro lo yaml ^^
+        # self.initialize(initial_joint_pos=initial_joint_positions, initial_base_pose=base_pose)
+
+        self.robot = self.tp.get_robot_kinematics()
+        initial = self.robot.get_arm_ee_poses()
         # Piccolo "blackboard" per eventuale coordinazione (SRM1/SRM2/supervisor)
         self.bb = {}
 
@@ -621,37 +654,64 @@ def ApproachObject():
     timer_key = f"{tree_name}_ApproachObject"
     near_key = f"{tree_name}_near_object"
 
-    t0 = node.get_action_timer(timer_key)
-    if t0 is None:
-        node.get_logger().info(bt_fmt(f"[ApproachObject] start (dur: {APPROACH_TIME}s)"))
-        t0 = node.start_action_timer(timer_key)
+    # t0 = node.get_action_timer(timer_key)
+    # if t0 is None:
+    #     node.get_logger().info(bt_fmt(f"[ApproachObject] start (dur: {APPROACH_TIME}s)"))
+    #     t0 = node.start_action_timer(timer_key)
 
-    elapsed = node.get_clock().now().nanoseconds/1e9 - t0
 
-    if elapsed < APPROACH_TIME:
-        tl = Twist()
-        tr = Twist()
-        tl.linear.x, tl.linear.y = APPROACH_LEFT_BASE_XY_VEL
-        tr.linear.x, tr.linear.y = APPROACH_RIGHT_BASE_XY_VEL
-        node.left_base_pub.publish(tl)
-        node.right_base_pub.publish(tr)
+    # elapsed = node.get_clock().now().nanoseconds/1e9 - t0
 
-        la = Float64MultiArray()
-        ra = Float64MultiArray()
-        la.data = LEFT_ARM_VEL
-        ra.data = RIGHT_ARM_VEL
-        node.left_arm_pub.publish(la)
-        node.right_arm_pub.publish(ra)
+    # if elapsed < APPROACH_TIME:
+    #     tl = Twist()
+    #     tr = Twist()
+    #     tl.linear.x, tl.linear.y = APPROACH_LEFT_BASE_XY_VEL
+    #     tr.linear.x, tr.linear.y = APPROACH_RIGHT_BASE_XY_VEL
+    #     node.left_base_pub.publish(tl)
+    #     node.right_base_pub.publish(tr)
 
-        # piccolo spin per far "vivere" ROS2
-        rclpy.spin_once(node, timeout_sec=0.01)
-        return None  # RUNNING
-    else:
-        node.stop_all_movement()
-        node.clear_action_timer(timer_key)
-        node.bb[near_key] = True
-        node.get_logger().info(bt_fmt(f"[ApproachObject] completed, {near_key}=True"))
-        return True
+    #     la = Float64MultiArray()
+    #     ra = Float64MultiArray()
+    #     la.data = LEFT_ARM_VEL
+    #     ra.data = RIGHT_ARM_VEL
+
+    #     node.left_arm_pub.publish(la)
+    #     node.right_arm_pub.publish(ra)
+
+    #     # piccolo spin per far "vivere" ROS2
+    #     rclpy.spin_once(node, timeout_sec=0.01)
+    #     return None  # RUNNING
+    # else:
+    #     node.stop_all_movement()
+    #     node.clear_action_timer(timer_key)
+    #     node.bb[near_key] = True
+    #     node.get_logger().info(bt_fmt(f"[ApproachObject] completed, {near_key}=True"))
+    #     return True
+
+    self.tp.cycle_starts()
+
+    left_arm_jp = ...left_listen() # pose dai giunti da /left/joint_states
+    right_arm_jp = ...right_listen() # pose dai giunti da /right/joint_states
+    left_base = ...left_base_listen()#pose absolute world fixed frame da left_summit_odom
+    right_base = ...right_base_listen()#pose absolute world fixed frame da right_summit_odom
+    [np.array(xyzrpybase_left), np.array(joint_left_arm), np.array(xyzrpybase_right), np.array(joint_right_arm)] 
+    
+    joint_pos = [left_base, left_arm_jp, right_base, right_arm_jp]
+    joint_pos= [[0.12,0.10212],]
+                #x^,   y^
+    cmd = self.tp.execute(joint_pos=joint_pos)
+
+    left_base_cmd = cmd[:3] # vx, vy, omega
+    left_arm_cmd = cmd[3:9]
+    right_base_cmd = cmd[9:12]
+    right_arm_cmd = cmd[12:18] # vx, vy, omega
+
+    node.left_base_twist.publish()
+    node.right_base_twist.publish()
+    node.left_arm_pub.publish(la)
+    node.right_arm_pub.publish(ra)
+
+    self.tp.cycle_ends()
 
 
 def LiftObj():

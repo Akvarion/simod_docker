@@ -1,0 +1,23 @@
+# Core dependencies
+numpy<2.0.0,>=1.24.0
+matplotlib==3.7.1
+torch>=2.0.0
+trimesh>=3.9.0
+control>=0.9.0
+rtree>=1.0.0
+scipy>=1.7.0
+pyvista>=0.34.0
+scikit-image<0.22
+cvxpy
+pymeshfix
+pyglet<2
+
+# Additional packages required for SDF / mesh processing
+mesh-to-sdf>=0.0.15
+pyrender>=0.1.45
+pyopengl>=3.1.0
+
+# Optional (visualization / utilities)
+imageio
+Pillow
+networkx
