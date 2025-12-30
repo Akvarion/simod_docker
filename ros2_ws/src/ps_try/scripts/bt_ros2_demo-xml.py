@@ -34,7 +34,8 @@ from xml.etree.ElementTree import parse
 
 from geometry_msgs.msg import Twist
 from std_msgs.msg import Float64MultiArray
-
+from sensor_msgs.msg import JointState
+from nav_msgs.msg import Odometry
 from linkattacher_msgs.srv import AttachLink, DetachLink
 from gazebo_link_gravity_toggle.srv import SetLinkGravity
 from gazebo_collision_toggle.srv import SetCollisionEnabled
@@ -44,7 +45,9 @@ from ament_index_python.packages import get_package_share_directory
 import os
 import sys
 import numpy as np
-# sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+import math
+
+#sys.path.append(os.path.dirname(os.path.abspath(__file__)))
  
 from TaskPrioritization.task_priority import TPManager
 from TaskPrioritization.Trajectories.trajectory import Trajectory
@@ -129,20 +132,31 @@ class BTDemoNode(Node):
         self.left_arm_pub = self.create_publisher(Float64MultiArray, self.left_arm_topic, 10)
         self.right_arm_pub = self.create_publisher(Float64MultiArray, self.right_arm_topic, 10)
 
+        # Subscriber
+        self._last_odom = {"left": None, "right": None}
+        self._last_joint_states = {"left": None, "right": None}
+
+        # subscribe (choose actual topic names in your system)
+        self.create_subscription(Odometry, '/left/odom', lambda msg: self._odom_cb(msg, 'left'), 10)
+        self.create_subscription(Odometry, '/right/odom', lambda msg: self._odom_cb(msg, 'right'), 10)
+        self.create_subscription(JointState, '/left/joint_states', lambda msg: self._joint_states_cb(msg, 'left'), 10)
+        self.create_subscription(JointState, '/right/joint_states', lambda msg: self._joint_states_cb(msg, 'right'), 10)
+
         # Services opzionali (se non ci sono semplicemente logga warning)
         self.attach_cli = self.create_client(AttachLink, "/ATTACHLINK")
         self.detach_cli = self.create_client(DetachLink, "/DETACHLINK")
         self.toggle_gravity_cli = self.create_client(SetLinkGravity, "/set_link_gravity")
         self.toggle_collision_cli = self.create_client(SetCollisionEnabled, "/set_collision_enabled")
 
-        self.tp = TPManager(device='cuda', dtype='float32')
+        self.tp = TPManager(device='cpu', dtype='float32')
         self.tp.add_robot(robot_name='robot', config_file='/ros2_ws/src/ps_try/config/dual_paletta.yaml')
         
         initial_ee = self.robot.get_arm_ee_poses()
         self.tr_left  = Trajectory()
         self.tr_right = Trajectory()
-        self.tr_left.poly5(p_i=initial_ee[0], p_f=np.array([0.5, 0.5, 0.5, 0.5, 0.0, 0.5]), period=5.0)
-        self.tr_right.poly5(p_i=initial_ee[1], p_f=np.array([-0.5, 0.5, -0.5, -0.5, 0.0, -0.5]), period=5.0)
+        ## Impostato p_f come posizioni finali dei giunti per la presa del pacco
+        self.tr_left.poly5(p_i=initial_ee[0], p_f=np.array([0.15708, -2.5831, -0.7326, -1.1107, 0.0524, -1.4469]), period=5.0)
+        self.tr_right.poly5(p_i=initial_ee[1], p_f=np.array([-3.14, -2.7925, -0.4186, -1.1942, 3.1734, 1.6578]), period=5.0)
 
         self.ee_task = self.tp.add_EE_task('/ros2_ws/src/ps_try/config/ee_task.yaml')
         self.ee_task.use_base = False
@@ -169,6 +183,65 @@ class BTDemoNode(Node):
 
         self.get_logger().info("BTDemoNode inizializzato")
 
+    def _joint_states_cb(self, msg: JointState, side: str):
+        """Callback per gli stati dei giunti."""
+        # keep a reference to the latest joint states msg
+        self._last_joint_states[side] = msg
+
+    def get_arm_joint_positions(self, side: str):
+        """
+        Return list of joint positions or None if no data yet.
+        side: 'left' or 'right'
+        """
+        joint_states = self._last_joint_states.get(side)
+        if joint_states is None:
+            return None
+        
+        return list(joint_states.position)
+    
+    def _odom_cb(self, msg: Odometry, side: str):
+        """Callback per l'odomentria delle basi."""
+        # keep a reference to the latest odom msg
+        self._last_odom[side] = msg
+
+    @staticmethod
+    def _quat_to_rpy(qx, qy, qz, qw):
+        """Conversione da quaternioni a roll-pitch-yaw"""
+        # standard quaternion -> roll,pitch,yaw
+        sinr_cosp = 2.0 * (qw * qx + qy * qz)
+        cosr_cosp = 1.0 - 2.0 * (qx * qx + qy * qy)
+        roll = math.atan2(sinr_cosp, cosr_cosp)
+
+        sinp = 2.0 * (qw * qy - qz * qx)
+        if abs(sinp) >= 1:
+            pitch = math.copysign(math.pi / 2.0, sinp)
+        else:
+            pitch = math.asin(sinp)
+
+        siny_cosp = 2.0 * (qw * qz + qx * qy)
+        cosy_cosp = 1.0 - 2.0 * (qy * qy + qz * qz)
+        yaw = math.atan2(siny_cosp, cosy_cosp)
+
+        return roll, pitch, yaw
+    
+    def get_base_pose(self, side: str):
+        """
+        Return tuple (x, y, z, roll, pitch, yaw) or None if no data yet.
+        side: 'left' or 'right'
+        """
+        odom = self._last_odom.get(side)
+        if odom is None:
+            return None
+
+        px = odom.pose.pose.position.x
+        py = odom.pose.pose.position.y
+        pz = odom.pose.pose.position.z
+        q = odom.pose.pose.orientation
+        # Se TP vuole quaternioni scommenta questa riga e commenta le altre
+        # return [px, py, pz, q]
+
+        roll, pitch, yaw = self._quat_to_rpy(q.x, q.y, q.z, q.w)
+        return [px, py, pz, roll, pitch, yaw]
     # -------------------------------------------------------------------------
     # Helpers per timer per azioni BT
     # -------------------------------------------------------------------------
@@ -690,15 +763,15 @@ def ApproachObject():
 
     self.tp.cycle_starts()
 
-    left_arm_jp = ...left_listen() # pose dai giunti da /left/joint_states
-    right_arm_jp = ...right_listen() # pose dai giunti da /right/joint_states
-    left_base = ...left_base_listen()#pose absolute world fixed frame da left_summit_odom
-    right_base = ...right_base_listen()#pose absolute world fixed frame da right_summit_odom
-    [np.array(xyzrpybase_left), np.array(joint_left_arm), np.array(xyzrpybase_right), np.array(joint_right_arm)] 
+    left_arm_jp = node.get_arm_joint_positions("left") # pose dai giunti da /left/joint_states
+    right_arm_jp = node.get_arm_joint_positions("right") # pose dai giunti da /right/joint_states
+
+    left_base = node.get_base_pose("left")   #pose absolute world fixed frame da left_summit_odom
+    right_base = node.get_base_pose("right") #pose absolute world fixed frame da right_summit_odom
+    #[np.array(xyzrpybase_left), np.array(joint_left_arm), np.array(xyzrpybase_right), np.array(joint_right_arm)] 
     
     joint_pos = [left_base, left_arm_jp, right_base, right_arm_jp]
-    joint_pos= [[0.12,0.10212],]
-                #x^,   y^
+    
     cmd = self.tp.execute(joint_pos=joint_pos)
 
     left_base_cmd = cmd[:3] # vx, vy, omega
@@ -706,10 +779,10 @@ def ApproachObject():
     right_base_cmd = cmd[9:12]
     right_arm_cmd = cmd[12:18] # vx, vy, omega
 
-    node.left_base_twist.publish()
-    node.right_base_twist.publish()
-    node.left_arm_pub.publish(la)
-    node.right_arm_pub.publish(ra)
+    node.left_base_pub.publish(left_base_cmd)
+    node.right_base_pub.publish(right_base_cmd)
+    node.left_arm_pub.publish(left_arm_cmd)
+    node.right_arm_pub.publish(right_arm_cmd)
 
     self.tp.cycle_ends()
 
