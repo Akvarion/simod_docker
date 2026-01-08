@@ -23,6 +23,7 @@ NB: si appoggia solo su:
 """
 
 import os
+import sys
 import time
 import contextvars
 
@@ -43,11 +44,30 @@ from gazebo_collision_toggle.srv import SetCollisionEnabled
 from ament_index_python.packages import get_package_share_directory
 
 import os
-import sys
 import numpy as np
 import math
 
 #sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+
+# Task Prioritization è in /TaskPrioritization (sibling di /ros2_ws nel container)
+# Individua la cartella anche da install space colcon e la aggiunge al sys.path
+def _ensure_task_prioritization_on_path():
+    here = os.path.abspath(os.path.dirname(__file__))
+    candidates = [
+        "/TaskPrioritization",  # posizione standard nel docker
+        os.path.abspath(os.path.join(here, "..", "..", "..", "TaskPrioritization")),
+        os.path.abspath(os.path.join(here, "..", "..", "..", "..", "..", "TaskPrioritization")),
+    ]
+
+    for cand in candidates:
+        if os.path.isdir(cand):
+            parent = os.path.dirname(cand) or cand
+            if parent not in sys.path:
+                sys.path.append(parent)
+            break
+
+
+_ensure_task_prioritization_on_path()
  
 from TaskPrioritization.task_priority import TPManager
 from TaskPrioritization.Trajectories.trajectory import Trajectory
@@ -148,9 +168,11 @@ class BTDemoNode(Node):
         self.toggle_gravity_cli = self.create_client(SetLinkGravity, "/set_link_gravity")
         self.toggle_collision_cli = self.create_client(SetCollisionEnabled, "/set_collision_enabled")
 
-        self.tp = TPManager(device='cpu', dtype='float32')
+        self.tp = TPManager(device='cuda', dtype='float32') # change device='cpu' to 'cuda' if GPU is available
         self.tp.add_robot(robot_name='robot', config_file='/ros2_ws/src/ps_try/config/dual_paletta.yaml')
         
+        # initialize robot kinematics before using it
+        self.robot = self.tp.get_robot_kinematics()
         initial_ee = self.robot.get_arm_ee_poses()
         self.tr_left  = Trajectory()
         self.tr_right = Trajectory()
@@ -170,8 +192,7 @@ class BTDemoNode(Node):
         # dentro lo yaml ^^
         # self.initialize(initial_joint_pos=initial_joint_positions, initial_base_pose=base_pose)
 
-        self.robot = self.tp.get_robot_kinematics()
-        initial = self.robot.get_arm_ee_poses()
+        # robot already initialized above
         # Piccolo "blackboard" per eventuale coordinazione (SRM1/SRM2/supervisor)
         self.bb = {}
 
@@ -761,30 +782,80 @@ def ApproachObject():
     #     node.get_logger().info(bt_fmt(f"[ApproachObject] completed, {near_key}=True"))
     #     return True
 
-    self.tp.cycle_starts()
+    # use the TPManager instance attached to the node
+    node.tp.cycle_starts()
 
     left_arm_jp = node.get_arm_joint_positions("left") # pose dai giunti da /left/joint_states
     right_arm_jp = node.get_arm_joint_positions("right") # pose dai giunti da /right/joint_states
 
     left_base = node.get_base_pose("left")   #pose absolute world fixed frame da left_summit_odom
     right_base = node.get_base_pose("right") #pose absolute world fixed frame da right_summit_odom
+    
+    # Check if all sensor data is available before proceeding
+    if None in [left_arm_jp, right_arm_jp, left_base, right_base]:
+        node.get_logger().warn(bt_fmt("[ApproachObject] Waiting for sensor data (joint_states/odom)"))
+        node.get_logger().warn(bt_fmt(f"  left_arm_jp: {left_arm_jp}"))
+        node.get_logger().warn(bt_fmt(f"  right_arm_jp: {right_arm_jp}"))
+        node.get_logger().warn(bt_fmt(f"  left_base: {left_base}"))
+        node.get_logger().warn(bt_fmt(f"  right_base: {right_base}"))
+         # piccolo spin per far "vivere" ROS2
+        rclpy.spin_once(node, timeout_sec=0.01)
+        return None  # RUNNING - keep trying until data arrives
+    
     #[np.array(xyzrpybase_left), np.array(joint_left_arm), np.array(xyzrpybase_right), np.array(joint_right_arm)] 
-    
     joint_pos = [left_base, left_arm_jp, right_base, right_arm_jp]
-    
-    cmd = self.tp.execute(joint_pos=joint_pos)
 
-    left_base_cmd = cmd[:3] # vx, vy, omega
-    left_arm_cmd = cmd[3:9]
-    right_base_cmd = cmd[9:12]
-    right_arm_cmd = cmd[12:18] # vx, vy, omega
+    cmd = node.tp.execute(joint_pos=joint_pos)
 
-    node.left_base_pub.publish(left_base_cmd)
-    node.right_base_pub.publish(right_base_cmd)
-    node.left_arm_pub.publish(left_arm_cmd)
-    node.right_arm_pub.publish(right_arm_cmd)
+    # Build ROS messages from numeric command vector
+    if cmd is not None:
+        # Cast to native floats because ROS2 message fields reject numpy/torch scalar types.
+        left_base_cmd_vals = [float(v) for v in cmd[:3]]  # vx, vy, omega
+        left_arm_cmd_vals = [float(v) for v in cmd[3:9]]
+        right_base_cmd_vals = [float(v) for v in cmd[9:12]]
+        right_arm_cmd_vals = [float(v) for v in cmd[12:18]]
+    else:
+        left_base_cmd_vals = [0.0, 0.0, 0.0]
+        left_arm_cmd_vals = [0.0]*6
+        right_base_cmd_vals = [0.0, 0.0, 0.0]
+        right_arm_cmd_vals = [0.0]*6
 
-    self.tp.cycle_ends()
+    # Twist messages for base commands
+    tl = Twist()
+    tr = Twist()
+    try:
+        tl.linear.x, tl.linear.y, tl.angular.z = left_base_cmd_vals
+    except Exception:
+        # fallback: assign what we can
+        if len(left_base_cmd_vals) >= 1:
+            tl.linear.x = left_base_cmd_vals[0]
+        if len(left_base_cmd_vals) >= 2:
+            tl.linear.y = left_base_cmd_vals[1]
+        if len(left_base_cmd_vals) >= 3:
+            tl.angular.z = left_base_cmd_vals[2]
+
+    try:
+        tr.linear.x, tr.linear.y, tr.angular.z = right_base_cmd_vals
+    except Exception:
+        if len(right_base_cmd_vals) >= 1:
+            tr.linear.x = right_base_cmd_vals[0]
+        if len(right_base_cmd_vals) >= 2:
+            tr.linear.y = right_base_cmd_vals[1]
+        if len(right_base_cmd_vals) >= 3:
+            tr.angular.z = right_base_cmd_vals[2]
+
+    # Float64MultiArray for arm joint velocity commands
+    la = Float64MultiArray()
+    ra = Float64MultiArray()
+    la.data = list(left_arm_cmd_vals)
+    ra.data = list(right_arm_cmd_vals)
+
+    node.left_base_pub.publish(tl)
+    node.right_base_pub.publish(tr)
+    node.left_arm_pub.publish(la)
+    node.right_arm_pub.publish(ra)
+
+    node.tp.cycle_ends()
 
 
 def LiftObj():
