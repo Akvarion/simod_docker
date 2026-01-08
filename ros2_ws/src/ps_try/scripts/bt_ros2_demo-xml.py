@@ -157,8 +157,8 @@ class BTDemoNode(Node):
         self._last_joint_states = {"left": None, "right": None}
 
         # subscribe (choose actual topic names in your system)
-        self.create_subscription(Odometry, '/left/odom', lambda msg: self._odom_cb(msg, 'left'), 10)
-        self.create_subscription(Odometry, '/right/odom', lambda msg: self._odom_cb(msg, 'right'), 10)
+        self.create_subscription(Odometry, '/left_summit_odom', lambda msg: self._odom_cb(msg, 'left'), 10)
+        self.create_subscription(Odometry, '/right_summit_odom', lambda msg: self._odom_cb(msg, 'right'), 10)
         self.create_subscription(JointState, '/left/joint_states', lambda msg: self._joint_states_cb(msg, 'left'), 10)
         self.create_subscription(JointState, '/right/joint_states', lambda msg: self._joint_states_cb(msg, 'right'), 10)
 
