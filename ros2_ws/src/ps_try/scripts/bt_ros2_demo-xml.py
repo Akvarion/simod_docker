@@ -22,6 +22,7 @@ NB: si appoggia solo su:
     - servizi link-attacher + toggle gravità/collisioni (opzionali)
 """
 
+import logging
 import os
 import sys
 import time
@@ -169,20 +170,25 @@ class BTDemoNode(Node):
         self.toggle_collision_cli = self.create_client(SetCollisionEnabled, "/set_collision_enabled")
 
         self.tp = TPManager(device='cuda', dtype='float32') # change device='cpu' to 'cuda' if GPU is available
-        self.tp.add_robot(robot_name='robot', config_file='/ros2_ws/src/ps_try/config/dual_paletta.yaml')
-        
-        # initialize robot kinematics before using it
-        self.robot = self.tp.get_robot_kinematics()
-        initial_ee = self.robot.get_arm_ee_poses()
-        self.tr_left  = Trajectory()
-        self.tr_right = Trajectory()
-        ## Impostato p_f come posizioni finali dei giunti per la presa del pacco
-        self.tr_left.poly5(p_i=initial_ee[0], p_f=np.array([0.15708, -2.5831, -0.7326, -1.1107, 0.0524, -1.4469]), period=5.0)
-        self.tr_right.poly5(p_i=initial_ee[1], p_f=np.array([-3.14, -2.7925, -0.4186, -1.1942, 3.1734, 1.6578]), period=5.0)
-
+        self.tp.add_robot(robot_name='__paletta__', config_file='/TaskPrioritization/default_robots/__paletta__/dual_paletta.yaml')
+        self.tp.connect_visualizer(host='127.0.0.1', port=55001, hz=60)
         self.ee_task = self.tp.add_EE_task('/ros2_ws/src/ps_try/config/ee_task.yaml')
+        # initialize robot kinematics before using it
+        # self.robot = self.tp.get_robot_kinematics()
+        # initial_ee = self.robot.get_arm_ee_poses()
+        # logging.info(f"Initial end-effector poses: {initial_ee}")
+        # print(f"Initial end-effector poses: {initial_ee}")
+        # self.tr_left  = Trajectory()
+        # self.tr_right = Trajectory()
+        ## Impostato p_f come posizioni finali dei giunti per la presa del pacco
+        # self.tr_left.poly5(p_i=initial_ee[0], p_f=np.array([0.15708, -2.5831, -0.7326, -1.1107, 0.0524, -1.4469]), period=5.0)
+        # initial_ee[0][:3] = np.array([0.15708, -0.4831, 0.7])
+        # self.tr_left.poly5(p_i=initial_ee[0], p_f=np.array([0.15708, -0.5831, 0.8, 3.14, 0, 0]), period=5.0)
+        # self.tr_right.poly5(p_i=initial_ee[1], p_f=np.array([0.15708, -0.5831, 0.5, 3.14, 0, 0]), period=5.0)
+        # self.tr_right.poly5(p_i=initial_ee[1], p_f=np.array([-3.14, -2.7925, -0.4186, -1.1942, 3.1734, 1.6578]), period=5.0)
+
         self.ee_task.use_base = False
-        self.ee_task.set_trajectory([self.tr_left, None])
+        # self.ee_task.set_trajectory([self.tr_left, None])
         
 
         # self.tp.initialize(initial_joint_pos=joint_pos)
@@ -289,13 +295,13 @@ class BTDemoNode(Node):
     def stop_all_movement(self):
         """Stop immediato di basi e bracci."""
         zero_twist = Twist()
-        self.left_base_pub.publish(zero_twist)
-        self.right_base_pub.publish(zero_twist)
+        # self.left_base_pub.publish(zero_twist)
+        # self.right_base_pub.publish(zero_twist)
 
         zero_arm = Float64MultiArray()
         zero_arm.data = [0.0] * 6
-        self.left_arm_pub.publish(zero_arm)
-        self.right_arm_pub.publish(zero_arm)
+        # self.left_arm_pub.publish(zero_arm)
+        # self.right_arm_pub.publish(zero_arm)
 
 
 def set_package_gravity(node: BTDemoNode, gravity_on: bool) -> bool:
@@ -805,7 +811,7 @@ def ApproachObject():
     #[np.array(xyzrpybase_left), np.array(joint_left_arm), np.array(xyzrpybase_right), np.array(joint_right_arm)] 
     joint_pos = [left_base, left_arm_jp, right_base, right_arm_jp]
 
-    cmd = node.tp.execute(joint_pos=joint_pos)
+    cmd = node.tp.execute(joint_pos=joint_pos, viewer_hz=60)
 
     # Build ROS messages from numeric command vector
     if cmd is not None:
@@ -850,10 +856,10 @@ def ApproachObject():
     la.data = list(left_arm_cmd_vals)
     ra.data = list(right_arm_cmd_vals)
 
-    node.left_base_pub.publish(tl)
-    node.right_base_pub.publish(tr)
-    node.left_arm_pub.publish(la)
-    node.right_arm_pub.publish(ra)
+    # node.left_base_pub.publish(tl)
+    # node.right_base_pub.publish(tr)
+    # node.left_arm_pub.publish(la)
+    # node.right_arm_pub.publish(ra)
 
     node.tp.cycle_ends()
 
@@ -900,8 +906,8 @@ def LiftObj():
             ra = Float64MultiArray()
             la.data = LEFT_ARM_PICK
             ra.data = RIGHT_ARM_PICK
-            node.left_arm_pub.publish(la)
-            node.right_arm_pub.publish(ra)
+            # node.left_arm_pub.publish(la)
+            # node.right_arm_pub.publish(ra)
             node.get_logger().info(bt_fmt("[LiftObj] descending..."))
             rclpy.spin_once(node, timeout_sec=0.01)
             return None
@@ -943,15 +949,15 @@ def LiftObj():
             tr = Twist()
             tl.linear.x, tl.linear.y = COLLECT_LEFT_BASE_XY_VEL
             tr.linear.x, tr.linear.y = COLLECT_RIGHT_BASE_XY_VEL
-            node.left_base_pub.publish(tl)
-            node.right_base_pub.publish(tr)
+            # node.left_base_pub.publish(tl)
+            # node.right_base_pub.publish(tr)
 
             la = Float64MultiArray()
             ra = Float64MultiArray()
             la.data = LEFT_ARM_COLLECT
             ra.data = RIGHT_ARM_COLLECT
-            node.left_arm_pub.publish(la)
-            node.right_arm_pub.publish(ra)
+            # node.left_arm_pub.publish(la)
+            # node.right_arm_pub.publish(ra)
 
             node.get_logger().info(bt_fmt("[LiftObj] collecting (lifting)..."))
             rclpy.spin_once(node, timeout_sec=0.01)
@@ -988,8 +994,8 @@ def MoveBase():
         tr = Twist()
         tl.linear.x, tl.linear.y = LEFT_TRANSPORT_VEL_XY
         tr.linear.x, tr.linear.y = RIGHT_TRANSPORT_VEL_XY
-        node.left_base_pub.publish(tl)
-        node.right_base_pub.publish(tr)
+        # node.left_base_pub.publish(tl)
+        # node.right_base_pub.publish(tr)
         rclpy.spin_once(node, timeout_sec=0.01)
         return None
     else:
@@ -1017,15 +1023,15 @@ def Drop():
         tr = Twist()
         tl.linear.x, tl.linear.y = PLACE_LEFT_BASE_XY_VEL
         tr.linear.x, tr.linear.y = PLACE_RIGHT_BASE_XY_VEL
-        node.left_base_pub.publish(tl)
-        node.right_base_pub.publish(tr)
+        # node.left_base_pub.publish(tl)
+        # node.right_base_pub.publish(tr)
 
         la = Float64MultiArray()
         ra = Float64MultiArray()
         la.data = LEFT_ARM_PLACE
         ra.data = RIGHT_ARM_PLACE
-        node.left_arm_pub.publish(la)
-        node.right_arm_pub.publish(ra)
+        # node.left_arm_pub.publish(la)
+        # node.right_arm_pub.publish(ra)
 
         rclpy.spin_once(node, timeout_sec=0.01)
         return None
@@ -1055,8 +1061,8 @@ def Release():
         ra = Float64MultiArray()
         la.data = LEFT_ARM_RELEASE
         ra.data = RIGHT_ARM_RELEASE
-        node.left_arm_pub.publish(la)
-        node.right_arm_pub.publish(ra)
+        # node.left_arm_pub.publish(la)
+        # node.right_arm_pub.publish(ra)
         rclpy.spin_once(node, timeout_sec=0.01)
         return None
     else:
@@ -1085,15 +1091,15 @@ def Release():
             tr = Twist()
             tl.linear.x, tl.linear.y = COLLECT_LEFT_BASE_XY_VEL
             tr.linear.x, tr.linear.y = COLLECT_RIGHT_BASE_XY_VEL
-            node.left_base_pub.publish(tl)
-            node.right_base_pub.publish(tr)
+            # node.left_base_pub.publish(tl)
+            # node.right_base_pub.publish(tr)
 
             la = Float64MultiArray()
             ra = Float64MultiArray()
             la.data = LEFT_ARM_COLLECT
             ra.data = RIGHT_ARM_COLLECT
-            node.left_arm_pub.publish(la)
-            node.right_arm_pub.publish(ra)
+            # node.left_arm_pub.publish(la)
+            # node.right_arm_pub.publish(ra)
 
             node.get_logger().info(bt_fmt("[Release] retreating (moving away)..."))
             rclpy.spin_once(node, timeout_sec=0.01)

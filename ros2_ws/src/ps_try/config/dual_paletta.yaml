@@ -13,12 +13,14 @@ left_summit_xls:
     - left_summit_back_left_wheel_link
     - left_summit_back_right_wheel_link
   base_pose: [0, 0, 0, 0, 0, 0]
+  load_sdf_models: false
+  collision_folder: '/TaskPrioritization/default_robots/__paletta__'
   links_with_mesh:
-    left_summit_xls_base_link: 60
-    left_summit_xls_front_right_wheel_link: 60
-    left_summit_xls_front_left_wheel_link: 60
-    left_summit_xls_back_left_wheel_link: 60
-    left_summit_xls_back_right_wheel_link: 60
+    - left_summit_xls_base_link: 60
+    - left_summit_xls_front_right_wheel_link: 60
+    - left_summit_xls_front_left_wheel_link: 60
+    - left_summit_xls_back_left_wheel_link: 60
+    - left_summit_xls_back_right_wheel_link: 60
 
 
 left_paletta:
@@ -31,18 +33,18 @@ left_paletta:
   ee_link: ur_left_paletta
   base_pose: [0, 0, 0.534, 0, 0, 1.57] # x,y,z, roll, pitch, yaw
   initial_joint_positions: [-1.4, -1.2278378164536448, -1.79104648177057, -1.447072928025223, 1.9003329433167337, -0.7553792167698568] # in radians
-  collision_folder: 'paletta'
-  load_sdf_models: true
+  collision_folder: '/TaskPrioritization/default_robots/__paletta__'
+  load_sdf_models: false
   links_with_mesh:
-    ur_left_base_link: 60
-    ur_left_shoulder_link: 60
-    ur_left_upper_arm_link: 60
-    ur_left_forearm_link: 60
-    ur_left_wrist_1_link: 60
-    ur_left_wrist_2_link: 60
-    ur_left_wrist_3_link: 60
-    ur_left_flange: 60
-    ur_left_paletta: 60
+    - ur_left_base_link: 60
+    - ur_left_shoulder_link: 60
+    - ur_left_upper_arm_link: 60
+    - ur_left_forearm_link: 60
+    - ur_left_wrist_1_link: 60
+    - ur_left_wrist_2_link: 60
+    - ur_left_wrist_3_link: 60
+    - ur_left_flange: 60
+    - ur_left_paletta: 60
 
 
 right_summit_xls:
@@ -58,17 +60,14 @@ right_summit_xls:
     - right_summit_back_left_wheel_link
     - right_summit_back_right_wheel_link
   base_pose: [0, 0, 0.543, 0, 0, 1.57]
+  collision_folder: '/TaskPrioritization/default_robots/__paletta__'
+  load_sdf_models: false
   links_with_mesh:
-    right_summit_xls_base_link: 60
-    right_summit_xls_base_chapa: 60
-    right_summit_xls_base_logo_left: 60
-    right_summit_xls_base_logo_right: 60
-    right_summit_xls_base_logo_front: 60
-    right_summit_xls_base_logo_rear: 60
-    right_summit_xls_front_right_wheel_link: 60
-    right_summit_xls_front_left_wheel_link: 60
-    right_summit_xls_back_left_wheel_link: 60
-    right_summit_xls_back_right_wheel_link: 60
+    - right_summit_xls_base_link: 60
+    - right_summit_xls_front_right_wheel_link: 60
+    - right_summit_xls_front_left_wheel_link: 60
+    - right_summit_xls_back_left_wheel_link: 60
+    - right_summit_xls_back_right_wheel_link: 60
 
 
 right_paletta:
@@ -81,18 +80,18 @@ right_paletta:
   ee_link: ur_right_paletta
   base_pose: [0.486, 0.71, 0, 0, 0, -1.57] # x,y,z, roll, pitch, yaw
   initial_joint_positions: [-1.3, -0.8, -1.8, -1.57, 1.638, 0.0] # in radians
-  collision_folder: 'paletta'
-  load_sdf_models: true
+  collision_folder: '/TaskPrioritization/default_robots/__paletta__'
+  load_sdf_models: false
   links_with_mesh:
-    ur_right_base_link: 60
-    ur_right_shoulder_link: 60
-    ur_right_upper_arm_link: 60
-    ur_right_forearm_link: 60
-    ur_right_wrist_1_link: 60
-    ur_right_wrist_2_link: 60
-    ur_right_wrist_3_link: 60
-    ur_right_flange: 60
-    ur_right_paletta: 60
+    - ur_right_base_link: 60
+    - ur_right_shoulder_link: 60
+    - ur_right_upper_arm_link: 60
+    - ur_right_forearm_link: 60
+    - ur_right_wrist_1_link: 60
+    - ur_right_wrist_2_link: 60
+    - ur_right_wrist_3_link: 60
+    - ur_right_flange: 60
+    - ur_right_paletta: 60
 
 
 # SDF_creation_parameters:
