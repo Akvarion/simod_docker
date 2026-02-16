@@ -22,11 +22,11 @@ NB: si appoggia solo su:
     - servizi link-attacher + toggle gravità/collisioni (opzionali)
 """
 
-import logging
 import os
 import sys
 import time
 import contextvars
+from typing import Dict, List, Optional
 
 import rclpy
 from rclpy.node import Node
@@ -44,7 +44,6 @@ from gazebo_collision_toggle.srv import SetCollisionEnabled
 
 from ament_index_python.packages import get_package_share_directory
 
-import os
 import numpy as np
 import math
 
@@ -56,7 +55,11 @@ def _ensure_task_prioritization_on_path():
     here = os.path.abspath(os.path.dirname(__file__))
     candidates = [
         "/TaskPrioritization",  # posizione standard nel docker
+        "/ros2_ws/TaskPrioritization",
+        "/ros2_ws/src/TaskPrioritization",
         os.path.abspath(os.path.join(here, "..", "..", "..", "TaskPrioritization")),
+        os.path.abspath(os.path.join(here, "..", "..", "TaskPrioritization")),
+        os.path.abspath(os.path.join(here, "..", "TaskPrioritization")),
         os.path.abspath(os.path.join(here, "..", "..", "..", "..", "..", "TaskPrioritization")),
     ]
 
@@ -122,6 +125,12 @@ LEFT_ARM_RELEASE   =  [0.01, 0.0, 0.0, 0.0, 0.1, 0.0]
 RIGHT_ARM_RELEASE  =  [-0.01, 0.0, 0.0, 0.0, -0.1, 0.0]
 
 PACKAGE_LINK_NAME = "pacco_clone_1::link_1"
+APPROACH_TEST_DURATION = 6.0
+APPROACH_TEST_TRAJ_TIME = 5.0
+APPROACH_ARM_CMD_ABS_MAX = 0.25
+APPROACH_BASE_CMD_XY_ABS_MAX = 0.05
+APPROACH_BASE_CMD_WZ_ABS_MAX = 0.20
+APPROACH_BASE_CMD_RAMP_TIME = 1.0
 
 
 
@@ -137,6 +146,16 @@ class BTDemoNode(Node):
     - client per attach/detach + collisioni/gravity (opzionali)
     - piccolo "blackboard" e gestione timer per le Action BT
     """
+    @staticmethod
+    def _pick_existing_file(candidates: List[str]) -> Optional[str]:
+        for path in candidates:
+            if path and os.path.isfile(path):
+                return path
+        return None
+
+    @staticmethod
+    def _normalize_joint_name(name: str) -> str:
+        return str(name).split("/")[-1]
 
     def __init__(self):
         super().__init__("bt_pick_and_place_demo")
@@ -155,46 +174,129 @@ class BTDemoNode(Node):
 
         # Subscriber
         self._last_odom = {"left": None, "right": None}
-        self._last_joint_states = {"left": None, "right": None}
+        self._last_joint_states = {"left": None, "right": None, "global": None}
+        self._warn_timestamps: Dict[str, float] = {}
+        self.approach_test_duration = APPROACH_TEST_DURATION
 
         # subscribe (choose actual topic names in your system)
         self.create_subscription(Odometry, '/left_summit_odom', lambda msg: self._odom_cb(msg, 'left'), 10)
         self.create_subscription(Odometry, '/right_summit_odom', lambda msg: self._odom_cb(msg, 'right'), 10)
         self.create_subscription(JointState, '/left/joint_states', lambda msg: self._joint_states_cb(msg, 'left'), 10)
         self.create_subscription(JointState, '/right/joint_states', lambda msg: self._joint_states_cb(msg, 'right'), 10)
+        # Fallback: in alcune configurazioni ROS2 c'è un solo /joint_states aggregato.
+        self.create_subscription(JointState, '/joint_states', self._joint_states_global_cb, 10)
 
-        # Services opzionali (se non ci sono semplicemente logga warning)
+        # Services opzionali per la demo (se non ci sono logga warning)
         self.attach_cli = self.create_client(AttachLink, "/ATTACHLINK")
         self.detach_cli = self.create_client(DetachLink, "/DETACHLINK")
         self.toggle_gravity_cli = self.create_client(SetLinkGravity, "/set_link_gravity")
         self.toggle_collision_cli = self.create_client(SetCollisionEnabled, "/set_collision_enabled")
 
+        # Config path robusti: install-space, source-space e fallback assoluti.
+        try:
+            pkg_share = get_package_share_directory("ps_try")
+        except Exception:
+            pkg_share = None
+
+        robot_cfg_env = os.getenv("SIMOD_TP_ROBOT_CFG", "").strip()
+        if robot_cfg_env and not os.path.isfile(robot_cfg_env):
+            self.get_logger().warn(f"SIMOD_TP_ROBOT_CFG not found: {robot_cfg_env}")
+        robot_cfg = self._pick_existing_file([
+            robot_cfg_env,
+            "/ros2_ws/src/ps_try/config/dual_paletta.yaml",
+            os.path.join(pkg_share, "config", "dual_paletta.yaml") if pkg_share else "",
+            "/ros2_ws/TaskPrioritization/default_robots/__paletta__/dual_paletta.yaml",
+            "/ros2_ws/src/TaskPrioritization/default_robots/__paletta__/dual_paletta.yaml",
+            "/TaskPrioritization/default_robots/__paletta__/dual_paletta.yaml",
+        ])
+        if robot_cfg is None:
+            raise FileNotFoundError("dual_paletta.yaml non trovato (ps_try/config o default_robots)")
+
+        ee_cfg_env = os.getenv("SIMOD_TP_EE_CFG", "").strip()
+        if ee_cfg_env and not os.path.isfile(ee_cfg_env):
+            self.get_logger().warn(f"SIMOD_TP_EE_CFG not found: {ee_cfg_env}")
+        ee_cfg = self._pick_existing_file([
+            ee_cfg_env,
+            "/ros2_ws/src/ps_try/config/ee_task.yaml",
+            os.path.join(pkg_share, "config", "ee_task.yaml") if pkg_share else "",
+        ])
+        if ee_cfg is None:
+            raise FileNotFoundError("ee_task.yaml non trovato (ps_try/config)")
+
         self.tp = TPManager(device='cuda', dtype='float32') # change device='cpu' to 'cuda' if GPU is available
-        self.tp.add_robot(robot_name='__paletta__', config_file='/TaskPrioritization/default_robots/__paletta__/dual_paletta.yaml')
-        self.tp.connect_visualizer(host='127.0.0.1', port=55001, hz=60)
-        self.ee_task = self.tp.add_EE_task('/ros2_ws/src/ps_try/config/ee_task.yaml')
+        self.tp.add_robot(robot_name='__paletta__', config_file=robot_cfg)
+        # Viewer TP (socket PyVistaQt). In Docker avvialo nello stesso container per avere path mesh validi.
+        enable_tp_viewer = os.getenv("SIMOD_TP_VIEWER", "1").strip().lower() in ("1", "true", "yes", "on")
+        if enable_tp_viewer:
+            try:
+                viewer_host = os.getenv("SIMOD_TP_VIEWER_HOST", "127.0.0.1")
+                viewer_port = int(os.getenv("SIMOD_TP_VIEWER_PORT", "55001"))
+                viewer_hz = float(os.getenv("SIMOD_TP_VIEWER_HZ", "60"))
+                launch_viewer = os.getenv("SIMOD_TP_VIEWER_AUTOSTART", "1").strip().lower() in ("1", "true", "yes", "on")
+                self.get_logger().info(
+                    f"Connecting TP viewer host={viewer_host} port={viewer_port} hz={viewer_hz} autostart={launch_viewer}"
+                )
+                self.tp.connect_visualizer(
+                    host=viewer_host,
+                    port=viewer_port,
+                    hz=viewer_hz,
+                    launch_viewer=launch_viewer,
+                    viewer_wait_timeout_s=8.0,
+                )
+                chain = getattr(self.tp, "chain", None)
+                bridge = getattr(chain, "viewer_bridge", None) if chain is not None else None
+                is_running = bool(bridge is not None and getattr(bridge, "is_running", lambda: False)())
+                self.get_logger().info(f"TP viewer bridge running: {is_running}")
+            except Exception as exc:
+                self.get_logger().warn(f"TP viewer disabled after connection error: {exc}")
+        else:
+            self.get_logger().info("TP viewer disabled (set SIMOD_TP_VIEWER=1 to enable)")
+        self.ee_task = self.tp.add_EE_task(ee_cfg)
         # Disattiva eventuali piani di traiettoria pre-caricati da YAML, così i valori di test non vengono sovrascritti al primo cycle.
         if hasattr(self.ee_task, "set_trajectory_plan"):
             self.ee_task.set_trajectory_plan(None)
         # initialize robot kinematics before using it
         self.robot = self.tp.get_robot_kinematics()
-        initial_ee = self.robot.get_arm_ee_poses()
-        logging.info(f"Initial end-effector poses: {initial_ee}")
-        print(f"Initial end-effector poses: {initial_ee}")
-        self.tr_left  = Trajectory()
-        self.tr_right = Trajectory()
+        self.tr_left: Optional[Trajectory] = None
+        self.tr_right: Optional[Trajectory] = None
 
-        # Piccolo spostamento di test vicino alla posa iniziale (solo bracci, basi ferme)
-        left_delta  = np.array([0.00, 0.0, 0.0, 0.0, 0.0, 0.0], dtype=np.float32)
-        right_delta = np.array([0.00, -0.1, 0.05, 0.0, 0.0, 0.0], dtype=np.float32)
+        # Approach-only test setup (trajectory verrà inizializzata al primo tick con stato reale da Gazebo).
+        self._approach_left_delta = np.array([0.05, 0.05, 0.04, 0.3, 0.3, 0.0], dtype=np.float32)
+        self._approach_right_delta = np.array([0.05, 0.05, 0.04, 0.3, 0.4, 0.0], dtype=np.float32)
+        self._tp_approach_traj_initialized = False
+        self._tp_last_exec_monotonic: Optional[float] = None
+        self._tp_cmd_cache = None
+        self._tp_cmd_cache_time: Optional[float] = None
+        self.tp_cmd_min_period = float(os.getenv("SIMOD_TP_CMD_MIN_PERIOD", "0.03"))
+        self.tp_arm_cmd_abs_max = float(os.getenv("SIMOD_TP_ARM_CMD_MAX", str(APPROACH_ARM_CMD_ABS_MAX)))
+        self.approach_use_base = os.getenv("SIMOD_APPROACH_USE_BASE", "1").strip().lower() in ("1", "true", "yes", "on")
+        self.tp_base_cmd_xy_abs_max = float(os.getenv("SIMOD_TP_BASE_CMD_XY_MAX", str(APPROACH_BASE_CMD_XY_ABS_MAX)))
+        self.tp_base_cmd_wz_abs_max = float(os.getenv("SIMOD_TP_BASE_CMD_WZ_MAX", str(APPROACH_BASE_CMD_WZ_ABS_MAX)))
+        self.tp_base_cmd_ramp_time = float(os.getenv("SIMOD_TP_BASE_CMD_RAMP_TIME", str(APPROACH_BASE_CMD_RAMP_TIME)))
+        self.approach_only_mode = os.getenv("SIMOD_APPROACH_ONLY", "1").strip().lower() in ("1", "true", "yes", "on")
+        if self.approach_only_mode:
+            self.get_logger().info("Approach-only mode active: Lift/Transport/Drop are paused")
+        self.get_logger().info(
+            "Approach TP config: "
+            f"use_base={self.approach_use_base}, "
+            f"arm_clip={self.tp_arm_cmd_abs_max:.3f}, "
+            f"base_clip_xy={self.tp_base_cmd_xy_abs_max:.3f}, "
+            f"base_clip_wz={self.tp_base_cmd_wz_abs_max:.3f}, "
+            f"base_ramp={self.tp_base_cmd_ramp_time:.2f}s"
+        )
+        if hasattr(self.ee_task, "set_use_base"):
+            self.ee_task.set_use_base(self.approach_use_base)
+        else:
+            self.ee_task.use_base = self.approach_use_base
+        self.ee_task.set_trajectory([None, None])
 
-        self.tr_left.poly5( p_i=initial_ee[0], p_f=initial_ee[0] + left_delta,  period=5.0)
-        self.tr_right.poly5(p_i=initial_ee[1], p_f=initial_ee[1] + right_delta, period=5.0)
-
-        self.ee_task.use_base = False
-        self.ee_task.set_trajectory([self.tr_left, self.tr_right])
+        self._expected_arm_joint_names = {"left": [], "right": []}
+        self._build_expected_joint_map()
+        self._tp_layout = {}
+        self._build_tp_layout_map()
+        self._arm_ee_index = {"left": 0, "right": 1}
+        self._build_arm_ee_index_map()
         
-
         # self.tp.initialize(initial_joint_pos=joint_pos)
         
         # posizione arm base-link rispetto al base-footprint
@@ -212,12 +314,313 @@ class BTDemoNode(Node):
         # Stato interno per azioni multi-fase (es. LiftObj)
         self.lift_phase = None
 
-        self.get_logger().info("BTDemoNode inizializzato")
+        self.get_logger().info(f"BTDemoNode inizializzato - robot_cfg={robot_cfg}, ee_cfg={ee_cfg}")
+
+    @staticmethod
+    def _infer_side_from_text(text: str) -> Optional[str]:
+        txt = str(text).lower()
+        has_left = "left" in txt
+        has_right = "right" in txt
+        if has_left and not has_right:
+            return "left"
+        if has_right and not has_left:
+            return "right"
+        return None
+
+    def _build_tp_layout_map(self):
+        """
+        Costruisce una mappa robusta tra side (left/right) e:
+        - indice sottosistema (base/arm) usato da TP.update_infos
+        - indice gruppo base nel vettore base_odom
+        - slice nel vettore comando TP (dqd)
+        """
+        chain = getattr(self.tp, "chain", None)
+        if chain is None:
+            self._tp_layout = {}
+            return
+
+        list_of_lists_joint = list(getattr(chain, "list_of_lists_joint", []) or [])
+        ordered_names = list(getattr(chain.robots_cl, "ordered_list_robot_names", []) or [])
+
+        layout = {
+            "num_subsystems": int(getattr(chain, "num_of_subsystems", 0)),
+            "num_groups": len(list_of_lists_joint),
+            "subsystem_sizes": [],
+            "base_sub_idx": {"left": None, "right": None},
+            "arm_sub_idx": {"left": None, "right": None},
+            "base_group_idx": {"left": None, "right": None},
+            "base_cmd_slice": {"left": None, "right": None},
+            "arm_cmd_slice": {"left": None, "right": None},
+        }
+
+        sub_idx = 0
+        cmd_off = 0
+        for gidx, assembly in enumerate(list_of_lists_joint):
+            names = ordered_names[gidx] if gidx < len(ordered_names) else []
+            name_ptr = 0
+            for slot, dof in enumerate(assembly):
+                if dof is None:
+                    continue
+                dof_i = int(dof)
+                comp_name = names[name_ptr] if name_ptr < len(names) else f"group{gidx}_slot{slot}"
+                name_ptr += 1
+
+                side = self._infer_side_from_text(comp_name)
+                if side is not None:
+                    if slot == 0:  # base
+                        layout["base_sub_idx"][side] = sub_idx
+                        layout["base_group_idx"][side] = gidx
+                        layout["base_cmd_slice"][side] = (cmd_off, cmd_off + dof_i)
+                    elif slot == 1:  # arm
+                        layout["arm_sub_idx"][side] = sub_idx
+                        layout["arm_cmd_slice"][side] = (cmd_off, cmd_off + dof_i)
+
+                layout["subsystem_sizes"].append(dof_i)
+                sub_idx += 1
+                cmd_off += dof_i
+
+        self._tp_layout = layout
+        self.get_logger().info(
+            "TP layout map - "
+            f"base_sub_idx={layout['base_sub_idx']}, arm_sub_idx={layout['arm_sub_idx']}, "
+            f"base_group_idx={layout['base_group_idx']}, arm_cmd_slice={layout['arm_cmd_slice']}"
+        )
+
+    def _build_arm_ee_index_map(self):
+        """
+        Mappa side->indice nel vettore EE restituito da robot.get_arm_ee_poses().
+        Riduce i rischi di inversione left/right quando l'ordine interno cambia.
+        """
+        arm_names = list(getattr(self.robot, "arm_names", []) or [])
+        idx_map: Dict[str, Optional[int]] = {"left": None, "right": None}
+
+        for i, arm_name in enumerate(arm_names):
+            side = self._infer_side_from_text(arm_name)
+            if side is not None and idx_map[side] is None:
+                idx_map[side] = i
+
+        if idx_map["left"] is None and len(arm_names) >= 1:
+            idx_map["left"] = 0
+        if idx_map["right"] is None and len(arm_names) >= 2:
+            idx_map["right"] = 1 if idx_map["left"] != 1 else 0
+
+        self._arm_ee_index = {
+            "left": int(idx_map["left"]) if idx_map["left"] is not None else 0,
+            "right": int(idx_map["right"]) if idx_map["right"] is not None else 1,
+        }
+        self.get_logger().info(
+            "TP arm EE index map - "
+            f"arm_names={arm_names}, side_to_ee_idx={self._arm_ee_index}"
+        )
+
+    def _build_tp_inputs_from_side_data(
+        self,
+        left_arm_jp: List[float],
+        right_arm_jp: List[float],
+        left_base: List[float],
+        right_base: List[float],
+    ):
+        layout = self._tp_layout or {}
+        nsubs = int(layout.get("num_subsystems", 0))
+        sizes = list(layout.get("subsystem_sizes", []))
+        ngroups = int(layout.get("num_groups", 0))
+
+        if nsubs <= 0 or len(sizes) != nsubs or ngroups <= 0:
+            # Fallback storico (left base, left arm, right base, right arm)
+            joint_pos = [
+                np.zeros(3, dtype=np.float32),
+                np.asarray(left_arm_jp, dtype=np.float32),
+                np.zeros(3, dtype=np.float32),
+                np.asarray(right_arm_jp, dtype=np.float32),
+            ]
+            base_odom = [
+                np.asarray(left_base, dtype=np.float32),
+                np.asarray(right_base, dtype=np.float32),
+            ]
+            return joint_pos, base_odom
+
+        joint_pos = [np.zeros(int(sz), dtype=np.float32) for sz in sizes]
+        base_odom = [np.zeros(6, dtype=np.float32) for _ in range(ngroups)]
+
+        arm_sub_idx = layout.get("arm_sub_idx", {})
+        base_group_idx = layout.get("base_group_idx", {})
+
+        idx_l_arm = arm_sub_idx.get("left", None)
+        idx_r_arm = arm_sub_idx.get("right", None)
+        if idx_l_arm is not None and 0 <= idx_l_arm < len(joint_pos):
+            joint_pos[idx_l_arm] = np.asarray(left_arm_jp, dtype=np.float32)
+        if idx_r_arm is not None and 0 <= idx_r_arm < len(joint_pos):
+            joint_pos[idx_r_arm] = np.asarray(right_arm_jp, dtype=np.float32)
+
+        gidx_l = base_group_idx.get("left", None)
+        gidx_r = base_group_idx.get("right", None)
+        if gidx_l is not None and 0 <= gidx_l < len(base_odom):
+            base_odom[gidx_l] = np.asarray(left_base, dtype=np.float32)
+        if gidx_r is not None and 0 <= gidx_r < len(base_odom):
+            base_odom[gidx_r] = np.asarray(right_base, dtype=np.float32)
+
+        return joint_pos, base_odom
+
+    def _get_arm_cmd_values(self, cmd, side: str) -> List[float]:
+        layout = self._tp_layout or {}
+        arm_slices = layout.get("arm_cmd_slice", {})
+        sl = arm_slices.get(side, None)
+        if sl is not None and isinstance(sl, (list, tuple)) and len(sl) == 2:
+            return _cmd_slice(cmd, int(sl[0]), int(sl[1]), 6)
+
+        # Fallback storico (left=3:9, right=12:18)
+        if side == "left":
+            return _cmd_slice(cmd, 3, 9, 6)
+        return _cmd_slice(cmd, 12, 18, 6)
+
+    def _get_base_cmd_values(self, cmd, side: str) -> List[float]:
+        layout = self._tp_layout or {}
+        base_slices = layout.get("base_cmd_slice", {})
+        sl = base_slices.get(side, None)
+        if sl is not None and isinstance(sl, (list, tuple)) and len(sl) == 2:
+            return _cmd_slice(cmd, int(sl[0]), int(sl[1]), 3)
+
+        # Fallback storico (left=0:3, right=9:12)
+        if side == "left":
+            return _cmd_slice(cmd, 0, 3, 3)
+        return _cmd_slice(cmd, 9, 12, 3)
+
+    def _init_tp_approach_trajectory_from_live_state(
+        self,
+        left_arm_jp: List[float],
+        right_arm_jp: List[float],
+        left_base: List[float],
+        right_base: List[float],
+    ) -> bool:
+        """
+        Inizializza la traiettoria di test sulla posa EE reale corrente (non su stato YAML).
+        """
+        try:
+            joint_pos, base_odom = self._build_tp_inputs_from_side_data(
+                left_arm_jp=left_arm_jp,
+                right_arm_jp=right_arm_jp,
+                left_base=left_base,
+                right_base=right_base,
+            )
+
+            # Porta il modello cinematico TP nello stato corrente letto dai topic ROS.
+            self.robot.compute(joint_pos, base_odom)
+            live_ee = self.robot.get_arm_ee_poses()
+            if live_ee is None or len(live_ee) == 0:
+                raise RuntimeError("robot.get_arm_ee_poses() returned no arm poses")
+
+            l_idx = int((self._arm_ee_index or {}).get("left", 0))
+            r_idx = int((self._arm_ee_index or {}).get("right", 1))
+            if l_idx < 0 or l_idx >= len(live_ee):
+                l_idx = 0
+            if r_idx < 0 or r_idx >= len(live_ee):
+                r_idx = min(1, len(live_ee) - 1)
+            left_ee = np.asarray(live_ee[l_idx], dtype=np.float32)
+            right_ee = np.asarray(live_ee[r_idx], dtype=np.float32)
+
+            self.tr_left = Trajectory()
+            self.tr_right = Trajectory()
+            self.tr_left.poly5(
+                p_i=left_ee,
+                p_f=left_ee + self._approach_left_delta,
+                period=APPROACH_TEST_TRAJ_TIME,
+            )
+            self.tr_right.poly5(
+                p_i=right_ee,
+                p_f=right_ee + self._approach_right_delta,
+                period=APPROACH_TEST_TRAJ_TIME,
+            )
+
+            if hasattr(self.ee_task, "set_use_base"):
+                self.ee_task.set_use_base(self.approach_use_base)
+            else:
+                self.ee_task.use_base = self.approach_use_base
+            self.ee_task.set_trajectory([self.tr_left, self.tr_right])
+            self._tp_approach_traj_initialized = True
+            self._tp_last_exec_monotonic = None
+            self._tp_cmd_cache = None
+            self._tp_cmd_cache_time = None
+
+            self.get_logger().info(
+                f"Approach TP trajectory initialized from live EE pose (T={APPROACH_TEST_TRAJ_TIME:.1f}s)"
+            )
+            return True
+        except Exception as exc:
+            self._warn_throttled(
+                "approach_tp_traj_init_failed",
+                f"Unable to initialize TP trajectory from live state: {exc}",
+                period_s=2.0,
+            )
+            return False
+
+    def _log_throttled(self, key: str, msg: str, period_s: float = 2.0, level: str = "warn"):
+        now = self.get_clock().now().nanoseconds / 1e9
+        last = self._warn_timestamps.get(key, -1e9)
+        if (now - last) >= period_s:
+            self._warn_timestamps[key] = now
+            if str(level).lower() == "info":
+                self.get_logger().info(msg)
+            else:
+                self.get_logger().warn(msg)
+
+    def _warn_throttled(self, key: str, msg: str, period_s: float = 2.0):
+        self._log_throttled(key=key, msg=msg, period_s=period_s, level="warn")
+
+    def _info_throttled(self, key: str, msg: str, period_s: float = 2.0):
+        self._log_throttled(key=key, msg=msg, period_s=period_s, level="info")
+
+    def _build_expected_joint_map(self):
+        """
+        Ricava i nomi giunto attesi da TP, mantenendo fallback robusto left/right.
+        """
+        try:
+            arm_joint_groups = self.robot.get_arm_joint_names(skip_fixed=True)
+        except Exception as exc:
+            self._warn_throttled("joint_map_missing", f"Unable to read arm joint names from TP model: {exc}")
+            return
+
+        arm_names = list(getattr(self.robot, "arm_names", []))
+        side_map: Dict[str, List[str]] = {"left": [], "right": []}
+
+        for idx, joints in enumerate(arm_joint_groups):
+            arm_name = arm_names[idx] if idx < len(arm_names) else f"arm_{idx}"
+            lname = arm_name.lower()
+            if "left" in lname:
+                side_map["left"] = list(joints)
+            elif "right" in lname:
+                side_map["right"] = list(joints)
+            elif not side_map["left"]:
+                side_map["left"] = list(joints)
+            elif not side_map["right"]:
+                side_map["right"] = list(joints)
+
+        self._expected_arm_joint_names = side_map
+        self.get_logger().info(
+            "TP expected joint mapping - "
+            f"left:{len(side_map['left'])} joints, right:{len(side_map['right'])} joints"
+        )
 
     def _joint_states_cb(self, msg: JointState, side: str):
         """Callback per gli stati dei giunti."""
-        # keep a reference to the latest joint states msg
-        self._last_joint_states[side] = msg
+        target_side = side
+        try:
+            if msg.name:
+                inferred = self._infer_side_from_text(" ".join(msg.name))
+                if inferred is not None:
+                    target_side = inferred
+        except Exception:
+            pass
+        if target_side != side:
+            self._warn_throttled(
+                f"joint_states_side_remap_{side}_{target_side}",
+                f"joint_states remapped from '{side}' callback to '{target_side}' using joint names",
+                period_s=2.0,
+            )
+        self._last_joint_states[target_side] = msg
+
+    def _joint_states_global_cb(self, msg: JointState):
+        """Fallback callback quando i joint state arrivano su topic aggregata."""
+        self._last_joint_states["global"] = msg
 
     def get_arm_joint_positions(self, side: str):
         """
@@ -226,14 +629,79 @@ class BTDemoNode(Node):
         """
         joint_states = self._last_joint_states.get(side)
         if joint_states is None:
+            joint_states = self._last_joint_states.get("global")
+            if joint_states is not None:
+                self._warn_throttled(
+                    f"{side}_joint_global_fallback",
+                    f"[{side}] using /joint_states fallback (side topic missing)"
+                )
+        if joint_states is None:
             return None
-        
-        return list(joint_states.position)
+
+        expected_names = self._expected_arm_joint_names.get(side, [])
+
+        if not expected_names:
+            if len(joint_states.position) >= 6:
+                self._warn_throttled(
+                    f"{side}_joint_fallback",
+                    f"[{side}] TP joint map unavailable, fallback to first 6 joint_states entries"
+                )
+                return [float(v) for v in joint_states.position[:6]]
+            self._warn_throttled(
+                f"{side}_joint_short",
+                f"[{side}] no TP joint map and joint_states has only {len(joint_states.position)} values"
+            )
+            return None
+
+        if len(joint_states.name) != len(joint_states.position):
+            self._warn_throttled(
+                f"{side}_joint_name_len_mismatch",
+                f"[{side}] joint_states name/position length mismatch: {len(joint_states.name)} != {len(joint_states.position)}"
+            )
+            return None
+
+        name_to_pos = {name: pos for name, pos in zip(joint_states.name, joint_states.position)}
+        norm_to_pos = {self._normalize_joint_name(name): pos for name, pos in zip(joint_states.name, joint_states.position)}
+
+        ordered = []
+        missing = []
+        for exp_name in expected_names:
+            if exp_name in name_to_pos:
+                ordered.append(float(name_to_pos[exp_name]))
+                continue
+            norm_name = self._normalize_joint_name(exp_name)
+            if norm_name in norm_to_pos:
+                ordered.append(float(norm_to_pos[norm_name]))
+                continue
+            missing.append(exp_name)
+
+        if missing:
+            self._warn_throttled(
+                f"{side}_joint_missing",
+                f"[{side}] missing {len(missing)} expected joints in /{side}/joint_states "
+                f"(first missing: {missing[0]})"
+            )
+            return None
+
+        return ordered
     
     def _odom_cb(self, msg: Odometry, side: str):
         """Callback per l'odomentria delle basi."""
-        # keep a reference to the latest odom msg
-        self._last_odom[side] = msg
+        target_side = side
+        try:
+            txt = f"{msg.child_frame_id} {msg.header.frame_id}"
+            inferred = self._infer_side_from_text(txt)
+            if inferred is not None:
+                target_side = inferred
+        except Exception:
+            pass
+        if target_side != side:
+            self._warn_throttled(
+                f"odom_side_remap_{side}_{target_side}",
+                f"odom remapped from '{side}' callback to '{target_side}' using frame ids",
+                period_s=2.0,
+            )
+        self._last_odom[target_side] = msg
 
     @staticmethod
     def _quat_to_rpy(qx, qy, qz, qw):
@@ -744,56 +1212,61 @@ def ReturnToPallet():
 # AZIONI DI MOVIMENTO "VERO" (pick & place)
 # -------------------------------------------------------------------------
 
+def _cmd_slice(cmd, start: int, end: int, expected_len: int) -> List[float]:
+    if cmd is None:
+        return [0.0] * expected_len
+    try:
+        out = [float(v) for v in cmd[start:end]]
+    except Exception:
+        out = []
+    if len(out) < expected_len:
+        out.extend([0.0] * (expected_len - len(out)))
+    return out[:expected_len]
+
+
+def _sanitize_arm_cmd(values: List[float], abs_max: float) -> List[float]:
+    out = []
+    lim = max(float(abs_max), 1e-3)
+    for v in values:
+        vv = float(v) if np.isfinite(v) else 0.0
+        if vv > lim:
+            vv = lim
+        elif vv < -lim:
+            vv = -lim
+        out.append(vv)
+    return out
+
+
+def _sanitize_base_cmd(values: List[float], xy_abs_max: float, wz_abs_max: float, ramp: float = 1.0) -> List[float]:
+    if len(values) < 3:
+        values = list(values) + [0.0] * (3 - len(values))
+    r = min(max(float(ramp), 0.0), 1.0)
+    lim_xy = max(float(xy_abs_max), 1e-3) * r
+    lim_wz = max(float(wz_abs_max), 1e-3) * r
+
+    out = []
+    for i, v in enumerate(values[:3]):
+        vv = float(v) if np.isfinite(v) else 0.0
+        lim = lim_xy if i < 2 else lim_wz
+        if vv > lim:
+            vv = lim
+        elif vv < -lim:
+            vv = -lim
+        out.append(vv)
+    return out
+
+
 def ApproachObject():
     """
-    Avvicinamento al pacco:
-    - muove le basi in approach
-    - muove i bracci con piccola velocità
-    - dopo APPROACH_TIME secondi ritorna SUCCESS e stoppa i movimenti
-
-    Mappa la fase 'approach' della demo a stati.
+    Avvicinamento in modalità Task Prioritization (test iniziale arm+base):
+    - usa TP con traiettoria breve sui due end-effector
+    - integra anche la base mobile (vx, vy, wz) con limiti conservativi
+    - al termine del test imposta near_object=True e ritorna SUCCESS
     """
     node = _require_node()
     tree_name = get_current_bt_name()
     timer_key = f"{tree_name}_ApproachObject"
     near_key = f"{tree_name}_near_object"
-
-    # t0 = node.get_action_timer(timer_key)
-    # if t0 is None:
-    #     node.get_logger().info(bt_fmt(f"[ApproachObject] start (dur: {APPROACH_TIME}s)"))
-    #     t0 = node.start_action_timer(timer_key)
-
-
-    # elapsed = node.get_clock().now().nanoseconds/1e9 - t0
-
-    # if elapsed < APPROACH_TIME:
-    #     tl = Twist()
-    #     tr = Twist()
-    #     tl.linear.x, tl.linear.y = APPROACH_LEFT_BASE_XY_VEL
-    #     tr.linear.x, tr.linear.y = APPROACH_RIGHT_BASE_XY_VEL
-    #     node.left_base_pub.publish(tl)
-    #     node.right_base_pub.publish(tr)
-
-    #     la = Float64MultiArray()
-    #     ra = Float64MultiArray()
-    #     la.data = LEFT_ARM_VEL
-    #     ra.data = RIGHT_ARM_VEL
-
-    #     node.left_arm_pub.publish(la)
-    #     node.right_arm_pub.publish(ra)
-
-    #     # piccolo spin per far "vivere" ROS2
-    #     rclpy.spin_once(node, timeout_sec=0.01)
-    #     return None  # RUNNING
-    # else:
-    #     node.stop_all_movement()
-    #     node.clear_action_timer(timer_key)
-    #     node.bb[near_key] = True
-    #     node.get_logger().info(bt_fmt(f"[ApproachObject] completed, {near_key}=True"))
-    #     return True
-
-    # use the TPManager instance attached to the node
-    node.tp.cycle_starts()
 
     left_arm_jp = node.get_arm_joint_positions("left") # pose dai giunti da /left/joint_states
     right_arm_jp = node.get_arm_joint_positions("right") # pose dai giunti da /right/joint_states
@@ -803,69 +1276,127 @@ def ApproachObject():
     
     # Check if all sensor data is available before proceeding
     if None in [left_arm_jp, right_arm_jp, left_base, right_base]:
-        node.get_logger().warn(bt_fmt("[ApproachObject] Waiting for sensor data (joint_states/odom)"))
-        node.get_logger().warn(bt_fmt(f"  left_arm_jp: {left_arm_jp}"))
-        node.get_logger().warn(bt_fmt(f"  right_arm_jp: {right_arm_jp}"))
-        node.get_logger().warn(bt_fmt(f"  left_base: {left_base}"))
-        node.get_logger().warn(bt_fmt(f"  right_base: {right_base}"))
-         # piccolo spin per far "vivere" ROS2
-        rclpy.spin_once(node, timeout_sec=0.01)
+        node._warn_throttled(f"{tree_name}_approach_wait", bt_fmt("[ApproachObject] Waiting for sensor data (joint_states/odom)"))
         return None  # RUNNING - keep trying until data arrives
-    
-    #[np.array(xyzrpybase_left), np.array(joint_left_arm), np.array(xyzrpybase_right), np.array(joint_right_arm)] 
-    joint_pos = [left_base, left_arm_jp, right_base, right_arm_jp]
 
-    cmd = node.tp.execute(joint_pos=joint_pos)
+    t0 = node.get_action_timer(timer_key)
+    if t0 is None:
+        t0 = node.start_action_timer(timer_key)
+        node.bb[near_key] = False
+        node.get_logger().info(
+            bt_fmt(
+                f"[ApproachObject] start TP test "
+                f"(use_base={node.approach_use_base}) "
+                f"(dur={node.approach_test_duration:.1f}s)"
+            )
+        )
 
-    # Build ROS messages from numeric command vector
-    if cmd is not None:
-        # Cast to native floats because ROS2 message fields reject numpy/torch scalar types.
-        left_base_cmd_vals = [float(v) for v in cmd[:3]]  # vx, vy, omega
-        left_arm_cmd_vals = [float(v) for v in cmd[3:9]]
-        right_base_cmd_vals = [float(v) for v in cmd[9:12]]
-        right_arm_cmd_vals = [float(v) for v in cmd[12:18]]
+    if not node._tp_approach_traj_initialized:
+        ok = node._init_tp_approach_trajectory_from_live_state(
+            left_arm_jp=left_arm_jp,
+            right_arm_jp=right_arm_jp,
+            left_base=left_base,
+            right_base=right_base,
+        )
+        if not ok:
+            return None  # RUNNING
+
+    # NOTE: execute() richiede i sottosistemi in ordine base+arm per ogni robot.
+    # In questo test passiamo sempre odometria reale delle basi; i cmd base vengono poi
+    # abilitati/disabilitati da `approach_use_base` prima della pubblicazione.
+    joint_pos, base_odom = node._build_tp_inputs_from_side_data(
+        left_arm_jp=left_arm_jp,
+        right_arm_jp=right_arm_jp,
+        left_base=left_base,
+        right_base=right_base,
+    )
+
+    now_mono = time.monotonic()
+    cmd = node._tp_cmd_cache
+    can_reuse = (
+        cmd is not None
+        and node._tp_cmd_cache_time is not None
+        and (now_mono - node._tp_cmd_cache_time) < max(node.tp_cmd_min_period, 1e-3)
+    )
+    if not can_reuse:
+        if node._tp_last_exec_monotonic is None:
+            tp_dt = 1.0 / 30.0
+        else:
+            tp_dt = now_mono - node._tp_last_exec_monotonic
+        node._tp_last_exec_monotonic = now_mono
+        # dt robusto: evita valori troppo piccoli/grandi che destabilizzano il controllo.
+        node.tp._delta_t = max(1e-3, min(float(tp_dt), 0.2))
+        cmd = node.tp.execute(joint_pos=joint_pos, base_odom=base_odom)
+        node._tp_cmd_cache = cmd
+        node._tp_cmd_cache_time = now_mono
+    if cmd is not None and len(cmd) < 18:
+        node._warn_throttled(
+            "approach_cmd_short",
+            bt_fmt(f"[ApproachObject] TP command vector too short: len={len(cmd)}")
+        )
+
+    elapsed = node.get_clock().now().nanoseconds / 1e9 - t0
+    ramp = 1.0
+    if node.approach_use_base:
+        ramp = min(max(elapsed / max(node.tp_base_cmd_ramp_time, 1e-3), 0.0), 1.0)
+
+    if node.approach_use_base:
+        left_base_cmd_vals = _sanitize_base_cmd(
+            node._get_base_cmd_values(cmd, "left"),
+            xy_abs_max=node.tp_base_cmd_xy_abs_max,
+            wz_abs_max=node.tp_base_cmd_wz_abs_max,
+            ramp=ramp,
+        )
+        right_base_cmd_vals = _sanitize_base_cmd(
+            node._get_base_cmd_values(cmd, "right"),
+            xy_abs_max=node.tp_base_cmd_xy_abs_max,
+            wz_abs_max=node.tp_base_cmd_wz_abs_max,
+            ramp=ramp,
+        )
     else:
         left_base_cmd_vals = [0.0, 0.0, 0.0]
-        left_arm_cmd_vals = [0.0]*6
         right_base_cmd_vals = [0.0, 0.0, 0.0]
-        right_arm_cmd_vals = [0.0]*6
 
-    # Twist messages for base commands
+    left_arm_cmd_vals = _sanitize_arm_cmd(node._get_arm_cmd_values(cmd, "left"), node.tp_arm_cmd_abs_max)
+    right_arm_cmd_vals = _sanitize_arm_cmd(node._get_arm_cmd_values(cmd, "right"), node.tp_arm_cmd_abs_max)
+    node._info_throttled(
+        f"{tree_name}_approach_cmd",
+        bt_fmt(
+            "[ApproachObject] cmd max abs "
+            f"BL={max(abs(v) for v in left_base_cmd_vals):.4f}, "
+            f"BR={max(abs(v) for v in right_base_cmd_vals):.4f}, "
+            f"L={max(abs(v) for v in left_arm_cmd_vals):.4f}, "
+            f"R={max(abs(v) for v in right_arm_cmd_vals):.4f}, "
+            f"dt={node.tp._delta_t:.4f}s, arm_clip={node.tp_arm_cmd_abs_max:.3f}, "
+            f"base_clip_xy={node.tp_base_cmd_xy_abs_max:.3f}, base_clip_wz={node.tp_base_cmd_wz_abs_max:.3f}, "
+            f"ramp={ramp:.2f}"
+        ),
+        period_s=1.0,
+    )
+
     tl = Twist()
     tr = Twist()
-    try:
-        tl.linear.x, tl.linear.y, tl.angular.z = left_base_cmd_vals
-    except Exception:
-        # fallback: assign what we can
-        if len(left_base_cmd_vals) >= 1:
-            tl.linear.x = left_base_cmd_vals[0]
-        if len(left_base_cmd_vals) >= 2:
-            tl.linear.y = left_base_cmd_vals[1]
-        if len(left_base_cmd_vals) >= 3:
-            tl.angular.z = left_base_cmd_vals[2]
+    tl.linear.x, tl.linear.y, tl.angular.z = left_base_cmd_vals
+    tr.linear.x, tr.linear.y, tr.angular.z = right_base_cmd_vals
 
-    try:
-        tr.linear.x, tr.linear.y, tr.angular.z = right_base_cmd_vals
-    except Exception:
-        if len(right_base_cmd_vals) >= 1:
-            tr.linear.x = right_base_cmd_vals[0]
-        if len(right_base_cmd_vals) >= 2:
-            tr.linear.y = right_base_cmd_vals[1]
-        if len(right_base_cmd_vals) >= 3:
-            tr.angular.z = right_base_cmd_vals[2]
-
-    # Float64MultiArray for arm joint velocity commands
     la = Float64MultiArray()
     ra = Float64MultiArray()
-    la.data = list(left_arm_cmd_vals)
-    ra.data = list(right_arm_cmd_vals)
+    la.data = left_arm_cmd_vals
+    ra.data = right_arm_cmd_vals
 
     node.left_base_pub.publish(tl)
     node.right_base_pub.publish(tr)
     node.left_arm_pub.publish(la)
     node.right_arm_pub.publish(ra)
 
-    node.tp.cycle_ends()
+    if elapsed >= node.approach_test_duration:
+        node.stop_all_movement()
+        node.clear_action_timer(timer_key)
+        node.bb[near_key] = True
+        node.get_logger().info(bt_fmt(f"[ApproachObject] completed, {near_key}=True"))
+        return True
+
+    return None
 
 
 def LiftObj():
@@ -881,6 +1412,13 @@ def LiftObj():
       * collect
     """
     node = _require_node()
+    if node.approach_only_mode:
+        node._info_throttled(
+            "approach_only_liftobj",
+            bt_fmt("[LiftObj] paused (SIMOD_APPROACH_ONLY=1)"),
+            period_s=5.0,
+        )
+        return None
     tree_name = get_current_bt_name()
 
     if tree_name == "Supervisor":
