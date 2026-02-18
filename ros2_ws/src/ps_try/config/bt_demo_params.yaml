@@ -123,9 +123,9 @@ approach:
   # Orientazione EE/tool
   # keep  -> mantiene RPY corrente
   # fixed -> usa ee_left_rpy / ee_right_rpy (roll,pitch,yaw in radianti)
-  ee_orient_mode: "keep"
-  ee_left_rpy: ""
-  ee_right_rpy: ""
+  ee_orient_mode: "fixed"
+  ee_left_rpy: "-1.52,0.0,0.0"
+  ee_right_rpy: "-1.52,0.0,3.1416"
 
   # Tolleranze convergenza
   arm_joint_tol: 0.10
@@ -143,8 +143,10 @@ approach:
   arm_enable_traj_time: 8.0
   # Home "comoda" UR5 (braccio piegato), in radianti:
   # [shoulder_pan, shoulder_lift, elbow, wrist_1, wrist_2, wrist_3]
-  left_arm_home: "3.10,-1.5708,1.5708,-1.5708,-1.5708,0.0"
-  right_arm_home: "0.0,-1.5708,1.5708,-1.5708,-1.5708,0.0"
+  left_arm_home: "0.0,-1.0000,-2.0000,-1.5708,0.0,-1.5708"
+  right_arm_home: "0.0,-2.1416,2.0000,-1.5708,0.0,1.5708"
+  # Con arm_target_mode=pallet_offset il target finale e' definito dalla posa EE:
+  # (ee_*_offset_{x,y,z} + orientazione ee_*_rpy se ee_orient_mode=fixed)
   left_arm_goal: ""
   right_arm_goal: ""
   approach_only: true
