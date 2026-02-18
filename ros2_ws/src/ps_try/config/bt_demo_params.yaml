@@ -1,0 +1,165 @@
+# ============================================================================
+# BT ROS2 XML demo - Parametri globali
+#
+# Questo file contiene la parametrizzazione "tipicamente fissa" della demo.
+# Il codice legge questi valori all'avvio.
+#
+# Fonte unica della configurazione:
+#   questo file viene caricato direttamente dalla demo.
+# ============================================================================
+
+phases:
+  # Durate nominali delle fasi principali [s]
+  approach_time: 20.5
+  descend_and_pick_time: 20.5
+  collect_time: 10.0
+  transport_time: 25.0
+  descend_and_place_time: 12.0
+  release_time: 1.0
+
+motion_profiles:
+  # Velocita' giunti braccio durante approach [rad/s]
+  left_arm_vel: [0.075, -0.01, 0.01, -0.01, -0.01, -0.01]
+  right_arm_vel: [-0.09, -0.01, 0.01, -0.01, 0.01, 0.021]
+
+  # Delta giunti per discesa/pick
+  left_arm_pick: [-0.001, -0.08, 0.08, 0.0, -0.12, -0.055]
+  right_arm_pick: [0.001, -0.12, 0.08, 0.0, 0.12, 0.055]
+
+  # Collect/lift
+  collect_left_base_xy_vel: [0.001, -0.15]
+  collect_right_base_xy_vel: [-0.0, -0.15]
+  left_arm_collect: [0.0, 0.08, -0.08, 0.0, 0.0, -0.020]
+  right_arm_collect: [0.0, 0.08, -0.08, 0.0, 0.0, -0.025]
+
+  # Trasporto
+  left_transport_vel_xy: [-0.24, 0.0]
+  right_transport_vel_xy: [-0.24, -0.055]
+
+  # Place
+  place_left_base_xy_vel: [0.0, 0.09]
+  place_right_base_xy_vel: [0.0, 0.06]
+  left_arm_place: [-0.001, -0.12, 0.08, 0.0, 0.0, 0.05]
+  right_arm_place: [0.001, -0.12, 0.08, 0.0, -0.0, 0.0]
+
+  # Release
+  left_arm_release: [0.01, 0.0, 0.0, 0.0, 0.1, 0.0]
+  right_arm_release: [-0.01, 0.0, 0.0, 0.0, -0.1, 0.0]
+
+package:
+  # Link del pacco usato dai servizi attach/detach
+  link_name: "pacco_clone_1::link_1"
+
+tp:
+  # Override opzionali dei path config TP (vuoto = auto-discovery standard)
+  robot_cfg_path: ""
+  ee_cfg_path: ""
+
+  viewer:
+    # Bridge verso visualizzatore TP
+    enable: true
+    host: "127.0.0.1"
+    port: 55001
+    hz: 60.0
+    autostart: true
+
+  # Periodo minimo [s] tra due chiamate TP.execute() effettive
+  cmd_min_period: 0.03
+
+approach:
+  # --------------------------------------------------------------------------
+  # Timing + limiti comandi
+  # --------------------------------------------------------------------------
+  test_duration: 20.5
+  test_traj_time: 20.5
+  task_mode: "hybrid"               # joint | ee | hybrid
+  estimated_timeout: 2.0
+  arm_cmd_abs_max: 0.25
+  base_cmd_xy_abs_max: 0.12
+  base_cmd_wz_abs_max: 0.20
+  base_cmd_ramp_time: 1.0
+  use_base: true
+  base_ctrl: "tp"
+  jtc_base_kp_xy: 1.2
+  jtc_base_kp_yaw: 1.0
+  jtc_arm_kp: 1.3
+
+  # --------------------------------------------------------------------------
+  # Controllo base + convergenza
+  # --------------------------------------------------------------------------
+  base_goal_tol: 0.08
+  base_kp_x: 0.9
+  base_kp_y: 0.9
+  base_target_mode: "pallet_offset"   # pallet_offset | legacy
+  base_pose_source: "aligned_odom"    # odom | gazebo | aligned_odom | auto
+
+  # Strategia percorso base
+  base_keep_lane: false
+  force_full_2d: true
+  base_auto_swap_slots: true
+  base_swap_hyst: 0.10
+  base_align_yaw: false
+
+  # Target base rispetto al pallet (world)
+  base_left_offset_x: -0.60
+  base_left_offset_y: -0.60
+  base_right_offset_x: 0.60
+  base_right_offset_y: -0.60
+
+  # --------------------------------------------------------------------------
+  # Target braccio/EE
+  # --------------------------------------------------------------------------
+  arm_target_mode: "pallet_offset"    # pallet_offset | joint_profile
+  arm_profile_scale: 0.18
+  arm_max_delta: 0.60
+
+  # Offset EE rispetto al pallet (world)
+  ee_left_offset_x: -0.35
+  ee_left_offset_y: -0.10
+  ee_right_offset_x: 0.35
+  ee_right_offset_y: -0.10
+  ee_offset_z: 0.40
+
+  # Orientazione EE/tool
+  # keep  -> mantiene RPY corrente
+  # fixed -> usa ee_left_rpy / ee_right_rpy (roll,pitch,yaw in radianti)
+  ee_orient_mode: "keep"
+  ee_left_rpy: ""
+  ee_right_rpy: ""
+
+  # Tolleranze convergenza
+  arm_joint_tol: 0.10
+  arm_ee_pos_tol: 0.03
+  min_exec_time: 2.0
+
+  # Cache obiettivo giunti approach
+  goal_cache_enabled: false
+  goal_cache_file: "/tmp/simod_approach_goal_joints.json"
+
+  # Fase "base-first": bracci in home, poi abilitati sotto soglia distanza
+  arm_delay_enable: true
+  arm_enable_dist: 0.80
+  arm_home_traj_time: 4.0
+  arm_enable_traj_time: 8.0
+  # Home "comoda" UR5 (braccio piegato), in radianti:
+  # [shoulder_pan, shoulder_lift, elbow, wrist_1, wrist_2, wrist_3]
+  left_arm_home: "3.10,-1.5708,1.5708,-1.5708,-1.5708,0.0"
+  right_arm_home: "0.0,-1.5708,1.5708,-1.5708,-1.5708,0.0"
+  left_arm_goal: ""
+  right_arm_goal: ""
+  approach_only: true
+
+  # --------------------------------------------------------------------------
+  # Mock visione / discovery modelli
+  # --------------------------------------------------------------------------
+  mock_pallet_forward: 1.20
+  mock_pallet_standoff: 0.85
+  mock_lateral_half: 0.35
+
+  mock_pallet_model: "pacco_clone_1,pacco,pallet2"
+  mock_world_file: ""
+  mock_pallet_x: ""
+  mock_pallet_y: ""
+  mock_pallet_z: ""
+  left_base_model: "left_srm,left_summit_xls"
+  right_base_model: "right_srm,right_summit_xls"

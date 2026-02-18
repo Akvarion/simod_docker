@@ -1,0 +1,3 @@
+from bt_xml_demo.mixins.gazebo_bridge import GazeboBridgeMixin
+from bt_xml_demo.mixins.tp_control import TPControlMixin
+from bt_xml_demo.mixins.approach_planning import ApproachPlanningMixin

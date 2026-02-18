@@ -28,11 +28,17 @@ target_compile_features(ps_try PUBLIC c_std_99 cxx_std_17)  # Require C99 and C+
 install(TARGETS ps_try DESTINATION lib/${PROJECT_NAME})
 
 install(DIRECTORY launch DESTINATION share/${PROJECT_NAME})
+install(DIRECTORY config DESTINATION share/${PROJECT_NAME})
 
 # Install XML behavior tree files
 install(DIRECTORY scripts/behaviortree_XML_demo
   DESTINATION share/${PROJECT_NAME}/scripts
   FILES_MATCHING PATTERN "*.xml"
+)
+
+# Install Python helper modules used by bt_ros2_demo-xml.py
+install(DIRECTORY scripts/bt_xml_demo
+  DESTINATION lib/${PROJECT_NAME}
 )
 
 # Install Python scripts so they are available as executables after colcon build
