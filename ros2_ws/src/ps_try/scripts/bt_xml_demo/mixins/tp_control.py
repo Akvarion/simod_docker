@@ -295,3 +295,54 @@ class TPControlMixin:
             return None
 
         return ordered
+
+    def get_arm_joint_efforts(self, side: str):
+        """
+        Return ordered joint efforts (same joint order as get_arm_joint_positions)
+        or None if effort is unavailable.
+        """
+        joint_states = self._last_joint_states.get(side)
+        if joint_states is None:
+            joint_states = self._last_joint_states.get("global")
+            if joint_states is not None:
+                self._warn_throttled(
+                    f"{side}_effort_global_fallback",
+                    f"[{side}] using /joint_states fallback for effort (side topic missing)"
+                )
+        if joint_states is None:
+            return None
+
+        expected_names = self._expected_arm_joint_names.get(side, [])
+        if not hasattr(joint_states, "effort") or joint_states.effort is None or len(joint_states.effort) == 0:
+            return None
+
+        if not expected_names:
+            if len(joint_states.effort) >= 6:
+                return [float(v) for v in joint_states.effort[:6]]
+            return None
+
+        if len(joint_states.name) != len(joint_states.effort):
+            self._warn_throttled(
+                f"{side}_effort_name_len_mismatch",
+                f"[{side}] joint_states name/effort length mismatch: {len(joint_states.name)} != {len(joint_states.effort)}"
+            )
+            return None
+
+        name_to_eff = {name: eff for name, eff in zip(joint_states.name, joint_states.effort)}
+        norm_to_eff = {
+            self._normalize_joint_name(name): eff
+            for name, eff in zip(joint_states.name, joint_states.effort)
+        }
+
+        ordered = []
+        for exp_name in expected_names:
+            if exp_name in name_to_eff:
+                ordered.append(float(name_to_eff[exp_name]))
+                continue
+            norm_name = self._normalize_joint_name(exp_name)
+            if norm_name in norm_to_eff:
+                ordered.append(float(norm_to_eff[norm_name]))
+                continue
+            return None
+
+        return ordered

@@ -10,7 +10,7 @@
 
 phases:
   # Durate nominali delle fasi principali [s]
-  approach_time: 20.5
+  approach_time: 10.5
   descend_and_pick_time: 20.5
   collect_time: 10.0
   transport_time: 25.0
@@ -27,8 +27,8 @@ motion_profiles:
   right_arm_pick: [0.001, -0.12, 0.08, 0.0, 0.12, 0.055]
 
   # Collect/lift
-  collect_left_base_xy_vel: [0.001, -0.15]
-  collect_right_base_xy_vel: [-0.0, -0.15]
+  collect_left_base_xy_vel: [0.001, -0.08]
+  collect_right_base_xy_vel: [-0.0, -0.08]
   left_arm_collect: [0.0, 0.08, -0.08, 0.0, 0.0, -0.020]
   right_arm_collect: [0.0, 0.08, -0.08, 0.0, 0.0, -0.025]
 
@@ -50,6 +50,135 @@ package:
   # Link del pacco usato dai servizi attach/detach
   link_name: "pacco_clone_1::link_1"
 
+manipulation:
+  # Mantiene i due EE alle estremita' del pacco durante collect/transport/place
+  # usando TP (object-centric hold)
+  enable_object_centric_hold: true
+  # Modalita' attach pacco: dual puo' essere fisicamente instabile in Gazebo.
+  # Consigliato per test: single_left
+  attach_mode: "single_left"   # single_left | single_right | dual
+  # Riferimento per il controllo hold durante trasporto:
+  # auto: single_left->left_ee, single_right->right_ee, dual->package
+  # package: usa sempre pose pacco da Gazebo
+  # left_ee/right_ee: stima pacco dall'EE del lato specificato
+  hold_reference: "left_ee"       # auto | package | left_ee | right_ee
+  # Pick TP a waypoint EE relativi al pacco:
+  # start(open) -> mid(open) -> grasp(close) -> attach
+  pick_use_ee_waypoints: true
+  # Start: quasi coincidente con fine Approach (movimento iniziale minimo)
+  pick_start_left_offset_x: -0.35
+  pick_start_right_offset_x: 0.35
+  pick_start_offset_y: -0.10
+  pick_start_offset_z: 0.40
+  # Mid: lieve apertura + inizio discesa (evita manovre ampie)
+  pick_mid_left_offset_x: -0.37
+  pick_mid_right_offset_x: 0.37
+  pick_mid_offset_y: -0.10
+  pick_mid_offset_z: 0.28
+  # Grasp: quota pacco + estremi lungo asse X, paletta "chiusa"
+  # Leggermente piu' larghi in presa per evitare compenetrazione della paletta nel pacco
+  pick_grasp_left_offset_x: -0.37
+  pick_grasp_right_offset_x: 0.37
+  pick_grasp_offset_y: -0.10
+  pick_grasp_offset_z: 0.04
+  # Apertura/chiusura paletta simulata via orientazione EE:
+  # open = rotazione sull'asse scelto, con angolo dedicato per lato
+  pick_open_axis: "pitch"   # roll | pitch | yaw
+  pick_open_angle_rad_left: 0.90
+  pick_open_angle_rad_right: 0.90
+  # Timing + convergenza waypoint pick
+  pick_start_traj_time: 1.2
+  pick_mid_traj_time: 1.2
+  pick_grasp_traj_time: 1.4
+  pick_stage_timeout: 6.0
+  pick_pos_tol: 0.03
+  pick_ori_tol: 0.20
+  pick_arm_cmd_abs_max: 0.22
+  # Se false usa offset fissi sotto, evitando capture rumorosa in fase attach
+  hold_use_captured_offsets: false
+  # Orientazione EE durante hold/pre-transport:
+  # captured = mantiene l'assetto rilevato al grasp (evita inversioni dei wrist)
+  # fixed    = forza approach.ee_left_rpy / approach.ee_right_rpy
+  hold_orientation_mode: "captured"
+  # Offset desiderati EE rispetto al centro pacco [m] durante hold
+  hold_left_offset_x: -0.37
+  hold_left_offset_y: -0.10
+  hold_left_offset_z: 0.05
+  hold_right_offset_x: 0.37
+  hold_right_offset_y: -0.10
+  hold_right_offset_z: 0.05
+  # Limite comando giunti braccio durante hold (ridotto per stabilita')
+  hold_arm_cmd_abs_max: 0.16
+  # Scala velocita' base durante hold (0..1) per ridurre agitazione del sistema
+  hold_base_vel_scale: 0.35
+  # Periodo [s] di ripianificazione della traiettoria EE rispetto alla posa pacco
+  hold_replan_period: 0.10
+  # Durata [s] della micro-traiettoria TP usata ad ogni ripianificazione
+  hold_traj_time: 0.55
+  # Sollevamento pacco [m] durante la fase collect
+  collect_lift_delta_z: 0.12
+  # Abbassamento pacco [m] durante la fase drop
+  drop_delta_z: 0.18
+  # Tolleranza [m] sulla differenza di quota tra i due EE (orizzontalita')
+  hold_z_tol: 0.04
+  # Tolleranza [m] sull'errore distanza EE-EE rispetto alla distanza nominale
+  hold_dist_tol: 0.05
+  # Periodo [s] di logging diagnostico della qualita' di presa
+  hold_log_period: 1.0
+  # Prima del MoveBase (trasporto), porta i bracci ad una posa di trasporto
+  # "comoda" tramite TP:
+  # - mode=package: package-centric (consigliato)
+  # - mode=joint: target giunti fissi
+  pre_transport_enable: true
+  pre_transport_mode: "package"  # package | joint
+  # Parametri package-centric: impone distanza EE in funzione della presa
+  # (half-span nominale catturato al grasp + margin) e quota/offset trasporto.
+  pre_transport_pkg_offset_y: -0.10
+  # Mantieni quasi la quota raggiunta a fine lift (evita pieghe "a scatto")
+  pre_transport_pkg_offset_z: 0.05
+  # Non allargare ulteriormente in pre-transport: mantieni la distanza di presa
+  pre_transport_pkg_half_span_margin_x: 0.00
+  # Allineamento basi alla formazione di trasporto relativa al pacco
+  # Evita spostamenti base in questa sottofase: la posa va solo rifinita sui bracci
+  pre_transport_base_align_enable: false
+  pre_transport_base_left_offset_x: -0.60
+  pre_transport_base_right_offset_x: 0.60
+  pre_transport_base_offset_y: -0.70
+  pre_transport_base_kp_x: 0.9
+  pre_transport_base_kp_y: 0.9
+  pre_transport_base_goal_tol: 0.10
+  pre_transport_base_cmd_xy_abs_max: 0.12
+  # [shoulder_pan, shoulder_lift, elbow, wrist_1, wrist_2, wrist_3]
+  # Usati solo con pre_transport_mode=joint
+  pre_transport_left_arm_goal: [0.0, -1.0, -2.0, -1.5708, 0.0, -1.5708]
+  pre_transport_right_arm_goal: [0.0, -2.1416, 2.0, -1.5708, 0.0, 1.5708]
+  pre_transport_traj_time: 2.5
+  pre_transport_stage_timeout: 6.0
+  pre_transport_joint_tol: 0.12
+  pre_transport_arm_cmd_abs_max: 0.16
+
+  # --------------------------------------------------------------------------
+  # MoveBase segmentato: retreat dal pallet + trasporto verso destinazione
+  # --------------------------------------------------------------------------
+  # Se true, prima del trasporto esegue un punto di allontanamento:
+  # y_target = y_pacco - transport_retreat_pkg_backoff_y
+  transport_retreat_enable: true
+  transport_retreat_pkg_backoff_y: 2.0
+  # Offset opzionali su X rispetto alla X corrente delle basi all'inizio retreat
+  transport_retreat_left_offset_x: 0.0
+  transport_retreat_right_offset_x: 0.0
+  transport_retreat_goal_tol: 0.10
+  transport_retreat_stage_timeout: 12.0
+  transport_retreat_kp_x: 1.0
+  transport_retreat_kp_y: 1.0
+  transport_retreat_cmd_xy_abs_max: 0.20
+  # Destinazione trasporto (world): modello di riferimento + offset.
+  # Default: davanti al pallet2 (model pacco_clone_2) con offset Y=-2m.
+  transport_destination_model: "pacco_clone_2"
+  transport_destination_offset_x: 0.0
+  transport_destination_offset_y: -2.0
+  transport_destination_goal_tol: 0.10
+
 tp:
   # Override opzionali dei path config TP (vuoto = auto-discovery standard)
   robot_cfg_path: ""
@@ -70,17 +199,17 @@ approach:
   # --------------------------------------------------------------------------
   # Timing + limiti comandi
   # --------------------------------------------------------------------------
-  test_duration: 20.5
-  test_traj_time: 20.5
+  test_duration: 10.5
+  test_traj_time: 10.5
   task_mode: "hybrid"               # joint | ee | hybrid
   estimated_timeout: 2.0
   arm_cmd_abs_max: 0.25
-  base_cmd_xy_abs_max: 0.12
+  base_cmd_xy_abs_max: 0.18
   base_cmd_wz_abs_max: 0.20
-  base_cmd_ramp_time: 1.0
+  base_cmd_ramp_time: 0.6
   use_base: true
   base_ctrl: "tp"
-  jtc_base_kp_xy: 1.2
+  jtc_base_kp_xy: 1.8
   jtc_base_kp_yaw: 1.0
   jtc_arm_kp: 1.3
 
@@ -88,15 +217,17 @@ approach:
   # Controllo base + convergenza
   # --------------------------------------------------------------------------
   base_goal_tol: 0.08
-  base_kp_x: 0.9
-  base_kp_y: 0.9
+  base_kp_x: 1.2
+  base_kp_y: 1.2
   base_target_mode: "pallet_offset"   # pallet_offset | legacy
   base_pose_source: "aligned_odom"    # odom | gazebo | aligned_odom | auto
 
   # Strategia percorso base
   base_keep_lane: false
   force_full_2d: true
-  base_auto_swap_slots: true
+  # Mantiene i ruoli fissi (left resta sul lato left del pallet, right sul right).
+  # Evita inversioni di lato che in pick fanno sembrare il destro "opposto".
+  base_auto_swap_slots: false
   base_swap_hyst: 0.10
   base_align_yaw: false
 
@@ -149,7 +280,9 @@ approach:
   # (ee_*_offset_{x,y,z} + orientazione ee_*_rpy se ee_orient_mode=fixed)
   left_arm_goal: ""
   right_arm_goal: ""
-  approach_only: true
+  # Se true, mette in pausa le fasi Supervisor (LiftObj/MoveBase/Drop/Release)
+  # e chiede conferma da terminale prima di proseguire.
+  pause_between_phases: true
 
   # --------------------------------------------------------------------------
   # Mock visione / discovery modelli

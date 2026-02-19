@@ -48,6 +48,47 @@ class GazeboBridgeMixin:
 
         return None
 
+    def _get_model_pose_xyz_by_candidates(self, raw_candidates, prefer_start: bool = True):
+        """
+        Cerca la posa xyz di un modello dai candidate names usando la cache da /model_states.
+        Ritorna (xyz, model_name) oppure (None, None).
+        """
+        if isinstance(raw_candidates, str):
+            candidates = self._split_model_candidates(raw_candidates)
+        elif isinstance(raw_candidates, (list, tuple)):
+            candidates = [str(c).strip() for c in raw_candidates if str(c).strip()]
+        else:
+            candidates = []
+        if not candidates:
+            return None, None
+
+        start_map = getattr(self, "_gazebo_model_pose_start_xyz", None) or {}
+        last_map = getattr(self, "_gazebo_model_pose_last_xyz", None) or {}
+
+        def _try(src_map):
+            if not src_map:
+                return None, None
+            names = list(src_map.keys())
+            idx = self._pick_model_index(names, candidates)
+            if idx is None or idx < 0 or idx >= len(names):
+                return None, None
+            name = names[idx]
+            pose = src_map.get(name, None)
+            if not isinstance(pose, (list, tuple)) or len(pose) < 3:
+                return None, None
+            return [float(pose[0]), float(pose[1]), float(pose[2])], str(name)
+
+        if prefer_start:
+            pose, name = _try(start_map)
+            if pose is not None:
+                return pose, name
+            return _try(last_map)
+
+        pose, name = _try(last_map)
+        if pose is not None:
+            return pose, name
+        return _try(start_map)
+
     def _pick_pallet_model_index(self, model_names: List[str]) -> Optional[int]:
         return self._pick_model_index(model_names, self.approach_mock_pallet_model_candidates)
 
@@ -94,6 +135,18 @@ class GazeboBridgeMixin:
             poses = list(getattr(msg, "pose", []) or [])
             if not names or len(names) != len(poses):
                 return
+
+            # Generic model cache for destination lookups (e.g. pacco_clone_2).
+            if not hasattr(self, "_gazebo_model_pose_last_xyz"):
+                self._gazebo_model_pose_last_xyz = {}
+            if not hasattr(self, "_gazebo_model_pose_start_xyz"):
+                self._gazebo_model_pose_start_xyz = {}
+            for i, mname in enumerate(names):
+                p = poses[i].position
+                xyz = [float(p.x), float(p.y), float(p.z)]
+                self._gazebo_model_pose_last_xyz[str(mname)] = xyz
+                if str(mname) not in self._gazebo_model_pose_start_xyz:
+                    self._gazebo_model_pose_start_xyz[str(mname)] = list(xyz)
 
             for side in ("left", "right"):
                 bidx = self._pick_base_model_index(names, side)

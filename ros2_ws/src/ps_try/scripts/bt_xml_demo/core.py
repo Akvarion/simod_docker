@@ -340,12 +340,21 @@ class BTDemoNode(ApproachPlanningMixin, TPControlMixin, GazeboBridgeMixin, Node)
         if self.approach_goal_cache_enabled and self.approach_arm_target_mode != "pallet_offset":
             self._load_approach_goal_cache()
 
+        # Deprecated: non blocca piu' le fasi post-approach.
         self.approach_only_mode = bool(ap.approach_only)
         self.approach_only_raw = "1" if self.approach_only_mode else "0"
         if self.approach_only_mode:
+            self.get_logger().warn(
+                "approach.approach_only is deprecated/no-op. "
+                "Use approach.pause_between_phases for manual step-by-step execution."
+            )
+
+        # Nuovo flag: pausa manuale tra fasi (prompt in console).
+        self.pause_between_phases = bool(ap.pause_between_phases)
+        if self.pause_between_phases:
             self.get_logger().info(
-                f"Approach-only mode active: Lift/Transport/Drop are paused "
-                f"(approach.approach_only={self.approach_only_mode})"
+                "Phase pause mode active: execution will stop at each phase boundary "
+                "and wait for user confirmation."
             )
 
         self.get_logger().info(
@@ -391,7 +400,8 @@ class BTDemoNode(ApproachPlanningMixin, TPControlMixin, GazeboBridgeMixin, Node)
             f"arm_goal_source=L:{self._approach_arm_goal_source['left']}/R:{self._approach_arm_goal_source['right']}, "
             f"arm_home_source=L:{'config' if self._approach_home_env_goal['left'] is not None else 'cfg/live'}/"
             f"R:{'config' if self._approach_home_env_goal['right'] is not None else 'cfg/live'}, "
-            f"approach_only={self.approach_only_mode} (raw='{self.approach_only_raw}'), "
+            f"approach_only(deprecated)={self.approach_only_mode} (raw='{self.approach_only_raw}'), "
+            f"pause_between_phases={self.pause_between_phases}, "
             f"pallet_model_candidates={self.approach_mock_pallet_model_candidates}, "
             f"base_model_candidates={self._gazebo_base_model_candidates}"
         )
@@ -463,6 +473,9 @@ class BTDemoNode(ApproachPlanningMixin, TPControlMixin, GazeboBridgeMixin, Node)
         self._gazebo_pallet_pose_start_xyz: Optional[List[float]] = None
         self._gazebo_pallet_pose_last_xyz: Optional[List[float]] = None
         self._gazebo_pallet_pose_start_model: Optional[str] = None
+        # Generic model pose cache from /model_states (for destination lookups, e.g. pacco_clone_2).
+        self._gazebo_model_pose_start_xyz: Dict[str, List[float]] = {}
+        self._gazebo_model_pose_last_xyz: Dict[str, List[float]] = {}
         self._gazebo_ee_pose_last: Dict[str, Optional[List[float]]] = {"left": None, "right": None}
         self._gazebo_ee_link_name: Dict[str, Optional[str]] = {"left": None, "right": None}
         self._world_pallet_pose_checked = False

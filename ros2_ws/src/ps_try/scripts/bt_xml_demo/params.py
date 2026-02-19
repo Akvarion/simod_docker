@@ -228,6 +228,7 @@ class ApproachConfig:
     mock_pallet_y: str = ""
     mock_pallet_z: str = ""
     approach_only: bool = True
+    pause_between_phases: bool = False
     task_mode: str = "hybrid"
     estimated_timeout: float = 2.0
     jtc_base_kp_xy: float = 1.2
@@ -239,11 +240,100 @@ class ApproachConfig:
 
 
 @dataclass
+class ManipulationConfig:
+    enable_object_centric_hold: bool = True
+    attach_mode: str = "single_left"  # single_left | single_right | dual
+    hold_reference: str = "auto"  # auto | package | left_ee | right_ee
+    pick_use_ee_waypoints: bool = True
+    pick_start_left_offset_x: float = -0.40
+    pick_start_right_offset_x: float = 0.40
+    pick_start_offset_y: float = 0.00
+    pick_start_offset_z: float = 0.40
+    pick_mid_left_offset_x: float = -0.45
+    pick_mid_right_offset_x: float = 0.45
+    pick_mid_offset_y: float = 0.00
+    pick_mid_offset_z: float = 0.15
+    pick_grasp_left_offset_x: float = -0.35
+    pick_grasp_right_offset_x: float = 0.35
+    pick_grasp_offset_y: float = 0.00
+    pick_grasp_offset_z: float = 0.00
+    pick_open_axis: str = "pitch"  # roll | pitch | yaw
+    pick_open_angle_rad_left: float = 1.5708
+    pick_open_angle_rad_right: float = 1.5708
+    pick_start_traj_time: float = 2.5
+    pick_mid_traj_time: float = 2.0
+    pick_grasp_traj_time: float = 2.0
+    pick_stage_timeout: float = 6.0
+    pick_pos_tol: float = 0.03
+    pick_ori_tol: float = 0.20
+    pick_arm_cmd_abs_max: float = 0.18
+    hold_use_captured_offsets: bool = False
+    # Modalita' orientazione EE durante hold/pre-transport:
+    # - captured: usa RPY catturato al grasp (default, piu' stabile)
+    # - fixed: usa approach.ee_left_rpy / approach.ee_right_rpy
+    hold_orientation_mode: str = "captured"
+    hold_left_offset_x: float = -0.35
+    hold_left_offset_y: float = -0.10
+    hold_left_offset_z: float = 0.08
+    hold_right_offset_x: float = 0.35
+    hold_right_offset_y: float = -0.10
+    hold_right_offset_z: float = 0.08
+    hold_arm_cmd_abs_max: float = 0.10
+    hold_base_vel_scale: float = 0.50
+    hold_replan_period: float = 0.30
+    hold_traj_time: float = 0.80
+    collect_lift_delta_z: float = 0.18
+    drop_delta_z: float = 0.18
+    hold_z_tol: float = 0.04
+    hold_dist_tol: float = 0.05
+    hold_log_period: float = 1.00
+    pre_transport_enable: bool = True
+    pre_transport_mode: str = "package"  # package | joint
+    pre_transport_pkg_offset_y: float = -0.10
+    pre_transport_pkg_offset_z: float = 0.18
+    pre_transport_pkg_half_span_margin_x: float = 0.02
+    pre_transport_base_align_enable: bool = True
+    pre_transport_base_left_offset_x: float = -0.60
+    pre_transport_base_right_offset_x: float = 0.60
+    pre_transport_base_offset_y: float = -0.70
+    pre_transport_base_kp_x: float = 0.9
+    pre_transport_base_kp_y: float = 0.9
+    pre_transport_base_goal_tol: float = 0.10
+    pre_transport_base_cmd_xy_abs_max: float = 0.12
+    pre_transport_left_arm_goal: List[float] = field(
+        default_factory=lambda: [0.0, -1.0, -2.0, -1.5708, 0.0, -1.5708]
+    )
+    pre_transport_right_arm_goal: List[float] = field(
+        default_factory=lambda: [0.0, -2.1416, 2.0, -1.5708, 0.0, 1.5708]
+    )
+    pre_transport_traj_time: float = 2.5
+    pre_transport_stage_timeout: float = 6.0
+    pre_transport_joint_tol: float = 0.12
+    pre_transport_arm_cmd_abs_max: float = 0.16
+    # MoveBase a 2 segmenti: prima allontanamento dal pallet, poi trasporto verso destinazione.
+    transport_retreat_enable: bool = True
+    transport_retreat_pkg_backoff_y: float = 2.0
+    transport_retreat_left_offset_x: float = 0.0
+    transport_retreat_right_offset_x: float = 0.0
+    transport_retreat_goal_tol: float = 0.10
+    transport_retreat_stage_timeout: float = 12.0
+    transport_retreat_kp_x: float = 1.0
+    transport_retreat_kp_y: float = 1.0
+    transport_retreat_cmd_xy_abs_max: float = 0.20
+    # Destinazione world per il trasporto "a blocco rigido".
+    transport_destination_model: str = "pacco_clone_2"
+    transport_destination_offset_x: float = 0.0
+    transport_destination_offset_y: float = -2.0
+    transport_destination_goal_tol: float = 0.10
+
+
+@dataclass
 class DemoConfig:
     phases: PhasesConfig = field(default_factory=PhasesConfig)
     motion_profiles: MotionProfilesConfig = field(default_factory=MotionProfilesConfig)
     package: PackageConfig = field(default_factory=PackageConfig)
     approach: ApproachConfig = field(default_factory=ApproachConfig)
+    manipulation: ManipulationConfig = field(default_factory=ManipulationConfig)
     tp: TPConfig = field(default_factory=TPConfig)
 
 
@@ -365,6 +455,7 @@ def _parse_approach(raw: Dict[str, Any], phases: PhasesConfig) -> ApproachConfig
         mock_pallet_y=str(raw.get("mock_pallet_y", defaults.mock_pallet_y)),
         mock_pallet_z=str(raw.get("mock_pallet_z", defaults.mock_pallet_z)),
         approach_only=_as_bool(raw.get("approach_only"), defaults.approach_only),
+        pause_between_phases=_as_bool(raw.get("pause_between_phases"), defaults.pause_between_phases),
         task_mode=str(raw.get("task_mode", defaults.task_mode)),
         estimated_timeout=_as_float(raw.get("estimated_timeout"), defaults.estimated_timeout),
         jtc_base_kp_xy=_as_float(raw.get("jtc_base_kp_xy"), defaults.jtc_base_kp_xy),
@@ -373,6 +464,139 @@ def _parse_approach(raw: Dict[str, Any], phases: PhasesConfig) -> ApproachConfig
         use_base=_as_bool(raw.get("use_base"), defaults.use_base),
         base_ctrl=str(raw.get("base_ctrl", defaults.base_ctrl)),
         goal_cache_enabled=_as_bool(raw.get("goal_cache_enabled"), defaults.goal_cache_enabled),
+    )
+
+
+def _parse_manipulation(raw: Dict[str, Any]) -> ManipulationConfig:
+    defaults = ManipulationConfig()
+    return ManipulationConfig(
+        enable_object_centric_hold=_as_bool(raw.get("enable_object_centric_hold"), defaults.enable_object_centric_hold),
+        attach_mode=str(raw.get("attach_mode", defaults.attach_mode)),
+        hold_reference=str(raw.get("hold_reference", defaults.hold_reference)),
+        pick_use_ee_waypoints=_as_bool(raw.get("pick_use_ee_waypoints"), defaults.pick_use_ee_waypoints),
+        pick_start_left_offset_x=_as_float(raw.get("pick_start_left_offset_x"), defaults.pick_start_left_offset_x),
+        pick_start_right_offset_x=_as_float(raw.get("pick_start_right_offset_x"), defaults.pick_start_right_offset_x),
+        pick_start_offset_y=_as_float(raw.get("pick_start_offset_y"), defaults.pick_start_offset_y),
+        pick_start_offset_z=_as_float(raw.get("pick_start_offset_z"), defaults.pick_start_offset_z),
+        pick_mid_left_offset_x=_as_float(raw.get("pick_mid_left_offset_x"), defaults.pick_mid_left_offset_x),
+        pick_mid_right_offset_x=_as_float(raw.get("pick_mid_right_offset_x"), defaults.pick_mid_right_offset_x),
+        pick_mid_offset_y=_as_float(raw.get("pick_mid_offset_y"), defaults.pick_mid_offset_y),
+        pick_mid_offset_z=_as_float(raw.get("pick_mid_offset_z"), defaults.pick_mid_offset_z),
+        pick_grasp_left_offset_x=_as_float(raw.get("pick_grasp_left_offset_x"), defaults.pick_grasp_left_offset_x),
+        pick_grasp_right_offset_x=_as_float(raw.get("pick_grasp_right_offset_x"), defaults.pick_grasp_right_offset_x),
+        pick_grasp_offset_y=_as_float(raw.get("pick_grasp_offset_y"), defaults.pick_grasp_offset_y),
+        pick_grasp_offset_z=_as_float(raw.get("pick_grasp_offset_z"), defaults.pick_grasp_offset_z),
+        pick_open_axis=str(raw.get("pick_open_axis", defaults.pick_open_axis)),
+        pick_open_angle_rad_left=_as_float(
+            raw.get("pick_open_angle_rad_left", raw.get("pick_open_angle_rad")),
+            defaults.pick_open_angle_rad_left,
+        ),
+        pick_open_angle_rad_right=_as_float(
+            raw.get("pick_open_angle_rad_right", raw.get("pick_open_angle_rad")),
+            defaults.pick_open_angle_rad_right,
+        ),
+        pick_start_traj_time=_as_float(raw.get("pick_start_traj_time"), defaults.pick_start_traj_time),
+        pick_mid_traj_time=_as_float(raw.get("pick_mid_traj_time"), defaults.pick_mid_traj_time),
+        pick_grasp_traj_time=_as_float(raw.get("pick_grasp_traj_time"), defaults.pick_grasp_traj_time),
+        pick_stage_timeout=_as_float(raw.get("pick_stage_timeout"), defaults.pick_stage_timeout),
+        pick_pos_tol=_as_float(raw.get("pick_pos_tol"), defaults.pick_pos_tol),
+        pick_ori_tol=_as_float(raw.get("pick_ori_tol"), defaults.pick_ori_tol),
+        pick_arm_cmd_abs_max=_as_float(raw.get("pick_arm_cmd_abs_max"), defaults.pick_arm_cmd_abs_max),
+        hold_use_captured_offsets=_as_bool(raw.get("hold_use_captured_offsets"), defaults.hold_use_captured_offsets),
+        hold_orientation_mode=str(raw.get("hold_orientation_mode", defaults.hold_orientation_mode)),
+        hold_left_offset_x=_as_float(raw.get("hold_left_offset_x"), defaults.hold_left_offset_x),
+        hold_left_offset_y=_as_float(raw.get("hold_left_offset_y"), defaults.hold_left_offset_y),
+        hold_left_offset_z=_as_float(raw.get("hold_left_offset_z"), defaults.hold_left_offset_z),
+        hold_right_offset_x=_as_float(raw.get("hold_right_offset_x"), defaults.hold_right_offset_x),
+        hold_right_offset_y=_as_float(raw.get("hold_right_offset_y"), defaults.hold_right_offset_y),
+        hold_right_offset_z=_as_float(raw.get("hold_right_offset_z"), defaults.hold_right_offset_z),
+        hold_arm_cmd_abs_max=_as_float(raw.get("hold_arm_cmd_abs_max"), defaults.hold_arm_cmd_abs_max),
+        hold_base_vel_scale=_as_float(raw.get("hold_base_vel_scale"), defaults.hold_base_vel_scale),
+        hold_replan_period=_as_float(raw.get("hold_replan_period"), defaults.hold_replan_period),
+        hold_traj_time=_as_float(raw.get("hold_traj_time"), defaults.hold_traj_time),
+        collect_lift_delta_z=_as_float(raw.get("collect_lift_delta_z"), defaults.collect_lift_delta_z),
+        drop_delta_z=_as_float(raw.get("drop_delta_z"), defaults.drop_delta_z),
+        hold_z_tol=_as_float(raw.get("hold_z_tol"), defaults.hold_z_tol),
+        hold_dist_tol=_as_float(raw.get("hold_dist_tol"), defaults.hold_dist_tol),
+        hold_log_period=_as_float(raw.get("hold_log_period"), defaults.hold_log_period),
+        pre_transport_enable=_as_bool(raw.get("pre_transport_enable"), defaults.pre_transport_enable),
+        pre_transport_mode=str(raw.get("pre_transport_mode", defaults.pre_transport_mode)),
+        pre_transport_pkg_offset_y=_as_float(raw.get("pre_transport_pkg_offset_y"), defaults.pre_transport_pkg_offset_y),
+        pre_transport_pkg_offset_z=_as_float(raw.get("pre_transport_pkg_offset_z"), defaults.pre_transport_pkg_offset_z),
+        pre_transport_pkg_half_span_margin_x=_as_float(
+            raw.get("pre_transport_pkg_half_span_margin_x"), defaults.pre_transport_pkg_half_span_margin_x
+        ),
+        pre_transport_base_align_enable=_as_bool(
+            raw.get("pre_transport_base_align_enable"), defaults.pre_transport_base_align_enable
+        ),
+        pre_transport_base_left_offset_x=_as_float(
+            raw.get("pre_transport_base_left_offset_x"), defaults.pre_transport_base_left_offset_x
+        ),
+        pre_transport_base_right_offset_x=_as_float(
+            raw.get("pre_transport_base_right_offset_x"), defaults.pre_transport_base_right_offset_x
+        ),
+        pre_transport_base_offset_y=_as_float(
+            raw.get("pre_transport_base_offset_y"), defaults.pre_transport_base_offset_y
+        ),
+        pre_transport_base_kp_x=_as_float(raw.get("pre_transport_base_kp_x"), defaults.pre_transport_base_kp_x),
+        pre_transport_base_kp_y=_as_float(raw.get("pre_transport_base_kp_y"), defaults.pre_transport_base_kp_y),
+        pre_transport_base_goal_tol=_as_float(
+            raw.get("pre_transport_base_goal_tol"), defaults.pre_transport_base_goal_tol
+        ),
+        pre_transport_base_cmd_xy_abs_max=_as_float(
+            raw.get("pre_transport_base_cmd_xy_abs_max"), defaults.pre_transport_base_cmd_xy_abs_max
+        ),
+        pre_transport_left_arm_goal=_as_float_list(
+            raw.get("pre_transport_left_arm_goal"), 6, defaults.pre_transport_left_arm_goal
+        ),
+        pre_transport_right_arm_goal=_as_float_list(
+            raw.get("pre_transport_right_arm_goal"), 6, defaults.pre_transport_right_arm_goal
+        ),
+        pre_transport_traj_time=_as_float(raw.get("pre_transport_traj_time"), defaults.pre_transport_traj_time),
+        pre_transport_stage_timeout=_as_float(
+            raw.get("pre_transport_stage_timeout"), defaults.pre_transport_stage_timeout
+        ),
+        pre_transport_joint_tol=_as_float(raw.get("pre_transport_joint_tol"), defaults.pre_transport_joint_tol),
+        pre_transport_arm_cmd_abs_max=_as_float(
+            raw.get("pre_transport_arm_cmd_abs_max"), defaults.pre_transport_arm_cmd_abs_max
+        ),
+        transport_retreat_enable=_as_bool(
+            raw.get("transport_retreat_enable"), defaults.transport_retreat_enable
+        ),
+        transport_retreat_pkg_backoff_y=_as_float(
+            raw.get("transport_retreat_pkg_backoff_y"), defaults.transport_retreat_pkg_backoff_y
+        ),
+        transport_retreat_left_offset_x=_as_float(
+            raw.get("transport_retreat_left_offset_x"), defaults.transport_retreat_left_offset_x
+        ),
+        transport_retreat_right_offset_x=_as_float(
+            raw.get("transport_retreat_right_offset_x"), defaults.transport_retreat_right_offset_x
+        ),
+        transport_retreat_goal_tol=_as_float(
+            raw.get("transport_retreat_goal_tol"), defaults.transport_retreat_goal_tol
+        ),
+        transport_retreat_stage_timeout=_as_float(
+            raw.get("transport_retreat_stage_timeout"), defaults.transport_retreat_stage_timeout
+        ),
+        transport_retreat_kp_x=_as_float(
+            raw.get("transport_retreat_kp_x"), defaults.transport_retreat_kp_x
+        ),
+        transport_retreat_kp_y=_as_float(
+            raw.get("transport_retreat_kp_y"), defaults.transport_retreat_kp_y
+        ),
+        transport_retreat_cmd_xy_abs_max=_as_float(
+            raw.get("transport_retreat_cmd_xy_abs_max"), defaults.transport_retreat_cmd_xy_abs_max
+        ),
+        transport_destination_model=str(raw.get("transport_destination_model", defaults.transport_destination_model)),
+        transport_destination_offset_x=_as_float(
+            raw.get("transport_destination_offset_x"), defaults.transport_destination_offset_x
+        ),
+        transport_destination_offset_y=_as_float(
+            raw.get("transport_destination_offset_y"), defaults.transport_destination_offset_y
+        ),
+        transport_destination_goal_tol=_as_float(
+            raw.get("transport_destination_goal_tol"), defaults.transport_destination_goal_tol
+        ),
     )
 
 
@@ -391,6 +615,9 @@ def load_demo_config(
     )
     package = _parse_package(raw.get("package", {}) if isinstance(raw.get("package", {}), dict) else {})
     approach = _parse_approach(raw.get("approach", {}) if isinstance(raw.get("approach", {}), dict) else {}, phases)
+    manipulation = _parse_manipulation(
+        raw.get("manipulation", {}) if isinstance(raw.get("manipulation", {}), dict) else {}
+    )
     tp = _parse_tp(raw.get("tp", {}) if isinstance(raw.get("tp", {}), dict) else {})
 
     return DemoConfig(
@@ -398,5 +625,6 @@ def load_demo_config(
         motion_profiles=motion_profiles,
         package=package,
         approach=approach,
+        manipulation=manipulation,
         tp=tp,
     ), path

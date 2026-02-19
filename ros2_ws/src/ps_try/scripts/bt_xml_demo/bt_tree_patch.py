@@ -18,6 +18,19 @@ def assign_bt_name(tree: Tree, name: str):
         assign_bt_name(child, name)
 
 
+def _parse_int_attr(attrs, keys, default):
+    for key in keys:
+        if key in attrs:
+            raw = str(attrs.get(key, "")).strip()
+            if raw == "":
+                return default
+            try:
+                return int(raw)
+            except Exception:
+                return default
+    return default
+
+
 def gen_tree_from_btcpp(self, xmlfile, funcs):
     """Custom parser for XML exported from Groot/BehaviorTree.CPP."""
     func_dict = {f.__name__: f for f in funcs}
@@ -44,6 +57,7 @@ def gen_tree_from_btcpp(self, xmlfile, funcs):
                 is_first = False
             else:
                 current_node = parent_node._Tree__add_child(xml_elem.tag, depth, child_index)
+            setattr(current_node, "_bt_attrs", dict(xml_elem.attrib) if xml_elem.attrib else {})
         elif xml_elem.tag not in control_nodes:
             func_name = xml_elem.tag
             func_obj = func_dict.get(func_name, None)
@@ -59,9 +73,13 @@ def gen_tree_from_btcpp(self, xmlfile, funcs):
                     leaf_func = _wrapped_func
                 else:
                     leaf_func = func_obj
-                parent_node._Tree__add_child("Action", depth, child_index, func_name, leaf_func)
+                leaf_node = parent_node._Tree__add_child("Action", depth, child_index, func_name, leaf_func)
+                setattr(leaf_node, "_bt_attrs", attrs)
             elif parent_node is not None:
-                print(f"[BT] WARNING: funzione '{func_name}' non trovata nel dizionario funzioni.")
+                raise ValueError(
+                    f"[BT] XML node '{func_name}' non mappato in all_funcs. "
+                    "Aggiungi la funzione in runner.py/all_funcs oppure correggi il tag nell'XML."
+                )
 
         if len(xml_elem) > 0:
             new_depth = depth + 1
@@ -76,6 +94,7 @@ def gen_tree_from_btcpp(self, xmlfile, funcs):
 def bt_run(self):
     """Simplified run() semantics for leaves and control nodes."""
     node_type = getattr(self, "type_", None)
+    node_attrs = getattr(self, "_bt_attrs", {}) or {}
 
     if getattr(self, "id_", None) is not None and getattr(self, "func_", None) is not None:
         if getattr(self, "_status", "IDLE") == "SUCCESS":
@@ -131,29 +150,80 @@ def bt_run(self):
         return False
 
     if node_type in ("ParallelAll", "Parallel"):
+        n_children = len(getattr(self, "child_", []))
+        success_count = 0
+        failure_count = 0
         running_seen = False
         for child in self.child_:
             status = child.run()
-            if status is False:
+            if status is True:
+                success_count += 1
+            elif status is False:
+                failure_count += 1
+            else:
+                running_seen = True
+
+        if node_type == "ParallelAll":
+            # BT.CPP-style ParallelAll: all children should succeed; max_failures can relax failure trigger.
+            max_failures = max(
+                0,
+                _parse_int_attr(node_attrs, ("max_failures", "maxFailures"), 0),
+            )
+            if failure_count > max_failures:
                 self._status = "FAIL"
                 return False
-            if status is None:
-                running_seen = True
-        if running_seen:
+            if (success_count + failure_count) == n_children:
+                # all children completed and failures are within tolerated budget
+                self._status = "SUCCESS"
+                return True
             self._status = "RUNNING"
             return None
-        self._status = "SUCCESS"
-        return True
+
+        # BT.CPP-style Parallel with thresholds
+        success_th = _parse_int_attr(
+            node_attrs,
+            ("success_threshold", "successThreshold", "success_count", "successCount"),
+            n_children,
+        )
+        failure_th = _parse_int_attr(
+            node_attrs,
+            ("failure_threshold", "failureThreshold", "failure_count", "failureCount"),
+            1,
+        )
+        success_th = min(max(1, success_th), max(1, n_children))
+        failure_th = min(max(1, failure_th), max(1, n_children))
+
+        if success_count >= success_th:
+            self._status = "SUCCESS"
+            return True
+        if failure_count >= failure_th:
+            self._status = "FAIL"
+            return False
+        self._status = "RUNNING"
+        return None
 
     if node_type == "RetryUntilSuccessful":
         if not self.child_:
             self._status = "SUCCESS"
             return True
+        max_attempts = _parse_int_attr(
+            node_attrs,
+            ("num_attempts", "numAttempts"),
+            -1,  # -1 => infinite retries (BT.CPP-like)
+        )
+        if not hasattr(self, "_retry_count"):
+            self._retry_count = 0
         child = self.child_[0]
         status = child.run()
         if status is True:
             self._status = "SUCCESS"
+            self._retry_count = 0
             return True
+        if status is False:
+            self._retry_count += 1
+            if max_attempts >= 0 and self._retry_count >= max_attempts:
+                self._status = "FAIL"
+                return False
         self._status = "RUNNING"
         return None
 
