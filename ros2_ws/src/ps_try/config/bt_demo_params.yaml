@@ -179,6 +179,58 @@ manipulation:
   transport_destination_offset_y: -2.0
   transport_destination_goal_tol: 0.10
 
+  # --------------------------------------------------------------------------
+  # Drop/Release target-centric sul pallet di deposito
+  # --------------------------------------------------------------------------
+  # Modello world che rappresenta il target di appoggio.
+  drop_target_model: "pacco_clone_2"
+  # Offset del target pacco finale rispetto al modello (world).
+  drop_target_offset_x: 0.0
+  drop_target_offset_y: 0.0
+  drop_target_offset_z: 0.0
+  # Quota pacco in fase pre-release: z = z_target + drop_release_z_offset.
+  drop_release_z_offset: 0.40
+  # Formazione basi durante drop (fronte pallet), riferita al target deposito.
+  drop_base_left_offset_x: -0.60
+  drop_base_right_offset_x: 0.60
+  drop_base_offset_y: -0.70
+  # rigid_pkg: trasla rigidamente la formazione corrente sul target pacco
+  # fixed_offsets: usa gli offset fissi qui sopra
+  drop_base_target_mode: "rigid_pkg"
+  drop_base_goal_tol: 0.10
+  drop_base_cmd_xy_abs_max: 0.12
+  drop_base_kp_xy: 1.20
+  # Tempo traiettoria base (s) per ogni allineamento/replan drop.
+  # Teniamolo breve per evitare avanzamento "a scatti lenti".
+  drop_base_align_traj_time: 2.50
+  # Frequenza di aggiornamento target base in modalita' rigid_pkg.
+  drop_base_replan_period: 1.50
+  # Timeout hard stage base_align. <=0 disabilita il timeout (solo warning).
+  drop_base_stage_timeout: 0.0
+  # Uscita soft da descend quando z e' convergente ma XY resta bloccato.
+  drop_descend_xy_tol_soft: 0.40
+  drop_descend_soft_after_s: 8.0
+
+  # Apertura palette in Release, rispetto al target deposito.
+  release_open_left_offset_x: -0.47
+  release_open_right_offset_x: 0.47
+  release_open_offset_y: -0.10
+  release_open_offset_z: 0.35
+  # Convergenza release-open (EE)
+  release_open_pos_tol: 0.03
+  release_open_ori_tol: 0.20
+  # Fallback estremo: forza detach anche senza convergenza piena.
+  release_open_force_after_s: 12.0
+
+  # Leggero arretramento finale dopo detach + ritorno home.
+  release_retreat_left_offset_x: 0.0
+  release_retreat_right_offset_x: 0.0
+  release_retreat_offset_y: -0.20
+  release_retreat_time: 2.5
+  release_retreat_goal_tol: 0.10
+  release_retreat_cmd_xy_abs_max: 0.12
+  release_retreat_arm_cmd_abs_max: 0.25
+
 tp:
   # Override opzionali dei path config TP (vuoto = auto-discovery standard)
   robot_cfg_path: ""

@@ -30,11 +30,12 @@ import rclpy
 from rclpy.node import Node
 
 
-from geometry_msgs.msg import Twist
+from geometry_msgs.msg import Twist, Pose, Quaternion
 from std_msgs.msg import Float64MultiArray
 from sensor_msgs.msg import JointState
 from nav_msgs.msg import Odometry
-from gazebo_msgs.msg import ModelStates, LinkStates
+from gazebo_msgs.msg import ModelStates, LinkStates, EntityState
+from gazebo_msgs.srv import SetEntityState
 from linkattacher_msgs.srv import AttachLink, DetachLink
 from gazebo_link_gravity_toggle.srv import SetLinkGravity
 from gazebo_collision_toggle.srv import SetCollisionEnabled
@@ -503,6 +504,7 @@ class BTDemoNode(ApproachPlanningMixin, TPControlMixin, GazeboBridgeMixin, Node)
         self.detach_cli = self.create_client(DetachLink, "/DETACHLINK")
         self.toggle_gravity_cli = self.create_client(SetLinkGravity, "/set_link_gravity")
         self.toggle_collision_cli = self.create_client(SetCollisionEnabled, "/set_collision_enabled")
+        self.set_entity_state_cli = self.create_client(SetEntityState, "/state/set_entity_state")
 
         # Config path robusti: install-space, source-space e fallback assoluti.
         try:
@@ -733,3 +735,72 @@ def set_package_gravity(node: BTDemoNode, gravity_on: bool) -> bool:
     else:
         node.get_logger().warn(bt_fmt(f"[Gravity] failed to set gravity={gravity_on} on {package_link_name}"))
     return success
+
+
+def wake_package_body(node: BTDemoNode) -> bool:
+    """Sveglia il body ODE del pacco impostandone lo stato con una leggera
+    velocità verso il basso tramite il servizio ``/state/set_entity_state``.
+
+    Gazebo/ODE mette automaticamente in *disabled* (sleep) i corpi rigidi
+    fermi.  ``SetGravityMode(true)`` imposta il flag ma ODE non ricalcola le
+    forze su un body disabilitato, quindi il pacco resta sospeso.
+
+    ``SetEntityState`` internamente chiama ``Model::SetWorldPose`` →
+    ``dBodySetPosition`` che **riabilita** il body ODE, permettendo alla
+    gravità appena riattivata di avere effetto.
+    """
+    client = node.set_entity_state_cli
+    if not client.service_is_ready():
+        try:
+            client.wait_for_service(timeout_sec=1.0)
+        except Exception:
+            pass
+    if not client.service_is_ready():
+        node.get_logger().warn(bt_fmt(
+            "[Gravity] set_entity_state service unavailable, body may stay asleep"
+        ))
+        return False
+
+    # Ricava la posa corrente del pacco dal cache di model_states.
+    pkg_model = str(node.cfg.package.link_name).split("::")[0].strip() or "pacco_clone_1"
+    last_xyz = getattr(node, "_gazebo_model_pose_last_xyz", {}).get(pkg_model)
+    if not (isinstance(last_xyz, (list, tuple)) and len(last_xyz) >= 3):
+        node.get_logger().warn(bt_fmt(
+            f"[Gravity] cannot wake {pkg_model}: current pose unknown"
+        ))
+        return False
+
+    req = SetEntityState.Request()
+    state = EntityState()
+    state.name = pkg_model
+    state.reference_frame = "world"
+    # Posa corrente (manteniamo la stessa posizione)
+    state.pose = Pose()
+    state.pose.position.x = float(last_xyz[0])
+    state.pose.position.y = float(last_xyz[1])
+    state.pose.position.z = float(last_xyz[2])
+    state.pose.orientation = Quaternion(x=0.0, y=0.0, z=0.0, w=1.0)
+    # Leggera velocità verso il basso per dare impulso iniziale
+    state.twist = Twist()
+    state.twist.linear.x = 0.0
+    state.twist.linear.y = 0.0
+    state.twist.linear.z = -0.05
+    req.state = state
+
+    future = client.call_async(req)
+    try:
+        rclpy.spin_until_future_complete(node, future, timeout_sec=2.0)
+    except Exception:
+        pass
+
+    ok = bool(future.done() and future.result() and getattr(future.result(), "success", True))
+    if ok:
+        node.get_logger().info(bt_fmt(
+            f"[Gravity] body wake via SetEntityState on {pkg_model} "
+            f"at [{last_xyz[0]:.3f}, {last_xyz[1]:.3f}, {last_xyz[2]:.3f}]"
+        ))
+    else:
+        node.get_logger().warn(bt_fmt(
+            f"[Gravity] SetEntityState wake failed on {pkg_model}"
+        ))
+    return ok

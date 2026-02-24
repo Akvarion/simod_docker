@@ -18,6 +18,7 @@ from TaskPrioritization.Trajectories.trajectory import Trajectory
 
 from bt_xml_demo.core import (
     set_package_gravity,
+    wake_package_body,
 )
 from bt_xml_demo.bt_action_context import (
     bt_fmt,
@@ -186,6 +187,53 @@ def _resolve_transport_destination_xy(node):
     return None, "unavailable"
 
 
+def _resolve_drop_target_xyz(node):
+    """
+    Target world del deposito pacco (drop/release).
+    Priorita':
+    1) modello configurato (default pacco_clone_2)
+    2) fallback su pacco live
+    """
+    man_cfg = node.cfg.manipulation
+    raw = str(getattr(man_cfg, "drop_target_model", "")).strip()
+    if not raw:
+        raw = str(getattr(man_cfg, "transport_destination_model", "pacco_clone_2")).strip() or "pacco_clone_2"
+    cands = node._split_model_candidates(raw) if hasattr(node, "_split_model_candidates") else [raw]
+    if not cands:
+        cands = ["pacco_clone_2"]
+
+    dst_xyz = None
+    dst_model = None
+    if hasattr(node, "_get_model_pose_xyz_by_candidates"):
+        try:
+            # Per il deposito preferiamo la posa live (last) e solo poi lo startup snapshot.
+            dst_xyz, dst_model = node._get_model_pose_xyz_by_candidates(cands, prefer_start=False)
+            if dst_xyz is None:
+                dst_xyz, dst_model = node._get_model_pose_xyz_by_candidates(cands, prefer_start=True)
+        except Exception:
+            dst_xyz, dst_model = None, None
+
+    if isinstance(dst_xyz, (list, tuple)) and len(dst_xyz) >= 3:
+        return [
+            float(dst_xyz[0]) + float(getattr(man_cfg, "drop_target_offset_x", 0.0)),
+            float(dst_xyz[1]) + float(getattr(man_cfg, "drop_target_offset_y", 0.0)),
+            float(dst_xyz[2]) + float(getattr(man_cfg, "drop_target_offset_z", 0.0)),
+        ], f"model:{dst_model or cands[0]}"
+
+    # Non usare il fallback del transport (puo' includere offset -Y di trasferimento).
+    # Se il modello target non e' disponibile, fallback solo sulla posa pacco corrente.
+    pkg_xyz = _get_live_package_xyz(node)
+    if isinstance(pkg_xyz, (list, tuple)) and len(pkg_xyz) >= 3:
+        node._warn_throttled(
+            "drop_target_fallback_pkg",
+            bt_fmt(f"[Drop] target model not found ({cands}), fallback to current package pose"),
+            period_s=3.0,
+        )
+        return [float(pkg_xyz[0]), float(pkg_xyz[1]), float(pkg_xyz[2])], "fallback:pkg"
+
+    return None, "unavailable"
+
+
 def _get_live_tp_state(node):
     left_arm_jp = node.get_arm_joint_positions("left")
     right_arm_jp = node.get_arm_joint_positions("right")
@@ -253,6 +301,23 @@ def _resolve_pkg_reference_xyz(node, left_arm_jp, right_arm_jp, left_base, right
     off = np.asarray(off, dtype=np.float32)
     pkg = np.asarray(ee[:3], dtype=np.float32) - np.asarray(off[:3], dtype=np.float32)
     return [float(pkg[0]), float(pkg[1]), float(pkg[2])]
+
+
+def _pkg_xyz_for_alignment(node, left_arm_jp, right_arm_jp, left_base, right_base):
+    """
+    Riferimento pacco per allineamento/drop:
+    - preferisci sempre posa live Gazebo (centro pacco fisico);
+    - fallback alla stima da hold-reference se la posa live non e' disponibile.
+    """
+    pkg_live = _get_live_package_xyz(node)
+    pkg_ref = _resolve_pkg_reference_xyz(
+        node,
+        left_arm_jp=left_arm_jp,
+        right_arm_jp=right_arm_jp,
+        left_base=left_base,
+        right_base=right_base,
+    )
+    return pkg_live if pkg_live is not None else pkg_ref
 
 
 def _build_base_cmd_to_xy(
@@ -365,6 +430,7 @@ def _replan_pkg_hold_tp(
     right_arm_jp,
     left_base,
     right_base,
+    pkg_xy_target=None,
     pkg_z_target=None,
     force=False,
     preserve_jtc_base=False,
@@ -386,6 +452,10 @@ def _replan_pkg_hold_tp(
         pkg_xyz = _get_live_package_xyz(node)
     if pkg_xyz is None:
         return False
+    pkg_xyz = [float(pkg_xyz[0]), float(pkg_xyz[1]), float(pkg_xyz[2])]
+    if isinstance(pkg_xy_target, (list, tuple)) and len(pkg_xy_target) >= 2:
+        pkg_xyz[0] = float(pkg_xy_target[0])
+        pkg_xyz[1] = float(pkg_xy_target[1])
 
     if node._pkg_hold_offsets.get("left", None) is None or node._pkg_hold_offsets.get("right", None) is None:
         if not _capture_pkg_grasp_offsets(node, left_arm_jp, right_arm_jp, left_base, right_base):
@@ -456,6 +526,8 @@ def _execute_tp_arm_control(node, left_arm_jp, right_arm_jp, left_base, right_ba
     clip = float(max(1e-4, arm_clip_abs))
     left_arm_cmd = _sanitize_arm_cmd(node._get_arm_cmd_values(cmd, "left"), clip)
     right_arm_cmd = _sanitize_arm_cmd(node._get_arm_cmd_values(cmd, "right"), clip)
+    # In modalita' arm-only, azzera sempre la base per evitare drift residui tra fasi.
+    _publish_base_cmd(node, left_cmd=[0.0, 0.0, 0.0], right_cmd=[0.0, 0.0, 0.0])
     _publish_arm_cmd(node, left_cmd=left_arm_cmd, right_cmd=right_arm_cmd)
     return left_arm_cmd, right_arm_cmd
 
@@ -512,7 +584,15 @@ def _execute_tp_arm_hold(node, left_arm_jp, right_arm_jp, left_base, right_base)
     )
 
 
-def _init_tp_base_stage(node, left_base_goal_xy, right_base_goal_xy, period_s: float, kp_xy: float = 1.0, kp_yaw: float = 0.0) -> bool:
+def _init_tp_base_stage(
+    node,
+    left_base_goal_xy,
+    right_base_goal_xy,
+    period_s: float,
+    kp_xy: float = 1.0,
+    kp_yaw: float = 0.0,
+    arm_active: bool = False,
+) -> bool:
     if node.approach_jtc_task is None:
         return False
     try:
@@ -525,7 +605,7 @@ def _init_tp_base_stage(node, left_base_goal_xy, right_base_goal_xy, period_s: f
         k_omni = np.asarray([[float(kp_xy), float(kp_xy), float(kp_yaw)], [float(kp_xy), float(kp_xy), float(kp_yaw)]], dtype=np.float32)
         node.approach_jtc_task.activate()
         node.approach_jtc_task.set_activation("base", True)
-        node.approach_jtc_task.set_activation("arm", False)
+        node.approach_jtc_task.set_activation("arm", bool(arm_active))
         node.approach_jtc_task.set_omni_trajectories_pnts(
             target_cart_positions=[l_goal, r_goal],
             K_omni=k_omni,
@@ -828,22 +908,40 @@ def _detach_package_from_arms(node) -> bool:
         sides = ("right",)
     else:
         sides = ("left",)
-    sent = False
+    all_ok = True
     for side in sides:
         req = DetachLink.Request()
         setattr(req, "model1_name", _get_robot_model_name_for_side(node, side))
         setattr(req, "link1_name", _get_arm_attach_link_name(side))
         setattr(req, "model2_name", pkg_model)
         setattr(req, "link2_name", pkg_link)
-        node.detach_cli.call_async(req)
-        sent = True
-    if sent:
-        node.get_logger().info(
-            bt_fmt(
-                f"[PkgAttach] detach requests sent mode={mode} for model={pkg_model}, link={pkg_link}"
+        future = node.detach_cli.call_async(req)
+        # Attesa sincrona: il joint deve essere rimosso in Gazebo PRIMA
+        # di riabilitare la gravità, altrimenti il body ODE può restare
+        # in sleep e la gravità non ha effetto.
+        try:
+            rclpy.spin_until_future_complete(node, future, timeout_sec=3.0)
+        except Exception:
+            pass
+        if future.done() and future.result() is not None:
+            ok = getattr(future.result(), "success", False)
+            if not ok:
+                node.get_logger().warn(
+                    bt_fmt(f"[PkgAttach] detach failed for side={side}: "
+                           f"{getattr(future.result(), 'message', '')}")
+                )
+                all_ok = False
+        else:
+            node.get_logger().warn(
+                bt_fmt(f"[PkgAttach] detach timeout for side={side}")
             )
+            all_ok = False
+    node.get_logger().info(
+        bt_fmt(
+            f"[PkgAttach] detach requests sent mode={mode} for model={pkg_model}, link={pkg_link}"
         )
-    return bool(sent)
+    )
+    return all_ok
 
 
 def _reset_pkg_hold_runtime(node):
@@ -2536,10 +2634,13 @@ def MoveBase():
 
 def Drop():
     """
-    Calata e posizionamento del pacco in zona place:
-    - basi + bracci verso pose di place per il tempo configurato.
+    Calata e posizionamento del pacco in zona place.
+    Modalita' package-centric (default):
+    - stage 1: base_align (TP base + hold) verso formazione frontale target
+    - stage 2: descend_hold (base ferma, TP bracci/hold) fino a quota release.
 
-    Mappa la fase 'discesa + place'.
+    Fallback legacy (quando hold non attivo):
+    - basi + bracci verso target TP classico.
     """
     node = _require_node()
     phase_cfg = node.cfg.phases
@@ -2564,31 +2665,132 @@ def Drop():
         left_arm_jp, right_arm_jp, left_base, right_base = live_state
         node.get_logger().info(bt_fmt(f"[Drop] start TP ({descend_and_place_time}s)"))
 
-        left_target_xy = _predict_world_target_from_body_velocity(left_base, place_left_base_xy, descend_and_place_time)
-        right_target_xy = _predict_world_target_from_body_velocity(right_base, place_right_base_xy, descend_and_place_time)
+        drop_target_xyz, drop_target_src = _resolve_drop_target_xyz(node)
+        node.bb["drop_target_xyz"] = (
+            [float(drop_target_xyz[0]), float(drop_target_xyz[1]), float(drop_target_xyz[2])]
+            if isinstance(drop_target_xyz, (list, tuple)) and len(drop_target_xyz) >= 3
+            else None
+        )
+        node.bb["drop_target_source"] = str(drop_target_src)
+
+        if isinstance(drop_target_xyz, (list, tuple)) and len(drop_target_xyz) >= 3:
+            base_target_mode = str(getattr(man_cfg, "drop_base_target_mode", "rigid_pkg")).strip().lower()
+            pkg_ref_xyz = _pkg_xyz_for_alignment(
+                node,
+                left_arm_jp=left_arm_jp,
+                right_arm_jp=right_arm_jp,
+                left_base=left_base,
+                right_base=right_base,
+            )
+            if (
+                base_target_mode == "rigid_pkg"
+                and isinstance(pkg_ref_xyz, (list, tuple))
+                and len(pkg_ref_xyz) >= 2
+            ):
+                dx = float(drop_target_xyz[0]) - float(pkg_ref_xyz[0])
+                dy = float(drop_target_xyz[1]) - float(pkg_ref_xyz[1])
+                pair_dx = float(right_base[0]) - float(left_base[0])
+                pair_dy = float(right_base[1]) - float(left_base[1])
+                node.bb["drop_base_pair_xy"] = [pair_dx, pair_dy]
+                center_x = 0.5 * (float(left_base[0]) + float(right_base[0])) + dx
+                center_y = 0.5 * (float(left_base[1]) + float(right_base[1])) + dy
+                left_target_xy = [center_x - 0.5 * pair_dx, center_y - 0.5 * pair_dy]
+                right_target_xy = [center_x + 0.5 * pair_dx, center_y + 0.5 * pair_dy]
+                target_mode_msg = f"rigid_pkg(dx={dx:.3f},dy={dy:.3f})"
+            else:
+                left_target_xy = [
+                    float(drop_target_xyz[0]) + float(getattr(man_cfg, "drop_base_left_offset_x", -0.60)),
+                    float(drop_target_xyz[1]) + float(getattr(man_cfg, "drop_base_offset_y", -0.70)),
+                ]
+                right_target_xy = [
+                    float(drop_target_xyz[0]) + float(getattr(man_cfg, "drop_base_right_offset_x", 0.60)),
+                    float(drop_target_xyz[1]) + float(getattr(man_cfg, "drop_base_offset_y", -0.70)),
+                ]
+                node.bb["drop_base_pair_xy"] = [
+                    float(right_target_xy[0]) - float(left_target_xy[0]),
+                    float(right_target_xy[1]) - float(left_target_xy[1]),
+                ]
+                target_mode_msg = "fixed_offsets"
+            node.get_logger().info(
+                bt_fmt(
+                    "[Drop] target acquired "
+                    f"(src={drop_target_src}, mode={target_mode_msg}, "
+                    f"target={np.round(np.asarray(drop_target_xyz), 3).tolist()})"
+                )
+            )
+        else:
+            node._warn_throttled(
+                "drop_target_wait",
+                bt_fmt("[Drop] target model unavailable, waiting for valid drop target pose"),
+                period_s=1.0,
+            )
+            rclpy.spin_once(node, timeout_sec=0.01)
+            return None
+
         node.bb["drop_left_target_xy"] = left_target_xy
         node.bb["drop_right_target_xy"] = right_target_xy
+        node.bb["drop_target_pkg_xy"] = [float(drop_target_xyz[0]), float(drop_target_xyz[1])] if isinstance(drop_target_xyz, (list, tuple)) and len(drop_target_xyz) >= 2 else None
         node.bb["drop_arm_goal_left"] = None
         node.bb["drop_arm_goal_right"] = None
+        drop_base_kp_xy = float(getattr(man_cfg, "drop_base_kp_xy", getattr(man_cfg, "transport_retreat_kp_x", 1.0)))
+        drop_base_traj_time = float(
+            max(
+                0.3,
+                getattr(
+                    man_cfg,
+                    "drop_base_align_traj_time",
+                    min(max(descend_and_place_time * 0.25, 1.0), 3.0),
+                ),
+            )
+        )
+        node.bb["drop_base_align_kp_xy"] = drop_base_kp_xy
+        node.bb["drop_base_align_traj_time"] = drop_base_traj_time
 
         if not _init_tp_base_stage(
             node,
             left_base_goal_xy=left_target_xy,
             right_base_goal_xy=right_target_xy,
-            period_s=float(max(descend_and_place_time, 0.2)),
-            kp_xy=float(getattr(man_cfg, "transport_retreat_kp_x", 1.0)),
+            period_s=drop_base_traj_time,
+            kp_xy=drop_base_kp_xy,
             kp_yaw=0.0,
+            arm_active=bool(use_pkg_hold),
         ):
             node.get_logger().warn(bt_fmt("[Drop] unable to initialize TP base stage"))
             return False
 
         if use_pkg_hold:
-            if node._pkg_hold_start_z is not None:
+            if node._pkg_hold_offsets.get("left", None) is None or node._pkg_hold_offsets.get("right", None) is None:
+                _capture_pkg_grasp_offsets(node, left_arm_jp, right_arm_jp, left_base, right_base)
+            # Lock bracci in joint-space durante base_align, per evitare twisting EE.
+            q_lock_l = np.asarray(left_arm_jp, dtype=np.float32)
+            q_lock_r = np.asarray(right_arm_jp, dtype=np.float32)
+            node.bb["drop_lock_arm_goal_left"] = [float(v) for v in q_lock_l.tolist()]
+            node.bb["drop_lock_arm_goal_right"] = [float(v) for v in q_lock_r.tolist()]
+            _init_tp_arm_joint_stage(
+                node,
+                left_arm_goal=q_lock_l,
+                right_arm_goal=q_lock_r,
+                period_s=float(max(descend_and_place_time, 0.2)),
+                kp_arm=float(getattr(man_cfg, "transport_lock_arm_kp", node.approach_jtc_arm_kp)),
+            )
+            if node.approach_jtc_task is not None:
+                try:
+                    node.approach_jtc_task.activate()
+                    node.approach_jtc_task.set_activation("base", True)
+                    node.approach_jtc_task.set_activation("arm", True)
+                except Exception:
+                    pass
+            node.bb["drop_base_align_last_replan"] = _ros_now_s(node)
+            if isinstance(drop_target_xyz, (list, tuple)) and len(drop_target_xyz) >= 3:
+                node._pkg_hold_target_z = float(drop_target_xyz[2]) + float(getattr(man_cfg, "drop_release_z_offset", 0.30))
+            elif node._pkg_hold_start_z is not None:
                 node._pkg_hold_target_z = (
                     float(node._pkg_hold_start_z)
                     + float(man_cfg.collect_lift_delta_z)
                     - float(man_cfg.drop_delta_z)
                 )
+            node.bb["drop_stage"] = "base_align"
+            node.bb["drop_stage_t0"] = _ros_now_s(node)
         else:
             q_left_goal = np.asarray(left_arm_jp, dtype=np.float32) + np.asarray(left_arm_place, dtype=np.float32)
             q_right_goal = np.asarray(right_arm_jp, dtype=np.float32) + np.asarray(right_arm_place, dtype=np.float32)
@@ -2596,6 +2798,8 @@ def Drop():
             node.bb["drop_arm_goal_left"] = [float(v) for v in q_left_goal.tolist()]
             node.bb["drop_arm_goal_right"] = [float(v) for v in q_right_goal.tolist()]
             _init_tp_arm_joint_stage(node, q_left_goal, q_right_goal, period_s=float(max(descend_and_place_time, 0.2)))
+            node.bb["drop_stage"] = "legacy_joint"
+            node.bb["drop_stage_t0"] = _ros_now_s(node)
 
         t0 = node.start_action_timer("Drop")
 
@@ -2606,6 +2810,305 @@ def Drop():
         return None
 
     left_arm_jp, right_arm_jp, left_base, right_base = live_state
+    stage = str(node.bb.get("drop_stage", "legacy_joint")).strip().lower()
+    stage_t0 = float(node.bb.get("drop_stage_t0", _ros_now_s(node)))
+
+    if use_pkg_hold and stage == "base_align":
+        _execute_tp_full_control(
+            node,
+            left_arm_jp=left_arm_jp,
+            right_arm_jp=right_arm_jp,
+            left_base=left_base,
+            right_base=right_base,
+            arm_clip_abs=float(getattr(man_cfg, "hold_arm_cmd_abs_max", node.tp_arm_cmd_abs_max)),
+            base_xy_abs_max=float(getattr(man_cfg, "drop_base_cmd_xy_abs_max", 0.12)),
+            base_wz_abs_max=float(node.tp_base_cmd_wz_abs_max),
+        )
+        _log_pkg_hold_quality(node, left_arm_jp, right_arm_jp, left_base, right_base, "drop_base_align")
+        _log_force_proxy(node, "drop_base_align", period_s=1.0)
+
+        left_target_xy = node.bb.get("drop_left_target_xy", None)
+        right_target_xy = node.bb.get("drop_right_target_xy", None)
+        drop_target_pkg_xy = node.bb.get("drop_target_pkg_xy", None)
+        pkg_xyz_eval = _pkg_xyz_for_alignment(
+            node,
+            left_arm_jp=left_arm_jp,
+            right_arm_jp=right_arm_jp,
+            left_base=left_base,
+            right_base=right_base,
+        )
+        l_dist = float("inf")
+        r_dist = float("inf")
+        if isinstance(left_target_xy, (list, tuple)) and len(left_target_xy) >= 2:
+            l_dist = float(math.hypot(float(left_target_xy[0]) - float(left_base[0]), float(left_target_xy[1]) - float(left_base[1])))
+        if isinstance(right_target_xy, (list, tuple)) and len(right_target_xy) >= 2:
+            r_dist = float(math.hypot(float(right_target_xy[0]) - float(right_base[0]), float(right_target_xy[1]) - float(right_base[1])))
+        pkg_xy_err = float("nan")
+        if (
+            isinstance(drop_target_pkg_xy, (list, tuple))
+            and len(drop_target_pkg_xy) >= 2
+            and isinstance(pkg_xyz_eval, (list, tuple))
+            and len(pkg_xyz_eval) >= 2
+        ):
+            pkg_xy_err = float(
+                math.hypot(
+                    float(pkg_xyz_eval[0]) - float(drop_target_pkg_xy[0]),
+                    float(pkg_xyz_eval[1]) - float(drop_target_pkg_xy[1]),
+                )
+            )
+        base_tol = float(getattr(man_cfg, "drop_base_goal_tol", getattr(man_cfg, "transport_retreat_goal_tol", 0.10)))
+        base_reached = bool(l_dist <= base_tol and r_dist <= base_tol)
+        pkg_reached = bool(np.isfinite(pkg_xy_err) and pkg_xy_err <= base_tol)
+        # Evita passaggio anticipato a descend quando il pacco e' vicino al target
+        # ma le basi non sono ancora in posizione.
+        align_reached = bool(base_reached and (pkg_reached or (not np.isfinite(pkg_xy_err))))
+        elapsed_stage = _ros_now_s(node) - stage_t0
+        timeout_cfg = float(getattr(man_cfg, "drop_base_stage_timeout", 0.0))
+        timeout_stage = timeout_cfg if timeout_cfg > 0.0 else float("inf")
+        node._info_throttled(
+            "drop_base_align_track",
+            bt_fmt(
+                f"[Drop] base_align target_reached={align_reached} "
+                f"L_dist={l_dist:.3f} R_dist={r_dist:.3f} "
+                f"pkg_xy_err={pkg_xy_err:.3f} "
+                f"elapsed={elapsed_stage:.2f}/{timeout_stage:.2f}s "
+                f"target_src={node.bb.get('drop_target_source', 'n/a')}"
+            ),
+            period_s=1.0,
+        )
+
+        replan_period = float(max(0.5, getattr(man_cfg, "drop_base_replan_period", 1.5)))
+        last_replan = float(node.bb.get("drop_base_align_last_replan", 0.0))
+        need_replan = bool((_ros_now_s(node) - last_replan) >= replan_period)
+        if align_reached:
+            node.stop_all_movement()
+            if node.approach_jtc_task is not None:
+                try:
+                    node.approach_jtc_task.activate()
+                    node.approach_jtc_task.set_activation("base", False)
+                    node.approach_jtc_task.set_activation("arm", False)
+                except Exception:
+                    pass
+            # Blocca l'orientazione in ingresso alla discesa per evitare rotazioni spurie dei wrist.
+            ee_live = node._get_live_ee_by_side(
+                left_arm_jp=left_arm_jp,
+                right_arm_jp=right_arm_jp,
+                left_base=left_base,
+                right_base=right_base,
+            )
+            l_ee = ee_live.get("left", None)
+            r_ee = ee_live.get("right", None)
+            if isinstance(l_ee, np.ndarray) and l_ee.shape[0] >= 6:
+                node._pkg_hold_rpy["left"] = np.asarray(l_ee[3:6], dtype=np.float32).copy()
+            if isinstance(r_ee, np.ndarray) and r_ee.shape[0] >= 6:
+                node._pkg_hold_rpy["right"] = np.asarray(r_ee[3:6], dtype=np.float32).copy()
+            node.bb["drop_descend_force_replan"] = True
+            node.bb["drop_stage"] = "descend_hold"
+            node.bb["drop_stage_t0"] = _ros_now_s(node)
+            node.get_logger().info(bt_fmt("[Drop] base aligned, switching to descend_hold"))
+            rclpy.spin_once(node, timeout_sec=0.01)
+            return None
+
+        if need_replan:
+            base_target_mode = str(getattr(man_cfg, "drop_base_target_mode", "rigid_pkg")).strip().lower()
+            if (
+                base_target_mode == "rigid_pkg"
+                and isinstance(drop_target_pkg_xy, (list, tuple))
+                and len(drop_target_pkg_xy) >= 2
+                and isinstance(pkg_xyz_eval, (list, tuple))
+                and len(pkg_xyz_eval) >= 2
+            ):
+                dx = float(drop_target_pkg_xy[0]) - float(pkg_xyz_eval[0])
+                dy = float(drop_target_pkg_xy[1]) - float(pkg_xyz_eval[1])
+                pair = node.bb.get("drop_base_pair_xy", None)
+                if isinstance(pair, (list, tuple)) and len(pair) >= 2:
+                    pair_dx = float(pair[0])
+                    pair_dy = float(pair[1])
+                else:
+                    pair_dx = float(right_base[0]) - float(left_base[0])
+                    pair_dy = float(right_base[1]) - float(left_base[1])
+                    node.bb["drop_base_pair_xy"] = [pair_dx, pair_dy]
+                center_x = 0.5 * (float(left_base[0]) + float(right_base[0])) + dx
+                center_y = 0.5 * (float(left_base[1]) + float(right_base[1])) + dy
+                left_target_xy = [center_x - 0.5 * pair_dx, center_y - 0.5 * pair_dy]
+                right_target_xy = [center_x + 0.5 * pair_dx, center_y + 0.5 * pair_dy]
+                node.bb["drop_left_target_xy"] = left_target_xy
+                node.bb["drop_right_target_xy"] = right_target_xy
+
+            _init_tp_base_stage(
+                node,
+                left_base_goal_xy=left_target_xy,
+                right_base_goal_xy=right_target_xy,
+                period_s=float(max(0.3, node.bb.get("drop_base_align_traj_time", 2.5))),
+                kp_xy=float(node.bb.get("drop_base_align_kp_xy", getattr(man_cfg, "drop_base_kp_xy", 1.2))),
+                kp_yaw=0.0,
+                arm_active=True,
+            )
+            node.bb["drop_base_align_last_replan"] = _ros_now_s(node)
+
+        if np.isfinite(timeout_stage) and elapsed_stage >= timeout_stage:
+            node._warn_throttled(
+                "drop_base_align_extend",
+                bt_fmt(
+                    "[Drop] base_align timeout without convergence, continuing tracking "
+                    f"(L_dist={l_dist:.3f}, R_dist={r_dist:.3f}, pkg_xy_err={pkg_xy_err:.3f})"
+                ),
+                period_s=2.0,
+            )
+
+        rclpy.spin_once(node, timeout_sec=0.01)
+        return None
+
+    if use_pkg_hold and stage == "descend_hold":
+        _execute_tp_arm_control(
+            node,
+            left_arm_jp=left_arm_jp,
+            right_arm_jp=right_arm_jp,
+            left_base=left_base,
+            right_base=right_base,
+            arm_clip_abs=float(getattr(man_cfg, "hold_arm_cmd_abs_max", node.tp_arm_cmd_abs_max)),
+        )
+        drop_target_xyz = node.bb.get("drop_target_xyz", None)
+        drop_xy_target = (
+            [float(drop_target_xyz[0]), float(drop_target_xyz[1])]
+            if isinstance(drop_target_xyz, (list, tuple)) and len(drop_target_xyz) >= 2
+            else None
+        )
+        force_replan = bool(node.bb.pop("drop_descend_force_replan", False))
+        if _replan_pkg_hold_tp(
+            node,
+            left_arm_jp,
+            right_arm_jp,
+            left_base,
+            right_base,
+            pkg_xy_target=drop_xy_target,
+            pkg_z_target=node._pkg_hold_target_z,
+            force=force_replan,
+            preserve_jtc_base=False,
+        ):
+            _log_pkg_hold_quality(node, left_arm_jp, right_arm_jp, left_base, right_base, "drop_descend")
+            _log_force_proxy(node, "drop_descend", period_s=1.0)
+
+        pkg_xyz_live = _get_live_package_xyz(node)
+        pkg_xyz_ref = _resolve_pkg_reference_xyz(
+            node,
+            left_arm_jp=left_arm_jp,
+            right_arm_jp=right_arm_jp,
+            left_base=left_base,
+            right_base=right_base,
+        )
+        pkg_xyz_eval = pkg_xyz_live if pkg_xyz_live is not None else pkg_xyz_ref
+        z_target = float(node._pkg_hold_target_z) if node._pkg_hold_target_z is not None else (
+            float(drop_target_xyz[2]) if isinstance(drop_target_xyz, (list, tuple)) and len(drop_target_xyz) >= 3 else float("nan")
+        )
+        z_err = (
+            abs(float(pkg_xyz_eval[2]) - z_target)
+            if isinstance(pkg_xyz_eval, (list, tuple)) and len(pkg_xyz_eval) >= 3 and np.isfinite(z_target)
+            else float("inf")
+        )
+        xy_err = float("nan")
+        if (
+            isinstance(pkg_xyz_eval, (list, tuple))
+            and len(pkg_xyz_eval) >= 2
+            and isinstance(drop_target_xyz, (list, tuple))
+            and len(drop_target_xyz) >= 2
+        ):
+            xy_err = float(
+                math.hypot(
+                    float(pkg_xyz_eval[0]) - float(drop_target_xyz[0]),
+                    float(pkg_xyz_eval[1]) - float(drop_target_xyz[1]),
+                )
+            )
+        z_tol = float(getattr(man_cfg, "hold_z_tol", 0.04))
+        xy_tol = float(getattr(man_cfg, "transport_destination_goal_tol", 0.10))
+        elapsed_stage = _ros_now_s(node) - stage_t0
+        reached_nominal = bool(z_err <= z_tol and ((not np.isfinite(xy_err)) or (xy_err <= xy_tol)))
+        xy_tol_soft = float(max(xy_tol, getattr(man_cfg, "drop_descend_xy_tol_soft", 0.40)))
+        z_tol_soft = float(
+            max(
+                z_tol,
+                getattr(man_cfg, "drop_descend_z_tol_soft", max(z_tol + 0.02, 0.07)),
+            )
+        )
+        soft_after_s = float(max(0.0, getattr(man_cfg, "drop_descend_soft_after_s", 8.0)))
+        reached_soft = bool(
+            elapsed_stage >= soft_after_s
+            and z_err <= z_tol_soft
+            and np.isfinite(xy_err)
+            and xy_err <= xy_tol_soft
+        )
+        timeout_stage = float(max(descend_and_place_time, 0.2) + 2.0)
+        force_after_s = float(
+            max(
+                timeout_stage + 6.0,
+                getattr(man_cfg, "drop_descend_force_after_s", timeout_stage + 12.0),
+            )
+        )
+        reached_force = bool(
+            elapsed_stage >= force_after_s
+            and np.isfinite(xy_err)
+            and xy_err <= xy_tol_soft
+        )
+        reached = bool(reached_nominal or reached_soft or reached_force)
+        node._info_throttled(
+            "drop_descend_track",
+            bt_fmt(
+                f"[Drop] descend_hold reached={reached} "
+                f"z_err={z_err:.3f} (tol={z_tol:.3f}) "
+                f"xy_err={xy_err:.3f} (tol={xy_tol:.3f}) "
+                f"elapsed={elapsed_stage:.2f}/{timeout_stage:.2f}s"
+            ),
+            period_s=1.0,
+        )
+        if reached_soft and (not reached_nominal):
+            node._warn_throttled(
+                "drop_descend_soft_reached",
+                bt_fmt(
+                    "[Drop] descend_hold soft-converged "
+                    f"(z_err={z_err:.3f}, z_tol_soft={z_tol_soft:.3f}, "
+                    f"xy_err={xy_err:.3f}, xy_tol_soft={xy_tol_soft:.3f})"
+                ),
+                period_s=2.0,
+            )
+        if reached_force and (not reached_nominal) and (not reached_soft):
+            node._warn_throttled(
+                "drop_descend_force_reached",
+                bt_fmt(
+                    "[Drop] descend_hold force-timeout reached, continuing "
+                    f"(z_err={z_err:.3f}, z_tol={z_tol:.3f}, z_tol_soft={z_tol_soft:.3f}, "
+                    f"xy_err={xy_err:.3f}, elapsed={elapsed_stage:.2f}/{force_after_s:.2f}s)"
+                ),
+                period_s=2.0,
+            )
+        if reached:
+            node.stop_all_movement()
+            node.clear_action_timer("Drop")
+            node.bb.pop("drop_left_target_xy", None)
+            node.bb.pop("drop_right_target_xy", None)
+            node.bb.pop("drop_base_pair_xy", None)
+            node.bb.pop("drop_arm_goal_left", None)
+            node.bb.pop("drop_arm_goal_right", None)
+            node.bb.pop("drop_stage", None)
+            node.bb.pop("drop_stage_t0", None)
+            _phase_pause_reset(node, "Drop")
+            node.get_logger().info(bt_fmt("[Drop] completed"))
+            return True
+
+        if elapsed_stage >= timeout_stage:
+            node._warn_throttled(
+                "drop_descend_extend",
+                bt_fmt(
+                    "[Drop] descend_hold timeout without convergence, extending stage "
+                    f"(z_err={z_err:.3f}, xy_err={xy_err:.3f})"
+                ),
+                period_s=2.0,
+            )
+            rclpy.spin_once(node, timeout_sec=0.01)
+            return None
+
+        rclpy.spin_once(node, timeout_sec=0.01)
+        return None
+
     _execute_tp_full_control(
         node,
         left_arm_jp=left_arm_jp,
@@ -2613,22 +3116,9 @@ def Drop():
         left_base=left_base,
         right_base=right_base,
         arm_clip_abs=float(getattr(man_cfg, "hold_arm_cmd_abs_max", node.tp_arm_cmd_abs_max)),
-        base_xy_abs_max=float(getattr(man_cfg, "transport_retreat_cmd_xy_abs_max", 0.20)),
+        base_xy_abs_max=float(getattr(man_cfg, "drop_base_cmd_xy_abs_max", 0.12)),
         base_wz_abs_max=float(node.tp_base_cmd_wz_abs_max),
     )
-
-    if use_pkg_hold:
-        if _replan_pkg_hold_tp(
-            node,
-            left_arm_jp,
-            right_arm_jp,
-            left_base,
-            right_base,
-            pkg_z_target=node._pkg_hold_target_z,
-            preserve_jtc_base=True,
-        ):
-            _log_pkg_hold_quality(node, left_arm_jp, right_arm_jp, left_base, right_base, "drop")
-            _log_force_proxy(node, "drop", period_s=1.0)
 
     left_target_xy = node.bb.get("drop_left_target_xy", None)
     right_target_xy = node.bb.get("drop_right_target_xy", None)
@@ -2638,7 +3128,7 @@ def Drop():
         l_dist = float(math.hypot(float(left_target_xy[0]) - float(left_base[0]), float(left_target_xy[1]) - float(left_base[1])))
     if isinstance(right_target_xy, (list, tuple)) and len(right_target_xy) >= 2:
         r_dist = float(math.hypot(float(right_target_xy[0]) - float(right_base[0]), float(right_target_xy[1]) - float(right_base[1])))
-    tol = float(getattr(man_cfg, "transport_retreat_goal_tol", 0.10))
+    tol = float(getattr(man_cfg, "drop_base_goal_tol", getattr(man_cfg, "transport_retreat_goal_tol", 0.10)))
     base_reached = bool(l_dist <= tol and r_dist <= tol)
 
     arm_reached = True
@@ -2671,8 +3161,14 @@ def Drop():
         node.clear_action_timer("Drop")
         node.bb.pop("drop_left_target_xy", None)
         node.bb.pop("drop_right_target_xy", None)
+        node.bb.pop("drop_base_pair_xy", None)
         node.bb.pop("drop_arm_goal_left", None)
         node.bb.pop("drop_arm_goal_right", None)
+        node.bb.pop("drop_lock_arm_goal_left", None)
+        node.bb.pop("drop_lock_arm_goal_right", None)
+        node.bb.pop("drop_base_align_last_replan", None)
+        node.bb.pop("drop_stage", None)
+        node.bb.pop("drop_stage_t0", None)
         _phase_pause_reset(node, "Drop")
         if elapsed >= timeout and (not reached):
             node.get_logger().warn(bt_fmt("[Drop] timeout reached, continuing"))
@@ -2693,12 +3189,12 @@ def Release():
     """
     node = _require_node()
     phase_cfg = node.cfg.phases
-    motion = node.cfg.motion_profiles
     release_time = float(phase_cfg.release_time)
-    collect_time = float(phase_cfg.collect_time)
-    retreat_left_base_xy = _float_vec(motion.collect_left_base_xy_vel)
-    retreat_right_base_xy = _float_vec(motion.collect_right_base_xy_vel)
     man_cfg = node.cfg.manipulation
+    release_retreat_time = float(max(getattr(man_cfg, "release_retreat_time", 2.5), 0.2))
+    release_retreat_arm_clip = float(
+        max(1e-4, getattr(man_cfg, "release_retreat_arm_cmd_abs_max", getattr(man_cfg, "pre_transport_arm_cmd_abs_max", node.tp_arm_cmd_abs_max)))
+    )
 
     phase_key = "release_phase"
     phase = str(node.bb.get(phase_key, "open_detach")).strip().lower()
@@ -2733,10 +3229,14 @@ def Release():
                 rclpy.spin_once(node, timeout_sec=0.01)
                 return None
 
-            pkg_xyz = _get_live_package_xyz(node)
-            if pkg_xyz is None:
-                pkg_xyz = _resolve_pkg_reference_xyz(node, left_arm_jp, right_arm_jp, left_base, right_base)
-            if pkg_xyz is None:
+            release_ref_xyz = node.bb.get("drop_target_xyz", None)
+            if not (isinstance(release_ref_xyz, (list, tuple)) and len(release_ref_xyz) >= 3):
+                release_ref_xyz, _ = _resolve_drop_target_xyz(node)
+            if release_ref_xyz is None:
+                release_ref_xyz = _get_live_package_xyz(node)
+            if release_ref_xyz is None:
+                release_ref_xyz = _resolve_pkg_reference_xyz(node, left_arm_jp, right_arm_jp, left_base, right_base)
+            if release_ref_xyz is None:
                 node._warn_throttled("release_no_pkg_init", bt_fmt("[Release] package pose unavailable"), period_s=1.0)
                 rclpy.spin_once(node, timeout_sec=0.01)
                 return None
@@ -2751,13 +3251,13 @@ def Release():
 
             left_goal = np.zeros((6,), dtype=np.float32)
             right_goal = np.zeros((6,), dtype=np.float32)
-            left_goal[0] = float(pkg_xyz[0]) + float(getattr(man_cfg, "pick_mid_left_offset_x", -0.45))
-            left_goal[1] = float(pkg_xyz[1]) + float(getattr(man_cfg, "pick_grasp_offset_y", -0.10))
-            left_goal[2] = float(pkg_xyz[2]) + float(getattr(man_cfg, "pick_grasp_offset_z", 0.0)) + 0.02
+            left_goal[0] = float(release_ref_xyz[0]) + float(getattr(man_cfg, "release_open_left_offset_x", -0.37))
+            left_goal[1] = float(release_ref_xyz[1]) + float(getattr(man_cfg, "release_open_offset_y", -0.10))
+            left_goal[2] = float(release_ref_xyz[2]) + float(getattr(man_cfg, "release_open_offset_z", 0.30))
             left_goal[3:6] = left_rpy_open
-            right_goal[0] = float(pkg_xyz[0]) + float(getattr(man_cfg, "pick_mid_right_offset_x", 0.45))
-            right_goal[1] = float(pkg_xyz[1]) + float(getattr(man_cfg, "pick_grasp_offset_y", -0.10))
-            right_goal[2] = float(pkg_xyz[2]) + float(getattr(man_cfg, "pick_grasp_offset_z", 0.0)) + 0.02
+            right_goal[0] = float(release_ref_xyz[0]) + float(getattr(man_cfg, "release_open_right_offset_x", 0.37))
+            right_goal[1] = float(release_ref_xyz[1]) + float(getattr(man_cfg, "release_open_offset_y", -0.10))
+            right_goal[2] = float(release_ref_xyz[2]) + float(getattr(man_cfg, "release_open_offset_z", 0.30))
             right_goal[3:6] = right_rpy_open
 
             if not _set_tp_ee_traj(
@@ -2773,6 +3273,7 @@ def Release():
 
             node.bb["release_open_goal_left"] = [float(v) for v in left_goal.tolist()]
             node.bb["release_open_goal_right"] = [float(v) for v in right_goal.tolist()]
+            node.bb["release_ref_xyz"] = [float(v) for v in np.asarray(release_ref_xyz[:3], dtype=np.float32).tolist()]
             node.get_logger().info(bt_fmt(f"[Release] start TP open+detach ({release_time}s)"))
             t0 = node.start_action_timer("Release")
 
@@ -2799,19 +3300,27 @@ def Release():
         )
         l_goal = node.bb.get("release_open_goal_left", None)
         r_goal = node.bb.get("release_open_goal_right", None)
+        open_pos_tol = float(getattr(man_cfg, "release_open_pos_tol", getattr(man_cfg, "pick_pos_tol", 0.03)))
+        open_ori_tol = float(getattr(man_cfg, "release_open_ori_tol", getattr(man_cfg, "pick_ori_tol", 0.20)))
+        force_after_s = float(max(0.5, getattr(man_cfg, "release_open_force_after_s", 12.0)))
+        attach_mode = str(getattr(man_cfg, "attach_mode", "single_left")).strip().lower()
+        need_left = attach_mode in ("single_left", "dual")
+        need_right = attach_mode in ("single_right", "dual")
         l_ok, l_pos, l_ori = _ee_goal_reached(
             node, ee_live.get("left", None), l_goal,
-            pos_tol=float(getattr(man_cfg, "pick_pos_tol", 0.03)),
-            ori_tol=float(getattr(man_cfg, "pick_ori_tol", 0.20)),
+            pos_tol=open_pos_tol,
+            ori_tol=open_ori_tol,
         )
         r_ok, r_pos, r_ori = _ee_goal_reached(
             node, ee_live.get("right", None), r_goal,
-            pos_tol=float(getattr(man_cfg, "pick_pos_tol", 0.03)),
-            ori_tol=float(getattr(man_cfg, "pick_ori_tol", 0.20)),
+            pos_tol=open_pos_tol,
+            ori_tol=open_ori_tol,
         )
         elapsed = _ros_now_s(node) - float(t0)
         timeout = float(max(release_time, 0.2) + 0.8)
-        open_reached = bool(l_ok and r_ok)
+        nominal_reached = bool((l_ok or (not need_left)) and (r_ok or (not need_right)))
+        force_reached = bool(elapsed >= force_after_s)
+        open_reached = bool(nominal_reached or force_reached)
         node._info_throttled(
             "release_open_track",
             bt_fmt(
@@ -2825,11 +3334,36 @@ def Release():
             rclpy.spin_once(node, timeout_sec=0.01)
             return None
 
+        if not open_reached:
+            node._warn_throttled(
+                "release_open_extend",
+                bt_fmt(
+                    "[Release] open stage timeout without convergence, extending stage "
+                    f"(L_pos={l_pos:.3f}, R_pos={r_pos:.3f})"
+                ),
+                period_s=2.0,
+            )
+            rclpy.spin_once(node, timeout_sec=0.01)
+            return None
+        if force_reached and (not nominal_reached):
+            node._warn_throttled(
+                "release_open_force_reached",
+                bt_fmt(
+                    "[Release] open stage force timeout reached, proceeding to detach "
+                    f"(elapsed={elapsed:.2f}s)"
+                ),
+                period_s=2.0,
+            )
+
         node.stop_all_movement()
         _detach_package_from_arms(node)
         node.bb["package_attached"] = False
         if node.bb.pop("package_gravity_disabled", False):
             set_package_gravity(node, True)
+            # Il body ODE potrebbe essere in stato disabled (sleep) dopo
+            # essere rimasto fermo con gravità disabilitata.  SetEntityState
+            # forza la riattivazione del body in Gazebo/ODE.
+            wake_package_body(node)
         _reset_pkg_hold_runtime(node)
 
         node.clear_action_timer("Release")
@@ -2866,25 +3400,32 @@ def Release():
         left_arm_jp, right_arm_jp, left_base, right_base = live_state
         left_home, _ = node._resolve_side_home_joint_goal("left", left_arm_jp)
         right_home, _ = node._resolve_side_home_joint_goal("right", right_arm_jp)
-        left_target_xy = _predict_world_target_from_body_velocity(left_base, retreat_left_base_xy, collect_time)
-        right_target_xy = _predict_world_target_from_body_velocity(right_base, retreat_right_base_xy, collect_time)
+        left_target_xy = [
+            float(left_base[0]) + float(getattr(man_cfg, "release_retreat_left_offset_x", 0.0)),
+            float(left_base[1]) + float(getattr(man_cfg, "release_retreat_offset_y", -0.20)),
+        ]
+        right_target_xy = [
+            float(right_base[0]) + float(getattr(man_cfg, "release_retreat_right_offset_x", 0.0)),
+            float(right_base[1]) + float(getattr(man_cfg, "release_retreat_offset_y", -0.20)),
+        ]
         node.bb["release_retreat_left_target_xy"] = left_target_xy
         node.bb["release_retreat_right_target_xy"] = right_target_xy
         node.bb["release_home_goal_left"] = [float(v) for v in np.asarray(left_home, dtype=np.float32).tolist()]
         node.bb["release_home_goal_right"] = [float(v) for v in np.asarray(right_home, dtype=np.float32).tolist()]
-        ok_base = _init_tp_base_stage(
-            node,
-            left_base_goal_xy=left_target_xy,
-            right_base_goal_xy=right_target_xy,
-            period_s=float(max(collect_time, 0.2)),
-            kp_xy=float(getattr(man_cfg, "transport_retreat_kp_x", 1.0)),
-            kp_yaw=0.0,
-        )
         ok_arm = _init_tp_arm_joint_stage(
             node,
             left_home,
             right_home,
-            period_s=float(max(collect_time, 0.2)),
+            period_s=release_retreat_time,
+        )
+        ok_base = _init_tp_base_stage(
+            node,
+            left_base_goal_xy=left_target_xy,
+            right_base_goal_xy=right_target_xy,
+            period_s=release_retreat_time,
+            kp_xy=float(getattr(man_cfg, "transport_retreat_kp_x", 1.0)),
+            kp_yaw=0.0,
+            arm_active=bool(ok_arm),
         )
         # Release fix: assicurati che base+arm restino attivi insieme nello stesso JTC stage.
         if bool(ok_base and ok_arm) and (node.approach_jtc_task is not None):
@@ -2912,8 +3453,8 @@ def Release():
         right_arm_jp=right_arm_jp,
         left_base=left_base,
         right_base=right_base,
-        arm_clip_abs=float(getattr(man_cfg, "pre_transport_arm_cmd_abs_max", node.tp_arm_cmd_abs_max)),
-        base_xy_abs_max=float(getattr(man_cfg, "transport_retreat_cmd_xy_abs_max", 0.20)),
+        arm_clip_abs=release_retreat_arm_clip,
+        base_xy_abs_max=float(getattr(man_cfg, "release_retreat_cmd_xy_abs_max", 0.12)),
         base_wz_abs_max=float(node.tp_base_cmd_wz_abs_max),
     )
 
@@ -2925,7 +3466,7 @@ def Release():
         l_dist = float(math.hypot(float(left_target_xy[0]) - float(left_base[0]), float(left_target_xy[1]) - float(left_base[1])))
     if isinstance(right_target_xy, (list, tuple)) and len(right_target_xy) >= 2:
         r_dist = float(math.hypot(float(right_target_xy[0]) - float(right_base[0]), float(right_target_xy[1]) - float(right_base[1])))
-    tol = float(getattr(man_cfg, "transport_retreat_goal_tol", 0.10))
+    tol = float(getattr(man_cfg, "release_retreat_goal_tol", 0.10))
     base_reached = bool(l_dist <= tol and r_dist <= tol)
 
     q_left_goal = node.bb.get("release_home_goal_left", None)
@@ -2940,7 +3481,7 @@ def Release():
     )
 
     elapsed = _ros_now_s(node) - float(retreat_t0)
-    timeout = float(max(collect_time, 0.2) + 2.0)
+    timeout = float(release_retreat_time + 2.0)
     reached = bool(base_reached and arm_reached)
     node._info_throttled(
         "release_retreat_track",
@@ -2951,19 +3492,56 @@ def Release():
         ),
         period_s=1.0,
     )
-    if reached or elapsed >= timeout:
+    if reached:
         node.stop_all_movement()
         node.clear_action_timer("ReleaseRetreat")
         node.bb.pop("release_retreat_left_target_xy", None)
         node.bb.pop("release_retreat_right_target_xy", None)
         node.bb.pop("release_home_goal_left", None)
         node.bb.pop("release_home_goal_right", None)
+        node.bb.pop("release_ref_xyz", None)
+        node.bb.pop("drop_target_xyz", None)
+        node.bb.pop("drop_target_source", None)
         node.bb.pop(phase_key, None)
         _phase_pause_reset(node, "Release")
-        if elapsed >= timeout and (not reached):
-            node.get_logger().warn(bt_fmt("[Release] retreat timeout, finishing anyway"))
         node.get_logger().info(bt_fmt("[Release] completed"))
         return True
+
+    force_timeout = float(max(timeout + 6.0, getattr(man_cfg, "release_open_force_after_s", 12.0)))
+    if elapsed >= force_timeout:
+        node._warn_throttled(
+            "release_retreat_force_complete",
+            bt_fmt(
+                "[Release] retreat force-timeout reached, completing phase "
+                f"(L_err={l_err:.3f}, R_err={r_err:.3f}, L_dist={l_dist:.3f}, R_dist={r_dist:.3f})"
+            ),
+            period_s=2.0,
+        )
+        node.stop_all_movement()
+        node.clear_action_timer("ReleaseRetreat")
+        node.bb.pop("release_retreat_left_target_xy", None)
+        node.bb.pop("release_retreat_right_target_xy", None)
+        node.bb.pop("release_home_goal_left", None)
+        node.bb.pop("release_home_goal_right", None)
+        node.bb.pop("release_ref_xyz", None)
+        node.bb.pop("drop_target_xyz", None)
+        node.bb.pop("drop_target_source", None)
+        node.bb.pop(phase_key, None)
+        _phase_pause_reset(node, "Release")
+        node.get_logger().info(bt_fmt("[Release] completed (force-timeout)"))
+        return True
+
+    if elapsed >= timeout:
+        node._warn_throttled(
+            "release_retreat_extend",
+            bt_fmt(
+                "[Release] retreat timeout without convergence, extending stage "
+                f"(L_err={l_err:.3f}, R_err={r_err:.3f}, L_dist={l_dist:.3f}, R_dist={r_dist:.3f})"
+            ),
+            period_s=2.0,
+        )
+        rclpy.spin_once(node, timeout_sec=0.01)
+        return None
 
     rclpy.spin_once(node, timeout_sec=0.01)
     return None

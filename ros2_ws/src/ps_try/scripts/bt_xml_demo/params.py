@@ -325,6 +325,48 @@ class ManipulationConfig:
     transport_destination_offset_x: float = 0.0
     transport_destination_offset_y: float = -2.0
     transport_destination_goal_tol: float = 0.10
+    # Target deposito pacco (drop/release) relativo a un modello world.
+    drop_target_model: str = "pacco_clone_2"
+    drop_target_offset_x: float = 0.0
+    drop_target_offset_y: float = 0.0
+    drop_target_offset_z: float = 0.0
+    drop_release_z_offset: float = 0.30
+    # Formazione basi durante drop (fronte pallet di deposito).
+    drop_base_left_offset_x: float = -0.60
+    drop_base_right_offset_x: float = 0.60
+    drop_base_offset_y: float = -0.70
+    # Modalita' target basi in drop:
+    # - rigid_pkg: trasla rigidamente la formazione attuale verso target pacco (default, robusta)
+    # - fixed_offsets: usa drop_base_*_offset_* rispetto al target.
+    drop_base_target_mode: str = "rigid_pkg"
+    drop_base_goal_tol: float = 0.10
+    drop_base_cmd_xy_abs_max: float = 0.12
+    drop_base_kp_xy: float = 1.20
+    drop_base_align_traj_time: float = 2.50
+    drop_base_replan_period: float = 1.50
+    # <=0 disabilita timeout hard di base_align (mantiene solo warning throttled).
+    drop_base_stage_timeout: float = 0.0
+    # In drop_descend, se z e' ok ma XY resta sopra tol nominale, permette uscita con tolleranza soft.
+    drop_descend_xy_tol_soft: float = 0.40
+    drop_descend_soft_after_s: float = 8.0
+    # Apertura palette in release rispetto al target deposito.
+    release_open_left_offset_x: float = -0.37
+    release_open_right_offset_x: float = 0.37
+    release_open_offset_y: float = -0.10
+    release_open_offset_z: float = 0.30
+    release_open_pos_tol: float = 0.03
+    release_open_ori_tol: float = 0.20
+    release_open_pos_tol_soft: float = 0.08
+    release_open_soft_after_s: float = 4.0
+    release_open_force_after_s: float = 12.0
+    # Retreat finale (leggero arretramento + home).
+    release_retreat_left_offset_x: float = 0.0
+    release_retreat_right_offset_x: float = 0.0
+    release_retreat_offset_y: float = -0.20
+    release_retreat_time: float = 2.5
+    release_retreat_goal_tol: float = 0.10
+    release_retreat_cmd_xy_abs_max: float = 0.12
+    release_retreat_arm_cmd_abs_max: float = 0.25
 
 
 @dataclass
@@ -596,6 +638,67 @@ def _parse_manipulation(raw: Dict[str, Any]) -> ManipulationConfig:
         ),
         transport_destination_goal_tol=_as_float(
             raw.get("transport_destination_goal_tol"), defaults.transport_destination_goal_tol
+        ),
+        drop_target_model=str(raw.get("drop_target_model", defaults.drop_target_model)),
+        drop_target_offset_x=_as_float(raw.get("drop_target_offset_x"), defaults.drop_target_offset_x),
+        drop_target_offset_y=_as_float(raw.get("drop_target_offset_y"), defaults.drop_target_offset_y),
+        drop_target_offset_z=_as_float(raw.get("drop_target_offset_z"), defaults.drop_target_offset_z),
+        drop_release_z_offset=_as_float(raw.get("drop_release_z_offset"), defaults.drop_release_z_offset),
+        drop_base_left_offset_x=_as_float(raw.get("drop_base_left_offset_x"), defaults.drop_base_left_offset_x),
+        drop_base_right_offset_x=_as_float(raw.get("drop_base_right_offset_x"), defaults.drop_base_right_offset_x),
+        drop_base_offset_y=_as_float(raw.get("drop_base_offset_y"), defaults.drop_base_offset_y),
+        drop_base_target_mode=str(raw.get("drop_base_target_mode", defaults.drop_base_target_mode)),
+        drop_base_goal_tol=_as_float(raw.get("drop_base_goal_tol"), defaults.drop_base_goal_tol),
+        drop_base_cmd_xy_abs_max=_as_float(raw.get("drop_base_cmd_xy_abs_max"), defaults.drop_base_cmd_xy_abs_max),
+        drop_base_kp_xy=_as_float(raw.get("drop_base_kp_xy"), defaults.drop_base_kp_xy),
+        drop_base_align_traj_time=_as_float(
+            raw.get("drop_base_align_traj_time"), defaults.drop_base_align_traj_time
+        ),
+        drop_base_replan_period=_as_float(
+            raw.get("drop_base_replan_period"), defaults.drop_base_replan_period
+        ),
+        drop_base_stage_timeout=_as_float(
+            raw.get("drop_base_stage_timeout"), defaults.drop_base_stage_timeout
+        ),
+        drop_descend_xy_tol_soft=_as_float(
+            raw.get("drop_descend_xy_tol_soft"), defaults.drop_descend_xy_tol_soft
+        ),
+        drop_descend_soft_after_s=_as_float(
+            raw.get("drop_descend_soft_after_s"), defaults.drop_descend_soft_after_s
+        ),
+        release_open_left_offset_x=_as_float(
+            raw.get("release_open_left_offset_x"), defaults.release_open_left_offset_x
+        ),
+        release_open_right_offset_x=_as_float(
+            raw.get("release_open_right_offset_x"), defaults.release_open_right_offset_x
+        ),
+        release_open_offset_y=_as_float(raw.get("release_open_offset_y"), defaults.release_open_offset_y),
+        release_open_offset_z=_as_float(raw.get("release_open_offset_z"), defaults.release_open_offset_z),
+        release_open_pos_tol=_as_float(raw.get("release_open_pos_tol"), defaults.release_open_pos_tol),
+        release_open_ori_tol=_as_float(raw.get("release_open_ori_tol"), defaults.release_open_ori_tol),
+        release_open_pos_tol_soft=_as_float(
+            raw.get("release_open_pos_tol_soft"), defaults.release_open_pos_tol_soft
+        ),
+        release_open_soft_after_s=_as_float(
+            raw.get("release_open_soft_after_s"), defaults.release_open_soft_after_s
+        ),
+        release_open_force_after_s=_as_float(
+            raw.get("release_open_force_after_s"), defaults.release_open_force_after_s
+        ),
+        release_retreat_left_offset_x=_as_float(
+            raw.get("release_retreat_left_offset_x"), defaults.release_retreat_left_offset_x
+        ),
+        release_retreat_right_offset_x=_as_float(
+            raw.get("release_retreat_right_offset_x"), defaults.release_retreat_right_offset_x
+        ),
+        release_retreat_offset_y=_as_float(raw.get("release_retreat_offset_y"), defaults.release_retreat_offset_y),
+        release_retreat_time=_as_float(raw.get("release_retreat_time"), defaults.release_retreat_time),
+        release_retreat_goal_tol=_as_float(raw.get("release_retreat_goal_tol"), defaults.release_retreat_goal_tol),
+        release_retreat_cmd_xy_abs_max=_as_float(
+            raw.get("release_retreat_cmd_xy_abs_max"), defaults.release_retreat_cmd_xy_abs_max
+        ),
+        release_retreat_arm_cmd_abs_max=_as_float(
+            raw.get("release_retreat_arm_cmd_abs_max"), defaults.release_retreat_arm_cmd_abs_max
         ),
     )
 
