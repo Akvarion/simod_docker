@@ -72,7 +72,8 @@ def main():
     bt_tree_srm1 = Tree()
     bt_tree_srm2 = Tree()
 
-    # Lista completa delle funzioni disponibili (foglie)
+    # Lista completa delle funzioni disponibili (foglie BT).
+    # Queste funzioni vengono usate dal parser XML per risolvere gli ID dei nodi.
     all_funcs = [
         # mock / condition
         Sync, FindObj, CalculateGoal, CheckAlignment, Set,
@@ -82,10 +83,14 @@ def main():
         ApproachObject, LiftObj, MoveBase, Drop, Release
     ]
 
+    # Binding XML -> callable Python (Action/Condition).
     bt_tree_supervisor.gen_tree_from_btcpp(xmlfile_supervisor, all_funcs)
     bt_tree_srm1.gen_tree_from_btcpp(xmlfile_srm1, all_funcs)
     bt_tree_srm2.gen_tree_from_btcpp(xmlfile_srm2, all_funcs)
 
+    # Assegna il nome logico al tree runtime.
+    # Le action leggono questo nome via get_current_bt_name() per distinguere
+    # il contesto Supervisor/SRM1/SRM2.
     assign_bt_name(bt_tree_supervisor, "Supervisor")
     assign_bt_name(bt_tree_srm1, "SRM1")
     assign_bt_name(bt_tree_srm2, "SRM2")
