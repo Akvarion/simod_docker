@@ -23,14 +23,13 @@ _require_node = require_node
 
 def _arm_pair_aligned(node) -> bool:
     """
-    Allineamento "operativo" della coppia robot prima del pick:
-    - preferisce i flag espliciti di base-goal raggiunto
-    - fallback sui flag near_object
+    Allineamento operativo pre-pick della coppia robot.
+
+    Per evitare avanzamenti prematuri del Supervisor (LiftObj avviato mentre
+    ApproachObject e' ancora in tracking), qui richiediamo convergenza completa
+    dell'approach su entrambi i lati: i flag `SRM*_near_object` devono essere
+    entrambi True.
     """
-    left_ok = bool(node.bb.get("SRM1_base_goal_reached", False))
-    right_ok = bool(node.bb.get("SRM2_base_goal_reached", False))
-    if left_ok and right_ok:
-        return True
     return bool(node.bb.get("SRM1_near_object", False) and node.bb.get("SRM2_near_object", False))
 
 
@@ -121,19 +120,23 @@ def CheckAlignment():
                 "[CheckAlignment] ARM1-ARM2 "
                 f"ok={ok} "
                 f"(SRM1_base_goal_reached={bool(node.bb.get('SRM1_base_goal_reached', False))}, "
-                f"SRM2_base_goal_reached={bool(node.bb.get('SRM2_base_goal_reached', False))})"
+                f"SRM2_base_goal_reached={bool(node.bb.get('SRM2_base_goal_reached', False))}, "
+                f"SRM1_near_object={bool(node.bb.get('SRM1_near_object', False))}, "
+                f"SRM2_near_object={bool(node.bb.get('SRM2_near_object', False))})"
             )
         )
         return ok
 
     # Verifica allineamento EE in preparazione al pick (Supervisor).
     if name_attr == "ee":
-        ok = _arm_pair_aligned(node)
+        ok = bool(node.bb.get("SRM1_near_object", False) and node.bb.get("SRM2_near_object", False))
         node.get_logger().info(
             bt_fmt(
                 "[CheckAlignment] EE "
                 f"ok={ok} "
-                f"(SRM1_near_object={bool(node.bb.get('SRM1_near_object', False))}, "
+                f"(SRM1_base_goal_reached={bool(node.bb.get('SRM1_base_goal_reached', False))}, "
+                f"SRM2_base_goal_reached={bool(node.bb.get('SRM2_base_goal_reached', False))}, "
+                f"SRM1_near_object={bool(node.bb.get('SRM1_near_object', False))}, "
                 f"SRM2_near_object={bool(node.bb.get('SRM2_near_object', False))})"
             )
         )

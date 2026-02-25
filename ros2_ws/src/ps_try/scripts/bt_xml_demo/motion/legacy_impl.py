@@ -1,13 +1,23 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-"""Compatibility facade for motion BT actions and helpers.
+"""Legacy compatibility facade for BT motion helpers/actions.
 
-This module preserves the historical import surface while delegating implementation
-across `bt_xml_demo.motion.*` modules.
+This module preserves the historical import surface while delegating all
+implementations to the split modules under ``bt_xml_demo.motion``.
 """
 
-from bt_xml_demo.bt_action_context import require_node
+from __future__ import annotations
+
+from bt_xml_demo.bt_action_context import (
+    bt_fmt,
+    get_current_bt_name,
+    require_node,
+)
+from bt_xml_demo.cmd_utils import (
+    sanitize_arm_cmd as _sanitize_arm_cmd,
+    sanitize_base_cmd as _sanitize_base_cmd,
+)
 from bt_xml_demo.motion.io_timing import (
     _float_vec,
     _ros_now_s,
@@ -32,6 +42,7 @@ from bt_xml_demo.motion.pose_targets import (
     _resolve_hold_reference_mode,
     _resolve_pkg_reference_xyz,
     _pkg_xyz_for_alignment,
+    _compute_rigid_pkg_base_targets,
 )
 from bt_xml_demo.motion.tp_runtime import (
     _build_base_cmd_to_xy,
@@ -81,6 +92,12 @@ from bt_xml_demo.motion.action_release import Release
 _require_node = require_node
 
 __all__ = [
+    "bt_fmt",
+    "get_current_bt_name",
+    "require_node",
+    "_require_node",
+    "_sanitize_arm_cmd",
+    "_sanitize_base_cmd",
     "_float_vec",
     "_ros_now_s",
     "_dt_from_ros_time",
@@ -90,7 +107,6 @@ __all__ = [
     "_scaled_xy",
     "_predict_world_target_from_body_velocity",
     "_split_package_model_link",
-    "_ensure_pkg_hold_state",
     "_get_live_package_xyz",
     "_normalize_yaw",
     "_offset_xy_in_target_frame",
@@ -103,10 +119,8 @@ __all__ = [
     "_resolve_hold_reference_mode",
     "_resolve_pkg_reference_xyz",
     "_pkg_xyz_for_alignment",
+    "_compute_rigid_pkg_base_targets",
     "_build_base_cmd_to_xy",
-    "_capture_pkg_grasp_offsets",
-    "_pkg_hold_goal_pose",
-    "_replan_pkg_hold_tp",
     "_execute_tp_arm_control",
     "_execute_tp_full_control",
     "_execute_tp_arm_hold",
@@ -117,23 +131,27 @@ __all__ = [
     "_ee_goal_reached",
     "_default_rpy_for_side",
     "_build_pick_waypoint_stage_plan",
-    "_reset_pick_waypoint_runtime",
+    "_max_joint_error",
+    "_clip_descend_pick_joint_goals",
+    "_init_descend_pick_tp",
+    "_init_pre_transport_tp",
+    "_ensure_pkg_hold_state",
+    "_capture_pkg_grasp_offsets",
+    "_pkg_hold_goal_pose",
+    "_replan_pkg_hold_tp",
     "_log_pkg_hold_quality",
     "_get_robot_model_name_for_side",
     "_get_arm_attach_link_name",
     "_attach_package_to_arms",
     "_detach_package_from_arms",
+    "_log_force_proxy",
+    "_reset_pick_waypoint_runtime",
     "_reset_pkg_hold_runtime",
     "_phase_pause_key",
     "_phase_pause_gate",
     "_phase_pause_reset",
     "_reset_movebase_runtime",
     "_reset_adjust_positioning_bb",
-    "_max_joint_error",
-    "_clip_descend_pick_joint_goals",
-    "_init_descend_pick_tp",
-    "_init_pre_transport_tp",
-    "_log_force_proxy",
     "ApproachObject",
     "LiftObj",
     "MoveBase",

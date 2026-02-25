@@ -78,15 +78,6 @@ def load_demo_params(
         return {}, path
 
 
-def get_path(data: Dict[str, Any], dotted_key: str, default: Any) -> Any:
-    cur: Any = data
-    for tok in dotted_key.split("."):
-        if not isinstance(cur, dict) or tok not in cur:
-            return default
-        cur = cur[tok]
-    return cur
-
-
 def _as_float(value: Any, default: float) -> float:
     try:
         return float(value)
