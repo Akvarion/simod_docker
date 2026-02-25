@@ -98,6 +98,8 @@ def Release():
         # Check if this is first-run (t0 == None) or continuing from previous tick
         t0 = node.get_action_timer("Release")
         if t0 is None:
+            # Reset release-local detach latch (used to avoid duplicate detach calls).
+            node.bb["release_detach_done"] = False
             # ================================================================
             # FIRST-RUN INIT: Set up open trajectory target and TP configuration
             # ================================================================
@@ -241,6 +243,26 @@ def Release():
             node.bb["release_ref_xyz"] = [float(v) for v in np.asarray(release_ref_xyz[:3], dtype=np.float32).tolist()]
             node.bb["release_ref_pose6"] = [float(v) for v in np.asarray(release_ref_pose6[:6], dtype=np.float32).tolist()]
             node.get_logger().info(bt_fmt(f"[Release] start TP open+detach ({release_time}s)"))
+
+            # ================================================================
+            # EARLY DETACH (requested): detach package at start of opening phase
+            # ================================================================
+            # Anticipate detach while grippers move to open pose. If early detach
+            # fails, keep fallback detach later (legacy behavior) after open stage.
+            early_detach_ok = bool(_detach_package_from_arms(node))
+            if early_detach_ok:
+                node.bb["release_detach_done"] = True
+                node.bb["package_attached"] = False
+                if node.bb.pop("package_gravity_disabled", False):
+                    set_package_gravity(node, True)
+                    wake_package_body(node)
+                _reset_pkg_hold_runtime(node)
+                node.get_logger().info(bt_fmt("[Release] early detach done, continuing open tracking"))
+            else:
+                node.bb["release_detach_done"] = False
+                node.get_logger().warn(
+                    bt_fmt("[Release] early detach not confirmed, will retry after open stage")
+                )
             t0 = node.start_action_timer("Release")
 
         live_state = _get_live_tp_state(node)
@@ -354,27 +376,30 @@ def Release():
         # Package was held via Gazebo LinkAttacher (virtual rigid joint between
         # grippers + package body). Call detach RPC to break this connection.
         # After detach, package becomes free object in simulation.
-        _detach_package_from_arms(node)
-        # Mark package as no longer attached: next phase (catch/place) will handle
-        # free object behavior (gravity, contact forces, etc.)
-        node.bb["package_attached"] = False
+        # If early-detach already succeeded, skip duplicate detach call.
+        if not bool(node.bb.get("release_detach_done", False)):
+            _detach_package_from_arms(node)
+            node.bb["release_detach_done"] = True
+            # Mark package as no longer attached: next phase (catch/place) will handle
+            # free object behavior (gravity, contact forces, etc.)
+            node.bb["package_attached"] = False
 
-        # ================================================================
-        # RESTORE GRAVITY: Re-enable gravity for free object
-        # ================================================================
-        # During grasp + transport, gravity was disabled on package to ensure
-        # held position. Now re-enable gravity so object falls/settles naturally.
-        if node.bb.pop("package_gravity_disabled", False):
-            # Call Gazebo service to enable gravity on package body
-            set_package_gravity(node, True)
-            # Il body ODE potrebbe essere in stato disabled (sleep) dopo
-            # essere rimasto fermo con gravità disabilitata.  SetEntityState
-            # forza la riattivazione del body in Gazebo/ODE.
-            # (ODE simulator puts static bodies to sleep; we force wake-up
-            # so gravity takes effect immediately in next physics step)
-            wake_package_body(node)
-        # Clear hold control runtime data: no longer maintaining package position
-        _reset_pkg_hold_runtime(node)
+            # ================================================================
+            # RESTORE GRAVITY: Re-enable gravity for free object
+            # ================================================================
+            # During grasp + transport, gravity was disabled on package to ensure
+            # held position. Now re-enable gravity so object falls/settles naturally.
+            if node.bb.pop("package_gravity_disabled", False):
+                # Call Gazebo service to enable gravity on package body
+                set_package_gravity(node, True)
+                # Il body ODE potrebbe essere in stato disabled (sleep) dopo
+                # essere rimasto fermo con gravità disabilitata.  SetEntityState
+                # forza la riattivazione del body in Gazebo/ODE.
+                # (ODE simulator puts static bodies to sleep; we force wake-up
+                # so gravity takes effect immediately in next physics step)
+                wake_package_body(node)
+            # Clear hold control runtime data: no longer maintaining package position
+            _reset_pkg_hold_runtime(node)
 
         node.clear_action_timer("Release")
         node.bb.pop("release_open_goal_left", None)
@@ -613,6 +638,7 @@ def Release():
         node.bb.pop("release_ref_xyz", None)
         node.bb.pop("drop_target_xyz", None)
         node.bb.pop("drop_target_source", None)
+        node.bb.pop("release_detach_done", None)
         # Clear phase tracker so next action uses fresh state
         node.bb.pop(phase_key, None)
         # Reset pause state for Release action
@@ -647,6 +673,7 @@ def Release():
         node.bb.pop("release_ref_xyz", None)
         node.bb.pop("drop_target_xyz", None)
         node.bb.pop("drop_target_source", None)
+        node.bb.pop("release_detach_done", None)
         node.bb.pop(phase_key, None)
         _phase_pause_reset(node, "Release")
         node.get_logger().info(bt_fmt("[Release] completed (force-timeout)"))
