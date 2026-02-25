@@ -87,6 +87,71 @@ class ApproachPlanningMixin:
                 period_s=5.0,
             )
 
+    @staticmethod
+    def _normalize_yaw(yaw: float) -> float:
+        y = float(yaw)
+        return (y + math.pi) % (2.0 * math.pi) - math.pi
+
+    def _resolve_pallet_target_pose6(self) -> Optional[List[float]]:
+        # 1) External/BB full pose (future vision integration path).
+        pose6 = self.bb.get("pallet_pose_world_pose6", None)
+        if isinstance(pose6, (list, tuple)) and len(pose6) >= 6:
+            try:
+                out = [float(v) for v in pose6[:6]]
+                if bool(np.all(np.isfinite(np.asarray(out, dtype=np.float32)))):
+                    out[5] = self._normalize_yaw(out[5])
+                    return out
+            except Exception:
+                pass
+
+        # 2) Gazebo live/start snapshots.
+        pose6 = getattr(self, "_gazebo_pallet_pose_last_pose6", None)
+        if isinstance(pose6, (list, tuple)) and len(pose6) >= 6:
+            out = [float(v) for v in pose6[:6]]
+            out[5] = self._normalize_yaw(out[5])
+            return out
+        pose6 = getattr(self, "_gazebo_pallet_pose_start_pose6", None)
+        if isinstance(pose6, (list, tuple)) and len(pose6) >= 6:
+            out = [float(v) for v in pose6[:6]]
+            out[5] = self._normalize_yaw(out[5])
+            return out
+
+        # 3) World-file snapshot (if available).
+        pose6 = getattr(self, "_world_pallet_pose6_cache", None)
+        if isinstance(pose6, (list, tuple)) and len(pose6) >= 6:
+            out = [float(v) for v in pose6[:6]]
+            out[5] = self._normalize_yaw(out[5])
+            return out
+
+        # 4) Legacy XY/XYZ fallback with yaw=0.
+        xy = self.bb.get("pallet_pose_world", None)
+        xyz = self.bb.get("pallet_pose_world_xyz", None)
+        if isinstance(xyz, (list, tuple)) and len(xyz) >= 3:
+            return [float(xyz[0]), float(xyz[1]), float(xyz[2]), 0.0, 0.0, 0.0]
+        if isinstance(xy, (list, tuple)) and len(xy) >= 2:
+            return [float(xy[0]), float(xy[1]), 0.0, 0.0, 0.0, 0.0]
+        return None
+
+    def _resolve_pallet_target_yaw(self) -> float:
+        pose6 = self._resolve_pallet_target_pose6()
+        if isinstance(pose6, (list, tuple)) and len(pose6) >= 6:
+            return float(self._normalize_yaw(float(pose6[5])))
+        return 0.0
+
+    def _offset_from_target_frame(
+        self,
+        target_xy: List[float],
+        off_x: float,
+        off_y: float,
+        target_yaw: Optional[float] = None,
+    ) -> List[float]:
+        yaw = float(self._resolve_pallet_target_yaw() if target_yaw is None else target_yaw)
+        c = math.cos(yaw)
+        s = math.sin(yaw)
+        dx = c * float(off_x) - s * float(off_y)
+        dy = s * float(off_x) + c * float(off_y)
+        return [float(target_xy[0]) + dx, float(target_xy[1]) + dy]
+
     def _init_tp_approach_trajectory_from_live_state(
         self,
         left_arm_jp: List[float],
@@ -132,9 +197,10 @@ class ApproachPlanningMixin:
             q_right_goal: Optional[np.ndarray] = None
             left_from_profile = False
             right_from_profile = False
+            pallet_yaw = self._resolve_pallet_target_yaw()
             if self.approach_arm_target_mode == "pallet_offset" and pallet_xyz is not None:
-                left_goal_ee = self._compute_side_ee_target_pose("left", left_ee, pallet_xyz)
-                right_goal_ee = self._compute_side_ee_target_pose("right", right_ee, pallet_xyz)
+                left_goal_ee = self._compute_side_ee_target_pose("left", left_ee, pallet_xyz, pallet_yaw=pallet_yaw)
+                right_goal_ee = self._compute_side_ee_target_pose("right", right_ee, pallet_xyz, pallet_yaw=pallet_yaw)
                 self._approach_arm_goal_source["left"] = "pallet_offset"
                 self._approach_arm_goal_source["right"] = "pallet_offset"
             else:
@@ -171,8 +237,8 @@ class ApproachPlanningMixin:
             base_left_goal = np.asarray(left_base, dtype=np.float32)
             base_right_goal = np.asarray(right_base, dtype=np.float32)
             if self.approach_use_base and pallet_xy is not None:
-                left_target_xy = self._compute_side_base_target_xy("left", left_base, right_base, pallet_xy)
-                right_target_xy = self._compute_side_base_target_xy("right", left_base, right_base, pallet_xy)
+                left_target_xy = self._compute_side_base_target_xy("left", left_base, right_base, pallet_xy, pallet_yaw=pallet_yaw)
+                right_target_xy = self._compute_side_base_target_xy("right", left_base, right_base, pallet_xy, pallet_yaw=pallet_yaw)
                 base_left_goal[0] = float(left_target_xy[0])
                 base_left_goal[1] = float(left_target_xy[1])
                 base_right_goal[0] = float(right_target_xy[0])
@@ -396,6 +462,17 @@ class ApproachPlanningMixin:
         """
         source = str(self.bb.get("pallet_pose_source", "unset")).lower()
         pose = self.bb.get("pallet_pose_world", None)
+        def _set_bb_pose6(px: float, py: float, pz: Optional[float] = None, yaw: Optional[float] = None):
+            pose6 = self.bb.get("pallet_pose_world_pose6", None)
+            z = float(pz) if pz is not None else (
+                float(pose6[2]) if isinstance(pose6, (list, tuple)) and len(pose6) >= 3 else 0.0
+            )
+            yawv = float(yaw) if yaw is not None else (
+                float(pose6[5]) if isinstance(pose6, (list, tuple)) and len(pose6) >= 6 else 0.0
+            )
+            yawv = self._normalize_yaw(yawv)
+            self.bb["pallet_pose_world_pose6"] = [float(px), float(py), float(z), 0.0, 0.0, float(yawv)]
+            self.bb["pallet_pose_world_yaw"] = float(yawv)
 
         if self.mock_pallet_x_env and self.mock_pallet_y_env:
             try:
@@ -411,6 +488,7 @@ class ApproachPlanningMixin:
                     self.bb["pallet_pose_world"] = [px, py]
                     self.bb["pallet_pose_source"] = "config"
                     self.bb["pallet_info_ready"] = True
+                    _set_bb_pose6(px=px, py=py)
                     self.get_logger().info(
                         bt_fmt(f"[VisionMock] pallet pose from config: x={px:.3f}, y={py:.3f}")
                     )
@@ -425,6 +503,11 @@ class ApproachPlanningMixin:
                 self.bb["pallet_pose_world"] = [gx, gy]
                 self.bb["pallet_pose_source"] = "gazebo"
                 self.bb["pallet_info_ready"] = True
+                gz_pose6 = getattr(self, "_gazebo_pallet_pose_start_pose6", None)
+                if isinstance(gz_pose6, (list, tuple)) and len(gz_pose6) >= 6:
+                    _set_bb_pose6(px=gx, py=gy, pz=float(gz_pose6[2]), yaw=float(gz_pose6[5]))
+                else:
+                    _set_bb_pose6(px=gx, py=gy, yaw=0.0)
                 self.get_logger().info(
                     bt_fmt(
                         "[VisionMock] pallet pose from Gazebo startup snapshot "
@@ -442,6 +525,11 @@ class ApproachPlanningMixin:
                     self.bb["pallet_pose_world"] = [wx, wy]
                     self.bb["pallet_pose_source"] = "world_file"
                     self.bb["pallet_info_ready"] = True
+                    world_pose6 = getattr(self, "_world_pallet_pose6_cache", None)
+                    if isinstance(world_pose6, (list, tuple)) and len(world_pose6) >= 6:
+                        _set_bb_pose6(px=wx, py=wy, pz=float(world_pose6[2]), yaw=float(world_pose6[5]))
+                    else:
+                        _set_bb_pose6(px=wx, py=wy, yaw=0.0)
                     self.get_logger().info(
                         bt_fmt(
                             "[VisionMock] pallet pose from world file snapshot "
@@ -465,6 +553,7 @@ class ApproachPlanningMixin:
         self.bb["pallet_pose_world"] = [px, py]
         self.bb["pallet_pose_source"] = "estimated"
         self.bb["pallet_info_ready"] = True
+        _set_bb_pose6(px=px, py=py)
         self.get_logger().info(
             bt_fmt(
                 "[VisionMock] estimated pallet pose "
@@ -506,6 +595,10 @@ class ApproachPlanningMixin:
 
         xyz = [float(xy[0]), float(xy[1]), float(z)]
         self.bb["pallet_pose_world_xyz"] = xyz
+        pose6 = self.bb.get("pallet_pose_world_pose6", None)
+        yaw = float(pose6[5]) if isinstance(pose6, (list, tuple)) and len(pose6) >= 6 else 0.0
+        self.bb["pallet_pose_world_pose6"] = [float(xy[0]), float(xy[1]), float(z), 0.0, 0.0, self._normalize_yaw(yaw)]
+        self.bb["pallet_pose_world_yaw"] = self._normalize_yaw(yaw)
         return xyz
 
     def _compute_side_base_target_xy(
@@ -514,15 +607,25 @@ class ApproachPlanningMixin:
         left_base: List[float],
         right_base: List[float],
         pallet_xy: List[float],
+        pallet_yaw: Optional[float] = None,
     ) -> List[float]:
         side = str(side).lower()
+        yaw = float(self._resolve_pallet_target_yaw() if pallet_yaw is None else pallet_yaw)
         if self.approach_base_target_mode == "pallet_offset":
             if side == "left":
-                tx = float(pallet_xy[0]) + float(self.approach_base_left_offset_x)
-                ty = float(pallet_xy[1]) + float(self.approach_base_left_offset_y)
+                tx, ty = self._offset_from_target_frame(
+                    pallet_xy,
+                    float(self.approach_base_left_offset_x),
+                    float(self.approach_base_left_offset_y),
+                    target_yaw=yaw,
+                )
             else:
-                tx = float(pallet_xy[0]) + float(self.approach_base_right_offset_x)
-                ty = float(pallet_xy[1]) + float(self.approach_base_right_offset_y)
+                tx, ty = self._offset_from_target_frame(
+                    pallet_xy,
+                    float(self.approach_base_right_offset_x),
+                    float(self.approach_base_right_offset_y),
+                    target_yaw=yaw,
+                )
             self._approach_slot_assignment = {"left": "left", "right": "right"}
             self.bb["approach_side_order"] = "pallet_offset_fixed"
             self.bb["approach_slot_assignment"] = "left->left,right->right"
@@ -545,11 +648,20 @@ class ApproachPlanningMixin:
             if self.approach_base_auto_swap_slots:
                 lx, ly = float(left_base[0]), float(left_base[1])
                 rx, ry = float(right_base[0]), float(right_base[1])
-                sx_l = float(pallet_xy[0]) - float(lateral_half)
-                sx_r = float(pallet_xy[0]) + float(lateral_half)
-                sy = float(pallet_xy[1]) - float(self.mock_pallet_standoff)
-                cost_fixed = math.hypot(sx_l - lx, sy - ly) + math.hypot(sx_r - rx, sy - ry)
-                cost_swap = math.hypot(sx_r - lx, sy - ly) + math.hypot(sx_l - rx, sy - ry)
+                sx_l, sy_l = self._offset_from_target_frame(
+                    pallet_xy,
+                    -float(lateral_half),
+                    -float(self.mock_pallet_standoff),
+                    target_yaw=yaw,
+                )
+                sx_r, sy_r = self._offset_from_target_frame(
+                    pallet_xy,
+                    float(lateral_half),
+                    -float(self.mock_pallet_standoff),
+                    target_yaw=yaw,
+                )
+                cost_fixed = math.hypot(sx_l - lx, sy_l - ly) + math.hypot(sx_r - rx, sy_r - ry)
+                cost_swap = math.hypot(sx_r - lx, sy_r - ly) + math.hypot(sx_l - rx, sy_l - ry)
                 if cost_swap + float(self.approach_base_swap_hyst) < cost_fixed:
                     slot_assign = {"left": "right", "right": "left"}
             self._approach_slot_assignment = slot_assign
@@ -557,8 +669,12 @@ class ApproachPlanningMixin:
 
         slot = slot_assign.get(side, side)
         side_sign = -1.0 if slot == "left" else 1.0
-        tx = float(pallet_xy[0]) + side_sign * float(lateral_half)
-        ty = float(pallet_xy[1]) - float(self.mock_pallet_standoff)
+        tx, ty = self._offset_from_target_frame(
+            pallet_xy,
+            side_sign * float(lateral_half),
+            -float(self.mock_pallet_standoff),
+            target_yaw=yaw,
+        )
         return [tx, ty]
 
     def _compute_side_ee_target_pose(
@@ -566,17 +682,31 @@ class ApproachPlanningMixin:
         side: str,
         live_ee_pose: np.ndarray,
         pallet_xyz: List[float],
+        pallet_yaw: Optional[float] = None,
     ) -> np.ndarray:
         side = str(side).lower()
+        yaw = float(self._resolve_pallet_target_yaw() if pallet_yaw is None else pallet_yaw)
         goal = np.asarray(live_ee_pose, dtype=np.float32).copy()
         if goal.shape[0] < 6:
             goal = np.pad(goal, (0, max(0, 6 - goal.shape[0])), mode="constant")
         if side == "left":
-            goal[0] = float(pallet_xyz[0]) + float(self.approach_ee_left_offset_x)
-            goal[1] = float(pallet_xyz[1]) + float(self.approach_ee_left_offset_y)
+            gx, gy = self._offset_from_target_frame(
+                [float(pallet_xyz[0]), float(pallet_xyz[1])],
+                float(self.approach_ee_left_offset_x),
+                float(self.approach_ee_left_offset_y),
+                target_yaw=yaw,
+            )
+            goal[0] = float(gx)
+            goal[1] = float(gy)
         else:
-            goal[0] = float(pallet_xyz[0]) + float(self.approach_ee_right_offset_x)
-            goal[1] = float(pallet_xyz[1]) + float(self.approach_ee_right_offset_y)
+            gx, gy = self._offset_from_target_frame(
+                [float(pallet_xyz[0]), float(pallet_xyz[1])],
+                float(self.approach_ee_right_offset_x),
+                float(self.approach_ee_right_offset_y),
+                target_yaw=yaw,
+            )
+            goal[0] = float(gx)
+            goal[1] = float(gy)
         goal[2] = float(pallet_xyz[2]) + float(self.approach_ee_offset_z)
         if str(self.approach_ee_orient_mode).lower() == "fixed":
             rpy_goal = self.approach_ee_left_rpy_goal if side == "left" else self.approach_ee_right_rpy_goal

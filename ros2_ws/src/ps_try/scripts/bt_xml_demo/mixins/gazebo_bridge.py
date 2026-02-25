@@ -89,6 +89,56 @@ class GazeboBridgeMixin:
             return pose, name
         return _try(start_map)
 
+    def _get_model_pose6_by_candidates(self, raw_candidates, prefer_start: bool = True):
+        """
+        Cerca la posa 6D [x,y,z,roll,pitch,yaw] di un modello dai candidate names
+        usando la cache da /model_states.
+
+        Ritorna (pose6, model_name) oppure (None, None).
+        """
+        if isinstance(raw_candidates, str):
+            candidates = self._split_model_candidates(raw_candidates)
+        elif isinstance(raw_candidates, (list, tuple)):
+            candidates = [str(c).strip() for c in raw_candidates if str(c).strip()]
+        else:
+            candidates = []
+        if not candidates:
+            return None, None
+
+        start_map = getattr(self, "_gazebo_model_pose_start_pose6", None) or {}
+        last_map = getattr(self, "_gazebo_model_pose_last_pose6", None) or {}
+
+        def _try(src_map):
+            if not src_map:
+                return None, None
+            names = list(src_map.keys())
+            idx = self._pick_model_index(names, candidates)
+            if idx is None or idx < 0 or idx >= len(names):
+                return None, None
+            name = names[idx]
+            pose = src_map.get(name, None)
+            if not isinstance(pose, (list, tuple)) or len(pose) < 6:
+                return None, None
+            return [
+                float(pose[0]),
+                float(pose[1]),
+                float(pose[2]),
+                float(pose[3]),
+                float(pose[4]),
+                float(pose[5]),
+            ], str(name)
+
+        if prefer_start:
+            pose, name = _try(start_map)
+            if pose is not None:
+                return pose, name
+            return _try(last_map)
+
+        pose, name = _try(last_map)
+        if pose is not None:
+            return pose, name
+        return _try(start_map)
+
     def _pick_pallet_model_index(self, model_names: List[str]) -> Optional[int]:
         return self._pick_model_index(model_names, self.approach_mock_pallet_model_candidates)
 
@@ -141,12 +191,20 @@ class GazeboBridgeMixin:
                 self._gazebo_model_pose_last_xyz = {}
             if not hasattr(self, "_gazebo_model_pose_start_xyz"):
                 self._gazebo_model_pose_start_xyz = {}
+            if not hasattr(self, "_gazebo_model_pose_last_pose6"):
+                self._gazebo_model_pose_last_pose6 = {}
+            if not hasattr(self, "_gazebo_model_pose_start_pose6"):
+                self._gazebo_model_pose_start_pose6 = {}
             for i, mname in enumerate(names):
                 p = poses[i].position
                 xyz = [float(p.x), float(p.y), float(p.z)]
+                pose6 = self._pose6_from_gazebo_pose_msg(poses[i])
                 self._gazebo_model_pose_last_xyz[str(mname)] = xyz
+                self._gazebo_model_pose_last_pose6[str(mname)] = pose6
                 if str(mname) not in self._gazebo_model_pose_start_xyz:
                     self._gazebo_model_pose_start_xyz[str(mname)] = list(xyz)
+                if str(mname) not in self._gazebo_model_pose_start_pose6:
+                    self._gazebo_model_pose_start_pose6[str(mname)] = list(pose6)
 
             for side in ("left", "right"):
                 bidx = self._pick_base_model_index(names, side)
@@ -173,9 +231,11 @@ class GazeboBridgeMixin:
             xyz = [float(p.x), float(p.y), float(p.z)]
             self._gazebo_pallet_pose_last_xy = xy
             self._gazebo_pallet_pose_last_xyz = xyz
+            self._gazebo_pallet_pose_last_pose6 = self._pose6_from_gazebo_pose_msg(poses[idx])
             if self._gazebo_pallet_pose_start_xy is None:
                 self._gazebo_pallet_pose_start_xy = list(xy)
                 self._gazebo_pallet_pose_start_xyz = list(xyz)
+                self._gazebo_pallet_pose_start_pose6 = list(self._gazebo_pallet_pose_last_pose6)
                 self._gazebo_pallet_pose_start_model = str(names[idx])
                 self.get_logger().info(
                     f"[VisionMock] startup pallet pose from Gazebo model '{self._gazebo_pallet_pose_start_model}': "
@@ -236,6 +296,29 @@ class GazeboBridgeMixin:
         except Exception:
             return None
 
+    def _parse_pose6_text(self, pose_text: str) -> Optional[List[float]]:
+        txt = str(pose_text or "").strip()
+        if not txt:
+            return None
+        parts = txt.split()
+        if len(parts) < 3:
+            return None
+        try:
+            x = float(parts[0])
+            y = float(parts[1])
+            z = float(parts[2])
+            if len(parts) >= 6:
+                roll = float(parts[3])
+                pitch = float(parts[4])
+                yaw = float(parts[5])
+            else:
+                roll = 0.0
+                pitch = 0.0
+                yaw = 0.0
+            return [x, y, z, roll, pitch, yaw]
+        except Exception:
+            return None
+
     def _resolve_world_file_candidates(self) -> List[str]:
         here = os.path.abspath(os.path.dirname(__file__))
         env_path = str(getattr(self, "approach_mock_world_file", "") or "").strip()
@@ -292,16 +375,17 @@ class GazeboBridgeMixin:
                 if not any((lname == c or lname.startswith(c) or lname.endswith(c) or c in lname) for c in name_cands):
                     continue
                 pose_el = model.find("pose")
-                xy = self._parse_pose_xy_text(pose_el.text if pose_el is not None else "")
-                if xy is not None:
-                    self._world_pallet_pose_cache = list(xy)
+                pose6 = self._parse_pose6_text(pose_el.text if pose_el is not None else "")
+                if pose6 is not None:
+                    self._world_pallet_pose_cache = [float(pose6[0]), float(pose6[1])]
+                    self._world_pallet_pose6_cache = list(pose6)
                     self._world_pallet_pose_model = mname
                     self._world_pallet_pose_file = world_path
                     self.get_logger().info(
                         f"[VisionMock] world-file pallet pose from state '{mname}' in '{world_path}': "
-                        f"x={xy[0]:.3f}, y={xy[1]:.3f}"
+                        f"x={pose6[0]:.3f}, y={pose6[1]:.3f}, yaw={pose6[5]:.3f}"
                     )
-                    return list(xy)
+                    return list(self._world_pallet_pose_cache)
 
             # Fallback: generic model pose.
             for model in root.findall(".//model"):
@@ -310,16 +394,17 @@ class GazeboBridgeMixin:
                 if not any((lname == c or lname.startswith(c) or lname.endswith(c) or c in lname) for c in name_cands):
                     continue
                 pose_el = model.find("pose")
-                xy = self._parse_pose_xy_text(pose_el.text if pose_el is not None else "")
-                if xy is not None:
-                    self._world_pallet_pose_cache = list(xy)
+                pose6 = self._parse_pose6_text(pose_el.text if pose_el is not None else "")
+                if pose6 is not None:
+                    self._world_pallet_pose_cache = [float(pose6[0]), float(pose6[1])]
+                    self._world_pallet_pose6_cache = list(pose6)
                     self._world_pallet_pose_model = mname
                     self._world_pallet_pose_file = world_path
                     self.get_logger().info(
                         f"[VisionMock] world-file pallet pose from model '{mname}' in '{world_path}': "
-                        f"x={xy[0]:.3f}, y={xy[1]:.3f}"
+                        f"x={pose6[0]:.3f}, y={pose6[1]:.3f}, yaw={pose6[5]:.3f}"
                     )
-                    return list(xy)
+                    return list(self._world_pallet_pose_cache)
 
         return None
 

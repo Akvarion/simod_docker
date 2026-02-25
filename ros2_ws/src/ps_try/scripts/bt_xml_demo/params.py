@@ -339,13 +339,31 @@ class ManipulationConfig:
     # - rigid_pkg: trasla rigidamente la formazione attuale verso target pacco (default, robusta)
     # - fixed_offsets: usa drop_base_*_offset_* rispetto al target.
     drop_base_target_mode: str = "rigid_pkg"
+    # Correzione orientamento in rigid_pkg: allinea la direzione L->R al yaw del target drop.
+    drop_rigid_pkg_align_yaw: bool = True
+    # Blend [0..1] della correzione yaw in rigid_pkg (1.0 = allineamento pieno).
+    drop_rigid_pkg_yaw_blend: float = 1.0
     drop_base_goal_tol: float = 0.10
     drop_base_cmd_xy_abs_max: float = 0.12
     drop_base_kp_xy: float = 1.20
     drop_base_align_traj_time: float = 2.50
+    # Variante breve usata quando la pre-pose e' gia' idonea (AdjustPositioning ok).
+    drop_base_align_traj_time_short: float = 1.20
     drop_base_replan_period: float = 1.50
     # <=0 disabilita timeout hard di base_align (mantiene solo warning throttled).
     drop_base_stage_timeout: float = 0.0
+    # Micro-correzione pre-drop (BT AdjustPositioning).
+    adjust_positioning_enable: bool = True
+    adjust_positioning_traj_time: float = 1.50
+    adjust_positioning_timeout_s: float = 0.0
+    adjust_positioning_soft_continue: bool = False
+    adjust_positioning_xy_tol: float = 0.10
+    adjust_positioning_z_tol: float = 0.04
+    # Se True, AdjustPositioning richiede anche convergenza su Z.
+    # Se False (default), la quota viene demandata alla fase Drop/descend.
+    adjust_positioning_require_z: bool = False
+    adjust_positioning_ee_dist_tol: float = 0.05
+    adjust_positioning_base_pair_tol: float = 0.10
     # In drop_descend, se z e' ok ma XY resta sopra tol nominale, permette uscita con tolleranza soft.
     drop_descend_xy_tol_soft: float = 0.40
     drop_descend_soft_after_s: float = 8.0
@@ -648,17 +666,53 @@ def _parse_manipulation(raw: Dict[str, Any]) -> ManipulationConfig:
         drop_base_right_offset_x=_as_float(raw.get("drop_base_right_offset_x"), defaults.drop_base_right_offset_x),
         drop_base_offset_y=_as_float(raw.get("drop_base_offset_y"), defaults.drop_base_offset_y),
         drop_base_target_mode=str(raw.get("drop_base_target_mode", defaults.drop_base_target_mode)),
+        drop_rigid_pkg_align_yaw=_as_bool(
+            raw.get("drop_rigid_pkg_align_yaw"), defaults.drop_rigid_pkg_align_yaw
+        ),
+        drop_rigid_pkg_yaw_blend=_as_float(
+            raw.get("drop_rigid_pkg_yaw_blend"), defaults.drop_rigid_pkg_yaw_blend
+        ),
         drop_base_goal_tol=_as_float(raw.get("drop_base_goal_tol"), defaults.drop_base_goal_tol),
         drop_base_cmd_xy_abs_max=_as_float(raw.get("drop_base_cmd_xy_abs_max"), defaults.drop_base_cmd_xy_abs_max),
         drop_base_kp_xy=_as_float(raw.get("drop_base_kp_xy"), defaults.drop_base_kp_xy),
         drop_base_align_traj_time=_as_float(
             raw.get("drop_base_align_traj_time"), defaults.drop_base_align_traj_time
         ),
+        drop_base_align_traj_time_short=_as_float(
+            raw.get("drop_base_align_traj_time_short"), defaults.drop_base_align_traj_time_short
+        ),
         drop_base_replan_period=_as_float(
             raw.get("drop_base_replan_period"), defaults.drop_base_replan_period
         ),
         drop_base_stage_timeout=_as_float(
             raw.get("drop_base_stage_timeout"), defaults.drop_base_stage_timeout
+        ),
+        adjust_positioning_enable=_as_bool(
+            raw.get("adjust_positioning_enable"), defaults.adjust_positioning_enable
+        ),
+        adjust_positioning_traj_time=_as_float(
+            raw.get("adjust_positioning_traj_time"), defaults.adjust_positioning_traj_time
+        ),
+        adjust_positioning_timeout_s=_as_float(
+            raw.get("adjust_positioning_timeout_s"), defaults.adjust_positioning_timeout_s
+        ),
+        adjust_positioning_soft_continue=_as_bool(
+            raw.get("adjust_positioning_soft_continue"), defaults.adjust_positioning_soft_continue
+        ),
+        adjust_positioning_xy_tol=_as_float(
+            raw.get("adjust_positioning_xy_tol"), defaults.adjust_positioning_xy_tol
+        ),
+        adjust_positioning_z_tol=_as_float(
+            raw.get("adjust_positioning_z_tol"), defaults.adjust_positioning_z_tol
+        ),
+        adjust_positioning_require_z=_as_bool(
+            raw.get("adjust_positioning_require_z"), defaults.adjust_positioning_require_z
+        ),
+        adjust_positioning_ee_dist_tol=_as_float(
+            raw.get("adjust_positioning_ee_dist_tol"), defaults.adjust_positioning_ee_dist_tol
+        ),
+        adjust_positioning_base_pair_tol=_as_float(
+            raw.get("adjust_positioning_base_pair_tol"), defaults.adjust_positioning_base_pair_tol
         ),
         drop_descend_xy_tol_soft=_as_float(
             raw.get("drop_descend_xy_tol_soft"), defaults.drop_descend_xy_tol_soft

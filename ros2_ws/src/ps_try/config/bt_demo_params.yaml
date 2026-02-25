@@ -197,16 +197,33 @@ manipulation:
   # rigid_pkg: trasla rigidamente la formazione corrente sul target pacco
   # fixed_offsets: usa gli offset fissi qui sopra
   drop_base_target_mode: "rigid_pkg"
+  # In rigid_pkg applica anche allineamento orientativo L->R rispetto al yaw del target.
+  drop_rigid_pkg_align_yaw: true
+  # Intensita' [0..1] della correzione yaw (1.0 = allineamento pieno al target).
+  drop_rigid_pkg_yaw_blend: 1.0
   drop_base_goal_tol: 0.10
   drop_base_cmd_xy_abs_max: 0.12
   drop_base_kp_xy: 1.20
   # Tempo traiettoria base (s) per ogni allineamento/replan drop.
   # Teniamolo breve per evitare avanzamento "a scatti lenti".
   drop_base_align_traj_time: 2.50
+  # Variante rapida usata se pre-drop gia' idoneo (AdjustPositioning completato).
+  drop_base_align_traj_time_short: 1.20
   # Frequenza di aggiornamento target base in modalita' rigid_pkg.
   drop_base_replan_period: 1.50
   # Timeout hard stage base_align. <=0 disabilita il timeout (solo warning).
   drop_base_stage_timeout: 0.0
+  # Micro-correzione pre-drop (BT node: AdjustPositioning).
+  adjust_positioning_enable: true
+  adjust_positioning_traj_time: 1.5
+  adjust_positioning_timeout_s: 0.0
+  adjust_positioning_soft_continue: false
+  adjust_positioning_xy_tol: 0.10
+  adjust_positioning_z_tol: 0.04
+  # Se true, il gate pre-drop richiede anche convergenza in quota (Z).
+  adjust_positioning_require_z: false
+  adjust_positioning_ee_dist_tol: 0.05
+  adjust_positioning_base_pair_tol: 0.10
   # Uscita soft da descend quando z e' convergente ma XY resta bloccato.
   drop_descend_xy_tol_soft: 0.40
   drop_descend_soft_after_s: 8.0

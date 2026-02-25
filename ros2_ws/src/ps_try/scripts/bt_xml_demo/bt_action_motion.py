@@ -261,6 +261,72 @@ def _get_live_package_xyz(node):
     return None
 
 
+def _normalize_yaw(yaw: float) -> float:
+    y = float(yaw)
+    return (y + math.pi) % (2.0 * math.pi) - math.pi
+
+
+def _offset_xy_in_target_frame(target_xy, off_x: float, off_y: float, target_yaw: float) -> list[float]:
+    c = math.cos(float(target_yaw))
+    s = math.sin(float(target_yaw))
+    dx = c * float(off_x) - s * float(off_y)
+    dy = s * float(off_x) + c * float(off_y)
+    return [float(target_xy[0]) + dx, float(target_xy[1]) + dy]
+
+
+def _align_pair_vector_to_target_yaw(
+    pair_dx: float,
+    pair_dy: float,
+    target_yaw: float,
+    blend: float,
+) -> tuple[float, float]:
+    """Rotate the L->R base-pair direction toward target yaw preserving pair norm."""
+    norm = float(math.hypot(float(pair_dx), float(pair_dy)))
+    if norm <= 1e-6:
+        return float(pair_dx), float(pair_dy)
+
+    b = float(max(0.0, min(1.0, float(blend))))
+    if b <= 1e-6:
+        return float(pair_dx), float(pair_dy)
+
+    yaw = float(_normalize_yaw(float(target_yaw)))
+    des_dx = norm * math.cos(yaw)
+    des_dy = norm * math.sin(yaw)
+
+    out_dx = (1.0 - b) * float(pair_dx) + b * float(des_dx)
+    out_dy = (1.0 - b) * float(pair_dy) + b * float(des_dy)
+
+    out_norm = float(math.hypot(out_dx, out_dy))
+    if out_norm > 1e-6:
+        scale = norm / out_norm
+        out_dx *= scale
+        out_dy *= scale
+    return float(out_dx), float(out_dy)
+
+
+def _get_live_package_pose6(node):
+    """Retrieve live package pose [x,y,z,roll,pitch,yaw] when available."""
+    p = getattr(node, "_gazebo_pallet_pose_last_pose6", None)
+    if isinstance(p, (list, tuple)) and len(p) >= 6:
+        out = [float(v) for v in p[:6]]
+        out[5] = _normalize_yaw(out[5])
+        return out
+    p = getattr(node, "_gazebo_pallet_pose_start_pose6", None)
+    if isinstance(p, (list, tuple)) and len(p) >= 6:
+        out = [float(v) for v in p[:6]]
+        out[5] = _normalize_yaw(out[5])
+        return out
+    p = node.bb.get("pallet_pose_world_pose6", None)
+    if isinstance(p, (list, tuple)) and len(p) >= 6:
+        out = [float(v) for v in p[:6]]
+        out[5] = _normalize_yaw(out[5])
+        return out
+    p = _get_live_package_xyz(node)
+    if isinstance(p, (list, tuple)) and len(p) >= 3:
+        return [float(p[0]), float(p[1]), float(p[2]), 0.0, 0.0, 0.0]
+    return None
+
+
 def _resolve_transport_destination_xy(node):
     """Determine transport destination (world-frame XY coordinate).
     
@@ -278,8 +344,24 @@ def _resolve_transport_destination_xy(node):
     if not cands:
         cands = ["pacco_clone_2"]
 
-    dst_xyz = None
+    dst_pose6 = None
     dst_model = None
+    if hasattr(node, "_get_model_pose6_by_candidates"):
+        try:
+            dst_pose6, dst_model = node._get_model_pose6_by_candidates(cands, prefer_start=True)
+        except Exception:
+            dst_pose6, dst_model = None, None
+    if isinstance(dst_pose6, (list, tuple)) and len(dst_pose6) >= 6:
+        dst_yaw = _normalize_yaw(float(dst_pose6[5]))
+        dst_xy = _offset_xy_in_target_frame(
+            [float(dst_pose6[0]), float(dst_pose6[1])],
+            float(getattr(man_cfg, "transport_destination_offset_x", 0.0)),
+            float(getattr(man_cfg, "transport_destination_offset_y", -2.0)),
+            dst_yaw,
+        )
+        return [float(dst_xy[0]), float(dst_xy[1])], f"model:{dst_model or cands[0]}"
+
+    dst_xyz = None
     if hasattr(node, "_get_model_pose_xyz_by_candidates"):
         try:
             dst_xyz, dst_model = node._get_model_pose_xyz_by_candidates(cands, prefer_start=True)
@@ -327,8 +409,41 @@ def _resolve_drop_target_xyz(node):
     if not cands:
         cands = ["pacco_clone_2"]
 
-    dst_xyz = None
+    dst_pose6 = None
     dst_model = None
+    if hasattr(node, "_get_model_pose6_by_candidates"):
+        try:
+            # Per il deposito preferiamo la posa live (last) e solo poi lo startup snapshot.
+            dst_pose6, dst_model = node._get_model_pose6_by_candidates(cands, prefer_start=False)
+            if dst_pose6 is None:
+                dst_pose6, dst_model = node._get_model_pose6_by_candidates(cands, prefer_start=True)
+        except Exception:
+            dst_pose6, dst_model = None, None
+    if isinstance(dst_pose6, (list, tuple)) and len(dst_pose6) >= 6:
+        dst_yaw = _normalize_yaw(float(dst_pose6[5]))
+        dst_xy = _offset_xy_in_target_frame(
+            [float(dst_pose6[0]), float(dst_pose6[1])],
+            float(getattr(man_cfg, "drop_target_offset_x", 0.0)),
+            float(getattr(man_cfg, "drop_target_offset_y", 0.0)),
+            dst_yaw,
+        )
+        out = [
+            float(dst_xy[0]),
+            float(dst_xy[1]),
+            float(dst_pose6[2]) + float(getattr(man_cfg, "drop_target_offset_z", 0.0)),
+        ]
+        node.bb["drop_target_yaw"] = float(dst_yaw)
+        node.bb["drop_target_pose6"] = [
+            float(dst_pose6[0]),
+            float(dst_pose6[1]),
+            float(dst_pose6[2]),
+            float(dst_pose6[3]),
+            float(dst_pose6[4]),
+            float(dst_yaw),
+        ]
+        return out, f"model:{dst_model or cands[0]}"
+
+    dst_xyz = None
     if hasattr(node, "_get_model_pose_xyz_by_candidates"):
         try:
             # Per il deposito preferiamo la posa live (last) e solo poi lo startup snapshot.
@@ -339,22 +454,36 @@ def _resolve_drop_target_xyz(node):
             dst_xyz, dst_model = None, None
 
     if isinstance(dst_xyz, (list, tuple)) and len(dst_xyz) >= 3:
-        return [
+        node.bb["drop_target_yaw"] = 0.0
+        node.bb["drop_target_pose6"] = [
             float(dst_xyz[0]) + float(getattr(man_cfg, "drop_target_offset_x", 0.0)),
             float(dst_xyz[1]) + float(getattr(man_cfg, "drop_target_offset_y", 0.0)),
             float(dst_xyz[2]) + float(getattr(man_cfg, "drop_target_offset_z", 0.0)),
-        ], f"model:{dst_model or cands[0]}"
+            0.0,
+            0.0,
+            float(node.bb.get("drop_target_yaw", 0.0)),
+        ]
+        return node.bb["drop_target_pose6"][:3], f"model:{dst_model or cands[0]}"
 
     # Non usare il fallback del transport (puo' includere offset -Y di trasferimento).
     # Se il modello target non e' disponibile, fallback solo sulla posa pacco corrente.
-    pkg_xyz = _get_live_package_xyz(node)
-    if isinstance(pkg_xyz, (list, tuple)) and len(pkg_xyz) >= 3:
+    pkg_pose6 = _get_live_package_pose6(node)
+    if isinstance(pkg_pose6, (list, tuple)) and len(pkg_pose6) >= 6:
+        node.bb["drop_target_yaw"] = float(_normalize_yaw(float(pkg_pose6[5])))
+        node.bb["drop_target_pose6"] = [
+            float(pkg_pose6[0]),
+            float(pkg_pose6[1]),
+            float(pkg_pose6[2]),
+            float(pkg_pose6[3]),
+            float(pkg_pose6[4]),
+            float(pkg_pose6[5]),
+        ]
         node._warn_throttled(
             "drop_target_fallback_pkg",
             bt_fmt(f"[Drop] target model not found ({cands}), fallback to current package pose"),
             period_s=3.0,
         )
-        return [float(pkg_xyz[0]), float(pkg_xyz[1]), float(pkg_xyz[2])], "fallback:pkg"
+        return [float(pkg_pose6[0]), float(pkg_pose6[1]), float(pkg_pose6[2])], "fallback:pkg"
 
     return None, "unavailable"
 
@@ -466,6 +595,10 @@ def _pkg_xyz_for_alignment(node, left_arm_jp, right_arm_jp, left_base, right_bas
         left_base=left_base,
         right_base=right_base,
     )
+    # During attached/hold phases Gazebo model pose can be stale; prefer EE-based
+    # reference to avoid frozen alignment errors.
+    if bool(node.bb.get("package_attached", False)):
+        return pkg_ref if pkg_ref is not None else pkg_live
     return pkg_live if pkg_live is not None else pkg_ref
 
 
@@ -1051,7 +1184,13 @@ def _build_pick_waypoint_stage_plan(node, left_arm_jp, right_arm_jp, left_base, 
         or None if package pose is unavailable
     """
     man_cfg = node.cfg.manipulation
-    pkg_xyz = _get_live_package_xyz(node)
+    pkg_pose6 = _get_live_package_pose6(node)
+    if pkg_pose6 is None:
+        pkg_xyz = _get_live_package_xyz(node)
+        pkg_yaw = 0.0
+    else:
+        pkg_xyz = [float(pkg_pose6[0]), float(pkg_pose6[1]), float(pkg_pose6[2])]
+        pkg_yaw = _normalize_yaw(float(pkg_pose6[5]))
     if pkg_xyz is None:
         return None
 
@@ -1077,8 +1216,14 @@ def _build_pick_waypoint_stage_plan(node, left_arm_jp, right_arm_jp, left_base, 
 
     def _goal(x_off: float, y_off: float, z_off: float, rpy):
         g = np.zeros((6,), dtype=np.float32)
-        g[0] = float(pkg_xyz[0]) + float(x_off)
-        g[1] = float(pkg_xyz[1]) + float(y_off)
+        gx, gy = _offset_xy_in_target_frame(
+            [float(pkg_xyz[0]), float(pkg_xyz[1])],
+            float(x_off),
+            float(y_off),
+            float(pkg_yaw),
+        )
+        g[0] = float(gx)
+        g[1] = float(gy)
         g[2] = float(pkg_xyz[2]) + float(z_off)
         g[3:6] = np.asarray(rpy, dtype=np.float32)
         return g
@@ -1413,6 +1558,15 @@ def _reset_movebase_runtime(node):
     node.bb.pop("movebase_transport_arm_goal_right", None)
 
 
+def _reset_adjust_positioning_bb(node):
+    """Clear BT-side pre-drop micro-correction runtime keys."""
+    node.bb.pop("adjust_positioning_stage", None)
+    node.bb.pop("adjust_positioning_t0", None)
+    node.bb.pop("adjust_positioning_last_err", None)
+    node.bb.pop("adjust_positioning_left_target_xy", None)
+    node.bb.pop("adjust_positioning_right_target_xy", None)
+
+
 def _max_joint_error(node, q_now, q_goal) -> float:
     """Compute maximum joint-space error (largest angle difference).
     
@@ -1650,17 +1804,17 @@ def ApproachObject():
     robots work in parallel, with each following its own TP trajectory. Coordinates via:
     - Base positioning: approach_base_ctrl (PD or TP-based)
     - Arm motion: TP endpoint tracking toward pallet
-    - Gating: SRM2 waits for SRM1 to be near object before its approach
+    - BT contract: SRM2 sync is expected from BT gating (DataReceived)
     
     FLOW:
-    1. Validate live state (joint positions, odometry) and cross-robot synchronization
+    1. Validate live state (joint positions, odometry)
     2. Initialize/re-initialize TP with approach target (from pallet pose estimate)
     3. Execute TP loop: compute commands, publish to arm+base controllers
     4. Check convergence (joint+EE+base errors within tolerances)
     5. Set <TREE>_near_object flag and exit
     
     NOTES:
-    - SRM1 and SRM2 run separately before synchronization (Supervisor oversees)
+    - SRM1 and SRM2 run separately; synchronization belongs to BT gating nodes
     - Base can use legacy open-loop profiles or TP-based approach
     - Optional arm pre-delay gates arm motion until base is close enough
     - Supports reinitializing TP if pallet source upgrades (estimated→real)
@@ -1705,17 +1859,21 @@ def ApproachObject():
         return None  # RUNNING - keep trying until all data arrives
 
     # =================================================================
-    # GATE 2: SRM2 synchronization (right robot waits for SRM1 readiness)
+    # BT PRECONDITION CONTRACT
     # =================================================================
-    # In dual-robot systems, SRM2 (right) should not approach until SRM1 (left)
-    # has validated the pallet location (simulates vision/detection handshake)
+    # La sincronizzazione SRM1 -> SRM2 (payload/vision handoff) e' delegata ai
+    # nodi BT di condition/gating (es. DataReceived in bt_action_basic.py).
+    # ApproachObject non blocca l'esecuzione su flag orchestration, ma mantiene
+    # un warning diagnostico se il dato non e' ancora disponibile.
     if side == "right" and not bool(node.bb.get("srm1_data_to_srm2", False)):
-        node._info_throttled(
-            f"{tree_name}_approach_wait_data",
-            bt_fmt("[ApproachObject] waiting pallet info from SRM1"),
-            period_s=1.0,
+        node._warn_throttled(
+            f"{tree_name}_approach_bt_gate_missing",
+            bt_fmt(
+                "[ApproachObject] SRM2 executing without srm1_data_to_srm2; "
+                "expected BT gate via DataReceived"
+            ),
+            period_s=2.0,
         )
-        return None  # RUNNING - wait for SRM1 to signal readiness on blackboard
 
     # =================================================================
     # PALLET POSE RESOLUTION: Get current pallet location for approach target
@@ -2202,24 +2360,12 @@ def LiftObj():
     tree_name = get_current_bt_name()
 
     # =================================================================
-    # SUPERVISOR SYNC GATE: Wait for both SRM1 & SRM2 to finish approach
+    # BT PRECONDITION CONTRACT
     # =================================================================
-    # In Supervisor tree: both robots must reach near_object before lifting
-    # In single-arm tree: proceed immediately to lift
-    if tree_name == "Supervisor":
-        srm1_ready = node.bb.get("SRM1_near_object", False)
-        srm2_ready = node.bb.get("SRM2_near_object", False)
-        # If either robot hasn't finished approach, wait and return RUNNING
-        if not (srm1_ready and srm2_ready):
-            wait_key = "supervisor_lift_wait_logged"
-            # Log once to avoid spam, then poll silently
-            if not node.bb.get(wait_key):
-                node.bb[wait_key] = True
-                node.get_logger().info(bt_fmt("[LiftObj] waiting for SRM1/SRM2 approach completion"))
-            return None  # RUNNING - keep waiting
-        else:
-            # Both ready: clear wait flag
-            node.bb.pop("supervisor_lift_wait_logged", None)
+    # La sincronizzazione tra SRM1/SRM2 (alignment/approach complete) e' gestita
+    # dai nodi di gating del BT in bt_action_basic.py (es. CheckAlignment,
+    # CorrectBasePos). LiftObj esegue solo la fase motion/TP, assumendo che il BT
+    # lo invochi quando le precondizioni sono gia' soddisfatte.
 
     # =================================================================
     # PHASE PAUSE GATE: Don't proceed if system is in pause state
@@ -3336,6 +3482,11 @@ def MoveBase():
         # ================================================================
         # ACTION INIT: Check pause, reset state, setup retreat/transport phases
         # ================================================================
+        # Expose BT-level completion flag for downstream checks (e.g. InAPositionToDrop?).
+        node.bb["movebase_done"] = False
+        # New transport cycle invalidates previous pre-drop idoneity.
+        node.bb["drop_prepose_ok"] = False
+        _reset_adjust_positioning_bb(node)
         # Check if action is paused: don't proceed if system is paused
         if not _phase_pause_gate(node, "MoveBase"):
             node.stop_all_movement()
@@ -3749,6 +3900,7 @@ def MoveBase():
                 node.get_logger().warn(bt_fmt("[MoveBase] transport timeout reached, continuing"))
             
             # ===== ACTION COMPLETION =====
+            node.bb["movebase_done"] = True
             node.get_logger().info(bt_fmt("[MoveBase] completed"))
             return True  # Action SUCCESS - proceed to next phase
         
@@ -3759,6 +3911,7 @@ def MoveBase():
     node.clear_action_timer("MoveBase")
     _reset_movebase_runtime(node)
     _phase_pause_reset(node, "MoveBase")
+    node.bb["movebase_done"] = True
     node.get_logger().info(bt_fmt("[MoveBase] completed"))
     return True
 
@@ -3807,6 +3960,8 @@ def Drop():
         # Check pause state: don't proceed if paused
         if not _phase_pause_gate(node, "Drop"):
             return None  # RUNNING - on pause, retry next tick
+        # Ensure explicit boolean exists for pre-drop gate consumer.
+        node.bb.setdefault("drop_prepose_ok", False)
         
         # Get sensor data: arm joint positions, base poses
         live_state = _get_live_tp_state(node)
@@ -3832,14 +3987,32 @@ def Drop():
         # Store resolved drop target XYZ in blackboard for use by base_align and descend_hold phases
         # Convert to float list if valid 3D coordinates, otherwise store None (invalid/not-yet-available)
         # This serves as the definitive drop location for all subsequent target frame calculations
-        node.bb["drop_target_xyz"] = (
+        prev_drop_target_xyz = node.bb.get("drop_target_xyz", None)
+        new_drop_target_xyz = (
             [float(drop_target_xyz[0]), float(drop_target_xyz[1]), float(drop_target_xyz[2])]
             if isinstance(drop_target_xyz, (list, tuple)) and len(drop_target_xyz) >= 3
             else None
         )
+        node.bb["drop_target_xyz"] = new_drop_target_xyz
         # Record resolution method string: "config", "gazebo_model", "estimated", etc.
         # Useful for diagnostics to understand which target source was successful
         node.bb["drop_target_source"] = str(drop_target_src)
+        if (
+            isinstance(prev_drop_target_xyz, (list, tuple))
+            and len(prev_drop_target_xyz) >= 3
+            and isinstance(new_drop_target_xyz, (list, tuple))
+            and len(new_drop_target_xyz) >= 3
+        ):
+            delta = float(
+                math.sqrt(
+                    (float(prev_drop_target_xyz[0]) - float(new_drop_target_xyz[0])) ** 2
+                    + (float(prev_drop_target_xyz[1]) - float(new_drop_target_xyz[1])) ** 2
+                    + (float(prev_drop_target_xyz[2]) - float(new_drop_target_xyz[2])) ** 2
+                )
+            )
+            if delta > 1e-3:
+                node.bb["drop_prepose_ok"] = False
+                _reset_adjust_positioning_bb(node)
 
         # ===== VALIDATE DROP TARGET & COMPUTE BASE TARGETS =====
         # Proceed only if drop target successfully resolved (3D coordinate available)
@@ -3882,6 +4055,14 @@ def Drop():
                 # This vector defines the base formation that must be preserved during base motion
                 pair_dx = float(right_base[0]) - float(left_base[0])
                 pair_dy = float(right_base[1]) - float(left_base[1])
+                if bool(getattr(man_cfg, "drop_rigid_pkg_align_yaw", True)):
+                    drop_target_yaw = float(_normalize_yaw(float(node.bb.get("drop_target_yaw", 0.0))))
+                    pair_dx, pair_dy = _align_pair_vector_to_target_yaw(
+                        pair_dx,
+                        pair_dy,
+                        drop_target_yaw,
+                        float(getattr(man_cfg, "drop_rigid_pkg_yaw_blend", 1.0)),
+                    )
                 # Store pair geometry in blackboard for use in replanning if package moves
                 node.bb["drop_base_pair_xy"] = [pair_dx, pair_dy]
                 
@@ -3896,25 +4077,34 @@ def Drop():
                 left_target_xy = [center_x - 0.5 * pair_dx, center_y - 0.5 * pair_dy]
                 right_target_xy = [center_x + 0.5 * pair_dx, center_y + 0.5 * pair_dy]
                 # For logging: show offsets computed from package to target
-                target_mode_msg = f"rigid_pkg(dx={dx:.3f},dy={dy:.3f})"
+                target_mode_msg = (
+                    f"rigid_pkg(dx={dx:.3f},dy={dy:.3f},"
+                    f"yaw_align={bool(getattr(man_cfg, 'drop_rigid_pkg_align_yaw', True))},"
+                    f"yaw_blend={float(getattr(man_cfg, 'drop_rigid_pkg_yaw_blend', 1.0)):.2f})"
+                )
             # ===== FIXED OFFSET MODE (FALLBACK) =====
             # If rigid_pkg mode disabled or package position not estimatable
             # Use static XY offsets from drop target (default: L at -0.6m X and R at +0.6m X, both -0.7m Y)
             else:
+                drop_target_yaw = float(_normalize_yaw(float(node.bb.get("drop_target_yaw", 0.0))))
                 # ===== LEFT BASE TARGET: STATIC OFFSET LEFT OF DROP POINT =====
                 # Position left base at (drop_x + left_offset_x, drop_y + offset_y)
                 # Default offset: -0.60m X, -0.70m Y (to left-front of drop target)
-                left_target_xy = [
-                    float(drop_target_xyz[0]) + float(getattr(man_cfg, "drop_base_left_offset_x", -0.60)),
-                    float(drop_target_xyz[1]) + float(getattr(man_cfg, "drop_base_offset_y", -0.70)),
-                ]
+                left_target_xy = _offset_xy_in_target_frame(
+                    [float(drop_target_xyz[0]), float(drop_target_xyz[1])],
+                    float(getattr(man_cfg, "drop_base_left_offset_x", -0.60)),
+                    float(getattr(man_cfg, "drop_base_offset_y", -0.70)),
+                    drop_target_yaw,
+                )
                 # ===== RIGHT BASE TARGET: STATIC OFFSET RIGHT OF DROP POINT =====
                 # Position right base at (drop_x + right_offset_x, drop_y + offset_y)
                 # Default offset: +0.60m X, -0.70m Y (to right-front of drop target)
-                right_target_xy = [
-                    float(drop_target_xyz[0]) + float(getattr(man_cfg, "drop_base_right_offset_x", 0.60)),
-                    float(drop_target_xyz[1]) + float(getattr(man_cfg, "drop_base_offset_y", -0.70)),
-                ]
+                right_target_xy = _offset_xy_in_target_frame(
+                    [float(drop_target_xyz[0]), float(drop_target_xyz[1])],
+                    float(getattr(man_cfg, "drop_base_right_offset_x", 0.60)),
+                    float(getattr(man_cfg, "drop_base_offset_y", -0.70)),
+                    drop_target_yaw,
+                )
                 # ===== STORE BASE PAIR SEPARATION FOR REFERENCE =====
                 # Record the resulting base pair geometry (computed from targets)
                 # Will be used if phase needs to adapt targets during execution
@@ -3979,7 +4169,7 @@ def Drop():
         # Strategy: allocate ~25% of total descend_and_place_time for base alignment
         # Ranges: min 0.3s (very close target), max 3.0s (distant targets), typically 1-2s
         # Gives TP sufficient time to plan smooth base trajectories
-        drop_base_traj_time = float(
+        drop_base_traj_time_default = float(
             max(
                 0.3,  # Minimum: 0.3 second (must allow some planning/execution time)
                 getattr(
@@ -3991,6 +4181,19 @@ def Drop():
                 ),
             )
         )
+        if bool(node.bb.get("drop_prepose_ok", False)):
+            drop_base_traj_time = float(
+                max(
+                    0.3,
+                    getattr(
+                        man_cfg,
+                        "drop_base_align_traj_time_short",
+                        getattr(man_cfg, "drop_base_align_traj_time", drop_base_traj_time_default),
+                    ),
+                )
+            )
+        else:
+            drop_base_traj_time = drop_base_traj_time_default
         # Store trajectory parameters in blackboard for base_align phase runtime
         node.bb["drop_base_align_kp_xy"] = drop_base_kp_xy
         node.bb["drop_base_align_traj_time"] = drop_base_traj_time
@@ -4344,6 +4547,15 @@ def Drop():
                     pair_dx = float(right_base[0]) - float(left_base[0])
                     pair_dy = float(right_base[1]) - float(left_base[1])
                     node.bb["drop_base_pair_xy"] = [pair_dx, pair_dy]
+                if bool(getattr(man_cfg, "drop_rigid_pkg_align_yaw", True)):
+                    drop_target_yaw = float(_normalize_yaw(float(node.bb.get("drop_target_yaw", 0.0))))
+                    pair_dx, pair_dy = _align_pair_vector_to_target_yaw(
+                        pair_dx,
+                        pair_dy,
+                        drop_target_yaw,
+                        float(getattr(man_cfg, "drop_rigid_pkg_yaw_blend", 1.0)),
+                    )
+                    node.bb["drop_base_pair_xy"] = [pair_dx, pair_dy]
                 
                 # ===== RECOMPUTE BASE TARGET POSITIONS MAINTAINING RIGID PAIR =====
                 # Formation center: update from initial drop target accounting for package movement
@@ -4605,6 +4817,7 @@ def Drop():
             node.bb.pop("drop_arm_goal_right", None)
             node.bb.pop("drop_stage", None)
             node.bb.pop("drop_stage_t0", None)
+            _reset_adjust_positioning_bb(node)
             
             # ===== PHASE PAUSE RESET =====
             # Clear any pause state for Drop action (allows next Drop to run if needed)
@@ -4735,6 +4948,7 @@ def Drop():
         node.bb.pop("drop_base_align_last_replan", None) # Timestamp of last base target replan
         node.bb.pop("drop_stage", None)                  # Current state machine phase (base_align/descend_hold/legacy)
         node.bb.pop("drop_stage_t0", None)               # Phase start time for elapsed time calculation
+        _reset_adjust_positioning_bb(node)
         
         # ===== PAUSE STATE RESET =====
         # Clear pause state for Drop (allows next Drop to run if paused)
@@ -4837,23 +5051,40 @@ def Release():
             # ================================================================
             # OPEN POSITION TARGET: Compute EE goal positions with open fingers
             # ================================================================
-            # Use drop target as reference for open gesture offset
-            release_ref_xyz = node.bb.get("drop_target_xyz", None)
-            # If drop_target not cached, try to resolve from model or package pose
-            # Cascade: Try drop_target config -> live package Gazebo pose -> estimated from EE
-            if not (isinstance(release_ref_xyz, (list, tuple)) and len(release_ref_xyz) >= 3):
+            # Use drop target as reference for open gesture offset.
+            # Offsets are interpreted in target frame (yaw-aware).
+            release_ref_pose6 = node.bb.get("drop_target_pose6", None)
+            if not (isinstance(release_ref_pose6, (list, tuple)) and len(release_ref_pose6) >= 6):
                 release_ref_xyz, _ = _resolve_drop_target_xyz(node)
-            # Second fallback: get package world pose directly from Gazebo via ROS service
-            if release_ref_xyz is None:
-                release_ref_xyz = _get_live_package_xyz(node)
-            # Third fallback: estimate from EE grasp offset (less reliable, may have bias)
-            if release_ref_xyz is None:
+                if isinstance(release_ref_xyz, (list, tuple)) and len(release_ref_xyz) >= 3:
+                    release_ref_pose6 = [
+                        float(release_ref_xyz[0]),
+                        float(release_ref_xyz[1]),
+                        float(release_ref_xyz[2]),
+                        0.0,
+                        0.0,
+                        float(_normalize_yaw(float(node.bb.get("drop_target_yaw", 0.0)))),
+                    ]
+            if not (isinstance(release_ref_pose6, (list, tuple)) and len(release_ref_pose6) >= 6):
+                release_ref_pose6 = _get_live_package_pose6(node)
+            if not (isinstance(release_ref_pose6, (list, tuple)) and len(release_ref_pose6) >= 6):
                 release_ref_xyz = _resolve_pkg_reference_xyz(node, left_arm_jp, right_arm_jp, left_base, right_base)
+                if isinstance(release_ref_xyz, (list, tuple)) and len(release_ref_xyz) >= 3:
+                    release_ref_pose6 = [
+                        float(release_ref_xyz[0]),
+                        float(release_ref_xyz[1]),
+                        float(release_ref_xyz[2]),
+                        0.0,
+                        0.0,
+                        0.0,
+                    ]
             # All fallbacks exhausted: cannot proceed without package reference
-            if release_ref_xyz is None:
+            if not (isinstance(release_ref_pose6, (list, tuple)) and len(release_ref_pose6) >= 6):
                 node._warn_throttled("release_no_pkg_init", bt_fmt("[Release] package pose unavailable"), period_s=1.0)
                 rclpy.spin_once(node, timeout_sec=0.01)
                 return None  # RUNNING - wait for package pose data
+            release_ref_xyz = [float(release_ref_pose6[0]), float(release_ref_pose6[1]), float(release_ref_pose6[2])]
+            release_ref_yaw = float(_normalize_yaw(float(release_ref_pose6[5])))
 
             # ================================================================
             # GRIPPER ORIENTATION CALCULATION: Closed vs open RPY angles
@@ -4878,16 +5109,27 @@ def Release():
             left_goal = np.zeros((6,), dtype=np.float32)
             right_goal = np.zeros((6,), dtype=np.float32)
             
-            # LEFT EE GOAL: Package center + configured offsets (for left gripper)
-            # Offsets are in world frame relative to package drop target
-            left_goal[0] = float(release_ref_xyz[0]) + float(getattr(man_cfg, "release_open_left_offset_x", -0.37))  # X: offset left
-            left_goal[1] = float(release_ref_xyz[1]) + float(getattr(man_cfg, "release_open_offset_y", -0.10))       # Y: behind package
+            # LEFT EE GOAL: Package center + configured offsets in target frame.
+            left_xy = _offset_xy_in_target_frame(
+                [float(release_ref_xyz[0]), float(release_ref_xyz[1])],
+                float(getattr(man_cfg, "release_open_left_offset_x", -0.37)),
+                float(getattr(man_cfg, "release_open_offset_y", -0.10)),
+                release_ref_yaw,
+            )
+            left_goal[0] = float(left_xy[0])  # X: offset left in target frame
+            left_goal[1] = float(left_xy[1])  # Y: frontal/back offset in target frame
             left_goal[2] = float(release_ref_xyz[2]) + float(getattr(man_cfg, "release_open_offset_z", 0.30))       # Z: above package
             left_goal[3:6] = left_rpy_open  # Orientation: gripper open
             
             # RIGHT EE GOAL: Mirror of left (symmetric grasping)
-            right_goal[0] = float(release_ref_xyz[0]) + float(getattr(man_cfg, "release_open_right_offset_x", 0.37))  # X: offset right
-            right_goal[1] = float(release_ref_xyz[1]) + float(getattr(man_cfg, "release_open_offset_y", -0.10))        # Y: same as left
+            right_xy = _offset_xy_in_target_frame(
+                [float(release_ref_xyz[0]), float(release_ref_xyz[1])],
+                float(getattr(man_cfg, "release_open_right_offset_x", 0.37)),
+                float(getattr(man_cfg, "release_open_offset_y", -0.10)),
+                release_ref_yaw,
+            )
+            right_goal[0] = float(right_xy[0])  # X: offset right
+            right_goal[1] = float(right_xy[1])  # Y: same frontal/back offset
             right_goal[2] = float(release_ref_xyz[2]) + float(getattr(man_cfg, "release_open_offset_z", 0.30))        # Z: same as left
             right_goal[3:6] = right_rpy_open  # Orientation: gripper open
 
@@ -4911,6 +5153,7 @@ def Release():
             node.bb["release_open_goal_left"] = [float(v) for v in left_goal.tolist()]
             node.bb["release_open_goal_right"] = [float(v) for v in right_goal.tolist()]
             node.bb["release_ref_xyz"] = [float(v) for v in np.asarray(release_ref_xyz[:3], dtype=np.float32).tolist()]
+            node.bb["release_ref_pose6"] = [float(v) for v in np.asarray(release_ref_pose6[:6], dtype=np.float32).tolist()]
             node.get_logger().info(bt_fmt(f"[Release] start TP open+detach ({release_time}s)"))
             t0 = node.start_action_timer("Release")
 
