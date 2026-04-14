@@ -53,12 +53,12 @@ services:
       context: .
       dockerfile: ros2_docker/Dockerfile
   # Uncomment to use NVIDIA GPU hardware acceleration
-  #  runtime: nvidia
+    runtime: nvidia
     environment:
     - DISPLAY=${DISPLAY}
     - QT_X11_NO_MITSHM=1
-  #  - NVIDIA_VISIBLE_DEVICES=all
-  #  - NVIDIA_DRIVER_CAPABILITIES=all
+    - NVIDIA_VISIBLE_DEVICES=all
+    - NVIDIA_DRIVER_CAPABILITIES=all
     network_mode: host
 
     volumes:
@@ -67,8 +67,12 @@ services:
       - /dev/shm:/dev/shm
 
       - type: bind
-        source: /home/<user_path_to_directory>/simod_docker/ros2_ws
+        source: /home/marco/Universita/Progetto_SIMOD/attivita/SIMOD/simod_docker/ros2_ws
         target: /ros2_ws
+
+      - type: bind
+        source: /home/marco/Universita/Progetto_SIMOD/attivita/SIMOD/TaskPrioritization
+        target: /TaskPrioritization
 
     command: 
       /bin/bash -c "cd /ros2_ws && terminator"
